@@ -1,6 +1,6 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Writer;
+namespace Luni\Component\MagentoDriver\Writer\Database;
 
 use Doctrine\DBAL\Connection;
 use League\Flysystem\File;

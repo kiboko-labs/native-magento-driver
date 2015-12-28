@@ -1,11 +1,11 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Writer;
+namespace Luni\Component\MagentoDriver\Writer\Database;
 
 use Doctrine\DBAL\Connection;
 use League\Flysystem\File;
 
-class LocalDataInfileDatabaseWriter
+class DataInfileDatabaseWriter
     implements DatabaseWriterInterface
 {
     use DataInfileDatabaseWriterTrait;
@@ -36,6 +36,6 @@ class LocalDataInfileDatabaseWriter
      */
     public function writeFromFile(File $file, $table, array $tableFields)
     {
-        $this->doWriteFromFile('LOAD DATA LOCAL INFILE', $file, $table, $tableFields);
+        $this->doWriteFromFile('LOAD DATA INFILE', $file, $table, $tableFields);
     }
 }
