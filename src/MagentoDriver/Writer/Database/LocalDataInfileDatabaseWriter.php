@@ -11,18 +11,26 @@ class LocalDataInfileDatabaseWriter
     use DataInfileDatabaseWriterTrait;
 
     /**
+     * @var File
+     */
+    private $file;
+
+    /**
      * DataInfileDatabaseWriter constructor.
+     * @param File $file
      * @param Connection $connection
      * @param string $delimiter
      * @param string $enclosure
      * @param string $escaper
      */
     public function __construct(
+        File $file,
         Connection $connection,
         $delimiter,
         $enclosure,
         $escaper
     ) {
+        $this->file = $file;
         $this->connection = $connection;
         $this->delimiter = $delimiter;
         $this->enclosure = $enclosure;
@@ -30,12 +38,11 @@ class LocalDataInfileDatabaseWriter
     }
 
     /**
-     * @param File $file
      * @param string $table
      * @param array $tableFields
      */
-    public function writeFromFile(File $file, $table, array $tableFields)
+    public function write($table, array $tableFields)
     {
-        $this->doWriteFromFile('LOAD DATA LOCAL INFILE', $file, $table, $tableFields);
+        $this->doWrite('LOAD DATA LOCAL INFILE', $this->file, $table, $tableFields);
     }
 }

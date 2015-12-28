@@ -35,7 +35,7 @@ trait DataInfileDatabaseWriterTrait
      * @param array $tableFields
      * @throws \Doctrine\DBAL\DBALException
      */
-    private function doWriteFromFile($prefix, File $file, $table, array $tableFields)
+    private function doWrite($prefix, File $file, $table, array $tableFields)
     {
         if (!$file->exists()) {
             throw new RuntimeErrorException(sprintf('File %s does not exist', $file->getPath()));
