@@ -8,7 +8,7 @@ use Prophecy\Argument;
 
 class MutableVarcharAttributeValueSpec extends ObjectBehavior
 {
-    function it_is_an_ImmutableAttributeValueInterface(AttributeInterface $attribute)
+    function it_is_an_MutableAttributeValueInterface(AttributeInterface $attribute)
     {
         $this->beConstructedWith($attribute, 'Lorem ipsum');
         $this->shouldImplement('Luni\Component\MagentoDriver\AttributeValue\Mutable\MutableAttributeValueInterface');

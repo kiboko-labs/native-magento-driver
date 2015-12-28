@@ -2,26 +2,25 @@
 
 namespace Luni\Component\MagentoDriver\AttributeValue;
 
+use Doctrine\Common\Collections\Collection;
+use League\Flysystem\File;
+
 interface ImageAttributeValueInterface
     extends AttributeValueInterface
 {
     /**
-     * @return \SplFileInfo
+     * @return File
      */
     public function getFile();
 
     /**
-     * @return string
+     * @return Collection|ImageMetadataAttributeValueInterface[]
      */
-    public function getLabel();
+    public function getMetadata();
 
     /**
-     * @return int
+     * @param int $storeId
+     * @return ImageMetadataAttributeValueInterface|null
      */
-    public function getPosition();
-
-    /**
-     * @return bool
-     */
-    public function isExcluded();
+    public function getMetadataForStoreId($storeId);
 }

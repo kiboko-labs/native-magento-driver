@@ -2,6 +2,8 @@
 
 namespace Luni\Component\MagentoDriver\AttributeValue;
 
+use Doctrine\Common\Collections\Collection;
+use League\Flysystem\File;
 use Luni\Component\MagentoDriver\Attribute\AttributeInterface;
 
 trait ImageAttributeValueTrait
@@ -9,63 +11,41 @@ trait ImageAttributeValueTrait
     use AttributeValueTrait;
 
     /**
-     * @var \SplFileInfo
+     * @var File
      */
     private $file;
 
     /**
-     * @var string
+     * @var Collection
      */
-    private $label;
-
-    /**
-     * @var int
-     */
-    private $position;
-
-    /**
-     * @var bool
-     */
-    private $excluded;
+    private $metadata;
 
     /**
      * DatetimeAttributeValueTrait constructor.
      * @param AttributeInterface $attribute
-     * @param \SplFileInfo $file
-     * @param string $label
-     * @param int $position
-     * @param bool $excluded
-     * @param null $storeId
+     * @param File $file
+     * @param array $metadata
      */
     abstract public function __construct(
         AttributeInterface $attribute,
-        \SplFileInfo $payload,
-        $label,
-        $position,
-        $excluded = false,
-        $storeId = null
+        File $file,
+        array $metadata = []
     );
 
     /**
      * @param AttributeInterface $attribute
      * @param int $valueId
-     * @param \SplFileInfo $file
-     * @param string $label
-     * @param int $storeId
-     * @param int $position
-     * @param bool $excluded
+     * @param File $file
+     * @param array $metadata
      * @return ImageAttributeValueInterface
      */
     public static function buildNewWith(
         AttributeInterface $attribute,
         $valueId,
-        \SplFileInfo $file,
-        $label,
-        $position,
-        $excluded = false,
-        $storeId = null
+        File $file,
+        array $metadata
     ) {
-        $object = new static($attribute, $file, $label, $position, $excluded, $storeId);
+        $object = new static($attribute, $file, $metadata);
 
         $object->id = $valueId;
 
@@ -77,30 +57,23 @@ trait ImageAttributeValueTrait
      */
     public function getFile()
     {
-        return $this->file;
+        return clone $this->file;
     }
 
     /**
-     * @return string
+     * @return Collection|ImageMetadataAttributeValueInterface[]
      */
-    public function getLabel()
+    public function getMetadata()
     {
-        return $this->label;
+        return clone $this->metadata;
     }
 
     /**
-     * @return int
+     * @param int $storeId
+     * @return ImageMetadataAttributeValueInterface|null
      */
-    public function getPosition()
+    public function getMetadataForStoreId($storeId)
     {
-        $this->position;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isExcluded()
-    {
-        return $this->excluded;
+        return $this->metadata->get($storeId);
     }
 }

@@ -8,7 +8,7 @@ use Prophecy\Argument;
 
 class MutableDecimalAttributeValueSpec extends ObjectBehavior
 {
-    function it_is_an_ImmutableAttributeValueInterface(AttributeInterface $attribute)
+    function it_is_an_MutableAttributeValueInterface(AttributeInterface $attribute)
     {
         $this->beConstructedWith($attribute, 1.5);
         $this->shouldImplement('Luni\Component\MagentoDriver\AttributeValue\Mutable\MutableAttributeValueInterface');

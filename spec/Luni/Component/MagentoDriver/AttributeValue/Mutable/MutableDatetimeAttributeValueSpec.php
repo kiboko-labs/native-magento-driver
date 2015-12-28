@@ -17,7 +17,7 @@ class MutableDatetimeAttributeValueSpec extends ObjectBehavior
         ];
     }
 
-    function it_is_an_ImmutableAttributeValueInterface(AttributeInterface $attribute, \DateTimeImmutable $datetime)
+    function it_is_an_MutableAttributeValueInterface(AttributeInterface $attribute, \DateTimeImmutable $datetime)
     {
         $this->beConstructedWith($attribute, $datetime);
         $this->shouldImplement('Luni\Component\MagentoDriver\AttributeValue\Mutable\MutableAttributeValueInterface');
