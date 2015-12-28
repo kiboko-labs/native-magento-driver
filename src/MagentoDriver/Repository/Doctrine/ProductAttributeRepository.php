@@ -5,17 +5,10 @@ namespace Luni\Component\MagentoDriver\Repository\Doctrine;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Connection;
-use League\Flysystem\Adapter\Local;
-use League\Flysystem\Filesystem;
 use Luni\Component\MagentoDriver\Attribute\Attribute;
 use Luni\Component\MagentoDriver\Attribute\AttributeInterface;
-use Luni\Component\MagentoDriver\AttributeBackend\BackendInterface;
-use Luni\Component\MagentoDriver\AttributeBackend\DatetimeAttributeBackend;
-use Luni\Component\MagentoDriver\AttributeBackend\DecimalAttributeBackend;
-use Luni\Component\MagentoDriver\AttributeBackend\IntegerAttributeBackend;
-use Luni\Component\MagentoDriver\AttributeBackend\TextAttributeBackend;
-use Luni\Component\MagentoDriver\AttributeBackend\VarcharAttributeBackend;
-use Luni\Component\MagentoDriver\AttributeBackend\MediaGalleryAttributeBackend;
+use Luni\Component\MagentoDriver\Broker\AttributeBackendBrokerInterface;
+use Luni\Component\MagentoDriver\Exception\RuntimeErrorException;
 use Luni\Component\MagentoDriver\Family\FamilyInterface;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
@@ -35,9 +28,9 @@ class ProductAttributeRepository
     protected $queryBuilder;
 
     /**
-     * @var Collection|BackendInterface[]
+     * @var AttributeBackendBrokerInterface
      */
-    protected $backends;
+    protected $backendBroker;
 
     /**
      * @var Connection
@@ -58,34 +51,19 @@ class ProductAttributeRepository
      * ProductAttributeRepository constructor.
      * @param Connection $connection
      * @param ProductAttributeQueryBuilderInterface $queryBuilder
+     * @param AttributeBackendBrokerInterface $backendBroker
      */
     public function __construct(
         Connection $connection,
-        ProductAttributeQueryBuilderInterface $queryBuilder
+        ProductAttributeQueryBuilderInterface $queryBuilder,
+        AttributeBackendBrokerInterface $backendBroker
     ) {
         $this->connection = $connection;
         $this->queryBuilder = $queryBuilder;
+        $this->backendBroker = $backendBroker;
 
         $this->attributeCacheByCode = new ArrayCollection();
         $this->attributeCacheById = new ArrayCollection();
-
-        $this->backends = new ArrayCollection();
-
-        $this->backends->set('datetime', new DatetimeAttributeBackend($this->connection, 'catalog_product_entity_datetime'));
-        $this->backends->set('decimal',  new DecimalAttributeBackend($this->connection, 'catalog_product_entity_decimal'));
-        $this->backends->set('integer',  new IntegerAttributeBackend($this->connection, 'catalog_product_entity_integer'));
-        $this->backends->set('text',     new TextAttributeBackend($this->connection, 'catalog_product_entity_text'));
-        $this->backends->set('varchar',  new VarcharAttributeBackend($this->connection, 'catalog_product_entity_varchar'));
-
-        /*
-        $this->backends->set('media_gallery', new MediaGalleryAttributeBackend(
-            $this->connection,
-            new Filesystem(new Local('/')),
-            '/',
-            'catalog_product_entity_media_gallery',
-            'catalog_product_entity_media_gallery_value'
-        ));
-        */
     }
 
     /**
@@ -96,18 +74,14 @@ class ProductAttributeRepository
     {
         $attributeId = isset($options['attribute_id']) ? $options['attribute_id'] : null;
         $attributeCode = isset($options['attribute_code']) ? $options['attribute_code'] : null;
-        $backendType = isset($options['backend_type']) ? $options['backend_type'] : null;
-        $frontendInput = isset($options['frontend_input']) ? $options['frontend_input'] : null;
 
         unset(
             $options['attribute_id'],
             $options['attribute_code']
         );
 
-        if ($backendType === 'varchar' && $frontendInput === 'gallery') {
-            $backend = $this->backends->get('media_gallery');
-        } else {
-            $backend = $this->backends->get($backendType);
+        if (null === ($backend = $this->backendBroker->find($attributeId, $attributeCode, $options))) {
+            throw new RuntimeErrorException(sprintf('No backend found for attribute "%s".', $attributeCode));
         }
 
         $attribute = Attribute::buildNewWith($attributeId, $attributeCode, $backend, $options);
