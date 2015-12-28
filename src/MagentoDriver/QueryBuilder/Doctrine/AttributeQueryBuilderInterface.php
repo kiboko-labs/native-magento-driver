@@ -15,9 +15,10 @@ interface AttributeQueryBuilderInterface
     /**
      * @param string $alias
      * @param string $extraAlias
+     * @param array $excludedIds
      * @return QueryBuilder
      */
-    public function createFindAllQueryBuilder($alias, $extraAlias);
+    public function createFindAllQueryBuilder($alias, $extraAlias, array $excludedIds = []);
 
     /**
      * @param string $alias

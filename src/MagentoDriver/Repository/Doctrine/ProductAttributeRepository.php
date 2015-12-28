@@ -226,7 +226,14 @@ class ProductAttributeRepository
      */
     public function findAll()
     {
-        $query = $this->queryBuilder->createFindAllQueryBuilder('a', 'e');
+        $attributeList = new ArrayCollection();
+        $excludedIds = [];
+        foreach ($this->attributeCacheById as $id => $attribute) {
+            $attributeList->set($id, $attribute);
+            $excludedIds[] = $id;
+        }
+
+        $query = $this->queryBuilder->createFindAllQueryBuilder('a', 'e', $excludedIds);
 
         $statement = $this->connection->prepare($query);
         if (!$statement->execute()) {

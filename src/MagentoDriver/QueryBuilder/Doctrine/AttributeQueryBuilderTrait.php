@@ -97,16 +97,24 @@ trait AttributeQueryBuilderTrait
     /**
      * @param string $alias
      * @param string $extraAlias
+     * @param array $excludedIds
      * @return QueryBuilder
      */
-    public function createFindAllQueryBuilder($alias, $extraAlias)
+    public function createFindAllQueryBuilder($alias, $extraAlias, array $excludedIds = [])
     {
-        return $this->createQueryBuilder($alias)
+        $queryBuilder = $this->createQueryBuilder($alias)
             ->innerJoin($alias, $this->extraTable, $extraAlias,
                 sprintf('%s.attribute_id=%s.attribute_id', $extraAlias, $alias))
             ->addSelect($this->createFieldsList($this->extraFields, $extraAlias))
             ->where(sprintf('%s.entity_type_id=4', $alias))
         ;
+
+        if (count($excludedIds)) {
+            $expr = array_pad([], count($excludedIds), $queryBuilder->expr()->neq(sprintf('%s.attribute_id', $alias), '?'));
+            $queryBuilder->andWhere($queryBuilder->expr()->andX(...$expr));
+        }
+
+        return $queryBuilder;
     }
 
     /**
