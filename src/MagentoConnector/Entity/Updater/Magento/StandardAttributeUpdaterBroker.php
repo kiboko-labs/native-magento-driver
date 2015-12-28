@@ -1,12 +1,12 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Entity\Updater\Magento;
+namespace Luni\Component\MagentoConnector\Entity\Updater\Magento;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Luni\Component\MagentoDriver\Attribute\AttributeInterface;
-use Luni\Component\MagentoDriver\Entity\Updater\AttributeUpdaterBrokerInterface;
-use Luni\Component\MagentoDriver\Entity\Updater\MagentoProductUpdaterInterface;
+use Luni\Component\MagentoConnector\Entity\Updater\AttributeUpdaterBrokerInterface;
+use Luni\Component\MagentoConnector\Entity\Updater\MagentoProductUpdaterInterface;
 
 class StandardAttributeUpdaterBroker
     implements AttributeUpdaterBrokerInterface

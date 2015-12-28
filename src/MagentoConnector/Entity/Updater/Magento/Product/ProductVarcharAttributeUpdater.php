@@ -1,19 +1,19 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Entity\Updater\Magento\Product;
+namespace Luni\Component\MagentoConnector\Entity\Updater\Magento\Product;
 
 use Luni\Component\MagentoDriver\Attribute\AttributeInterface as MagentoAttributeInterface;
-use Luni\Component\MagentoDriver\AttributeValue\Immutable\ImmutableIntegerAttributeValue;
+use Luni\Component\MagentoDriver\AttributeValue\Immutable\ImmutableVarcharAttributeValue;
 use Luni\Component\MagentoDriver\AttributeValue\Mutable\MutableAttributeValueInterface;
-use Luni\Component\MagentoDriver\AttributeValue\Mutable\MutableIntegerAttributeValue;
+use Luni\Component\MagentoDriver\AttributeValue\Mutable\MutableVarcharAttributeValue;
 use Luni\Component\MagentoDriver\Entity\ProductInterface as MagentoProductInterface;
-use Luni\Component\MagentoDriver\Entity\Updater\MagentoProductUpdaterInterface;
+use Luni\Component\MagentoConnector\Entity\Updater\MagentoProductUpdaterInterface;
 use Luni\Component\MagentoDriver\Exception\ImmutableValueException;
 use Luni\Component\MagentoDriver\Exception\InvalidAttributeBackendTypeException;
-use Pim\Bundle\CatalogBundle\Model\AttributeInterface as PimAttributeInterface;
-use Pim\Bundle\CatalogBundle\Model\ProductInterface as PimProductInterface;
+use Pim\Bundle\CatalogBundle\Model\AttributeInterface as PimAttributeInterface; // TODO: change to Pim\Component\Catalog\Model\AttributeInterface in 1.5
+use Pim\Bundle\CatalogBundle\Model\ProductInterface as PimProductInterface;     // TODO: change to Pim\Component\Catalog\Model\ProductInterface in 1.5
 
-class ProductBooleanAttributeUpdater
+class ProductVarcharAttributeUpdater
     implements MagentoProductUpdaterInterface
 {
     /**
@@ -34,16 +34,16 @@ class ProductBooleanAttributeUpdater
         PimAttributeInterface $pimAttribute,
         MagentoAttributeInterface $magentoAttribute
     ) {
-        if ($pimAttribute->getBackendType() !== 'boolean') {
+        if ($pimAttribute->getBackendType() !== 'varchar') {
             throw new InvalidAttributeBackendTypeException(sprintf(
-                'The PIM attribute %s\'s backend type mut be "boolean".',
+                'The PIM attribute %s\'s backend type mut be "varchar".',
                 $pimAttribute->getCode()
             ));
         }
 
-        if ($magentoAttribute->getBackendType() !== 'integer') {
+        if ($magentoAttribute->getBackendType() !== 'varchar') {
             throw new InvalidAttributeBackendTypeException(sprintf(
-                'The Magento attribute %s\'s backend type mut be "integer".',
+                'The Magento attribute %s\'s backend type mut be "varchar".',
                 $magentoAttribute->getCode()
             ));
         }
@@ -87,12 +87,12 @@ class ProductBooleanAttributeUpdater
                 ));
             }
 
-            /** @var MutableIntegerAttributeValue $magentoValue */
-            $magentoValue->setValue((bool) $pimValue->getBoolean());
+            /** @var MutableVarcharAttributeValue $magentoValue */
+            $magentoValue->setValue($pimValue->getVarchar());
         } else {
-            $magentoValue = new ImmutableIntegerAttributeValue(
+            $magentoValue = new ImmutableVarcharAttributeValue(
                 $this->magentoAttribute,
-                (bool) $pimValue->getBoolean(),
+                $pimValue->getVarchar(),
                 $storeId
             );
 

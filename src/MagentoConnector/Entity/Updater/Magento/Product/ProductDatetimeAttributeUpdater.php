@@ -1,19 +1,19 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Entity\Updater\Magento\Product;
+namespace Luni\Component\MagentoConnector\Entity\Updater\Magento\Product;
 
 use Luni\Component\MagentoDriver\Attribute\AttributeInterface as MagentoAttributeInterface;
-use Luni\Component\MagentoDriver\AttributeValue\Immutable\ImmutableDecimalAttributeValue;
+use Luni\Component\MagentoDriver\AttributeValue\Immutable\ImmutableDatetimeAttributeValue;
 use Luni\Component\MagentoDriver\AttributeValue\Mutable\MutableAttributeValueInterface;
-use Luni\Component\MagentoDriver\AttributeValue\Mutable\MutableDecimalAttributeValue;
+use Luni\Component\MagentoDriver\AttributeValue\Mutable\MutableDatetimeAttributeValue;
 use Luni\Component\MagentoDriver\Entity\ProductInterface as MagentoProductInterface;
-use Luni\Component\MagentoDriver\Entity\Updater\MagentoProductUpdaterInterface;
+use Luni\Component\MagentoConnector\Entity\Updater\MagentoProductUpdaterInterface;
 use Luni\Component\MagentoDriver\Exception\ImmutableValueException;
 use Luni\Component\MagentoDriver\Exception\InvalidAttributeBackendTypeException;
-use Pim\Bundle\CatalogBundle\Model\AttributeInterface as PimAttributeInterface;
-use Pim\Bundle\CatalogBundle\Model\ProductInterface as PimProductInterface;
+use Pim\Bundle\CatalogBundle\Model\AttributeInterface as PimAttributeInterface; // TODO: change to Pim\Component\Catalog\Model\AttributeInterface in 1.5
+use Pim\Bundle\CatalogBundle\Model\ProductInterface as PimProductInterface;     // TODO: change to Pim\Component\Catalog\Model\ProductInterface in 1.5
 
-class ProductDecimalAttributeUpdater
+class ProductDatetimeAttributeUpdater
     implements MagentoProductUpdaterInterface
 {
     /**
@@ -34,16 +34,16 @@ class ProductDecimalAttributeUpdater
         PimAttributeInterface $pimAttribute,
         MagentoAttributeInterface $magentoAttribute
     ) {
-        if ($pimAttribute->getBackendType() !== 'decimal') {
+        if ($pimAttribute->getBackendType() !== 'datetime') {
             throw new InvalidAttributeBackendTypeException(sprintf(
-                'The PIM attribute %s\'s backend type mut be "decimal".',
+                'The PIM attribute %s\'s backend type mut be "datetime".',
                 $pimAttribute->getCode()
             ));
         }
 
-        if ($magentoAttribute->getBackendType() !== 'decimal') {
+        if ($magentoAttribute->getBackendType() !== 'datetime') {
             throw new InvalidAttributeBackendTypeException(sprintf(
-                'The Magento attribute %s\'s backend type mut be "decimal".',
+                'The Magento attribute %s\'s backend type mut be "datetime".',
                 $magentoAttribute->getCode()
             ));
         }
@@ -87,12 +87,12 @@ class ProductDecimalAttributeUpdater
                 ));
             }
 
-            /** @var MutableDecimalAttributeValue $magentoValue */
-            $magentoValue->setValue($pimValue->getDecimal());
+            /** @var MutableDatetimeAttributeValue $magentoValue */
+            $magentoValue->setValue($pimValue->getDatetime());
         } else {
-            $magentoValue = new ImmutableDecimalAttributeValue(
+            $magentoValue = new ImmutableDatetimeAttributeValue(
                 $this->magentoAttribute,
-                $pimValue->getDecimal(),
+                $pimValue->getDatetime(),
                 $storeId
             );
 

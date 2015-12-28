@@ -1,6 +1,6 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Entity\Updater;
+namespace Luni\Component\MagentoConnector\Entity\Updater;
 
 use Luni\Component\MagentoDriver\Attribute\AttributeInterface;
 

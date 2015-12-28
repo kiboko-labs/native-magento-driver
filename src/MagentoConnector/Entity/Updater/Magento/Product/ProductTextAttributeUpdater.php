@@ -1,17 +1,17 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Entity\Updater\Magento\Product;
+namespace Luni\Component\MagentoConnector\Entity\Updater\Magento\Product;
 
 use Luni\Component\MagentoDriver\Attribute\AttributeInterface as MagentoAttributeInterface;
 use Luni\Component\MagentoDriver\AttributeValue\Immutable\ImmutableTextAttributeValue;
 use Luni\Component\MagentoDriver\AttributeValue\Mutable\MutableAttributeValueInterface;
 use Luni\Component\MagentoDriver\AttributeValue\Mutable\MutableTextAttributeValue;
 use Luni\Component\MagentoDriver\Entity\ProductInterface as MagentoProductInterface;
-use Luni\Component\MagentoDriver\Entity\Updater\MagentoProductUpdaterInterface;
+use Luni\Component\MagentoConnector\Entity\Updater\MagentoProductUpdaterInterface;
 use Luni\Component\MagentoDriver\Exception\ImmutableValueException;
 use Luni\Component\MagentoDriver\Exception\InvalidAttributeBackendTypeException;
-use Pim\Bundle\CatalogBundle\Model\AttributeInterface as PimAttributeInterface;
-use Pim\Bundle\CatalogBundle\Model\ProductInterface as PimProductInterface;
+use Pim\Bundle\CatalogBundle\Model\AttributeInterface as PimAttributeInterface; // TODO: change to Pim\Component\Catalog\Model\AttributeInterface in 1.5
+use Pim\Bundle\CatalogBundle\Model\ProductInterface as PimProductInterface;     // TODO: change to Pim\Component\Catalog\Model\ProductInterface in 1.5
 
 class ProductTextAttributeUpdater
     implements MagentoProductUpdaterInterface
