@@ -3,7 +3,8 @@
     "description": "A Magento driver for Akeneo PIM",
     "type": "library",
     "require-dev": {
-        "akeneo/pim-community-dev": "~1.4"
+        "akeneo/pim-community-dev": "~1.4",
+        "phpspec/phpspec": "~2.0"
     },
     "license": "LGPL",
     "authors": [
@@ -30,5 +31,8 @@
         "psr-4": {
             "Luni\\Component\\MagentoDriver\\": "src/MagentoDriver/"
         }
+    },
+    "config": {
+        "bin-dir": "bin"
     }
 }
