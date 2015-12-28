@@ -4,25 +4,56 @@ namespace Luni\Component\MagentoDriver\AttributeBackend;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Connection;
-use League\Flysystem\Filesystem as RemoteFilesystem;
-use Luni\Component\MagentoDriver\Attribute\AttributeInterface;
+use League\Flysystem\File;
+use League\Flysystem\FilesystemInterface;
+use Luni\Component\MagentoDriver\AttributeValue\AttributeValueInterface;
+use Luni\Component\MagentoDriver\AttributeValue\ImageAttributeValueInterface;
+use Luni\Component\MagentoDriver\AttributeValue\ImageMetadataAttributeValueInterface;
 use Luni\Component\MagentoDriver\AttributeValue\MediaGalleryAttributeValueInterface;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
-use Luni\Component\MagentoDriver\AttributeValue\AttributeValueInterface;
+use Luni\Component\MagentoDriver\Exception\InvalidAttributeBackendTypeException;
 use Luni\Component\MagentoDriver\Exception\RuntimeErrorException;
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Security\Core\Util\ClassUtils;
+use Luni\Component\MagentoDriver\Filesystem\FileMoverInterface;
+use Luni\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
+use Luni\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;
 
 class MediaGalleryAttributeBackend
     implements BackendInterface
 {
-    use AttributeBackendTrait;
+    /**
+     * @var TemporaryWriterInterface
+     */
+    private $temporaryImageWriter;
 
     /**
-     * @var RemoteFilesystem
+     * @var TemporaryWriterInterface
      */
-    private $remote;
+    private $temporaryLocaleWriter;
+
+    /**
+     * @var DatabaseWriterInterface
+     */
+    private $databaseImagesWriter;
+
+    /**
+     * @var DatabaseWriterInterface
+     */
+    private $databaseLocaleWriter;
+
+    /**
+     * @var FileMoverInterface
+     */
+    private $fileMover;
+
+    /**
+     * @var FilesystemInterface
+     */
+    private $imagesFs;
+
+    /**
+     * @var FilesystemInterface
+     */
+    private $remoteFs;
 
     /**
      * @var array
@@ -61,55 +92,85 @@ class MediaGalleryAttributeBackend
     /**
      * @var Collection
      */
-    private $imagesPaths;
+    private $imagesList;
 
     /**
-     * @var resource
+     * @var File
      */
     protected $tmpImagesFile;
 
     /**
-     * @var resource
+     * @var File
      */
     protected $tmpLocalesFile;
 
     /**
-     * @var string
-     */
-    private $delimiter = ';';
-
-    /**
-     * @var string
-     */
-    private $enclosure = '"';
-
-    /**
-     * @var string
-     */
-    private $escaper = '"';
-
-    /**
-     * @param Connection $connection
-     * @param RemoteFilesystem $remote
-     * @param string $basePath
+     * @param TemporaryWriterInterface $temporaryImageWriter
+     * @param TemporaryWriterInterface $temporaryLocaleWriter
+     * @param DatabaseWriterInterface $databaseImagesWriter
+     * @param DatabaseWriterInterface $databaseLocaleWriter
+     * @param FileMoverInterface $fileMover
      * @param string $imageTableName
      * @param string $localeTableName
+     * @param FilesystemInterface $imagesFs
+     * @param FilesystemInterface $remoteFs
      */
     public function __construct(
-        Connection $connection,
-        RemoteFilesystem $remote,
-        $basePath,
+        TemporaryWriterInterface $temporaryImageWriter,
+        TemporaryWriterInterface $temporaryLocaleWriter,
+        DatabaseWriterInterface $databaseImagesWriter,
+        DatabaseWriterInterface $databaseLocaleWriter,
+        FileMoverInterface $fileMover,
         $imageTableName,
-        $localeTableName
+        $localeTableName,
+        FilesystemInterface $imagesFs,
+        FilesystemInterface $remoteFs
     ) {
-        $this->connection = $connection;
-        $this->remote = $remote;
-        $this->basePath = $basePath;
+        $this->temporaryImageWriter = $temporaryImageWriter;
+        $this->temporaryLocaleWriter = $temporaryLocaleWriter;
+        $this->databaseImagesWriter = $databaseImagesWriter;
+        $this->databaseLocaleWriter = $databaseLocaleWriter;
+        $this->fileMover = $fileMover;
         $this->imageTableName = $imageTableName;
         $this->localeTableName = $localeTableName;
+        $this->remoteFs = $remoteFs;
+        $this->imagesFs = $imagesFs;
+        $this->imagesList = new ArrayCollection();
+    }
 
-        $this->localFs = new Filesystem();
-        $this->imagesPaths = new ArrayCollection();
+    /**
+     * @throws RuntimeErrorException
+     */
+    public function initialize()
+    {
+    }
+
+    public function persist(ProductInterface $product, AttributeValueInterface $value)
+    {
+        if (!$value instanceof MediaGalleryAttributeValueInterface) {
+            throw new InvalidAttributeBackendTypeException();
+        }
+
+        /** @var ImageAttributeValueInterface $mediaAsset */
+        foreach ($value as $mediaAsset) {
+            $this->temporaryImageWriter->persistRow([
+                'value_id'     => $mediaAsset->getId(),
+                'attribute_id' => $mediaAsset->getAttributeId(),
+                'entity_id'    => $product->getId(),
+                'value'        => $mediaAsset->getFile()->getPath(),
+            ]);
+
+            /** @var ImageMetadataAttributeValueInterface $metadata */
+            foreach ($mediaAsset->getMetadata() as $metadata) {
+                $this->temporaryLocaleWriter->persistRow([
+                    'value_id' => $mediaAsset->getId(),
+                    'store_id' => $metadata->getStoreId(),
+                    'label'    => $metadata->getLabel(),
+                    'position' => $metadata->getPosition(),
+                    'disabled' => $metadata->isExcluded(),
+                ]);
+            }
+        }
     }
 
     /**
@@ -117,77 +178,13 @@ class MediaGalleryAttributeBackend
      */
     public function flush()
     {
-        $this->flushInto($this->tmpImagesFile, $this->imageTableName, $this->imageTableKeys);
-        $this->flushInto($this->tmpLocalesFile, $this->localeTableName, $this->localeTableKeys);
+        $this->temporaryImageWriter->flush();
+        $this->temporaryLocaleWriter->flush();
 
-        $this->moveImages();
-    }
+        $this->databaseImagesWriter->write($this->imageTableName, $this->imageTableKeys);
+        $this->databaseLocaleWriter->write($this->localeTableName, $this->localeTableKeys);
 
-    /**
-     * @param $filename
-     * @param $table
-     * @param array $tableFields
-     * @throws \Doctrine\DBAL\DBALException
-     */
-    public function flushInto($filename, $table, array $tableFields)
-    {
-        if (!$filename) {
-            return;
-        }
-
-        if (false === fclose($filename)) {
-            throw new RuntimeErrorException(sprintf('Failed to close file %s', $filename));
-        }
-
-        $keys = [];
-        foreach ($tableFields as $key) {
-            $keys[] = $this->connection->quoteIdentifier($key);
-        }
-        $serializedKeys = implode(',', $keys);
-
-        $query =<<<SQL_EOF
-LOAD DATA LOCAL INFILE {$this->connection->quote($filename)}
-REPLACE INTO TABLE {$this->connection->quoteIdentifier($table)}
-FIELDS
-    TERMINATED BY {$this->connection->quote($this->delimiter)}
-    OPTIONALLY ENCLOSED BY {$this->connection->quote($this->enclosure)}
-    ESCAPED BY {$this->connection->quote($this->escaper)}
-({$serializedKeys})
-SQL_EOF;
-
-        if ($this->connection->exec($query) <= 0) {
-            throw new RuntimeErrorException(sprintf('Failed to import data from file %s', $filename));
-        }
-
-        $this->localFs->remove($filename);
-    }
-
-    public function moveImages()
-    {
-        /** @var \SplFileInfo $path */
-        foreach ($this->imagesPaths as $path) {
-            $this->remote->putStream($this->getImagePath($path), $fp = fopen($path->getPathname(), 'r'));
-            fclose($fp);
-        }
-
-        $this->imagesPaths->clear();
-    }
-
-    private function getImagePath(\SplFileInfo $fileInfo)
-    {
-        $path = $fileInfo->getPathname();
-        if ($path[0] !== '/') {
-            return $path;
-        }
-
-        if (($offset = strpos($path, $this->basePath)) === false) {
-            return $path;
-        }
-
-        if ($path[$offset] !== '/') {
-            return $path;
-        }
-
-        return substr($path, $offset + 1);
+        $this->fileMover->move($this->imagesFs, $this->remoteFs, $this->imagesList);
+        $this->imagesList->clear();
     }
 }

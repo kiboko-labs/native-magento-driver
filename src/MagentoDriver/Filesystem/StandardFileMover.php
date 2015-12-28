@@ -2,11 +2,8 @@
 
 namespace Luni\Component\MagentoDriver\Filesystem;
 
-
 use Doctrine\Common\Collections\Collection;
-use League\Flysystem\Adapter\Ftp;
-use League\Flysystem\Adapter\Local;
-use League\Flysystem\Filesystem;
+use League\Flysystem\File;
 use League\Flysystem\FilesystemInterface;
 
 class StandardFileMover
@@ -17,7 +14,7 @@ class StandardFileMover
         FilesystemInterface $destination,
         Collection $pathList
     ) {
-        /** @var \SplFileInfo $path */
+        /** @var File $path */
         foreach ($pathList as $path) {
             if (($stream = $source->readStream($path)) === false) {
                 continue;

@@ -3,7 +3,8 @@
 namespace Luni\Component\MagentoDriver\AttributeBackend;
 
 use Doctrine\DBAL\Connection;
-use Symfony\Component\Filesystem\Filesystem;
+use League\Flysystem\Filesystem;
+use League\Flysystem\FilesystemInterface;
 use Luni\Component\MagentoDriver\AttributeValue\AttributeValueInterface;
 use Luni\Component\MagentoDriver\AttributeValue\VarcharAttributeValueInterface;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
@@ -17,15 +18,16 @@ class VarcharAttributeBackend
     /**
      * @param Connection $connection
      * @param string $table
+     * @param FilesystemInterface $localFs
      */
     public function __construct(
         Connection $connection,
-        $table
+        $table,
+        FilesystemInterface $localFs
     ) {
         $this->connection = $connection;
         $this->table = $table;
-
-        $this->localFs = new Filesystem();
+        $this->localFs = $localFs;
     }
 
     /**
@@ -38,7 +40,7 @@ class VarcharAttributeBackend
             throw new InvalidAttributeBackendTypeException();
         }
 
-        $this->persistRow([
+        $this->temporaryWriter->persistRow([
             'value_id'       => $value->getId(),
             'entity_type_id' => 4,
             'attribute_id'   => $value->getAttributeId(),
