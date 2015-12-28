@@ -10,8 +10,8 @@ use Luni\Component\MagentoDriver\Entity\ProductInterface as MagentoProductInterf
 use Luni\Component\MagentoConnector\Entity\Updater\MagentoProductUpdaterInterface;
 use Luni\Component\MagentoDriver\Exception\ImmutableValueException;
 use Luni\Component\MagentoDriver\Exception\InvalidAttributeBackendTypeException;
-use Pim\Bundle\CatalogBundle\Model\AttributeInterface as PimAttributeInterface; // TODO: change to Pim\Component\Catalog\Model\AttributeInterface in 1.5
-use Pim\Bundle\CatalogBundle\Model\ProductInterface as PimProductInterface;     // TODO: change to Pim\Component\Catalog\Model\ProductInterface in 1.5
+use Pim\Component\Catalog\Model\AttributeInterface as PimAttributeInterface;
+use Pim\Component\Catalog\Model\ProductInterface as PimProductInterface;
 
 class ProductDateAttributeUpdater
     implements MagentoProductUpdaterInterface
