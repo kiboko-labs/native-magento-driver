@@ -1,7 +1,8 @@
 <?php
 
-namespace Luni\Component\MagentoConnector\Entity\Updater;
+namespace Luni\Component\MagentoConnector\Broker;
 
+use Luni\Component\MagentoConnector\Entity\Updater\MagentoProductUpdaterInterface;
 use Luni\Component\MagentoDriver\Attribute\AttributeInterface;
 
 interface AttributeUpdaterBrokerInterface
