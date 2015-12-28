@@ -5,7 +5,7 @@ namespace Luni\Component\MagentoDriver\Writer;
 use Doctrine\DBAL\Connection;
 use League\Flysystem\File;
 
-class DataInfileDatabaseWriter
+class LocalDataInfileDatabaseWriter
     implements DatabaseWriterInterface
 {
     use DataInfileDatabaseWriterTrait;
@@ -36,6 +36,6 @@ class DataInfileDatabaseWriter
      */
     public function writeFromFile(File $file, $table, array $tableFields)
     {
-        $this->doWriteFromFile('LOAD DATA INFILE', $file, $table, $tableFields);
+        $this->doWriteFromFile('LOAD DATA LOCAL INFILE', $file, $table, $tableFields);
     }
 }
