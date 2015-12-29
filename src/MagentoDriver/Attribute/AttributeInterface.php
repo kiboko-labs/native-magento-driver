@@ -26,4 +26,9 @@ interface AttributeInterface
      * @return string
      */
     public function getOption($key);
+
+    /**
+     * @return array
+     */
+    public function getOptions();
 }

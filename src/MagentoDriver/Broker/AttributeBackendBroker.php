@@ -37,14 +37,24 @@ class AttributeBackendBroker
     }
 
     /**
+     * @return \Generator|BackendInterface[]
+     */
+    public function walkBackendList()
+    {
+        foreach ($this->backends as $backendInfo) {
+            yield $backendInfo['matcher'] => $backendInfo['backend'];
+        }
+    }
+
+    /**
      * @param AttributeInterface $attribute
      * @return BackendInterface|null
      */
-    public function find(AttributeInterface $attribute)
+    public function findFor(AttributeInterface $attribute)
     {
-        foreach ($this->backends as $backendInfo) {
-            if ($backendInfo['matcher']($attribute) === true) {
-                return $backendInfo['backend'];
+        foreach ($this->walkBackendList() as $matcher => $backend) {
+            if ($matcher($attribute) === true) {
+                return $backend;
             }
         }
 

@@ -15,8 +15,13 @@ interface AttributeBackendBrokerInterface
     public function addBackend(BackendInterface $backend, Closure $matcher);
 
     /**
+     * @return \Generator|BackendInterface[]
+     */
+    public function walkBackendList();
+
+    /**
      * @param AttributeInterface $attribute
      * @return BackendInterface|null
      */
-    public function find(AttributeInterface $attribute);
+    public function findFor(AttributeInterface $attribute);
 }

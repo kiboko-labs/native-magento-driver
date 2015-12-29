@@ -47,6 +47,15 @@ trait AttributeValueTrait
     }
 
     /**
+     * @return AttributeInterface
+     * @internal
+     */
+    public function getAttribute()
+    {
+        return $this->attribute;
+    }
+
+    /**
      * @return int
      */
     public function getAttributeId()
@@ -60,5 +69,30 @@ trait AttributeValueTrait
     public function getAttributeCode()
     {
         return $this->attribute->getCode();
+    }
+
+    /**
+     * @return string
+     */
+    public function getAttributeBackendType()
+    {
+        return $this->attribute->getBackendType();
+    }
+
+    /**
+     * @param string $key
+     * @return string
+     */
+    public function getAttributeOption($key)
+    {
+        return $this->attribute->getOption($key);
+    }
+
+    /**
+     * @return array
+     */
+    public function getAttributeOptions()
+    {
+        return $this->attribute->getOptions();
     }
 }
