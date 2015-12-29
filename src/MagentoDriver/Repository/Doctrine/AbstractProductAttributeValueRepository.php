@@ -12,9 +12,10 @@ use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
 use Luni\Component\MagentoDriver\Exception\RuntimeErrorException;
 use Luni\Component\MagentoDriver\Factory\AttributeValueFactoryInterface;
 use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeValueQueryBuilderInterface;
+use Luni\Component\MagentoDriver\Repository\AttributeRepositoryInterface;
 use Luni\Component\MagentoDriver\Repository\ProductAttributeValueRepositoryInterface;
 
-abstract class ProductAttributeValueRepository
+abstract class AbstractProductAttributeValueRepository
     implements ProductAttributeValueRepositoryInterface
 {
     /**
@@ -31,6 +32,11 @@ abstract class ProductAttributeValueRepository
      * @var AttributeValueFactoryInterface
      */
     protected $valueFactory;
+
+    /**
+     * @var AttributeRepositoryInterface
+     */
+    protected $attributeRepository;
 
     /**
      * ProductAttributeRepository constructor.
