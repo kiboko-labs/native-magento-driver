@@ -1,6 +1,6 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Backend\Attribute;
+namespace Luni\Component\MagentoDriver\Backend\AttributeValue;
 
 use Luni\Component\MagentoDriver\AttributeValue\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Broker\AttributeBackendBrokerInterface;

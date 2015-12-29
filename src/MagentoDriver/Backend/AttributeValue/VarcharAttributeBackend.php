@@ -1,14 +1,14 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Backend\Attribute;
+namespace Luni\Component\MagentoDriver\Backend\AttributeValue;
 
 use Luni\Component\MagentoDriver\AttributeValue\AttributeValueInterface;
-use Luni\Component\MagentoDriver\AttributeValue\DatetimeAttributeValueInterface;
+use Luni\Component\MagentoDriver\AttributeValue\VarcharAttributeValueInterface;
 use Luni\Component\MagentoDriver\Backend\BaseCsvBackendTrait;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 use Luni\Component\MagentoDriver\Exception\InvalidAttributeBackendTypeException;
 
-class DatetimeAttributeBackend
+class VarcharAttributeBackend
     implements BackendInterface
 {
     use BaseCsvBackendTrait;
@@ -23,7 +23,7 @@ class DatetimeAttributeBackend
      */
     public function persist(ProductInterface $product, AttributeValueInterface $value)
     {
-        if (!$value instanceof DatetimeAttributeValueInterface) {
+        if (!$value instanceof VarcharAttributeValueInterface) {
             throw new InvalidAttributeBackendTypeException();
         }
 
@@ -33,7 +33,7 @@ class DatetimeAttributeBackend
             'attribute_id'   => $value->getAttributeId(),
             'store_id'       => $value->getStoreId(),
             'entity_id'      => $product->getId(),
-            'value'          => $value->getValue()->format('Y-m-d H:i:s'),
+            'value'          => $value->getValue(),
         ]);
     }
 }

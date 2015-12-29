@@ -1,14 +1,14 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Backend\Attribute;
+namespace Luni\Component\MagentoDriver\Backend\AttributeValue;
 
 use Luni\Component\MagentoDriver\AttributeValue\AttributeValueInterface;
-use Luni\Component\MagentoDriver\AttributeValue\TextAttributeValueInterface;
+use Luni\Component\MagentoDriver\AttributeValue\IntegerAttributeValueInterface;
 use Luni\Component\MagentoDriver\Backend\BaseCsvBackendTrait;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 use Luni\Component\MagentoDriver\Exception\InvalidAttributeBackendTypeException;
 
-class TextAttributeBackend
+class IntegerAttributeBackend
     implements BackendInterface
 {
     use BaseCsvBackendTrait;
@@ -23,7 +23,7 @@ class TextAttributeBackend
      */
     public function persist(ProductInterface $product, AttributeValueInterface $value)
     {
-        if (!$value instanceof TextAttributeValueInterface) {
+        if (!$value instanceof IntegerAttributeValueInterface) {
             throw new InvalidAttributeBackendTypeException();
         }
 
@@ -33,7 +33,7 @@ class TextAttributeBackend
             'attribute_id'   => $value->getAttributeId(),
             'store_id'       => $value->getStoreId(),
             'entity_id'      => $product->getId(),
-            'value'          => $value->getValue(),
+            'value'          => number_format($value->getValue(), 0),
         ]);
     }
 }
