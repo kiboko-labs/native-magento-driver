@@ -3,7 +3,7 @@
 namespace Luni\Component\MagentoDriver\QueryBuilder\Doctrine;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\ORM\QueryBuilder;
+use Doctrine\DBAL\Query\QueryBuilder;
 
 class ProductAttributeQueryBuilder
     implements ProductAttributeQueryBuilderInterface
