@@ -8,29 +8,34 @@ use Luni\Component\MagentoDriver\AttributeValue\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 
 interface ProductAttributeValueRepositoryInterface
-    extends AttributeRepositoryInterface
 {
     /**
-     * @param int $valueId
+     * @param int $id
      * @return AttributeValueInterface
      */
-    public function findOneById($valueId);
+    public function findOneById($id);
+
+    /**
+     * @param array|int[] $idList
+     * @return Collection|AttributeValueInterface[]
+     */
+    public function findAllById(array $idList);
 
     /**
      * @param ProductInterface $product
-     * @return Collection|AttributeInterface[]
+     * @return Collection|AttributeValueInterface[]
      */
     public function findAllByProduct(ProductInterface $product);
 
     /**
      * @param ProductInterface $product
-     * @return Collection|AttributeInterface[]
+     * @return Collection|AttributeValueInterface[]
      */
     public function findAllVariantAxisByProduct(ProductInterface $product);
 
     /**
      * @param ProductInterface $product
-     * @return Collection|AttributeInterface[]
+     * @return Collection|AttributeValueInterface[]
      */
     public function findAllMandatoryByProduct(ProductInterface $product);
 
@@ -58,18 +63,6 @@ interface ProductAttributeValueRepositoryInterface
 
     /**
      * @param ProductInterface $product
-     * @param AttributeInterface $attribute
-     * @param int $storeId
-     * @return AttributeValueInterface
-     */
-    public function findOneByProductAndAttributeFromStoreIdOrDefault(
-        ProductInterface $product,
-        AttributeInterface $attribute,
-        $storeId
-    );
-
-    /**
-     * @param ProductInterface $product
      * @return Collection|AttributeValueInterface[]
      */
     public function findAllByProductFromDefault(ProductInterface $product);
@@ -80,11 +73,4 @@ interface ProductAttributeValueRepositoryInterface
      * @return Collection|AttributeValueInterface[]
      */
     public function findAllByProductFromStoreId(ProductInterface $product, $storeId);
-
-    /**
-     * @param ProductInterface $product
-     * @param int $storeId
-     * @return Collection|AttributeValueInterface[]
-     */
-    public function findAllByProductFromStoreIdOrDefault(ProductInterface $product, $storeId);
 }

@@ -63,4 +63,10 @@ interface ProductAttributeValueQueryBuilderInterface
      * @return QueryBuilder
      */
     public function createFindAllByProductIdFromStoreIdOrDefaultQueryBuilder($defaultAlias, $storeAlias);
+
+    /**
+     * @param string $alias
+     * @return QueryBuilder
+     */
+    public function createFindAllByProductIdQueryBuilder($alias);
 }

@@ -251,4 +251,17 @@ class ProductAttributeValueQueryBuilder
 
         return $queryBuilder;
     }
+
+    /**
+     * @param string $alias
+     * @return QueryBuilder
+     */
+    public function createFindAllByProductIdQueryBuilder($alias)
+    {
+        $queryBuilder = $this->createBaseQueryBuilder($alias, $this->createFieldsList($this->fields, $alias));
+
+        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.entity_id', $defaultAlias), ':product_id'));
+
+        return $queryBuilder;
+    }
 }
