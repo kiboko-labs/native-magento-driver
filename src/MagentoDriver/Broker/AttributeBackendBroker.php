@@ -29,7 +29,10 @@ class AttributeBackendBroker
      */
     public function addBackend(BackendInterface $backend, Closure $matcher)
     {
-        $this->backends->set($matcher, $backend);
+        $this->backends->add([
+            'matcher' => $matcher,
+            'backend' => $backend
+        ]);
     }
 
     /**
@@ -40,9 +43,9 @@ class AttributeBackendBroker
      */
     public function find($attributeId, $attributeCode, array $attributeOptions)
     {
-        foreach ($this->backends as $matcher => $backend) {
-            if ($matcher($attributeId, $attributeCode, $attributeOptions) === true) {
-                return $backend;
+        foreach ($this->backends as $backendInfo) {
+            if ($backendInfo['matcher']($attributeId, $attributeCode, $attributeOptions) === true) {
+                return $backendInfo['backend'];
             }
         }
 

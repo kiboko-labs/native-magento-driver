@@ -15,7 +15,7 @@ $localFs = new \League\Flysystem\Filesystem(new \League\Flysystem\Adapter\Local(
 
 $datetimeBackend = new DatetimeAttributeBackend($connection, 'catalog_product_entity_datetime', $localFs);
 $decimalBackend = new DecimalAttributeBackend($connection, 'catalog_product_entity_decimal', $localFs);
-$integerBackend = new IntegerAttributeBackend($connection, 'catalog_product_entity_integer', $localFs);
+$integerBackend = new IntegerAttributeBackend($connection, 'catalog_product_entity_int', $localFs);
 $textBackend = new TextAttributeBackend($connection, 'catalog_product_entity_text', $localFs);
 $varcharBackend = new VarcharAttributeBackend($connection, 'catalog_product_entity_varchar', $localFs);
 ```
@@ -35,16 +35,15 @@ $backendBroker->addBackend($decimalBackend, function($attributeId, $attributeCod
     return isset($options['backend_type']) && $options['backend_type'] === 'decimal';
 });
 $backendBroker->addBackend($integerBackend, function($attributeId, $attributeCode, $options) {
-    return isset($options['backend_type']) && $options['backend_type'] === 'integer';
+    return isset($options['backend_type']) && $options['backend_type'] === 'int';
 });
 $backendBroker->addBackend($textBackend, function($attributeId, $attributeCode, $options) {
     return isset($options['backend_type']) && $options['backend_type'] === 'text';
 });
 $backendBroker->addBackend($varcharBackend, function($attributeId, $attributeCode, $options) {
-    return isset($options['backend_type']) && (
-        $options['backend_type'] === 'varchar' ||
+    return (isset($options['backend_type']) && $options['backend_type'] === 'varchar') ||
         $attributeCode === 'sku'
-    );
+    ;
 });
 ```
 
