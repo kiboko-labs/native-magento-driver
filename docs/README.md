@@ -232,6 +232,50 @@ foreach ($productList as $product) {
 $staticBackend->flush();
 ```
 
+## Initialize the `MediaGalleryAttributeBackend` objects
+
+This `MediaGalleryAttributeBackend` is used to store media gallery datum.
+
+```php
+<?php
+
+use League\Flysystem\File;
+use League\Flysystem\Filesystem;
+use League\Flysystem\Adapter\Local;
+use Luni\Component\MagentoDriver\Backend\Attribute\MediaGalleryAttributeBackend;
+
+$localFs = new Filesystem(new Local(__DIR__));
+$remoteFs = new Filesystem(new Local(__DIR__));
+
+$mediaAssetTemporaryWriter = new StandardTemporaryWriter(new File($localFs, 'tmp/attribute/media_asset.csv'), ';', '"', '"');
+$mediaAssetLocaleTemporaryWriter = new StandardTemporaryWriter(new File($localFs, 'tmp/attribute/media_asset_locale.csv'), ';', '"', '"');
+$mediaAssetDatabaseWriter = new LocalDataInfileDatabaseWriter(new File($localFs, 'tmp/attribute/media_asset.csv'), $connection, ';', '"', '"');
+$mediaAssetLocaleDatabaseWriter = new LocalDataInfileDatabaseWriter(new File($localFs, 'tmp/attribute/media_asset_locale.csv'), $connection, ';', '"', '"');
+
+$fileMover = new StandardFileMover();
+
+$mediaGalleryBackend = new MediaGalleryAttributeBackend(
+    $mediaAssetTemporaryWriter,
+    $mediaAssetLocaleTemporaryWriter,
+    $mediaAssetDatabaseWriter,
+    $mediaAssetLocaleDatabaseWriter,
+    $fileMover,
+    ProductMediaGalleryAttributeValueQueryBuilder::getDefaultImageTable(),
+    ProductMediaGalleryAttributeValueQueryBuilder::getDefaultLocaleTable(),
+    $localFs,
+    $remoteFs
+);
+
+$mediaGalleryAttribute = $productAttributeRepository->findOneByCode('media_gallery');
+
+$mediaGalleryBackend->initialize();
+/** @var \Luni\Component\MagentoDriver\Entity\ProductInterface $product */
+foreach ($productList as $product) {
+    $mediaGalleryBackend->persist($product, $product->getValueFor($mediaGalleryAttribute));
+}
+$mediaGalleryBackend->flush();
+```
+
 ## Initialize the `AttributeBackendBroker`
 
 Once all your backends have been initialized, you can use the `AttributeBackendBroker` to find the best backend.
@@ -243,6 +287,9 @@ use Luni\Component\MagentoDriver\Attribute\AttributeInterface;
 use Luni\Component\MagentoDriver\Broker\AttributeBackendBroker;
 
 $backendBroker = new AttributeBackendBroker();
+$backendBroker->addBackend($mediaGalleryBackend, function(AttributeInterface $attribute) {
+    return $attribute->getBackendType() === 'varchar' && $attribute->getFrontendType() === 'gallery';
+});
 $backendBroker->addBackend($datetimeBackend, function(AttributeInterface $attribute) {
     return $attribute->getBackendType() === 'datetime';
 });
