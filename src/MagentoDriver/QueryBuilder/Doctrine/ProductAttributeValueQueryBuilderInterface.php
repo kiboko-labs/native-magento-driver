@@ -14,27 +14,16 @@ interface ProductAttributeValueQueryBuilderInterface
 
     /**
      * @param string $alias
-     * @param array $excludedIds
      * @return QueryBuilder
      */
-    public function createFindAllFromDefaultQueryBuilder($alias, array $excludedIds = []);
-
-    /**
-     * @param string $alias
-     * @param int $storeId
-     * @param array $excludedIds
-     * @return QueryBuilder
-     */
-    public function createFindAllFromStoreIdQueryBuilder($alias, $storeId, array $excludedIds = []);
+    public function createFindAllFromStoreIdQueryBuilder($alias);
 
     /**
      * @param string $defaultAlias
      * @param string $storeAlias
-     * @param int $storeId
-     * @param array $excludedIds
      * @return QueryBuilder
      */
-    public function createFindAllFromStoreIdOrDefaultQueryBuilder($defaultAlias, $storeAlias, $storeId, array $excludedIds = []);
+    public function createFindAllFromStoreIdOrDefaultQueryBuilder($defaultAlias, $storeAlias);
 
     /**
      * @param string $alias
@@ -44,52 +33,34 @@ interface ProductAttributeValueQueryBuilderInterface
 
     /**
      * @param string $alias
-     * @param int $productId
-     * @param int $attributeId
+     * @param array $valueIds
      * @return QueryBuilder
      */
-    public function createFindOneByProductIdAndAttributeIdFromDefaultQueryBuilder($alias, $productId, $attributeId);
+    public function createFindAllByIdQueryBuilder($alias, array $valueIds);
 
     /**
      * @param string $alias
-     * @param int $storeId
-     * @param int $productId
-     * @param int $attributeId
      * @return QueryBuilder
      */
-    public function createFindOneByProductIdAndAttributeIdFromStoreIdQueryBuilder($alias, $storeId, $productId, $attributeId);
+    public function createFindOneByProductIdAndAttributeIdFromStoreIdQueryBuilder($alias);
 
     /**
      * @param string $defaultAlias
      * @param string $storeAlias
-     * @param int $storeId
-     * @param int $productId
-     * @param int $attributeId
      * @return QueryBuilder
      */
-    public function createFindOneByProductIdAndAttributeIdFromStoreIdOrDefaultQueryBuilder($defaultAlias, $storeAlias, $storeId, $productId, $attributeId);
+    public function createFindOneByProductIdAndAttributeIdFromStoreIdOrDefaultQueryBuilder($defaultAlias, $storeAlias);
 
     /**
      * @param string $alias
-     * @param int $productId
      * @return QueryBuilder
      */
-    public function createFindAllByProductIdFromDefaultQueryBuilder($alias, $productId);
-
-    /**
-     * @param string $alias
-     * @param int $storeId
-     * @param int $productId
-     * @return QueryBuilder
-     */
-    public function createFindAllByProductIdFromStoreIdQueryBuilder($alias, $storeId, $productId);
+    public function createFindAllByProductIdFromStoreIdQueryBuilder($alias);
 
     /**
      * @param string $defaultAlias
      * @param string $storeAlias
-     * @param int $storeId
-     * @param int $productId
      * @return QueryBuilder
      */
-    public function createFindAllByProductIdFromStoreIdOrDefaultQueryBuilder($defaultAlias, $storeAlias, $storeId, $productId);
+    public function createFindAllByProductIdFromStoreIdOrDefaultQueryBuilder($defaultAlias, $storeAlias);
 }
