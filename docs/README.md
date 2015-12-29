@@ -292,3 +292,24 @@ foreach ($productList as $product) {
 }
 $bestBackend->flush();
 ```
+
+## Initialize the `AttributeBackendFacade`
+
+The `AttributeBackendBroker` may not be so easy to use, there is the `AttributeBackendFacade` to make your code backend agnostic.
+
+```php
+<?php
+
+use Luni\Component\MagentoDriver\Backend\Attribute\AttributeBackendFacade;
+
+$backendFacade = new AttributeBackendFacade($backendBroker);
+
+$releaseDateAttribute = $productAttributeRepository->findOneByCode('release_date');
+
+$backendFacade->initialize();
+/** @var \Luni\Component\MagentoDriver\Entity\ProductInterface $product */
+foreach ($productList as $product) {
+    $backendFacade->persist($product, $product->getValueFor($releaseDateAttribute));
+}
+$backendFacade->flush();
+```
