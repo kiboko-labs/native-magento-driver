@@ -38,13 +38,14 @@ class AttributeBackendBroker
     /**
      * @param int $attributeId
      * @param string $attributeCode
+     * @param string $backendType
      * @param array $attributeOptions
      * @return BackendInterface|null
      */
-    public function find($attributeId, $attributeCode, array $attributeOptions)
+    public function find($attributeId, $attributeCode, $backendType, array $attributeOptions)
     {
         foreach ($this->backends as $backendInfo) {
-            if ($backendInfo['matcher']($attributeId, $attributeCode, $attributeOptions) === true) {
+            if ($backendInfo['matcher']($attributeId, $attributeCode, $backendType, $attributeOptions) === true) {
                 return $backendInfo['backend'];
             }
         }

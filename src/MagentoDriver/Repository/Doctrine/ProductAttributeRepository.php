@@ -7,8 +7,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Connection;
 use Luni\Component\MagentoDriver\Attribute\Attribute;
 use Luni\Component\MagentoDriver\Attribute\AttributeInterface;
-use Luni\Component\MagentoDriver\Broker\AttributeBackendBrokerInterface;
-use Luni\Component\MagentoDriver\Exception\RuntimeErrorException;
 use Luni\Component\MagentoDriver\Family\FamilyInterface;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
@@ -26,11 +24,6 @@ class ProductAttributeRepository
      * @var ProductAttributeQueryBuilderInterface
      */
     protected $queryBuilder;
-
-    /**
-     * @var AttributeBackendBrokerInterface
-     */
-    protected $backendBroker;
 
     /**
      * @var Connection
@@ -51,16 +44,13 @@ class ProductAttributeRepository
      * ProductAttributeRepository constructor.
      * @param Connection $connection
      * @param ProductAttributeQueryBuilderInterface $queryBuilder
-     * @param AttributeBackendBrokerInterface $backendBroker
      */
     public function __construct(
         Connection $connection,
-        ProductAttributeQueryBuilderInterface $queryBuilder,
-        AttributeBackendBrokerInterface $backendBroker
+        ProductAttributeQueryBuilderInterface $queryBuilder
     ) {
         $this->connection = $connection;
         $this->queryBuilder = $queryBuilder;
-        $this->backendBroker = $backendBroker;
 
         $this->attributeCacheByCode = new ArrayCollection();
         $this->attributeCacheById = new ArrayCollection();
@@ -74,17 +64,15 @@ class ProductAttributeRepository
     {
         $attributeId = isset($options['attribute_id']) ? $options['attribute_id'] : null;
         $attributeCode = isset($options['attribute_code']) ? $options['attribute_code'] : null;
+        $backendType = isset($options['backend_type']) ? $options['backend_type'] : null;
 
         unset(
             $options['attribute_id'],
-            $options['attribute_code']
+            $options['attribute_code'],
+            $options['backend_type']
         );
 
-        if (null === ($backend = $this->backendBroker->find($attributeId, $attributeCode, $options))) {
-            throw new RuntimeErrorException(sprintf('No backend found for attribute "%s".', $attributeCode));
-        }
-
-        $attribute = Attribute::buildNewWith($attributeId, $attributeCode, $backend, $options);
+        $attribute = Attribute::buildNewWith($attributeId, $attributeCode, $backendType, $options);
 
         $this->attributeCacheByCode->set($attributeCode, $attribute);
         $this->attributeCacheById->set($attributeId, $attribute);

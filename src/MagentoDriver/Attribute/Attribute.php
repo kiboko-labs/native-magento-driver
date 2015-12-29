@@ -19,9 +19,9 @@ class Attribute
     private $code;
 
     /**
-     * @var BackendInterface
+     * @var string
      */
-    private $backend;
+    private $backendType;
 
     /**
      * @var array
@@ -30,33 +30,33 @@ class Attribute
 
     /**
      * @param string $code
-     * @param BackendInterface $backend
+     * @param string $backendType
      * @param array $options
      */
     public function __construct(
         $code,
-        BackendInterface $backend,
+        $backendType,
         array $options = []
     ) {
         $this->code = $code;
-        $this->backend = $backend;
+        $this->backendType = $backendType;
         $this->options = new ArrayCollection($options);
     }
 
     /**
      * @param int $attributeId
      * @param string $code
-     * @param BackendInterface $backend
+     * @param string $backendType
      * @param array $options
      * @return AttributeInterface
      */
     public static function buildNewWith(
         $attributeId,
         $code,
-        BackendInterface $backend,
+        $backendType,
         array $options = []
     ) {
-        $object = new static($code, $backend, $options);
+        $object = new static($code, $backendType, $options);
 
         $object->id = $attributeId;
 
@@ -84,15 +84,7 @@ class Attribute
      */
     public function getBackendType()
     {
-        return $this->backend->getType();
-    }
-
-    /**
-     * @return BackendInterface
-     */
-    public function getBackend()
-    {
-        return $this->backend;
+        return $this->backendType;
     }
 
     /**

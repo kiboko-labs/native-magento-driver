@@ -22,11 +22,6 @@ interface AttributeInterface
     public function getBackendType();
 
     /**
-     * @return BackendInterface
-     */
-    public function getBackend();
-
-    /**
      * @param string $key
      * @return string
      */
