@@ -1,16 +1,16 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\AttributeBackend;
+namespace Luni\Component\MagentoDriver\Backend\Attribute;
 
 use Doctrine\DBAL\Connection;
 use League\Flysystem\Filesystem;
 use League\Flysystem\FilesystemInterface;
 use Luni\Component\MagentoDriver\AttributeValue\AttributeValueInterface;
-use Luni\Component\MagentoDriver\AttributeValue\TextAttributeValueInterface;
+use Luni\Component\MagentoDriver\AttributeValue\VarcharAttributeValueInterface;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 use Luni\Component\MagentoDriver\Exception\InvalidAttributeBackendTypeException;
 
-class TextAttributeBackend
+class VarcharAttributeBackend
     implements BackendInterface
 {
     use BaseAttributeCsvBackendTrait;
@@ -36,7 +36,7 @@ class TextAttributeBackend
      */
     public function persist(ProductInterface $product, AttributeValueInterface $value)
     {
-        if (!$value instanceof TextAttributeValueInterface) {
+        if (!$value instanceof VarcharAttributeValueInterface) {
             throw new InvalidAttributeBackendTypeException();
         }
 

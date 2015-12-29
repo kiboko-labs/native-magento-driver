@@ -5,7 +5,7 @@ namespace Luni\Component\MagentoDriver\Broker;
 use Closure;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Luni\Component\MagentoDriver\AttributeBackend\BackendInterface;
+use Luni\Component\MagentoDriver\Backend\Attribute\BackendInterface;
 
 class AttributeBackendBroker
     implements AttributeBackendBrokerInterface

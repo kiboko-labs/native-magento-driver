@@ -5,11 +5,11 @@
 ```php
 <?php
 
-use Luni\Component\MagentoDriver\AttributeBackend\DatetimeAttributeBackend;
-use Luni\Component\MagentoDriver\AttributeBackend\DecimalAttributeBackend;
-use Luni\Component\MagentoDriver\AttributeBackend\IntegerAttributeBackend;
-use Luni\Component\MagentoDriver\AttributeBackend\TextAttributeBackend;
-use Luni\Component\MagentoDriver\AttributeBackend\VarcharAttributeBackend;
+use Luni\Component\MagentoDriver\Backend\Attribute\DatetimeAttributeBackend;
+use Luni\Component\MagentoDriver\Backend\Attribute\DecimalAttributeBackend;
+use Luni\Component\MagentoDriver\Backend\Attribute\IntegerAttributeBackend;
+use Luni\Component\MagentoDriver\Backend\Attribute\TextAttributeBackend;
+use Luni\Component\MagentoDriver\Backend\Attribute\VarcharAttributeBackend;
 
 $localFs = new \League\Flysystem\Filesystem(new \League\Flysystem\Adapter\Local(__DIR__));
 

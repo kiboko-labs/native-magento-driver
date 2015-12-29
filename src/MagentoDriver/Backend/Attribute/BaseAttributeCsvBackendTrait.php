@@ -1,6 +1,6 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\AttributeBackend;
+namespace Luni\Component\MagentoDriver\Backend\Attribute;
 
 use League\Flysystem\File;
 use Luni\Component\MagentoDriver\AttributeValue\AttributeValueInterface;

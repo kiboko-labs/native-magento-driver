@@ -1,6 +1,6 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\AttributeBackend;
+namespace Luni\Component\MagentoDriver\Backend\Attribute;
 
 use Doctrine\DBAL\Connection;
 use League\Flysystem\Filesystem;
