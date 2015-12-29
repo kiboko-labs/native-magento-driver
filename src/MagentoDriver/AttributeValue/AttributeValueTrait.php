@@ -22,6 +22,11 @@ trait AttributeValueTrait
     private $attribute;
 
     /**
+     * @return bool
+     */
+    abstract public function isScopable();
+
+    /**
      * @param AttributeInterface $friend
      * @return bool
      */
@@ -35,7 +40,7 @@ trait AttributeValueTrait
      */
     public function getId()
     {
-        return $this->id;
+        return $this->isScopable() ? $this->id : null;
     }
 
     /**

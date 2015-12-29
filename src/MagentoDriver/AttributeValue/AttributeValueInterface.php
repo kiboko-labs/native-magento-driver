@@ -12,7 +12,12 @@ interface AttributeValueInterface
     public function getId();
 
     /**
-     * @return int
+     * @return bool
+     */
+    public function isScopable();
+
+    /**
+     * @return int|null
      */
     public function getStoreId();
 

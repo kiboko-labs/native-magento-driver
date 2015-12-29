@@ -30,7 +30,7 @@ trait DecimalAttributeValueTrait
      * @param int $valueId
      * @param float $payload
      * @param null $storeId
-     * @return MediaGalleryAttributeValue
+     * @return DecimalAttributeValueInterface
      */
     public static function buildNewWith(
         AttributeInterface $attribute,
@@ -43,6 +43,14 @@ trait DecimalAttributeValueTrait
         $object->id = $valueId;
 
         return $object;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isScopable()
+    {
+        return true;
     }
 
     /**

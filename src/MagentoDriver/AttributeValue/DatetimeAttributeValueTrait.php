@@ -30,7 +30,7 @@ trait DatetimeAttributeValueTrait
      * @param int $valueId
      * @param \DateTimeInterface $payload
      * @param null $storeId
-     * @return MediaGalleryAttributeValue
+     * @return DatetimeAttributeValueInterface
      */
     public static function buildNewWith(
         AttributeInterface $attribute,
@@ -43,6 +43,14 @@ trait DatetimeAttributeValueTrait
         $object->id = $valueId;
 
         return $object;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isScopable()
+    {
+        return true;
     }
 
     /**

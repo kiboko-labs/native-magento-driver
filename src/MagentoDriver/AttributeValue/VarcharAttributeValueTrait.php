@@ -30,7 +30,7 @@ trait VarcharAttributeValueTrait
      * @param int $valueId
      * @param string $payload
      * @param null $storeId
-     * @return MediaGalleryAttributeValue
+     * @return VarcharAttributeValueInterface
      */
     public static function buildNewWith(
         AttributeInterface $attribute,
@@ -43,6 +43,14 @@ trait VarcharAttributeValueTrait
         $object->id = $valueId;
 
         return $object;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isScopable()
+    {
+        return true;
     }
 
     /**

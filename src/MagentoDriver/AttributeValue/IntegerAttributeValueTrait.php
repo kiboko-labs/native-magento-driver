@@ -30,7 +30,7 @@ trait IntegerAttributeValueTrait
      * @param int $valueId
      * @param int $payload
      * @param null $storeId
-     * @return MediaGalleryAttributeValue
+     * @return IntegerAttributeValueInterface
      */
     public static function buildNewWith(
         AttributeInterface $attribute,
@@ -43,6 +43,14 @@ trait IntegerAttributeValueTrait
         $object->id = $valueId;
 
         return $object;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isScopable()
+    {
+        return true;
     }
 
     /**

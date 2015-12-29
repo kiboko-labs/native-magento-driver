@@ -43,6 +43,14 @@ trait MediaGalleryAttributeValueTrait
     }
 
     /**
+     * @return bool
+     */
+    public function isScopable()
+    {
+        return false;
+    }
+
+    /**
      * @return int
      */
     public function count()
