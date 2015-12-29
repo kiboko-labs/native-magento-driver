@@ -80,6 +80,12 @@ interface ProductInterface
     public function getValueFor(AttributeInterface $attribute, $storeId);
 
     /**
+     * @param AttributeInterface $attribute
+     * @return Collection|AttributeValueInterface[]
+     */
+    public function getAllValuesFor(AttributeInterface $attribute);
+
+    /**
      * @param AttributeValueInterface $value
      */
     public function setValue(AttributeValueInterface $value);
