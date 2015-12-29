@@ -30,7 +30,7 @@ trait TextAttributeValueTrait
      * @param int $valueId
      * @param string $payload
      * @param null $storeId
-     * @return MediaGalleryAttributeValue
+     * @return TextAttributeValueInterface
      */
     public static function buildNewWith(
         AttributeInterface $attribute,
@@ -43,6 +43,14 @@ trait TextAttributeValueTrait
         $object->id = $valueId;
 
         return $object;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isScopable()
+    {
+        return true;
     }
 
     /**

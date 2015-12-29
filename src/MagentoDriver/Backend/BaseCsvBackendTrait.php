@@ -1,15 +1,11 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\AttributeBackend;
+namespace Luni\Component\MagentoDriver\Backend;
 
-use League\Flysystem\File;
-use Luni\Component\MagentoDriver\AttributeValue\AttributeValueInterface;
-use Luni\Component\MagentoDriver\Entity\ProductInterface;
-use Luni\Component\MagentoDriver\Exception\RuntimeErrorException;
 use Luni\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
 use Luni\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;
 
-trait BaseAttributeCsvBackendTrait
+trait BaseCsvBackendTrait
 {
     /**
      * @var TemporaryWriterInterface
@@ -24,14 +20,7 @@ trait BaseAttributeCsvBackendTrait
     /**
      * @var array
      */
-    private $tableKeys = [
-        'value_id',
-        'entity_type_id',
-        'attribute_id',
-        'store_id',
-        'entity_id',
-        'value',
-    ];
+    private $tableKeys = [];
 
     /**
      * @var string
@@ -42,29 +31,19 @@ trait BaseAttributeCsvBackendTrait
      * @param TemporaryWriterInterface $temporaryWriter
      * @param DatabaseWriterInterface $databaseWriter
      * @param string $tableName
+     * @param array $tableKeys
      */
     public function __construct(
         TemporaryWriterInterface $temporaryWriter,
         DatabaseWriterInterface $databaseWriter,
-        $tableName
+        $tableName,
+        array $tableKeys = []
     ) {
         $this->temporaryWriter = $temporaryWriter;
         $this->databaseWriter = $databaseWriter;
         $this->tableName = $tableName;
+        $this->tableKeys = $tableKeys;
     }
-
-    /**
-     * @throws RuntimeErrorException
-     */
-    public function initialize()
-    {
-    }
-
-    /**
-     * @param ProductInterface $product
-     * @param AttributeValueInterface $value
-     */
-    abstract public function persist(ProductInterface $product, AttributeValueInterface $value);
 
     /**
      * Flushes data into the DB
@@ -73,6 +52,22 @@ trait BaseAttributeCsvBackendTrait
     {
         $this->temporaryWriter->flush();
 
-        $this->databaseWriter->write($this->tableName, $this->tableKeys);
+        $this->databaseWriter->write($this->getTableName(), $this->getTableKeys());
+    }
+
+    /**
+     * @return string
+     */
+    protected function getTableName()
+    {
+        return $this->tableName;
+    }
+
+    /**
+     * @return array
+     */
+    protected function getTableKeys()
+    {
+        return $this->tableKeys;
     }
 }

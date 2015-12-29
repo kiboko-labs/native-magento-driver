@@ -2,6 +2,7 @@
 
 namespace Luni\Component\MagentoDriver\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Luni\Component\MagentoDriver\Attribute\AttributeInterface;
 use Luni\Component\MagentoDriver\Attribute\MediaGalleryAttributeInterface;
@@ -143,6 +144,25 @@ trait MagentoProductTrait
         }
 
         return false;
+    }
+
+    /**
+     * @param AttributeInterface $attribute
+     * @return Collection|AttributeValueInterface[]
+     */
+    public function getAllValuesFor(AttributeInterface $attribute)
+    {
+        $collection = new ArrayCollection();
+        /** @var AttributeValueInterface $value */
+        foreach ($this->values as $value) {
+            if ($value->getAttributeCode() !== $attribute->getCode()) {
+                continue;
+            }
+
+            $collection->set($value->getStoreId(), $value);
+        }
+
+        return $collection;
     }
 
     /**

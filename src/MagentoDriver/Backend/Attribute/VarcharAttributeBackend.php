@@ -1,33 +1,20 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\AttributeBackend;
+namespace Luni\Component\MagentoDriver\Backend\Attribute;
 
-use Doctrine\DBAL\Connection;
-use League\Flysystem\Filesystem;
-use League\Flysystem\FilesystemInterface;
 use Luni\Component\MagentoDriver\AttributeValue\AttributeValueInterface;
 use Luni\Component\MagentoDriver\AttributeValue\VarcharAttributeValueInterface;
+use Luni\Component\MagentoDriver\Backend\BaseCsvBackendTrait;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 use Luni\Component\MagentoDriver\Exception\InvalidAttributeBackendTypeException;
 
 class VarcharAttributeBackend
     implements BackendInterface
 {
-    use BaseAttributeCsvBackendTrait;
+    use BaseCsvBackendTrait;
 
-    /**
-     * @param Connection $connection
-     * @param string $table
-     * @param FilesystemInterface $localFs
-     */
-    public function __construct(
-        Connection $connection,
-        $table,
-        FilesystemInterface $localFs
-    ) {
-        $this->connection = $connection;
-        $this->table = $table;
-        $this->localFs = $localFs;
+    public function initialize()
+    {
     }
 
     /**

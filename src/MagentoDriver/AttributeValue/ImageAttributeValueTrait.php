@@ -53,6 +53,14 @@ trait ImageAttributeValueTrait
     }
 
     /**
+     * @return bool
+     */
+    public function isScopable()
+    {
+        return false;
+    }
+
+    /**
      * @return string
      */
     public function getFile()

@@ -15,47 +15,12 @@ trait AttributeQueryBuilderTrait
     /**
      * @var array
      */
-    private $fields = [
-        'attribute_id',
-        'attribute_code',
-        'attribute_model',
-        'backend_model',
-        'backend_type',
-        'backend_table',
-        'frontend_model',
-        'frontend_input',
-        'frontend_label',
-        'frontend_class',
-        'source_model',
-        'is_required',
-        'is_user_defined',
-        'default_value',
-        'is_unique',
-    ];
+    private $fields;
 
     /**
      * @var array
      */
-    private $extraFields = [
-        'frontend_input_renderer',
-        'is_global',
-        'is_visible',
-        'is_searchable',
-        'is_filterable',
-        'is_comparable',
-        'is_visible_on_front',
-        'is_html_allowed_on_front',
-        'is_used_for_price_rules',
-        'is_filterable_in_search',
-        'used_in_product_listing',
-        'used_for_sort_by',
-        'is_configurable',
-        'apply_to',
-        'is_visible_in_advanced_search',
-        'position',
-        'is_wysiwyg_enabled',
-        'is_used_for_promo_rules',
-    ];
+    private $extraFields;
 
     /**
      * @var string

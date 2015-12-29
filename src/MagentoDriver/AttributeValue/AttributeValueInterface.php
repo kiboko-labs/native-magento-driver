@@ -12,9 +12,20 @@ interface AttributeValueInterface
     public function getId();
 
     /**
-     * @return int
+     * @return bool
+     */
+    public function isScopable();
+
+    /**
+     * @return int|null
      */
     public function getStoreId();
+
+    /**
+     * @return AttributeInterface
+     * @internal
+     */
+    public function getAttribute();
 
     /**
      * @return int
@@ -31,4 +42,20 @@ interface AttributeValueInterface
      * @return bool
      */
     public function isAttribute(AttributeInterface $friend);
+
+    /**
+     * @return string
+     */
+    public function getAttributeBackendType();
+
+    /**
+     * @param string $key
+     * @return string
+     */
+    public function getAttributeOption($key);
+
+    /**
+     * @return array
+     */
+    public function getAttributeOptions();
 }

@@ -1,33 +1,20 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\AttributeBackend;
+namespace Luni\Component\MagentoDriver\Backend\Attribute;
 
-use Doctrine\DBAL\Connection;
-use League\Flysystem\Filesystem;
-use League\Flysystem\FilesystemInterface;
 use Luni\Component\MagentoDriver\AttributeValue\AttributeValueInterface;
-use Luni\Component\MagentoDriver\AttributeValue\IntegerAttributeValueInterface;
+use Luni\Component\MagentoDriver\AttributeValue\DecimalAttributeValueInterface;
+use Luni\Component\MagentoDriver\Backend\BaseCsvBackendTrait;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 use Luni\Component\MagentoDriver\Exception\InvalidAttributeBackendTypeException;
 
-class IntegerAttributeBackend
+class DecimalAttributeBackend
     implements BackendInterface
 {
-    use BaseAttributeCsvBackendTrait;
+    use BaseCsvBackendTrait;
 
-    /**
-     * @param Connection $connection
-     * @param string $table
-     * @param FilesystemInterface $localFs
-     */
-    public function __construct(
-        Connection $connection,
-        $table,
-        FilesystemInterface $localFs
-    ) {
-        $this->connection = $connection;
-        $this->table = $table;
-        $this->localFs = $localFs;
+    public function initialize()
+    {
     }
 
     /**
@@ -36,7 +23,7 @@ class IntegerAttributeBackend
      */
     public function persist(ProductInterface $product, AttributeValueInterface $value)
     {
-        if (!$value instanceof IntegerAttributeValueInterface) {
+        if (!$value instanceof DecimalAttributeValueInterface) {
             throw new InvalidAttributeBackendTypeException();
         }
 
@@ -46,7 +33,7 @@ class IntegerAttributeBackend
             'attribute_id'   => $value->getAttributeId(),
             'store_id'       => $value->getStoreId(),
             'entity_id'      => $product->getId(),
-            'value'          => number_format($value->getValue(), 0),
+            'value'          => number_format($value->getValue(), 4),
         ]);
     }
 }

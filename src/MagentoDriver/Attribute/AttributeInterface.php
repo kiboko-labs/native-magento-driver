@@ -2,7 +2,7 @@
 
 namespace Luni\Component\MagentoDriver\Attribute;
 
-use Luni\Component\MagentoDriver\AttributeBackend\BackendInterface;
+use Luni\Component\MagentoDriver\Backend\Attribute\BackendInterface;
 
 interface AttributeInterface
 {
@@ -22,13 +22,18 @@ interface AttributeInterface
     public function getBackendType();
 
     /**
-     * @return BackendInterface
+     * @return string
      */
-    public function getBackend();
+    public function getFrontendType();
 
     /**
      * @param string $key
      * @return string
      */
     public function getOption($key);
+
+    /**
+     * @return array
+     */
+    public function getOptions();
 }

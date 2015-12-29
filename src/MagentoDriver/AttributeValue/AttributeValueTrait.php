@@ -22,6 +22,11 @@ trait AttributeValueTrait
     private $attribute;
 
     /**
+     * @return bool
+     */
+    abstract public function isScopable();
+
+    /**
      * @param AttributeInterface $friend
      * @return bool
      */
@@ -35,7 +40,7 @@ trait AttributeValueTrait
      */
     public function getId()
     {
-        return $this->id;
+        return $this->isScopable() ? $this->id : null;
     }
 
     /**
@@ -44,6 +49,15 @@ trait AttributeValueTrait
     public function getStoreId()
     {
         return $this->storeId;
+    }
+
+    /**
+     * @return AttributeInterface
+     * @internal
+     */
+    public function getAttribute()
+    {
+        return $this->attribute;
     }
 
     /**
@@ -60,5 +74,30 @@ trait AttributeValueTrait
     public function getAttributeCode()
     {
         return $this->attribute->getCode();
+    }
+
+    /**
+     * @return string
+     */
+    public function getAttributeBackendType()
+    {
+        return $this->attribute->getBackendType();
+    }
+
+    /**
+     * @param string $key
+     * @return string
+     */
+    public function getAttributeOption($key)
+    {
+        return $this->attribute->getOption($key);
+    }
+
+    /**
+     * @return array
+     */
+    public function getAttributeOptions()
+    {
+        return $this->attribute->getOptions();
     }
 }

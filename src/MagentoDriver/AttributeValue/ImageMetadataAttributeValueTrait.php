@@ -48,7 +48,7 @@ trait ImageMetadataAttributeValueTrait
      * @param int $storeId
      * @param int $position
      * @param bool $excluded
-     * @return ImageAttributeValueInterface
+     * @return ImageMetadataAttributeValueInterface
      */
     public static function buildNewWith(
         AttributeInterface $attribute,
@@ -63,6 +63,14 @@ trait ImageMetadataAttributeValueTrait
         $object->id = $valueId;
 
         return $object;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isScopable()
+    {
+        return true;
     }
 
     /**
