@@ -15,16 +15,6 @@ class IntegerAttributeBackend
 
     public function initialize()
     {
-        if (empty($this->tableKeys)) {
-            $this->tableKeys = [
-                'value_id',
-                'entity_type_id',
-                'attribute_id',
-                'store_id',
-                'entity_id',
-                'value',
-            ];
-        }
     }
 
     /**

@@ -55,18 +55,14 @@ use Luni\Component\MagentoDriver\Backend\Attribute\DatetimeAttributeBackend;
 
 $localFs = new Filesystem(new Local(__DIR__));
 
-$backendFields = [
-    'value_id',
-    'entity_type_id',
-    'attribute_id',
-    'store_id',
-    'entity_id',
-    'value',
-];
-
 $datetimeTemporaryWriter = new StandardTemporaryWriter(new File($localFs, 'tmp/attribute/datetime.csv'), ';', '"', '"');
 $datetimeDatabaseWriter = new LocalDataInfileDatabaseWriter(new File($localFs, 'tmp/attribute/datetime.csv'), $connection, ';', '"', '"');
-$datetimeBackend = new DatetimeAttributeBackend($datetimeTemporaryWriter, $datetimeDatabaseWriter, 'catalog_product_entity_datetime', $backendFields);
+$datetimeBackend = new DatetimeAttributeBackend(
+    $datetimeTemporaryWriter,
+    $datetimeDatabaseWriter,
+    ProductAttributeValueQueryBuilder::getDefaultTable('datetime'),
+    ProductAttributeValueQueryBuilder::getDefaultFields()
+);
 
 $releaseDateAttribute = $productAttributeRepository->findOneByCode('release_date');
 
@@ -92,18 +88,14 @@ use Luni\Component\MagentoDriver\Backend\Attribute\DecimalAttributeBackend;
 
 $localFs = new Filesystem(new Local(__DIR__));
 
-$backendFields = [
-    'value_id',
-    'entity_type_id',
-    'attribute_id',
-    'store_id',
-    'entity_id',
-    'value',
-];
-
 $decimalTemporaryWriter = new StandardTemporaryWriter(new File($localFs, 'tmp/attribute/decimal.csv'), ';', '"', '"');
 $decimalDatabaseWriter = new LocalDataInfileDatabaseWriter(new File($localFs, 'tmp/attribute/decimal.csv'), $connection, ';', '"', '"');
-$decimalBackend = new DecimalAttributeBackend($decimalTemporaryWriter, $decimalDatabaseWriter, 'catalog_product_entity_decimal', $backendFields);
+$decimalBackend = new DecimalAttributeBackend(
+    $decimalTemporaryWriter,
+    $decimalDatabaseWriter,
+    ProductAttributeValueQueryBuilder::getDefaultTable('decimal'),
+    ProductAttributeValueQueryBuilder::getDefaultFields()
+);
 
 $specialPriceAttribute = $productAttributeRepository->findOneByCode('special_price');
 
@@ -129,18 +121,14 @@ use Luni\Component\MagentoDriver\Backend\Attribute\IntegerAttributeBackend;
 
 $localFs = new Filesystem(new Local(__DIR__));
 
-$backendFields = [
-    'value_id',
-    'entity_type_id',
-    'attribute_id',
-    'store_id',
-    'entity_id',
-    'value',
-];
-
 $integerTemporaryWriter = new StandardTemporaryWriter(new File($localFs, 'tmp/attribute/integer.csv'), ';', '"', '"');
 $integerDatabaseWriter = new LocalDataInfileDatabaseWriter(new File($localFs, 'tmp/attribute/integer.csv'), $connection, ';', '"', '"');
-$integerBackend = new IntegerAttributeBackend($integerTemporaryWriter, $integerDatabaseWriter, 'catalog_product_entity_integer', $backendFields);
+$integerBackend = new IntegerAttributeBackend(
+    $integerTemporaryWriter,
+    $integerDatabaseWriter,
+    ProductAttributeValueQueryBuilder::getDefaultTable('int'),
+    ProductAttributeValueQueryBuilder::getDefaultFields()
+);
 
 $isActiveAttribute = $productAttributeRepository->findOneByCode('is_active');
 
@@ -166,18 +154,14 @@ use Luni\Component\MagentoDriver\Backend\Attribute\TextAttributeBackend;
 
 $localFs = new Filesystem(new Local(__DIR__));
 
-$backendFields = [
-    'value_id',
-    'entity_type_id',
-    'attribute_id',
-    'store_id',
-    'entity_id',
-    'value',
-];
-
 $textTemporaryWriter = new StandardTemporaryWriter(new File($localFs, 'tmp/attribute/text.csv'), ';', '"', '"');
 $textDatabaseWriter = new LocalDataInfileDatabaseWriter(new File($localFs, 'tmp/attribute/text.csv'), $connection, ';', '"', '"');
-$textBackend = new TextAttributeBackend($textTemporaryWriter, $textDatabaseWriter, 'catalog_product_entity_text', $backendFields);
+$textBackend = new TextAttributeBackend(
+    $textTemporaryWriter,
+    $textDatabaseWriter,
+    ProductAttributeValueQueryBuilder::getDefaultTable('text'),
+    ProductAttributeValueQueryBuilder::getDefaultFields()
+);
 
 $descriptionAttribute = $productAttributeRepository->findOneByCode('description');
 
@@ -203,18 +187,14 @@ use Luni\Component\MagentoDriver\Backend\Attribute\VarcharAttributeBackend;
 
 $localFs = new Filesystem(new Local(__DIR__));
 
-$backendFields = [
-    'value_id',
-    'entity_type_id',
-    'attribute_id',
-    'store_id',
-    'entity_id',
-    'value',
-];
-
 $varcharTemporaryWriter = new StandardTemporaryWriter(new File($localFs, 'tmp/attribute/varchar.csv'), ';', '"', '"');
 $varcharDatabaseWriter = new LocalDataInfileDatabaseWriter(new File($localFs, 'tmp/attribute/varchar.csv'), $connection, ';', '"', '"');
-$varcharBackend = new VarcharAttributeBackend($varcharTemporaryWriter, $varcharDatabaseWriter, 'catalog_product_entity_varchar', $backendFields);
+$varcharBackend = new VarcharAttributeBackend(
+    $varcharTemporaryWriter,
+    $varcharDatabaseWriter,
+    ProductAttributeValueQueryBuilder::getDefaultTable('varchar'),
+    ProductAttributeValueQueryBuilder::getDefaultFields()
+);
 
 $nameAttribute = $productAttributeRepository->findOneByCode('name');
 
