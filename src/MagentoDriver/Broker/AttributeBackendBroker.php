@@ -5,6 +5,7 @@ namespace Luni\Component\MagentoDriver\Broker;
 use Closure;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Luni\Component\MagentoDriver\Attribute\AttributeInterface;
 use Luni\Component\MagentoDriver\Backend\Attribute\BackendInterface;
 
 class AttributeBackendBroker
@@ -36,16 +37,13 @@ class AttributeBackendBroker
     }
 
     /**
-     * @param int $attributeId
-     * @param string $attributeCode
-     * @param string $backendType
-     * @param array $attributeOptions
+     * @param AttributeInterface $attribute
      * @return BackendInterface|null
      */
-    public function find($attributeId, $attributeCode, $backendType, array $attributeOptions)
+    public function find(AttributeInterface $attribute)
     {
         foreach ($this->backends as $backendInfo) {
-            if ($backendInfo['matcher']($attributeId, $attributeCode, $backendType, $attributeOptions) === true) {
+            if ($backendInfo['matcher']($attribute) === true) {
                 return $backendInfo['backend'];
             }
         }
