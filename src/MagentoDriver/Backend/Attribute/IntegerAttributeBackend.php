@@ -2,32 +2,29 @@
 
 namespace Luni\Component\MagentoDriver\Backend\Attribute;
 
-use Doctrine\DBAL\Connection;
-use League\Flysystem\Filesystem;
-use League\Flysystem\FilesystemInterface;
 use Luni\Component\MagentoDriver\AttributeValue\AttributeValueInterface;
 use Luni\Component\MagentoDriver\AttributeValue\IntegerAttributeValueInterface;
+use Luni\Component\MagentoDriver\Backend\BaseCsvBackendTrait;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 use Luni\Component\MagentoDriver\Exception\InvalidAttributeBackendTypeException;
 
 class IntegerAttributeBackend
     implements BackendInterface
 {
-    use BaseAttributeCsvBackendTrait;
+    use BaseCsvBackendTrait;
 
-    /**
-     * @param Connection $connection
-     * @param string $table
-     * @param FilesystemInterface $localFs
-     */
-    public function __construct(
-        Connection $connection,
-        $table,
-        FilesystemInterface $localFs
-    ) {
-        $this->connection = $connection;
-        $this->table = $table;
-        $this->localFs = $localFs;
+    public function initialize()
+    {
+        if (empty($this->tableKeys)) {
+            $this->tableKeys = [
+                'value_id',
+                'entity_type_id',
+                'attribute_id',
+                'store_id',
+                'entity_id',
+                'value',
+            ];
+        }
     }
 
     /**
