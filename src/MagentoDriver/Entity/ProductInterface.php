@@ -46,6 +46,26 @@ interface ProductInterface
     public function getAxisAttributes();
 
     /**
+     * @return bool
+     */
+    public function hasOptions();
+
+    /**
+     * @return null
+     */
+    public function getRequiredOptions();
+
+    /**
+     * @return \DateTimeInterface
+     */
+    public function getCreationDate();
+
+    /**
+     * @return \DateTimeInterface
+     */
+    public function getModificationDate();
+
+    /**
      * @param AttributeInterface $attribute
      * @param int $storeId
      * @return bool
