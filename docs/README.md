@@ -69,7 +69,7 @@ $releaseDateAttribute = $productAttributeRepository->findOneByCode('release_date
 $datetimeBackend->initialize();
 /** @var \Luni\Component\MagentoDriver\Entity\ProductInterface $product */
 foreach ($productList as $product) {
-    $datetimeBackend->persist($product, $product->getValueFor($releaseDateAttribute));
+    $datetimeBackend->persist($product, $product->getValueFor($releaseDateAttribute, 0));
 }
 $datetimeBackend->flush();
 ```
@@ -102,7 +102,7 @@ $specialPriceAttribute = $productAttributeRepository->findOneByCode('special_pri
 $decimalBackend->initialize();
 /** @var \Luni\Component\MagentoDriver\Entity\ProductInterface $product */
 foreach ($productList as $product) {
-    $decimalBackend->persist($product, $product->getValueFor($specialPriceAttribute));
+    $decimalBackend->persist($product, $product->getValueFor($specialPriceAttribute, 0));
 }
 $decimalBackend->flush();
 ```
@@ -135,7 +135,7 @@ $isActiveAttribute = $productAttributeRepository->findOneByCode('is_active');
 $integerBackend->initialize();
 /** @var \Luni\Component\MagentoDriver\Entity\ProductInterface $product */
 foreach ($productList as $product) {
-    $integerBackend->persist($product, $product->getValueFor($isActiveAttribute));
+    $integerBackend->persist($product, $product->getValueFor($isActiveAttribute, 0));
 }
 $integerBackend->flush();
 ```
@@ -168,7 +168,7 @@ $descriptionAttribute = $productAttributeRepository->findOneByCode('description'
 $textBackend->initialize();
 /** @var \Luni\Component\MagentoDriver\Entity\ProductInterface $product */
 foreach ($productList as $product) {
-    $textBackend->persist($product, $product->getValueFor($descriptionAttribute));
+    $textBackend->persist($product, $product->getValueFor($descriptionAttribute, 0));
 }
 $textBackend->flush();
 ```
@@ -201,7 +201,7 @@ $nameAttribute = $productAttributeRepository->findOneByCode('name');
 $varcharBackend->initialize();
 /** @var \Luni\Component\MagentoDriver\Entity\ProductInterface $product */
 foreach ($productList as $product) {
-    $varcharBackend->persist($product, $product->getValueFor($nameAttribute));
+    $varcharBackend->persist($product, $product->getValueFor($nameAttribute, 0));
 }
 $varcharBackend->flush();
 ```
@@ -227,7 +227,7 @@ $releaseDateAttribute = $productAttributeRepository->findOneByCode('release_date
 $staticBackend->initialize();
 /** @var \Luni\Component\MagentoDriver\Entity\ProductInterface $product */
 foreach ($productList as $product) {
-    $staticBackend->persist($product, $product->getValueFor($releaseDateAttribute));
+    $staticBackend->persist($product, $product->getValueFor($releaseDateAttribute, 0));
 }
 $staticBackend->flush();
 ```
@@ -271,7 +271,7 @@ $mediaGalleryAttribute = $productAttributeRepository->findOneByCode('media_galle
 $mediaGalleryBackend->initialize();
 /** @var \Luni\Component\MagentoDriver\Entity\ProductInterface $product */
 foreach ($productList as $product) {
-    $mediaGalleryBackend->persist($product, $product->getValueFor($mediaGalleryAttribute));
+    $mediaGalleryBackend->persist($product, $product->getValueFor($mediaGalleryAttribute, 0));
 }
 $mediaGalleryBackend->flush();
 ```
@@ -315,7 +315,7 @@ $bestBackend = $backendBroker->find($releaseDateAttribute);
 $bestBackend->initialize();
 /** @var \Luni\Component\MagentoDriver\Entity\ProductInterface $product */
 foreach ($productList as $product) {
-    $bestBackend->persist($product, $product->getValueFor($releaseDateAttribute));
+    $bestBackend->persist($product, $product->getValueFor($releaseDateAttribute, 0));
 }
 $bestBackend->flush();
 ```
@@ -336,7 +336,7 @@ $releaseDateAttribute = $productAttributeRepository->findOneByCode('release_date
 $backendFacade->initialize();
 /** @var \Luni\Component\MagentoDriver\Entity\ProductInterface $product */
 foreach ($productList as $product) {
-    $backendFacade->persist($product, $product->getValueFor($releaseDateAttribute));
+    $backendFacade->persist($product, $product->getValueFor($releaseDateAttribute, 0));
 }
 $backendFacade->flush();
 ```
