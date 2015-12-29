@@ -88,11 +88,27 @@ class Attribute
     }
 
     /**
+     * @return string
+     */
+    public function getFrontendType()
+    {
+        return $this->getOption('frontend_input');
+    }
+
+    /**
      * @param string $key
      * @return string
      */
     public function getOption($key)
     {
         return $this->options->get($key);
+    }
+
+    /**
+     * @return array
+     */
+    public function getOptions()
+    {
+        return $this->options;
     }
 }

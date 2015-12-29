@@ -22,6 +22,11 @@ interface AttributeInterface
     public function getBackendType();
 
     /**
+     * @return string
+     */
+    public function getFrontendType();
+
+    /**
      * @param string $key
      * @return string
      */
