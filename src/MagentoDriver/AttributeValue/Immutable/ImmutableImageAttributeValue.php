@@ -18,16 +18,19 @@ class ImmutableImageAttributeValue
     /**
      * DatetimeAttributeValueTrait constructor.
      * @param AttributeInterface $attribute
-     * @param array $metadata
      * @param File $file
+     * @param int $productId
+     * @param array $metadata
      */
     public function __construct(
         AttributeInterface $attribute,
         File $file,
+        $productId = null,
         array $metadata = []
     ) {
         $this->attribute = $attribute;
         $this->file = $file;
+        $this->productId = $productId;
 
         $this->metadata = new ArrayCollection();
         foreach ($metadata as $meta) {
@@ -48,6 +51,7 @@ class ImmutableImageAttributeValue
             $this->attribute,
             $this->id,
             $this->file,
+            $this->productId,
             $this->metadata->toArray()
         );
     }

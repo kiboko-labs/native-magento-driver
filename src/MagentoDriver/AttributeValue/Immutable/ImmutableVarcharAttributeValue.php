@@ -16,15 +16,18 @@ class ImmutableVarcharAttributeValue
      * MediaGalleryAttributeValue constructor.
      * @param AttributeInterface $attribute
      * @param string $payload
+     * @param int $productId
      * @param int $storeId
      */
     public function __construct(
         AttributeInterface $attribute,
         $payload,
+        $productId = null,
         $storeId = null
     ) {
         $this->attribute = $attribute;
         $this->payload = $payload;
+        $this->productId = $productId;
         $this->storeId = (int) $storeId;
     }
 
@@ -37,6 +40,7 @@ class ImmutableVarcharAttributeValue
             $this->attribute,
             $this->id,
             $this->payload,
+            $this->productId,
             $this->storeId
         );
     }

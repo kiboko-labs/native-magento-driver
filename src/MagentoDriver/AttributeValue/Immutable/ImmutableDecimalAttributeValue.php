@@ -16,15 +16,18 @@ class ImmutableDecimalAttributeValue
      * MediaGalleryAttributeValue constructor.
      * @param AttributeInterface $attribute
      * @param float $payload
+     * @param int $productId
      * @param int $storeId
      */
     public function __construct(
         AttributeInterface $attribute,
         $payload,
+        $productId = null,
         $storeId = null
     ) {
         $this->attribute = $attribute;
         $this->payload = (float) $payload;
+        $this->productId = $productId;
         $this->storeId = (int) $storeId;
     }
 
@@ -37,6 +40,7 @@ class ImmutableDecimalAttributeValue
             $this->attribute,
             $this->id,
             $this->payload,
+            $this->productId,
             $this->storeId
         );
     }

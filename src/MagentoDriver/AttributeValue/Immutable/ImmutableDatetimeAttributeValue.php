@@ -16,11 +16,13 @@ class ImmutableDatetimeAttributeValue
      * MediaGalleryAttributeValue constructor.
      * @param AttributeInterface $attribute
      * @param \DateTimeInterface $payload
+     * @param int $productId
      * @param int $storeId
      */
     public function __construct(
         AttributeInterface $attribute,
         \DateTimeInterface $payload,
+        $productId = null,
         $storeId = null
     ) {
         $this->attribute = $attribute;
@@ -29,6 +31,7 @@ class ImmutableDatetimeAttributeValue
         } else if ($payload instanceof \DateTimeImmutable) {
             $this->payload = $payload;
         }
+        $this->productId = $productId;
         $this->storeId = (int) $storeId;
     }
 
@@ -41,6 +44,7 @@ class ImmutableDatetimeAttributeValue
             $this->attribute,
             $this->id,
             $this->payload,
+            $this->productId,
             $this->storeId
         );
     }

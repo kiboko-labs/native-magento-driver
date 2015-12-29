@@ -14,6 +14,11 @@ trait AttributeValueTrait
     /**
      * @var int
      */
+    private $productId;
+
+    /**
+     * @var int
+     */
     private $storeId;
 
     /**
@@ -41,6 +46,14 @@ trait AttributeValueTrait
     public function getId()
     {
         return $this->isScopable() ? $this->id : null;
+    }
+
+    /**
+     * @return int
+     */
+    public function getProductId()
+    {
+        return $this->storeId;
     }
 
     /**
