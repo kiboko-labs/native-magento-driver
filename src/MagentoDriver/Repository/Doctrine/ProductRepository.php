@@ -71,7 +71,7 @@ class ProductRepository
         $query = $this->queryBuilder->createFindOneByIdentifierQueryBuilder('p');
 
         $statement = $this->connection->prepare($query);
-        $statement->bindValue('sku', $code);
+        $statement->bindValue(1, $code);
 
         if (!$statement->execute()) {
             throw new DatabaseFetchingFailureException();
@@ -113,7 +113,23 @@ class ProductRepository
      */
     public function findAllByIdentifier(array $identifierList)
     {
-        // TODO: Implement findAllByIdentifier() method.
+        $query = $this->queryBuilder->createFindAllByIdentifierQueryBuilder('p', $identifierList);
+
+        $statement = $this->connection->prepare($query);
+        if (!$statement->execute($identifierList)) {
+            throw new DatabaseFetchingFailureException();
+        }
+
+        $productList = new ArrayCollection();
+        if ($statement->rowCount() < 1) {
+            return $productList;
+        }
+
+        foreach ($statement as $options) {
+            $productList->set($options['entity_id'], $this->createNewProductInstanceFromDatabase($options));
+        }
+
+        return $productList;
     }
 
     /**
@@ -122,7 +138,23 @@ class ProductRepository
      */
     public function findAllById(array $idList)
     {
-        // TODO: Implement findAllById() method.
+        $query = $this->queryBuilder->createFindAllByIdQueryBuilder('p', $idList);
+
+        $statement = $this->connection->prepare($query);
+        if (!$statement->execute($idList)) {
+            throw new DatabaseFetchingFailureException();
+        }
+
+        $productList = new ArrayCollection();
+        if ($statement->rowCount() < 1) {
+            return $productList;
+        }
+
+        foreach ($statement as $options) {
+            $productList->set($options['entity_id'], $this->createNewProductInstanceFromDatabase($options));
+        }
+
+        return $productList;
     }
 
     /**
@@ -131,7 +163,23 @@ class ProductRepository
      */
     public function findAllByFamily(FamilyInterface $family)
     {
-        // TODO: Implement findAllByFamily() method.
+        $query = $this->queryBuilder->createFindAllByFamilyQueryBuilder('p', 'f');
+
+        $statement = $this->connection->prepare($query);
+        if (!$statement->execute([$family->getId()])) {
+            throw new DatabaseFetchingFailureException();
+        }
+
+        $productList = new ArrayCollection();
+        if ($statement->rowCount() < 1) {
+            return $productList;
+        }
+
+        foreach ($statement as $options) {
+            $productList->set($options['entity_id'], $this->createNewProductInstanceFromDatabase($options));
+        }
+
+        return $productList;
     }
 
     /**
@@ -140,7 +188,23 @@ class ProductRepository
      */
     public function findAllByCategory(CategoryInterface $category)
     {
-        // TODO: Implement findAllByCategory() method.
+        $query = $this->queryBuilder->createFindAllByCategoryQueryBuilder('p', 'c');
+
+        $statement = $this->connection->prepare($query);
+        if (!$statement->execute([$category->getId()])) {
+            throw new DatabaseFetchingFailureException();
+        }
+
+        $productList = new ArrayCollection();
+        if ($statement->rowCount() < 1) {
+            return $productList;
+        }
+
+        foreach ($statement as $options) {
+            $productList->set($options['entity_id'], $this->createNewProductInstanceFromDatabase($options));
+        }
+
+        return $productList;
     }
 
     /**
@@ -148,6 +212,22 @@ class ProductRepository
      */
     public function findAll()
     {
-        // TODO: Implement findAll() method.
+        $query = $this->queryBuilder->createFindAllQueryBuilder('p');
+
+        $statement = $this->connection->prepare($query);
+        if (!$statement->execute()) {
+            throw new DatabaseFetchingFailureException();
+        }
+
+        $productList = new ArrayCollection();
+        if ($statement->rowCount() < 1) {
+            return $productList;
+        }
+
+        foreach ($statement as $options) {
+            $productList->set($options['entity_id'], $this->createNewProductInstanceFromDatabase($options));
+        }
+
+        return $productList;
     }
 }
