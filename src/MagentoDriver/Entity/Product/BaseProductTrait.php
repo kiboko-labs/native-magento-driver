@@ -1,6 +1,6 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Product;
+namespace Luni\Component\MagentoDriver\Entity\Product;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
