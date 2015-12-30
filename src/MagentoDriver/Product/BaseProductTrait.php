@@ -1,6 +1,6 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Entity;
+namespace Luni\Component\MagentoDriver\Product;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -8,10 +8,11 @@ use Luni\Component\MagentoDriver\Attribute\AttributeInterface;
 use Luni\Component\MagentoDriver\Attribute\MediaGalleryAttributeInterface;
 use Luni\Component\MagentoDriver\AttributeValue\AttributeValueInterface;
 use Luni\Component\MagentoDriver\AttributeValue\Immutable\ImmutableAttributeValueInterface;
+use Luni\Component\MagentoDriver\Entity\ProductInterface;
 use Luni\Component\MagentoDriver\Exception\ImmutableValueException;
 use Luni\Component\MagentoDriver\Family\FamilyInterface;
 
-trait MagentoProductTrait
+trait BaseProductTrait
 {
     /**
      * @var int
@@ -44,9 +45,19 @@ trait MagentoProductTrait
     private $family;
 
     /**
-     * @var bool
+     * @var string
      */
     private $productType;
+
+    /**
+     * @var \DateTimeInterface
+     */
+    private $creationDate;
+
+    /**
+     * @var \DateTimeInterface
+     */
+    private $modificationDate;
 
     /**
      * @return int
@@ -55,6 +66,19 @@ trait MagentoProductTrait
     {
         return $this->id;
     }
+
+    /**
+     * @return string
+     */
+    public function getIdentifier()
+    {
+        return $this->identifier;
+    }
+
+    /**
+     * @return string
+     */
+    abstract public function getType();
 
     /**
      * @return Collection|AttributeInterface[]
@@ -94,14 +118,6 @@ trait MagentoProductTrait
     public function getAxisAttributes()
     {
         return $this->axisAttributes;
-    }
-
-    /**
-     * @return string
-     */
-    public function getIdentifier()
-    {
-        return $this->identifier;
     }
 
     /**
@@ -192,5 +208,28 @@ trait MagentoProductTrait
     public function getMediaGalleryFor(MediaGalleryAttributeInterface $attribute, $storeId)
     {
         // TODO: Implement getMediaGalleryFor() method.
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasOptions()
+    {
+        // TODO: Implement hasOptions() method.
+    }
+
+    public function getRequiredOptions()
+    {
+        // TODO: Implement getRequiredOptions() method.
+    }
+
+    public function getCreationDate()
+    {
+        // TODO: Implement getCreationDate() method.
+    }
+
+    public function getModificationDate()
+    {
+        // TODO: Implement getModificationDate() method.
     }
 }
