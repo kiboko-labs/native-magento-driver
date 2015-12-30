@@ -33,6 +33,12 @@ Simply require it in your `composer.json` :
 
 `$ composer require luni/akeneo-magento-driver:*`
 
+## What's the difference between `Entity` and `Model`?
+
+An `Entity` maps to a document, using the EAV pattern. Typically products and categories.
+
+A `Model` maps to a flat table.
+
 ## To do:
 
 - Implement EAV attribute filters
