@@ -5,7 +5,7 @@ namespace Luni\Component\MagentoDriver\Repository;
 use Doctrine\Common\Collections\Collection;
 use Luni\Component\MagentoDriver\Entity\CategoryInterface;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
-use Luni\Component\MagentoDriver\Family\FamilyInterface;
+use Luni\Component\MagentoDriver\Model\FamilyInterface;
 
 interface ProductRepositoryInterface
 {

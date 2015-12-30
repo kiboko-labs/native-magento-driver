@@ -3,7 +3,7 @@
 namespace Luni\Component\MagentoDriver\Entity\Product;
 
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
-use Luni\Component\MagentoDriver\Family\FamilyInterface;
+use Luni\Component\MagentoDriver\Model\FamilyInterface;
 
 class SimpleProduct
     implements ProductInterface

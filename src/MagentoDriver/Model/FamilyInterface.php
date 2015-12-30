@@ -1,6 +1,6 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Family;
+namespace Luni\Component\MagentoDriver\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Luni\Component\MagentoDriver\Attribute\AttributeInterface;

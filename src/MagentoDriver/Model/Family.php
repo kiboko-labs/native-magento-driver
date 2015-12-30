@@ -1,6 +1,6 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Family;
+namespace Luni\Component\MagentoDriver\Model;
 
 class Family
     implements FamilyInterface

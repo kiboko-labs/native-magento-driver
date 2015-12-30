@@ -7,7 +7,7 @@ use Luni\Component\MagentoDriver\Attribute\AttributeInterface;
 use Luni\Component\MagentoDriver\Attribute\MediaGalleryAttributeInterface;
 use Luni\Component\MagentoDriver\AttributeValue\AttributeValueInterface;
 use Luni\Component\MagentoDriver\AttributeValue\MediaGalleryAttributeValueInterface;
-use Luni\Component\MagentoDriver\Family\FamilyInterface;
+use Luni\Component\MagentoDriver\Model\FamilyInterface;
 
 interface ProductInterface
     extends EntityInterface

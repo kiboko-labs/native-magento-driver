@@ -10,7 +10,7 @@ use Luni\Component\MagentoDriver\AttributeValue\AttributeValueInterface;
 use Luni\Component\MagentoDriver\AttributeValue\Immutable\ImmutableAttributeValueInterface;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 use Luni\Component\MagentoDriver\Exception\ImmutableValueException;
-use Luni\Component\MagentoDriver\Family\FamilyInterface;
+use Luni\Component\MagentoDriver\Model\FamilyInterface;
 
 trait BaseProductTrait
 {

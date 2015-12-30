@@ -9,7 +9,7 @@ use Luni\Component\MagentoDriver\Entity\CategoryInterface;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
 use Luni\Component\MagentoDriver\Factory\ProductFactoryInterface;
-use Luni\Component\MagentoDriver\Family\FamilyInterface;
+use Luni\Component\MagentoDriver\Model\FamilyInterface;
 use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductQueryBuilderInterface;
 use Luni\Component\MagentoDriver\Repository\ProductRepositoryInterface;
 

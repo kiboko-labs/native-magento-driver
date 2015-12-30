@@ -2,8 +2,8 @@
 
 namespace Luni\Component\MagentoDriver\Repository\Doctrine;
 
-use Luni\Component\MagentoDriver\Family\Family;
-use Luni\Component\MagentoDriver\Family\FamilyInterface;
+use Luni\Component\MagentoDriver\Model\Family;
+use Luni\Component\MagentoDriver\Model\FamilyInterface;
 use Luni\Component\MagentoDriver\Repository\FamilyRepositoryInterface;
 
 class FamilyRepository

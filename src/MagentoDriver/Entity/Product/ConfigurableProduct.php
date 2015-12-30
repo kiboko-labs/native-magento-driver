@@ -2,13 +2,8 @@
 
 namespace Luni\Component\MagentoDriver\Entity\Product;
 
-use Doctrine\Common\Collections\Collection;
-use Luni\Component\MagentoDriver\Attribute\AttributeInterface;
-use Luni\Component\MagentoDriver\Attribute\MediaGalleryAttributeInterface;
-use Luni\Component\MagentoDriver\AttributeValue\AttributeValueInterface;
-use Luni\Component\MagentoDriver\AttributeValue\MediaGalleryAttributeValueInterface;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
-use Luni\Component\MagentoDriver\Family\FamilyInterface;
+use Luni\Component\MagentoDriver\Model\FamilyInterface;
 
 class ConfigurableProduct
     implements ProductInterface
