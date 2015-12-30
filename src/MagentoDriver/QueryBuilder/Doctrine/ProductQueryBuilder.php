@@ -158,11 +158,14 @@ class ProductQueryBuilder
      */
     public function createFindOneByIdentifierQueryBuilder($alias)
     {
-        return $this->createFindAllQueryBuilder($alias)
-            ->where(sprintf('%s.sku = ?', $alias), ':sku')
+        $queryBuilder = $this->createFindAllQueryBuilder($alias);
+
+        $queryBuilder->where($queryBuilder->expr()->eq(sprintf('%s.sku', $alias), '?'))
             ->setFirstResult(0)
             ->setMaxResults(1)
         ;
+
+        return $queryBuilder;
     }
 
     /**
@@ -171,11 +174,15 @@ class ProductQueryBuilder
      */
     public function createFindOneByIdQueryBuilder($alias)
     {
-        return $this->createFindAllQueryBuilder($alias)
-            ->where(sprintf('%s.entity_id = ?', $alias), ':product_id')
+        $queryBuilder = $this->createFindAllQueryBuilder($alias);
+
+        $queryBuilder->where($queryBuilder->expr()->eq(sprintf('%s.entity_id', $alias), '?'))
             ->setFirstResult(0)
             ->setMaxResults(1)
         ;
+
+        echo $queryBuilder->getSQL();
+        return $queryBuilder;
     }
 
     /**
@@ -220,7 +227,7 @@ class ProductQueryBuilder
                 sprintf('%1$s.entity_type_id=%2$s.entity_type_id', $familyAlias, $alias))
         ;
 
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_set_id', $familyAlias), ':family_id'));
+        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_set_id', $familyAlias), '?'));
 
         return $queryBuilder;
     }
@@ -237,7 +244,7 @@ class ProductQueryBuilder
                 sprintf('%1$s.product_id=%2$s.entity_id', $categoryAlias, $alias))
         ;
 
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.category_id', $categoryAlias), ':category_id'));
+        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.category_id', $categoryAlias), '?'));
 
         return $queryBuilder;
     }

@@ -5,7 +5,6 @@ namespace Luni\Component\MagentoDriver\Repository\Doctrine;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\DBALException;
 use Luni\Component\MagentoDriver\Entity\CategoryInterface;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
@@ -192,6 +191,32 @@ class ProductRepository
 
         $statement = $this->connection->prepare($query);
         if (!$statement->execute([$category->getId()])) {
+            throw new DatabaseFetchingFailureException();
+        }
+
+        $productList = new ArrayCollection();
+        if ($statement->rowCount() < 1) {
+            return $productList;
+        }
+
+        foreach ($statement as $options) {
+            $productList->set($options['entity_id'], $this->createNewProductInstanceFromDatabase($options));
+        }
+
+        return $productList;
+    }
+
+    /**
+     * @param string $productType
+     * @return Collection|ProductInterface[]
+     */
+    public function findAllByType($productType)
+    {
+        $query = $this->queryBuilder->createFindAllQueryBuilder('p');
+        $query->where($query->expr()->eq('p.type_id', '?'));
+
+        $statement = $this->connection->prepare($query);
+        if (!$statement->execute([$productType])) {
             throw new DatabaseFetchingFailureException();
         }
 
