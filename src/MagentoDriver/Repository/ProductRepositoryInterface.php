@@ -3,6 +3,7 @@
 namespace Luni\Component\MagentoDriver\Repository;
 
 use Doctrine\Common\Collections\Collection;
+use Luni\Component\MagentoDriver\Entity\CategoryInterface;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 use Luni\Component\MagentoDriver\Family\FamilyInterface;
 
@@ -37,6 +38,12 @@ interface ProductRepositoryInterface
      * @return Collection|ProductInterface[]
      */
     public function findAllByFamily(FamilyInterface $family);
+
+    /**
+     * @param CategoryInterface $category
+     * @return Collection|ProductInterface[]
+     */
+    public function findAllByCategory(CategoryInterface $category);
 
     /**
      * @return Collection|ProductInterface[]

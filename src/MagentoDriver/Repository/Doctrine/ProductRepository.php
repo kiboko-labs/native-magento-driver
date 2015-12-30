@@ -5,7 +5,11 @@ namespace Luni\Component\MagentoDriver\Repository\Doctrine;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\DBALException;
+use Luni\Component\MagentoDriver\Entity\CategoryInterface;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
+use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
+use Luni\Component\MagentoDriver\Factory\ProductFactoryInterface;
 use Luni\Component\MagentoDriver\Family\FamilyInterface;
 use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductQueryBuilderInterface;
 use Luni\Component\MagentoDriver\Repository\ProductRepositoryInterface;
@@ -16,27 +20,46 @@ class ProductRepository
     /**
      * @var ProductQueryBuilderInterface
      */
-    protected $queryBuilder;
+    private $queryBuilder;
 
     /**
      * @var Connection
      */
-    protected $connection;
+    private $connection;
+
+    /**
+     * @var ProductFactoryInterface
+     */
+    private $productFactory;
 
     /**
      * ProductAttributeRepository constructor.
      * @param Connection $connection
      * @param ProductQueryBuilderInterface $queryBuilder
+     * @param ProductFactoryInterface $productFactory
      */
     public function __construct(
         Connection $connection,
-        ProductQueryBuilderInterface $queryBuilder
+        ProductQueryBuilderInterface $queryBuilder,
+        ProductFactoryInterface $productFactory
     ) {
         $this->connection = $connection;
         $this->queryBuilder = $queryBuilder;
+        $this->productFactory = $productFactory;
+    }
 
-        $this->attributeCacheByCode = new ArrayCollection();
-        $this->attributeCacheById = new ArrayCollection();
+    /**
+     * @param array $options
+     * @return ProductInterface
+     */
+    protected function createNewProductInstanceFromDatabase(array $options)
+    {
+        $type = isset($options['type_id']) ? $options['type_id'] : null;
+        unset($options['type_id']);
+
+        $product = $this->productFactory->buildNew($type, $options);
+
+        return $product;
     }
 
     /**
@@ -45,7 +68,21 @@ class ProductRepository
      */
     public function findOneByIdentifier($code)
     {
-        // TODO: Implement findOneByIdentifier() method.
+        $query = $this->queryBuilder->createFindOneByIdentifierQueryBuilder('p');
+
+        $statement = $this->connection->prepare($query);
+        $statement->bindValue('sku', $code);
+
+        if (!$statement->execute()) {
+            throw new DatabaseFetchingFailureException();
+        }
+
+        if ($statement->rowCount() < 1) {
+            return null;
+        }
+
+        $options = $statement->fetch();
+        return $this->createNewProductInstanceFromDatabase($options);
     }
 
     /**
@@ -54,7 +91,20 @@ class ProductRepository
      */
     public function findOneById($id)
     {
-        // TODO: Implement findOneById() method.
+        $query = $this->queryBuilder->createFindOneByIdQueryBuilder('p');
+
+        $statement = $this->connection->prepare($query);
+
+        if (!$statement->execute([$id])) {
+            throw new DatabaseFetchingFailureException();
+        }
+
+        if ($statement->rowCount() < 1) {
+            return null;
+        }
+
+        $options = $statement->fetch();
+        return $this->createNewProductInstanceFromDatabase($options);
     }
 
     /**
@@ -82,6 +132,15 @@ class ProductRepository
     public function findAllByFamily(FamilyInterface $family)
     {
         // TODO: Implement findAllByFamily() method.
+    }
+
+    /**
+     * @param CategoryInterface $category
+     * @return Collection|ProductInterface[]
+     */
+    public function findAllByCategory(CategoryInterface $category)
+    {
+        // TODO: Implement findAllByCategory() method.
     }
 
     /**
