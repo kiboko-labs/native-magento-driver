@@ -161,8 +161,9 @@ class ProductQueryBuilder
         $queryBuilder = $this->createFindAllQueryBuilder($alias)
             ->innerJoin($alias, $this->familyTable, $familyAlias,
                 sprintf('%1$s.entity_type_id=%2$s.entity_type_id', $familyAlias, $alias))
-            ->where(sprintf('%s.attribute_set_id = ?', $familyAlias))
         ;
+
+        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_set_id', $familyAlias), ':family_id'));
 
         return $queryBuilder;
     }
@@ -177,8 +178,9 @@ class ProductQueryBuilder
         $queryBuilder = $this->createFindAllQueryBuilder($alias)
             ->innerJoin($alias, $this->productCategoryTable, $categoryAlias,
                 sprintf('%1$s.product_id=%2$s.entity_id', $categoryAlias, $alias))
-            ->where(sprintf('%s.category_id = ?', $categoryAlias), ':category_id')
         ;
+
+        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.category_id', $categoryAlias), ':category_id'));
 
         return $queryBuilder;
     }
