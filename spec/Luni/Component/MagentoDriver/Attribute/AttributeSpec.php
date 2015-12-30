@@ -2,7 +2,6 @@
 
 namespace spec\Luni\Component\MagentoDriver\Attribute;
 
-use Luni\Component\MagentoDriver\AttributeBackend\BackendInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
