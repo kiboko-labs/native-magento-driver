@@ -24,11 +24,13 @@ trait ImageAttributeValueTrait
      * DatetimeAttributeValueTrait constructor.
      * @param AttributeInterface $attribute
      * @param File $file
+     * @param int $productId
      * @param array $metadata
      */
     abstract public function __construct(
         AttributeInterface $attribute,
         File $file,
+        $productId = null,
         array $metadata = []
     );
 
@@ -36,6 +38,7 @@ trait ImageAttributeValueTrait
      * @param AttributeInterface $attribute
      * @param int $valueId
      * @param File $file
+     * @param int $productId
      * @param array $metadata
      * @return ImageAttributeValueInterface
      */
@@ -43,9 +46,10 @@ trait ImageAttributeValueTrait
         AttributeInterface $attribute,
         $valueId,
         File $file,
+        $productId = null,
         array $metadata
     ) {
-        $object = new static($attribute, $file, $metadata);
+        $object = new static($attribute, $file, $productId, $metadata);
 
         $object->id = $valueId;
 

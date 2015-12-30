@@ -3,7 +3,7 @@
 namespace Luni\Component\MagentoDriver\Attribute;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Luni\Component\MagentoDriver\Backend\Attribute\BackendInterface;
+use Luni\Component\MagentoDriver\Backend\AttributeValue\BackendInterface;
 
 class Attribute
     implements AttributeInterface

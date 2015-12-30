@@ -17,11 +17,13 @@ trait IntegerAttributeValueTrait
      * DatetimeAttributeValueTrait constructor.
      * @param AttributeInterface $attribute
      * @param int $payload
-     * @param null $storeId
+     * @param int $productId
+     * @param int $storeId
      */
     abstract public function __construct(
         AttributeInterface $attribute,
         $payload,
+        $productId = null,
         $storeId = null
     );
 
@@ -29,16 +31,18 @@ trait IntegerAttributeValueTrait
      * @param AttributeInterface $attribute
      * @param int $valueId
      * @param int $payload
-     * @param null $storeId
+     * @param int $productId
+     * @param int $storeId
      * @return IntegerAttributeValueInterface
      */
     public static function buildNewWith(
         AttributeInterface $attribute,
         $valueId,
         $payload,
+        $productId = null,
         $storeId = null
     ) {
-        $object = new static($attribute, $payload, $storeId);
+        $object = new static($attribute, $payload, $productId, $storeId);
 
         $object->id = $valueId;
 
