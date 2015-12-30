@@ -32,3 +32,9 @@ So if your application uses Doctrine DBAL, you will be able to use it out of the
 Simply require it in your `composer.json` :
 
 `$ composer require luni/akeneo-magento-driver:*`
+
+## To do:
+
+- Implement EAV attribute filters
+- Implement Index refresh
+- Implement object factories
