@@ -6,7 +6,7 @@ use Closure;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Luni\Component\MagentoDriver\Attribute\AttributeInterface;
-use Luni\Component\MagentoDriver\Backend\Attribute\BackendInterface;
+use Luni\Component\MagentoDriver\Backend\AttributeValue\BackendInterface;
 
 class AttributeBackendBroker
     implements AttributeBackendBrokerInterface

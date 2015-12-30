@@ -4,7 +4,7 @@ namespace Luni\Component\MagentoDriver\Broker;
 
 use Closure;
 use Luni\Component\MagentoDriver\Attribute\AttributeInterface;
-use Luni\Component\MagentoDriver\Backend\Attribute\BackendInterface;
+use Luni\Component\MagentoDriver\Backend\AttributeValue\BackendInterface;
 
 interface AttributeBackendBrokerInterface
 {

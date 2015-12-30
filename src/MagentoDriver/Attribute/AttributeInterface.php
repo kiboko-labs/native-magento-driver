@@ -2,7 +2,7 @@
 
 namespace Luni\Component\MagentoDriver\Attribute;
 
-use Luni\Component\MagentoDriver\Backend\Attribute\BackendInterface;
+use Luni\Component\MagentoDriver\Backend\AttributeValue\BackendInterface;
 
 interface AttributeInterface
 {
