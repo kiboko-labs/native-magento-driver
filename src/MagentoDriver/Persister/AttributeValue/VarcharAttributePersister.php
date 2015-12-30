@@ -1,17 +1,17 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Backend\AttributeValue;
+namespace Luni\Component\MagentoDriver\Persister\AttributeValue;
 
 use Luni\Component\MagentoDriver\AttributeValue\AttributeValueInterface;
-use Luni\Component\MagentoDriver\AttributeValue\TextAttributeValueInterface;
-use Luni\Component\MagentoDriver\Backend\BaseCsvBackendTrait;
+use Luni\Component\MagentoDriver\AttributeValue\VarcharAttributeValueInterface;
+use Luni\Component\MagentoDriver\Persister\BaseCsvPersisterTrait;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
-use Luni\Component\MagentoDriver\Exception\InvalidAttributeBackendTypeException;
+use Luni\Component\MagentoDriver\Exception\InvalidAttributePersisterTypeException;
 
-class TextAttributeBackend
-    implements BackendInterface
+class VarcharAttributePersister
+    implements PersisterInterface
 {
-    use BaseCsvBackendTrait;
+    use BaseCsvPersisterTrait;
 
     public function initialize()
     {
@@ -23,8 +23,8 @@ class TextAttributeBackend
      */
     public function persist(ProductInterface $product, AttributeValueInterface $value)
     {
-        if (!$value instanceof TextAttributeValueInterface) {
-            throw new InvalidAttributeBackendTypeException();
+        if (!$value instanceof VarcharAttributeValueInterface) {
+            throw new InvalidAttributePersisterTypeException();
         }
 
         $this->temporaryWriter->persistRow([

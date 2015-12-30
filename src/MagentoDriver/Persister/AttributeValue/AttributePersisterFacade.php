@@ -1,20 +1,20 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Backend\AttributeValue;
+namespace Luni\Component\MagentoDriver\Persister\AttributeValue;
 
 use Luni\Component\MagentoDriver\AttributeValue\AttributeValueInterface;
-use Luni\Component\MagentoDriver\Broker\AttributeBackendBrokerInterface;
+use Luni\Component\MagentoDriver\Broker\AttributePersisterBrokerInterface;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 
-class AttributeBackendFacade
-    implements BackendInterface
+class AttributePersisterFacade
+    implements PersisterInterface
 {
     /**
-     * @var AttributeBackendBrokerInterface
+     * @var AttributePersisterBrokerInterface
      */
     private $broker;
 
-    public function __construct(AttributeBackendBrokerInterface $broker)
+    public function __construct(AttributePersisterBrokerInterface $broker)
     {
         $this->broker = $broker;
     }
@@ -31,14 +31,14 @@ class AttributeBackendFacade
 
     public function initialize()
     {
-        foreach ($this->broker->walkBackendList() as $backend) {
+        foreach ($this->broker->walkPersisterList() as $backend) {
             $backend->initialize();
         }
     }
 
     public function flush()
     {
-        foreach ($this->broker->walkBackendList() as $backend) {
+        foreach ($this->broker->walkPersisterList() as $backend) {
             $backend->flush();
         }
     }

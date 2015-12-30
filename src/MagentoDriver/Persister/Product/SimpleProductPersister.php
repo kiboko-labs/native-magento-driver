@@ -1,14 +1,14 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Backend\Product;
+namespace Luni\Component\MagentoDriver\Persister\Product;
 
-use Luni\Component\MagentoDriver\Backend\BaseCsvBackendTrait;
+use Luni\Component\MagentoDriver\Persister\BaseCsvPersisterTrait;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 
-class SimpleProductBackend
-    implements BackendInterface
+class SimpleProductPersister
+    implements PersisterInterface
 {
-    use BaseCsvBackendTrait;
+    use BaseCsvPersisterTrait;
 
     public function initialize()
     {

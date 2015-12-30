@@ -1,11 +1,11 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Backend\AttributeValue;
+namespace Luni\Component\MagentoDriver\Persister\AttributeValue;
 
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 use Luni\Component\MagentoDriver\AttributeValue\AttributeValueInterface;
 
-interface BackendInterface
+interface PersisterInterface
 {
     /**
      * @param ProductInterface $product

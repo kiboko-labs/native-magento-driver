@@ -1,17 +1,17 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Backend\AttributeValue;
+namespace Luni\Component\MagentoDriver\Persister\AttributeValue;
 
 use Luni\Component\MagentoDriver\AttributeValue\AttributeValueInterface;
-use Luni\Component\MagentoDriver\AttributeValue\DatetimeAttributeValueInterface;
-use Luni\Component\MagentoDriver\Backend\BaseCsvBackendTrait;
+use Luni\Component\MagentoDriver\AttributeValue\IntegerAttributeValueInterface;
+use Luni\Component\MagentoDriver\Persister\BaseCsvPersisterTrait;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
-use Luni\Component\MagentoDriver\Exception\InvalidAttributeBackendTypeException;
+use Luni\Component\MagentoDriver\Exception\InvalidAttributePersisterTypeException;
 
-class DatetimeAttributeBackend
-    implements BackendInterface
+class IntegerAttributePersister
+    implements PersisterInterface
 {
-    use BaseCsvBackendTrait;
+    use BaseCsvPersisterTrait;
 
     public function initialize()
     {
@@ -23,8 +23,8 @@ class DatetimeAttributeBackend
      */
     public function persist(ProductInterface $product, AttributeValueInterface $value)
     {
-        if (!$value instanceof DatetimeAttributeValueInterface) {
-            throw new InvalidAttributeBackendTypeException();
+        if (!$value instanceof IntegerAttributeValueInterface) {
+            throw new InvalidAttributePersisterTypeException();
         }
 
         $this->temporaryWriter->persistRow([
@@ -33,7 +33,7 @@ class DatetimeAttributeBackend
             'attribute_id'   => $value->getAttributeId(),
             'store_id'       => $value->getStoreId(),
             'entity_id'      => $product->getId(),
-            'value'          => $value->getValue()->format('Y-m-d H:i:s'),
+            'value'          => number_format($value->getValue(), 0),
         ]);
     }
 }

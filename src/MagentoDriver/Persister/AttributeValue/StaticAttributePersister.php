@@ -1,12 +1,12 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Backend\AttributeValue;
+namespace Luni\Component\MagentoDriver\Persister\AttributeValue;
 
 use Luni\Component\MagentoDriver\AttributeValue\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 
-class StaticAttributeBackend
-    implements BackendInterface
+class StaticAttributePersister
+    implements PersisterInterface
 {
     public function persist(ProductInterface $product, AttributeValueInterface $value)
     {

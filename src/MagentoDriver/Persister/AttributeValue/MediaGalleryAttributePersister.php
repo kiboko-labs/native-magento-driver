@@ -1,6 +1,6 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Backend\AttributeValue;
+namespace Luni\Component\MagentoDriver\Persister\AttributeValue;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -11,14 +11,14 @@ use Luni\Component\MagentoDriver\AttributeValue\ImageAttributeValueInterface;
 use Luni\Component\MagentoDriver\AttributeValue\ImageMetadataAttributeValueInterface;
 use Luni\Component\MagentoDriver\AttributeValue\MediaGalleryAttributeValueInterface;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
-use Luni\Component\MagentoDriver\Exception\InvalidAttributeBackendTypeException;
+use Luni\Component\MagentoDriver\Exception\InvalidAttributePersisterTypeException;
 use Luni\Component\MagentoDriver\Exception\RuntimeErrorException;
 use Luni\Component\MagentoDriver\Filesystem\FileMoverInterface;
 use Luni\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
 use Luni\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;
 
-class MediaGalleryAttributeBackend
-    implements BackendInterface
+class MediaGalleryAttributePersister
+    implements PersisterInterface
 {
     /**
      * @var TemporaryWriterInterface
@@ -148,7 +148,7 @@ class MediaGalleryAttributeBackend
     public function persist(ProductInterface $product, AttributeValueInterface $value)
     {
         if (!$value instanceof MediaGalleryAttributeValueInterface) {
-            throw new InvalidAttributeBackendTypeException();
+            throw new InvalidAttributePersisterTypeException();
         }
 
         /** @var ImageAttributeValueInterface $mediaAsset */

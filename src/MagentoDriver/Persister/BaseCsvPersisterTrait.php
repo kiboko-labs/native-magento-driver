@@ -1,11 +1,11 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Backend;
+namespace Luni\Component\MagentoDriver\Persister;
 
 use Luni\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
 use Luni\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;
 
-trait BaseCsvBackendTrait
+trait BaseCsvPersisterTrait
 {
     /**
      * @var TemporaryWriterInterface

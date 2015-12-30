@@ -1,17 +1,17 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Backend\AttributeValue;
+namespace Luni\Component\MagentoDriver\Persister\AttributeValue;
 
 use Luni\Component\MagentoDriver\AttributeValue\AttributeValueInterface;
-use Luni\Component\MagentoDriver\AttributeValue\DecimalAttributeValueInterface;
-use Luni\Component\MagentoDriver\Backend\BaseCsvBackendTrait;
+use Luni\Component\MagentoDriver\AttributeValue\TextAttributeValueInterface;
+use Luni\Component\MagentoDriver\Persister\BaseCsvPersisterTrait;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
-use Luni\Component\MagentoDriver\Exception\InvalidAttributeBackendTypeException;
+use Luni\Component\MagentoDriver\Exception\InvalidAttributePersisterTypeException;
 
-class DecimalAttributeBackend
-    implements BackendInterface
+class TextAttributePersister
+    implements PersisterInterface
 {
-    use BaseCsvBackendTrait;
+    use BaseCsvPersisterTrait;
 
     public function initialize()
     {
@@ -23,8 +23,8 @@ class DecimalAttributeBackend
      */
     public function persist(ProductInterface $product, AttributeValueInterface $value)
     {
-        if (!$value instanceof DecimalAttributeValueInterface) {
-            throw new InvalidAttributeBackendTypeException();
+        if (!$value instanceof TextAttributeValueInterface) {
+            throw new InvalidAttributePersisterTypeException();
         }
 
         $this->temporaryWriter->persistRow([
@@ -33,7 +33,7 @@ class DecimalAttributeBackend
             'attribute_id'   => $value->getAttributeId(),
             'store_id'       => $value->getStoreId(),
             'entity_id'      => $product->getId(),
-            'value'          => number_format($value->getValue(), 4),
+            'value'          => $value->getValue(),
         ]);
     }
 }

@@ -6,10 +6,10 @@ use Closure;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Luni\Component\MagentoDriver\Attribute\AttributeInterface;
-use Luni\Component\MagentoDriver\Backend\AttributeValue\BackendInterface;
+use Luni\Component\MagentoDriver\Persister\AttributeValue\PersisterInterface;
 
-class AttributeBackendBroker
-    implements AttributeBackendBrokerInterface
+class AttributePersisterBroker
+    implements AttributePersisterBrokerInterface
 {
     /**
      * @var Collection
@@ -17,7 +17,7 @@ class AttributeBackendBroker
     private $backends;
 
     /**
-     * AttributeBackendBroker constructor.
+     * AttributePersisterBroker constructor.
      */
     public function __construct()
     {
@@ -25,34 +25,34 @@ class AttributeBackendBroker
     }
 
     /**
-     * @param BackendInterface $backend
+     * @param PersisterInterface $backend
      * @param Closure $matcher
      */
-    public function addBackend(BackendInterface $backend, Closure $matcher)
+    public function addPersister(PersisterInterface $backend, Closure $matcher)
     {
         $this->backends->add([
             'matcher' => $matcher,
-            'backend' => $backend
+            'persister' => $backend
         ]);
     }
 
     /**
-     * @return \Generator|BackendInterface[]
+     * @return \Generator|PersisterInterface[]
      */
-    public function walkBackendList()
+    public function walkPersisterList()
     {
         foreach ($this->backends as $backendInfo) {
-            yield $backendInfo['matcher'] => $backendInfo['backend'];
+            yield $backendInfo['matcher'] => $backendInfo['persister'];
         }
     }
 
     /**
      * @param AttributeInterface $attribute
-     * @return BackendInterface|null
+     * @return PersisterInterface|null
      */
     public function findFor(AttributeInterface $attribute)
     {
-        foreach ($this->walkBackendList() as $matcher => $backend) {
+        foreach ($this->walkPersisterList() as $matcher => $backend) {
             if ($matcher($attribute) === true) {
                 return $backend;
             }

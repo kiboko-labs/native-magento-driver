@@ -2,7 +2,7 @@
 
 namespace Luni\Component\MagentoDriver\Exception;
 
-class InvalidAttributeBackendTypeException
+class InvalidAttributePersisterTypeException
     extends InvalidArgumentException
 {
 }

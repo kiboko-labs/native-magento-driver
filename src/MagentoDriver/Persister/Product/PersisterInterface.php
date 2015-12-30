@@ -1,10 +1,10 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Backend\Product;
+namespace Luni\Component\MagentoDriver\Persister\Product;
 
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 
-interface BackendInterface
+interface PersisterInterface
 {
     /**
      * @param ProductInterface $product
