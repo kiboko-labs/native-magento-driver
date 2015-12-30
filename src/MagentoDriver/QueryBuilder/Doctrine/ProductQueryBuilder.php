@@ -31,28 +31,85 @@ class ProductQueryBuilder
     /**
      * @var string
      */
-    private $productCategoryTable;
+    private $categoryProductTable;
 
     /**
      * @param Connection $connection
      * @param string $table
      * @param string $familyTable
-     * @param string $productCategoryTable
+     * @param string $categoryProductTable
      * @param array $fields
      */
     public function __construct(
         Connection $connection,
         $table,
         $familyTable,
-        $productCategoryTable,
+        $categoryProductTable,
         array $fields
     ) {
         $this->connection = $connection;
         $this->table = $table;
         $this->familyTable = $familyTable;
-        $this->productCategoryTable = $productCategoryTable;
+        $this->categoryProductTable = $categoryProductTable;
 
         $this->fields = $fields;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getDefaultFields()
+    {
+        return [
+            'entity_id',
+            'entity_type_id',
+            'attribute_set_id',
+            'type_id',
+            'sku',
+            'has_options',
+            'required_options',
+            'created_at',
+            'updated_at',
+        ];
+    }
+
+    /**
+     * @param string $prefix
+     * @return string
+     */
+    public static function getDefaultTable($prefix = null)
+    {
+        if ($prefix !== null) {
+            return sprintf('%scatalog_product_entity', $prefix);
+        }
+
+        return 'catalog_product_entity';
+    }
+
+    /**
+     * @param string $prefix
+     * @return string
+     */
+    public static function getDefaultFamilyTable($prefix = null)
+    {
+        if ($prefix !== null) {
+            return sprintf('%seav_attribute_set', $prefix);
+        }
+
+        return 'eav_attribute_set';
+    }
+
+    /**
+     * @param string $prefix
+     * @return string
+     */
+    public static function getDefaultCategoryProductTable($prefix = null)
+    {
+        if ($prefix !== null) {
+            return sprintf('%scatalog_category_product', $prefix);
+        }
+
+        return 'catalog_category_product';
     }
 
     /**
@@ -176,7 +233,7 @@ class ProductQueryBuilder
     public function createFindAllByCategoryQueryBuilder($alias, $categoryAlias)
     {
         $queryBuilder = $this->createFindAllQueryBuilder($alias)
-            ->innerJoin($alias, $this->productCategoryTable, $categoryAlias,
+            ->innerJoin($alias, $this->categoryProductTable, $categoryAlias,
                 sprintf('%1$s.product_id=%2$s.entity_id', $categoryAlias, $alias))
         ;
 
