@@ -3,7 +3,7 @@
 namespace Luni\Component\MagentoDriver\Broker;
 
 use Closure;
-use Luni\Component\MagentoDriver\Attribute\AttributeInterface;
+use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Persister\AttributeValue\PersisterInterface;
 
 interface AttributePersisterBrokerInterface

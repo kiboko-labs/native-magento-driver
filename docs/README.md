@@ -283,7 +283,7 @@ Once all your backends have been initialized, you can use the `AttributeBackendB
 ```php
 <?php
 
-use Luni\Component\MagentoDriver\Attribute\AttributeInterface;
+use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Broker\AttributeBackendBroker;
 
 $backendBroker = new AttributeBackendBroker();

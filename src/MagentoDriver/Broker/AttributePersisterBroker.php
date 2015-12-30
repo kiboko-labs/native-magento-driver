@@ -5,7 +5,7 @@ namespace Luni\Component\MagentoDriver\Broker;
 use Closure;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Luni\Component\MagentoDriver\Attribute\AttributeInterface;
+use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Persister\AttributeValue\PersisterInterface;
 
 class AttributePersisterBroker

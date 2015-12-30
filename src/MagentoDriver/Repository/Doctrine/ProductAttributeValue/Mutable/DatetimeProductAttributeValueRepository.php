@@ -2,8 +2,8 @@
 
 namespace Luni\Component\MagentoDriver\Repository\Doctrine\ProductAttributeValue\Mutable;
 
-use Luni\Component\MagentoDriver\AttributeValue\AttributeValueInterface;
-use Luni\Component\MagentoDriver\AttributeValue\Mutable\MutableDatetimeAttributeValue;
+use Luni\Component\MagentoDriver\ModelValue\AttributeValueInterface;
+use Luni\Component\MagentoDriver\ModelValue\Mutable\MutableDatetimeAttributeValue;
 use Luni\Component\MagentoDriver\Repository\Doctrine\AbstractProductAttributeValueRepository;
 
 class DatetimeProductAttributeValueRepository

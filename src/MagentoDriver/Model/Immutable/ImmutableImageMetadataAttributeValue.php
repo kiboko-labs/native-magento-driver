@@ -1,0 +1,51 @@
+<?php
+
+namespace Luni\Component\MagentoDriver\ModelValue\Immutable;
+
+use Luni\Component\MagentoDriver\Model\AttributeInterface;
+use Luni\Component\MagentoDriver\ModelValue\ImageMetadataAttributeValueInterface;
+use Luni\Component\MagentoDriver\ModelValue\ImageMetadataAttributeValueTrait;
+use Luni\Component\MagentoDriver\ModelValue\Mutable\MutableImageMetadataAttributeValue;
+
+class ImmutableImageMetadataAttributeValue
+    implements ImmutableAttributeValueInterface, ImageMetadataAttributeValueInterface
+{
+    use ImageMetadataAttributeValueTrait;
+
+    /**
+     * DatetimeAttributeValueTrait constructor.
+     * @param AttributeInterface $attribute
+     * @param string $label
+     * @param int $position
+     * @param bool $excluded
+     * @param null $storeId
+     */
+    public function __construct(
+        AttributeInterface $attribute,
+        $label,
+        $position,
+        $excluded = false,
+        $storeId = null
+    ) {
+        $this->attribute = $attribute;
+        $this->label = $label;
+        $this->position = (int) $position;
+        $this->excluded = (bool) $excluded;
+        $this->storeId = (int) $storeId;
+    }
+
+    /**
+     * @return MutableImageMetadataAttributeValue
+     */
+    public function switchToMutable()
+    {
+        return MutableImageMetadataAttributeValue::buildNewWith(
+            $this->attribute,
+            $this->id,
+            $this->label,
+            $this->position,
+            $this->excluded,
+            $this->storeId
+        );
+    }
+}

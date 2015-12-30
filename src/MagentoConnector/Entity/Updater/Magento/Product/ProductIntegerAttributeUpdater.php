@@ -2,10 +2,10 @@
 
 namespace Luni\Component\MagentoConnector\Entity\Updater\Magento\Product;
 
-use Luni\Component\MagentoDriver\Attribute\AttributeInterface as MagentoAttributeInterface;
-use Luni\Component\MagentoDriver\AttributeValue\Immutable\ImmutableIntegerAttributeValue;
-use Luni\Component\MagentoDriver\AttributeValue\Mutable\MutableAttributeValueInterface;
-use Luni\Component\MagentoDriver\AttributeValue\Mutable\MutableIntegerAttributeValue;
+use Luni\Component\MagentoDriver\Model\AttributeInterface as MagentoAttributeInterface;
+use Luni\Component\MagentoDriver\ModelValue\Immutable\ImmutableIntegerAttributeValue;
+use Luni\Component\MagentoDriver\ModelValue\Mutable\MutableAttributeValueInterface;
+use Luni\Component\MagentoDriver\ModelValue\Mutable\MutableIntegerAttributeValue;
 use Luni\Component\MagentoDriver\Entity\ProductInterface as MagentoProductInterface;
 use Luni\Component\MagentoConnector\Entity\Updater\MagentoProductUpdaterInterface;
 use Luni\Component\MagentoDriver\Exception\ImmutableValueException;

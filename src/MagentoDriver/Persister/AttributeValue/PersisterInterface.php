@@ -3,7 +3,7 @@
 namespace Luni\Component\MagentoDriver\Persister\AttributeValue;
 
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
-use Luni\Component\MagentoDriver\AttributeValue\AttributeValueInterface;
+use Luni\Component\MagentoDriver\ModelValue\AttributeValueInterface;
 
 interface PersisterInterface
 {

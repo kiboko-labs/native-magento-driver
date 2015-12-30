@@ -2,8 +2,8 @@
 
 namespace Luni\Component\MagentoDriver\Repository\Doctrine\ProductAttributeValue\Immutable;
 
-use Luni\Component\MagentoDriver\AttributeValue\AttributeValueInterface;
-use Luni\Component\MagentoDriver\AttributeValue\Immutable\ImmutableDecimalAttributeValue;
+use Luni\Component\MagentoDriver\ModelValue\AttributeValueInterface;
+use Luni\Component\MagentoDriver\ModelValue\Immutable\ImmutableDecimalAttributeValue;
 use Luni\Component\MagentoDriver\Repository\Doctrine\AbstractProductAttributeValueRepository;
 
 class DecimalProductAttributeValueRepository

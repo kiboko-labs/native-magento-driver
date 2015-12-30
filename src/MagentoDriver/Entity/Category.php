@@ -4,8 +4,8 @@ namespace Luni\Component\MagentoDriver\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Luni\Component\MagentoDriver\Attribute\AttributeInterface;
-use Luni\Component\MagentoDriver\AttributeValue\AttributeValueInterface;
+use Luni\Component\MagentoDriver\Model\AttributeInterface;
+use Luni\Component\MagentoDriver\ModelValue\AttributeValueInterface;
 
 class Category
     implements CategoryInterface

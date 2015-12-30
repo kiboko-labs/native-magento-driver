@@ -4,10 +4,10 @@ namespace Luni\Component\MagentoDriver\Entity\Product;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Luni\Component\MagentoDriver\Attribute\AttributeInterface;
-use Luni\Component\MagentoDriver\Attribute\MediaGalleryAttributeInterface;
-use Luni\Component\MagentoDriver\AttributeValue\AttributeValueInterface;
-use Luni\Component\MagentoDriver\AttributeValue\Immutable\ImmutableAttributeValueInterface;
+use Luni\Component\MagentoDriver\Model\AttributeInterface;
+use Luni\Component\MagentoDriver\Model\MediaGalleryAttributeInterface;
+use Luni\Component\MagentoDriver\ModelValue\AttributeValueInterface;
+use Luni\Component\MagentoDriver\ModelValue\Immutable\ImmutableAttributeValueInterface;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 use Luni\Component\MagentoDriver\Exception\ImmutableValueException;
 use Luni\Component\MagentoDriver\Model\FamilyInterface;

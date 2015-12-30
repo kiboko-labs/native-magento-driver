@@ -2,8 +2,8 @@
 
 namespace Luni\Component\MagentoDriver\Persister\AttributeValue;
 
-use Luni\Component\MagentoDriver\AttributeValue\AttributeValueInterface;
-use Luni\Component\MagentoDriver\AttributeValue\DatetimeAttributeValueInterface;
+use Luni\Component\MagentoDriver\ModelValue\AttributeValueInterface;
+use Luni\Component\MagentoDriver\ModelValue\DatetimeAttributeValueInterface;
 use Luni\Component\MagentoDriver\Persister\BaseCsvPersisterTrait;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 use Luni\Component\MagentoDriver\Exception\InvalidAttributePersisterTypeException;

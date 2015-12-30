@@ -2,7 +2,7 @@
 
 namespace Luni\Component\MagentoDriver\Persister\AttributeValue;
 
-use Luni\Component\MagentoDriver\AttributeValue\AttributeValueInterface;
+use Luni\Component\MagentoDriver\ModelValue\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Broker\AttributePersisterBrokerInterface;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 
