@@ -1,11 +1,11 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\ModelValue\Immutable;
+namespace Luni\Component\MagentoDriver\Model\Immutable;
 
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\ModelValue\Mutable\MutableTextAttributeValue;
-use Luni\Component\MagentoDriver\ModelValue\TextAttributeValueInterface;
-use Luni\Component\MagentoDriver\ModelValue\TextAttributeValueTrait;
+use Luni\Component\MagentoDriver\Model\Mutable\MutableTextAttributeValue;
+use Luni\Component\MagentoDriver\Model\TextAttributeValueInterface;
+use Luni\Component\MagentoDriver\Model\TextAttributeValueTrait;
 
 class ImmutableTextAttributeValue
     implements ImmutableAttributeValueInterface, TextAttributeValueInterface

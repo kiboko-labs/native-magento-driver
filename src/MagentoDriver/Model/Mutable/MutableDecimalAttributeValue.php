@@ -1,11 +1,11 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\ModelValue\Mutable;
+namespace Luni\Component\MagentoDriver\Model\Mutable;
 
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\ModelValue\Immutable\ImmutableDecimalAttributeValue;
-use Luni\Component\MagentoDriver\ModelValue\DecimalAttributeValueInterface;
-use Luni\Component\MagentoDriver\ModelValue\DecimalAttributeValueTrait;
+use Luni\Component\MagentoDriver\Model\Immutable\ImmutableDecimalAttributeValue;
+use Luni\Component\MagentoDriver\Model\DecimalAttributeValueInterface;
+use Luni\Component\MagentoDriver\Model\DecimalAttributeValueTrait;
 
 class MutableDecimalAttributeValue
     implements MutableAttributeValueInterface, DecimalAttributeValueInterface

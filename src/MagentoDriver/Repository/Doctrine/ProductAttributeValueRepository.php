@@ -6,17 +6,17 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Connection;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\ModelValue\AttributeValueInterface;
+use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
 use Luni\Component\MagentoDriver\Exception\RuntimeErrorException;
 use Luni\Component\MagentoDriver\Factory\AttributeValueFactoryInterface;
 use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeValueQueryBuilderInterface;
 use Luni\Component\MagentoDriver\Repository\AttributeRepositoryInterface;
-use Luni\Component\MagentoDriver\Repository\ProductAttributeValueRepositoryInterface;
+use Luni\Component\MagentoDriver\Repository\ProductAttributeValueRepositoryBackendInterface;
 
-abstract class AbstractProductAttributeValueRepository
-    implements ProductAttributeValueRepositoryInterface
+class ProductAttributeValueRepository
+    implements ProductAttributeValueRepositoryBackendInterface
 {
     /**
      * @var ProductAttributeValueQueryBuilderInterface
@@ -42,15 +42,18 @@ abstract class AbstractProductAttributeValueRepository
      * ProductAttributeRepository constructor.
      * @param Connection $connection
      * @param ProductAttributeValueQueryBuilderInterface $queryBuilder
+     * @param AttributeRepositoryInterface $attributeRepository
      * @param AttributeValueFactoryInterface $valueFactory
      */
     public function __construct(
         Connection $connection,
         ProductAttributeValueQueryBuilderInterface $queryBuilder,
+        AttributeRepositoryInterface $attributeRepository,
         AttributeValueFactoryInterface $valueFactory
     ) {
         $this->connection = $connection;
         $this->queryBuilder = $queryBuilder;
+        $this->attributeRepository = $attributeRepository;
         $this->valueFactory = $valueFactory;
     }
 
@@ -58,7 +61,18 @@ abstract class AbstractProductAttributeValueRepository
      * @param array $options
      * @return AttributeValueInterface
      */
-    abstract protected function createNewAttributeValueInstanceFromDatabase(array $options);
+    protected function createNewAttributeValueInstanceFromDatabase(array $options)
+    {
+        $attributeId = isset($options['attribute_id']) ? $options['attribute_id'] : null;
+        unset($options['attribute_id']);
+
+        $attribute = $this->attributeRepository->findOneById($attributeId);
+        if (!$attribute) {
+            return null;
+        }
+
+        return $this->valueFactory->buildNew($attribute, $options);
+    }
 
     /**
      * @param int $valueId
@@ -115,9 +129,7 @@ abstract class AbstractProductAttributeValueRepository
         $query = $this->queryBuilder->createFindAllByProductIdQueryBuilder('v');
 
         $statement = $this->connection->prepare($query);
-        if (!$statement->execute([
-            ':product_id' => $product->getId(),
-        ])) {
+        if (!$statement->execute([$product->getId()])) {
             throw new DatabaseFetchingFailureException();
         }
 
@@ -182,9 +194,9 @@ abstract class AbstractProductAttributeValueRepository
 
         $statement = $this->connection->prepare($query);
         if (!$statement->execute([
-            ':store_id'     => $storeId,
-            ':product_id'   => $product->getId(),
-            ':attribute_id' => $attribute->getId(),
+            $storeId,
+            $product->getId(),
+            $attribute->getId(),
         ])) {
             throw new DatabaseFetchingFailureException();
         }
@@ -221,8 +233,8 @@ abstract class AbstractProductAttributeValueRepository
 
         $statement = $this->connection->prepare($query);
         if (!$statement->execute([
-            ':store_id'   => $storeId,
-            ':product_id' => $product->getId(),
+            $storeId,
+            $product->getId(),
         ])) {
             throw new DatabaseFetchingFailureException();
         }

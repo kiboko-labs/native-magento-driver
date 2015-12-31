@@ -12,7 +12,7 @@ class AttributePersisterBroker
     implements AttributePersisterBrokerInterface
 {
     /**
-     * @var Collection
+     * @var Collection|PersisterInterface[]
      */
     private $backends;
 
@@ -31,7 +31,7 @@ class AttributePersisterBroker
     public function addPersister(PersisterInterface $backend, Closure $matcher)
     {
         $this->backends->add([
-            'matcher' => $matcher,
+            'matcher'   => $matcher,
             'persister' => $backend
         ]);
     }

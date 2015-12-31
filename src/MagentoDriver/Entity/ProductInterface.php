@@ -5,8 +5,8 @@ namespace Luni\Component\MagentoDriver\Entity;
 use Doctrine\Common\Collections\Collection;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Model\MediaGalleryAttributeInterface;
-use Luni\Component\MagentoDriver\ModelValue\AttributeValueInterface;
-use Luni\Component\MagentoDriver\ModelValue\MediaGalleryAttributeValueInterface;
+use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
+use Luni\Component\MagentoDriver\Model\MediaGalleryAttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\FamilyInterface;
 
 interface ProductInterface

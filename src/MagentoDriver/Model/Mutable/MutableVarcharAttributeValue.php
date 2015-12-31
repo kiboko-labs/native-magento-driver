@@ -1,11 +1,11 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\ModelValue\Mutable;
+namespace Luni\Component\MagentoDriver\Model\Mutable;
 
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\ModelValue\Immutable\ImmutableVarcharAttributeValue;
-use Luni\Component\MagentoDriver\ModelValue\VarcharAttributeValueInterface;
-use Luni\Component\MagentoDriver\ModelValue\VarcharAttributeValueTrait;
+use Luni\Component\MagentoDriver\Model\Immutable\ImmutableVarcharAttributeValue;
+use Luni\Component\MagentoDriver\Model\VarcharAttributeValueInterface;
+use Luni\Component\MagentoDriver\Model\VarcharAttributeValueTrait;
 
 class MutableVarcharAttributeValue
     implements MutableAttributeValueInterface, VarcharAttributeValueInterface

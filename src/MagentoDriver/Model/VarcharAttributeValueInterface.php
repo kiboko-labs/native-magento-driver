@@ -1,6 +1,6 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\ModelValue;
+namespace Luni\Component\MagentoDriver\Model;
 
 interface VarcharAttributeValueInterface
     extends AttributeValueInterface

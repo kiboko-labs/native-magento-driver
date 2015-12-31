@@ -1,11 +1,11 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\ModelValue\Immutable;
+namespace Luni\Component\MagentoDriver\Model\Immutable;
 
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\ModelValue\IntegerAttributeValueInterface;
-use Luni\Component\MagentoDriver\ModelValue\Mutable\MutableIntegerAttributeValue;
-use Luni\Component\MagentoDriver\ModelValue\IntegerAttributeValueTrait;
+use Luni\Component\MagentoDriver\Model\IntegerAttributeValueInterface;
+use Luni\Component\MagentoDriver\Model\Mutable\MutableIntegerAttributeValue;
+use Luni\Component\MagentoDriver\Model\IntegerAttributeValueTrait;
 
 class ImmutableIntegerAttributeValue
     implements ImmutableAttributeValueInterface, IntegerAttributeValueInterface

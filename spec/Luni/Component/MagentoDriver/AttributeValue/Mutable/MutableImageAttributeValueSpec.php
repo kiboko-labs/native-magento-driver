@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Luni\Component\MagentoDriver\ModelValue\Mutable;
+namespace spec\Luni\Component\MagentoDriver\Model\Mutable;
 
 use League\Flysystem\Adapter\NullAdapter;
 use League\Flysystem\File;
@@ -27,7 +27,7 @@ class MutableImageAttributeValueSpec extends ObjectBehavior
     function it_is_an_MutableAttributeValueInterface(AttributeInterface $attribute, File $file)
     {
         $this->beConstructedWith($attribute, $file);
-        $this->shouldImplement('Luni\Component\MagentoDriver\ModelValue\Mutable\MutableAttributeValueInterface');
+        $this->shouldImplement('Luni\Component\MagentoDriver\Model\Mutable\MutableAttributeValueInterface');
     }
 
     function it_should_contain_flysystem_file_value(AttributeInterface $attribute,  File $file)

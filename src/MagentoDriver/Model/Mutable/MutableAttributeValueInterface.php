@@ -1,9 +1,9 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\ModelValue\Mutable;
+namespace Luni\Component\MagentoDriver\Model\Mutable;
 
-use Luni\Component\MagentoDriver\ModelValue\AttributeValueInterface;
-use Luni\Component\MagentoDriver\ModelValue\Immutable\ImmutableAttributeValueInterface;
+use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
+use Luni\Component\MagentoDriver\Model\Immutable\ImmutableAttributeValueInterface;
 
 interface MutableAttributeValueInterface
     extends AttributeValueInterface

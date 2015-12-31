@@ -1,14 +1,14 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\ModelValue\Immutable;
+namespace Luni\Component\MagentoDriver\Model\Immutable;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use League\Flysystem\File;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\ModelValue\ImageAttributeValueInterface;
-use Luni\Component\MagentoDriver\ModelValue\ImageAttributeValueTrait;
-use Luni\Component\MagentoDriver\ModelValue\ImageMetadataAttributeValueInterface;
-use Luni\Component\MagentoDriver\ModelValue\Mutable\MutableImageAttributeValue;
+use Luni\Component\MagentoDriver\Model\ImageAttributeValueInterface;
+use Luni\Component\MagentoDriver\Model\ImageAttributeValueTrait;
+use Luni\Component\MagentoDriver\Model\ImageMetadataAttributeValueInterface;
+use Luni\Component\MagentoDriver\Model\Mutable\MutableImageAttributeValue;
 
 class ImmutableImageAttributeValue
     implements ImmutableAttributeValueInterface, ImageAttributeValueInterface

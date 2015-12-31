@@ -1,6 +1,6 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\ModelValue;
+namespace Luni\Component\MagentoDriver\Model;
 
 use League\Flysystem\File;
 

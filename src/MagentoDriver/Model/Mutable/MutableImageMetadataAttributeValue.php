@@ -1,11 +1,11 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\ModelValue\Mutable;
+namespace Luni\Component\MagentoDriver\Model\Mutable;
 
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\ModelValue\ImageMetadataAttributeValueInterface;
-use Luni\Component\MagentoDriver\ModelValue\ImageMetadataAttributeValueTrait;
-use Luni\Component\MagentoDriver\ModelValue\Immutable\ImmutableImageMetadataAttributeValue;
+use Luni\Component\MagentoDriver\Model\ImageMetadataAttributeValueInterface;
+use Luni\Component\MagentoDriver\Model\ImageMetadataAttributeValueTrait;
+use Luni\Component\MagentoDriver\Model\Immutable\ImmutableImageMetadataAttributeValue;
 
 class MutableImageMetadataAttributeValue
     implements MutableAttributeValueInterface, ImageMetadataAttributeValueInterface

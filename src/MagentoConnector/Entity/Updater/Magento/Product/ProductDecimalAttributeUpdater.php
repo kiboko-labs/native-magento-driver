@@ -3,9 +3,9 @@
 namespace Luni\Component\MagentoConnector\Entity\Updater\Magento\Product;
 
 use Luni\Component\MagentoDriver\Model\AttributeInterface as MagentoAttributeInterface;
-use Luni\Component\MagentoDriver\ModelValue\Immutable\ImmutableDecimalAttributeValue;
-use Luni\Component\MagentoDriver\ModelValue\Mutable\MutableAttributeValueInterface;
-use Luni\Component\MagentoDriver\ModelValue\Mutable\MutableDecimalAttributeValue;
+use Luni\Component\MagentoDriver\Model\Immutable\ImmutableDecimalAttributeValue;
+use Luni\Component\MagentoDriver\Model\Mutable\MutableAttributeValueInterface;
+use Luni\Component\MagentoDriver\Model\Mutable\MutableDecimalAttributeValue;
 use Luni\Component\MagentoDriver\Entity\ProductInterface as MagentoProductInterface;
 use Luni\Component\MagentoConnector\Entity\Updater\MagentoProductUpdaterInterface;
 use Luni\Component\MagentoDriver\Exception\ImmutableValueException;

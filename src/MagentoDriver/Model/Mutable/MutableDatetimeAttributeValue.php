@@ -1,11 +1,11 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\ModelValue\Mutable;
+namespace Luni\Component\MagentoDriver\Model\Mutable;
 
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\ModelValue\Immutable\ImmutableDatetimeAttributeValue;
-use Luni\Component\MagentoDriver\ModelValue\DatetimeAttributeValueInterface;
-use Luni\Component\MagentoDriver\ModelValue\DatetimeAttributeValueTrait;
+use Luni\Component\MagentoDriver\Model\Immutable\ImmutableDatetimeAttributeValue;
+use Luni\Component\MagentoDriver\Model\DatetimeAttributeValueInterface;
+use Luni\Component\MagentoDriver\Model\DatetimeAttributeValueTrait;
 
 class MutableDatetimeAttributeValue
     implements MutableAttributeValueInterface, DatetimeAttributeValueInterface
