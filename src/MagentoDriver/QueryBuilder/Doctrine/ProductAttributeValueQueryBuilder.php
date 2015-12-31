@@ -88,7 +88,7 @@ class ProductAttributeValueQueryBuilder
     {
         $outputFields = [];
         foreach ($fields as $field) {
-            $outputFields[] = sprintf('IFNULL(%1$s.%3$s, $2$s.3$s) AS %3$s', $defaultAlias, $storeAlias, $field);
+            $outputFields[] = sprintf('IFNULL(%1$s.%3$s, %2$s.%3$s) AS %3$s', $defaultAlias, $storeAlias, $field);
         }
 
         return $outputFields;
