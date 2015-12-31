@@ -6,7 +6,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Luni\Component\MagentoDriver\Broker\ProductAttributeValueRepositoryBrokerInterface;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
-use Luni\Component\MagentoDriver\Exception\InvalidAttributeValueRepositoryTypeException;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 
@@ -48,13 +47,13 @@ class ProductAttributeValueRepositoryFacade
      * @param ProductInterface $product
      * @return Collection|AttributeValueInterface[]
      */
-    public function findAllVariantAxisByProduct(ProductInterface $product)
+    public function findAllVariantAxisByProductFromDefault(ProductInterface $product)
     {
         $valuesList = [];
         foreach ($this->broker->walkRepositoryList() as $repository) {
             $valuesList = array_merge(
                 $valuesList,
-                $repository->findAllVariantAxisByProduct($product)->toArray()
+                $values = $repository->findAllVariantAxisByProductFromDefault($product)->toArray()
             );
         }
 
@@ -63,15 +62,16 @@ class ProductAttributeValueRepositoryFacade
 
     /**
      * @param ProductInterface $product
+     * @param int $storeId
      * @return Collection|AttributeValueInterface[]
      */
-    public function findAllMandatoryByProduct(ProductInterface $product)
+    public function findAllVariantAxisByProductFromStoreId(ProductInterface $product, $storeId)
     {
         $valuesList = [];
         foreach ($this->broker->walkRepositoryList() as $repository) {
             $valuesList = array_merge(
                 $valuesList,
-                $repository->findAllMandatoryByProduct($product)->toArray()
+                $values = $repository->findAllVariantAxisByProductFromStoreId($product, $storeId)->toArray()
             );
         }
 
@@ -148,7 +148,7 @@ class ProductAttributeValueRepositoryFacade
         foreach ($this->broker->walkRepositoryList() as $repository) {
             $valuesList = array_merge(
                 $valuesList,
-                $repository->findAllByProductFromStoreId($product, $storeId)->toArray()
+                $values = $repository->findAllByProductFromStoreId($product, $storeId)->toArray()
             );
         }
 

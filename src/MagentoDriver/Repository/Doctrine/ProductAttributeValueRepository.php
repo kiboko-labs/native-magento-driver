@@ -149,18 +149,39 @@ class ProductAttributeValueRepository
      * @param ProductInterface $product
      * @return Collection|AttributeValueInterface[]
      */
-    public function findAllVariantAxisByProduct(ProductInterface $product)
+    public function findAllVariantAxisByProductFromDefault(ProductInterface $product)
     {
-        throw new RuntimeErrorException('Not yet implemented.');
+        return $this->findAllVariantAxisByProductFromStoreId($product, 0);
     }
 
     /**
      * @param ProductInterface $product
+     * @param int $storeId
      * @return Collection|AttributeValueInterface[]
      */
-    public function findAllMandatoryByProduct(ProductInterface $product)
+    public function findAllVariantAxisByProductFromStoreId(ProductInterface $product, $storeId)
     {
-        throw new RuntimeErrorException('Not yet implemented.');
+        if ($storeId === 0) {
+            $query = $this->queryBuilder->createFindAllVariantAxisByProductFromStoreIdQueryBuilder('v', 'va');
+        } else {
+            $query = $this->queryBuilder->createFindAllVariantAxisByProductFromStoreIdOrDefaultQueryBuilder('v', 'l', 'va');
+        }
+
+        $statement = $this->connection->prepare($query);
+        if (!$statement->execute([$storeId, $product->getId()])) {
+            throw new DatabaseFetchingFailureException();
+        }
+
+        $attributeValueList = new ArrayCollection();
+        if ($statement->rowCount() < 1) {
+            return $attributeValueList;
+        }
+
+        foreach ($statement as $options) {
+            $attributeValueList->set($options['value_id'], $this->createNewAttributeValueInstanceFromDatabase($options));
+        }
+
+        return $attributeValueList;
     }
 
     /**
@@ -193,11 +214,7 @@ class ProductAttributeValueRepository
         }
 
         $statement = $this->connection->prepare($query);
-        if (!$statement->execute([
-            $storeId,
-            $product->getId(),
-            $attribute->getId(),
-        ])) {
+        if (!$statement->execute([$storeId, $product->getId(), $attribute->getId()])) {
             throw new DatabaseFetchingFailureException();
         }
 
@@ -232,10 +249,7 @@ class ProductAttributeValueRepository
         }
 
         $statement = $this->connection->prepare($query);
-        if (!$statement->execute([
-            $storeId,
-            $product->getId(),
-        ])) {
+        if (!$statement->execute([$storeId, $product->getId()])) {
             throw new DatabaseFetchingFailureException();
         }
 

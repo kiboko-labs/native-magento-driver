@@ -19,18 +19,19 @@ interface ProductAttributeValueRepositoryInterface
      * @param ProductInterface $product
      * @return Collection|AttributeValueInterface[]
      */
-    public function findAllVariantAxisByProduct(ProductInterface $product);
+    public function findAllVariantAxisByProductFromDefault(ProductInterface $product);
 
     /**
      * @param ProductInterface $product
+     * @param int $storeId
      * @return Collection|AttributeValueInterface[]
      */
-    public function findAllMandatoryByProduct(ProductInterface $product);
+    public function findAllVariantAxisByProductFromStoreId(ProductInterface $product, $storeId);
 
     /**
      * @param ProductInterface $product
      * @param AttributeInterface $attribute
-     * @return AttributeValueInterface
+     * @return AttributeValueInterface|null
      */
     public function findOneByProductAndAttributeFromDefault(
         ProductInterface $product,
@@ -41,7 +42,7 @@ interface ProductAttributeValueRepositoryInterface
      * @param ProductInterface $product
      * @param AttributeInterface $attribute
      * @param int $storeId
-     * @return AttributeValueInterface
+     * @return AttributeValueInterface|null
      */
     public function findOneByProductAndAttributeFromStoreId(
         ProductInterface $product,

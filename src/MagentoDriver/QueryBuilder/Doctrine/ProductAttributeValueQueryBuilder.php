@@ -24,17 +24,25 @@ class ProductAttributeValueQueryBuilder
     private $table;
 
     /**
+     * @var string
+     */
+    private $variantAxisTable;
+
+    /**
      * @param Connection $connection
      * @param string $table
+     * @param string $variantAxisTable
      * @param array $fields
      */
     public function __construct(
         Connection $connection,
         $table,
+        $variantAxisTable,
         array $fields
     ) {
         $this->connection = $connection;
         $this->table = $table;
+        $this->variantAxisTable = $variantAxisTable;
         $this->fields = $fields;
     }
 
@@ -64,6 +72,15 @@ class ProductAttributeValueQueryBuilder
     }
 
     /**
+     * @param null $prefix
+     * @return string
+     */
+    public static function getDefaultVariantAxisTable($prefix = null)
+    {
+        return sprintf('%scatalog_product_super_attribute', $prefix);
+    }
+
+    /**
      * @param array $fields
      * @param string $alias
      * @return array
@@ -88,7 +105,7 @@ class ProductAttributeValueQueryBuilder
     {
         $outputFields = [];
         foreach ($fields as $field) {
-            $outputFields[] = sprintf('IFNULL(%1$s.%3$s, %2$s.%3$s) AS %3$s', $defaultAlias, $storeAlias, $field);
+            $outputFields[] = sprintf('IFNULL(%2$s.%3$s, %1$s.%3$s) AS %3$s', $defaultAlias, $storeAlias, $field);
         }
 
         return $outputFields;
@@ -248,6 +265,37 @@ class ProductAttributeValueQueryBuilder
         $queryBuilder = $this->createBaseQueryBuilderWithDefaultAndStoreFilter($defaultAlias, $storeAlias);
 
         $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.entity_id', $defaultAlias), '?'));
+
+        return $queryBuilder;
+    }
+
+    /**
+     * @param string $defaultAlias
+     * @param string $variantAxisAlias
+     * @return QueryBuilder
+     */
+    public function createFindAllVariantAxisByProductFromStoreIdQueryBuilder($defaultAlias, $variantAxisAlias)
+    {
+        $queryBuilder = $this->createFindAllByProductIdFromStoreIdQueryBuilder($defaultAlias)
+            ->innerJoin($defaultAlias, $this->variantAxisTable, $variantAxisAlias,
+                sprintf('%s.product_id=%s.entity_id', $variantAxisAlias, $defaultAlias))
+        ;
+
+        return $queryBuilder;
+    }
+
+    /**
+     * @param string $defaultAlias
+     * @param string $storeAlias
+     * @param string $variantAxisAlias
+     * @return QueryBuilder
+     */
+    public function createFindAllVariantAxisByProductFromStoreIdOrDefaultQueryBuilder($defaultAlias, $storeAlias, $variantAxisAlias)
+    {
+        $queryBuilder = $this->createFindAllByProductIdFromStoreIdOrDefaultQueryBuilder($defaultAlias, $storeAlias)
+            ->innerJoin($defaultAlias, $this->variantAxisTable, $variantAxisAlias,
+                sprintf('%s.product_id=%s.entity_id', $variantAxisAlias, $defaultAlias))
+        ;
 
         return $queryBuilder;
     }
