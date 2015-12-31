@@ -4,7 +4,7 @@ namespace Luni\Component\MagentoDriver\Repository;
 
 use Doctrine\Common\Collections\Collection;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Entity\FamilyInterface;
+use Luni\Component\MagentoDriver\Model\FamilyInterface;
 
 interface AttributeRepositoryInterface
 {

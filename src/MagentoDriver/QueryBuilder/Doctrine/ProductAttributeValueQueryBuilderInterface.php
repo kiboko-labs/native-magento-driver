@@ -69,7 +69,7 @@ interface ProductAttributeValueQueryBuilderInterface
      * @param string $variantAxisAlias
      * @return QueryBuilder
      */
-    public function createFindAllVariantAxisByProductFromStoreIdQueryBuilder($alias, $variantAxisAlias);
+    public function createFindAllVariantAxisByProductIdFromStoreIdQueryBuilder($alias, $variantAxisAlias);
 
     /**
      * @param string $defaultAlias
@@ -77,7 +77,7 @@ interface ProductAttributeValueQueryBuilderInterface
      * @param string $variantAxisAlias
      * @return QueryBuilder
      */
-    public function createFindAllVariantAxisByProductFromStoreIdOrDefaultQueryBuilder($defaultAlias, $storeAlias, $variantAxisAlias);
+    public function createFindAllVariantAxisByProductIdFromStoreIdOrDefaultQueryBuilder($defaultAlias, $storeAlias, $variantAxisAlias);
 
     /**
      * @param string $alias

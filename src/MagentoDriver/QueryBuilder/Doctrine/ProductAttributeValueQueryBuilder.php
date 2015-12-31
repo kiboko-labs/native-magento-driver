@@ -274,7 +274,7 @@ class ProductAttributeValueQueryBuilder
      * @param string $variantAxisAlias
      * @return QueryBuilder
      */
-    public function createFindAllVariantAxisByProductFromStoreIdQueryBuilder($defaultAlias, $variantAxisAlias)
+    public function createFindAllVariantAxisByProductIdFromStoreIdQueryBuilder($defaultAlias, $variantAxisAlias)
     {
         $queryBuilder = $this->createFindAllByProductIdFromStoreIdQueryBuilder($defaultAlias)
             ->innerJoin($defaultAlias, $this->variantAxisTable, $variantAxisAlias,
@@ -290,7 +290,7 @@ class ProductAttributeValueQueryBuilder
      * @param string $variantAxisAlias
      * @return QueryBuilder
      */
-    public function createFindAllVariantAxisByProductFromStoreIdOrDefaultQueryBuilder($defaultAlias, $storeAlias, $variantAxisAlias)
+    public function createFindAllVariantAxisByProductIdFromStoreIdOrDefaultQueryBuilder($defaultAlias, $storeAlias, $variantAxisAlias)
     {
         $queryBuilder = $this->createFindAllByProductIdFromStoreIdOrDefaultQueryBuilder($defaultAlias, $storeAlias)
             ->innerJoin($defaultAlias, $this->variantAxisTable, $variantAxisAlias,
