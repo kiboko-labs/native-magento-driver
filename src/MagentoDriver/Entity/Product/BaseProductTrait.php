@@ -159,7 +159,7 @@ trait BaseProductTrait
             }
         }
 
-        return false;
+        return null;
     }
 
     /**

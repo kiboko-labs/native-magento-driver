@@ -78,6 +78,37 @@ class ProductAttributeValueRepositoryFacade
         return new ArrayCollection($valuesList);
     }
 
+    public function findAllByProductAndAttributeListFromDefault(
+        ProductInterface $product,
+        array $attributeList
+    ) {
+        $valuesList = [];
+        foreach ($this->broker->walkRepositoryList() as $repository) {
+            $valuesList = array_merge(
+                $valuesList,
+                $values = $repository->findAllByProductAndAttributeListFromDefault($product, $attributeList)->toArray()
+            );
+        }
+
+        return new ArrayCollection($valuesList);
+    }
+
+    public function findAllByProductAndAttributeListFromStoreId(
+        ProductInterface $product,
+        array $attributeList,
+        $storeId
+    ) {
+        $valuesList = [];
+        foreach ($this->broker->walkRepositoryList() as $repository) {
+            $valuesList = array_merge(
+                $valuesList,
+                $values = $repository->findAllByProductAndAttributeListFromStoreId($product, $attributeList, $storeId)->toArray()
+            );
+        }
+
+        return new ArrayCollection($valuesList);
+    }
+
     /**
      * @param ProductInterface $product
      * @param AttributeInterface $attribute

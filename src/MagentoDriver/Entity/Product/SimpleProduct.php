@@ -2,6 +2,7 @@
 
 namespace Luni\Component\MagentoDriver\Entity\Product;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 use Luni\Component\MagentoDriver\Model\FamilyInterface;
 
@@ -25,6 +26,7 @@ class SimpleProduct
         $this->identifier = $identifier;
         $this->productType = 'simple';
         $this->family = $family;
+        $this->values = new ArrayCollection();
 
         if ($creationDate instanceof \DateTime) {
             $this->creationDate = \DateTimeImmutable::createFromMutable($creationDate);

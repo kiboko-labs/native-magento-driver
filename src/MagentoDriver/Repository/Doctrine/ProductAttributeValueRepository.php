@@ -201,7 +201,7 @@ class ProductAttributeValueRepository
      * @param int $storeId
      * @return AttributeValueInterface
      */
-    public function findOneByProductIdAndAttributeFromStoreId(
+    public function findOneByProductAndAttributeFromStoreId(
         ProductInterface $product,
         AttributeInterface $attribute,
         $storeId
@@ -225,14 +225,25 @@ class ProductAttributeValueRepository
         return $this->createNewAttributeValueInstanceFromDatabase($options);
     }
 
-    public function findAllByProductAndAttributeFromDefault(
+    /**
+     * @param ProductInterface $product
+     * @param array $attributeList
+     * @return ArrayCollection|AttributeValueInterface[]
+     */
+    public function findAllByProductAndAttributeListFromDefault(
         ProductInterface $product,
         array $attributeList
     ) {
-        return $this->findAllByProductAndAttributeFromDefault($product, $attributeList);
+        return $this->findAllByProductAndAttributeListFromStoreId($product, $attributeList, 0);
     }
 
-    public function findAllByProductAndAttributeFromStoreId(
+    /**
+     * @param ProductInterface $product
+     * @param array $attributeList
+     * @param int $storeId
+     * @return ArrayCollection|AttributeValueInterface[]
+     */
+    public function findAllByProductAndAttributeListFromStoreId(
         ProductInterface $product,
         array $attributeList,
         $storeId
@@ -243,8 +254,15 @@ class ProductAttributeValueRepository
             $query = $this->queryBuilder->createFindAllByProductIdFromStoreIdOrDefaultQueryBuilder('v', 'l');
         }
 
+        $attributeIdList = array_map(function(AttributeInterface $item) {
+            return $item->getId();
+        }, $attributeList);
+
+        $expr = array_pad([], count($attributeIdList), $query->expr()->eq('v.attribute_id', '?'));
+        $query->andWhere($query->expr()->orX(...$expr));
+
         $statement = $this->connection->prepare($query);
-        if (!$statement->execute([$storeId, $product->getId()])) {
+        if (!$statement->execute(array_merge([$storeId, $product->getId()], $attributeIdList))) {
             throw new DatabaseFetchingFailureException();
         }
 

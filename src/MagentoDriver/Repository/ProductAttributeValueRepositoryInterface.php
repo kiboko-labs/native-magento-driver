@@ -55,7 +55,7 @@ interface ProductAttributeValueRepositoryInterface
      * @param AttributeInterface[] $attributeList
      * @return AttributeValueInterface|null
      */
-    public function findAllByProductAndAttributeFromDefault(
+    public function findAllByProductAndAttributeListFromDefault(
         ProductInterface $product,
         array $attributeList
     );
@@ -66,7 +66,7 @@ interface ProductAttributeValueRepositoryInterface
      * @param int $storeId
      * @return AttributeValueInterface|null
      */
-    public function findAllByProductAndAttributeFromStoreId(
+    public function findAllByProductAndAttributeListFromStoreId(
         ProductInterface $product,
         array $attributeList,
         $storeId
