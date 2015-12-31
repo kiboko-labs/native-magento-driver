@@ -3,8 +3,6 @@
 namespace Luni\Component\MagentoDriver\Broker;
 
 use Closure;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Persister\AttributeValue\PersisterInterface;
 
@@ -12,7 +10,7 @@ class AttributePersisterBroker
     implements AttributePersisterBrokerInterface
 {
     /**
-     * @var Collection|PersisterInterface[]
+     * @var \SplObjectStorage
      */
     private $backends;
 
@@ -21,7 +19,7 @@ class AttributePersisterBroker
      */
     public function __construct()
     {
-        $this->backends = new ArrayCollection();
+        $this->backends = new \SplObjectStorage();
     }
 
     /**
@@ -30,10 +28,7 @@ class AttributePersisterBroker
      */
     public function addPersister(PersisterInterface $backend, Closure $matcher)
     {
-        $this->backends->add([
-            'matcher'   => $matcher,
-            'persister' => $backend
-        ]);
+        $this->backends->attach($matcher, $backend);
     }
 
     /**
@@ -41,8 +36,8 @@ class AttributePersisterBroker
      */
     public function walkPersisterList()
     {
-        foreach ($this->backends as $backendInfo) {
-            yield $backendInfo['matcher'] => $backendInfo['persister'];
+        foreach ($this->backends as $matcher) {
+            yield $matcher => $this->backends[$matcher];
         }
     }
 
@@ -52,10 +47,16 @@ class AttributePersisterBroker
      */
     public function findFor(AttributeInterface $attribute)
     {
+        /**
+         * @var Closure $matcher
+         * @var PersisterInterface $backend
+         */
         foreach ($this->walkPersisterList() as $matcher => $backend) {
-            if ($matcher($attribute) === true) {
-                return $backend;
+            if ($matcher($attribute) !== true) {
+                continue;
             }
+
+            return $backend;
         }
 
         return null;

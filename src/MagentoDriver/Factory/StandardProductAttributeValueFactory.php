@@ -2,8 +2,7 @@
 
 namespace Luni\Component\MagentoDriver\Factory;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Closure;
 use Luni\Component\MagentoDriver\Exception\InvalidProductTypeException;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Model\Mutable\MutableAttributeValueInterface;
@@ -25,10 +24,10 @@ class StandardProductAttributeValueFactory
     }
 
     /**
-     * @param \Closure $matcher
-     * @param \Closure $builder
+     * @param Closure $matcher
+     * @param Closure $builder
      */
-    public function addBuilder(\Closure $matcher, \Closure $builder)
+    public function addBuilder(Closure $matcher, Closure $builder)
     {
         $this->builders->attach($matcher, $builder);
     }
@@ -38,8 +37,8 @@ class StandardProductAttributeValueFactory
      */
     public function walkBuildersList()
     {
-        foreach ($this->builders as $matcher => $builder) {
-            yield $this->builders[$builder] => $builder;
+        foreach ($this->builders as $matcher) {
+            yield $matcher => $this->builders[$matcher];
         }
     }
 
@@ -51,7 +50,7 @@ class StandardProductAttributeValueFactory
     public function buildNew(AttributeInterface $attribute, array $options)
     {
         /**
-         * @var \Closure $expectedType
+         * @var \Closure $matcher
          * @var \Closure $builder
          */
         foreach ($this->walkBuildersList() as $matcher => $builder) {

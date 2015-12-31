@@ -3,8 +3,6 @@
 namespace Luni\Component\MagentoDriver\Broker;
 
 use Closure;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Repository\ProductAttributeValueRepositoryInterface;
 
@@ -12,7 +10,7 @@ class ProductAttributeValueRepositoryBroker
     implements ProductAttributeValueRepositoryBrokerInterface
 {
     /**
-     * @var Collection|
+     * @var \SplObjectStorage
      */
     private $repositories;
 
@@ -21,7 +19,7 @@ class ProductAttributeValueRepositoryBroker
      */
     public function __construct()
     {
-        $this->repositories = new ArrayCollection();
+        $this->repositories = new \SplObjectStorage();
     }
 
     /**
@@ -30,10 +28,7 @@ class ProductAttributeValueRepositoryBroker
      */
     public function addRepository(ProductAttributeValueRepositoryInterface $repository, Closure $matcher)
     {
-        $this->repositories->add([
-            'matcher'    => $matcher,
-            'repository' => $repository
-        ]);
+        $this->repositories->attach($matcher, $repository);
     }
 
     /**
@@ -41,8 +36,8 @@ class ProductAttributeValueRepositoryBroker
      */
     public function walkRepositoryList()
     {
-        foreach ($this->repositories as $repositoryInfo) {
-            yield $repositoryInfo['matcher'] => $repositoryInfo['repository'];
+        foreach ($this->repositories as $matcher) {
+            yield $matcher => $this->repositories[$matcher];
         }
     }
 
@@ -52,10 +47,16 @@ class ProductAttributeValueRepositoryBroker
      */
     public function findFor(AttributeInterface $attribute)
     {
+        /**
+         * @var Closure $matcher
+         * @var ProductAttributeValueRepositoryInterface $repository
+         */
         foreach ($this->walkRepositoryList() as $matcher => $repository) {
-            if ($matcher($attribute) === true) {
-                return $repository;
+            if ($matcher($attribute) !== true) {
+                continue;
             }
+
+            return $repository;
         }
 
         return null;
