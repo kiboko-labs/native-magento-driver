@@ -181,7 +181,6 @@ class ProductQueryBuilder
             ->setMaxResults(1)
         ;
 
-        echo $queryBuilder->getSQL();
         return $queryBuilder;
     }
 

@@ -224,7 +224,7 @@ class ProductAttributeRepository
         $query = $this->queryBuilder->createFindAllQueryBuilder('a', 'e', $excludedIds);
 
         $statement = $this->connection->prepare($query);
-        if (!$statement->execute()) {
+        if (!$statement->execute($excludedIds)) {
             throw new DatabaseFetchingFailureException();
         }
 
