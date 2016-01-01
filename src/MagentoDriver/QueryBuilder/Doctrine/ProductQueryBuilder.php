@@ -221,10 +221,14 @@ class ProductQueryBuilder
      */
     public function createFindAllByFamilyQueryBuilder($alias, $familyAlias)
     {
-        $queryBuilder = $this->createFindAllQueryBuilder($alias)
-            ->innerJoin($alias, $this->familyTable, $familyAlias,
-                sprintf('%1$s.entity_type_id=%2$s.entity_type_id', $familyAlias, $alias))
-        ;
+        $queryBuilder = $this->createFindAllQueryBuilder($alias);
+
+        $queryBuilder->innerJoin($alias, $this->familyTable, $familyAlias,
+            $queryBuilder->expr()->andX(
+                $queryBuilder->expr()->eq(sprintf('%s.attribute_set_id', $alias), sprintf('%s.attribute_set_id', $familyAlias)),
+                $queryBuilder->expr()->eq(sprintf('%s.entity_type_id', $alias), sprintf('%s.entity_type_id', $familyAlias))
+            )
+        );
 
         $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_set_id', $familyAlias), '?'));
 
@@ -238,10 +242,11 @@ class ProductQueryBuilder
      */
     public function createFindAllByCategoryQueryBuilder($alias, $categoryAlias)
     {
-        $queryBuilder = $this->createFindAllQueryBuilder($alias)
-            ->innerJoin($alias, $this->categoryProductTable, $categoryAlias,
-                sprintf('%1$s.product_id=%2$s.entity_id', $categoryAlias, $alias))
-        ;
+        $queryBuilder = $this->createFindAllQueryBuilder($alias);
+
+        $queryBuilder->innerJoin($alias, $this->categoryProductTable, $categoryAlias,
+            $queryBuilder->expr()->eq(sprintf('%s.product_id', $categoryAlias), sprintf('%s.entity_id', $alias))
+        );
 
         $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.category_id', $categoryAlias), '?'));
 

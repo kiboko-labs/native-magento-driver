@@ -162,9 +162,10 @@ class ProductAttributeQueryBuilder
         $queryBuilder = $this->createFindAllQueryBuilder($alias, $extraAlias);
 
         $queryBuilder->innerJoin($alias, $this->variantAxisTable, $variantAxisAlias,
-                sprintf('%s.attribute_id=%s.attribute_id', $variantAxisAlias, $alias))
-            ->where($queryBuilder->expr()->eq(sprintf('%s.product_id', $variantAxisAlias), '?'))
-        ;
+            $queryBuilder->expr()->eq(sprintf('%s.attribute_id', $variantAxisAlias), sprintf('%s.attribute_id', $alias))
+        );
+
+        $queryBuilder->where($queryBuilder->expr()->eq(sprintf('%s.product_id', $variantAxisAlias), '?'));
 
         return $queryBuilder;
     }
@@ -180,9 +181,10 @@ class ProductAttributeQueryBuilder
         $queryBuilder = $this->createFindAllQueryBuilder($alias, $extraAlias);
 
         $queryBuilder->innerJoin($alias, $this->familyTable, $familyAlias,
-                sprintf('%s.entity_type_id=%s.entity_type_id', $familyAlias, $alias))
-            ->where($queryBuilder->expr()->eq(sprintf('%s.attribute_set_id', $familyAlias), '?'))
-        ;
+            $queryBuilder->expr()->eq(sprintf('%s.entity_type_id', $familyAlias), sprintf('%s.entity_type_id', $alias))
+        );
+
+        $queryBuilder->where($queryBuilder->expr()->eq(sprintf('%s.attribute_set_id', $familyAlias), '?'));
 
         return $queryBuilder;
     }
@@ -195,10 +197,11 @@ class ProductAttributeQueryBuilder
      */
     public function createFindAllMandatoryByFamilyQueryBuilder($alias, $extraAlias, $familyAlias)
     {
-        $queryBuilder = $this->createFindAllQueryBuilder($alias, $extraAlias)
-            ->innerJoin($alias, $this->familyTable, $familyAlias,
-                sprintf('%s.entity_type_id=%s.entity_type_id', $familyAlias, $alias))
-            ->where(sprintf('%s.attribute_set_id = ?', $familyAlias))
+        $queryBuilder = $this->createFindAllQueryBuilder($alias, $extraAlias);
+        $queryBuilder->innerJoin($alias, $this->familyTable, $familyAlias,
+            $queryBuilder->expr()->eq(sprintf('%s.entity_type_id', $familyAlias), sprintf('%s.entity_type_id', $alias))
+        );
+        $queryBuilder->where(sprintf('%s.attribute_set_id = ?', $familyAlias))
             ->andWhere(sprintf('%s.is_required = 1', $alias))
         ;
 

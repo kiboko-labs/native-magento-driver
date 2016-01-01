@@ -280,10 +280,11 @@ class ProductAttributeValueQueryBuilder
      */
     public function createFindAllVariantAxisByProductIdFromStoreIdQueryBuilder($defaultAlias, $variantAxisAlias)
     {
-        $queryBuilder = $this->createFindAllByProductIdFromStoreIdQueryBuilder($defaultAlias)
-            ->innerJoin($defaultAlias, $this->variantAxisTable, $variantAxisAlias,
-                sprintf('%s.product_id=%s.entity_id', $variantAxisAlias, $defaultAlias))
-        ;
+        $queryBuilder = $this->createFindAllByProductIdFromStoreIdQueryBuilder($defaultAlias);
+
+        $queryBuilder->innerJoin($defaultAlias, $this->variantAxisTable, $variantAxisAlias,
+            $queryBuilder->expr()->eq(sprintf('%s.product_id', $variantAxisAlias), sprintf('%s.entity_id', $defaultAlias))
+        );
 
         return $queryBuilder;
     }
@@ -296,10 +297,11 @@ class ProductAttributeValueQueryBuilder
      */
     public function createFindAllVariantAxisByProductIdFromStoreIdOrDefaultQueryBuilder($defaultAlias, $storeAlias, $variantAxisAlias)
     {
-        $queryBuilder = $this->createFindAllByProductIdFromStoreIdOrDefaultQueryBuilder($defaultAlias, $storeAlias)
-            ->innerJoin($defaultAlias, $this->variantAxisTable, $variantAxisAlias,
-                sprintf('%s.product_id=%s.entity_id', $variantAxisAlias, $defaultAlias))
-        ;
+        $queryBuilder = $this->createFindAllByProductIdFromStoreIdOrDefaultQueryBuilder($defaultAlias, $storeAlias);
+
+        $queryBuilder->innerJoin($defaultAlias, $this->variantAxisTable, $variantAxisAlias,
+            $queryBuilder->expr()->eq(sprintf('%s.product_id', $variantAxisAlias), sprintf('%s.entity_id', $defaultAlias))
+        );
 
         return $queryBuilder;
     }
