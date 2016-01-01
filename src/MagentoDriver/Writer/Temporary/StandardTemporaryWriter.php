@@ -72,6 +72,5 @@ class StandardTemporaryWriter
     public function flush()
     {
         $this->file->putStream($this->stream);
-        ftruncate($this->stream, 0);
     }
 }

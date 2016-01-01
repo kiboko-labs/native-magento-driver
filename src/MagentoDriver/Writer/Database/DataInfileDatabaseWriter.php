@@ -40,9 +40,10 @@ class DataInfileDatabaseWriter
     /**
      * @param string $table
      * @param array $tableFields
+     * @return int
      */
     public function write($table, array $tableFields)
     {
-        $this->doWrite('LOAD DATA INFILE', $this->file, $table, $tableFields);
+        return $this->doWrite('LOAD DATA INFILE', $this->file, $table, $tableFields);
     }
 }

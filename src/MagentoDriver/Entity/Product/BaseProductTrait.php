@@ -11,6 +11,7 @@ use Luni\Component\MagentoDriver\Model\Immutable\ImmutableAttributeValueInterfac
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 use Luni\Component\MagentoDriver\Exception\ImmutableValueException;
 use Luni\Component\MagentoDriver\Model\FamilyInterface;
+use Luni\Component\MagentoDriver\Model\Mutable\MutableAttributeValueInterface;
 
 trait BaseProductTrait
 {
@@ -148,6 +149,8 @@ trait BaseProductTrait
      */
     public function getValueFor(AttributeInterface $attribute, $storeId = null)
     {
+        $defaultValue = null;
+
         /** @var AttributeValueInterface $value */
         foreach ($this->values as $value) {
             if ($value->getAttributeCode() !== $attribute->getCode()) {
@@ -157,9 +160,45 @@ trait BaseProductTrait
             if ($value->getStoreId() === $storeId) {
                 return $value;
             }
+
+            if ($storeId !== 0 && $value->getStoreId() === 0) {
+                $defaultValue = $value;
+            }
         }
 
-        return null;
+        return $defaultValue;
+    }
+
+    /**
+     * @param AttributeInterface $attribute
+     * @param int $storeId
+     * @return ImmutableAttributeValueInterface
+     */
+    public function getImmutableValueFor(AttributeInterface $attribute, $storeId)
+    {
+        $attributeValue = $this->getValueFor($attribute, $storeId);
+
+        if ($attributeValue instanceof ImmutableAttributeValueInterface) {
+            return $attributeValue;
+        }
+
+        return $attributeValue->switchToMutable();
+    }
+
+    /**
+     * @param AttributeInterface $attribute
+     * @param int $storeId
+     * @return MutableAttributeValueInterface
+     */
+    public function getMutableValueFor(AttributeInterface $attribute, $storeId)
+    {
+        $attributeValue = $this->getValueFor($attribute, $storeId);
+
+        if ($attributeValue instanceof MutableAttributeValueInterface) {
+            return $attributeValue;
+        }
+
+        return $attributeValue->switchToMutable();
     }
 
     /**
