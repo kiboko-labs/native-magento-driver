@@ -24,17 +24,25 @@ class ProductAttributeValueQueryBuilder
     private $table;
 
     /**
+     * @var string
+     */
+    private $variantAxisTable;
+
+    /**
      * @param Connection $connection
      * @param string $table
+     * @param string $variantAxisTable
      * @param array $fields
      */
     public function __construct(
         Connection $connection,
         $table,
+        $variantAxisTable,
         array $fields
     ) {
         $this->connection = $connection;
         $this->table = $table;
+        $this->variantAxisTable = $variantAxisTable;
         $this->fields = $fields;
     }
 
@@ -64,6 +72,15 @@ class ProductAttributeValueQueryBuilder
     }
 
     /**
+     * @param null $prefix
+     * @return string
+     */
+    public static function getDefaultVariantAxisTable($prefix = null)
+    {
+        return sprintf('%scatalog_product_super_attribute', $prefix);
+    }
+
+    /**
      * @param array $fields
      * @param string $alias
      * @return array
@@ -88,7 +105,7 @@ class ProductAttributeValueQueryBuilder
     {
         $outputFields = [];
         foreach ($fields as $field) {
-            $outputFields[] = sprintf('IFNULL(%1$s.%3$s, $2$s.3$s) AS %3$s', $defaultAlias, $storeAlias, $field);
+            $outputFields[] = sprintf('IFNULL(%2$s.%3$s, %1$s.%3$s) AS %3$s', $defaultAlias, $storeAlias, $field);
         }
 
         return $outputFields;
@@ -102,7 +119,7 @@ class ProductAttributeValueQueryBuilder
     private function createBaseQueryBuilder($alias, array $fieldList)
     {
         return (new QueryBuilder($this->connection))
-            ->select($this->createFieldsList($fieldList, $alias))
+            ->select($fieldList, $alias)
             ->from($this->table, $alias)
             ->where(sprintf('%s.entity_type_id=4', $alias))
         ;
@@ -116,7 +133,7 @@ class ProductAttributeValueQueryBuilder
     {
         $queryBuilder = $this->createBaseQueryBuilder($alias, $this->createFieldsList($this->fields, $alias));
 
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.store_id', $alias), ':store_id'));
+        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.store_id', $alias), '?'));
 
         return $queryBuilder;
     }
@@ -128,14 +145,18 @@ class ProductAttributeValueQueryBuilder
      */
     private function createBaseQueryBuilderWithDefaultAndStoreFilter($defaultAlias, $storeAlias)
     {
-        $queryBuilder = $this->createBaseQueryBuilder($defaultAlias, $this->createFallbackFieldsList($this->fields, $defaultAlias, $storeAlias))
-            ->innerJoin($defaultAlias, $this->table, $storeAlias,
-                sprintf('%1$s.entity_id=%2$s.entity_id AND %1$s.attribute_id=%2$s.attribute_id', $storeAlias, $defaultAlias))
-            ->where(sprintf('%s.entity_type_id=4', $storeAlias))
+        $queryBuilder = $this->createBaseQueryBuilder($defaultAlias, $this->createFallbackFieldsList($this->fields, $defaultAlias, $storeAlias));
+
+        $queryBuilder
+            ->leftJoin($defaultAlias, $this->table, $storeAlias, $queryBuilder->expr()->andX(
+                $queryBuilder->expr()->eq(sprintf('%s.entity_id', $storeAlias), sprintf('%s.entity_id', $defaultAlias)),
+                $queryBuilder->expr()->eq(sprintf('%s.attribute_id', $storeAlias), sprintf('%s.attribute_id', $defaultAlias)),
+                $queryBuilder->expr()->eq(sprintf('%s.entity_type_id', $storeAlias), sprintf('%s.entity_type_id', $defaultAlias)),
+                $queryBuilder->expr()->eq(sprintf('%s.store_id', $storeAlias), '?')
+            ))
         ;
 
         $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.store_id', $defaultAlias), 0));
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.store_id', $storeAlias), ':store_id'));
 
         return $queryBuilder;
     }
@@ -204,8 +225,8 @@ class ProductAttributeValueQueryBuilder
     {
         $queryBuilder = $this->createBaseQueryBuilderWithStoreFilter($alias);
 
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.entity_id', $alias), ':product_id'));
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_id', $alias), ':attribute_id'));
+        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.entity_id', $alias), '?'));
+        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_id', $alias), '?'));
 
         return $queryBuilder;
     }
@@ -219,8 +240,8 @@ class ProductAttributeValueQueryBuilder
     {
         $queryBuilder = $this->createBaseQueryBuilderWithDefaultAndStoreFilter($defaultAlias, $storeAlias);
 
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.entity_id', $defaultAlias), ':product_id'));
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_id', $defaultAlias), ':attribute_id'));
+        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.entity_id', $defaultAlias), '?'));
+        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_id', $defaultAlias), '?'));
 
         return $queryBuilder;
     }
@@ -233,7 +254,7 @@ class ProductAttributeValueQueryBuilder
     {
         $queryBuilder = $this->createBaseQueryBuilderWithStoreFilter($alias);
 
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.entity_id', $alias), ':product_id'));
+        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.entity_id', $alias), '?'));
 
         return $queryBuilder;
     }
@@ -247,7 +268,40 @@ class ProductAttributeValueQueryBuilder
     {
         $queryBuilder = $this->createBaseQueryBuilderWithDefaultAndStoreFilter($defaultAlias, $storeAlias);
 
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.entity_id', $defaultAlias), ':product_id'));
+        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.entity_id', $defaultAlias), '?'));
+
+        return $queryBuilder;
+    }
+
+    /**
+     * @param string $defaultAlias
+     * @param string $variantAxisAlias
+     * @return QueryBuilder
+     */
+    public function createFindAllVariantAxisByProductIdFromStoreIdQueryBuilder($defaultAlias, $variantAxisAlias)
+    {
+        $queryBuilder = $this->createFindAllByProductIdFromStoreIdQueryBuilder($defaultAlias);
+
+        $queryBuilder->innerJoin($defaultAlias, $this->variantAxisTable, $variantAxisAlias,
+            $queryBuilder->expr()->eq(sprintf('%s.product_id', $variantAxisAlias), sprintf('%s.entity_id', $defaultAlias))
+        );
+
+        return $queryBuilder;
+    }
+
+    /**
+     * @param string $defaultAlias
+     * @param string $storeAlias
+     * @param string $variantAxisAlias
+     * @return QueryBuilder
+     */
+    public function createFindAllVariantAxisByProductIdFromStoreIdOrDefaultQueryBuilder($defaultAlias, $storeAlias, $variantAxisAlias)
+    {
+        $queryBuilder = $this->createFindAllByProductIdFromStoreIdOrDefaultQueryBuilder($defaultAlias, $storeAlias);
+
+        $queryBuilder->innerJoin($defaultAlias, $this->variantAxisTable, $variantAxisAlias,
+            $queryBuilder->expr()->eq(sprintf('%s.product_id', $variantAxisAlias), sprintf('%s.entity_id', $defaultAlias))
+        );
 
         return $queryBuilder;
     }
@@ -260,7 +314,7 @@ class ProductAttributeValueQueryBuilder
     {
         $queryBuilder = $this->createBaseQueryBuilder($alias, $this->createFieldsList($this->fields, $alias));
 
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.entity_id', $defaultAlias), ':product_id'));
+        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.entity_id', $alias), '?'));
 
         return $queryBuilder;
     }

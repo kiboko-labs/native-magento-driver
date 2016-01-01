@@ -3,7 +3,7 @@
 namespace Luni\Component\MagentoConnector\Broker;
 
 use Luni\Component\MagentoConnector\Entity\Updater\MagentoProductUpdaterInterface;
-use Luni\Component\MagentoDriver\Attribute\AttributeInterface;
+use Luni\Component\MagentoDriver\Model\AttributeInterface;
 
 interface AttributeUpdaterBrokerInterface
 {

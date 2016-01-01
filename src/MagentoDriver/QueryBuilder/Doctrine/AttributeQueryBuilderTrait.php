@@ -74,7 +74,7 @@ trait AttributeQueryBuilderTrait
             ->where(sprintf('%s.entity_type_id=4', $alias))
         ;
 
-        if (count($excludedIds)) {
+        if (count($excludedIds) > 0) {
             $expr = array_pad([], count($excludedIds), $queryBuilder->expr()->neq(sprintf('%s.attribute_id', $alias), '?'));
             $queryBuilder->andWhere($queryBuilder->expr()->andX(...$expr));
         }

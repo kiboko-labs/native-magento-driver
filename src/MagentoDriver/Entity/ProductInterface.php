@@ -3,11 +3,13 @@
 namespace Luni\Component\MagentoDriver\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use Luni\Component\MagentoDriver\Attribute\AttributeInterface;
-use Luni\Component\MagentoDriver\Attribute\MediaGalleryAttributeInterface;
-use Luni\Component\MagentoDriver\AttributeValue\AttributeValueInterface;
-use Luni\Component\MagentoDriver\AttributeValue\MediaGalleryAttributeValueInterface;
-use Luni\Component\MagentoDriver\Family\FamilyInterface;
+use Luni\Component\MagentoDriver\Model\AttributeInterface;
+use Luni\Component\MagentoDriver\Model\Immutable\ImmutableAttributeValueInterface;
+use Luni\Component\MagentoDriver\Model\MediaGalleryAttributeInterface;
+use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
+use Luni\Component\MagentoDriver\Model\MediaGalleryAttributeValueInterface;
+use Luni\Component\MagentoDriver\Model\FamilyInterface;
+use Luni\Component\MagentoDriver\Model\Mutable\MutableAttributeValueInterface;
 
 interface ProductInterface
     extends EntityInterface
@@ -78,6 +80,20 @@ interface ProductInterface
      * @return AttributeValueInterface
      */
     public function getValueFor(AttributeInterface $attribute, $storeId);
+
+    /**
+     * @param AttributeInterface $attribute
+     * @param int $storeId
+     * @return ImmutableAttributeValueInterface
+     */
+    public function getImmutableValueFor(AttributeInterface $attribute, $storeId);
+
+    /**
+     * @param AttributeInterface $attribute
+     * @param int $storeId
+     * @return MutableAttributeValueInterface
+     */
+    public function getMutableValueFor(AttributeInterface $attribute, $storeId);
 
     /**
      * @param AttributeInterface $attribute

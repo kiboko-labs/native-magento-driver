@@ -32,3 +32,15 @@ So if your application uses Doctrine DBAL, you will be able to use it out of the
 Simply require it in your `composer.json` :
 
 `$ composer require luni/akeneo-magento-driver:*`
+
+## What's the difference between `Entity` and `Model`?
+
+An `Entity` maps to a document, using the EAV pattern. Typically products and categories.
+
+A `Model` maps to a flat table.
+
+## To do:
+
+- Implement EAV attribute filters
+- Implement Index refresh
+- Implement object factories

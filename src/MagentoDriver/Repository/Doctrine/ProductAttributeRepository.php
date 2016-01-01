@@ -5,9 +5,9 @@ namespace Luni\Component\MagentoDriver\Repository\Doctrine;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Connection;
-use Luni\Component\MagentoDriver\Attribute\Attribute;
-use Luni\Component\MagentoDriver\Attribute\AttributeInterface;
-use Luni\Component\MagentoDriver\Family\FamilyInterface;
+use Luni\Component\MagentoDriver\Model\Attribute;
+use Luni\Component\MagentoDriver\Model\AttributeInterface;
+use Luni\Component\MagentoDriver\Model\FamilyInterface;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
 use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilderInterface;
@@ -224,7 +224,7 @@ class ProductAttributeRepository
         $query = $this->queryBuilder->createFindAllQueryBuilder('a', 'e', $excludedIds);
 
         $statement = $this->connection->prepare($query);
-        if (!$statement->execute()) {
+        if (!$statement->execute($excludedIds)) {
             throw new DatabaseFetchingFailureException();
         }
 

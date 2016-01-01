@@ -3,9 +3,9 @@
 namespace Luni\Component\MagentoDriver\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use Luni\Component\MagentoDriver\Attribute\AttributeInterface;
-use Luni\Component\MagentoDriver\AttributeValue\AttributeValueInterface;
-use Luni\Component\MagentoDriver\AttributeValue\Immutable\ImmutableVarcharAttributeValue;
+use Luni\Component\MagentoDriver\Model\AttributeInterface;
+use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
+use Luni\Component\MagentoDriver\Model\Immutable\ImmutableVarcharAttributeValue;
 
 interface EntityInterface
 {

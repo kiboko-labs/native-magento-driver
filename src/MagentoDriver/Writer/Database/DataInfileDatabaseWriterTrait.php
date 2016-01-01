@@ -33,12 +33,17 @@ trait DataInfileDatabaseWriterTrait
      * @param File $file
      * @param string $table
      * @param array $tableFields
+     * @return int
      * @throws \Doctrine\DBAL\DBALException
      */
     private function doWrite($prefix, File $file, $table, array $tableFields)
     {
         if (!$file->exists()) {
             throw new RuntimeErrorException(sprintf('File %s does not exist', $file->getPath()));
+        }
+
+        if ($file->getSize() <= 0) {
+            return 0;
         }
 
         $keys = [];
@@ -57,8 +62,10 @@ FIELDS
 ({$serializedKeys})
 SQL_EOF;
 
-        if ($this->connection->exec($query) <= 0) {
+        if (($count = $this->connection->exec($query)) <= 0) {
             throw new RuntimeErrorException(sprintf('Failed to import data from file %s', $file->getPath()));
         }
+
+        return $count;
     }
 }
