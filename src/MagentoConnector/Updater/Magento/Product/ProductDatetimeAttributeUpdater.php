@@ -1,19 +1,19 @@
 <?php
 
-namespace Luni\Component\MagentoConnector\Entity\Updater\Magento\Product;
+namespace Luni\Component\MagentoConnector\Updater\Magento\Product;
 
 use Luni\Component\MagentoDriver\Model\AttributeInterface as MagentoAttributeInterface;
 use Luni\Component\MagentoDriver\Model\Immutable\ImmutableDatetimeAttributeValue;
 use Luni\Component\MagentoDriver\Model\Mutable\MutableAttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\Mutable\MutableDatetimeAttributeValue;
 use Luni\Component\MagentoDriver\Entity\ProductInterface as MagentoProductInterface;
-use Luni\Component\MagentoConnector\Entity\Updater\MagentoProductUpdaterInterface;
+use Luni\Component\MagentoConnector\Updater\MagentoProductUpdaterInterface;
 use Luni\Component\MagentoDriver\Exception\ImmutableValueException;
 use Luni\Component\MagentoDriver\Exception\InvalidAttributeBackendTypeException;
 use Pim\Bundle\CatalogBundle\Model\AttributeInterface as PimAttributeInterface; // TODO: change to Pim\Component\Catalog\Model\AttributeInterface in 1.5
 use Pim\Bundle\CatalogBundle\Model\ProductInterface as PimProductInterface;     // TODO: change to Pim\Component\Catalog\Model\ProductInterface in 1.5
 
-class ProductDateAttributeUpdater
+class ProductDatetimeAttributeUpdater
     implements MagentoProductUpdaterInterface
 {
     /**
@@ -34,9 +34,9 @@ class ProductDateAttributeUpdater
         PimAttributeInterface $pimAttribute,
         MagentoAttributeInterface $magentoAttribute
     ) {
-        if ($pimAttribute->getBackendType() !== 'date') {
+        if ($pimAttribute->getBackendType() !== 'datetime') {
             throw new InvalidAttributeBackendTypeException(sprintf(
-                'The PIM attribute %s\'s backend type mut be "date".',
+                'The PIM attribute %s\'s backend type mut be "datetime".',
                 $pimAttribute->getCode()
             ));
         }
@@ -88,11 +88,11 @@ class ProductDateAttributeUpdater
             }
 
             /** @var MutableDatetimeAttributeValue $magentoValue */
-            $magentoValue->setValue($pimValue->getDate());
+            $magentoValue->setValue($pimValue->getDatetime());
         } else {
             $magentoValue = new ImmutableDatetimeAttributeValue(
                 $this->magentoAttribute,
-                $pimValue->getDate(),
+                $pimValue->getDatetime(),
                 $storeId
             );
 

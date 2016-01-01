@@ -1,19 +1,19 @@
 <?php
 
-namespace Luni\Component\MagentoConnector\Entity\Updater\Magento\Product;
+namespace Luni\Component\MagentoConnector\Updater\Magento\Product;
 
 use Luni\Component\MagentoDriver\Model\AttributeInterface as MagentoAttributeInterface;
-use Luni\Component\MagentoDriver\Model\Immutable\ImmutableVarcharAttributeValue;
+use Luni\Component\MagentoDriver\Model\Immutable\ImmutableDecimalAttributeValue;
 use Luni\Component\MagentoDriver\Model\Mutable\MutableAttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\Mutable\MutableVarcharAttributeValue;
+use Luni\Component\MagentoDriver\Model\Mutable\MutableDecimalAttributeValue;
 use Luni\Component\MagentoDriver\Entity\ProductInterface as MagentoProductInterface;
-use Luni\Component\MagentoConnector\Entity\Updater\MagentoProductUpdaterInterface;
+use Luni\Component\MagentoConnector\Updater\MagentoProductUpdaterInterface;
 use Luni\Component\MagentoDriver\Exception\ImmutableValueException;
 use Luni\Component\MagentoDriver\Exception\InvalidAttributeBackendTypeException;
 use Pim\Bundle\CatalogBundle\Model\AttributeInterface as PimAttributeInterface; // TODO: change to Pim\Component\Catalog\Model\AttributeInterface in 1.5
 use Pim\Bundle\CatalogBundle\Model\ProductInterface as PimProductInterface;     // TODO: change to Pim\Component\Catalog\Model\ProductInterface in 1.5
 
-class ProductVarcharAttributeUpdater
+class ProductDecimalAttributeUpdater
     implements MagentoProductUpdaterInterface
 {
     /**
@@ -34,16 +34,16 @@ class ProductVarcharAttributeUpdater
         PimAttributeInterface $pimAttribute,
         MagentoAttributeInterface $magentoAttribute
     ) {
-        if ($pimAttribute->getBackendType() !== 'varchar') {
+        if ($pimAttribute->getBackendType() !== 'decimal') {
             throw new InvalidAttributeBackendTypeException(sprintf(
-                'The PIM attribute %s\'s backend type mut be "varchar".',
+                'The PIM attribute %s\'s backend type mut be "decimal".',
                 $pimAttribute->getCode()
             ));
         }
 
-        if ($magentoAttribute->getBackendType() !== 'varchar') {
+        if ($magentoAttribute->getBackendType() !== 'decimal') {
             throw new InvalidAttributeBackendTypeException(sprintf(
-                'The Magento attribute %s\'s backend type mut be "varchar".',
+                'The Magento attribute %s\'s backend type mut be "decimal".',
                 $magentoAttribute->getCode()
             ));
         }
@@ -87,12 +87,12 @@ class ProductVarcharAttributeUpdater
                 ));
             }
 
-            /** @var MutableVarcharAttributeValue $magentoValue */
-            $magentoValue->setValue($pimValue->getVarchar());
+            /** @var MutableDecimalAttributeValue $magentoValue */
+            $magentoValue->setValue($pimValue->getDecimal());
         } else {
-            $magentoValue = new ImmutableVarcharAttributeValue(
+            $magentoValue = new ImmutableDecimalAttributeValue(
                 $this->magentoAttribute,
-                $pimValue->getVarchar(),
+                $pimValue->getDecimal(),
                 $storeId
             );
 

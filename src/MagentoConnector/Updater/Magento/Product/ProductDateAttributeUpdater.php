@@ -1,19 +1,19 @@
 <?php
 
-namespace Luni\Component\MagentoConnector\Entity\Updater\Magento\Product;
+namespace Luni\Component\MagentoConnector\Updater\Magento\Product;
 
 use Luni\Component\MagentoDriver\Model\AttributeInterface as MagentoAttributeInterface;
-use Luni\Component\MagentoDriver\Model\Immutable\ImmutableTextAttributeValue;
+use Luni\Component\MagentoDriver\Model\Immutable\ImmutableDatetimeAttributeValue;
 use Luni\Component\MagentoDriver\Model\Mutable\MutableAttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\Mutable\MutableTextAttributeValue;
+use Luni\Component\MagentoDriver\Model\Mutable\MutableDatetimeAttributeValue;
 use Luni\Component\MagentoDriver\Entity\ProductInterface as MagentoProductInterface;
-use Luni\Component\MagentoConnector\Entity\Updater\MagentoProductUpdaterInterface;
+use Luni\Component\MagentoConnector\Updater\MagentoProductUpdaterInterface;
 use Luni\Component\MagentoDriver\Exception\ImmutableValueException;
 use Luni\Component\MagentoDriver\Exception\InvalidAttributeBackendTypeException;
 use Pim\Bundle\CatalogBundle\Model\AttributeInterface as PimAttributeInterface; // TODO: change to Pim\Component\Catalog\Model\AttributeInterface in 1.5
 use Pim\Bundle\CatalogBundle\Model\ProductInterface as PimProductInterface;     // TODO: change to Pim\Component\Catalog\Model\ProductInterface in 1.5
 
-class ProductTextAttributeUpdater
+class ProductDateAttributeUpdater
     implements MagentoProductUpdaterInterface
 {
     /**
@@ -34,16 +34,16 @@ class ProductTextAttributeUpdater
         PimAttributeInterface $pimAttribute,
         MagentoAttributeInterface $magentoAttribute
     ) {
-        if ($pimAttribute->getBackendType() !== 'text') {
+        if ($pimAttribute->getBackendType() !== 'date') {
             throw new InvalidAttributeBackendTypeException(sprintf(
-                'The PIM attribute %s\'s backend type mut be "text".',
+                'The PIM attribute %s\'s backend type mut be "date".',
                 $pimAttribute->getCode()
             ));
         }
 
-        if ($magentoAttribute->getBackendType() !== 'text') {
+        if ($magentoAttribute->getBackendType() !== 'datetime') {
             throw new InvalidAttributeBackendTypeException(sprintf(
-                'The Magento attribute %s\'s backend type mut be "text".',
+                'The Magento attribute %s\'s backend type mut be "datetime".',
                 $magentoAttribute->getCode()
             ));
         }
@@ -87,12 +87,12 @@ class ProductTextAttributeUpdater
                 ));
             }
 
-            /** @var MutableTextAttributeValue $magentoValue */
-            $magentoValue->setValue($pimValue->getText());
+            /** @var MutableDatetimeAttributeValue $magentoValue */
+            $magentoValue->setValue($pimValue->getDate());
         } else {
-            $magentoValue = new ImmutableTextAttributeValue(
+            $magentoValue = new ImmutableDatetimeAttributeValue(
                 $this->magentoAttribute,
-                $pimValue->getText(),
+                $pimValue->getDate(),
                 $storeId
             );
 

@@ -1,19 +1,19 @@
 <?php
 
-namespace Luni\Component\MagentoConnector\Entity\Updater\Magento\Product;
+namespace Luni\Component\MagentoConnector\Updater\Magento\Product;
 
 use Luni\Component\MagentoDriver\Model\AttributeInterface as MagentoAttributeInterface;
 use Luni\Component\MagentoDriver\Model\Immutable\ImmutableIntegerAttributeValue;
 use Luni\Component\MagentoDriver\Model\Mutable\MutableAttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\Mutable\MutableIntegerAttributeValue;
 use Luni\Component\MagentoDriver\Entity\ProductInterface as MagentoProductInterface;
-use Luni\Component\MagentoConnector\Entity\Updater\MagentoProductUpdaterInterface;
+use Luni\Component\MagentoConnector\Updater\MagentoProductUpdaterInterface;
 use Luni\Component\MagentoDriver\Exception\ImmutableValueException;
 use Luni\Component\MagentoDriver\Exception\InvalidAttributeBackendTypeException;
 use Pim\Bundle\CatalogBundle\Model\AttributeInterface as PimAttributeInterface; // TODO: change to Pim\Component\Catalog\Model\AttributeInterface in 1.5
 use Pim\Bundle\CatalogBundle\Model\ProductInterface as PimProductInterface;     // TODO: change to Pim\Component\Catalog\Model\ProductInterface in 1.5
 
-class ProductIntegerAttributeUpdater
+class ProductBooleanAttributeUpdater
     implements MagentoProductUpdaterInterface
 {
     /**
@@ -34,9 +34,9 @@ class ProductIntegerAttributeUpdater
         PimAttributeInterface $pimAttribute,
         MagentoAttributeInterface $magentoAttribute
     ) {
-        if ($pimAttribute->getBackendType() !== 'integer') {
+        if ($pimAttribute->getBackendType() !== 'boolean') {
             throw new InvalidAttributeBackendTypeException(sprintf(
-                'The PIM attribute %s\'s backend type mut be "integer".',
+                'The PIM attribute %s\'s backend type mut be "boolean".',
                 $pimAttribute->getCode()
             ));
         }
@@ -88,11 +88,11 @@ class ProductIntegerAttributeUpdater
             }
 
             /** @var MutableIntegerAttributeValue $magentoValue */
-            $magentoValue->setValue($pimValue->getInteger());
+            $magentoValue->setValue((bool) $pimValue->getBoolean());
         } else {
             $magentoValue = new ImmutableIntegerAttributeValue(
                 $this->magentoAttribute,
-                $pimValue->getInteger(),
+                (bool) $pimValue->getBoolean(),
                 $storeId
             );
 

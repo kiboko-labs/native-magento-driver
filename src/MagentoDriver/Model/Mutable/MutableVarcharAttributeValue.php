@@ -3,6 +3,7 @@
 namespace Luni\Component\MagentoDriver\Model\Mutable;
 
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
+use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\Immutable\ImmutableVarcharAttributeValue;
 use Luni\Component\MagentoDriver\Model\VarcharAttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\VarcharAttributeValueTrait;
@@ -50,6 +51,21 @@ class MutableVarcharAttributeValue
             $this->payload,
             $this->productId,
             $this->storeId
+        );
+    }
+
+    /**
+     * @param $storeId
+     * @return AttributeValueInterface
+     */
+    public function copyToStoreId($storeId)
+    {
+        return static::buildNewWith(
+            $this->attribute,
+            $this->id,
+            $this->payload,
+            $this->productId,
+            $storeId
         );
     }
 }

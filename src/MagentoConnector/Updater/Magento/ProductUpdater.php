@@ -1,9 +1,9 @@
 <?php
 
-namespace Luni\Component\MagentoConnector\Entity\Updater\Magento;
+namespace Luni\Component\MagentoConnector\Updater\Magento;
 
 use Luni\Component\MagentoConnector\Broker\AttributeUpdaterBrokerInterface;
-use Luni\Component\MagentoConnector\Entity\Updater\MagentoProductUpdaterInterface;
+use Luni\Component\MagentoConnector\Updater\MagentoProductUpdaterInterface;
 use Luni\Component\MagentoDriver\Entity\ProductInterface as MagentoProductInterface;
 use Pim\Bundle\CatalogBundle\Model\ProductInterface as PimProductInterface; // TODO: change to Pim\Component\Catalog\Model\ProductInterface in 1.5
 

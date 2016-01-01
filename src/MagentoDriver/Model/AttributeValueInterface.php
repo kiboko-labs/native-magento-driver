@@ -63,4 +63,10 @@ interface AttributeValueInterface
      * @return array
      */
     public function getAttributeOptions();
+
+    /**
+     * @param $storeId
+     * @return AttributeValueInterface
+     */
+    public function copyToStoreId($storeId);
 }
