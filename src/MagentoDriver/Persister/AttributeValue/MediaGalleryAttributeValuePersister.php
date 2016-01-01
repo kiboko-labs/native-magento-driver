@@ -17,8 +17,8 @@ use Luni\Component\MagentoDriver\Filesystem\FileMoverInterface;
 use Luni\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
 use Luni\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;
 
-class MediaGalleryAttributePersister
-    implements PersisterInterface
+class MediaGalleryAttributeValuePersister
+    implements AttributeValuePersisterInterface
 {
     /**
      * @var TemporaryWriterInterface
@@ -148,7 +148,7 @@ class MediaGalleryAttributePersister
     public function persist(ProductInterface $product, AttributeValueInterface $value)
     {
         if (!$value instanceof MediaGalleryAttributeValueInterface) {
-            throw new InvalidAttributePersisterTypeException();
+            throw new InvalidAttributePersisterTypeException('Invalid attribute value type, expected "media_gallery" type.');
         }
 
         /** @var ImageAttributeValueInterface $mediaAsset */

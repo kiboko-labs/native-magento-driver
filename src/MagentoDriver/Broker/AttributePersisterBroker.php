@@ -4,7 +4,7 @@ namespace Luni\Component\MagentoDriver\Broker;
 
 use Closure;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Persister\AttributeValue\PersisterInterface;
+use Luni\Component\MagentoDriver\Persister\AttributeValue\AttributeValuePersisterInterface;
 
 class AttributePersisterBroker
     implements AttributePersisterBrokerInterface
@@ -23,16 +23,16 @@ class AttributePersisterBroker
     }
 
     /**
-     * @param PersisterInterface $backend
+     * @param AttributeValuePersisterInterface $backend
      * @param Closure $matcher
      */
-    public function addPersister(PersisterInterface $backend, Closure $matcher)
+    public function addPersister(AttributeValuePersisterInterface $backend, Closure $matcher)
     {
         $this->backends->attach($matcher, $backend);
     }
 
     /**
-     * @return \Generator|PersisterInterface[]
+     * @return \Generator|AttributeValuePersisterInterface[]
      */
     public function walkPersisterList()
     {
@@ -43,13 +43,13 @@ class AttributePersisterBroker
 
     /**
      * @param AttributeInterface $attribute
-     * @return PersisterInterface|null
+     * @return AttributeValuePersisterInterface|null
      */
     public function findFor(AttributeInterface $attribute)
     {
         /**
          * @var Closure $matcher
-         * @var PersisterInterface $backend
+         * @var AttributeValuePersisterInterface $backend
          */
         foreach ($this->walkPersisterList() as $matcher => $backend) {
             if ($matcher($attribute) !== true) {

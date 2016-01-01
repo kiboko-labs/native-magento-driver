@@ -48,7 +48,7 @@ trait BaseCsvPersisterTrait
     /**
      * Flushes data into the DB
      */
-    public function flush()
+    public function doFlush()
     {
         $this->temporaryWriter->flush();
 

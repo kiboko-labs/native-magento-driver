@@ -3,13 +3,13 @@
 namespace Luni\Component\MagentoDriver\Persister\AttributeValue;
 
 use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\DatetimeAttributeValueInterface;
+use Luni\Component\MagentoDriver\Model\IntegerAttributeValueInterface;
 use Luni\Component\MagentoDriver\Persister\BaseCsvPersisterTrait;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 use Luni\Component\MagentoDriver\Exception\InvalidAttributePersisterTypeException;
 
-class DatetimeAttributePersister
-    implements PersisterInterface
+class IntegerAttributeValuePersister
+    implements AttributeValuePersisterInterface
 {
     use BaseCsvPersisterTrait;
 
@@ -23,8 +23,8 @@ class DatetimeAttributePersister
      */
     public function persist(ProductInterface $product, AttributeValueInterface $value)
     {
-        if (!$value instanceof DatetimeAttributeValueInterface) {
-            throw new InvalidAttributePersisterTypeException();
+        if (!$value instanceof IntegerAttributeValueInterface) {
+            throw new InvalidAttributePersisterTypeException('Invalid attribute value type, expected "integer" type.');
         }
 
         $this->temporaryWriter->persistRow([
@@ -33,7 +33,12 @@ class DatetimeAttributePersister
             'attribute_id'   => $value->getAttributeId(),
             'store_id'       => $value->getStoreId(),
             'entity_id'      => $product->getId(),
-            'value'          => $value->getValue()->format('Y-m-d H:i:s'),
+            'value'          => number_format($value->getValue(), 0),
         ]);
+    }
+
+    public function flush()
+    {
+        $this->doFlush();
     }
 }

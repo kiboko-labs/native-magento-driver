@@ -8,8 +8,8 @@ use Luni\Component\MagentoDriver\Persister\BaseCsvPersisterTrait;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 use Luni\Component\MagentoDriver\Exception\InvalidAttributePersisterTypeException;
 
-class VarcharAttributePersister
-    implements PersisterInterface
+class VarcharAttributeValuePersister
+    implements AttributeValuePersisterInterface
 {
     use BaseCsvPersisterTrait;
 
@@ -24,7 +24,7 @@ class VarcharAttributePersister
     public function persist(ProductInterface $product, AttributeValueInterface $value)
     {
         if (!$value instanceof VarcharAttributeValueInterface) {
-            throw new InvalidAttributePersisterTypeException();
+            throw new InvalidAttributePersisterTypeException('Invalid attribute value type, expected "text" type.');
         }
 
         $this->temporaryWriter->persistRow([
@@ -35,5 +35,10 @@ class VarcharAttributePersister
             'entity_id'      => $product->getId(),
             'value'          => $value->getValue(),
         ]);
+    }
+
+    public function flush()
+    {
+        $this->doFlush();
     }
 }

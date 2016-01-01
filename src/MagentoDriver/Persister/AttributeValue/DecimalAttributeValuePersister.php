@@ -3,13 +3,13 @@
 namespace Luni\Component\MagentoDriver\Persister\AttributeValue;
 
 use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\IntegerAttributeValueInterface;
+use Luni\Component\MagentoDriver\Model\DecimalAttributeValueInterface;
 use Luni\Component\MagentoDriver\Persister\BaseCsvPersisterTrait;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 use Luni\Component\MagentoDriver\Exception\InvalidAttributePersisterTypeException;
 
-class IntegerAttributePersister
-    implements PersisterInterface
+class DecimalAttributeValuePersister
+    implements AttributeValuePersisterInterface
 {
     use BaseCsvPersisterTrait;
 
@@ -23,8 +23,8 @@ class IntegerAttributePersister
      */
     public function persist(ProductInterface $product, AttributeValueInterface $value)
     {
-        if (!$value instanceof IntegerAttributeValueInterface) {
-            throw new InvalidAttributePersisterTypeException();
+        if (!$value instanceof DecimalAttributeValueInterface) {
+            throw new InvalidAttributePersisterTypeException('Invalid attribute value type, expected "decimal" type.');
         }
 
         $this->temporaryWriter->persistRow([
@@ -33,7 +33,12 @@ class IntegerAttributePersister
             'attribute_id'   => $value->getAttributeId(),
             'store_id'       => $value->getStoreId(),
             'entity_id'      => $product->getId(),
-            'value'          => number_format($value->getValue(), 0),
+            'value'          => number_format($value->getValue(), 4),
         ]);
+    }
+
+    public function flush()
+    {
+        $this->doFlush();
     }
 }

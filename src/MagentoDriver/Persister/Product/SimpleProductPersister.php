@@ -28,4 +28,9 @@ class SimpleProductPersister
             'updated_at'       => $product->getModificationDate(),
         ]);
     }
+
+    public function flush()
+    {
+        $this->doFlush();
+    }
 }

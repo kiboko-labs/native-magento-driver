@@ -4,24 +4,24 @@ namespace Luni\Component\MagentoDriver\Broker;
 
 use Closure;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Persister\AttributeValue\PersisterInterface;
+use Luni\Component\MagentoDriver\Persister\AttributeValue\AttributeValuePersisterInterface;
 
 interface AttributePersisterBrokerInterface
 {
     /**
-     * @param PersisterInterface $backend
+     * @param AttributeValuePersisterInterface $backend
      * @param Closure $matcher
      */
-    public function addPersister(PersisterInterface $backend, Closure $matcher);
+    public function addPersister(AttributeValuePersisterInterface $backend, Closure $matcher);
 
     /**
-     * @return \Generator|PersisterInterface[]
+     * @return \Generator|AttributeValuePersisterInterface[]
      */
     public function walkPersisterList();
 
     /**
      * @param AttributeInterface $attribute
-     * @return PersisterInterface|null
+     * @return AttributeValuePersisterInterface|null
      */
     public function findFor(AttributeInterface $attribute);
 }

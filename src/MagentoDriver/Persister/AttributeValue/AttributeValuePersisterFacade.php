@@ -6,8 +6,8 @@ use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Broker\AttributePersisterBrokerInterface;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 
-class AttributePersisterFacade
-    implements PersisterInterface
+class AttributeValuePersisterFacade
+    implements AttributeValuePersisterInterface
 {
     /**
      * @var AttributePersisterBrokerInterface
@@ -19,16 +19,9 @@ class AttributePersisterFacade
         $this->broker = $broker;
     }
 
-    public function persist(ProductInterface $product, AttributeValueInterface $value)
-    {
-        $backend = $this->broker->findFor($value->getAttribute());
-        if ($backend === null) {
-            return;
-        }
-
-        $backend->persist($product, $value);
-    }
-
+    /**
+     *
+     */
     public function initialize()
     {
         foreach ($this->broker->walkPersisterList() as $backend) {
@@ -36,6 +29,24 @@ class AttributePersisterFacade
         }
     }
 
+    /**
+     * @param ProductInterface $product
+     * @param AttributeValueInterface $value
+     */
+    public function persist(ProductInterface $product, AttributeValueInterface $value)
+    {
+        $backend = $this->broker->findFor($value->getAttribute());
+
+        if ($backend === null) {
+            return;
+        }
+
+        $backend->persist($product, $value);
+    }
+
+    /**
+     *
+     */
     public function flush()
     {
         foreach ($this->broker->walkPersisterList() as $backend) {
