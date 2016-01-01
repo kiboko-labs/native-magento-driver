@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "57f47f25cd4dc4819e05a26143c0b355",
-    "content-hash": "80749aa8fd5d185f44e28dcc03a44cf9",
+    "hash": "5cde9e00e9868d3590338a243cdfcf07",
+    "content-hash": "b0cc27deb0c4dee38432d716ee683835",
     "packages": [],
     "packages-dev": [
         {
@@ -108,12 +108,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/akeneo/pim-community-dev.git",
-                "reference": "68010e9d9ed6a9fe5ebad575ff4321bad6144ab6"
+                "reference": "0fe752d4376e7c688ec5d7303ee434a5206c4901"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/akeneo/pim-community-dev/zipball/68010e9d9ed6a9fe5ebad575ff4321bad6144ab6",
-                "reference": "68010e9d9ed6a9fe5ebad575ff4321bad6144ab6",
+                "url": "https://api.github.com/repos/akeneo/pim-community-dev/zipball/0fe752d4376e7c688ec5d7303ee434a5206c4901",
+                "reference": "0fe752d4376e7c688ec5d7303ee434a5206c4901",
                 "shasum": ""
             },
             "require": {
@@ -214,7 +214,8 @@
             "autoload": {
                 "psr-0": {
                     "": "src/",
-                    "Context": "features/"
+                    "Context": "features/",
+                    "Pim\\Behat": "features/"
                 }
             },
             "scripts": {
@@ -253,7 +254,7 @@
                 "source": "https://github.com/akeneo/pim-community-dev/tree/1.4",
                 "issues": "https://github.com/akeneo/pim-community-dev/issues"
             },
-            "time": "2015-12-28 08:00:34"
+            "time": "2015-12-31 08:36:20"
         },
         {
             "name": "apy/jsfv-bundle",
@@ -1600,6 +1601,64 @@
                 "rest"
             ],
             "time": "2013-05-06 10:33:17"
+        },
+        {
+            "name": "fzaninotto/faker",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fzaninotto/Faker.git",
+                "reference": "3037df47eca2e534f62f061415a071f9b5d1a1a4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/3037df47eca2e534f62f061415a071f9b5d1a1a4",
+                "reference": "3037df47eca2e534f62f061415a071f9b5d1a1a4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "ext-intl": "*",
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "~1.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.6.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Faker\\": "src/Faker/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Faker\\PHPUnit\\": "test/Faker/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "François Zaninotto"
+                }
+            ],
+            "description": "Faker is a PHP library that generates fake data for you.",
+            "keywords": [
+                "data",
+                "faker",
+                "fixtures"
+            ],
+            "support": {
+                "source": "https://github.com/fzaninotto/Faker/tree/master",
+                "issues": "https://github.com/fzaninotto/Faker/issues"
+            },
+            "time": "2015-11-30 17:35:42"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -3304,16 +3363,16 @@
         },
         {
             "name": "phpspec/phpspec",
-            "version": "2.4.0",
+            "version": "2.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "1d3938e6d9ffb1bd4805ea8ddac62ea48767f358"
+                "reference": "5528ce1e93a1efa090c9404aba3395c329b4e6ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/1d3938e6d9ffb1bd4805ea8ddac62ea48767f358",
-                "reference": "1d3938e6d9ffb1bd4805ea8ddac62ea48767f358",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/5528ce1e93a1efa090c9404aba3395c329b4e6ed",
+                "reference": "5528ce1e93a1efa090c9404aba3395c329b4e6ed",
                 "shasum": ""
             },
             "require": {
@@ -3378,7 +3437,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2015-11-29 02:03:49"
+            "time": "2016-01-01 10:17:54"
         },
         {
             "name": "phpspec/prophecy",
@@ -4548,7 +4607,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "fzaninotto/faker": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
