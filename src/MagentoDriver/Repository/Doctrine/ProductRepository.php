@@ -32,7 +32,6 @@ class ProductRepository
     private $productFactory;
 
     /**
-     * ProductAttributeRepository constructor.
      * @param Connection $connection
      * @param ProductQueryBuilderInterface $queryBuilder
      * @param ProductFactoryInterface $productFactory
