@@ -20,4 +20,17 @@ interface ProductAttributeValueHydratorInterface
      * @param int $storeId
      */
     public function hydrateByAttributeList(ProductInterface $product, array $attributeList, $storeId = null);
+
+    /**
+     * @param ProductInterface[] $productList
+     * @param int $storeId
+     */
+    public function hydrateList(array $productList, $storeId = null);
+
+    /**
+     * @param ProductInterface[] $productList
+     * @param AttributeInterface[] $attributeList
+     * @param int $storeId
+     */
+    public function hydrateListByAttributeList(array $productList, array $attributeList, $storeId = null);
 }

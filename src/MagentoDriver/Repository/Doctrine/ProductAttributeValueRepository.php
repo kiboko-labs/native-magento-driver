@@ -228,7 +228,7 @@ class ProductAttributeValueRepository
     /**
      * @param ProductInterface $product
      * @param array $attributeList
-     * @return ArrayCollection|AttributeValueInterface[]
+     * @return Collection|AttributeValueInterface[]
      */
     public function findAllByProductAndAttributeListFromDefault(
         ProductInterface $product,
@@ -241,7 +241,7 @@ class ProductAttributeValueRepository
      * @param ProductInterface $product
      * @param array $attributeList
      * @param int $storeId
-     * @return ArrayCollection|AttributeValueInterface[]
+     * @return Collection|AttributeValueInterface[]
      */
     public function findAllByProductAndAttributeListFromStoreId(
         ProductInterface $product,
@@ -263,6 +263,115 @@ class ProductAttributeValueRepository
 
         $statement = $this->connection->prepare($query);
         if (!$statement->execute(array_merge([$storeId, $product->getId()], $attributeIdList))) {
+            throw new DatabaseFetchingFailureException();
+        }
+
+        $attributeValueList = new ArrayCollection();
+        if ($statement->rowCount() < 1) {
+            return $attributeValueList;
+        }
+
+        foreach ($statement as $options) {
+            $attributeValueList->set($options['value_id'], $this->createNewAttributeValueInstanceFromDatabase($options));
+        }
+
+        return $attributeValueList;
+    }
+
+    /**
+     * @param array $productList
+     * @return Collection|AttributeValueInterface[]
+     */
+    public function findAllByProductListFromDefault(
+        array $productList
+    ) {
+        return $this->findAllByProductListFromStoreId($productList, 0);
+    }
+
+    /**
+     * @param array $productList
+     * @param int $storeId
+     * @return Collection|AttributeValueInterface[]
+     */
+    public function findAllByProductListFromStoreId(
+        array $productList,
+        $storeId
+    ) {
+        if ($storeId === 0) {
+            $query = $this->queryBuilder->createFindAllFromStoreIdQueryBuilder('v');
+        } else {
+            $query = $this->queryBuilder->createFindAllFromStoreIdOrDefaultQueryBuilder('v', 'l');
+        }
+
+        $productIdList = array_map(function(ProductInterface $item) {
+            return $item->getId();
+        }, $productList);
+
+        $expr = array_pad([], count($productIdList), $query->expr()->eq('v.entity_id', '?'));
+        $query->andWhere($query->expr()->orX(...$expr));
+
+        $statement = $this->connection->prepare($query);
+        if (!$statement->execute(array_merge([$storeId], $productIdList))) {
+            throw new DatabaseFetchingFailureException();
+        }
+
+        $attributeValueList = new ArrayCollection();
+        if ($statement->rowCount() < 1) {
+            return $attributeValueList;
+        }
+
+        foreach ($statement as $options) {
+            $attributeValueList->set($options['value_id'], $this->createNewAttributeValueInstanceFromDatabase($options));
+        }
+
+        return $attributeValueList;
+    }
+
+    /**
+     * @param array $productList
+     * @param array $attributeList
+     * @return Collection|AttributeValueInterface[]
+     */
+    public function findAllByProductListAndAttributeListFromDefault(
+        array $productList,
+        array $attributeList
+    ) {
+        return $this->findAllByProductListAndAttributeListFromStoreId($productList, $attributeList, 0);
+    }
+
+    /**
+     * @param array $productList
+     * @param array $attributeList
+     * @param int $storeId
+     * @return Collection|AttributeValueInterface[]
+     */
+    public function findAllByProductListAndAttributeListFromStoreId(
+        array $productList,
+        array $attributeList,
+        $storeId
+    ) {
+        if ($storeId === 0) {
+            $query = $this->queryBuilder->createFindAllFromStoreIdQueryBuilder('v');
+        } else {
+            $query = $this->queryBuilder->createFindAllFromStoreIdOrDefaultQueryBuilder('v', 'l');
+        }
+
+        $productIdList = array_map(function(ProductInterface $item) {
+            return $item->getId();
+        }, $productList);
+
+        $expr = array_pad([], count($productIdList), $query->expr()->eq('v.entity_id', '?'));
+        $query->andWhere($query->expr()->orX(...$expr));
+
+        $attributeIdList = array_map(function(AttributeInterface $item) {
+            return $item->getId();
+        }, $attributeList);
+
+        $expr = array_pad([], count($attributeIdList), $query->expr()->eq('v.attribute_id', '?'));
+        $query->andWhere($query->expr()->orX(...$expr));
+
+        $statement = $this->connection->prepare($query);
+        if (!$statement->execute(array_merge([$storeId], $productIdList, $attributeIdList))) {
             throw new DatabaseFetchingFailureException();
         }
 

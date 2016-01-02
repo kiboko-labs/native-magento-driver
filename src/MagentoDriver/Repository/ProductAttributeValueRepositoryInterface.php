@@ -73,6 +73,46 @@ interface ProductAttributeValueRepositoryInterface
     );
 
     /**
+     * @param ProductInterface[] $productList
+     * @return AttributeValueInterface|null
+     */
+    public function findAllByProductListFromDefault(
+        array $productList
+    );
+
+    /**
+     * @param ProductInterface[] $productList
+     * @param int $storeId
+     * @return AttributeValueInterface|null
+     */
+    public function findAllByProductListFromStoreId(
+        array $productList,
+        $storeId
+    );
+
+    /**
+     * @param ProductInterface[] $productList
+     * @param AttributeInterface[] $attributeList
+     * @return AttributeValueInterface|null
+     */
+    public function findAllByProductListAndAttributeListFromDefault(
+        array $productList,
+        array $attributeList
+    );
+
+    /**
+     * @param ProductInterface[] $productList
+     * @param AttributeInterface[] $attributeList
+     * @param int $storeId
+     * @return AttributeValueInterface|null
+     */
+    public function findAllByProductListAndAttributeListFromStoreId(
+        array $productList,
+        array $attributeList,
+        $storeId
+    );
+
+    /**
      * @param ProductInterface $product
      * @return Collection|AttributeValueInterface[]
      */
