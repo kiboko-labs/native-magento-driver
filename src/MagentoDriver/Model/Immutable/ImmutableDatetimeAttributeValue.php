@@ -3,12 +3,14 @@
 namespace Luni\Component\MagentoDriver\Model\Immutable;
 
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
+use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\Mutable\MutableDatetimeAttributeValue;
 use Luni\Component\MagentoDriver\Model\DatetimeAttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\DatetimeAttributeValueTrait;
+use Luni\Component\MagentoDriver\Model\ScopableAttributeValueInterface;
 
 class ImmutableDatetimeAttributeValue
-    implements ImmutableAttributeValueInterface, DatetimeAttributeValueInterface
+    implements ImmutableAttributeValueInterface, ScopableAttributeValueInterface, DatetimeAttributeValueInterface
 {
     use DatetimeAttributeValueTrait;
 
@@ -46,6 +48,21 @@ class ImmutableDatetimeAttributeValue
             $this->payload,
             $this->productId,
             $this->storeId
+        );
+    }
+
+    /**
+     * @param $storeId
+     * @return AttributeValueInterface
+     */
+    public function copyToStoreId($storeId)
+    {
+        return static::buildNewWith(
+            $this->attribute,
+            $this->id,
+            $this->payload,
+            $this->productId,
+            $storeId
         );
     }
 }

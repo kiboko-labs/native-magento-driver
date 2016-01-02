@@ -7,9 +7,10 @@ use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\ImageMetadataAttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\ImageMetadataAttributeValueTrait;
 use Luni\Component\MagentoDriver\Model\Immutable\ImmutableImageMetadataAttributeValue;
+use Luni\Component\MagentoDriver\Model\ScopableAttributeValueInterface;
 
 class MutableImageMetadataAttributeValue
-    implements MutableAttributeValueInterface, ImageMetadataAttributeValueInterface
+    implements MutableAttributeValueInterface, ScopableAttributeValueInterface, ImageMetadataAttributeValueInterface
 {
     use ImageMetadataAttributeValueTrait;
 

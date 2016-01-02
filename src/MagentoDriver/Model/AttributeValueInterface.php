@@ -12,19 +12,9 @@ interface AttributeValueInterface
     public function getId();
 
     /**
-     * @return bool
-     */
-    public function isScopable();
-
-    /**
      * @return int
      */
     public function getProductId();
-
-    /**
-     * @return int|null
-     */
-    public function getStoreId();
 
     /**
      * @return AttributeInterface
@@ -63,10 +53,4 @@ interface AttributeValueInterface
      * @return array
      */
     public function getAttributeOptions();
-
-    /**
-     * @param $storeId
-     * @return AttributeValueInterface
-     */
-    public function copyToStoreId($storeId);
 }

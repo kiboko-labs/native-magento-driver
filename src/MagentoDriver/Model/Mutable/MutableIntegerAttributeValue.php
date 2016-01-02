@@ -7,9 +7,10 @@ use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\Immutable\ImmutableIntegerAttributeValue;
 use Luni\Component\MagentoDriver\Model\IntegerAttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\IntegerAttributeValueTrait;
+use Luni\Component\MagentoDriver\Model\ScopableAttributeValueInterface;
 
 class MutableIntegerAttributeValue
-    implements MutableAttributeValueInterface, IntegerAttributeValueInterface
+    implements MutableAttributeValueInterface, ScopableAttributeValueInterface, IntegerAttributeValueInterface
 {
     use IntegerAttributeValueTrait;
 

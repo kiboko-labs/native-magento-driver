@@ -5,11 +5,12 @@ namespace Luni\Component\MagentoDriver\Model\Mutable;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\Immutable\ImmutableTextAttributeValue;
+use Luni\Component\MagentoDriver\Model\ScopableAttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\TextAttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\TextAttributeValueTrait;
 
 class MutableTextAttributeValue
-    implements MutableAttributeValueInterface, TextAttributeValueInterface
+    implements MutableAttributeValueInterface, ScopableAttributeValueInterface, TextAttributeValueInterface
 {
     use TextAttributeValueTrait;
 
