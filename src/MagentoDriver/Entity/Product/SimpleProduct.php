@@ -14,27 +14,31 @@ class SimpleProduct
     /**
      * @param string $identifier
      * @param FamilyInterface $family,
-     * @param \DateTimeInterface $creationDate
-     * @param \DateTimeInterface $modificationDate
+     * @param \DateTimeInterface|null $creationDate
+     * @param \DateTimeInterface|null $modificationDate
      */
     public function __construct(
         $identifier,
         FamilyInterface $family,
-        \DateTimeInterface $creationDate,
-        \DateTimeInterface $modificationDate
+        \DateTimeInterface $creationDate = null,
+        \DateTimeInterface $modificationDate = null
     ) {
         $this->identifier = $identifier;
         $this->productType = 'simple';
         $this->family = $family;
         $this->values = new ArrayCollection();
 
-        if ($creationDate instanceof \DateTime) {
+        if ($creationDate === null) {
+            $this->creationDate = new \DateTimeImmutable();
+        } else if ($creationDate instanceof \DateTime) {
             $this->creationDate = \DateTimeImmutable::createFromMutable($creationDate);
         } else {
             $this->creationDate = $creationDate;
         }
 
-        if ($modificationDate instanceof \DateTime) {
+        if ($creationDate === null) {
+            $this->modificationDate = new \DateTimeImmutable();
+        } else if ($modificationDate instanceof \DateTime) {
             $this->modificationDate = \DateTimeImmutable::createFromMutable($modificationDate);
         } else {
             $this->modificationDate = $modificationDate;

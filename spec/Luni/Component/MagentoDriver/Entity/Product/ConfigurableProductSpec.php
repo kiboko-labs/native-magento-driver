@@ -9,11 +9,9 @@ use Prophecy\Argument;
 class ConfigurableProductSpec extends ObjectBehavior
 {
     function it_is_initializable(
-        FamilyInterface $family,
-        \DateTimeImmutable $creationDate,
-        \DateTimeImmutable $modificationDate
+        FamilyInterface $family
     ) {
-        $this->beConstructedWith(1337, $family, $creationDate, $modificationDate);
+        $this->beConstructedWith(1337, $family);
         $this->shouldHaveType('Luni\Component\MagentoDriver\Entity\Product\ConfigurableProduct');
     }
 }
