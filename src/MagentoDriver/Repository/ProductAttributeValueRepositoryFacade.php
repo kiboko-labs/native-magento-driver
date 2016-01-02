@@ -151,6 +151,66 @@ class ProductAttributeValueRepositoryFacade
         return null;
     }
 
+    public function findAllByProductListFromDefault(
+        array $productList
+    ) {
+        $valuesList = [];
+        foreach ($this->broker->walkRepositoryList() as $repository) {
+            $valuesList = array_merge(
+                $valuesList,
+                $values = $repository->findAllByProductListFromDefault($productList)->toArray()
+            );
+        }
+
+        return new ArrayCollection($valuesList);
+    }
+
+    public function findAllByProductListFromStoreId(
+        array $productList,
+        $storeId
+    ) {
+        $valuesList = [];
+        foreach ($this->broker->walkRepositoryList() as $repository) {
+            $valuesList = array_merge(
+                $valuesList,
+                $values = $repository->findAllByProductListFromStoreId($productList, $storeId)->toArray()
+            );
+        }
+
+        return new ArrayCollection($valuesList);
+    }
+
+    public function findAllByProductListAndAttributeListFromDefault(
+        array $productList,
+        array $attributeList
+    ) {
+        $valuesList = [];
+        foreach ($this->broker->walkRepositoryList() as $repository) {
+            $valuesList = array_merge(
+                $valuesList,
+                $values = $repository->findAllByProductListAndAttributeListFromDefault($productList, $attributeList)->toArray()
+            );
+        }
+
+        return new ArrayCollection($valuesList);
+    }
+
+    public function findAllByProductListAndAttributeListFromStoreId(
+        array $productList,
+        array $attributeList,
+        $storeId
+    ) {
+        $valuesList = [];
+        foreach ($this->broker->walkRepositoryList() as $repository) {
+            $valuesList = array_merge(
+                $valuesList,
+                $values = $repository->findAllByProductListAndAttributeListFromStoreId($productList, $attributeList, $storeId)->toArray()
+            );
+        }
+
+        return new ArrayCollection($valuesList);
+    }
+
     /**
      * @param ProductInterface $product
      * @return Collection|AttributeValueInterface[]
