@@ -6,7 +6,7 @@ use Luni\Component\MagentoDriver\Persister\BaseCsvPersisterTrait;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 
 class SimpleProductPersister
-    implements PersisterInterface
+    implements ProductPersisterInterface
 {
     use BaseCsvPersisterTrait;
 
