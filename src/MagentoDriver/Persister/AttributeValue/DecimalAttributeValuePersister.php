@@ -44,9 +44,6 @@ class DecimalAttributeValuePersister
         $this->persist($value);
     }
 
-    /**
-     * Flushes data into the DB
-     */
     public function flush()
     {
         $this->doFlush();

@@ -5,6 +5,7 @@ namespace Luni\Component\MagentoDriver\Persister\AttributeValue;
 use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\DatetimeAttributeValueInterface;
 use Luni\Component\MagentoDriver\Persister\BaseCsvPersisterTrait;
+use Luni\Component\MagentoDriver\Entity\ProductInterface;
 use Luni\Component\MagentoDriver\Exception\InvalidAttributePersisterTypeException;
 
 class DatetimeAttributeValuePersister
@@ -44,9 +45,6 @@ class DatetimeAttributeValuePersister
         $this->persist($value);
     }
 
-    /**
-     * Flushes data into the DB
-     */
     public function flush()
     {
         $this->doFlush();
