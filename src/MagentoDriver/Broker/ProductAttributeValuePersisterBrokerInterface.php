@@ -6,7 +6,7 @@ use Closure;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Persister\AttributeValue\AttributeValuePersisterInterface;
 
-interface AttributePersisterBrokerInterface
+interface ProductAttributeValuePersisterBrokerInterface
 {
     /**
      * @param AttributeValuePersisterInterface $backend

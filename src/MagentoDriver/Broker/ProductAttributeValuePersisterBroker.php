@@ -6,8 +6,8 @@ use Closure;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Persister\AttributeValue\AttributeValuePersisterInterface;
 
-class AttributePersisterBroker
-    implements AttributePersisterBrokerInterface
+class ProductAttributeValuePersisterBroker
+    implements ProductAttributeValuePersisterBrokerInterface
 {
     /**
      * @var \SplObjectStorage
@@ -15,7 +15,7 @@ class AttributePersisterBroker
     private $backends;
 
     /**
-     * AttributePersisterBroker constructor.
+     * ProductAttributeValuePersisterBroker constructor.
      */
     public function __construct()
     {

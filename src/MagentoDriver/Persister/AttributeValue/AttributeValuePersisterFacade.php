@@ -3,18 +3,18 @@
 namespace Luni\Component\MagentoDriver\Persister\AttributeValue;
 
 use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
-use Luni\Component\MagentoDriver\Broker\AttributePersisterBrokerInterface;
+use Luni\Component\MagentoDriver\Broker\ProductAttributeValuePersisterBrokerInterface;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 
 class AttributeValuePersisterFacade
     implements AttributeValuePersisterInterface
 {
     /**
-     * @var AttributePersisterBrokerInterface
+     * @var ProductAttributeValuePersisterBrokerInterface
      */
     private $broker;
 
-    public function __construct(AttributePersisterBrokerInterface $broker)
+    public function __construct(ProductAttributeValuePersisterBrokerInterface $broker)
     {
         $this->broker = $broker;
     }
