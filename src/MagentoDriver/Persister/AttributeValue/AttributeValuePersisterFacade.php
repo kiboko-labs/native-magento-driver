@@ -30,10 +30,9 @@ class AttributeValuePersisterFacade
     }
 
     /**
-     * @param ProductInterface $product
      * @param AttributeValueInterface $value
      */
-    public function persist(ProductInterface $product, AttributeValueInterface $value)
+    public function persist(AttributeValueInterface $value)
     {
         $backend = $this->broker->findFor($value->getAttribute());
 
@@ -41,7 +40,7 @@ class AttributeValuePersisterFacade
             return;
         }
 
-        $backend->persist($product, $value);
+        $backend->persist($value);
     }
 
     /**

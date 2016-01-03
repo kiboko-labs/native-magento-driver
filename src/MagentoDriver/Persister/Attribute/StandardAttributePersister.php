@@ -130,4 +130,9 @@ class StandardAttributePersister
         $this->baseTableDatabaseWriter->write($this->getBaseTableName(), $this->getBaseTableKeys());
         $this->extendedTableDatabaseWriter->write($this->getExtendedTableName(), $this->getExtendedTableKeys());
     }
+
+    public function __invoke(AttributeInterface $attribute)
+    {
+        $this->persist($attribute);
+    }
 }

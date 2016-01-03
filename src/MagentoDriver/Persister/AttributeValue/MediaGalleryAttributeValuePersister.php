@@ -145,7 +145,7 @@ class MediaGalleryAttributeValuePersister
     {
     }
 
-    public function persist(ProductInterface $product, AttributeValueInterface $value)
+    public function persist(AttributeValueInterface $value)
     {
         if (!$value instanceof MediaGalleryAttributeValueInterface) {
             throw new InvalidAttributePersisterTypeException('Invalid attribute value type, expected "media_gallery" type.');
@@ -156,7 +156,7 @@ class MediaGalleryAttributeValuePersister
             $this->temporaryImageWriter->persistRow([
                 'value_id'     => $mediaAsset->getId(),
                 'attribute_id' => $mediaAsset->getAttributeId(),
-                'entity_id'    => $product->getId(),
+                'entity_id'    => $mediaAsset->getProductId(),
                 'value'        => $mediaAsset->getFile()->getPath(),
             ]);
 
@@ -171,6 +171,15 @@ class MediaGalleryAttributeValuePersister
                 ]);
             }
         }
+    }
+
+    /**
+     * @param AttributeValueInterface $value
+     * @return void
+     */
+    public function __invoke(AttributeValueInterface $value)
+    {
+        $this->persist($value);
     }
 
     /**

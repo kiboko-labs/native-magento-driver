@@ -17,6 +17,11 @@ interface AttributePersisterInterface
     public function persist(AttributeInterface $attribute);
 
     /**
+     * @param AttributeInterface $attribute
+     */
+    public function __invoke(AttributeInterface $attribute);
+
+    /**
      * @return void
      */
     public function flush();

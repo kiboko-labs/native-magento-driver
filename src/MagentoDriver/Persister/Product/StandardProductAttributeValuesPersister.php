@@ -62,6 +62,14 @@ class StandardProductAttributeValuesPersister
     }
 
     /**
+     * @param ProductInterface $product
+     */
+    public function __invoke(ProductInterface $product)
+    {
+        $this->persist($product);
+    }
+
+    /**
      *
      */
     public function flush()
