@@ -44,3 +44,4 @@ A `Model` maps to a flat table.
 - Implement EAV attribute filters
 - Implement Index refresh
 - Implement object factories
+- Implement data deletion
