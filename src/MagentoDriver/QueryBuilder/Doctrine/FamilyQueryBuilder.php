@@ -78,7 +78,7 @@ class FamilyQueryBuilder
      * @param string $alias
      * @return QueryBuilder
      */
-    public function createQueryBuilder($alias)
+    public function createFindQueryBuilder($alias)
     {
         return (new QueryBuilder($this->connection))
             ->select($this->createFieldsList($this->fields, $alias))
@@ -92,7 +92,7 @@ class FamilyQueryBuilder
      */
     public function createFindAllQueryBuilder($alias)
     {
-        $queryBuilder = $this->createQueryBuilder($alias)
+        $queryBuilder = $this->createFindQueryBuilder($alias)
             ->where(sprintf('%s.entity_type_id=4', $alias))
         ;
 
@@ -120,6 +120,46 @@ class FamilyQueryBuilder
         $queryBuilder = $this->createFindAllQueryBuilder($alias);
 
         $expr = array_pad([], count($idList), $queryBuilder->expr()->eq(sprintf('%s.attribute_set_id', $alias), '?'));
+        $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
+
+        return $queryBuilder;
+    }
+
+    /**
+     * @return QueryBuilder
+     */
+    public function createDeleteQueryBuilder()
+    {
+        return (new QueryBuilder($this->connection))
+            ->delete($this->table)
+            ->where('entity_type_id=4')
+        ;
+    }
+
+    /**
+     * @return QueryBuilder
+     */
+    public function createDeleteOneByIdQueryBuilder()
+    {
+        $queryBuilder = $this->createDeleteQueryBuilder();
+
+        $queryBuilder->where($queryBuilder->expr()->eq('attribute_set_id', '?'))
+            ->setFirstResult(0)
+            ->setMaxResults(1)
+        ;
+
+        return $queryBuilder;
+    }
+
+    /**
+     * @param array $idList
+     * @return QueryBuilder
+     */
+    public function createDeleteAllByIdQueryBuilder(array $idList)
+    {
+        $queryBuilder = $this->createDeleteQueryBuilder();
+
+        $expr = array_pad([], count($idList), $queryBuilder->expr()->eq('attribute_set_id', '?'));
         $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
 
         return $queryBuilder;
