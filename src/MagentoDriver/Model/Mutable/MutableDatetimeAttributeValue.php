@@ -7,9 +7,10 @@ use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\Immutable\ImmutableDatetimeAttributeValue;
 use Luni\Component\MagentoDriver\Model\DatetimeAttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\DatetimeAttributeValueTrait;
+use Luni\Component\MagentoDriver\Model\ScopableAttributeValueInterface;
 
 class MutableDatetimeAttributeValue
-    implements MutableAttributeValueInterface, DatetimeAttributeValueInterface
+    implements MutableAttributeValueInterface, ScopableAttributeValueInterface, DatetimeAttributeValueInterface
 {
     use DatetimeAttributeValueTrait;
 

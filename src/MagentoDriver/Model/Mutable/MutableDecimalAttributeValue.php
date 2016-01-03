@@ -7,9 +7,10 @@ use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\Immutable\ImmutableDecimalAttributeValue;
 use Luni\Component\MagentoDriver\Model\DecimalAttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\DecimalAttributeValueTrait;
+use Luni\Component\MagentoDriver\Model\ScopableAttributeValueInterface;
 
 class MutableDecimalAttributeValue
-    implements MutableAttributeValueInterface, DecimalAttributeValueInterface
+    implements MutableAttributeValueInterface, ScopableAttributeValueInterface, DecimalAttributeValueInterface
 {
     use DecimalAttributeValueTrait;
 

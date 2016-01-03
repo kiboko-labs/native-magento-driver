@@ -3,12 +3,14 @@
 namespace Luni\Component\MagentoDriver\Model\Immutable;
 
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
+use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\ImageMetadataAttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\ImageMetadataAttributeValueTrait;
 use Luni\Component\MagentoDriver\Model\Mutable\MutableImageMetadataAttributeValue;
+use Luni\Component\MagentoDriver\Model\ScopableAttributeValueInterface;
 
 class ImmutableImageMetadataAttributeValue
-    implements ImmutableAttributeValueInterface, ImageMetadataAttributeValueInterface
+    implements ImmutableAttributeValueInterface, ScopableAttributeValueInterface, ImageMetadataAttributeValueInterface
 {
     use ImageMetadataAttributeValueTrait;
 
@@ -46,6 +48,22 @@ class ImmutableImageMetadataAttributeValue
             $this->position,
             $this->excluded,
             $this->storeId
+        );
+    }
+
+    /**
+     * @param $storeId
+     * @return AttributeValueInterface
+     */
+    public function copyToStoreId($storeId)
+    {
+        return static::buildNewWith(
+            $this->attribute,
+            $this->id,
+            $this->label,
+            $this->position,
+            $this->excluded,
+            $storeId
         );
     }
 }

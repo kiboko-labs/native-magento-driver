@@ -3,12 +3,14 @@
 namespace Luni\Component\MagentoDriver\Model\Immutable;
 
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
+use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\Mutable\MutableDecimalAttributeValue;
 use Luni\Component\MagentoDriver\Model\DecimalAttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\DecimalAttributeValueTrait;
+use Luni\Component\MagentoDriver\Model\ScopableAttributeValueInterface;
 
 class ImmutableDecimalAttributeValue
-    implements ImmutableAttributeValueInterface, DecimalAttributeValueInterface
+    implements ImmutableAttributeValueInterface, ScopableAttributeValueInterface, DecimalAttributeValueInterface
 {
     use DecimalAttributeValueTrait;
 
@@ -42,6 +44,21 @@ class ImmutableDecimalAttributeValue
             $this->payload,
             $this->productId,
             $this->storeId
+        );
+    }
+
+    /**
+     * @param $storeId
+     * @return AttributeValueInterface
+     */
+    public function copyToStoreId($storeId)
+    {
+        return static::buildNewWith(
+            $this->attribute,
+            $this->id,
+            $this->payload,
+            $this->productId,
+            $storeId
         );
     }
 }

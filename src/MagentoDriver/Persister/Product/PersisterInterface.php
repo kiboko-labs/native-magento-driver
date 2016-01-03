@@ -7,14 +7,14 @@ use Luni\Component\MagentoDriver\Entity\ProductInterface;
 interface PersisterInterface
 {
     /**
-     * @param ProductInterface $product
-     */
-    public function persist(ProductInterface $product);
-
-    /**
      * @return void
      */
     public function initialize();
+
+    /**
+     * @param ProductInterface $product
+     */
+    public function persist(ProductInterface $product);
 
     /**
      * @return void

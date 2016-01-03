@@ -1,5 +1,5 @@
 {
-    "name": "luni/akeneo-magento-driver",
+    "name": "lunistore/native-magento-driver",
     "description": "A Magento driver for Akeneo PIM",
     "type": "library",
     "require-dev": {

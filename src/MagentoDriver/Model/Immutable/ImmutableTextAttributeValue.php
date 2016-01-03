@@ -3,12 +3,14 @@
 namespace Luni\Component\MagentoDriver\Model\Immutable;
 
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
+use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\Mutable\MutableTextAttributeValue;
+use Luni\Component\MagentoDriver\Model\ScopableAttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\TextAttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\TextAttributeValueTrait;
 
 class ImmutableTextAttributeValue
-    implements ImmutableAttributeValueInterface, TextAttributeValueInterface
+    implements ImmutableAttributeValueInterface, ScopableAttributeValueInterface, TextAttributeValueInterface
 {
     use TextAttributeValueTrait;
 
@@ -42,6 +44,21 @@ class ImmutableTextAttributeValue
             $this->payload,
             $this->productId,
             $this->storeId
+        );
+    }
+
+    /**
+     * @param $storeId
+     * @return AttributeValueInterface
+     */
+    public function copyToStoreId($storeId)
+    {
+        return static::buildNewWith(
+            $this->attribute,
+            $this->id,
+            $this->payload,
+            $this->productId,
+            $storeId
         );
     }
 }

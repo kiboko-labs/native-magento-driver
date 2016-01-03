@@ -3,12 +3,14 @@
 namespace Luni\Component\MagentoDriver\Model\Immutable;
 
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
+use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\Mutable\MutableVarcharAttributeValue;
+use Luni\Component\MagentoDriver\Model\ScopableAttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\VarcharAttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\VarcharAttributeValueTrait;
 
 class ImmutableVarcharAttributeValue
-    implements ImmutableAttributeValueInterface, VarcharAttributeValueInterface
+    implements ImmutableAttributeValueInterface, ScopableAttributeValueInterface, VarcharAttributeValueInterface
 {
     use VarcharAttributeValueTrait;
 
@@ -42,6 +44,21 @@ class ImmutableVarcharAttributeValue
             $this->payload,
             $this->productId,
             $this->storeId
+        );
+    }
+
+    /**
+     * @param $storeId
+     * @return AttributeValueInterface
+     */
+    public function copyToStoreId($storeId)
+    {
+        return static::buildNewWith(
+            $this->attribute,
+            $this->id,
+            $this->payload,
+            $this->productId,
+            $storeId
         );
     }
 }
