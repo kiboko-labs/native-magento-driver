@@ -2,7 +2,7 @@
 
 namespace Luni\Component\MagentoDriver\Broker;
 
-use Closure;
+use Luni\Component\MagentoDriver\Matcher\AttributeValuePersisterMatcherInterface;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Persister\AttributeValue\AttributeValuePersisterInterface;
 
@@ -10,9 +10,9 @@ interface ProductAttributeValuePersisterBrokerInterface
 {
     /**
      * @param AttributeValuePersisterInterface $backend
-     * @param Closure $matcher
+     * @param AttributeValuePersisterMatcherInterface $matcher
      */
-    public function addPersister(AttributeValuePersisterInterface $backend, Closure $matcher);
+    public function addPersister(AttributeValuePersisterInterface $backend, AttributeValuePersisterMatcherInterface $matcher);
 
     /**
      * @return \Generator|AttributeValuePersisterInterface[]
