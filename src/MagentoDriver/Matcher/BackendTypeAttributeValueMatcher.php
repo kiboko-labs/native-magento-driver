@@ -5,7 +5,7 @@ namespace Luni\Component\MagentoDriver\Matcher;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 
 class BackendTypeAttributeValuePersisterMatcher
-    implements AttributeValuePersisterMatcherInterface
+    implements AttributeValueMatcherInterface
 {
     /**
      * @var string
@@ -13,15 +13,15 @@ class BackendTypeAttributeValuePersisterMatcher
     private $expectedType;
 
     /**
-     * @var AttributeValuePersisterMatcherInterface
+     * @var AttributeValueMatcherInterface
      */
     private $next;
 
     /**
      * @param string $expectedType
-     * @param AttributeValuePersisterMatcherInterface|null $next
+     * @param AttributeValueMatcherInterface|null $next
      */
-    public function __construct($expectedType, AttributeValuePersisterMatcherInterface $next = null)
+    public function __construct($expectedType, AttributeValueMatcherInterface $next = null)
     {
         $this->expectedType = $expectedType;
         $this->next = $next;

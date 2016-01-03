@@ -4,26 +4,27 @@ namespace Luni\Component\MagentoDriver\Matcher;
 
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 
-class ClosureAttributeValuePersisterMatcher
-    implements AttributeValuePersisterMatcherInterface
+class FrontendTypeAttributeValueMatcher
+    implements AttributeValueMatcherInterface
 {
     /**
-     * @var \Closure
+     * @var string
      */
-    private $closure;
+    private $expectedType;
 
     /**
-     * @var AttributeValuePersisterMatcherInterface
+     * @var AttributeValueMatcherInterface
      */
     private $next;
 
     /**
-     * @param \Closure $matcher
-     * @param AttributeValuePersisterMatcherInterface|null $next
+     * @param string $expectedType
+     * @param AttributeValueMatcherInterface|null $next
      */
-    public function __construct(\Closure $matcher, AttributeValuePersisterMatcherInterface $next = null)
+    public function __construct($expectedType, AttributeValueMatcherInterface $next = null)
     {
-        $this->closure = $matcher;
+        $this->expectedType = $expectedType;
+        $this->next = $next;
     }
 
     /**
@@ -32,8 +33,7 @@ class ClosureAttributeValuePersisterMatcher
      */
     public function match(AttributeInterface $attributeValue)
     {
-        $closure = $this->closure;
-        if ($closure($attributeValue) !== true) {
+        if ($this->expectedType !== $attributeValue->getFrontendType()) {
             return false;
         }
 
