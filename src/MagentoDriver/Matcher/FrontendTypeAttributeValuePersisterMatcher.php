@@ -4,7 +4,7 @@ namespace Luni\Component\MagentoDriver\Matcher;
 
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 
-class BackendTypeAttributeValuePersisterMatcher
+class FrontendTypeAttributeValuePersisterMatcher
     implements AttributeValuePersisterMatcherInterface
 {
     /**
@@ -33,7 +33,7 @@ class BackendTypeAttributeValuePersisterMatcher
      */
     public function match(AttributeInterface $attributeValue)
     {
-        if ($this->expectedType !== $attributeValue->getBackendType()) {
+        if ($this->expectedType !== $attributeValue->getFrontendType()) {
             return false;
         }
 

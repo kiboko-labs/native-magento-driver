@@ -12,7 +12,16 @@ class ClosureAttributeValuePersisterMatcher
      */
     private $closure;
 
-    public function __construct(\Closure $matcher)
+    /**
+     * @var AttributeValuePersisterMatcherInterface
+     */
+    private $next;
+
+    /**
+     * @param \Closure $matcher
+     * @param AttributeValuePersisterMatcherInterface|null $next
+     */
+    public function __construct(\Closure $matcher, AttributeValuePersisterMatcherInterface $next = null)
     {
         $this->closure = $matcher;
     }
@@ -24,6 +33,14 @@ class ClosureAttributeValuePersisterMatcher
     public function match(AttributeInterface $attributeValue)
     {
         $closure = $this->closure;
-        return $closure($attributeValue);
+        if ($closure($attributeValue) !== true) {
+            return false;
+        }
+
+        if ($this->next === null) {
+            return true;
+        }
+
+        return $this->next->match($attributeValue);
     }
 }
