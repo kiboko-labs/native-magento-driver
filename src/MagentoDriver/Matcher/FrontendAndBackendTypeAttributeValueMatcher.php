@@ -4,7 +4,7 @@ namespace Luni\Component\MagentoDriver\Matcher;
 
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 
-class BackendTypeAttributeValueMatcher
+class FrontendAndBackendTypeAttributeValueMatcher
     implements AttributeValueMatcherInterface
 {
     /**
