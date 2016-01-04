@@ -17,18 +17,18 @@ class DataInfileDatabaseWriter
 
     /**
      * DataInfileDatabaseWriter constructor.
-     * @param File $file
      * @param Connection $connection
+     * @param File $file
      * @param string $delimiter
      * @param string $enclosure
      * @param string $escaper
      */
     public function __construct(
-        File $file,
         Connection $connection,
-        $delimiter,
-        $enclosure,
-        $escaper
+        File $file = null,
+        $delimiter = ';',
+        $enclosure = '"',
+        $escaper = '"'
     ) {
         $this->file = $file;
         $this->connection = $connection;
@@ -45,5 +45,69 @@ class DataInfileDatabaseWriter
     public function write($table, array $tableFields)
     {
         return $this->doWrite('LOAD DATA INFILE', $this->file, $table, $tableFields);
+    }
+
+    /**
+     * @return File
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * @param File $file
+     */
+    public function setFile(File $file)
+    {
+        $this->file = $file;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDelimiter()
+    {
+        return $this->delimiter;
+    }
+
+    /**
+     * @param string $delimiter
+     */
+    public function setDelimiter($delimiter)
+    {
+        $this->delimiter = $delimiter;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEnclosure()
+    {
+        return $this->enclosure;
+    }
+
+    /**
+     * @param string $enclosure
+     */
+    public function setEnclosure($enclosure)
+    {
+        $this->enclosure = $enclosure;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEscaper()
+    {
+        return $this->escaper;
+    }
+
+    /**
+     * @param string $escaper
+     */
+    public function setEscaper($escaper)
+    {
+        $this->escaper = $escaper;
     }
 }

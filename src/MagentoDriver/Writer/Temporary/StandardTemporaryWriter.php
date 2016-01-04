@@ -41,10 +41,10 @@ class StandardTemporaryWriter
      * @param string $escaper
      */
     public function __construct(
-        File $file,
-        $delimiter,
-        $enclosure,
-        $escaper
+        File $file = null,
+        $delimiter = ';',
+        $enclosure = '"',
+        $escaper = '"'
     ) {
         $this->file = $file;
         $this->delimiter = $delimiter;
@@ -72,5 +72,69 @@ class StandardTemporaryWriter
     public function flush()
     {
         $this->file->putStream($this->stream);
+    }
+
+    /**
+     * @return File
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * @param File $file
+     */
+    public function setFile(File $file)
+    {
+        $this->file = $file;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDelimiter()
+    {
+        return $this->delimiter;
+    }
+
+    /**
+     * @param string $delimiter
+     */
+    public function setDelimiter($delimiter)
+    {
+        $this->delimiter = $delimiter;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEnclosure()
+    {
+        return $this->enclosure;
+    }
+
+    /**
+     * @param string $enclosure
+     */
+    public function setEnclosure($enclosure)
+    {
+        $this->enclosure = $enclosure;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEscaper()
+    {
+        return $this->escaper;
+    }
+
+    /**
+     * @param string $escaper
+     */
+    public function setEscaper($escaper)
+    {
+        $this->escaper = $escaper;
     }
 }
