@@ -10,7 +10,7 @@ interface ProductQueryBuilderInterface
      * @param string $alias
      * @return QueryBuilder
      */
-    public function createQueryBuilder($alias);
+    public function createFindQueryBuilder($alias);
 
     /**
      * @param string $alias

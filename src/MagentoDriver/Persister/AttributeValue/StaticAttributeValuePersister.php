@@ -8,12 +8,27 @@ use Luni\Component\MagentoDriver\Entity\ProductInterface;
 class StaticAttributeValuePersister
     implements AttributeValuePersisterInterface
 {
-    public function persist(ProductInterface $product, AttributeValueInterface $value)
+    /**
+     *
+     */
+    public function initialize()
     {
     }
 
-    public function initialize()
+    /**
+     * @param AttributeValueInterface $value
+     */
+    public function persist(AttributeValueInterface $value)
     {
+    }
+
+    /**
+     * @param AttributeValueInterface $value
+     * @return void
+     */
+    public function __invoke(AttributeValueInterface $value)
+    {
+        $this->persist($value);
     }
 
     public function flush()

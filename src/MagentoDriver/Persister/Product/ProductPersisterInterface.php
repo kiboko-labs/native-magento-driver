@@ -4,7 +4,7 @@ namespace Luni\Component\MagentoDriver\Persister\Product;
 
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 
-interface PersisterInterface
+interface ProductPersisterInterface
 {
     /**
      * @return void
@@ -15,6 +15,11 @@ interface PersisterInterface
      * @param ProductInterface $product
      */
     public function persist(ProductInterface $product);
+
+    /**
+     * @param ProductInterface $product
+     */
+    public function __invoke(ProductInterface $product);
 
     /**
      * @return void

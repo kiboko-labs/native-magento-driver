@@ -15,7 +15,7 @@ class ProductAttributeValueRepositoryBroker
     private $repositories;
 
     /**
-     * AttributePersisterBroker constructor.
+     * ProductAttributeValuePersisterBroker constructor.
      */
     public function __construct()
     {

@@ -165,7 +165,7 @@ class ProductAttributeValueQueryBuilder
      * @param string $alias
      * @return QueryBuilder
      */
-    public function createQueryBuilder($alias)
+    public function createFindQueryBuilder($alias)
     {
         return $this->createBaseQueryBuilder($alias, $this->createFieldsList($this->fields, $alias));
     }

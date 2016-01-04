@@ -6,7 +6,7 @@ use Luni\Component\MagentoDriver\Persister\BaseCsvPersisterTrait;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 
 class SimpleProductPersister
-    implements PersisterInterface
+    implements ProductPersisterInterface
 {
     use BaseCsvPersisterTrait;
 
@@ -27,6 +27,11 @@ class SimpleProductPersister
             'created_at'       => $product->getCreationDate(),
             'updated_at'       => $product->getModificationDate(),
         ]);
+    }
+
+    public function __invoke(ProductInterface $product)
+    {
+        $this->persist($product);
     }
 
     public function flush()

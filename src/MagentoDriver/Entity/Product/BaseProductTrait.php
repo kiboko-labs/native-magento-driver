@@ -194,6 +194,10 @@ trait BaseProductTrait
     {
         $attributeValue = $this->getValueFor($attribute, $storeId);
 
+        if ($attributeValue === null) {
+            return null;
+        }
+
         if ($attributeValue instanceof MutableAttributeValueInterface) {
             return $attributeValue;
         }

@@ -131,7 +131,7 @@ class ProductQueryBuilder
      * @param string $alias
      * @return QueryBuilder
      */
-    public function createQueryBuilder($alias)
+    public function createFindQueryBuilder($alias)
     {
         return (new QueryBuilder($this->connection))
             ->select($this->createFieldsList($this->fields, $alias))
@@ -145,7 +145,7 @@ class ProductQueryBuilder
      */
     public function createFindAllQueryBuilder($alias)
     {
-        $queryBuilder = $this->createQueryBuilder($alias)
+        $queryBuilder = $this->createFindQueryBuilder($alias)
             ->where(sprintf('%s.entity_type_id=4', $alias))
         ;
 

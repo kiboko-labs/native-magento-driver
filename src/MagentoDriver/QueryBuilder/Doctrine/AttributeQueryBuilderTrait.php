@@ -51,7 +51,7 @@ trait AttributeQueryBuilderTrait
      * @param string $alias
      * @return QueryBuilder
      */
-    public function createQueryBuilder($alias)
+    public function createFindQueryBuilder($alias)
     {
         return (new QueryBuilder($this->connection))
             ->select($this->createFieldsList($this->fields, $alias))
@@ -67,7 +67,7 @@ trait AttributeQueryBuilderTrait
      */
     public function createFindAllQueryBuilder($alias, $extraAlias, array $excludedIds = [])
     {
-        $queryBuilder = $this->createQueryBuilder($alias)
+        $queryBuilder = $this->createFindQueryBuilder($alias)
             ->innerJoin($alias, $this->extraTable, $extraAlias,
                 sprintf('%s.attribute_id=%s.attribute_id', $extraAlias, $alias))
             ->addSelect($this->createFieldsList($this->extraFields, $extraAlias))
@@ -137,6 +137,69 @@ trait AttributeQueryBuilderTrait
         $queryBuilder = $this->createFindAllQueryBuilder($alias, $extraAlias);
 
         $expr = array_pad([], count($idList), $queryBuilder->expr()->eq(sprintf('%s.attribute_id', $alias), '?'));
+        $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
+
+        return $queryBuilder;
+    }
+
+    /**
+     * @return QueryBuilder
+     */
+    public function createDeleteQueryBuilder()
+    {
+        return (new QueryBuilder($this->connection))
+            ->delete($this->table)
+            ->where('entity_type_id=4')
+        ;
+    }
+
+    /**
+     * @return QueryBuilder
+     */
+    public function createDeleteOneByCodeQueryBuilder()
+    {
+        return $this->createDeleteQueryBuilder()
+            ->where('attribute_code = ?')
+            ->setFirstResult(0)
+            ->setMaxResults(1)
+        ;
+    }
+
+    /**
+     * @return QueryBuilder
+     */
+    public function createDeleteOneByIdQueryBuilder()
+    {
+        return $this->createDeleteQueryBuilder()
+            ->where('attribute_id = ?')
+            ->setFirstResult(0)
+            ->setMaxResults(1)
+        ;
+    }
+
+    /**
+     * @param array|string[] $codeList
+     * @return QueryBuilder
+     */
+    public function createDeleteAllByCodeQueryBuilder(array $codeList)
+    {
+        $queryBuilder = $this->createDeleteQueryBuilder();
+
+        $expr = array_pad([], count($codeList), $queryBuilder->expr()->eq('attribute_code', '?'));
+        $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
+
+        return $queryBuilder;
+    }
+
+    /**
+     * @param array|int[] $idList
+     * @return QueryBuilder
+     */
+    public function createDeleteAllByIdQueryBuilder(array $idList)
+    {
+        $queryBuilder = $this->createDeleteQueryBuilder();
+
+        $expr = array_pad([], count($idList), $queryBuilder->expr()->eq('attribute_id', '?'));
         $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
 
         return $queryBuilder;

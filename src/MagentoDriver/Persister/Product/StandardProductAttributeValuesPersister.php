@@ -9,7 +9,7 @@ use Luni\Component\MagentoDriver\Persister\AttributeValue\AttributeValuePersiste
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 
 class StandardProductAttributeValuesPersister
-    implements PersisterInterface
+    implements ProductPersisterInterface
 {
     /**
      * @var AttributeValuePersisterInterface
@@ -59,6 +59,14 @@ class StandardProductAttributeValuesPersister
                 $this->attributeValuesPersister->persist($product, $attributeValue);
             }
         }
+    }
+
+    /**
+     * @param ProductInterface $product
+     */
+    public function __invoke(ProductInterface $product)
+    {
+        $this->persist($product);
     }
 
     /**

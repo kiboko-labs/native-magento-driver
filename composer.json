@@ -15,7 +15,11 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {},
+    "require": {
+        "php": ">=5.5",
+        "league/flysystem": "1.0.*",
+        "doctrine/dbal": "~2.2"
+    },
     "repositories": [
         {
             "type": "vcs",
