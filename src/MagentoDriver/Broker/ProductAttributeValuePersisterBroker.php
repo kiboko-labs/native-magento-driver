@@ -2,7 +2,6 @@
 
 namespace Luni\Component\MagentoDriver\Broker;
 
-use Closure;
 use Luni\Component\MagentoDriver\Matcher\AttributeValueMatcherInterface;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Persister\AttributeValue\AttributeValuePersisterInterface;
