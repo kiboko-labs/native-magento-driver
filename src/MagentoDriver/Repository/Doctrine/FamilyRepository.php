@@ -5,7 +5,6 @@ namespace Luni\Component\MagentoDriver\Repository\Doctrine;
 use Doctrine\DBAL\Connection;
 use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
 use Luni\Component\MagentoDriver\Factory\FamilyFactoryInterface;
-use Luni\Component\MagentoDriver\Model\Family;
 use Luni\Component\MagentoDriver\Model\FamilyInterface;
 use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\FamilyQueryBuilderInterface;
 use Luni\Component\MagentoDriver\Repository\FamilyRepositoryInterface;
@@ -62,6 +61,27 @@ class FamilyRepository
 
         $statement = $this->connection->prepare($query);
         if (!$statement->execute([$id])) {
+            throw new DatabaseFetchingFailureException();
+        }
+
+        if ($statement->rowCount() < 1) {
+            return null;
+        }
+
+        $options = $statement->fetch();
+        return $this->createNewFamilyInstanceFromDatabase($options);
+    }
+
+    /**
+     * @param string $name
+     * @return FamilyInterface
+     */
+    public function findOneByName($name)
+    {
+        $query = $this->queryBuilder->createFindOneByNameQueryBuilder('f');
+
+        $statement = $this->connection->prepare($query);
+        if (!$statement->execute([$name])) {
             throw new DatabaseFetchingFailureException();
         }
 

@@ -115,6 +115,22 @@ class FamilyQueryBuilder
         return $queryBuilder;
     }
 
+    /**
+     * @param string $alias
+     * @return QueryBuilder
+     */
+    public function createFindOneByNameQueryBuilder($alias)
+    {
+        $queryBuilder = $this->createFindAllQueryBuilder($alias);
+
+        $queryBuilder->where($queryBuilder->expr()->eq(sprintf('%s.attribute_set_name', $alias), '?'))
+            ->setFirstResult(0)
+            ->setMaxResults(1)
+        ;
+
+        return $queryBuilder;
+    }
+
     public function createFindAllByIdQueryBuilder($alias, array $idList)
     {
         $queryBuilder = $this->createFindAllQueryBuilder($alias);

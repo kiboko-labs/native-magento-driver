@@ -56,7 +56,7 @@ use Luni\Component\MagentoDriver\Backend\Attribute\DatetimeAttributeBackend;
 $localFs = new Filesystem(new Local(__DIR__));
 
 $datetimeTemporaryWriter = new StandardTemporaryWriter(new File($localFs, 'tmp/attribute/datetime.csv'), ';', '"', '"');
-$datetimeDatabaseWriter = new LocalDataInfileDatabaseWriter(new File($localFs, 'tmp/attribute/datetime.csv'), $connection, ';', '"', '"');
+$datetimeDatabaseWriter = new DataInfileDatabaseWriter(new File($localFs, 'tmp/attribute/datetime.csv'), $connection, ';', '"', '"');
 $datetimeBackend = new DatetimeAttributeBackend(
     $datetimeTemporaryWriter,
     $datetimeDatabaseWriter,
@@ -89,7 +89,7 @@ use Luni\Component\MagentoDriver\Backend\Attribute\DecimalAttributeBackend;
 $localFs = new Filesystem(new Local(__DIR__));
 
 $decimalTemporaryWriter = new StandardTemporaryWriter(new File($localFs, 'tmp/attribute/decimal.csv'), ';', '"', '"');
-$decimalDatabaseWriter = new LocalDataInfileDatabaseWriter(new File($localFs, 'tmp/attribute/decimal.csv'), $connection, ';', '"', '"');
+$decimalDatabaseWriter = new DataInfileDatabaseWriter(new File($localFs, 'tmp/attribute/decimal.csv'), $connection, ';', '"', '"');
 $decimalBackend = new DecimalAttributeBackend(
     $decimalTemporaryWriter,
     $decimalDatabaseWriter,
@@ -122,7 +122,7 @@ use Luni\Component\MagentoDriver\Backend\Attribute\IntegerAttributeBackend;
 $localFs = new Filesystem(new Local(__DIR__));
 
 $integerTemporaryWriter = new StandardTemporaryWriter(new File($localFs, 'tmp/attribute/integer.csv'), ';', '"', '"');
-$integerDatabaseWriter = new LocalDataInfileDatabaseWriter(new File($localFs, 'tmp/attribute/integer.csv'), $connection, ';', '"', '"');
+$integerDatabaseWriter = new DataInfileDatabaseWriter(new File($localFs, 'tmp/attribute/integer.csv'), $connection, ';', '"', '"');
 $integerBackend = new IntegerAttributeBackend(
     $integerTemporaryWriter,
     $integerDatabaseWriter,
@@ -155,7 +155,7 @@ use Luni\Component\MagentoDriver\Backend\Attribute\TextAttributeBackend;
 $localFs = new Filesystem(new Local(__DIR__));
 
 $textTemporaryWriter = new StandardTemporaryWriter(new File($localFs, 'tmp/attribute/text.csv'), ';', '"', '"');
-$textDatabaseWriter = new LocalDataInfileDatabaseWriter(new File($localFs, 'tmp/attribute/text.csv'), $connection, ';', '"', '"');
+$textDatabaseWriter = new DataInfileDatabaseWriter(new File($localFs, 'tmp/attribute/text.csv'), $connection, ';', '"', '"');
 $textBackend = new TextAttributeBackend(
     $textTemporaryWriter,
     $textDatabaseWriter,
@@ -188,7 +188,7 @@ use Luni\Component\MagentoDriver\Backend\Attribute\VarcharAttributeBackend;
 $localFs = new Filesystem(new Local(__DIR__));
 
 $varcharTemporaryWriter = new StandardTemporaryWriter(new File($localFs, 'tmp/attribute/varchar.csv'), ';', '"', '"');
-$varcharDatabaseWriter = new LocalDataInfileDatabaseWriter(new File($localFs, 'tmp/attribute/varchar.csv'), $connection, ';', '"', '"');
+$varcharDatabaseWriter = new DataInfileDatabaseWriter(new File($localFs, 'tmp/attribute/varchar.csv'), $connection, ';', '"', '"');
 $varcharBackend = new VarcharAttributeBackend(
     $varcharTemporaryWriter,
     $varcharDatabaseWriter,
@@ -249,8 +249,8 @@ $remoteFs = new Filesystem(new Local(__DIR__));
 
 $mediaAssetTemporaryWriter = new StandardTemporaryWriter(new File($localFs, 'tmp/attribute/media_asset.csv'), ';', '"', '"');
 $mediaAssetLocaleTemporaryWriter = new StandardTemporaryWriter(new File($localFs, 'tmp/attribute/media_asset_locale.csv'), ';', '"', '"');
-$mediaAssetDatabaseWriter = new LocalDataInfileDatabaseWriter(new File($localFs, 'tmp/attribute/media_asset.csv'), $connection, ';', '"', '"');
-$mediaAssetLocaleDatabaseWriter = new LocalDataInfileDatabaseWriter(new File($localFs, 'tmp/attribute/media_asset_locale.csv'), $connection, ';', '"', '"');
+$mediaAssetDatabaseWriter = new DataInfileDatabaseWriter(new File($localFs, 'tmp/attribute/media_asset.csv'), $connection, ';', '"', '"');
+$mediaAssetLocaleDatabaseWriter = new DataInfileDatabaseWriter(new File($localFs, 'tmp/attribute/media_asset_locale.csv'), $connection, ';', '"', '"');
 
 $fileMover = new StandardFileMover();
 

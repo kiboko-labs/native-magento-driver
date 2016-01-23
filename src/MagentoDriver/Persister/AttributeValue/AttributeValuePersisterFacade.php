@@ -43,6 +43,11 @@ class AttributeValuePersisterFacade
         $backend->persist($value);
     }
 
+    public function __invoke(AttributeValueInterface $value)
+    {
+        $this->persist($value);
+    }
+
     /**
      *
      */
