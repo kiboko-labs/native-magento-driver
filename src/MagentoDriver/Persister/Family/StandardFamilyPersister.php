@@ -2,11 +2,8 @@
 
 namespace Luni\Component\MagentoDriver\Persister\Family;
 
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Model\FamilyInterface;
 use Luni\Component\MagentoDriver\Persister\BaseCsvPersisterTrait;
-use Luni\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
-use Luni\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;
 
 class StandardFamilyPersister
     implements FamilyPersisterInterface

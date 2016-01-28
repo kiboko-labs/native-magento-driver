@@ -153,6 +153,16 @@ class ProductQueryBuilder
     }
 
     /**
+     * @return QueryBuilder
+     */
+    public function createDeleteQueryBuilder()
+    {
+        return (new QueryBuilder($this->connection))
+            ->delete($this->table)
+        ;
+    }
+
+    /**
      * @param string $alias
      * @return QueryBuilder
      */
@@ -249,6 +259,64 @@ class ProductQueryBuilder
         );
 
         $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.category_id', $categoryAlias), '?'));
+
+        return $queryBuilder;
+    }
+
+    /**
+     * @return QueryBuilder
+     */
+    public function createDeleteOneByIdQueryBuilder()
+    {
+        $queryBuilder = $this->createDeleteQueryBuilder();
+
+        $queryBuilder->where($queryBuilder->expr()->eq('entity_id', '?'))
+            ->setFirstResult(0)
+            ->setMaxResults(1)
+        ;
+
+        return $queryBuilder;
+    }
+
+    /**
+     * @param array $idList
+     * @return QueryBuilder
+     */
+    public function createDeleteAllByIdQueryBuilder(array $idList)
+    {
+        $queryBuilder = $this->createDeleteQueryBuilder();
+
+        $expr = array_pad([], count($idList), $queryBuilder->expr()->eq('entity_id', '?'));
+        $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
+
+        return $queryBuilder;
+    }
+
+    /**
+     * @return QueryBuilder
+     */
+    public function createDeleteOneByIdentifierQueryBuilder()
+    {
+        $queryBuilder = $this->createDeleteQueryBuilder();
+
+        $queryBuilder->where($queryBuilder->expr()->eq('sku', '?'))
+            ->setFirstResult(0)
+            ->setMaxResults(1)
+        ;
+
+        return $queryBuilder;
+    }
+
+    /**
+     * @param array $skuList
+     * @return QueryBuilder
+     */
+    public function createDeleteAllByIdentitiferQueryBuilder(array $skuList)
+    {
+        $queryBuilder = $this->createDeleteQueryBuilder();
+
+        $expr = array_pad([], count($skuList), $queryBuilder->expr()->eq('sku', '?'));
+        $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
 
         return $queryBuilder;
     }

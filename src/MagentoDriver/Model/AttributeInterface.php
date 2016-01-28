@@ -26,9 +26,16 @@ interface AttributeInterface
 
     /**
      * @param string $key
-     * @return string
+     * @return string|int|null
      */
     public function getOption($key);
+
+    /**
+     * @param string $key
+     * @param string|int|null $default
+     * @return string|int|null
+     */
+    public function getOptionOrDefault($key, $default = null);
 
     /**
      * @return array

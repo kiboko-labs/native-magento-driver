@@ -1,4 +1,6 @@
+# Entity types
 
+* [ ] read
 
 # Families
 
@@ -13,7 +15,7 @@
 ## Global attributes data
 
 * [x] read
-* [ ] persist
+* [x] persist
 * [ ] delete
 
 ## Attribute groups
@@ -25,7 +27,7 @@
 ## Product Attributes extensions
 
 * [x] read
-* [ ] persist
+* [x] persist
 * [ ] delete
 
 ## Category Attributes extensions
@@ -40,7 +42,7 @@
 
 * [x] read
 * [x] persist
-* [ ] delete
+* [x] delete
 
 ## Datetime values
 

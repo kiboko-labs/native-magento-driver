@@ -19,6 +19,11 @@ interface ProductQueryBuilderInterface
     public function createFindAllQueryBuilder($alias);
 
     /**
+     * @return QueryBuilder
+     */
+    public function createDeleteQueryBuilder();
+
+    /**
      * @param string $alias
      * @return QueryBuilder
      */
@@ -57,4 +62,26 @@ interface ProductQueryBuilderInterface
      * @return QueryBuilder
      */
     public function createFindAllByCategoryQueryBuilder($alias, $categoryAlias);
+
+    /**
+     * @return QueryBuilder
+     */
+    public function createDeleteOneByIdQueryBuilder();
+
+    /**
+     * @param array $idList
+     * @return QueryBuilder
+     */
+    public function createDeleteAllByIdQueryBuilder(array $idList);
+
+    /**
+     * @return QueryBuilder
+     */
+    public function createDeleteOneByIdentifierQueryBuilder();
+
+    /**
+     * @param array $skuList
+     * @return QueryBuilder
+     */
+    public function createDeleteAllByIdentitiferQueryBuilder(array $skuList);
 }

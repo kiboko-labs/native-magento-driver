@@ -104,6 +104,20 @@ class Attribute
     }
 
     /**
+     * @param string $key
+     * @param string|int|null $default
+     * @return string|int|null
+     */
+    public function getOptionOrDefault($key, $default = null)
+    {
+        if (!$this->options->containsKey($key)) {
+            return $default;
+        }
+
+        return $this->getOption($key);
+    }
+
+    /**
      * @return array
      */
     public function getOptions()
