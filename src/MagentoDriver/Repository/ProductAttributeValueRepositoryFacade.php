@@ -53,7 +53,7 @@ class ProductAttributeValueRepositoryFacade
         foreach ($this->broker->walkRepositoryList() as $repository) {
             $valuesList = array_merge(
                 $valuesList,
-                $values = $repository->findAllVariantAxisByProductFromDefault($product)->toArray()
+                $repository->findAllVariantAxisByProductFromDefault($product)->toArray()
             );
         }
 
@@ -71,7 +71,7 @@ class ProductAttributeValueRepositoryFacade
         foreach ($this->broker->walkRepositoryList() as $repository) {
             $valuesList = array_merge(
                 $valuesList,
-                $values = $repository->findAllVariantAxisByProductFromStoreId($product, $storeId)->toArray()
+                $repository->findAllVariantAxisByProductFromStoreId($product, $storeId)->toArray()
             );
         }
 
@@ -86,7 +86,7 @@ class ProductAttributeValueRepositoryFacade
         foreach ($this->broker->walkRepositoryList() as $repository) {
             $valuesList = array_merge(
                 $valuesList,
-                $values = $repository->findAllByProductAndAttributeListFromDefault($product, $attributeList)->toArray()
+                $repository->findAllByProductAndAttributeListFromDefault($product, $attributeList)->toArray()
             );
         }
 
@@ -102,7 +102,7 @@ class ProductAttributeValueRepositoryFacade
         foreach ($this->broker->walkRepositoryList() as $repository) {
             $valuesList = array_merge(
                 $valuesList,
-                $values = $repository->findAllByProductAndAttributeListFromStoreId($product, $attributeList, $storeId)->toArray()
+                $repository->findAllByProductAndAttributeListFromStoreId($product, $attributeList, $storeId)->toArray()
             );
         }
 
