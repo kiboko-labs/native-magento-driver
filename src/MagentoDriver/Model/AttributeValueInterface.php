@@ -3,7 +3,6 @@
 namespace Luni\Component\MagentoDriver\Model;
 
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
 
 interface AttributeValueInterface
 {

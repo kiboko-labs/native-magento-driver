@@ -6,7 +6,6 @@ use Closure;
 use Luni\Component\MagentoDriver\Exception\InvalidProductTypeException;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\Mutable\MutableAttributeValueInterface;
 
 class StandardProductAttributeValueFactory
     implements ProductAttributeValueFactoryInterface
