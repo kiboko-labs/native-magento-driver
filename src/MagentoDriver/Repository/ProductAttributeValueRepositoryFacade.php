@@ -158,7 +158,7 @@ class ProductAttributeValueRepositoryFacade
         foreach ($this->broker->walkRepositoryList() as $repository) {
             $valuesList = array_merge(
                 $valuesList,
-                $values = $repository->findAllByProductListFromDefault($productList)->toArray()
+                $repository->findAllByProductListFromDefault($productList)->toArray()
             );
         }
 
@@ -173,7 +173,7 @@ class ProductAttributeValueRepositoryFacade
         foreach ($this->broker->walkRepositoryList() as $repository) {
             $valuesList = array_merge(
                 $valuesList,
-                $values = $repository->findAllByProductListFromStoreId($productList, $storeId)->toArray()
+                $repository->findAllByProductListFromStoreId($productList, $storeId)->toArray()
             );
         }
 
@@ -188,7 +188,7 @@ class ProductAttributeValueRepositoryFacade
         foreach ($this->broker->walkRepositoryList() as $repository) {
             $valuesList = array_merge(
                 $valuesList,
-                $values = $repository->findAllByProductListAndAttributeListFromDefault($productList, $attributeList)->toArray()
+                $repository->findAllByProductListAndAttributeListFromDefault($productList, $attributeList)->toArray()
             );
         }
 
@@ -204,7 +204,7 @@ class ProductAttributeValueRepositoryFacade
         foreach ($this->broker->walkRepositoryList() as $repository) {
             $valuesList = array_merge(
                 $valuesList,
-                $values = $repository->findAllByProductListAndAttributeListFromStoreId($productList, $attributeList, $storeId)->toArray()
+                $repository->findAllByProductListAndAttributeListFromStoreId($productList, $attributeList, $storeId)->toArray()
             );
         }
 
@@ -239,7 +239,7 @@ class ProductAttributeValueRepositoryFacade
         foreach ($this->broker->walkRepositoryList() as $repository) {
             $valuesList = array_merge(
                 $valuesList,
-                $values = $repository->findAllByProductFromStoreId($product, $storeId)->toArray()
+                $repository->findAllByProductFromStoreId($product, $storeId)->toArray()
             );
         }
 

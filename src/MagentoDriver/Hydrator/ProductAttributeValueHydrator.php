@@ -20,20 +20,12 @@ class ProductAttributeValueHydrator
     private $attributeValueRepository;
 
     /**
-     * @var ProductAttributeRepositoryInterface
-     */
-    private $attributeRepository;
-
-    /**
      * @param ProductAttributeValueRepositoryInterface $attributeValueRepository
-     * @param ProductAttributeRepositoryInterface $attributeRepository
      */
     public function __construct(
-        ProductAttributeValueRepositoryInterface $attributeValueRepository,
-        ProductAttributeRepositoryInterface $attributeRepository
+        ProductAttributeValueRepositoryInterface $attributeValueRepository
     ) {
         $this->attributeValueRepository = $attributeValueRepository;
-        $this->attributeRepository = $attributeRepository;
     }
 
     /**
