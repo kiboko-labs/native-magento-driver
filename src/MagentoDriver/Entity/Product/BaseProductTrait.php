@@ -67,6 +67,17 @@ trait BaseProductTrait
      */
     private $modificationDate;
 
+    private function initializeDate(\DateTimeInterface $dateTime = null)
+    {
+        if ($dateTime === null) {
+            return new \DateTimeImmutable();
+        } else if ($dateTime instanceof \DateTime) {
+            return \DateTimeImmutable::createFromMutable($dateTime);
+        } else {
+            return $dateTime;
+        }
+    }
+
     /**
      * @return int
      */
