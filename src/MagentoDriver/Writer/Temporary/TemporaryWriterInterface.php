@@ -2,8 +2,6 @@
 
 namespace Luni\Component\MagentoDriver\Writer\Temporary;
 
-use League\Flysystem\File;
-
 interface TemporaryWriterInterface
 {
     /**

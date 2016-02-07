@@ -51,17 +51,22 @@ class LocalDataInfileDatabaseWriter
     /**
      * @param string $table
      * @param array $tableFields
+     * @param \Generator $messenger
      * @return int
      */
-    public function write($table, array $tableFields)
+    public function write($table, array $tableFields, \Generator $messenger = null)
     {
         $adapter = $this->filesystem->getAdapter();
-        if ($adapter instanceof AbstractAdapter) {
-            $path = $adapter->applyPathPrefix($this->file->getPath());
-            return $this->doWrite('LOAD DATA LOCAL INFILE', $path, $table, $tableFields);
+        if (!$adapter instanceof AbstractAdapter) {
+            throw new InvalidArgumentException('Could not determine the file path.');
         }
 
-        throw new InvalidArgumentException('Could not determine the file path.');
+        $path = $adapter->applyPathPrefix($this->file->getPath());
+        $count = $this->doWrite('LOAD DATA LOCAL INFILE', $path, $table, $tableFields, $messenger);
+
+        $this->file->delete();
+
+        return $count;
     }
 
     /**

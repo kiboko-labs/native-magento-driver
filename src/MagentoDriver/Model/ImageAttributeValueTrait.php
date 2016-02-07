@@ -4,6 +4,7 @@ namespace Luni\Component\MagentoDriver\Model;
 
 use Doctrine\Common\Collections\Collection;
 use League\Flysystem\File;
+use Luni\Component\MagentoDriver\Entity\ProductInterface;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 
 trait ImageAttributeValueTrait
@@ -24,13 +25,13 @@ trait ImageAttributeValueTrait
      * DatetimeAttributeValueTrait constructor.
      * @param AttributeInterface $attribute
      * @param File $file
-     * @param int $productId
+     * @param ProductInterface $product
      * @param array $metadata
      */
     abstract public function __construct(
         AttributeInterface $attribute,
         File $file,
-        $productId = null,
+        ProductInterface $product = null,
         array $metadata = []
     );
 
@@ -38,7 +39,7 @@ trait ImageAttributeValueTrait
      * @param AttributeInterface $attribute
      * @param int $valueId
      * @param File $file
-     * @param int $productId
+     * @param ProductInterface $product
      * @param array $metadata
      * @return ImageAttributeValueInterface
      */
@@ -46,10 +47,10 @@ trait ImageAttributeValueTrait
         AttributeInterface $attribute,
         $valueId,
         File $file,
-        $productId = null,
+        ProductInterface $product = null,
         array $metadata
     ) {
-        $object = new static($attribute, $file, $productId, $metadata);
+        $object = new static($attribute, $file, $product, $metadata);
 
         $object->id = $valueId;
 

@@ -3,7 +3,7 @@
 namespace Luni\Component\MagentoDriver\Model;
 
 interface IntegerAttributeValueInterface
-    extends AttributeValueInterface
+    extends ScopableAttributeValueInterface
 {
     /**
      * @return int

@@ -28,14 +28,20 @@ trait DataInfileDatabaseWriterTrait
     private $escaper;
 
     /**
+     * @var int[]
+     */
+    private $insertedIds = [];
+
+    /**
      * @param string $prefix
      * @param string $path
      * @param string $table
      * @param array $tableFields
+     * @param \Generator $messenger
      * @return int
      * @throws \Doctrine\DBAL\DBALException
      */
-    private function doWrite($prefix, $path, $table, array $tableFields)
+    private function doWrite($prefix, $path, $table, array $tableFields, \Generator $messenger = null)
     {
         $keys = [];
         foreach ($tableFields as $key) {
@@ -53,8 +59,20 @@ FIELDS
 ({$serializedKeys})
 SQL_EOF;
 
-        if (($count = $this->connection->exec($query)) <= 0) {
-            throw new RuntimeErrorException(sprintf('Failed to import data from file %s', $file->getPath()));
+        if (($count = $this->connection->exec($query)) < 0) {
+            throw new RuntimeErrorException(sprintf('Failed to import data from file %s', $path));
+        }
+
+        if ($messenger !== null) {
+            // $this->connection->lastInertId() seems to be buggy with MariaDB 10.0.15
+            $statement = $this->connection
+                ->executeQuery("SELECT LAST_INSERT_ID()");
+            $statement->execute();
+            $lastId = $statement->fetchColumn();
+
+            for ($id = 0; $id < $count; ++$id) {
+                $messenger->send($lastId + $id);
+            }
         }
 
         return $count;

@@ -3,7 +3,9 @@
 namespace Luni\Component\MagentoDriver\Entity\Product;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
+use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\FamilyInterface;
 
 class ConfigurableProduct
@@ -51,6 +53,7 @@ class ConfigurableProduct
      * @param FamilyInterface $family
      * @param \DateTimeInterface $creationDate
      * @param \DateTimeInterface $modificationDate
+     * @param Collection|AttributeValueInterface[] $values
      * @return static
      */
     public static function buildNewWith(
@@ -58,11 +61,17 @@ class ConfigurableProduct
         $identifier,
         FamilyInterface $family,
         \DateTimeInterface $creationDate,
-        \DateTimeInterface $modificationDate
+        \DateTimeInterface $modificationDate,
+        Collection $values
     ) {
-        $instance = new static($identifier, $family, $creationDate, $modificationDate);
+        $instance = new self($identifier, $family, $creationDate, $modificationDate);
 
         $instance->id = $id;
+
+        /** @var AttributeValueInterface $value */
+        foreach ($values as $value) {
+            $instance->values->add($value->attachToProduct($instance));
+        }
 
         return $instance;
     }

@@ -31,16 +31,6 @@ class ProductAttributeRepository
     protected $connection;
 
     /**
-     * @var Collection
-     */
-    protected $attributeCacheByCode;
-
-    /**
-     * @var Collection
-     */
-    protected $attributeCacheById;
-
-    /**
      * ProductAttributeRepository constructor.
      * @param Connection $connection
      * @param ProductAttributeQueryBuilderInterface $queryBuilder
@@ -51,9 +41,6 @@ class ProductAttributeRepository
     ) {
         $this->connection = $connection;
         $this->queryBuilder = $queryBuilder;
-
-        $this->attributeCacheByCode = new ArrayCollection();
-        $this->attributeCacheById = new ArrayCollection();
     }
 
     /**
@@ -72,28 +59,20 @@ class ProductAttributeRepository
             $options['backend_type']
         );
 
-        $attribute = Attribute::buildNewWith($attributeId, $attributeCode, $backendType, $options);
-
-        $this->attributeCacheByCode->set($attributeCode, $attribute);
-        $this->attributeCacheById->set($attributeId, $attribute);
-
-        return $attribute;
+        return Attribute::buildNewWith($attributeId, $attributeCode, $backendType, $options);
     }
 
     /**
+     * @param string $entityTypeCode
      * @param string $code
      * @return AttributeInterface
      */
-    public function findOneByCode($code)
+    public function findOneByCode($entityTypeCode, $code)
     {
-        if ($this->attributeCacheByCode->containsKey($code)) {
-            return $this->attributeCacheByCode->get($code);
-        }
-
-        $query = $this->queryBuilder->createFindOneByCodeQueryBuilder('a', 'e');
+        $query = $this->queryBuilder->createFindOneByCodeQueryBuilder('a', 'x', 'e');
 
         $statement = $this->connection->prepare($query);
-        if (!$statement->execute([$code])) {
+        if (!$statement->execute([$entityTypeCode, $code])) {
             throw new DatabaseFetchingFailureException();
         }
 
@@ -111,11 +90,7 @@ class ProductAttributeRepository
      */
     public function findOneById($id)
     {
-        if ($this->attributeCacheById->containsKey($id)) {
-            return $this->attributeCacheById->get($id);
-        }
-
-        $query = $this->queryBuilder->createFindOneByIdQueryBuilder('a', 'e');
+        $query = $this->queryBuilder->createFindOneByIdQueryBuilder('a', 'x');
 
         $statement = $this->connection->prepare($query);
         if (!$statement->execute([$id])) {
@@ -131,33 +106,20 @@ class ProductAttributeRepository
     }
 
     /**
+     * @param string $entityTypeCode
      * @param array|string[] $codeList
      * @return Collection|AttributeInterface[]
      */
-    public function findAllByCode(array $codeList)
+    public function findAllByCode($entityTypeCode, array $codeList)
     {
-        $attributeList = new ArrayCollection();
-        $codeSearch = [];
-        foreach ($codeList as $code) {
-            if (!$this->attributeCacheByCode->containsKey($code)) {
-                $codeSearch[] = $code;
-                continue;
-            }
-
-            $attributeList->set($code, $this->attributeCacheByCode->get($code));
-        }
-
-        if (count($codeSearch) <= 0) {
-            return $attributeList;
-        }
-
-        $query = $this->queryBuilder->createFindAllByCodeQueryBuilder('a', 'e', $codeSearch);
+        $query = $this->queryBuilder->createFindAllByCodeQueryBuilder('a', 'x', 'e', $codeList);
 
         $statement = $this->connection->prepare($query);
-        if (!$statement->execute($codeSearch)) {
+        if (!$statement->execute(array_merge(['catalog_product'], $codeList))) {
             throw new DatabaseFetchingFailureException();
         }
 
+        $attributeList = new ArrayCollection();
         if ($statement->rowCount() < 1) {
             return $attributeList;
         }
@@ -175,25 +137,10 @@ class ProductAttributeRepository
      */
     public function findAllById(array $idList)
     {
-        $attributeList = new ArrayCollection();
-        $idSearch = [];
-        foreach ($idList as $id) {
-            if (!$this->attributeCacheById->containsKey($id)) {
-                $idSearch[] = $id;
-                continue;
-            }
-
-            $attributeList->set($id, $this->attributeCacheById->get($id));
-        }
-
-        if (count($idSearch) <= 0) {
-            return $attributeList;
-        }
-
-        $query = $this->queryBuilder->createFindAllByIdQueryBuilder('a', 'e', $idSearch);
+        $query = $this->queryBuilder->createFindAllByIdQueryBuilder('a', 'x', $idList);
 
         $statement = $this->connection->prepare($query);
-        if (!$statement->execute($idSearch)) {
+        if (!$statement->execute($idList)) {
             throw new DatabaseFetchingFailureException();
         }
 
@@ -203,7 +150,7 @@ class ProductAttributeRepository
         }
 
         foreach ($statement as $options) {
-            $attributeList->set($options['attribute_code'], $this->createNewAttributeInstanceFromDatabase($options));
+            $attributeList->set($options['attribute_id'], $this->createNewAttributeInstanceFromDatabase($options));
         }
 
         return $attributeList;
@@ -214,17 +161,10 @@ class ProductAttributeRepository
      */
     public function findAll()
     {
-        $attributeList = new ArrayCollection();
-        $excludedIds = [];
-        foreach ($this->attributeCacheById as $id => $attribute) {
-            $attributeList->set($id, $attribute);
-            $excludedIds[] = $id;
-        }
-
-        $query = $this->queryBuilder->createFindAllQueryBuilder('a', 'e', $excludedIds);
+        $query = $this->queryBuilder->createFindAllQueryBuilder('a', 'x');
 
         $statement = $this->connection->prepare($query);
-        if (!$statement->execute($excludedIds)) {
+        if (!$statement->execute()) {
             throw new DatabaseFetchingFailureException();
         }
 
@@ -250,6 +190,58 @@ class ProductAttributeRepository
     }
 
     /**
+     * @param string $entityTypeCode
+     * @return Collection|AttributeInterface[]
+     */
+    public function findAllByEntityTypeCode($entityTypeCode)
+    {
+        $query = $this->queryBuilder->createFindAllQueryBuilder('a', 'x');
+
+        $attributeList = new ArrayCollection();
+        $statement = $this->connection->prepare($query);
+        if (!$statement->execute([$entityTypeCode])) {
+            throw new DatabaseFetchingFailureException();
+        }
+
+        if ($statement->rowCount() < 1) {
+            return $attributeList;
+        }
+
+        foreach ($statement as $options) {
+            $attributeList->set($options['attribute_code'], $this->createNewAttributeInstanceFromDatabase($options));
+        }
+
+        return $attributeList;
+    }
+
+    /**
+     * @param int $entityTypeId
+     * @return Collection|AttributeInterface[]
+     */
+    public function findAllByEntityTypeId($entityTypeId)
+    {
+        $query = $this->queryBuilder->createFindAllQueryBuilder('a', 'x');
+
+        $query->where($query->expr()->eq('a.entity_type_id', '?'));
+
+        $attributeList = new ArrayCollection();
+        $statement = $this->connection->prepare($query);
+        if (!$statement->execute([$entityTypeId])) {
+            throw new DatabaseFetchingFailureException();
+        }
+
+        if ($statement->rowCount() < 1) {
+            return $attributeList;
+        }
+
+        foreach ($statement as $options) {
+            $attributeList->set($options['attribute_code'], $this->createNewAttributeInstanceFromDatabase($options));
+        }
+
+        return $attributeList;
+    }
+
+    /**
      * @param ProductInterface $product
      * @return Collection|AttributeInterface[]
      */
@@ -260,7 +252,7 @@ class ProductAttributeRepository
             return $attributeList;
         }
 
-        $query = $this->queryBuilder->createFindAllVariantAxisByEntityQueryBuilder('a', 'e', 'va');
+        $query = $this->queryBuilder->createFindAllVariantAxisByEntityQueryBuilder('a', 'x', 'e', 'va');
 
         $statement = $this->connection->prepare($query);
         if (!$statement->execute([$product->getId()])) {
@@ -284,7 +276,7 @@ class ProductAttributeRepository
      */
     public function findAllByFamily(FamilyInterface $family)
     {
-        $query = $this->queryBuilder->createFindAllByFamilyQueryBuilder('a', 'e', 'f');
+        $query = $this->queryBuilder->createFindAllByFamilyQueryBuilder('a', 'x', 'e', 'f');
 
         $attributeList = new ArrayCollection();
         $statement = $this->connection->prepare($query);
@@ -309,7 +301,7 @@ class ProductAttributeRepository
      */
     public function findAllMandatoryByFamily(FamilyInterface $family)
     {
-        $query = $this->queryBuilder->createFindAllMandatoryByFamilyQueryBuilder('a', 'e', 'f');
+        $query = $this->queryBuilder->createFindAllMandatoryByFamilyQueryBuilder('a', 'x', 'e', 'f');
 
         $attributeList = new ArrayCollection();
         $statement = $this->connection->prepare($query);

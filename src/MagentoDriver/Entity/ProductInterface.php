@@ -22,6 +22,17 @@ interface ProductInterface
     const TYPE_DOWNLOADABLE = 'downloadable';
     const TYPE_GIFT_CARD    = 'gift_card';
 
+    const VISIBILITY_NOT_VISIBLE    = 1;
+    const VISIBILITY_IN_CATALOG     = 2;
+    const VISIBILITY_IN_SEARCH      = 3;
+    const VISIBILITY_BOTH           = 4;
+
+    /**
+     * @param int $id
+     * @return ProductInterface
+     */
+    public function persistedToId($id);
+
     /**
      * @return string
      */
@@ -33,6 +44,11 @@ interface ProductInterface
     public function getType();
 
     /**
+     * @return int
+     */
+    public function getFamilyId();
+
+    /**
      * @return FamilyInterface
      */
     public function getFamily();
@@ -41,6 +57,39 @@ interface ProductInterface
      * @return bool
      */
     public function isConfigurable();
+
+    /**
+     * @return bool
+     */
+    public function isNotVisible();
+
+    /**
+     * @return bool
+     */
+    public function isVisibleInCatalog();
+
+    /**
+     * @return bool
+     */
+    public function isVisibleInSearch();
+
+    /**
+     * @return bool
+     */
+    public function isVisibleInCatalogAndSearch();
+
+    /**
+     * @return bool
+     */
+    public function isVisibleSomewhere();
+
+    public function setNotVisible();
+
+    public function setVisibleInCatalog();
+
+    public function setVisibleInSearch();
+
+    public function setVisibleInCatalogAndSearch();
 
     /**
      * @return AttributeInterface[]|Collection

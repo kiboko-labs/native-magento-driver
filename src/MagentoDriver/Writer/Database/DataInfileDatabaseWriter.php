@@ -39,11 +39,12 @@ class DataInfileDatabaseWriter
     /**
      * @param string $table
      * @param array $tableFields
+     * @param \Generator $messenger
      * @return int
      */
-    public function write($table, array $tableFields)
+    public function write($table, array $tableFields, \Generator $messenger = null)
     {
-        return $this->doWrite('LOAD DATA INFILE', $this->path, $table, $tableFields);
+        return $this->doWrite('LOAD DATA INFILE', $this->path, $table, $tableFields, $messenger);
     }
 
     /**

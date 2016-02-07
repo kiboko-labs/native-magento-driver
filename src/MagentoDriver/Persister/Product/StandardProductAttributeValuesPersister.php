@@ -23,11 +23,11 @@ class StandardProductAttributeValuesPersister
 
     /**
      * @param AttributeValuePersisterInterface $persister
-     * @param array $attributeList
+     * @param Collection $attributeList
      */
     public function __construct(
         AttributeValuePersisterInterface $persister,
-        array $attributeList
+        Collection $attributeList
     ) {
         $this->attributeValuesPersister = $persister;
 
@@ -56,7 +56,7 @@ class StandardProductAttributeValuesPersister
     {
         foreach ($this->attributeList as $attribute) {
             foreach ($product->getAllValuesFor($attribute) as $attributeValue) {
-                $this->attributeValuesPersister->persist($product, $attributeValue);
+                $this->attributeValuesPersister->persist($attributeValue);
             }
         }
     }

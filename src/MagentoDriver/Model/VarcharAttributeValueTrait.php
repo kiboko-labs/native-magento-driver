@@ -2,6 +2,7 @@
 
 namespace Luni\Component\MagentoDriver\Model;
 
+use Luni\Component\MagentoDriver\Entity\ProductInterface;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 
 trait VarcharAttributeValueTrait
@@ -17,13 +18,13 @@ trait VarcharAttributeValueTrait
      * DatetimeAttributeValueTrait constructor.
      * @param AttributeInterface $attribute
      * @param string $payload
-     * @param int $productId
+     * @param ProductInterface $product
      * @param int $storeId
      */
     abstract public function __construct(
         AttributeInterface $attribute,
         $payload,
-        $productId = null,
+        ProductInterface $product = null,
         $storeId = null
     );
 
@@ -31,7 +32,7 @@ trait VarcharAttributeValueTrait
      * @param AttributeInterface $attribute
      * @param int $valueId
      * @param string $payload
-     * @param int $productId
+     * @param ProductInterface $product
      * @param int $storeId
      * @return VarcharAttributeValueInterface
      */
@@ -39,10 +40,10 @@ trait VarcharAttributeValueTrait
         AttributeInterface $attribute,
         $valueId,
         $payload,
-        $productId = null,
+        ProductInterface $product = null,
         $storeId = null
     ) {
-        $object = new static($attribute, $payload, $productId, $storeId);
+        $object = new static($attribute, $payload, $product, $storeId);
 
         $object->id = $valueId;
 

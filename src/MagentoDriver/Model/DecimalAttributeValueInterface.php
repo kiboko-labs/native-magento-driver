@@ -3,7 +3,7 @@
 namespace Luni\Component\MagentoDriver\Model;
 
 interface DecimalAttributeValueInterface
-    extends AttributeValueInterface
+    extends ScopableAttributeValueInterface
 {
     /**
      * @return float
