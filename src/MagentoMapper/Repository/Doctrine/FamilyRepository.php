@@ -4,7 +4,7 @@ namespace Luni\Component\MagentoMapper\Repository\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
-use Luni\Component\MagentoMapper\QueryBuilder\AttributeQueryBuilderInterface;
+use Luni\Component\MagentoMapper\QueryBuilder\FamilyQueryBuilderInterface;
 use Luni\Component\MagentoMapper\Repository\FamilyRepositoryInterface;
 
 class FamilyRepository
@@ -16,18 +16,18 @@ class FamilyRepository
     private $connection;
 
     /**
-     * @var AttributeQueryBuilderInterface
+     * @var FamilyQueryBuilderInterface
      */
     private $queryBuilder;
 
     /**
      * AttributeRepository constructor.
      * @param Connection $connection
-     * @param AttributeQueryBuilderInterface $queryBuilder
+     * @param FamilyQueryBuilderInterface $queryBuilder
      */
     public function __construct(
         Connection $connection,
-        AttributeQueryBuilderInterface $queryBuilder
+        FamilyQueryBuilderInterface $queryBuilder
     ) {
         $this->connection = $connection;
         $this->queryBuilder = $queryBuilder;
