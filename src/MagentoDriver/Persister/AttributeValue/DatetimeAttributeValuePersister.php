@@ -23,7 +23,12 @@ class DatetimeAttributeValuePersister
     public function persist(AttributeValueInterface $value)
     {
         if (!$value instanceof DatetimeAttributeValueInterface) {
-            throw new InvalidAttributePersisterTypeException('Invalid attribute value type, expected "datetime" type.');
+            throw new InvalidAttributePersisterTypeException(sprintf(
+                'Invalid attribute value type for "%s", expected "%s", got "%s".',
+                $value->getAttributeCode(),
+                DatetimeAttributeValueInterface::class,
+                get_class($value)
+            ));
         }
 
         $this->temporaryWriter->persistRow([

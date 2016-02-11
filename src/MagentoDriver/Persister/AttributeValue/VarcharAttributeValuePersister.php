@@ -23,7 +23,12 @@ class VarcharAttributeValuePersister
     public function persist(AttributeValueInterface $value)
     {
         if (!$value instanceof VarcharAttributeValueInterface) {
-            throw new InvalidAttributePersisterTypeException('Invalid attribute value type, expected "varchar" type.');
+            throw new InvalidAttributePersisterTypeException(sprintf(
+                'Invalid attribute value type for "%s", expected "%s", got "%s".',
+                $value->getAttributeCode(),
+                VarcharAttributeValueInterface::class,
+                get_class($value)
+            ));
         }
 
         $this->temporaryWriter->persistRow([

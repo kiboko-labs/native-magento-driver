@@ -148,7 +148,12 @@ class MediaGalleryAttributeValuePersister
     public function persist(AttributeValueInterface $value)
     {
         if (!$value instanceof MediaGalleryAttributeValueInterface) {
-            throw new InvalidAttributePersisterTypeException('Invalid attribute value type, expected "media_gallery" type.');
+            throw new InvalidAttributePersisterTypeException(sprintf(
+                'Invalid attribute value type for "%s", expected "%s", got "%s".',
+                $value->getAttributeCode(),
+                MediaGalleryAttributeValueInterface::class,
+                get_class($value)
+            ));
         }
 
         /** @var ImageAttributeValueInterface $mediaAsset */

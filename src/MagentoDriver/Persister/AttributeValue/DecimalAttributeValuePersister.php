@@ -22,7 +22,12 @@ class DecimalAttributeValuePersister
     public function persist(AttributeValueInterface $value)
     {
         if (!$value instanceof DecimalAttributeValueInterface) {
-            throw new InvalidAttributePersisterTypeException('Invalid attribute value type, expected "decimal" type.');
+            throw new InvalidAttributePersisterTypeException(sprintf(
+                'Invalid attribute value type for "%s", expected "%s", got "%s".',
+                $value->getAttributeCode(),
+                DecimalAttributeValueInterface::class,
+                get_class($value)
+            ));
         }
 
         $this->temporaryWriter->persistRow([

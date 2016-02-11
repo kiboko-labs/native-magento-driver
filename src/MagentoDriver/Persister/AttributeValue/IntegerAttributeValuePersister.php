@@ -22,7 +22,12 @@ class IntegerAttributeValuePersister
     public function persist(AttributeValueInterface $value)
     {
         if (!$value instanceof IntegerAttributeValueInterface) {
-            throw new InvalidAttributePersisterTypeException('Invalid attribute value type, expected "integer" type.');
+            throw new InvalidAttributePersisterTypeException(sprintf(
+                'Invalid attribute value type for "%s", expected "%s", got "%s".',
+                $value->getAttributeCode(),
+                IntegerAttributeValueInterface::class,
+                get_class($value)
+            ));
         }
 
         $this->temporaryWriter->persistRow([

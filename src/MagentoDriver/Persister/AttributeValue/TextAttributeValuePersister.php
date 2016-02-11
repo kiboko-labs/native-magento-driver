@@ -22,7 +22,12 @@ class TextAttributeValuePersister
     public function persist(AttributeValueInterface $value)
     {
         if (!$value instanceof TextAttributeValueInterface) {
-            throw new InvalidAttributePersisterTypeException('Invalid attribute value type, expected "text" type.');
+            throw new InvalidAttributePersisterTypeException(sprintf(
+                'Invalid attribute value type for "%s", expected "%s", got "%s".',
+                $value->getAttributeCode(),
+                TextAttributeValueInterface::class,
+                get_class($value)
+            ));
         }
 
         $this->temporaryWriter->persistRow([
