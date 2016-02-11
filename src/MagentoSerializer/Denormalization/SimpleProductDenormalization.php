@@ -1,14 +1,14 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Denormalization;
+namespace Luni\Component\MagentoSerializer\Denormalization;
 
-use Luni\Component\MagentoDriver\Denormalization\AttributeValue\DatetimeAttributeValueDenormalization;
-use Luni\Component\MagentoDriver\Denormalization\AttributeValue\DecimalAttributeValueDenormalization;
-use Luni\Component\MagentoDriver\Denormalization\AttributeValue\IntegerAttributeValueDenormalization;
-use Luni\Component\MagentoDriver\Denormalization\AttributeValue\MultipleOptionsAttributeValueDenormalization;
-use Luni\Component\MagentoDriver\Denormalization\AttributeValue\OptionAttributeValueDenormalization;
-use Luni\Component\MagentoDriver\Denormalization\AttributeValue\TextAttributeValueDenormalization;
-use Luni\Component\MagentoDriver\Denormalization\AttributeValue\VarcharAttributeValueDenormalization;
+use Luni\Component\MagentoSerializer\Denormalization\AttributeValue\DatetimeAttributeValueDenormalization;
+use Luni\Component\MagentoSerializer\Denormalization\AttributeValue\DecimalAttributeValueDenormalization;
+use Luni\Component\MagentoSerializer\Denormalization\AttributeValue\IntegerAttributeValueDenormalization;
+use Luni\Component\MagentoSerializer\Denormalization\AttributeValue\MultipleOptionsAttributeValueDenormalization;
+use Luni\Component\MagentoSerializer\Denormalization\AttributeValue\OptionAttributeValueDenormalization;
+use Luni\Component\MagentoSerializer\Denormalization\AttributeValue\TextAttributeValueDenormalization;
+use Luni\Component\MagentoSerializer\Denormalization\AttributeValue\VarcharAttributeValueDenormalization;
 use Luni\Component\MagentoDriver\Entity\Product\SimpleProduct;
 use Luni\Component\MagentoDriver\Entity\ProductInterface;
 use Luni\Component\MagentoDriver\Exception\RuntimeErrorException;

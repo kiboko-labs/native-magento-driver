@@ -1,6 +1,6 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Denormalization\AttributeValue;
+namespace Luni\Component\MagentoSerializer\Denormalization\AttributeValue;
 
 use Luni\Component\MagentoDriver\Mapper\OptionMapperInterface;
 use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
