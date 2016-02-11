@@ -46,9 +46,7 @@ class FamilyQueryBuilder
     {
         return [
             'attribute_set_id',
-            'entity_type_id',
-            'attribute_set_name',
-            'sort_order',
+            'family_code',
         ];
     }
 
