@@ -4,12 +4,11 @@ namespace Luni\Component\MagentoMapper\Repository\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoMapper\QueryBuilder\OptionQueryBuilderInterface;
-use Luni\Component\MagentoMapper\Repository\OptionRepositoryInterface;
+use Luni\Component\MagentoMapper\QueryBuilder\Doctrine\CategoryQueryBuilder;
+use Luni\Component\MagentoMapper\Repository\CategoryRepositoryInterface;
 
-class OptionRepository
-    implements OptionRepositoryInterface
+class CategoryRepository
+    implements CategoryRepositoryInterface
 {
     /**
      * @var Connection
@@ -17,36 +16,34 @@ class OptionRepository
     private $connection;
 
     /**
-     * @var OptionQueryBuilderInterface
+     * @var CategoryQueryBuilder
      */
     private $queryBuilder;
 
     /**
      * AttributeRepository constructor.
      * @param Connection $connection
-     * @param OptionQueryBuilderInterface $queryBuilder
+     * @param CategoryQueryBuilder $queryBuilder
      */
     public function __construct(
         Connection $connection,
-        OptionQueryBuilderInterface $queryBuilder
+        CategoryQueryBuilder $queryBuilder
     ) {
         $this->connection = $connection;
         $this->queryBuilder = $queryBuilder;
     }
 
     /**
-     * @param AttributeInterface $attribute
-     * @param $optionCode
+     * @param string $code
      * @return null|int
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function findOneByAttribute(AttributeInterface $attribute, $optionCode)
+    public function findOneByCode($code)
     {
-        $query = $this->queryBuilder->createFindOneByAttributeQueryBuilder('o');
+        $query = $this->queryBuilder->createFindOneByCodeQueryBuilder('p');
 
         $statement = $this->connection->prepare($query);
-        $statement->bindValue(1, $optionCode);
-        $statement->bindValue(2, $attribute->getId());
+        $statement->bindValue(1, $code);
 
         if (!$statement->execute()) {
             throw new DatabaseFetchingFailureException();
@@ -65,16 +62,15 @@ class OptionRepository
     }
 
     /**
-     * @param AttributeInterface $attribute
      * @return int[]
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function findAllByAttribute(AttributeInterface $attribute)
+    public function findAll()
     {
-        $query = $this->queryBuilder->createFindAllByAttributeQueryBuilder('o');
+        $query = $this->queryBuilder->createFindAllQueryBuilder('p');
 
         $statement = $this->connection->prepare($query);
-        if (!$statement->execute([$attribute->getId()])) {
+        if (!$statement->execute()) {
             throw new DatabaseFetchingFailureException();
         }
 
@@ -84,7 +80,7 @@ class OptionRepository
 
         $attributeList = [];
         foreach ($statement as $options) {
-            $attributeList[$options['option_code']] = $options['option_id'];
+            $attributeList[$options['category_code']] = $options['category_id'];
         }
 
         return $attributeList;

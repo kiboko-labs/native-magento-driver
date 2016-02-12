@@ -4,10 +4,10 @@ namespace Luni\Component\MagentoMapper\QueryBuilder\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
-use Luni\Component\MagentoMapper\QueryBuilder\OptionQueryBuilderInterface;
+use Luni\Component\MagentoMapper\QueryBuilder\AttributeQueryBuilderInterface;
 
-class OptionQueryBuilder
-    implements OptionQueryBuilderInterface
+class CategoryQueryBuilder
+    implements AttributeQueryBuilderInterface
 {
     /**
      * @var Connection
@@ -45,9 +45,8 @@ class OptionQueryBuilder
     public static function getDefaultFields()
     {
         return [
-            'option_id',
-            'attribute_id',
-            'option_code',
+            'category_id',
+            'category_code',
         ];
     }
 
@@ -58,36 +57,23 @@ class OptionQueryBuilder
     public static function getDefaultTable($prefix = null)
     {
         if ($prefix !== null) {
-            return sprintf('%sluni_pim_mapping_option', $prefix);
+            return sprintf('%sluni_pim_mapping_category', $prefix);
         }
 
-        return 'luni_pim_mapping_option';
+        return 'luni_pim_mapping_category';
     }
 
     /**
      * @param string $prefix
      * @return string
      */
-    public static function getAttributeDefaultTable($prefix = null)
+    public static function getCategoryDefaultTable($prefix = null)
     {
         if ($prefix !== null) {
-            return sprintf('%seav_attribute', $prefix);
+            return sprintf('%scatalog_category_entity', $prefix);
         }
 
-        return 'eav_attribute';
-    }
-
-    /**
-     * @param string $prefix
-     * @return string
-     */
-    public static function getOptionDefaultTable($prefix = null)
-    {
-        if ($prefix !== null) {
-            return sprintf('%seav_attribute_option', $prefix);
-        }
-
-        return 'eav_attribute_option';
+        return 'catalog_category_entity';
     }
 
     /**
@@ -121,13 +107,12 @@ class OptionQueryBuilder
      * @param string $alias
      * @return QueryBuilder
      */
-    public function createFindOneByAttributeQueryBuilder($alias)
+    public function createFindOneByCodeQueryBuilder($alias)
     {
         $queryBuilder = $this->createFindQueryBuilder($alias);
 
         $queryBuilder
-            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.option_code', $alias), '?'))
-            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_id', $alias), '?'))
+            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.category_code', $alias), '?'))
             ->setFirstResult(0)
             ->setMaxResults(1)
         ;
@@ -139,13 +124,9 @@ class OptionQueryBuilder
      * @param string $alias
      * @return QueryBuilder
      */
-    public function createFindAllByAttributeQueryBuilder($alias)
+    public function createFindAllQueryBuilder($alias)
     {
         $queryBuilder = $this->createFindQueryBuilder($alias);
-
-        $queryBuilder
-            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_id', $alias), '?'))
-        ;
 
         return $queryBuilder;
     }
