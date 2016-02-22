@@ -8,7 +8,7 @@ use Doctrine\DBAL\Connection;
 use Luni\Component\MagentoDriver\Model\Attribute;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Model\FamilyInterface;
-use Luni\Component\MagentoDriver\Entity\ProductInterface;
+use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
 use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
 use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilderInterface;
 use Luni\Component\MagentoDriver\Repository\ProductAttributeRepositoryInterface;

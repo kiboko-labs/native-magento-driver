@@ -3,7 +3,7 @@
 namespace Luni\Component\MagentoDriver\Persister\Product;
 
 use Luni\Component\MagentoDriver\Persister\BaseCsvPersisterTrait;
-use Luni\Component\MagentoDriver\Entity\ProductInterface;
+use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
 
 class SimpleProductPersister
     implements ProductPersisterInterface

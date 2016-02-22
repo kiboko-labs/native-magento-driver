@@ -3,7 +3,6 @@
 namespace Luni\Component\MagentoDriver\Persister\AttributeValue;
 
 use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
-use Luni\Component\MagentoDriver\Entity\ProductInterface;
 
 class StaticAttributeValuePersister
     implements AttributeValuePersisterInterface

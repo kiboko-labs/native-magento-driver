@@ -4,7 +4,7 @@ namespace Luni\Component\MagentoDriver\Model;
 
 use Doctrine\Common\Collections\Collection;
 use League\Flysystem\File;
-use Luni\Component\MagentoDriver\Entity\ProductInterface;
+use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 
 trait ImageAttributeValueTrait

@@ -62,6 +62,39 @@ class CategoryRepository
     }
 
     /**
+     * @param string[] $codes
+     * @return int[]
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function findAllByCodes(array $codes)
+    {
+        if (count($codes) <= 0) {
+            return [];
+        }
+
+        $query = $this->queryBuilder->createFindAllQueryBuilder('p');
+
+        $expr = array_pad([], count($codes), $query->expr()->eq('p.category_id', '?'));
+        $query->andWhere($query->expr()->andX(...$expr));
+
+        $statement = $this->connection->prepare($query);
+        if (!$statement->execute($codes)) {
+            throw new DatabaseFetchingFailureException();
+        }
+
+        if ($statement->rowCount() < 1) {
+            return [];
+        }
+
+        $attributeList = [];
+        foreach ($statement as $options) {
+            $attributeList[$options['category_code']] = $options['category_id'];
+        }
+
+        return $attributeList;
+    }
+
+    /**
      * @return int[]
      * @throws \Doctrine\DBAL\DBALException
      */

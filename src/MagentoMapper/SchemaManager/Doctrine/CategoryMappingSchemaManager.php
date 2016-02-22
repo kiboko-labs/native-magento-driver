@@ -76,7 +76,7 @@ class CategoryMappingSchemaManager
                 'category_id',
             ],
             [
-                'category_id',
+                'entity_id',
             ],
             [
                 'onUpdate' => 'CASCADE',

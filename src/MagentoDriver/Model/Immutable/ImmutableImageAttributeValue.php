@@ -4,7 +4,7 @@ namespace Luni\Component\MagentoDriver\Model\Immutable;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use League\Flysystem\File;
-use Luni\Component\MagentoDriver\Entity\ProductInterface;
+use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Model\ImageAttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\ImageAttributeValueTrait;

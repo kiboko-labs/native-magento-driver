@@ -9,7 +9,7 @@ use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Model\MediaGalleryAttributeInterface;
 use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\Immutable\ImmutableAttributeValueInterface;
-use Luni\Component\MagentoDriver\Entity\ProductInterface;
+use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
 use Luni\Component\MagentoDriver\Exception\ImmutableValueException;
 use Luni\Component\MagentoDriver\Model\FamilyInterface;
 use Luni\Component\MagentoDriver\Model\Mutable\MutableAttributeValueInterface;
@@ -109,7 +109,10 @@ trait BaseProductTrait
     /**
      * @return string
      */
-    abstract public function getType();
+    public function getType()
+    {
+        return $this->productType;
+    }
 
     /**
      * @return Collection|AttributeInterface[]
@@ -381,19 +384,28 @@ trait BaseProductTrait
      */
     public function hasOptions()
     {
-        // TODO: Implement hasOptions() method.
+        return false;
     }
 
+    /**
+     * return Collection
+     */
     public function getRequiredOptions()
     {
-        // TODO: Implement getRequiredOptions() method.
+        return new ArrayCollection();
     }
 
+    /**
+     * @return \DateTimeInterface
+     */
     public function getCreationDate()
     {
         return $this->creationDate;
     }
 
+    /**
+     * @return \DateTimeInterface
+     */
     public function getModificationDate()
     {
         return $this->modificationDate;

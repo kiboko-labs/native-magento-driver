@@ -10,7 +10,6 @@ use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\ImageAttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\ImageMetadataAttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\MediaGalleryAttributeValueInterface;
-use Luni\Component\MagentoDriver\Entity\ProductInterface;
 use Luni\Component\MagentoDriver\Exception\InvalidAttributePersisterTypeException;
 use Luni\Component\MagentoDriver\Exception\RuntimeErrorException;
 use Luni\Component\MagentoDriver\Filesystem\FileMoverInterface;
