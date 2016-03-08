@@ -67,7 +67,7 @@ class ProductAttributeRepository
      * @param string $code
      * @return AttributeInterface
      */
-    public function findOneByCode($entityTypeCode, $code)
+    public function findOneByCode($code, $entityTypeCode)
     {
         $query = $this->queryBuilder->createFindOneByCodeQueryBuilder('a', 'x', 'e');
 

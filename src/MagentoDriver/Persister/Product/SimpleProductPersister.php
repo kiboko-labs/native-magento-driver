@@ -2,18 +2,50 @@
 
 namespace Luni\Component\MagentoDriver\Persister\Product;
 
-use Luni\Component\MagentoDriver\Persister\BaseCsvPersisterTrait;
 use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
+use Luni\Component\MagentoDriver\Persister\BaseCsvPersisterTrait;
+use Luni\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
+use Luni\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;
 
 class SimpleProductPersister
     implements ProductPersisterInterface
 {
     use BaseCsvPersisterTrait;
 
+    /**
+     * @var \SplQueue
+     */
+    private $productQueue;
+
+    /**
+     * @param TemporaryWriterInterface $temporaryWriter
+     * @param DatabaseWriterInterface $databaseWriter
+     * @param string $tableName
+     * @param array $tableKeys
+     */
+    public function __construct(
+        TemporaryWriterInterface $temporaryWriter,
+        DatabaseWriterInterface $databaseWriter,
+        $tableName,
+        array $tableKeys = []
+    ) {
+        $this->temporaryWriter = $temporaryWriter;
+        $this->databaseWriter = $databaseWriter;
+        $this->tableName = $tableName;
+        $this->tableKeys = $tableKeys;
+        $this->productQueue = new \SplQueue();
+    }
+
+    /**
+     * @return void
+     */
     public function initialize()
     {
     }
 
+    /**
+     * @param ProductInterface $product
+     */
     public function persist(ProductInterface $product)
     {
         if ($product->getId() === null) {
@@ -21,7 +53,7 @@ class SimpleProductPersister
         }
 
         $this->temporaryWriter->persistRow([
-            'value_id'         => $product->getId(),
+            'entity_id'        => $product->getId(),
             'entity_type_id'   => 4,
             'attribute_set_id' => $product->getFamilyId(),
             'type_id'          => $product->getType(),
@@ -33,13 +65,32 @@ class SimpleProductPersister
         ]);
     }
 
+    /**
+     * @param ProductInterface $product
+     * @return void
+     */
     public function __invoke(ProductInterface $product)
     {
         $this->persist($product);
     }
 
+    /**
+     * @return void
+     */
     public function flush()
     {
         $this->doFlush();
+    }
+
+    /**
+     * @return \Generator
+     */
+    protected function walkQueue()
+    {
+        while ($this->productQueue->count() > 0 && $id = yield) {
+            /** @var ProductInterface $product */
+            $product = $this->productQueue->dequeue();
+            $product->persistedToId($id);
+        }
     }
 }

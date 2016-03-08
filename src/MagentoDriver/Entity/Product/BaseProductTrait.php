@@ -30,11 +30,6 @@ trait BaseProductTrait
     /**
      * @var Collection|AttributeInterface[]
      */
-    private $axisAttributes;
-
-    /**
-     * @var Collection|AttributeInterface[]
-     */
     private $attributes;
 
     /**
@@ -143,6 +138,14 @@ trait BaseProductTrait
     }
 
     /**
+     * @param FamilyInterface $family
+     */
+    public function changeFamily(FamilyInterface $family)
+    {
+        $this->family = $family;
+    }
+
+    /**
      * @return FamilyInterface
      */
     public function getFamily()
@@ -223,14 +226,6 @@ trait BaseProductTrait
     public function setVisibleInCatalogAndSearch()
     {
         $this->visibility = ProductInterface::VISIBILITY_BOTH;
-    }
-
-    /**
-     * @return Collection|AttributeInterface[]
-     */
-    public function getAxisAttributes()
-    {
-        return $this->axisAttributes;
     }
 
     /**

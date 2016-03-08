@@ -5,6 +5,7 @@ namespace Luni\Component\MagentoSerializer\Denormalization\AttributeValue;
 use Luni\Component\MagentoDriver\Mapper\OptionMapperInterface;
 use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\Immutable\ImmutableIntegerAttributeValue;
+use Luni\Component\MagentoDriver\Model\Immutable\ImmutableVarcharAttributeValue;
 use Luni\Component\MagentoDriver\Repository\AttributeRepositoryInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
@@ -42,12 +43,29 @@ class OptionAttributeValueDenormalization
      */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        return new ImmutableIntegerAttributeValue(
-            $this->attributeRepository->findOneByCode('catalog_product', $data['attribute']),
-            $data['value'],
-            null,
-            isset($data['channel']) || isset($data['locale']) ? 1 : null
-        );
+        $attribute = $this->attributeRepository->findOneByCode('catalog_product', $data['attribute']);
+
+        if (!$attribute) {
+            return null;
+        }
+
+        if ($attribute->getBackendType() === 'int') {
+            return new ImmutableIntegerAttributeValue(
+                $attribute,
+                (int) $data['value'],
+                null,
+                isset($data['channel']) || isset($data['locale']) ? 0 : null
+            );
+        } else if ($attribute->getBackendType() === 'varchar') {
+            return new ImmutableVarcharAttributeValue(
+                $attribute,
+                $data['value'],
+                null,
+                isset($data['channel']) || isset($data['locale']) ? 0 : null
+            );
+        }
+
+        return null;
     }
 
     /**

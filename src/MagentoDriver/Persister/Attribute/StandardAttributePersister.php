@@ -4,16 +4,42 @@ namespace Luni\Component\MagentoDriver\Persister\Attribute;
 
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Persister\BaseCsvPersisterTrait;
+use Luni\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
+use Luni\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;
 
 class StandardAttributePersister
     implements AttributePersisterInterface
 {
     use BaseCsvPersisterTrait;
 
+    /**
+     * @param TemporaryWriterInterface $temporaryWriter
+     * @param DatabaseWriterInterface $databaseWriter
+     * @param string $tableName
+     * @param array $tableKeys
+     */
+    public function __construct(
+        TemporaryWriterInterface $temporaryWriter,
+        DatabaseWriterInterface $databaseWriter,
+        $tableName,
+        array $tableKeys = []
+    ) {
+        $this->temporaryWriter = $temporaryWriter;
+        $this->databaseWriter = $databaseWriter;
+        $this->tableName = $tableName;
+        $this->tableKeys = $tableKeys;
+    }
+
+    /**
+     * @return void
+     */
     public function initialize()
     {
     }
 
+    /**
+     * @param AttributeInterface $attribute
+     */
     public function persist(AttributeInterface $attribute)
     {
         $this->temporaryWriter->persistRow([
@@ -42,8 +68,18 @@ class StandardAttributePersister
         $this->persist($attribute);
     }
 
+    /**
+     * @return void
+     */
     public function flush()
     {
         $this->doFlush();
+    }
+
+    /**
+     * @return \Generator
+     */
+    protected function walkQueue()
+    {
     }
 }

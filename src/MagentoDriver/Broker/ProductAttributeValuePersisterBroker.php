@@ -4,7 +4,7 @@ namespace Luni\Component\MagentoDriver\Broker;
 
 use Luni\Component\MagentoDriver\Matcher\AttributeValueMatcherInterface;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Persister\AttributeValue\AttributeValuePersisterInterface;
+use Luni\Component\MagentoDriver\Persister\AttributeValuePersisterInterface;
 
 class ProductAttributeValuePersisterBroker
     implements ProductAttributeValuePersisterBrokerInterface

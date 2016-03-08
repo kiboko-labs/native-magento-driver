@@ -50,6 +50,11 @@ interface ProductInterface
     public function getFamilyId();
 
     /**
+     * @param FamilyInterface $family
+     */
+    public function changeFamily(FamilyInterface $family);
+
+    /**
      * @return FamilyInterface
      */
     public function getFamily();
@@ -91,11 +96,6 @@ interface ProductInterface
     public function setVisibleInSearch();
 
     public function setVisibleInCatalogAndSearch();
-
-    /**
-     * @return AttributeInterface[]|Collection
-     */
-    public function getAxisAttributes();
 
     /**
      * @return bool

@@ -139,6 +139,24 @@ class OptionQueryBuilder
      * @param string $alias
      * @return QueryBuilder
      */
+    public function createFindOneByAttributeCodeQueryBuilder($alias)
+    {
+        $queryBuilder = $this->createFindQueryBuilder($alias);
+
+        $queryBuilder
+            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.option_code', $alias), '?'))
+            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_code', $alias), '?'))
+            ->setFirstResult(0)
+            ->setMaxResults(1)
+        ;
+
+        return $queryBuilder;
+    }
+
+    /**
+     * @param string $alias
+     * @return QueryBuilder
+     */
     public function createFindAllByAttributeQueryBuilder($alias)
     {
         $queryBuilder = $this->createFindQueryBuilder($alias);

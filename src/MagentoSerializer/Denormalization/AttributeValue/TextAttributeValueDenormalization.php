@@ -37,7 +37,7 @@ class TextAttributeValueDenormalization
             $this->attributeRepository->findOneByCode('catalog_product', $data['attribute']),
             $data['value'],
             null,
-            isset($data['channel']) || isset($data['locale']) ? 1 : null
+            isset($data['channel']) || isset($data['locale']) ? 0 : null
         );
     }
 

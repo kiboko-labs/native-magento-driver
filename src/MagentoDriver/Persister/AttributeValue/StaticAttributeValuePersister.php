@@ -33,4 +33,8 @@ class StaticAttributeValuePersister
     public function flush()
     {
     }
+
+    protected function walkQueue()
+    {
+    }
 }

@@ -14,6 +14,10 @@ use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeValueQuer
 use Luni\Component\MagentoDriver\Repository\AttributeRepositoryInterface;
 use Luni\Component\MagentoDriver\Repository\ProductAttributeValueRepositoryBackendInterface;
 
+/**
+ * Class ProductAttributeValueRepository
+ * @package Luni\Component\MagentoDriver\Repository\Doctrine
+ */
 class ProductAttributeValueRepository
     implements ProductAttributeValueRepositoryBackendInterface
 {

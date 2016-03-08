@@ -4,16 +4,39 @@ namespace Luni\Component\MagentoDriver\Persister\Family;
 
 use Luni\Component\MagentoDriver\Model\FamilyInterface;
 use Luni\Component\MagentoDriver\Persister\BaseCsvPersisterTrait;
+use Luni\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
+use Luni\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;
 
 class StandardFamilyPersister
     implements FamilyPersisterInterface
 {
     use BaseCsvPersisterTrait;
 
+    /**
+     * @param TemporaryWriterInterface $temporaryWriter
+     * @param DatabaseWriterInterface $databaseWriter
+     * @param string $tableName
+     * @param array $tableKeys
+     */
+    public function __construct(
+        TemporaryWriterInterface $temporaryWriter,
+        DatabaseWriterInterface $databaseWriter,
+        $tableName,
+        array $tableKeys = []
+    ) {
+        $this->temporaryWriter = $temporaryWriter;
+        $this->databaseWriter = $databaseWriter;
+        $this->tableName = $tableName;
+        $this->tableKeys = $tableKeys;
+    }
+
     public function initialize()
     {
     }
 
+    /**
+     * @param FamilyInterface $familyInterface
+     */
     public function persist(FamilyInterface $familyInterface)
     {
         $this->temporaryWriter->persistRow([
@@ -24,13 +47,27 @@ class StandardFamilyPersister
         ]);
     }
 
+    /**
+     * @param FamilyInterface $family
+     * @return void
+     */
     public function __invoke(FamilyInterface $family)
     {
         $this->persist($family);
     }
 
+    /**
+     * @return void
+     */
     public function flush()
     {
         $this->doFlush();
+    }
+
+    /**
+     * @return \Generator
+     */
+    protected function walkQueue()
+    {
     }
 }

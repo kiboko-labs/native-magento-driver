@@ -49,6 +49,14 @@ trait AttributeValueTrait
     }
 
     /**
+     * @param int $id
+     */
+    public function persistedToId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
      * @return int
      */
     public function getProductId()

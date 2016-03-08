@@ -6,11 +6,31 @@ use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\IntegerAttributeValueInterface;
 use Luni\Component\MagentoDriver\Persister\BaseCsvPersisterTrait;
 use Luni\Component\MagentoDriver\Exception\InvalidAttributePersisterTypeException;
+use Luni\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
+use Luni\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;
 
 class IntegerAttributeValuePersister
     implements AttributeValuePersisterInterface
 {
     use BaseCsvPersisterTrait;
+
+    /**
+     * @param TemporaryWriterInterface $temporaryWriter
+     * @param DatabaseWriterInterface $databaseWriter
+     * @param string $tableName
+     * @param array $tableKeys
+     */
+    public function __construct(
+        TemporaryWriterInterface $temporaryWriter,
+        DatabaseWriterInterface $databaseWriter,
+        $tableName,
+        array $tableKeys = []
+    ) {
+        $this->temporaryWriter = $temporaryWriter;
+        $this->databaseWriter = $databaseWriter;
+        $this->tableName = $tableName;
+        $this->tableKeys = $tableKeys;
+    }
 
     public function initialize()
     {
@@ -55,5 +75,12 @@ class IntegerAttributeValuePersister
     public function flush()
     {
         $this->doFlush();
+    }
+
+    /**
+     * @return \Generator
+     */
+    protected function walkQueue()
+    {
     }
 }

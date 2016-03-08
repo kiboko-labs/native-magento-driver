@@ -65,6 +65,66 @@ class OptionRepository
     }
 
     /**
+     * @param int $attributeId
+     * @param $optionCode
+     * @return null|int
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function findOneByAttributeId($attributeId, $optionCode)
+    {
+        $query = $this->queryBuilder->createFindOneByAttributeQueryBuilder('o');
+
+        $statement = $this->connection->prepare($query);
+        $statement->bindValue(1, $optionCode);
+        $statement->bindValue(2, $attributeId);
+
+        if (!$statement->execute()) {
+            throw new DatabaseFetchingFailureException();
+        }
+
+        if ($statement->rowCount() < 1) {
+            return null;
+        }
+
+        $id = $statement->fetchColumn(0);
+        if ($id === false) {
+            return null;
+        }
+
+        return $id;
+    }
+
+    /**
+     * @param string $attributeCode
+     * @param $optionCode
+     * @return null|int
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function findOneByAttributeCode($attributeCode, $optionCode)
+    {
+        $query = $this->queryBuilder->createFindOneByAttributeQueryBuilder('o');
+
+        $statement = $this->connection->prepare($query);
+        $statement->bindValue(1, $optionCode);
+        $statement->bindValue(2, $attributeCode);
+
+        if (!$statement->execute()) {
+            throw new DatabaseFetchingFailureException();
+        }
+
+        if ($statement->rowCount() < 1) {
+            return null;
+        }
+
+        $id = $statement->fetchColumn(0);
+        if ($id === false) {
+            return null;
+        }
+
+        return $id;
+    }
+
+    /**
      * @param AttributeInterface $attribute
      * @return int[]
      * @throws \Doctrine\DBAL\DBALException

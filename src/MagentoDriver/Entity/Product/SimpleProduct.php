@@ -7,11 +7,17 @@ use Doctrine\Common\Collections\Collection;
 use Luni\Component\MagentoDriver\Exception\RuntimeErrorException;
 use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\FamilyInterface;
+use Luni\Component\MagentoDriver\Model\SuperLinkInterface;
 
 class SimpleProduct
     implements SimpleProductInterface
 {
     use BaseProductTrait;
+
+    /**
+     * @var Collection
+     */
+    private $configurables;
 
     /**
      * @param string $identifier
@@ -26,9 +32,10 @@ class SimpleProduct
         \DateTimeInterface $modificationDate = null
     ) {
         $this->identifier = $identifier;
-        $this->productType = 'simple';
+        $this->productType = ProductInterface::TYPE_SIMPLE;
         $this->family = $family;
         $this->values = new ArrayCollection();
+        $this->configurables = new ArrayCollection();
 
         $this->creationDate = $this->initializeDate($creationDate);
         $this->modificationDate = $this->initializeDate($modificationDate);
@@ -41,7 +48,6 @@ class SimpleProduct
      * @param \DateTimeInterface $creationDate
      * @param \DateTimeInterface $modificationDate
      * @param Collection|AttributeValueInterface[] $values
-     * @param ConfigurableProductInterface $configurableProduct
      * @return static
      */
     public static function buildNewWith(
@@ -50,8 +56,7 @@ class SimpleProduct
         FamilyInterface $family,
         \DateTimeInterface $creationDate,
         \DateTimeInterface $modificationDate,
-        Collection $values = null,
-        ConfigurableProductInterface $configurableProduct = null
+        Collection $values = null
     ) {
         $instance = new self($identifier, $family, $creationDate, $modificationDate);
 
@@ -72,5 +77,44 @@ class SimpleProduct
         }
 
         return $instance;
+    }
+
+    /**
+     * @param ConfigurableProductInterface $configurable
+     * @param SuperLinkInterface $superLink
+     */
+    public function addToConfigurable(
+        ConfigurableProductInterface $configurable,
+        SuperLinkInterface $superLink
+    ) {
+        if (!$this->hasConfigurable($configurable)) {
+            $this->configurables->set($configurable->getIdentifier(), $configurable);
+            $configurable->addVariant($this);
+        }
+    }
+
+    /**
+     * @return Collection|ConfigurableProductInterface[]
+     */
+    public function getConfigurables()
+    {
+        return $this->configurables;
+    }
+
+    /**
+     * @param ConfigurableProductInterface $configurable
+     * @return bool
+     */
+    public function hasConfigurable(ConfigurableProductInterface $configurable)
+    {
+        return $this->configurables->containsKey($configurable->getIdentifier());
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasConfigurables()
+    {
+        return $this->configurables->count() > 0;
     }
 }

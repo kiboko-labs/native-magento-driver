@@ -16,5 +16,11 @@ interface OptionQueryBuilderInterface
      * @param string $alias
      * @return QueryBuilder
      */
+    public function createFindOneByAttributeCodeQueryBuilder($alias);
+
+    /**
+     * @param string $alias
+     * @return QueryBuilder
+     */
     public function createFindAllByAttributeQueryBuilder($alias);
 }

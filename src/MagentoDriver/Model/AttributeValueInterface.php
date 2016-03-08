@@ -12,6 +12,11 @@ interface AttributeValueInterface
     public function getId();
 
     /**
+     * @param int $id
+     */
+    public function persistedToId($id);
+
+    /**
      * @return int
      */
     public function getProductId();
