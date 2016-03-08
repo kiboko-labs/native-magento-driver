@@ -17,7 +17,7 @@ class ProductAttributeRepositoryTest
     const TEST_ATTRIBUTE_ID_1 = 4;
     const TEST_ATTRIBUTE_ID_2 = 8;
 
-    const TEST_ATTRIBUTE_CODE_1 = 'special_from_date';
+    const TEST_ATTRIBUTE_CODE_1 = 'size';
     const TEST_ATTRIBUTE_CODE_2 = 'special_to_date';
 
     /**
@@ -104,6 +104,27 @@ class ProductAttributeRepositoryTest
     private $catalogAttributeData = [
         [
             'attribute_id'                  => self::TEST_ATTRIBUTE_ID_1,
+            'frontend_input_renderer'       => null,
+            'is_global'                     => 1,
+            'is_visible'                    => 1,
+            'is_searchable'                 => 0,
+            'is_filterable'                 => 0,
+            'is_comparable'                 => 0,
+            'is_visible_on_front'           => 1,
+            'is_html_allowed_on_front'      => 0,
+            'is_used_for_price_rules'       => 0,
+            'is_filterable_in_search'       => 0,
+            'used_in_product_listing'       => 1,
+            'used_for_sort_by'              => 1,
+            'is_configurable'               => 1,
+            'apply_to'                      => null,
+            'is_visible_in_advanced_search' => 0,
+            'position'                      => 0,
+            'is_wysiwyg_enabled'            => 0,
+            'is_used_for_promo_rules'       => 0
+        ],
+        [
+            'attribute_id'                  => self::TEST_ATTRIBUTE_ID_2,
             'frontend_input_renderer'       => null,
             'is_global'                     => 1,
             'is_visible'                    => 1,
