@@ -8,10 +8,13 @@ use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuil
 use Luni\Component\MagentoDriver\Repository\AttributeRepositoryInterface;
 use Luni\Component\MagentoDriver\Repository\Doctrine\ProductAttributeRepository;
 use unit\Luni\Component\MagentoDriver\DoctrineSchemaBuilder;
+use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
 
 class ProductAttributeRepositoryTest
-    extends AbstractRepositoryTestCase
+    extends \PHPUnit_Framework_TestCase
 {
+    use DatabaseConnectionAwareTrait;
+
     const TEST_ENTITY_TYPE_ID_1 = 4;
 
     const TEST_ATTRIBUTE_ID_1 = 4;
@@ -175,6 +178,8 @@ class ProductAttributeRepositoryTest
     {
         parent::setUp();
 
+        $this->initConnection();
+
         $currentSchema = $this->getConnection()->getSchemaManager()->createSchema();
 
         $this->schema = new Schema();
@@ -225,6 +230,7 @@ class ProductAttributeRepositoryTest
     protected function tearDown()
     {
         $this->truncateTables();
+        $this->closeConnection();
 
         parent::tearDown();
 

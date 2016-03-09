@@ -9,10 +9,13 @@ use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\FamilyQueryBuilder;
 use Luni\Component\MagentoDriver\Repository\Doctrine\FamilyRepository;
 use Luni\Component\MagentoDriver\Repository\FamilyRepositoryInterface;
 use unit\Luni\Component\MagentoDriver\DoctrineSchemaBuilder;
+use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
 
 class FamilyRepositoryTest
-    extends AbstractRepositoryTestCase
+    extends \PHPUnit_Framework_TestCase
 {
+    use DatabaseConnectionAwareTrait;
+
     /**
      * @var Schema
      */
@@ -90,6 +93,8 @@ class FamilyRepositoryTest
     {
         parent::setUp();
 
+        $this->initConnection();
+
         $currentSchema = $this->getConnection()->getSchemaManager()->createSchema();
 
         $this->schema = new Schema();
@@ -130,6 +135,7 @@ class FamilyRepositoryTest
     protected function tearDown()
     {
         $this->truncateTables();
+        $this->closeConnection();
 
         parent::tearDown();
 

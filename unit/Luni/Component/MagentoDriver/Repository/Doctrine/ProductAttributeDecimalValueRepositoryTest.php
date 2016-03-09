@@ -6,8 +6,8 @@ use Doctrine\DBAL\Schema\Schema;
 use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
 use Luni\Component\MagentoDriver\Factory\AttributeValueFactoryInterface;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Model\DatetimeAttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\Immutable\ImmutableDatetimeAttributeValue;
+use Luni\Component\MagentoDriver\Model\DecimalAttributeValueInterface;
+use Luni\Component\MagentoDriver\Model\Immutable\ImmutableDecimalAttributeValue;
 use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeValueQueryBuilder;
 use Luni\Component\MagentoDriver\Repository\AttributeRepositoryInterface;
 use Luni\Component\MagentoDriver\Repository\Doctrine\ProductAttributeValueRepository;
@@ -15,7 +15,7 @@ use Luni\Component\MagentoDriver\Repository\ProductAttributeValueRepositoryInter
 use unit\Luni\Component\MagentoDriver\DoctrineSchemaBuilder;
 use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
 
-class ProductAttributeDatetimeValueRepositoryTest
+class ProductAttributeDecimalValueRepositoryTest
     extends \PHPUnit_Framework_TestCase
 {
     use DatabaseConnectionAwareTrait;
@@ -163,7 +163,7 @@ class ProductAttributeDatetimeValueRepositoryTest
             'attribute_id'   => self::TEST_ATTRIBUTE_ID_1,
             'store_id'       => self::TEST_STORE_ID_0,
             'entity_id'      => self::TEST_ENTITY_ID_1,
-            'value'          => '2016-02-23 12:22:43',
+            'value'          => .4,
         ],
         [
             'value_id'       => 125,
@@ -171,7 +171,7 @@ class ProductAttributeDatetimeValueRepositoryTest
             'attribute_id'   => self::TEST_ATTRIBUTE_ID_2,
             'store_id'       => self::TEST_STORE_ID_0,
             'entity_id'      => self::TEST_ENTITY_ID_1,
-            'value'          => '2016-05-01 22:34:30',
+            'value'          => .5,
         ],
         [
             'value_id'       => 126,
@@ -179,7 +179,7 @@ class ProductAttributeDatetimeValueRepositoryTest
             'attribute_id'   => self::TEST_ATTRIBUTE_ID_1,
             'store_id'       => self::TEST_STORE_ID_0,
             'entity_id'      => self::TEST_ENTITY_ID_2,
-            'value'          => '2016-03-12 10:54:32',
+            'value'          => 5.7,
         ],
         [
             'value_id'       => 127,
@@ -187,7 +187,7 @@ class ProductAttributeDatetimeValueRepositoryTest
             'attribute_id'   => self::TEST_ATTRIBUTE_ID_2,
             'store_id'       => self::TEST_STORE_ID_0,
             'entity_id'      => self::TEST_ENTITY_ID_2,
-            'value'          => '2016-06-30 08:07:01',
+            'value'          => 3.3,
         ],
 
         [
@@ -196,7 +196,7 @@ class ProductAttributeDatetimeValueRepositoryTest
             'attribute_id'   => self::TEST_ATTRIBUTE_ID_1,
             'store_id'       => self::TEST_STORE_ID_1,
             'entity_id'      => self::TEST_ENTITY_ID_1,
-            'value'          => '2016-02-23 12:22:43',
+            'value'          => 5.1,
         ],
         [
             'value_id'       => 225,
@@ -204,7 +204,7 @@ class ProductAttributeDatetimeValueRepositoryTest
             'attribute_id'   => self::TEST_ATTRIBUTE_ID_2,
             'store_id'       => self::TEST_STORE_ID_1,
             'entity_id'      => self::TEST_ENTITY_ID_1,
-            'value'          => '2016-05-01 22:34:30',
+            'value'          => 7.1,
         ],
         [
             'value_id'       => 226,
@@ -212,7 +212,7 @@ class ProductAttributeDatetimeValueRepositoryTest
             'attribute_id'   => self::TEST_ATTRIBUTE_ID_1,
             'store_id'       => self::TEST_STORE_ID_1,
             'entity_id'      => self::TEST_ENTITY_ID_2,
-            'value'          => '2016-03-12 10:54:32',
+            'value'          => 3.,
         ],
         [
             'value_id'       => 227,
@@ -220,7 +220,7 @@ class ProductAttributeDatetimeValueRepositoryTest
             'attribute_id'   => self::TEST_ATTRIBUTE_ID_2,
             'store_id'       => self::TEST_STORE_ID_1,
             'entity_id'      => self::TEST_ENTITY_ID_2,
-            'value'          => '2016-06-30 08:07:01',
+            'value'          => .65,
         ],
     ];
 
@@ -245,7 +245,7 @@ class ProductAttributeDatetimeValueRepositoryTest
         );
 
         $this->getConnection()->exec(
-            $platform->getTruncateTableSQL('catalog_product_entity_datetime')
+            $platform->getTruncateTableSQL('catalog_product_entity_decimal')
         );
         $this->getConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
     }
@@ -267,10 +267,10 @@ class ProductAttributeDatetimeValueRepositoryTest
         $schemaBuilder->ensureStoreTable();
         $schemaBuilder->ensureAttributeTable();
         $schemaBuilder->ensureCatalogProductEntityTable();
-        $schemaBuilder->ensureCatalogProductAttributeValueTable('datetime', 'datetime');
-        $schemaBuilder->ensureCatalogProductAttributeValueToStoreLinks('datetime');
-        $schemaBuilder->ensureCatalogProductAttributeValueToAttributeLinks('datetime');
-        $schemaBuilder->ensureCatalogProductAttributeValueToCatalogProductEntityLinks('datetime');
+        $schemaBuilder->ensureCatalogProductAttributeValueTable('decimal', 'decimal');
+        $schemaBuilder->ensureCatalogProductAttributeValueToStoreLinks('decimal');
+        $schemaBuilder->ensureCatalogProductAttributeValueToAttributeLinks('decimal');
+        $schemaBuilder->ensureCatalogProductAttributeValueToCatalogProductEntityLinks('decimal');
 
         $comparator = new \Doctrine\DBAL\Schema\Comparator();
         $schemaDiff = $comparator->compare($currentSchema, $this->schema);
@@ -300,14 +300,14 @@ class ProductAttributeDatetimeValueRepositoryTest
         }
 
         foreach ($this->productAttributeValueData as $row) {
-            $this->getConnection()->insert('catalog_product_entity_datetime', $row);
+            $this->getConnection()->insert('catalog_product_entity_decimal', $row);
         }
 
         $this->repository = new ProductAttributeValueRepository(
             $this->getConnection(),
             new ProductAttributeValueQueryBuilder(
                 $this->getConnection(),
-                ProductAttributeValueQueryBuilder::getDefaultTable('datetime'),
+                ProductAttributeValueQueryBuilder::getDefaultTable('decimal'),
                 ProductAttributeValueQueryBuilder::getDefaultVariantAxisTable(),
                 ProductAttributeValueQueryBuilder::getDefaultFields()
             ),
@@ -372,7 +372,7 @@ class ProductAttributeDatetimeValueRepositoryTest
         $mock->method('buildNew')
             ->with($this->isInstanceOf(AttributeInterface::class), $this->isType('array'))
             ->willReturnCallback(function($attribute, $data){
-                return ImmutableDatetimeAttributeValue::buildNewWith($attribute, 124, new \DateTimeImmutable(), null, 0);
+                return ImmutableDecimalAttributeValue::buildNewWith($attribute, 124, 1., null, 0);
             })
         ;
 
@@ -395,11 +395,11 @@ class ProductAttributeDatetimeValueRepositoryTest
             ->willReturn(self::TEST_ATTRIBUTE_ID_1)
         ;
 
-        /** @var DatetimeAttributeValueInterface $attributeValue */
+        /** @var DecimalAttributeValueInterface $attributeValue */
         $attributeValue = $this->repository->findOneByProductAndAttributeFromDefault($product, $attribute);
-        $this->assertInstanceOf(DatetimeAttributeValueInterface::class, $attributeValue);
+        $this->assertInstanceOf(DecimalAttributeValueInterface::class, $attributeValue);
 
-        $this->assertInstanceOf(\DateTimeInterface::class, $attributeValue->getValue());
+        $this->assertInternalType('float', $attributeValue->getValue());
     }
 
     public function testFetchingOneByProductAndAttributeFromDefaultButNonExistent()

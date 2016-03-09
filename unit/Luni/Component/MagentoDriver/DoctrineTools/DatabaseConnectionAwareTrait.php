@@ -1,12 +1,11 @@
 <?php
 
-namespace unit\Luni\Component\MagentoDriver\Repository\Doctrine;
+namespace unit\Luni\Component\MagentoDriver\DoctrineTools;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 
-abstract class AbstractRepositoryTestCase
-    extends \PHPUnit_Framework_TestCase
+trait DatabaseConnectionAwareTrait
 {
     /**
      * @var Connection
@@ -17,10 +16,8 @@ abstract class AbstractRepositoryTestCase
     /**
      * @throws \Doctrine\DBAL\DBALException
      */
-    protected function setUp()
+    protected function initConnection()
     {
-        parent::setUp();
-
         $this->connection = DriverManager::getConnection(
             [
                 'driver'   => isset($GLOBALS['DB_DRIVER'])   ? $GLOBALS['DB_DRIVER']   : 'mysqli',
@@ -33,10 +30,8 @@ abstract class AbstractRepositoryTestCase
         );
     }
 
-    protected function tearDown()
+    protected function closeConnection()
     {
-        parent::tearDown();
-
         $this->connection->close();
         $this->connection = null;
     }
