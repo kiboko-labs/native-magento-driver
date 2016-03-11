@@ -15,17 +15,17 @@ class CatalogAttribute
     /**
      * @var CatalogAttributeExtensionInterface
      */
-    private $extensios;
+    private $extension;
 
     /**
      * @param AttributeInterface $attribute
-     * @param CatalogAttributeExtensionInterface $extensios
+     * @param CatalogAttributeExtensionInterface $extension
      */
     public function __construct(
         AttributeInterface $attribute,
-        CatalogAttributeExtensionInterface $extensios
+        CatalogAttributeExtensionInterface $extension
     ) {
-        if ($attribute->getId() !== $extensios->getId()) {
+        if ($attribute->getId() !== $extension->getId()) {
             throw new RuntimeErrorException('Extension\'s attribute ID should match the attribute\'s.');
         }
     }
@@ -171,7 +171,7 @@ class CatalogAttribute
      */
     public function getFrontendInputRendererClassName()
     {
-        return $this->extensios->getFrontendInputRendererClassName();
+        return $this->extension->getFrontendInputRendererClassName();
     }
 
     /**
@@ -179,7 +179,7 @@ class CatalogAttribute
      */
     public function isGlobal()
     {
-        return $this->extensios->isGlobal();
+        return $this->extension->isGlobal();
     }
 
     /**
@@ -187,7 +187,7 @@ class CatalogAttribute
      */
     public function isVisible()
     {
-        return $this->extensios->isVisible();
+        return $this->extension->isVisible();
     }
 
     /**
@@ -195,7 +195,7 @@ class CatalogAttribute
      */
     public function isSearchable()
     {
-        return $this->extensios->isSearchable();
+        return $this->extension->isSearchable();
     }
 
     /**
@@ -203,7 +203,7 @@ class CatalogAttribute
      */
     public function isFilterable()
     {
-        return $this->extensios->isFilterable();
+        return $this->extension->isFilterable();
     }
 
     /**
@@ -211,7 +211,7 @@ class CatalogAttribute
      */
     public function isComparable()
     {
-        return $this->extensios->isComparable();
+        return $this->extension->isComparable();
     }
 
     /**
@@ -219,7 +219,7 @@ class CatalogAttribute
      */
     public function isVisibleOnFront()
     {
-        return $this->extensios->isVisibleOnFront();
+        return $this->extension->isVisibleOnFront();
     }
 
     /**
@@ -227,7 +227,7 @@ class CatalogAttribute
      */
     public function isHtmlAllowedOnFront()
     {
-        return $this->extensios->isHtmlAllowedOnFront();
+        return $this->extension->isHtmlAllowedOnFront();
     }
 
     /**
@@ -235,7 +235,7 @@ class CatalogAttribute
      */
     public function isUsedForPriceRules()
     {
-        return $this->extensios->isUsedForPriceRules();
+        return $this->extension->isUsedForPriceRules();
     }
 
     /**
@@ -243,7 +243,7 @@ class CatalogAttribute
      */
     public function isFilterableInSearch()
     {
-        return $this->extensios->isFilterableInSearch();
+        return $this->extension->isFilterableInSearch();
     }
 
     /**
@@ -251,7 +251,7 @@ class CatalogAttribute
      */
     public function isUsedInProductListing()
     {
-        return $this->extensios->isUsedInProductListing();
+        return $this->extension->isUsedInProductListing();
     }
 
     /**
@@ -259,7 +259,7 @@ class CatalogAttribute
      */
     public function isUsedForSortBy()
     {
-        return $this->extensios->isUsedForSortBy();
+        return $this->extension->isUsedForSortBy();
     }
 
     /**
@@ -267,7 +267,7 @@ class CatalogAttribute
      */
     public function isVisibleInAdvancedSearch()
     {
-        return $this->extensios->isVisibleInAdvancedSearch();
+        return $this->extension->isVisibleInAdvancedSearch();
     }
 
     /**
@@ -275,7 +275,7 @@ class CatalogAttribute
      */
     public function isWysiwygEnabled()
     {
-        return $this->extensios->isWysiwygEnabled();
+        return $this->extension->isWysiwygEnabled();
     }
 
     /**
@@ -283,7 +283,7 @@ class CatalogAttribute
      */
     public function isUsedForPromoRules()
     {
-        return $this->extensios->isUsedForPromoRules();
+        return $this->extension->isUsedForPromoRules();
     }
 
     /**
@@ -291,7 +291,7 @@ class CatalogAttribute
      */
     public function isRequiredInAdminStore()
     {
-        return $this->extensios->isRequiredInAdminStore();
+        return $this->extension->isRequiredInAdminStore();
     }
 
     /**
@@ -299,7 +299,7 @@ class CatalogAttribute
      */
     public function isUsedInGrid()
     {
-        return $this->extensios->isUsedInGrid();
+        return $this->extension->isUsedInGrid();
     }
 
     /**
@@ -307,7 +307,7 @@ class CatalogAttribute
      */
     public function isVisibleInGrid()
     {
-        return $this->extensios->isVisibleInGrid();
+        return $this->extension->isVisibleInGrid();
     }
 
     /**
@@ -315,7 +315,7 @@ class CatalogAttribute
      */
     public function isFilterableInGrid()
     {
-        return $this->extensios->isFilterableInGrid();
+        return $this->extension->isFilterableInGrid();
     }
 
     /**
@@ -323,7 +323,7 @@ class CatalogAttribute
      */
     public function getPosition()
     {
-        return $this->extensios->getPosition();
+        return $this->extension->getPosition();
     }
 
     /**
@@ -331,7 +331,7 @@ class CatalogAttribute
      */
     public function getSearchWeight()
     {
-        return $this->extensios->getSearchWeight();
+        return $this->extension->getSearchWeight();
     }
 
     /**
@@ -339,7 +339,7 @@ class CatalogAttribute
      */
     public function getProductTypesApplyingTo()
     {
-        return $this->extensios->getProductTypesApplyingTo();
+        return $this->extension->getProductTypesApplyingTo();
     }
 
     /**
@@ -347,6 +347,6 @@ class CatalogAttribute
      */
     public function getAdditionalData()
     {
-        return $this->extensios->getAdditionalData();
+        return $this->extension->getAdditionalData();
     }
 }
