@@ -140,7 +140,7 @@ class CachedProductAttributeRepository
             return $attributeList;
         }
 
-        $searchedAttributeList = $this->decorated->findAllByCode($idSearch);
+        $searchedAttributeList = $this->decorated->findAllById($idSearch);
         foreach ($searchedAttributeList as $attribute) {
             $id = $attribute->getId();
             $attributeList->set($id, $attribute);

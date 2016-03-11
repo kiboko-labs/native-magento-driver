@@ -10,6 +10,11 @@ interface AttributeInterface
     public function getId();
 
     /**
+     * @return int
+     */
+    public function getEntityTypeId();
+
+    /**
      * @return string
      */
     public function getCode();
@@ -17,28 +22,70 @@ interface AttributeInterface
     /**
      * @return string
      */
-    public function getBackendType();
+    public function getModelClass();
 
     /**
      * @return string
      */
-    public function getFrontendType();
+    public function getBackendModelClass();
 
     /**
-     * @param string $key
-     * @return string|int|null
+     * @return string
      */
-    public function getOption($key);
+    public function getBackendTable();
 
     /**
-     * @param string $key
-     * @param string|int|null $default
-     * @return string|int|null
+     * @return string
      */
-    public function getOptionOrDefault($key, $default = null);
+    public function getFrontendModelClass();
 
     /**
-     * @return array
+     * @return string
      */
-    public function getOptions();
+    public function getFrontendInput();
+
+    /**
+     * @return string
+     */
+    public function getFrontendLabel();
+
+    /**
+     * @return string
+     */
+    public function getFrontendViewClass();
+
+    /**
+     * @return string
+     */
+    public function getSourceModelClass();
+
+    /**
+     * @return bool
+     */
+    public function isRequired();
+
+    /**
+     * @return bool
+     */
+    public function isUserDefined();
+
+    /**
+     * @return bool
+     */
+    public function isSystem();
+
+    /**
+     * @return bool
+     */
+    public function isUnique();
+
+    /**
+     * @return string
+     */
+    public function getDefaultValue();
+
+    /**
+     * @return string
+     */
+    public function getNote();
 }

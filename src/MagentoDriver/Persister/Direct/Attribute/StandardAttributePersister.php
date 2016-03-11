@@ -66,27 +66,28 @@ class StandardAttributePersister
      */
     public function flush()
     {
+        /** @var AttributeInterface $attribute */
         foreach ($this->dataQueue as $attribute) {
             if ($attribute->getId()) {
                 $this->connection->update($this->tableName,
                     [
                         'attribute_id'    => $attribute->getId(),
-                        'entity_type_id'  => $attribute->getOptionOrDefault('entity_type_id'),
+                        'entity_type_id'  => $attribute->getEntityTypeId(),
                         'attribute_code'  => $attribute->getCode(),
-                        'attribute_model' => $attribute->getOptionOrDefault('attribute_model'),
-                        'backend_model'   => $attribute->getOptionOrDefault('backend_model'),
+                        'attribute_model' => $attribute->getModelClass(),
+                        'backend_model'   => $attribute->getBackendModelClass(),
                         'backend_type'    => $attribute->getBackendType(),
-                        'backend_table'   => $attribute->getOptionOrDefault('backend_table'),
-                        'frontend_model'  => $attribute->getOptionOrDefault('frontend_model'),
+                        'backend_table'   => $attribute->getBackendTable(),
+                        'frontend_model'  => $attribute->getFrontendModelClass(),
                         'frontend_input'  => $attribute->getFrontendType(),
-                        'frontend_label'  => $attribute->getOptionOrDefault('frontend_label'),
-                        'frontend_class'  => $attribute->getOptionOrDefault('frontend_class'),
-                        'source_model'    => $attribute->getOptionOrDefault('source_model'),
-                        'is_required'     => $attribute->getOptionOrDefault('is_required'),
-                        'is_user_defined' => $attribute->getOptionOrDefault('is_user_defined'),
-                        'default_value'   => $attribute->getOptionOrDefault('default_value'),
-                        'is_unique'       => $attribute->getOptionOrDefault('is_unique'),
-                        'note'            => $attribute->getOptionOrDefault('note'),
+                        'frontend_label'  => $attribute->getFrontendLabel(),
+                        'frontend_class'  => $attribute->getFrontendModelClass(),
+                        'source_model'    => $attribute->getSourceModelClass(),
+                        'is_required'     => $attribute->isRequired(),
+                        'is_user_defined' => $attribute->isUserDefined(),
+                        'default_value'   => $attribute->getDefaultValue(),
+                        'is_unique'       => $attribute->isUnique(),
+                        'note'            => $attribute->getNote(),
                     ],
                     [
                         'attribute_id' => $attribute->getId(),
@@ -95,22 +96,22 @@ class StandardAttributePersister
             } else {
                 $this->connection->insert($this->tableName,
                     [
-                        'entity_type_id'  => $attribute->getOptionOrDefault('entity_type_id'),
+                        'entity_type_id'  => $attribute->getEntityTypeId(),
                         'attribute_code'  => $attribute->getCode(),
-                        'attribute_model' => $attribute->getOptionOrDefault('attribute_model'),
-                        'backend_model'   => $attribute->getOptionOrDefault('backend_model'),
+                        'attribute_model' => $attribute->getModelClass(),
+                        'backend_model'   => $attribute->getBackendModelClass(),
                         'backend_type'    => $attribute->getBackendType(),
-                        'backend_table'   => $attribute->getOptionOrDefault('backend_table'),
-                        'frontend_model'  => $attribute->getOptionOrDefault('frontend_model'),
+                        'backend_table'   => $attribute->getBackendTable(),
+                        'frontend_model'  => $attribute->getFrontendModelClass(),
                         'frontend_input'  => $attribute->getFrontendType(),
-                        'frontend_label'  => $attribute->getOptionOrDefault('frontend_label'),
-                        'frontend_class'  => $attribute->getOptionOrDefault('frontend_class'),
-                        'source_model'    => $attribute->getOptionOrDefault('source_model'),
-                        'is_required'     => $attribute->getOptionOrDefault('is_required'),
-                        'is_user_defined' => $attribute->getOptionOrDefault('is_user_defined'),
-                        'default_value'   => $attribute->getOptionOrDefault('default_value'),
-                        'is_unique'       => $attribute->getOptionOrDefault('is_unique'),
-                        'note'            => $attribute->getOptionOrDefault('note'),
+                        'frontend_label'  => $attribute->getFrontendLabel(),
+                        'frontend_class'  => $attribute->getFrontendModelClass(),
+                        'source_model'    => $attribute->getSourceModelClass(),
+                        'is_required'     => $attribute->isRequired(),
+                        'is_user_defined' => $attribute->isUserDefined(),
+                        'default_value'   => $attribute->getDefaultValue(),
+                        'is_unique'       => $attribute->isUnique(),
+                        'note'            => $attribute->getNote(),
                     ]
                 );
 
