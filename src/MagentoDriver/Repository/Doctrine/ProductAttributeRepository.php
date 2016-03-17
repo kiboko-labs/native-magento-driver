@@ -6,7 +6,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Connection;
 use Luni\Component\MagentoDriver\Model\Attribute;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
+use Luni\Component\MagentoDriver\Model\CatalogAttribute;
+use Luni\Component\MagentoDriver\Model\CatalogAttributeExtension;
+use Luni\Component\MagentoDriver\Model\CatalogAttributeExtensionInterface;
 use Luni\Component\MagentoDriver\Model\FamilyInterface;
 use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
 use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
@@ -45,27 +47,64 @@ class ProductAttributeRepository
 
     /**
      * @param array $options
-     * @return AttributeInterface
+     * @return CatalogAttributeExtensionInterface
      */
     protected function createNewAttributeInstanceFromDatabase(array $options)
     {
-        $attributeId = isset($options['attribute_id']) ? $options['attribute_id'] : null;
-        $attributeCode = isset($options['attribute_code']) ? $options['attribute_code'] : null;
-        $backendType = isset($options['backend_type']) ? $options['backend_type'] : null;
-
-        unset(
-            $options['attribute_id'],
-            $options['attribute_code'],
-            $options['backend_type']
+        return new CatalogAttribute(
+            Attribute::buildNewWith(
+                isset($options['attribute_id'])    ? $options['attribute_id']           : null,
+                isset($options['entity_type_id'])  ? $options['entity_type_id']         : null,
+                isset($options['attribute_code'])  ? $options['attribute_code']         : null,
+                isset($options['attribute_model']) ? $options['attribute_model']        : null,
+                isset($options['backend_type'])    ? $options['backend_type']           : null,
+                isset($options['backend_model'])   ? $options['backend_model']          : null,
+                isset($options['backend_table'])   ? $options['backend_table']          : null,
+                isset($options['frontend_model'])  ? $options['frontend_model']         : null,
+                isset($options['frontend_input'])  ? $options['frontend_input']         : null,
+                isset($options['frontend_label'])  ? $options['frontend_label']         : null,
+                isset($options['frontend_class'])  ? $options['frontend_class']         : null,
+                isset($options['source_model'])    ? $options['source_model']           : null,
+                isset($options['is_required'])     ? (bool) $options['is_required']     : false,
+                isset($options['is_user_defined']) ? (bool) $options['is_user_defined'] : false,
+                isset($options['is_unique'])       ? (bool) $options['is_unique']       : false,
+                isset($options['default_value'])   ? $options['default_value']          : null
+            ),
+            CatalogAttributeExtension::buildNewWith(
+                isset($options['attribute_id'])                  ? $options['attribute_id']                         : null,
+                isset($options['frontend_input_renderer'])       ? $options['frontend_input_renderer']              : null,
+                isset($options['is_global'])                     ? (bool) $options['is_global']                     : 1,
+                isset($options['is_visible'])                    ? (bool) $options['is_visible']                    : false,
+                isset($options['is_searchable'])                 ? (bool) $options['is_searchable']                 : false,
+                isset($options['is_filterable'])                 ? (bool) $options['is_filterable']                 : false,
+                isset($options['is_comparable'])                 ? (bool) $options['is_comparable']                 : false,
+                isset($options['is_visible_on_front'])           ? (bool) $options['is_visible_on_front']           : false,
+                isset($options['is_html_allowed_on_front'])      ? (bool) $options['is_html_allowed_on_front']      : false,
+                isset($options['is_used_for_price_rules'])       ? (bool) $options['is_used_for_price_rules']       : false,
+                isset($options['is_filterable_in_search'])       ? (bool) $options['is_filterable_in_search']       : false,
+                isset($options['used_in_product_listing'])       ? (bool) $options['used_in_product_listing']       : false,
+                isset($options['used_for_sort_by'])              ? (bool) $options['used_for_sort_by']              : false,
+                isset($options['is_configurable'])               ? (bool) $options['is_configurable']               : false, // Magento 1
+                isset($options['is_visible_in_advanced_search']) ? (bool) $options['is_visible_in_advanced_search'] : false,
+                isset($options['is_wysiwyg_enabled'])            ? (bool) $options['is_wysiwyg_enabled']            : false,
+                isset($options['is_used_for_promo_rules'])       ? (bool) $options['is_used_for_promo_rules']       : false,
+                $requiredInAdminStore = false,                          // Magento 2
+                $usedInGrid = false,                                    // Magento 2
+                $visibleInGrid = false,                                 // Magento 2
+                $filterableInGrid = false,                              // Magento 2
+                isset($options['position'])                      ? (bool) $options['position']                      : 1,
+                $searchWeight = false,                                  // Magento 2
+                $applyTo = [],                                          // Magento 2
+                $additionalData = [],                                   // Magento 2
+                isset($options['note']) ? $options['note'] : null
+            )
         );
-
-        return Attribute::buildNewWith($attributeId, $attributeCode, $backendType, $options);
     }
 
     /**
      * @param string $entityTypeCode
      * @param string $code
-     * @return AttributeInterface
+     * @return CatalogAttributeExtensionInterface
      */
     public function findOneByCode($code, $entityTypeCode)
     {
@@ -86,7 +125,7 @@ class ProductAttributeRepository
 
     /**
      * @param int $id
-     * @return AttributeInterface
+     * @return CatalogAttributeExtensionInterface
      */
     public function findOneById($id)
     {
@@ -108,7 +147,7 @@ class ProductAttributeRepository
     /**
      * @param string $entityTypeCode
      * @param array|string[] $codeList
-     * @return Collection|AttributeInterface[]
+     * @return Collection|CatalogAttributeExtensionInterface[]
      */
     public function findAllByCode($entityTypeCode, array $codeList)
     {
@@ -133,7 +172,7 @@ class ProductAttributeRepository
 
     /**
      * @param array|int[] $idList
-     * @return Collection|AttributeInterface[]
+     * @return Collection|CatalogAttributeExtensionInterface[]
      */
     public function findAllById(array $idList)
     {
@@ -157,7 +196,7 @@ class ProductAttributeRepository
     }
 
     /**
-     * @return Collection|AttributeInterface[]
+     * @return Collection|CatalogAttributeExtensionInterface[]
      */
     public function findAll()
     {
@@ -182,7 +221,7 @@ class ProductAttributeRepository
 
     /**
      * @param ProductInterface $product
-     * @return Collection|AttributeInterface[]
+     * @return Collection|CatalogAttributeExtensionInterface[]
      */
     public function findAllByEntity(ProductInterface $product)
     {
@@ -191,7 +230,7 @@ class ProductAttributeRepository
 
     /**
      * @param string $entityTypeCode
-     * @return Collection|AttributeInterface[]
+     * @return Collection|CatalogAttributeExtensionInterface[]
      */
     public function findAllByEntityTypeCode($entityTypeCode)
     {
@@ -216,7 +255,7 @@ class ProductAttributeRepository
 
     /**
      * @param int $entityTypeId
-     * @return Collection|AttributeInterface[]
+     * @return Collection|CatalogAttributeExtensionInterface[]
      */
     public function findAllByEntityTypeId($entityTypeId)
     {
@@ -243,7 +282,7 @@ class ProductAttributeRepository
 
     /**
      * @param ProductInterface $product
-     * @return Collection|AttributeInterface[]
+     * @return Collection|CatalogAttributeExtensionInterface[]
      */
     public function findAllVariantAxisByEntity(ProductInterface $product)
     {
@@ -272,7 +311,7 @@ class ProductAttributeRepository
 
     /**
      * @param FamilyInterface $family
-     * @return Collection|AttributeInterface[]
+     * @return Collection|CatalogAttributeExtensionInterface[]
      */
     public function findAllByFamily(FamilyInterface $family)
     {
@@ -297,7 +336,7 @@ class ProductAttributeRepository
 
     /**
      * @param FamilyInterface $family
-     * @return Collection|AttributeInterface[]
+     * @return Collection|CatalogAttributeExtensionInterface[]
      */
     public function findAllMandatoryByFamily(FamilyInterface $family)
     {

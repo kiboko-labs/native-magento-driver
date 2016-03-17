@@ -73,6 +73,11 @@ class CatalogAttributeExtension
     /**
      * @var bool
      */
+    private $isConfigurable;
+
+    /**
+     * @var bool
+     */
     private $visibleInAdvancedSearch;
 
     /**
@@ -138,6 +143,7 @@ class CatalogAttributeExtension
      * @param bool $filterableInSearch,
      * @param bool $usedInProductListing,
      * @param bool $usedForSortBy,
+     * @param bool $configurable,
      * @param bool $visibleInAdvancedSearch,
      * @param bool $wysiwygEnabled,
      * @param bool $usedForPromoRules,
@@ -164,6 +170,7 @@ class CatalogAttributeExtension
         $filterableInSearch = false,
         $usedInProductListing = false,
         $usedForSortBy = false,
+        $configurable = false,
         $visibleInAdvancedSearch = false,
         $wysiwygEnabled = false,
         $usedForPromoRules = false,
@@ -189,6 +196,7 @@ class CatalogAttributeExtension
         $this->filterableInSearch = (bool) $filterableInSearch;
         $this->usedInProductListing = (bool) $usedInProductListing;
         $this->usedForSortBy = (bool) $usedForSortBy;
+        $this->configurable = (bool) $configurable;
         $this->visibleInAdvancedSearch = (bool) $visibleInAdvancedSearch;
         $this->wysiwygEnabled = (bool) $wysiwygEnabled;
         $this->usedForPromoRules = (bool) $usedForPromoRules;
@@ -229,7 +237,7 @@ class CatalogAttributeExtension
      * @param array $productTypesApplyingTo,
      * @param array $additionalData,
      * @param string $note
-     * @return AttributeInterface
+     * @return CatalogAttributeExtensionInterface
      */
     public static function buildNewWith(
         $attributeId,
@@ -245,6 +253,7 @@ class CatalogAttributeExtension
         $filterableInSearch = false,
         $usedInProductListing = false,
         $usedForSortBy = false,
+        $configurable = false,
         $visibleInAdvancedSearch = false,
         $wysiwygEnabled = false,
         $usedForPromoRules = false,
@@ -271,6 +280,7 @@ class CatalogAttributeExtension
             $filterableInSearch,
             $usedInProductListing,
             $usedForSortBy,
+            $configurable,
             $visibleInAdvancedSearch,
             $wysiwygEnabled,
             $usedForPromoRules,
@@ -291,7 +301,25 @@ class CatalogAttributeExtension
     }
 
     /**
-     * @return bool
+     * @return int
+     * @MagentoODM\Field('attribute_id', version='*')
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function persistedToId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return string
+     * @MagentoODM\Field('frontend_input_renderer', version='*')
      */
     public function getFrontendInputRendererClassName()
     {
@@ -300,6 +328,7 @@ class CatalogAttributeExtension
 
     /**
      * @return bool
+     * @MagentoODM\Field('is_global', version='*')
      */
     public function isGlobal()
     {
@@ -308,6 +337,7 @@ class CatalogAttributeExtension
 
     /**
      * @return bool
+     * @MagentoODM\Field('is_visible', version='*')
      */
     public function isVisible()
     {
@@ -316,6 +346,7 @@ class CatalogAttributeExtension
 
     /**
      * @return bool
+     * @MagentoODM\Field('is_searchable', version='*')
      */
     public function isSearchable()
     {
@@ -324,6 +355,7 @@ class CatalogAttributeExtension
 
     /**
      * @return bool
+     * @MagentoODM\Field('is_filterable', version='*')
      */
     public function isFilterable()
     {
@@ -332,6 +364,7 @@ class CatalogAttributeExtension
 
     /**
      * @return bool
+     * @MagentoODM\Field('is_comparable', version='*')
      */
     public function isComparable()
     {
@@ -340,6 +373,7 @@ class CatalogAttributeExtension
 
     /**
      * @return bool
+     * @MagentoODM\Field('is_visible_on_front', version='*')
      */
     public function isVisibleOnFront()
     {
@@ -348,6 +382,7 @@ class CatalogAttributeExtension
 
     /**
      * @return bool
+     * @MagentoODM\Field('is_html_allowed_on_front', version='*')
      */
     public function isHtmlAllowedOnFront()
     {
@@ -356,6 +391,7 @@ class CatalogAttributeExtension
 
     /**
      * @return bool
+     * @MagentoODM\Field('is_used_for_price_rules', version='*')
      */
     public function isUsedForPriceRules()
     {
@@ -364,6 +400,7 @@ class CatalogAttributeExtension
 
     /**
      * @return bool
+     * @MagentoODM\Field('is_filterable_in_search', version='*')
      */
     public function isFilterableInSearch()
     {
@@ -372,6 +409,7 @@ class CatalogAttributeExtension
 
     /**
      * @return bool
+     * @MagentoODM\Field('used_in_product_listing', version='*')
      */
     public function isUsedInProductListing()
     {
@@ -380,6 +418,7 @@ class CatalogAttributeExtension
 
     /**
      * @return bool
+     * @MagentoODM\Field('used_for_sort_by', version='*')
      */
     public function isUsedForSortBy()
     {
@@ -388,6 +427,16 @@ class CatalogAttributeExtension
 
     /**
      * @return bool
+     * @MagentoODM\Field('is_configurable', version='1.*')
+     */
+    public function isConfigurable()
+    {
+        return (bool) $this->configurable;
+    }
+
+    /**
+     * @return bool
+     * @MagentoODM\Field('is_visible_in_advanced_search', version='*')
      */
     public function isVisibleInAdvancedSearch()
     {
@@ -396,6 +445,7 @@ class CatalogAttributeExtension
 
     /**
      * @return bool
+     * @MagentoODM\Field('is_wysiwyg_enabled', version='*')
      */
     public function isWysiwygEnabled()
     {
@@ -404,6 +454,7 @@ class CatalogAttributeExtension
 
     /**
      * @return bool
+     * @MagentoODM\Field('is_used_for_promo_rules', version='*')
      */
     public function isUsedForPromoRules()
     {
@@ -412,6 +463,7 @@ class CatalogAttributeExtension
 
     /**
      * @return bool
+     * @MagentoODM\Field('is_required_in_admin_store', version='2.*')
      */
     public function isRequiredInAdminStore()
     {
@@ -420,6 +472,7 @@ class CatalogAttributeExtension
 
     /**
      * @return bool
+     * @MagentoODM\Field('is_used_in_grid', version='2.*')
      */
     public function isUsedInGrid()
     {
@@ -428,6 +481,7 @@ class CatalogAttributeExtension
 
     /**
      * @return bool
+     * @MagentoODM\Field('is_visible_in_grid', version='2.*')
      */
     public function isVisibleInGrid()
     {
@@ -436,6 +490,7 @@ class CatalogAttributeExtension
 
     /**
      * @return bool
+     * @MagentoODM\Field('is_filterable_in_grid', version='2.*')
      */
     public function isFilterableInGrid()
     {
@@ -443,7 +498,8 @@ class CatalogAttributeExtension
     }
 
     /**
-     * @return bool
+     * @return int
+     * @MagentoODM\Field('position', version='*')
      */
     public function getPosition()
     {
@@ -451,7 +507,8 @@ class CatalogAttributeExtension
     }
 
     /**
-     * @return bool
+     * @return int
+     * @MagentoODM\Field('search_weight', version='2.*')
      */
     public function getSearchWeight()
     {
@@ -459,7 +516,8 @@ class CatalogAttributeExtension
     }
 
     /**
-     * @return array
+     * @return string[]
+     * @MagentoODM\Field('apply_to', version='*')
      */
     public function getProductTypesApplyingTo()
     {
@@ -468,6 +526,7 @@ class CatalogAttributeExtension
 
     /**
      * @return array
+     * @MagentoODM\Field('additional_data', version='2.*')
      */
     public function getAdditionalData()
     {

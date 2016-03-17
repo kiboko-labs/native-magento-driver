@@ -12,7 +12,6 @@ trait DatabaseConnectionAwareTrait
      */
     private $connection;
 
-
     /**
      * @throws \Doctrine\DBAL\DBALException
      */

@@ -28,6 +28,11 @@ class Attribute
     /**
      * @var string
      */
+    private $backendType;
+
+    /**
+     * @var string
+     */
     private $backendModelClass;
 
     /**
@@ -89,6 +94,7 @@ class Attribute
      * @param int $entityTypeId
      * @param string $code
      * @param string $modelClass
+     * @param string $backendType
      * @param string $backendModelClass
      * @param string $backendTable
      * @param string $frontendType
@@ -107,6 +113,7 @@ class Attribute
         $entityTypeId,
         $code,
         $modelClass,
+        $backendType,
         $backendModelClass,
         $backendTable,
         $frontendType,
@@ -124,6 +131,7 @@ class Attribute
         $this->entityTypeId = $entityTypeId;
         $this->code = $code;
         $this->modelClass = $modelClass;
+        $this->backendType = $backendType;
         $this->backendModelClass = $backendModelClass;
         $this->backendTable = $backendTable;
         $this->frontendType = $frontendType;
@@ -144,6 +152,7 @@ class Attribute
      * @param int $entityTypeId
      * @param string $code
      * @param string $modelClass
+     * @param string $backendType
      * @param string $backendModelClass
      * @param string $backendTable
      * @param string $frontendType
@@ -164,6 +173,7 @@ class Attribute
         $entityTypeId,
         $code,
         $modelClass,
+        $backendType,
         $backendModelClass,
         $backendTable,
         $frontendType,
@@ -173,8 +183,8 @@ class Attribute
         $frontendViewClass,
         $sourceModelClass,
         $required,
-        $unique,
         $userDefined,
+        $unique,
         $defaultValue,
         $note = null
     ) {
@@ -182,6 +192,7 @@ class Attribute
             $entityTypeId,
             $code,
             $modelClass,
+            $backendType,
             $backendModelClass,
             $backendTable,
             $frontendType,
@@ -204,6 +215,7 @@ class Attribute
 
     /**
      * @return int
+     * @MagentoODM\Field('attribute_id', version='*')
      */
     public function getId()
     {
@@ -211,7 +223,16 @@ class Attribute
     }
 
     /**
+     * @param int $id
+     */
+    public function persistedToId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
      * @return int
+     * @MagentoODM\Field('entity_type_id', version='*')
      */
     public function getEntityTypeId()
     {
@@ -220,6 +241,7 @@ class Attribute
 
     /**
      * @return string
+     * @MagentoODM\Field('attribute_code', version='*')
      */
     public function getCode()
     {
@@ -228,6 +250,7 @@ class Attribute
 
     /**
      * @return string
+     * @MagentoODM\Field('attribute_model', version='*')
      */
     public function getModelClass()
     {
@@ -236,6 +259,16 @@ class Attribute
 
     /**
      * @return string
+     * @MagentoODM\Field('backend_type', version='*')
+     */
+    public function getBackendType()
+    {
+        return $this->backendType;
+    }
+
+    /**
+     * @return string
+     * @MagentoODM\Field('backend_model', version='*')
      */
     public function getBackendModelClass()
     {
@@ -244,6 +277,7 @@ class Attribute
 
     /**
      * @return string
+     * @MagentoODM\Field('backend_table', version='*')
      */
     public function getBackendTable()
     {
@@ -252,6 +286,7 @@ class Attribute
 
     /**
      * @return string
+     * @MagentoODM\Field('frontend_model', version='*')
      */
     public function getFrontendModelClass()
     {
@@ -260,6 +295,7 @@ class Attribute
 
     /**
      * @return string
+     * @MagentoODM\Field('frontend_input', version='*')
      */
     public function getFrontendInput()
     {
@@ -268,6 +304,7 @@ class Attribute
 
     /**
      * @return string
+     * @MagentoODM\Field('frontend_label', version='*')
      */
     public function getFrontendLabel()
     {
@@ -276,6 +313,7 @@ class Attribute
 
     /**
      * @return string
+     * @MagentoODM\Field('frontend_class', version='*')
      */
     public function getFrontendViewClass()
     {
@@ -284,6 +322,7 @@ class Attribute
 
     /**
      * @return string
+     * @MagentoODM\Field('source_model', version='*')
      */
     public function getSourceModelClass()
     {
@@ -292,6 +331,7 @@ class Attribute
 
     /**
      * @return bool
+     * @MagentoODM\Field('is_required', version='*')
      */
     public function isRequired()
     {
@@ -300,6 +340,7 @@ class Attribute
 
     /**
      * @return bool
+     * @MagentoODM\Field('is_user_defined', version='*')
      */
     public function isUserDefined()
     {
@@ -316,14 +357,16 @@ class Attribute
 
     /**
      * @return bool
+     * @MagentoODM\Field('is_unique', version='*')
      */
     public function isUnique()
     {
-        return (bool) !$this->unique;
+        return (bool) $this->unique;
     }
 
     /**
      * @return string
+     * @MagentoODM\Field('default_value', version='*')
      */
     public function getDefaultValue()
     {
@@ -332,6 +375,7 @@ class Attribute
 
     /**
      * @return string
+     * @MagentoODM\Field('note', version='*')
      */
     public function getNote()
     {

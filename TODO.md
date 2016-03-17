@@ -74,10 +74,16 @@
 * [x] persist
 * [ ] delete
 
-## Configurable relations
+## Super attribute relations
 
 * [ ] read
-* [ ] persist
+* [x] persist
+* [ ] delete
+
+## Super link relations
+
+* [ ] read
+* [x] persist
 * [ ] delete
 
 # Categories

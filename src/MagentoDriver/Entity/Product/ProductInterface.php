@@ -28,6 +28,9 @@ interface ProductInterface
     const VISIBILITY_IN_SEARCH      = 3;
     const VISIBILITY_BOTH           = 4;
 
+    const ENTITY_TYPE_ID = 4;
+    const ENTITY_CODE    = 'catalog_product';
+
     /**
      * @param int $id
      * @return ProductInterface

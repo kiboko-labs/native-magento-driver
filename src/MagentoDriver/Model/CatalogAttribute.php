@@ -5,7 +5,7 @@ namespace Luni\Component\MagentoDriver\Model;
 use Luni\Component\MagentoDriver\Exception\RuntimeErrorException;
 
 class CatalogAttribute
-    implements AttributeInterface, CatalogAttributeExtensionInterface
+    implements CatalogAttributeInterface
 {
     /**
      * @var AttributeInterface
@@ -28,6 +28,9 @@ class CatalogAttribute
         if ($attribute->getId() !== $extension->getId()) {
             throw new RuntimeErrorException('Extension\'s attribute ID should match the attribute\'s.');
         }
+
+        $this->attribute = $attribute;
+        $this->extension = $extension;
     }
 
     /**
@@ -36,6 +39,15 @@ class CatalogAttribute
     public function getId()
     {
         return $this->attribute->getId();
+    }
+
+    /**
+     * @param int $id
+     */
+    public function persistedToId($id)
+    {
+        $this->attribute->persistedToId($id);
+        $this->extension->persistedToId($id);
     }
 
     /**
@@ -60,6 +72,14 @@ class CatalogAttribute
     public function getModelClass()
     {
         return $this->attribute->getModelClass();
+    }
+
+    /**
+     * @return string
+     */
+    public function getBackendType()
+    {
+        return $this->attribute->getBackendType();
     }
 
     /**
@@ -260,6 +280,15 @@ class CatalogAttribute
     public function isUsedForSortBy()
     {
         return $this->extension->isUsedForSortBy();
+    }
+
+    /**
+     * @return bool
+     * @MagentoODM\Field('is_configurable', version='1.*')
+     */
+    public function isConfigurable()
+    {
+        return $this->extension->isConfigurable();
     }
 
     /**
