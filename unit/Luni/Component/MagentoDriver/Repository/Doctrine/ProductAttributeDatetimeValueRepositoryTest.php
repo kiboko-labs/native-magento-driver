@@ -12,7 +12,7 @@ use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeValueQuer
 use Luni\Component\MagentoDriver\Repository\AttributeRepositoryInterface;
 use Luni\Component\MagentoDriver\Repository\Doctrine\ProductAttributeValueRepository;
 use Luni\Component\MagentoDriver\Repository\ProductAttributeValueRepositoryInterface;
-use unit\Luni\Component\MagentoDriver\DoctrineSchemaBuilder;
+use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
 
 class ProductAttributeDatetimeValueRepositoryTest
@@ -263,7 +263,7 @@ class ProductAttributeDatetimeValueRepositoryTest
 
         $this->schema = new Schema();
 
-        $schemaBuilder = new DoctrineSchemaBuilder($this->schema);
+        $schemaBuilder = new DoctrineSchemaBuilder($this->connection, $this->schema);
         $schemaBuilder->ensureStoreTable();
         $schemaBuilder->ensureAttributeTable();
         $schemaBuilder->ensureCatalogProductEntityTable();

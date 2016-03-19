@@ -8,7 +8,7 @@ use Luni\Component\MagentoDriver\Model\FamilyInterface;
 use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\FamilyQueryBuilder;
 use Luni\Component\MagentoDriver\Repository\Doctrine\FamilyRepository;
 use Luni\Component\MagentoDriver\Repository\FamilyRepositoryInterface;
-use unit\Luni\Component\MagentoDriver\DoctrineSchemaBuilder;
+use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
 
 class FamilyRepositoryTest
@@ -99,7 +99,7 @@ class FamilyRepositoryTest
 
         $this->schema = new Schema();
 
-        $schemaBuilder = new DoctrineSchemaBuilder($this->schema);
+        $schemaBuilder = new DoctrineSchemaBuilder($this->connection, $this->schema);
         $schemaBuilder->ensureEntityTypeTable();
         $schemaBuilder->ensureFamilyTable();
         $schemaBuilder->ensureFamilyToEntityTypeLinks();

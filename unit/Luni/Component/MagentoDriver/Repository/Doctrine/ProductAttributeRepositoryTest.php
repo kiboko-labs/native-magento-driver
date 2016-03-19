@@ -7,7 +7,7 @@ use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilder;
 use Luni\Component\MagentoDriver\Repository\AttributeRepositoryInterface;
 use Luni\Component\MagentoDriver\Repository\Doctrine\ProductAttributeRepository;
-use unit\Luni\Component\MagentoDriver\DoctrineSchemaBuilder;
+use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
 
 class ProductAttributeRepositoryTest
@@ -184,12 +184,12 @@ class ProductAttributeRepositoryTest
 
         $this->schema = new Schema();
 
-        $schemaBuilder = new DoctrineSchemaBuilder($this->schema);
+        $schemaBuilder = new DoctrineSchemaBuilder($this->connection, $this->schema);
         $schemaBuilder->ensureEntityTypeTable();
         $schemaBuilder->ensureAttributeTable();
-        $schemaBuilder->ensureCatalogAttributeExtraTable();
+        $schemaBuilder->ensureCatalogAttributeExtensionsTable();
         $schemaBuilder->ensureAttributeToEntityTypeLinks();
-        $schemaBuilder->ensureCatalogAttributeExtraToAttributeLinks();
+        $schemaBuilder->ensureCatalogAttributeExtensionsToAttributeLinks();
 
         $comparator = new \Doctrine\DBAL\Schema\Comparator();
         $schemaDiff = $comparator->compare($currentSchema, $this->schema);

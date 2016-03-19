@@ -8,7 +8,7 @@ use Luni\Component\MagentoDriver\Model\Attribute;
 use Luni\Component\MagentoDriver\Persister\AttributePersisterInterface;
 use Luni\Component\MagentoDriver\Persister\Direct\Attribute\StandardAttributePersister;
 use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilder;
-use unit\Luni\Component\MagentoDriver\DoctrineSchemaBuilder;
+use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
 
 class AttributePersisterTest
@@ -50,7 +50,7 @@ class AttributePersisterTest
 
         $this->schema = new Schema();
 
-        $schemaBuilder = new DoctrineSchemaBuilder($this->schema);
+        $schemaBuilder = new DoctrineSchemaBuilder($this->connection, $this->schema);
         $schemaBuilder->ensureEntityTypeTable();
         $schemaBuilder->ensureAttributeTable();
         $schemaBuilder->ensureAttributeToEntityTypeLinks();
