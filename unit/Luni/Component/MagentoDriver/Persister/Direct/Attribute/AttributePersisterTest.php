@@ -10,6 +10,7 @@ use Luni\Component\MagentoDriver\Persister\Direct\Attribute\StandardAttributePer
 use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilder;
 use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Luni\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
 
 class AttributePersisterTest
     extends \PHPUnit_Framework_TestCase
@@ -54,6 +55,7 @@ class AttributePersisterTest
         $schemaBuilder->ensureEntityTypeTable();
         $schemaBuilder->ensureAttributeTable();
         $schemaBuilder->ensureAttributeToEntityTypeLinks();
+        $schemaBuilder->hydrateEntityTypeTable('1.9', 'ce');
 
         $comparator = new \Doctrine\DBAL\Schema\Comparator();
         $schemaDiff = $comparator->compare($currentSchema, $this->schema);
@@ -67,28 +69,6 @@ class AttributePersisterTest
         $this->persister = new StandardAttributePersister(
             $this->getConnection(),
             ProductAttributeQueryBuilder::getDefaultTable()
-        );
-
-        $this->connection->insert(
-            'eav_entity_type',
-            [
-                'entity_type_id'              => ProductInterface::ENTITY_TYPE_ID,
-                'entity_type_code'            => ProductInterface::ENTITY_CODE,
-                'entity_model'                => 'catalog/product',
-                'attribute_model'             => 'catalog/resource_eav_attribute',
-                'entity_table'                => 'catalog/product',
-                'value_table_prefix'          => null,
-                'entity_id_field'             => null,
-                'is_data_sharing'             => 1,
-                'data_sharing_key'            => 'default',
-                'default_attribute_set_id'    => 4,
-                'increment_model'             => null,
-                'increment_per_store'         => 0,
-                'increment_pad_length'        => 8,
-                'increment_pad_char'          => 0,
-                'additional_attribute_table'  => 'catalog/eav_attribute',
-                'entity_attribute_collection' => 'catalog/product_attribute_collection',
-            ]
         );
     }
 
@@ -107,25 +87,28 @@ class AttributePersisterTest
         $this->persister->flush();
     }
 
-    public function testInsertOneInteger()
+    public function testInsertOne()
     {
+        $dataLoader = new Loader($this->connection, 'eav_attribute');
+
+        $data = $dataLoader->readData('1.9', 'ce');
         $attribute = new Attribute(
-            ProductInterface::ENTITY_TYPE_ID,       // entity_type_id
-            'testing_integer',                      // attribute_code
-            null,                                   // attribute_model
-            'int',                                  // backend_type
-            null,                                   // backend_model
-            null,                                   // backend_table
-            null,                                   // frontend_model
-            'text',                                 // frontend_input
-            'Testing integer',                      // frontend_label
-            null,                                   // frontend_class
-            null,                                   // source_model
-            false,                                  // is_required
-            false,                                  // is_user_defined
-            false,                                  // is_unique
-            '0',                                    // default_value
-            null                                    // note
+            $data['entity_type_id'],
+            $data['attribute_code'],
+            $data['attribute_model'],
+            $data['backend_model'],
+            $data['backend_type'],
+            $data['backend_table'],
+            $data['frontend_model'],
+            $data['frontend_input'],
+            $data['frontend_label'],
+            $data['frontend_class'],
+            $data['source_model'],
+            $data['is_required'],
+            $data['is_user_defined'],
+            $data['default_value'],
+            $data['is_unique'],
+            $data['note']
         );
 
         $this->persister->initialize();
@@ -133,25 +116,29 @@ class AttributePersisterTest
         $this->persister->flush();
     }
 
-    public function testInsertOneSelectable()
+    public function testUpdateOneExisting()
     {
-        $attribute = new Attribute(
-            ProductInterface::ENTITY_TYPE_ID,       // entity_type_id
-            'testing_selectable',                   // attribute_code
-            null,                                   // attribute_model
-            'int',                                  // backend_type
-            null,                                   // backend_model
-            null,                                   // backend_table
-            null,                                   // frontend_model
-            'select',                               // frontend_input
-            'Testing selectable',                   // frontend_label
-            null,                                   // frontend_class
-            'eav/entity_attribute_source_table',    // source_model
-            false,                                  // is_required
-            true,                                   // is_user_defined
-            false,                                  // is_unique
-            '0',                                    // default_value
-            null                                    // note
+        $dataLoader = new Loader($this->connection, 'eav_attribute');
+
+        $data = $dataLoader->readData('1.9', 'ce');
+        $attribute = Attribute::buildNewWith(
+            $data['attribute_id'],
+            $data['entity_type_id'],
+            $data['attribute_code'],
+            $data['attribute_model'],
+            $data['backend_model'],
+            $data['backend_type'],
+            $data['backend_table'],
+            $data['frontend_model'],
+            $data['frontend_input'],
+            $data['frontend_label'],
+            $data['frontend_class'],
+            $data['source_model'],
+            $data['is_required'],
+            $data['is_user_defined'],
+            $data['default_value'],
+            $data['is_unique'],
+            $data['note']
         );
 
         $this->persister->initialize();

@@ -3,8 +3,6 @@
 namespace unit\Luni\Component\MagentoDriver\Persister\Direct\Attribute;
 
 use Doctrine\DBAL\Schema\Schema;
-use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
-use Luni\Component\MagentoDriver\Model\Attribute;
 use Luni\Component\MagentoDriver\Model\CatalogAttributeExtension;
 use Luni\Component\MagentoDriver\Persister\CatalogAttributeExtensionPersisterInterface;
 use Luni\Component\MagentoDriver\Persister\Direct\Attribute\CatalogAttributeExtensionPersister;
@@ -95,12 +93,13 @@ class CatalogAttributeExtensionPersisterTest
         $this->persister->flush();
     }
 
-    public function testInsertOneInteger()
+    public function testInsertOne()
     {
         $dataLoader = new Loader($this->connection, 'catalog_eav_attribute');
 
         $data = $dataLoader->readData('1.9', 'ce');
         $attribute = new CatalogAttributeExtension(
+            $data['attribute_id'],
             $data['frontend_input_renderer'],
             $data['is_global'],
             $data['is_visible'],
@@ -119,32 +118,6 @@ class CatalogAttributeExtensionPersisterTest
             $data['position'],
             $data['is_wysiwyg_enabled'],
             $data['is_used_for_promo_rules']
-        );
-
-        $this->persister->initialize();
-        $this->persister->persist($attribute);
-        $this->persister->flush();
-    }
-
-    public function testInsertOneSelectable()
-    {
-        $attribute = new Attribute(
-            ProductInterface::ENTITY_TYPE_ID,
-            'testing_integer',
-            null,
-            null,
-            'int',
-            null,
-            null,
-            'select',
-            null,
-            null,
-            'eav/entity_attribute_source_table',
-            0,
-            1,
-            null,
-            0,
-            null
         );
 
         $this->persister->initialize();

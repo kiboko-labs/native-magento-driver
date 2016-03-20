@@ -131,6 +131,7 @@ class CatalogAttributeExtension
     private $additionalData;
 
     /**
+     * @param int $attributeId
      * @param bool $frontendInputRendererClassName,
      * @param int $global,
      * @param bool $visible,
@@ -158,6 +159,7 @@ class CatalogAttributeExtension
      * @param string $note
      */
     public function __construct(
+        $attributeId,
         $frontendInputRendererClassName,
         $global = 1,
         $visible = false,
@@ -184,6 +186,7 @@ class CatalogAttributeExtension
         array $additionalData = [],
         $note = null
     ) {
+        $this->id = $attributeId;
         $this->frontendInputRendererClassName = $frontendInputRendererClassName;
         $this->global = $global;
         $this->visible = (bool) $visible;
@@ -212,109 +215,12 @@ class CatalogAttributeExtension
     }
 
     /**
-     * @param int $attributeId
-     * @param bool $frontendInputRendererClassName,
-     * @param int $global,
-     * @param bool $visible,
-     * @param bool $searchable,
-     * @param bool $filterable,
-     * @param bool $comparable,
-     * @param bool $visibleOnFront,
-     * @param bool $htmlAllowedOnFront,
-     * @param bool $usedForPriceRules,
-     * @param bool $filterableInSearch,
-     * @param bool $usedInProductListing,
-     * @param bool $usedForSortBy,
-     * @param bool $visibleInAdvancedSearch,
-     * @param bool $wysiwygEnabled,
-     * @param bool $usedForPromoRules,
-     * @param bool $requiredInAdminStore,
-     * @param bool $usedInGrid,
-     * @param bool $visibleInGrid,
-     * @param bool $filterableInGrid,
-     * @param bool $position,
-     * @param bool $searchWeight,
-     * @param array $productTypesApplyingTo,
-     * @param array $additionalData,
-     * @param string $note
-     * @return CatalogAttributeExtensionInterface
-     */
-    public static function buildNewWith(
-        $attributeId,
-        $frontendInputRendererClassName,
-        $global = 1,
-        $visible = false,
-        $searchable = false,
-        $filterable = false,
-        $comparable = false,
-        $visibleOnFront = false,
-        $htmlAllowedOnFront = false,
-        $usedForPriceRules = false,
-        $filterableInSearch = false,
-        $usedInProductListing = false,
-        $usedForSortBy = false,
-        $configurable = false,
-        $visibleInAdvancedSearch = false,
-        $wysiwygEnabled = false,
-        $usedForPromoRules = false,
-        $requiredInAdminStore = false,
-        $usedInGrid = false,
-        $visibleInGrid = false,
-        $filterableInGrid = false,
-        $position = false,
-        $searchWeight = false,
-        array $productTypesApplyingTo = [],
-        array $additionalData = [],
-        $note = null
-    ) {
-        $object = new self(
-            $frontendInputRendererClassName,
-            $global,
-            $visible,
-            $searchable,
-            $filterable,
-            $comparable,
-            $visibleOnFront,
-            $htmlAllowedOnFront,
-            $usedForPriceRules,
-            $filterableInSearch,
-            $usedInProductListing,
-            $usedForSortBy,
-            $configurable,
-            $visibleInAdvancedSearch,
-            $wysiwygEnabled,
-            $usedForPromoRules,
-            $requiredInAdminStore,
-            $usedInGrid,
-            $visibleInGrid,
-            $filterableInGrid,
-            $position,
-            $searchWeight,
-            $productTypesApplyingTo,
-            $additionalData,
-            $note
-        );
-
-        $object->id = $attributeId;
-
-        return $object;
-    }
-
-    /**
      * @return int
      * @MagentoODM\Field('attribute_id', version='*')
      */
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function persistedToId($id)
-    {
-        $this->id = $id;
     }
 
     /**

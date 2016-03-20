@@ -11,11 +11,6 @@ interface CatalogAttributeExtensionInterface
     public function getId();
 
     /**
-     * @param int $id
-     */
-    public function persistedToId($id);
-
-    /**
      * @return string
      * @MagentoODM\Field('frontend_input_renderer', version='*')
      */

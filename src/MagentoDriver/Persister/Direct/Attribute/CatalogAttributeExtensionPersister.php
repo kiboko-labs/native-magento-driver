@@ -84,7 +84,8 @@ class CatalogAttributeExtensionPersister
                         'used_in_product_listing'       => $attribute->isUsedInProductListing(),
                         'used_for_sort_by'              => $attribute->isUsedForSortBy(),
                         'is_configurable'               => $attribute->isConfigurable(),
-                        'apply_to'                      => implode(',', $attribute->getProductTypesApplyingTo()),
+                        'apply_to'                      => empty($attribute->getProductTypesApplyingTo()) ?
+                            null : implode(',', $attribute->getProductTypesApplyingTo()),
                         'is_visible_in_advanced_search' => $attribute->isVisibleInAdvancedSearch(),
                         'position'                      => $attribute->getPosition(),
                         'is_wysiwyg_enabled'            => $attribute->isWysiwygEnabled(),
@@ -110,15 +111,14 @@ class CatalogAttributeExtensionPersister
                         'used_in_product_listing'       => $attribute->isUsedInProductListing(),
                         'used_for_sort_by'              => $attribute->isUsedForSortBy(),
                         'is_configurable'               => $attribute->isConfigurable(),
-                        'apply_to'                      => implode(',', $attribute->getProductTypesApplyingTo()),
+                        'apply_to'                      => empty($attribute->getProductTypesApplyingTo()) ?
+                            null : implode(',', $attribute->getProductTypesApplyingTo()),
                         'is_visible_in_advanced_search' => $attribute->isVisibleInAdvancedSearch(),
                         'position'                      => $attribute->getPosition(),
                         'is_wysiwyg_enabled'            => $attribute->isWysiwygEnabled(),
                         'is_used_for_promo_rules'       => $attribute->isUsedForPromoRules(),
                     ]
                 );
-
-                $attribute->persistedToId($this->connection->lastInsertId());
             }
         }
     }
