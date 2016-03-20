@@ -5,7 +5,7 @@ namespace Luni\Component\MagentoDriver\Repository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Luni\Component\MagentoDriver\Broker\ProductAttributeValueRepositoryBrokerInterface;
-use Luni\Component\MagentoDriver\Entity\ProductInterface;
+use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 
@@ -53,7 +53,7 @@ class ProductAttributeValueRepositoryFacade
         foreach ($this->broker->walkRepositoryList() as $repository) {
             $valuesList = array_merge(
                 $valuesList,
-                $values = $repository->findAllVariantAxisByProductFromDefault($product)->toArray()
+                $repository->findAllVariantAxisByProductFromDefault($product)->toArray()
             );
         }
 
@@ -71,7 +71,7 @@ class ProductAttributeValueRepositoryFacade
         foreach ($this->broker->walkRepositoryList() as $repository) {
             $valuesList = array_merge(
                 $valuesList,
-                $values = $repository->findAllVariantAxisByProductFromStoreId($product, $storeId)->toArray()
+                $repository->findAllVariantAxisByProductFromStoreId($product, $storeId)->toArray()
             );
         }
 
@@ -86,7 +86,7 @@ class ProductAttributeValueRepositoryFacade
         foreach ($this->broker->walkRepositoryList() as $repository) {
             $valuesList = array_merge(
                 $valuesList,
-                $values = $repository->findAllByProductAndAttributeListFromDefault($product, $attributeList)->toArray()
+                $repository->findAllByProductAndAttributeListFromDefault($product, $attributeList)->toArray()
             );
         }
 
@@ -102,7 +102,7 @@ class ProductAttributeValueRepositoryFacade
         foreach ($this->broker->walkRepositoryList() as $repository) {
             $valuesList = array_merge(
                 $valuesList,
-                $values = $repository->findAllByProductAndAttributeListFromStoreId($product, $attributeList, $storeId)->toArray()
+                $repository->findAllByProductAndAttributeListFromStoreId($product, $attributeList, $storeId)->toArray()
             );
         }
 
@@ -158,7 +158,7 @@ class ProductAttributeValueRepositoryFacade
         foreach ($this->broker->walkRepositoryList() as $repository) {
             $valuesList = array_merge(
                 $valuesList,
-                $values = $repository->findAllByProductListFromDefault($productList)->toArray()
+                $repository->findAllByProductListFromDefault($productList)->toArray()
             );
         }
 
@@ -173,7 +173,7 @@ class ProductAttributeValueRepositoryFacade
         foreach ($this->broker->walkRepositoryList() as $repository) {
             $valuesList = array_merge(
                 $valuesList,
-                $values = $repository->findAllByProductListFromStoreId($productList, $storeId)->toArray()
+                $repository->findAllByProductListFromStoreId($productList, $storeId)->toArray()
             );
         }
 
@@ -188,7 +188,7 @@ class ProductAttributeValueRepositoryFacade
         foreach ($this->broker->walkRepositoryList() as $repository) {
             $valuesList = array_merge(
                 $valuesList,
-                $values = $repository->findAllByProductListAndAttributeListFromDefault($productList, $attributeList)->toArray()
+                $repository->findAllByProductListAndAttributeListFromDefault($productList, $attributeList)->toArray()
             );
         }
 
@@ -204,7 +204,7 @@ class ProductAttributeValueRepositoryFacade
         foreach ($this->broker->walkRepositoryList() as $repository) {
             $valuesList = array_merge(
                 $valuesList,
-                $values = $repository->findAllByProductListAndAttributeListFromStoreId($productList, $attributeList, $storeId)->toArray()
+                $repository->findAllByProductListAndAttributeListFromStoreId($productList, $attributeList, $storeId)->toArray()
             );
         }
 
@@ -239,7 +239,7 @@ class ProductAttributeValueRepositoryFacade
         foreach ($this->broker->walkRepositoryList() as $repository) {
             $valuesList = array_merge(
                 $valuesList,
-                $values = $repository->findAllByProductFromStoreId($product, $storeId)->toArray()
+                $repository->findAllByProductFromStoreId($product, $storeId)->toArray()
             );
         }
 

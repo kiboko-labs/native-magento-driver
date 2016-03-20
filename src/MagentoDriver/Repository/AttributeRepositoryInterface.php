@@ -10,9 +10,10 @@ interface AttributeRepositoryInterface
 {
     /**
      * @param string $code
+     * @param string $entityTypeId
      * @return AttributeInterface
      */
-    public function findOneByCode($code);
+    public function findOneByCode($code, $entityTypeId);
 
     /**
      * @param int $id
@@ -21,10 +22,11 @@ interface AttributeRepositoryInterface
     public function findOneById($id);
 
     /**
+     * @param string $entityTypeCode
      * @param array $codeList
      * @return Collection|AttributeInterface[]
      */
-    public function findAllByCode(array $codeList);
+    public function findAllByCode($entityTypeCode, array $codeList);
 
     /**
      * @param array|int[] $idList

@@ -28,31 +28,13 @@ trait BaseCsvPersisterTrait
     private $tableName;
 
     /**
-     * @param TemporaryWriterInterface $temporaryWriter
-     * @param DatabaseWriterInterface $databaseWriter
-     * @param string $tableName
-     * @param array $tableKeys
-     */
-    public function __construct(
-        TemporaryWriterInterface $temporaryWriter,
-        DatabaseWriterInterface $databaseWriter,
-        $tableName,
-        array $tableKeys = []
-    ) {
-        $this->temporaryWriter = $temporaryWriter;
-        $this->databaseWriter = $databaseWriter;
-        $this->tableName = $tableName;
-        $this->tableKeys = $tableKeys;
-    }
-
-    /**
      * Flushes data into the DB
      */
     public function doFlush()
     {
         $this->temporaryWriter->flush();
 
-        $this->databaseWriter->write($this->getTableName(), $this->getTableKeys());
+        $this->databaseWriter->write($this->getTableName(), $this->getTableKeys(), $this->walkQueue());
     }
 
     /**
@@ -70,4 +52,9 @@ trait BaseCsvPersisterTrait
     {
         return $this->tableKeys;
     }
+
+    /**
+     * @return \Generator
+     */
+    abstract protected function walkQueue();
 }

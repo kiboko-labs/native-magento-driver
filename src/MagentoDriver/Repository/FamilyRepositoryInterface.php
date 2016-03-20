@@ -11,4 +11,10 @@ interface FamilyRepositoryInterface
      * @return FamilyInterface
      */
     public function findOneById($id);
+
+    /**
+     * @param string $name
+     * @return FamilyInterface
+     */
+    public function findOneByName($name);
 }

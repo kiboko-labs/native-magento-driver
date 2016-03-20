@@ -25,6 +25,7 @@ class ProductAttributeQueryBuilder
      * @param string $table
      * @param string $extraTable
      * @param string $variantAxisTable
+     * @param string $entityTable
      * @param string $familyTable
      * @param array $fields
      * @param array $extraFields
@@ -33,6 +34,7 @@ class ProductAttributeQueryBuilder
         Connection $connection,
         $table,
         $extraTable,
+        $entityTable,
         $variantAxisTable,
         $familyTable,
         array $fields,
@@ -42,6 +44,7 @@ class ProductAttributeQueryBuilder
         $this->table = $table;
         $this->extraTable = $extraTable;
         $this->variantAxisTable = $variantAxisTable;
+        $this->entityTable = $entityTable;
         $this->familyTable = $familyTable;
 
         $this->fields = $fields;
@@ -116,6 +119,19 @@ class ProductAttributeQueryBuilder
      * @param string $prefix
      * @return string
      */
+    public static function getDefaultEntityTable($prefix = null)
+    {
+        if ($prefix !== null) {
+            return sprintf('%seav_entity_type', $prefix);
+        }
+
+        return 'eav_entity_type';
+    }
+
+    /**
+     * @param string $prefix
+     * @return string
+     */
     public static function getDefaultExtraTable($prefix = null)
     {
         if ($prefix !== null) {
@@ -154,12 +170,13 @@ class ProductAttributeQueryBuilder
     /**
      * @param string $alias
      * @param string $extraAlias
+     * @param string $entityAlias
      * @param string $variantAxisAlias
      * @return QueryBuilder
      */
-    public function createFindAllVariantAxisByEntityQueryBuilder($alias, $extraAlias, $variantAxisAlias)
+    public function createFindAllVariantAxisByEntityQueryBuilder($alias, $extraAlias, $entityAlias, $variantAxisAlias)
     {
-        $queryBuilder = $this->createFindAllQueryBuilder($alias, $extraAlias);
+        $queryBuilder = $this->createFindAllByEntityTypeQueryBuilder($alias, $extraAlias, $entityAlias);
 
         $queryBuilder->innerJoin($alias, $this->variantAxisTable, $variantAxisAlias,
             $queryBuilder->expr()->eq(sprintf('%s.attribute_id', $variantAxisAlias), sprintf('%s.attribute_id', $alias))
@@ -173,12 +190,13 @@ class ProductAttributeQueryBuilder
     /**
      * @param string $alias
      * @param string $extraAlias
+     * @param string $entityAlias
      * @param string $familyAlias
      * @return QueryBuilder
      */
-    public function createFindAllByFamilyQueryBuilder($alias, $extraAlias, $familyAlias)
+    public function createFindAllByFamilyQueryBuilder($alias, $extraAlias, $entityAlias, $familyAlias)
     {
-        $queryBuilder = $this->createFindAllQueryBuilder($alias, $extraAlias);
+        $queryBuilder = $this->createFindAllByEntityTypeQueryBuilder($alias, $extraAlias, $entityAlias);
 
         $queryBuilder->innerJoin($alias, $this->familyTable, $familyAlias,
             $queryBuilder->expr()->eq(sprintf('%s.entity_type_id', $familyAlias), sprintf('%s.entity_type_id', $alias))
@@ -192,12 +210,13 @@ class ProductAttributeQueryBuilder
     /**
      * @param string $alias
      * @param string $extraAlias
+     * @param string $entityAlias
      * @param string $familyAlias
      * @return QueryBuilder
      */
-    public function createFindAllMandatoryByFamilyQueryBuilder($alias, $extraAlias, $familyAlias)
+    public function createFindAllMandatoryByFamilyQueryBuilder($alias, $extraAlias, $entityAlias, $familyAlias)
     {
-        $queryBuilder = $this->createFindAllQueryBuilder($alias, $extraAlias);
+        $queryBuilder = $this->createFindAllByEntityTypeQueryBuilder($alias, $extraAlias, $entityAlias);
         $queryBuilder->innerJoin($alias, $this->familyTable, $familyAlias,
             $queryBuilder->expr()->eq(sprintf('%s.entity_type_id', $familyAlias), sprintf('%s.entity_type_id', $alias))
         );

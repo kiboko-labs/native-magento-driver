@@ -2,7 +2,7 @@
 
 namespace Luni\Component\MagentoDriver\Model;
 
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
+use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
 
 trait AttributeValueTrait
 {
@@ -12,9 +12,9 @@ trait AttributeValueTrait
     private $id;
 
     /**
-     * @var int
+     * @var ProductInterface
      */
-    private $productId;
+    private $product;
 
     /**
      * @var int
@@ -49,11 +49,32 @@ trait AttributeValueTrait
     }
 
     /**
+     * @param int $id
+     */
+    public function persistedToId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
      * @return int
      */
     public function getProductId()
     {
-        return $this->storeId;
+        if ($this->product === null) {
+            return null;
+        }
+
+        return $this->product->getId();
+    }
+
+    /**
+     * @param ProductInterface $product
+     * @return AttributeValueInterface
+     */
+    public function attachToProduct(ProductInterface $product)
+    {
+        $this->product = $product;
     }
 
     /**

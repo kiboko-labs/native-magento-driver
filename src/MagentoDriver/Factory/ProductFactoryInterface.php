@@ -2,7 +2,7 @@
 
 namespace Luni\Component\MagentoDriver\Factory;
 
-use Luni\Component\MagentoDriver\Entity\ProductInterface;
+use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
 
 interface ProductFactoryInterface
 {

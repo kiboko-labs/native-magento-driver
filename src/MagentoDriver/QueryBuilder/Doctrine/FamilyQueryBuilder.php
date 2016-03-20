@@ -107,7 +107,25 @@ class FamilyQueryBuilder
     {
         $queryBuilder = $this->createFindAllQueryBuilder($alias);
 
-        $queryBuilder->where($queryBuilder->expr()->eq(sprintf('%s.attribute_set_id', $alias), '?'))
+        $queryBuilder
+            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_set_id', $alias), '?'))
+            ->setFirstResult(0)
+            ->setMaxResults(1)
+        ;
+
+        return $queryBuilder;
+    }
+
+    /**
+     * @param string $alias
+     * @return QueryBuilder
+     */
+    public function createFindOneByNameQueryBuilder($alias)
+    {
+        $queryBuilder = $this->createFindAllQueryBuilder($alias);
+
+        $queryBuilder
+            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_set_name', $alias), '?'))
             ->setFirstResult(0)
             ->setMaxResults(1)
         ;

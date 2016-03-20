@@ -4,6 +4,7 @@ namespace Luni\Component\MagentoDriver\Model\Immutable;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use League\Flysystem\File;
+use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Model\ImageAttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\ImageAttributeValueTrait;
@@ -19,18 +20,20 @@ class ImmutableImageAttributeValue
      * DatetimeAttributeValueTrait constructor.
      * @param AttributeInterface $attribute
      * @param File $file
-     * @param int $productId
+     * @param ProductInterface $product
      * @param array $metadata
      */
     public function __construct(
         AttributeInterface $attribute,
         File $file,
-        $productId = null,
+        ProductInterface $product = null,
         array $metadata = []
     ) {
         $this->attribute = $attribute;
         $this->file = $file;
-        $this->productId = $productId;
+        if ($product !== null) {
+            $this->attachToProduct($product);
+        }
 
         $this->metadata = new ArrayCollection();
         foreach ($metadata as $meta) {
@@ -51,7 +54,7 @@ class ImmutableImageAttributeValue
             $this->attribute,
             $this->id,
             $this->file,
-            $this->productId,
+            $this->product,
             $this->metadata->toArray()
         );
     }

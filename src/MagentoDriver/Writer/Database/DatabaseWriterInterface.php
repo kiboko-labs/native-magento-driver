@@ -7,7 +7,8 @@ interface DatabaseWriterInterface
     /**
      * @param string $table
      * @param string[]|array $tableFields
-     * @return void
+     * @param \Generator $messenger
+     * @return int
      */
-    public function write($table, array $tableFields);
+    public function write($table, array $tableFields, \Generator $messenger = null);
 }

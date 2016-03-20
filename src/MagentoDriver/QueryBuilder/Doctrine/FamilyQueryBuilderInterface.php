@@ -26,6 +26,12 @@ interface FamilyQueryBuilderInterface
 
     /**
      * @param string $alias
+     * @return QueryBuilder
+     */
+    public function createFindOneByNameQueryBuilder($alias);
+
+    /**
+     * @param string $alias
      * @param array|int[] $idList
      * @return QueryBuilder
      */

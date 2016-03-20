@@ -2,9 +2,8 @@
 
 namespace Luni\Component\MagentoDriver\Hydrator;
 
-use Luni\Component\MagentoDriver\Entity\ProductInterface;
+use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Model\FamilyInterface;
 
 interface ProductAttributeValueHydratorInterface
 {

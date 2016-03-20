@@ -49,4 +49,22 @@ class FamilyDeleter
 
         return $statement->rowCount();
     }
+
+    /**
+     * @param int[] $idList
+     * @return int
+     * @throws \Doctrine\DBAL\DBALException
+     * @throws DatabaseFetchingFailureException
+     */
+    public function deleteAllById(array $idList)
+    {
+        $query = $this->queryBuilder->createDeleteAllByIdQueryBuilder($idList);
+
+        $statement = $this->connection->prepare($query);
+        if (!$statement->execute($idList)) {
+            throw new DatabaseFetchingFailureException();
+        }
+
+        return $statement->rowCount();
+    }
 }

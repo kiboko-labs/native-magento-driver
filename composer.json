@@ -5,9 +5,10 @@
     "require-dev": {
         "akeneo/pim-community-dev": "1.4.*",
         "phpspec/phpspec": "~2.0",
-        "fzaninotto/faker": "dev-master"
+        "fzaninotto/faker": "dev-master",
+        "phpunit/phpunit": "^5.2"
     },
-    "license": "LGPL",
+    "license": "LGPL-3.0+",
     "authors": [
         {
             "name": "Grégory Planchat",
@@ -39,7 +40,14 @@
     ],
     "autoload": {
         "psr-4": {
-            "Luni\\Component\\MagentoDriver\\": "src/MagentoDriver/"
+            "Luni\\Component\\MagentoDriver\\": "src/MagentoDriver/",
+            "Luni\\Component\\MagentoMapper\\": "src/MagentoMapper/",
+            "Luni\\Component\\MagentoSerializer\\": "src/MagentoSerializer/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "unit\\Luni\\Component\\MagentoDriver\\": "unit/Luni/Component/MagentoDriver/"
         }
     },
     "config": {

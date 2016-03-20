@@ -2,6 +2,7 @@
 
 namespace Luni\Component\MagentoDriver\Model\Mutable;
 
+use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\Immutable\ImmutableIntegerAttributeValue;
@@ -18,18 +19,20 @@ class MutableIntegerAttributeValue
      * MediaGalleryAttributeValue constructor.
      * @param AttributeInterface $attribute
      * @param int $payload
-     * @param int $productId
+     * @param ProductInterface $product
      * @param int $storeId
      */
     public function __construct(
         AttributeInterface $attribute,
         $payload,
-        $productId = null,
+        ProductInterface $product = null,
         $storeId = null
     ) {
         $this->attribute = $attribute;
-        $this->payload = $payload;
-        $this->productId = $productId;
+        $this->payload = (int) $payload;
+        if ($product !== null) {
+            $this->attachToProduct($product);
+        }
         $this->storeId = (int) $storeId;
     }
 
@@ -50,7 +53,7 @@ class MutableIntegerAttributeValue
             $this->attribute,
             $this->id,
             $this->payload,
-            $this->productId,
+            $this->product,
             $this->storeId
         );
     }
@@ -65,7 +68,7 @@ class MutableIntegerAttributeValue
             $this->attribute,
             $this->id,
             $this->payload,
-            $this->productId,
+            $this->product,
             $storeId
         );
     }

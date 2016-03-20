@@ -33,6 +33,11 @@ trait AttributeQueryBuilderTrait
     private $extraTable;
 
     /**
+     * @var string
+     */
+    private $entityTable;
+
+    /**
      * @param array $fields
      * @param string $alias
      * @return array
@@ -85,12 +90,33 @@ trait AttributeQueryBuilderTrait
     /**
      * @param string $alias
      * @param string $extraAlias
+     * @param string $entityAlias
+     * @param array $excludedIds
      * @return QueryBuilder
      */
-    public function createFindOneByCodeQueryBuilder($alias, $extraAlias)
+    public function createFindAllByEntityTypeQueryBuilder($alias, $extraAlias, $entityAlias, array $excludedIds = [])
     {
-        return $this->createFindAllQueryBuilder($alias, $extraAlias)
-            ->where(sprintf('%s.attribute_code = ?', $alias))
+        $queryBuilder = $this->createFindAllQueryBuilder($alias, $extraAlias, $excludedIds);
+
+        $queryBuilder->innerJoin($alias, $this->entityTable, $entityAlias,
+            $queryBuilder->expr()->eq(sprintf('%s.entity_type_id', $entityAlias), sprintf('%s.entity_type_id', $alias))
+        );
+
+        $queryBuilder->where($queryBuilder->expr()->eq(sprintf('%s.entity_type_code', $entityAlias), '?'));
+
+        return $queryBuilder;
+    }
+
+    /**
+     * @param string $alias
+     * @param string $extraAlias
+     * @param string $entityAlias
+     * @return QueryBuilder
+     */
+    public function createFindOneByCodeQueryBuilder($alias, $extraAlias, $entityAlias)
+    {
+        return $this->createFindAllByEntityTypeQueryBuilder($alias, $extraAlias, $entityAlias)
+            ->andWhere(sprintf('%s.attribute_code = ?', $alias))
             ->setFirstResult(0)
             ->setMaxResults(1)
         ;
@@ -113,12 +139,13 @@ trait AttributeQueryBuilderTrait
     /**
      * @param string $alias
      * @param string $extraAlias
+     * @param string $entityAlias
      * @param array|string[] $codeList
      * @return QueryBuilder
      */
-    public function createFindAllByCodeQueryBuilder($alias, $extraAlias, array $codeList)
+    public function createFindAllByCodeQueryBuilder($alias, $extraAlias, $entityAlias, array $codeList)
     {
-        $queryBuilder = $this->createFindAllQueryBuilder($alias, $extraAlias);
+        $queryBuilder = $this->createFindAllByEntityTypeQueryBuilder($alias, $extraAlias, $entityAlias);
 
         $expr = array_pad([], count($codeList), $queryBuilder->expr()->eq(sprintf('%s.attribute_code', $alias), '?'));
         $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));

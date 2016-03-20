@@ -4,8 +4,6 @@ namespace Luni\Component\MagentoDriver\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 
 class Category
     implements CategoryInterface
@@ -36,11 +34,17 @@ class Category
         return $this->id;
     }
 
+    /**
+     * @return Collection
+     */
     public function getAttributes()
     {
         return new ArrayCollection();
     }
 
+    /**
+     * @return Collection
+     */
     public function getValues()
     {
         return new ArrayCollection();

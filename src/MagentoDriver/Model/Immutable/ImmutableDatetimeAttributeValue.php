@@ -2,6 +2,7 @@
 
 namespace Luni\Component\MagentoDriver\Model\Immutable;
 
+use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\Mutable\MutableDatetimeAttributeValue;
@@ -18,13 +19,13 @@ class ImmutableDatetimeAttributeValue
      * MediaGalleryAttributeValue constructor.
      * @param AttributeInterface $attribute
      * @param \DateTimeInterface $payload
-     * @param int $productId
+     * @param ProductInterface $product
      * @param int $storeId
      */
     public function __construct(
         AttributeInterface $attribute,
         \DateTimeInterface $payload,
-        $productId = null,
+        ProductInterface $product = null,
         $storeId = null
     ) {
         $this->attribute = $attribute;
@@ -33,7 +34,9 @@ class ImmutableDatetimeAttributeValue
         } else if ($payload instanceof \DateTimeImmutable) {
             $this->payload = $payload;
         }
-        $this->productId = $productId;
+        if ($product !== null) {
+            $this->attachToProduct($product);
+        }
         $this->storeId = (int) $storeId;
     }
 
@@ -46,7 +49,7 @@ class ImmutableDatetimeAttributeValue
             $this->attribute,
             $this->id,
             $this->payload,
-            $this->productId,
+            $this->product,
             $this->storeId
         );
     }
@@ -61,7 +64,7 @@ class ImmutableDatetimeAttributeValue
             $this->attribute,
             $this->id,
             $this->payload,
-            $this->productId,
+            $this->product,
             $storeId
         );
     }

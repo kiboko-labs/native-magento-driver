@@ -2,10 +2,9 @@
 
 namespace Luni\Component\MagentoDriver\Broker;
 
-use Closure;
-use Luni\Component\MagentoDriver\Matcher\AttributeValuePersisterMatcherInterface;
+use Luni\Component\MagentoDriver\Matcher\AttributeValueMatcherInterface;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Persister\AttributeValue\AttributeValuePersisterInterface;
+use Luni\Component\MagentoDriver\Persister\AttributeValuePersisterInterface;
 
 class ProductAttributeValuePersisterBroker
     implements ProductAttributeValuePersisterBrokerInterface
@@ -25,11 +24,11 @@ class ProductAttributeValuePersisterBroker
 
     /**
      * @param AttributeValuePersisterInterface $backend
-     * @param AttributeValuePersisterMatcherInterface $matcher
+     * @param AttributeValueMatcherInterface $matcher
      */
     public function addPersister(
         AttributeValuePersisterInterface $backend,
-        AttributeValuePersisterMatcherInterface $matcher
+        AttributeValueMatcherInterface $matcher
     ) {
         $this->backends->attach($matcher, $backend);
     }
@@ -51,7 +50,7 @@ class ProductAttributeValuePersisterBroker
     public function findFor(AttributeInterface $attribute)
     {
         /**
-         * @var AttributeValuePersisterMatcherInterface $matcher
+         * @var AttributeValueMatcherInterface $matcher
          * @var AttributeValuePersisterInterface $backend
          */
         foreach ($this->walkPersisterList() as $matcher => $backend) {

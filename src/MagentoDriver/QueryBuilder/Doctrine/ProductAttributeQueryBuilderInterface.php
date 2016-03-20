@@ -10,24 +10,27 @@ interface ProductAttributeQueryBuilderInterface
     /**
      * @param string $alias
      * @param string $extraAlias
+     * @param string $entityAlias
      * @param string $variantAxisAlias
      * @return QueryBuilder
      */
-    public function createFindAllVariantAxisByEntityQueryBuilder($alias, $extraAlias, $variantAxisAlias);
+    public function createFindAllVariantAxisByEntityQueryBuilder($alias, $extraAlias, $entityAlias, $variantAxisAlias);
 
     /**
      * @param string $alias
      * @param string $extraAlias
+     * @param string $entityAlias
      * @param string $familyAlias
      * @return QueryBuilder
      */
-    public function createFindAllByFamilyQueryBuilder($alias, $extraAlias, $familyAlias);
+    public function createFindAllByFamilyQueryBuilder($alias, $extraAlias, $entityAlias, $familyAlias);
 
     /**
      * @param string $alias
      * @param string $extraAlias
+     * @param string $entityAlias
      * @param string $familyAlias
      * @return QueryBuilder
      */
-    public function createFindAllMandatoryByFamilyQueryBuilder($alias, $extraAlias, $familyAlias);
+    public function createFindAllMandatoryByFamilyQueryBuilder($alias, $extraAlias, $entityAlias, $familyAlias);
 }

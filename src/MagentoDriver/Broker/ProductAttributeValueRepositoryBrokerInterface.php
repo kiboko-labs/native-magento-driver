@@ -2,7 +2,7 @@
 
 namespace Luni\Component\MagentoDriver\Broker;
 
-use Closure;
+use Luni\Component\MagentoDriver\Matcher\AttributeValueMatcherInterface;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Repository\ProductAttributeValueRepositoryInterface;
 
@@ -10,9 +10,12 @@ interface ProductAttributeValueRepositoryBrokerInterface
 {
     /**
      * @param ProductAttributeValueRepositoryInterface $repository
-     * @param Closure $matcher
+     * @param AttributeValueMatcherInterface $matcher
      */
-    public function addRepository(ProductAttributeValueRepositoryInterface $repository, Closure $matcher);
+    public function addRepository(
+        ProductAttributeValueRepositoryInterface $repository,
+        AttributeValueMatcherInterface $matcher
+    );
 
     /**
      * @return \Generator|ProductAttributeValueRepositoryInterface[]

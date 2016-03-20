@@ -23,9 +23,19 @@ interface AttributeQueryBuilderInterface
     /**
      * @param string $alias
      * @param string $extraAlias
+     * @param string $entityAlias
+     * @param array $excludedIds
      * @return QueryBuilder
      */
-    public function createFindOneByCodeQueryBuilder($alias, $extraAlias);
+    public function createFindAllByEntityTypeQueryBuilder($alias, $extraAlias, $entityAlias, array $excludedIds = []);
+
+    /**
+     * @param string $alias
+     * @param string $extraAlias
+     * @param string $entityAlias
+     * @return QueryBuilder
+     */
+    public function createFindOneByCodeQueryBuilder($alias, $extraAlias, $entityAlias);
 
     /**
      * @param string $alias
@@ -37,10 +47,11 @@ interface AttributeQueryBuilderInterface
     /**
      * @param string $alias
      * @param string $extraAlias
+     * @param string $entityAlias
      * @param array|string[] $codeList
      * @return QueryBuilder
      */
-    public function createFindAllByCodeQueryBuilder($alias, $extraAlias, array $codeList);
+    public function createFindAllByCodeQueryBuilder($alias, $extraAlias, $entityAlias, array $codeList);
 
     /**
      * @param string $alias

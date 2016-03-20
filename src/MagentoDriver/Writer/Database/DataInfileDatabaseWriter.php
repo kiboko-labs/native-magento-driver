@@ -3,7 +3,6 @@
 namespace Luni\Component\MagentoDriver\Writer\Database;
 
 use Doctrine\DBAL\Connection;
-use League\Flysystem\File;
 
 class DataInfileDatabaseWriter
     implements DatabaseWriterInterface
@@ -11,26 +10,26 @@ class DataInfileDatabaseWriter
     use DataInfileDatabaseWriterTrait;
 
     /**
-     * @var File
+     * @var string
      */
-    private $file;
+    private $path;
 
     /**
      * DataInfileDatabaseWriter constructor.
-     * @param File $file
      * @param Connection $connection
+     * @param string $path
      * @param string $delimiter
      * @param string $enclosure
      * @param string $escaper
      */
     public function __construct(
-        File $file,
         Connection $connection,
-        $delimiter,
-        $enclosure,
-        $escaper
+        $path,
+        $delimiter = ';',
+        $enclosure = '"',
+        $escaper = '"'
     ) {
-        $this->file = $file;
+        $this->path = $path;
         $this->connection = $connection;
         $this->delimiter = $delimiter;
         $this->enclosure = $enclosure;
@@ -40,10 +39,27 @@ class DataInfileDatabaseWriter
     /**
      * @param string $table
      * @param array $tableFields
+     * @param \Generator $messenger
      * @return int
      */
-    public function write($table, array $tableFields)
+    public function write($table, array $tableFields, \Generator $messenger = null)
     {
-        return $this->doWrite('LOAD DATA INFILE', $this->file, $table, $tableFields);
+        return $this->doWrite('LOAD DATA INFILE', $this->path, $table, $tableFields, $messenger);
+    }
+
+    /**
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
+     * @param string $path
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
     }
 }

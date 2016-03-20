@@ -4,14 +4,16 @@ namespace Luni\Component\MagentoDriver\Entity\Product;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Luni\Component\MagentoDriver\Exception\RuntimeErrorException;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Model\MediaGalleryAttributeInterface;
 use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\Immutable\ImmutableAttributeValueInterface;
-use Luni\Component\MagentoDriver\Entity\ProductInterface;
+use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
 use Luni\Component\MagentoDriver\Exception\ImmutableValueException;
 use Luni\Component\MagentoDriver\Model\FamilyInterface;
 use Luni\Component\MagentoDriver\Model\Mutable\MutableAttributeValueInterface;
+use Luni\Component\MagentoDriver\Model\ScopableAttributeValueInterface;
 
 trait BaseProductTrait
 {
@@ -24,11 +26,6 @@ trait BaseProductTrait
      * @var string
      */
     private $identifier;
-
-    /**
-     * @var Collection|AttributeInterface[]
-     */
-    private $axisAttributes;
 
     /**
      * @var Collection|AttributeInterface[]
@@ -51,6 +48,11 @@ trait BaseProductTrait
     private $productType;
 
     /**
+     * @var int
+     */
+    private $visibility;
+
+    /**
      * @var \DateTimeInterface
      */
     private $creationDate;
@@ -60,12 +62,35 @@ trait BaseProductTrait
      */
     private $modificationDate;
 
+    private function initializeDate(\DateTimeInterface $dateTime = null)
+    {
+        if ($dateTime === null) {
+            return new \DateTimeImmutable();
+        } else if ($dateTime instanceof \DateTime) {
+            return \DateTimeImmutable::createFromMutable($dateTime);
+        } else {
+            return $dateTime;
+        }
+    }
+
     /**
      * @return int
      */
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param int $id
+     * @return ProductInterface
+     */
+    public function persistedToId($id)
+    {
+        if ($this->id !== null) {
+            throw new RuntimeErrorException('Product ID is immutable once set.');
+        }
+        $this->id = $id;
     }
 
     /**
@@ -79,7 +104,10 @@ trait BaseProductTrait
     /**
      * @return string
      */
-    abstract public function getType();
+    public function getType()
+    {
+        return $this->productType;
+    }
 
     /**
      * @return Collection|AttributeInterface[]
@@ -100,6 +128,26 @@ trait BaseProductTrait
     /**
      * @return FamilyInterface
      */
+    public function getFamilyId()
+    {
+        if ($this->getFamily() === null) {
+            return null;
+        }
+
+        return $this->getFamily()->getId();
+    }
+
+    /**
+     * @param FamilyInterface $family
+     */
+    public function changeFamily(FamilyInterface $family)
+    {
+        $this->family = $family;
+    }
+
+    /**
+     * @return FamilyInterface
+     */
     public function getFamily()
     {
         return $this->family;
@@ -114,11 +162,70 @@ trait BaseProductTrait
     }
 
     /**
-     * @return Collection|AttributeInterface[]
+     * @return bool
      */
-    public function getAxisAttributes()
+    public function isNotVisible()
     {
-        return $this->axisAttributes;
+        return $this->visibility === ProductInterface::VISIBILITY_NOT_VISIBLE;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isVisibleInCatalog()
+    {
+        return $this->visibility === ProductInterface::VISIBILITY_IN_CATALOG ||
+            $this->visibility === ProductInterface::VISIBILITY_BOTH
+        ;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isVisibleInSearch()
+    {
+        return $this->visibility === ProductInterface::VISIBILITY_IN_SEARCH ||
+            $this->visibility === ProductInterface::VISIBILITY_BOTH
+        ;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isVisibleInCatalogAndSearch()
+    {
+        return $this->visibility === ProductInterface::VISIBILITY_BOTH;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isVisibleSomewhere()
+    {
+        return $this->visibility === ProductInterface::VISIBILITY_IN_CATALOG ||
+            $this->visibility === ProductInterface::VISIBILITY_IN_SEARCH ||
+            $this->visibility === ProductInterface::VISIBILITY_BOTH
+        ;
+    }
+
+    public function setNotVisible()
+    {
+        $this->visibility = ProductInterface::VISIBILITY_NOT_VISIBLE;
+    }
+
+    public function setVisibleInCatalog()
+    {
+        $this->visibility = ProductInterface::VISIBILITY_IN_CATALOG;
+    }
+
+    public function setVisibleInSearch()
+    {
+        $this->visibility = ProductInterface::VISIBILITY_IN_SEARCH;
+    }
+
+    public function setVisibleInCatalogAndSearch()
+    {
+        $this->visibility = ProductInterface::VISIBILITY_BOTH;
     }
 
     /**
@@ -134,8 +241,10 @@ trait BaseProductTrait
                 continue;
             }
 
-            if ($value->getStoreId() === $storeId) {
-                return true;
+            if ($value instanceof ScopableAttributeValueInterface) {
+                if ($value->getStoreId() === $storeId) {
+                    return true;
+                }
             }
         }
 
@@ -157,12 +266,14 @@ trait BaseProductTrait
                 continue;
             }
 
-            if ($value->getStoreId() === $storeId) {
-                return $value;
-            }
+            if ($value instanceof ScopableAttributeValueInterface) {
+                if ($value->getStoreId() === $storeId) {
+                    return $value;
+                }
 
-            if ($storeId !== 0 && $value->getStoreId() === 0) {
-                $defaultValue = $value;
+                if ($storeId !== 0 && $value->getStoreId() === 0) {
+                    $defaultValue = $value;
+                }
             }
         }
 
@@ -180,9 +291,11 @@ trait BaseProductTrait
 
         if ($attributeValue instanceof ImmutableAttributeValueInterface) {
             return $attributeValue;
+        } else if ($attributeValue instanceof MutableAttributeValueInterface) {
+            return $attributeValue->switchToImmutable();
         }
 
-        return $attributeValue->switchToMutable();
+        throw new RuntimeErrorException('Invalid value type');
     }
 
     /**
@@ -200,9 +313,11 @@ trait BaseProductTrait
 
         if ($attributeValue instanceof MutableAttributeValueInterface) {
             return $attributeValue;
+        } else if ($attributeValue instanceof ImmutableAttributeValueInterface) {
+            return $attributeValue->switchToMutable();
         }
 
-        return $attributeValue->switchToMutable();
+        throw new RuntimeErrorException('Invalid value type');
     }
 
     /**
@@ -218,7 +333,12 @@ trait BaseProductTrait
                 continue;
             }
 
-            $collection->set($value->getStoreId(), $value);
+            if ($value instanceof ScopableAttributeValueInterface) {
+                $collection->set($value->getStoreId(), $value);
+            } else {
+                $collection->add(0, $value);
+                break;
+            }
         }
 
         return $collection;
@@ -241,6 +361,7 @@ trait BaseProductTrait
             }
         }
 
+        $newValue->attachToProduct($this);
         $this->values->add($newValue);
     }
 
@@ -258,21 +379,30 @@ trait BaseProductTrait
      */
     public function hasOptions()
     {
-        // TODO: Implement hasOptions() method.
+        return false;
     }
 
+    /**
+     * return Collection
+     */
     public function getRequiredOptions()
     {
-        // TODO: Implement getRequiredOptions() method.
+        return new ArrayCollection();
     }
 
+    /**
+     * @return \DateTimeInterface
+     */
     public function getCreationDate()
     {
-        // TODO: Implement getCreationDate() method.
+        return $this->creationDate;
     }
 
+    /**
+     * @return \DateTimeInterface
+     */
     public function getModificationDate()
     {
-        // TODO: Implement getModificationDate() method.
+        return $this->modificationDate;
     }
 }

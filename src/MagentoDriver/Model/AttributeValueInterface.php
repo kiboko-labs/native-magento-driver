@@ -2,7 +2,7 @@
 
 namespace Luni\Component\MagentoDriver\Model;
 
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
+use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
 
 interface AttributeValueInterface
 {
@@ -12,9 +12,20 @@ interface AttributeValueInterface
     public function getId();
 
     /**
+     * @param int $id
+     */
+    public function persistedToId($id);
+
+    /**
      * @return int
      */
     public function getProductId();
+
+    /**
+     * @param ProductInterface $product
+     * @return AttributeValueInterface
+     */
+    public function attachToProduct(ProductInterface $product);
 
     /**
      * @return AttributeInterface
@@ -31,6 +42,11 @@ interface AttributeValueInterface
      * @return string
      */
     public function getAttributeCode();
+
+    /**
+     * @return bool
+     */
+    public function isScopable();
 
     /**
      * @param AttributeInterface $friend
