@@ -60,8 +60,6 @@ class CatalogAttributeExtensionPersisterTest
         $schemaBuilder->ensureCatalogAttributeExtensionsTable();
         $schemaBuilder->ensureAttributeToEntityTypeLinks();
         $schemaBuilder->ensureCatalogAttributeExtensionsToAttributeLinks();
-        $schemaBuilder->hydrateEntityTypeTable('1.9', 'ce');
-        $schemaBuilder->hydrateAttributeTable('1.9', 'ce');
 
         $comparator = new \Doctrine\DBAL\Schema\Comparator();
         $schemaDiff = $comparator->compare($currentSchema, $this->schema);
@@ -71,6 +69,8 @@ class CatalogAttributeExtensionPersisterTest
         }
 
         $this->truncateTables();
+        $schemaBuilder->hydrateEntityTypeTable('1.9', 'ce');
+        $schemaBuilder->hydrateAttributeTable('1.9', 'ce');
 
         $this->persister = new CatalogAttributeExtensionPersister(
             $this->getConnection(),

@@ -55,7 +55,6 @@ class AttributePersisterTest
         $schemaBuilder->ensureEntityTypeTable();
         $schemaBuilder->ensureAttributeTable();
         $schemaBuilder->ensureAttributeToEntityTypeLinks();
-        $schemaBuilder->hydrateEntityTypeTable('1.9', 'ce');
 
         $comparator = new \Doctrine\DBAL\Schema\Comparator();
         $schemaDiff = $comparator->compare($currentSchema, $this->schema);
@@ -65,6 +64,7 @@ class AttributePersisterTest
         }
 
         $this->truncateTables();
+        $schemaBuilder->hydrateEntityTypeTable('1.9', 'ce');
 
         $this->persister = new StandardAttributePersister(
             $this->getConnection(),
