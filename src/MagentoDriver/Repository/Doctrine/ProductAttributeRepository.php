@@ -60,6 +60,7 @@ class ProductAttributeRepository
                 isset($options['backend_type'])    ? $options['backend_type']           : null,
                 isset($options['backend_model'])   ? $options['backend_model']          : null,
                 isset($options['backend_table'])   ? $options['backend_table']          : null,
+                isset($options['frontend_type'])   ? $options['frontend_type']          : null,
                 isset($options['frontend_model'])  ? $options['frontend_model']         : null,
                 isset($options['frontend_input'])  ? $options['frontend_input']         : null,
                 isset($options['frontend_label'])  ? $options['frontend_label']         : null,
@@ -70,7 +71,7 @@ class ProductAttributeRepository
                 isset($options['is_unique'])       ? (bool) $options['is_unique']       : false,
                 isset($options['default_value'])   ? $options['default_value']          : null
             ),
-            CatalogAttributeExtension::buildNewWith(
+            new CatalogAttributeExtension(
                 isset($options['attribute_id'])                  ? $options['attribute_id']                         : null,
                 isset($options['frontend_input_renderer'])       ? $options['frontend_input_renderer']              : null,
                 isset($options['is_global'])                     ? (bool) $options['is_global']                     : 1,
