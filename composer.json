@@ -7,6 +7,7 @@
         "phpspec/phpspec": "~2.0",
         "fzaninotto/faker": "dev-master",
         "phpunit/phpunit": "^5.2",
+        "phpunit/dbunit": ">=1.2",
         "fabpot/php-cs-fixer": "^1.11"
     },
     "license": "LGPL-3.0+",
