@@ -103,7 +103,7 @@ class DoctrineSchemaBuilder
      */
     public function hydrateStoreTable($magentoVersion, $magentoEdition)
     {
-        (new Fixture\Loader($this->connection, 'eav_store'))
+        (new Fixture\Loader($this->connection, 'core_store'))
             ->hydrate($magentoVersion, $magentoEdition)
         ;
     }
@@ -208,6 +208,16 @@ class DoctrineSchemaBuilder
     public function ensureCatalogProductEntityToFamilyLinks()
     {
         (new Link\CatalogProductEntityToFamily($this->schema))->build();
+    }
+
+    /**
+     * @param string $backendType
+     * @return void
+     * @throws \Doctrine\DBAL\Schema\SchemaException
+     */
+    public function ensureCatalogProductAttributeValueToEntityTypeLinks($backendType)
+    {
+        (new Link\CatalogProductAttributeValueToEntityType($this->schema, $backendType))->build();
     }
 
     /**
