@@ -6,8 +6,7 @@ use Doctrine\DBAL\Connection;
 use Luni\Component\MagentoDriver\Model\CatalogAttributeExtensionInterface;
 use Luni\Component\MagentoDriver\Persister\CatalogAttributeExtensionPersisterInterface;
 
-class CatalogAttributeExtensionPersister
-    implements CatalogAttributeExtensionPersisterInterface
+class CatalogAttributeExtensionPersister implements CatalogAttributeExtensionPersisterInterface
 {
     /**
      * @var Connection
@@ -26,7 +25,7 @@ class CatalogAttributeExtensionPersister
 
     /**
      * @param Connection $connection
-     * @param string $tableName
+     * @param string     $tableName
      */
     public function __construct(
         Connection $connection,
@@ -45,9 +44,6 @@ class CatalogAttributeExtensionPersister
         return $this->tableName;
     }
 
-    /**
-     * @return void
-     */
     public function initialize()
     {
         $this->dataQueue = new \SplQueue();
@@ -61,9 +57,6 @@ class CatalogAttributeExtensionPersister
         $this->dataQueue->push($attribute);
     }
 
-    /**
-     * @return void
-     */
     public function flush()
     {
         /** @var CatalogAttributeExtensionInterface $attribute */
@@ -71,25 +64,25 @@ class CatalogAttributeExtensionPersister
             if ($attribute->getId()) {
                 $this->connection->update($this->tableName,
                     [
-                        'frontend_input_renderer'       => $attribute->getFrontendInputRendererClassName(),
-                        'is_global'                     => $attribute->isGlobal(),
-                        'is_visible'                    => $attribute->isVisible(),
-                        'is_searchable'                 => $attribute->isSearchable(),
-                        'is_filterable'                 => $attribute->isFilterable(),
-                        'is_comparable'                 => $attribute->isComparable(),
-                        'is_visible_on_front'           => $attribute->isVisibleOnFront(),
-                        'is_html_allowed_on_front'      => $attribute->isHtmlAllowedOnFront(),
-                        'is_used_for_price_rules'       => $attribute->isUsedForPriceRules(),
-                        'is_filterable_in_search'       => $attribute->isFilterableInSearch(),
-                        'used_in_product_listing'       => $attribute->isUsedInProductListing(),
-                        'used_for_sort_by'              => $attribute->isUsedForSortBy(),
-                        'is_configurable'               => $attribute->isConfigurable(),
-                        'apply_to'                      => empty($attribute->getProductTypesApplyingTo()) ?
+                        'frontend_input_renderer' => $attribute->getFrontendInputRendererClassName(),
+                        'is_global' => $attribute->isGlobal(),
+                        'is_visible' => $attribute->isVisible(),
+                        'is_searchable' => $attribute->isSearchable(),
+                        'is_filterable' => $attribute->isFilterable(),
+                        'is_comparable' => $attribute->isComparable(),
+                        'is_visible_on_front' => $attribute->isVisibleOnFront(),
+                        'is_html_allowed_on_front' => $attribute->isHtmlAllowedOnFront(),
+                        'is_used_for_price_rules' => $attribute->isUsedForPriceRules(),
+                        'is_filterable_in_search' => $attribute->isFilterableInSearch(),
+                        'used_in_product_listing' => $attribute->isUsedInProductListing(),
+                        'used_for_sort_by' => $attribute->isUsedForSortBy(),
+                        'is_configurable' => $attribute->isConfigurable(),
+                        'apply_to' => empty($attribute->getProductTypesApplyingTo()) ?
                             null : implode(',', $attribute->getProductTypesApplyingTo()),
                         'is_visible_in_advanced_search' => $attribute->isVisibleInAdvancedSearch(),
-                        'position'                      => $attribute->getPosition(),
-                        'is_wysiwyg_enabled'            => $attribute->isWysiwygEnabled(),
-                        'is_used_for_promo_rules'       => $attribute->isUsedForPromoRules(),
+                        'position' => $attribute->getPosition(),
+                        'is_wysiwyg_enabled' => $attribute->isWysiwygEnabled(),
+                        'is_used_for_promo_rules' => $attribute->isUsedForPromoRules(),
                     ],
                     [
                         'attribute_id' => $attribute->getId(),
@@ -98,25 +91,25 @@ class CatalogAttributeExtensionPersister
             } else {
                 $this->connection->insert($this->tableName,
                     [
-                        'frontend_input_renderer'       => $attribute->getFrontendInputRendererClassName(),
-                        'is_global'                     => $attribute->isGlobal(),
-                        'is_visible'                    => $attribute->isVisible(),
-                        'is_searchable'                 => $attribute->isSearchable(),
-                        'is_filterable'                 => $attribute->isFilterable(),
-                        'is_comparable'                 => $attribute->isComparable(),
-                        'is_visible_on_front'           => $attribute->isVisibleOnFront(),
-                        'is_html_allowed_on_front'      => $attribute->isHtmlAllowedOnFront(),
-                        'is_used_for_price_rules'       => $attribute->isUsedForPriceRules(),
-                        'is_filterable_in_search'       => $attribute->isFilterableInSearch(),
-                        'used_in_product_listing'       => $attribute->isUsedInProductListing(),
-                        'used_for_sort_by'              => $attribute->isUsedForSortBy(),
-                        'is_configurable'               => $attribute->isConfigurable(),
-                        'apply_to'                      => empty($attribute->getProductTypesApplyingTo()) ?
+                        'frontend_input_renderer' => $attribute->getFrontendInputRendererClassName(),
+                        'is_global' => $attribute->isGlobal(),
+                        'is_visible' => $attribute->isVisible(),
+                        'is_searchable' => $attribute->isSearchable(),
+                        'is_filterable' => $attribute->isFilterable(),
+                        'is_comparable' => $attribute->isComparable(),
+                        'is_visible_on_front' => $attribute->isVisibleOnFront(),
+                        'is_html_allowed_on_front' => $attribute->isHtmlAllowedOnFront(),
+                        'is_used_for_price_rules' => $attribute->isUsedForPriceRules(),
+                        'is_filterable_in_search' => $attribute->isFilterableInSearch(),
+                        'used_in_product_listing' => $attribute->isUsedInProductListing(),
+                        'used_for_sort_by' => $attribute->isUsedForSortBy(),
+                        'is_configurable' => $attribute->isConfigurable(),
+                        'apply_to' => empty($attribute->getProductTypesApplyingTo()) ?
                             null : implode(',', $attribute->getProductTypesApplyingTo()),
                         'is_visible_in_advanced_search' => $attribute->isVisibleInAdvancedSearch(),
-                        'position'                      => $attribute->getPosition(),
-                        'is_wysiwyg_enabled'            => $attribute->isWysiwygEnabled(),
-                        'is_used_for_promo_rules'       => $attribute->isUsedForPromoRules(),
+                        'position' => $attribute->getPosition(),
+                        'is_wysiwyg_enabled' => $attribute->isWysiwygEnabled(),
+                        'is_used_for_promo_rules' => $attribute->isUsedForPromoRules(),
                     ]
                 );
             }

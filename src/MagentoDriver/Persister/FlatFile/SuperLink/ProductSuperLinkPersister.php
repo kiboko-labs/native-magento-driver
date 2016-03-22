@@ -8,10 +8,9 @@ use Luni\Component\MagentoDriver\Persister\SuperLinkPersisterInterface;
 use Luni\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
 use Luni\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;
 
-class ProductSuperLinkPersister
-    implements SuperLinkPersisterInterface
+class ProductSuperLinkPersister implements SuperLinkPersisterInterface
 {
-    use  BaseFlatFilePersisterTrait;
+    use BaseFlatFilePersisterTrait;
 
     /**
      * @var \SplQueue
@@ -20,9 +19,9 @@ class ProductSuperLinkPersister
 
     /**
      * @param TemporaryWriterInterface $temporaryWriter
-     * @param DatabaseWriterInterface $databaseWriter
-     * @param string $tableName
-     * @param array $tableKeys
+     * @param DatabaseWriterInterface  $databaseWriter
+     * @param string                   $tableName
+     * @param array                    $tableKeys
      */
     public function __construct(
         TemporaryWriterInterface $temporaryWriter,
@@ -37,9 +36,6 @@ class ProductSuperLinkPersister
         $this->superLinkQueue = new \SplQueue();
     }
 
-    /**
-     * @return void
-     */
     public function initialize()
     {
     }
@@ -54,8 +50,8 @@ class ProductSuperLinkPersister
         }
 
         $this->temporaryWriter->persistRow([
-            'link_id'    => $superLink->getId(),
-            'parent_id'  => $superLink->getConfigurableId(),
+            'link_id' => $superLink->getId(),
+            'parent_id' => $superLink->getConfigurableId(),
             'product_id' => $superLink->getVariantId(),
         ]);
     }
@@ -68,9 +64,6 @@ class ProductSuperLinkPersister
         $this->persist($superLink);
     }
 
-    /**
-     * @return void
-     */
     public function flush()
     {
         $this->doFlush();

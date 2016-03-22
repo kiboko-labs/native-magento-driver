@@ -2,8 +2,7 @@
 
 namespace Luni\Component\MagentoDriver\Model;
 
-class Family
-    implements FamilyInterface
+class Family implements FamilyInterface
 {
     /**
      * @var int
@@ -40,8 +39,9 @@ class Family
     }
 
     /**
-     * @param int $familyId
+     * @param int    $familyId
      * @param string $label
+     *
      * @return FamilyInterface
      */
     public static function buildNewWith(

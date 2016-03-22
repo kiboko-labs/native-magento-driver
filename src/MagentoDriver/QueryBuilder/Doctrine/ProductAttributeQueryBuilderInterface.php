@@ -4,14 +4,14 @@ namespace Luni\Component\MagentoDriver\QueryBuilder\Doctrine;
 
 use Doctrine\DBAL\Query\QueryBuilder;
 
-interface ProductAttributeQueryBuilderInterface
-    extends AttributeQueryBuilderInterface
+interface ProductAttributeQueryBuilderInterface extends AttributeQueryBuilderInterface
 {
     /**
      * @param string $alias
      * @param string $extraAlias
      * @param string $entityAlias
      * @param string $variantAxisAlias
+     *
      * @return QueryBuilder
      */
     public function createFindAllVariantAxisByEntityQueryBuilder($alias, $extraAlias, $entityAlias, $variantAxisAlias);
@@ -21,6 +21,7 @@ interface ProductAttributeQueryBuilderInterface
      * @param string $extraAlias
      * @param string $entityAlias
      * @param string $familyAlias
+     *
      * @return QueryBuilder
      */
     public function createFindAllByFamilyQueryBuilder($alias, $extraAlias, $entityAlias, $familyAlias);
@@ -30,6 +31,7 @@ interface ProductAttributeQueryBuilderInterface
      * @param string $extraAlias
      * @param string $entityAlias
      * @param string $familyAlias
+     *
      * @return QueryBuilder
      */
     public function createFindAllMandatoryByFamilyQueryBuilder($alias, $extraAlias, $entityAlias, $familyAlias);

@@ -6,9 +6,6 @@ use Luni\Component\MagentoDriver\Model\SuperAttributeInterface;
 
 interface SuperAttributePersisterInterface
 {
-    /**
-     * @return void
-     */
     public function initialize();
 
     /**
@@ -21,8 +18,5 @@ interface SuperAttributePersisterInterface
      */
     public function __invoke(SuperAttributeInterface $superAttribute);
 
-    /**
-     * @return void
-     */
     public function flush();
 }

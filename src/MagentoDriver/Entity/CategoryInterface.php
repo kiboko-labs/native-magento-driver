@@ -2,7 +2,6 @@
 
 namespace Luni\Component\MagentoDriver\Entity;
 
-interface CategoryInterface
-    extends EntityInterface
+interface CategoryInterface extends EntityInterface
 {
 }

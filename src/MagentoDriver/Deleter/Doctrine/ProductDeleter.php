@@ -7,8 +7,7 @@ use Luni\Component\MagentoDriver\Deleter\ProductDeleterInterface;
 use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
 use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductQueryBuilderInterface;
 
-class ProductDeleter
-    implements ProductDeleterInterface
+class ProductDeleter implements ProductDeleterInterface
 {
     /**
      * @var ProductQueryBuilderInterface
@@ -21,7 +20,7 @@ class ProductDeleter
     private $connection;
 
     /**
-     * @param Connection $connection
+     * @param Connection                   $connection
      * @param ProductQueryBuilderInterface $queryBuilder
      */
     public function __construct(
@@ -34,7 +33,9 @@ class ProductDeleter
 
     /**
      * @param int $id
+     *
      * @return int
+     *
      * @throws \Doctrine\DBAL\DBALException
      * @throws DatabaseFetchingFailureException
      */
@@ -52,7 +53,9 @@ class ProductDeleter
 
     /**
      * @param int[] $idList
+     *
      * @return int
+     *
      * @throws \Doctrine\DBAL\DBALException
      * @throws DatabaseFetchingFailureException
      */
@@ -70,7 +73,9 @@ class ProductDeleter
 
     /**
      * @param int $sku
+     *
      * @return int
+     *
      * @throws \Doctrine\DBAL\DBALException
      * @throws DatabaseFetchingFailureException
      */
@@ -88,7 +93,9 @@ class ProductDeleter
 
     /**
      * @param array $skuList
+     *
      * @return int
+     *
      * @throws \Doctrine\DBAL\DBALException
      * @throws DatabaseFetchingFailureException
      */

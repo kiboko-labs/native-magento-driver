@@ -8,8 +8,7 @@ use Luni\Component\MagentoDriver\Persister\ProductPersisterInterface;
 use Luni\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
 use Luni\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;
 
-class SimpleProductPersister
-    implements ProductPersisterInterface
+class SimpleProductPersister implements ProductPersisterInterface
 {
     use BaseFlatFilePersisterTrait;
 
@@ -20,9 +19,9 @@ class SimpleProductPersister
 
     /**
      * @param TemporaryWriterInterface $temporaryWriter
-     * @param DatabaseWriterInterface $databaseWriter
-     * @param string $tableName
-     * @param array $tableKeys
+     * @param DatabaseWriterInterface  $databaseWriter
+     * @param string                   $tableName
+     * @param array                    $tableKeys
      */
     public function __construct(
         TemporaryWriterInterface $temporaryWriter,
@@ -37,9 +36,6 @@ class SimpleProductPersister
         $this->productQueue = new \SplQueue();
     }
 
-    /**
-     * @return void
-     */
     public function initialize()
     {
     }
@@ -54,30 +50,26 @@ class SimpleProductPersister
         }
 
         $this->temporaryWriter->persistRow([
-            'entity_id'        => $product->getId(),
-            'entity_type_id'   => 4,
+            'entity_id' => $product->getId(),
+            'entity_type_id' => 4,
             'attribute_set_id' => $product->getFamilyId(),
-            'type_id'          => $product->getType(),
-            'sku'              => $product->getIdentifier(),
-            'has_options'      => $product->hasOptions(),
+            'type_id' => $product->getType(),
+            'sku' => $product->getIdentifier(),
+            'has_options' => $product->hasOptions(),
             'required_options' => $product->getRequiredOptions(),
-            'created_at'       => $product->getCreationDate()->format(\DateTime::ISO8601),
-            'updated_at'       => $product->getModificationDate()->format(\DateTime::ISO8601),
+            'created_at' => $product->getCreationDate()->format(\DateTime::ISO8601),
+            'updated_at' => $product->getModificationDate()->format(\DateTime::ISO8601),
         ]);
     }
 
     /**
      * @param ProductInterface $product
-     * @return void
      */
     public function __invoke(ProductInterface $product)
     {
         $this->persist($product);
     }
 
-    /**
-     * @return void
-     */
     public function flush()
     {
         $this->doFlush();

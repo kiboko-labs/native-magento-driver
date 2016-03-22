@@ -6,8 +6,7 @@ use Doctrine\DBAL\Connection;
 use Luni\Component\MagentoDriver\Model\SuperLinkInterface;
 use Luni\Component\MagentoDriver\Persister\SuperLinkPersisterInterface;
 
-class ProductSuperLinkPersister
-    implements SuperLinkPersisterInterface
+class ProductSuperLinkPersister implements SuperLinkPersisterInterface
 {
     /**
      * @var Connection
@@ -26,7 +25,7 @@ class ProductSuperLinkPersister
 
     /**
      * @param Connection $connection
-     * @param string $tableName
+     * @param string     $tableName
      */
     public function __construct(
         Connection $connection,
@@ -45,9 +44,6 @@ class ProductSuperLinkPersister
         return $this->tableName;
     }
 
-    /**
-     * @return void
-     */
     public function initialize()
     {
     }
@@ -60,26 +56,23 @@ class ProductSuperLinkPersister
         $this->dataQueue->push($superLink);
     }
 
-    /**
-     * @return void
-     */
     public function flush()
     {
         foreach ($this->dataQueue as $superLink) {
             if ($superLink->getId()) {
                 $this->connection->update($this->tableName,
                     [
-                        'parent_id'  => $superLink->getConfigurableId(),
+                        'parent_id' => $superLink->getConfigurableId(),
                         'product_id' => $superLink->getVariantId(),
                     ],
                     [
-                        'link_id'    => $superLink->getId(),
+                        'link_id' => $superLink->getId(),
                     ]
                 );
             } else {
                 $this->connection->insert($this->tableName,
                     [
-                        'parent_id'  => $superLink->getConfigurableId(),
+                        'parent_id' => $superLink->getConfigurableId(),
                         'product_id' => $superLink->getVariantId(),
                     ]
                 );

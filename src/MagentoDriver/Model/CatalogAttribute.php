@@ -4,8 +4,7 @@ namespace Luni\Component\MagentoDriver\Model;
 
 use Luni\Component\MagentoDriver\Exception\RuntimeErrorException;
 
-class CatalogAttribute
-    implements CatalogAttributeInterface
+class CatalogAttribute implements CatalogAttributeInterface
 {
     /**
      * @var AttributeInterface
@@ -18,7 +17,7 @@ class CatalogAttribute
     private $extension;
 
     /**
-     * @param AttributeInterface $attribute
+     * @param AttributeInterface                 $attribute
      * @param CatalogAttributeExtensionInterface $extension
      */
     public function __construct(

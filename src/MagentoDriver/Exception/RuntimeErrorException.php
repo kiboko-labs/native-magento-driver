@@ -2,7 +2,6 @@
 
 namespace Luni\Component\MagentoDriver\Exception;
 
-class RuntimeErrorException
-    extends \RuntimeException
+class RuntimeErrorException extends \RuntimeException
 {
 }

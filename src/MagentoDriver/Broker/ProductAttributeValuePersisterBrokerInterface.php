@@ -10,7 +10,7 @@ interface ProductAttributeValuePersisterBrokerInterface
 {
     /**
      * @param AttributeValuePersisterInterface $backend
-     * @param AttributeValueMatcherInterface $matcher
+     * @param AttributeValueMatcherInterface   $matcher
      */
     public function addPersister(AttributeValuePersisterInterface $backend, AttributeValueMatcherInterface $matcher);
 
@@ -21,6 +21,7 @@ interface ProductAttributeValuePersisterBrokerInterface
 
     /**
      * @param AttributeInterface $attribute
+     *
      * @return AttributeValuePersisterInterface|null
      */
     public function findFor(AttributeInterface $attribute);

@@ -13,8 +13,7 @@ use Luni\Component\MagentoDriver\Model\ProductSuperLink;
 use Luni\Component\MagentoDriver\Model\SuperAttributeInterface;
 use Luni\Component\MagentoDriver\Model\SuperLinkInterface;
 
-class ConfigurableProduct
-    implements ConfigurableProductInterface
+class ConfigurableProduct implements ConfigurableProductInterface
 {
     use BaseProductTrait;
 
@@ -34,8 +33,8 @@ class ConfigurableProduct
     private $axisAttributes;
 
     /**
-     * @param string $identifier
-     * @param FamilyInterface $family,
+     * @param string                  $identifier
+     * @param FamilyInterface         $family,
      * @param \DateTimeInterface|null $creationDate
      * @param \DateTimeInterface|null $modificationDate
      */
@@ -58,13 +57,14 @@ class ConfigurableProduct
     }
 
     /**
-     * @param int $id
-     * @param string $identifier
-     * @param FamilyInterface $family
-     * @param \DateTimeInterface $creationDate
-     * @param \DateTimeInterface $modificationDate
+     * @param int                                  $id
+     * @param string                               $identifier
+     * @param FamilyInterface                      $family
+     * @param \DateTimeInterface                   $creationDate
+     * @param \DateTimeInterface                   $modificationDate
      * @param Collection|AttributeValueInterface[] $values
-     * @param Collection|AttributeInterface[] $axisAttributes
+     * @param Collection|AttributeInterface[]      $axisAttributes
+     *
      * @return static
      */
     public static function buildNewWith(
@@ -139,11 +139,12 @@ class ConfigurableProduct
 
     /**
      * @param AttributeInterface $attribute
+     *
      * @return bool
      */
     public function hasAxisAttribute(AttributeInterface $attribute)
     {
-        /** @var SuperAttributeInterface $attribute */
+        /* @var SuperAttributeInterface $attribute */
         foreach ($this->axisAttributes as $superAttribute) {
             if ($superAttribute->isAttribute($attribute)) {
                 return true;
@@ -187,6 +188,7 @@ class ConfigurableProduct
 
     /**
      * @param SimpleProductInterface $variant
+     *
      * @return bool
      */
     public function hasVariant(SimpleProductInterface $variant)
@@ -230,6 +232,7 @@ class ConfigurableProduct
 
     /**
      * @param SuperLinkInterface $superLink
+     *
      * @return bool
      */
     public function hasSuperLink(SuperLinkInterface $superLink)

@@ -2,8 +2,7 @@
 
 namespace Luni\Component\MagentoMapper\Mapper;
 
-class DefaultAttributeMapper
-    implements AttributeMapperInterface
+class DefaultAttributeMapper implements AttributeMapperInterface
 {
     private $mapping = [
         'additional_colors' => 169,
@@ -137,7 +136,7 @@ class DefaultAttributeMapper
     public function map($identifier)
     {
         if (!isset($this->mapping[$identifier])) {
-            return null;
+            return;
         }
 
         return $this->mapping[$identifier];

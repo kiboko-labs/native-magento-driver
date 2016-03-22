@@ -5,8 +5,7 @@ namespace Luni\Component\MagentoDriver\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-class Option
-    implements OptionInterface
+class Option implements OptionInterface
 {
     /**
      * @var int
@@ -24,8 +23,8 @@ class Option
     private $locales;
 
     /**
-     * @param int $value
-     * @param OptionLocaleInterface $default
+     * @param int                                $value
+     * @param OptionLocaleInterface              $default
      * @param Collection|OptionLocaleInterface[] $locales
      */
     public function __construct(
@@ -64,6 +63,7 @@ class Option
 
     /**
      * @param int $storeId
+     *
      * @return mixed
      */
     public function getLocale($storeId)
@@ -73,6 +73,7 @@ class Option
 
     /**
      * @param int $storeId
+     *
      * @return OptionLocaleInterface|mixed
      */
     public function getLocaleOrDefault($storeId)
@@ -94,11 +95,12 @@ class Option
             return $locale->getLabel();
         }
 
-        return null;
+        return;
     }
 
     /**
      * @param int $storeId
+     *
      * @return null|string
      */
     public function getLocaleLabel($storeId)
@@ -108,11 +110,12 @@ class Option
             return $locale->getLabel();
         }
 
-        return null;
+        return;
     }
 
     /**
      * @param int $storeId
+     *
      * @return null|string
      */
     public function getLocaleOrDefaultLabel($storeId)
@@ -122,7 +125,7 @@ class Option
             return $locale->getLabel();
         }
 
-        return null;
+        return;
     }
 
     /**

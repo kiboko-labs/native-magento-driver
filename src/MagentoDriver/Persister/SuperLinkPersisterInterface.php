@@ -6,9 +6,6 @@ use Luni\Component\MagentoDriver\Model\SuperLinkInterface;
 
 interface SuperLinkPersisterInterface
 {
-    /**
-     * @return void
-     */
     public function initialize();
 
     /**
@@ -21,8 +18,5 @@ interface SuperLinkPersisterInterface
      */
     public function __invoke(SuperLinkInterface $superLink);
 
-    /**
-     * @return void
-     */
     public function flush();
 }

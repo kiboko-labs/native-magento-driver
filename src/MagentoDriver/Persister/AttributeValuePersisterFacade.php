@@ -5,8 +5,7 @@ namespace Luni\Component\MagentoDriver\Persister;
 use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Broker\ProductAttributeValuePersisterBrokerInterface;
 
-class AttributeValuePersisterFacade
-    implements AttributeValuePersisterInterface
+class AttributeValuePersisterFacade implements AttributeValuePersisterInterface
 {
     /**
      * @var ProductAttributeValuePersisterBrokerInterface
@@ -18,9 +17,6 @@ class AttributeValuePersisterFacade
         $this->broker = $broker;
     }
 
-    /**
-     *
-     */
     public function initialize()
     {
         foreach ($this->broker->walkPersisterList() as $backend) {
@@ -47,9 +43,6 @@ class AttributeValuePersisterFacade
         $this->persist($value);
     }
 
-    /**
-     *
-     */
     public function flush()
     {
         foreach ($this->broker->walkPersisterList() as $backend) {

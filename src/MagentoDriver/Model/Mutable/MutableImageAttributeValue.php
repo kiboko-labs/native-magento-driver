@@ -11,17 +11,17 @@ use Luni\Component\MagentoDriver\Model\ImageAttributeValueTrait;
 use Luni\Component\MagentoDriver\Model\ImageMetadataAttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\Immutable\ImmutableImageAttributeValue;
 
-class MutableImageAttributeValue
-    implements MutableAttributeValueInterface, ImageAttributeValueInterface
+class MutableImageAttributeValue implements MutableAttributeValueInterface, ImageAttributeValueInterface
 {
     use ImageAttributeValueTrait;
 
     /**
      * DatetimeAttributeValueTrait constructor.
+     *
      * @param AttributeInterface $attribute
-     * @param File $file
-     * @param ProductInterface $product
-     * @param array $metadata
+     * @param File               $file
+     * @param ProductInterface   $product
+     * @param array              $metadata
      */
     public function __construct(
         AttributeInterface $attribute,

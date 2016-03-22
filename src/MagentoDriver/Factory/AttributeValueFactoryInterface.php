@@ -9,7 +9,8 @@ interface AttributeValueFactoryInterface
 {
     /**
      * @param AttributeInterface $attribute
-     * @param array $options
+     * @param array              $options
+     *
      * @return AttributeValueInterface
      */
     public function buildNew(AttributeInterface $attribute, array $options);

@@ -6,8 +6,7 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Luni\Component\MagentoMapper\QueryBuilder\AttributeQueryBuilderInterface;
 
-class AttributeQueryBuilder
-    implements AttributeQueryBuilderInterface
+class AttributeQueryBuilder implements AttributeQueryBuilderInterface
 {
     /**
      * @var Connection
@@ -26,8 +25,8 @@ class AttributeQueryBuilder
 
     /**
      * @param Connection $connection
-     * @param string $table
-     * @param array $fields
+     * @param string     $table
+     * @param array      $fields
      */
     public function __construct(
         Connection $connection,
@@ -52,6 +51,7 @@ class AttributeQueryBuilder
 
     /**
      * @param string $prefix
+     *
      * @return string
      */
     public static function getDefaultTable($prefix = null)
@@ -65,6 +65,7 @@ class AttributeQueryBuilder
 
     /**
      * @param string $prefix
+     *
      * @return string
      */
     public static function getAttributeDefaultTable($prefix = null)
@@ -77,8 +78,9 @@ class AttributeQueryBuilder
     }
 
     /**
-     * @param array $fields
+     * @param array  $fields
      * @param string $alias
+     *
      * @return array
      */
     protected function createFieldsList(array $fields, $alias)
@@ -93,6 +95,7 @@ class AttributeQueryBuilder
 
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindQueryBuilder($alias)
@@ -105,6 +108,7 @@ class AttributeQueryBuilder
 
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindOneByCodeQueryBuilder($alias)
@@ -122,6 +126,7 @@ class AttributeQueryBuilder
 
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindAllQueryBuilder($alias)

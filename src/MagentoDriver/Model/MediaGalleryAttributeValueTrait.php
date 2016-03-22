@@ -3,7 +3,6 @@
 namespace Luni\Component\MagentoDriver\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
 
 trait MediaGalleryAttributeValueTrait
 {
@@ -16,7 +15,8 @@ trait MediaGalleryAttributeValueTrait
 
     /**
      * MediaGalleryAttributeValue constructor.
-     * @param AttributeInterface $attribute
+     *
+     * @param AttributeInterface                        $attribute
      * @param Collection|ImageAttributeValueInterface[] $imagesCollection
      */
     abstract public function __construct(
@@ -25,9 +25,10 @@ trait MediaGalleryAttributeValueTrait
     );
 
     /**
-     * @param AttributeInterface $attribute
-     * @param int $valueId
+     * @param AttributeInterface                        $attribute
+     * @param int                                       $valueId
      * @param Collection|ImageAttributeValueInterface[] $imagesCollection
+     *
      * @return MediaGalleryAttributeValueInterface
      */
     public static function buildNewWith(

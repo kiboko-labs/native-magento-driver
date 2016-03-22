@@ -5,8 +5,7 @@ namespace Luni\Component\MagentoDriver\QueryBuilder\Doctrine;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
 
-class ProductQueryBuilder
-    implements ProductQueryBuilderInterface
+class ProductQueryBuilder implements ProductQueryBuilderInterface
 {
     /**
      * @var Connection
@@ -35,10 +34,10 @@ class ProductQueryBuilder
 
     /**
      * @param Connection $connection
-     * @param string $table
-     * @param string $familyTable
-     * @param string $categoryProductTable
-     * @param array $fields
+     * @param string     $table
+     * @param string     $familyTable
+     * @param string     $categoryProductTable
+     * @param array      $fields
      */
     public function __construct(
         Connection $connection,
@@ -75,6 +74,7 @@ class ProductQueryBuilder
 
     /**
      * @param string $prefix
+     *
      * @return string
      */
     public static function getDefaultTable($prefix = null)
@@ -88,6 +88,7 @@ class ProductQueryBuilder
 
     /**
      * @param string $prefix
+     *
      * @return string
      */
     public static function getDefaultFamilyTable($prefix = null)
@@ -101,6 +102,7 @@ class ProductQueryBuilder
 
     /**
      * @param string $prefix
+     *
      * @return string
      */
     public static function getDefaultCategoryProductTable($prefix = null)
@@ -113,8 +115,9 @@ class ProductQueryBuilder
     }
 
     /**
-     * @param array $fields
+     * @param array  $fields
      * @param string $alias
+     *
      * @return array
      */
     protected function createFieldsList(array $fields, $alias)
@@ -129,6 +132,7 @@ class ProductQueryBuilder
 
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindQueryBuilder($alias)
@@ -141,6 +145,7 @@ class ProductQueryBuilder
 
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindAllQueryBuilder($alias)
@@ -164,6 +169,7 @@ class ProductQueryBuilder
 
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindOneByIdentifierQueryBuilder($alias)
@@ -180,6 +186,7 @@ class ProductQueryBuilder
 
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindOneByIdQueryBuilder($alias)
@@ -195,8 +202,9 @@ class ProductQueryBuilder
     }
 
     /**
-     * @param string $alias
+     * @param string         $alias
      * @param array|string[] $identifierList
+     *
      * @return QueryBuilder
      */
     public function createFindAllByIdentifierQueryBuilder($alias, array $identifierList)
@@ -210,8 +218,9 @@ class ProductQueryBuilder
     }
 
     /**
-     * @param string $alias
+     * @param string      $alias
      * @param array|int[] $idList
+     *
      * @return QueryBuilder
      */
     public function createFindAllByIdQueryBuilder($alias, array $idList)
@@ -227,6 +236,7 @@ class ProductQueryBuilder
     /**
      * @param string $alias
      * @param string $familyAlias
+     *
      * @return QueryBuilder
      */
     public function createFindAllByFamilyQueryBuilder($alias, $familyAlias)
@@ -248,6 +258,7 @@ class ProductQueryBuilder
     /**
      * @param string $alias
      * @param string $categoryAlias
+     *
      * @return QueryBuilder
      */
     public function createFindAllByCategoryQueryBuilder($alias, $categoryAlias)
@@ -280,6 +291,7 @@ class ProductQueryBuilder
 
     /**
      * @param array $idList
+     *
      * @return QueryBuilder
      */
     public function createDeleteAllByIdQueryBuilder(array $idList)
@@ -309,6 +321,7 @@ class ProductQueryBuilder
 
     /**
      * @param array $skuList
+     *
      * @return QueryBuilder
      */
     public function createDeleteAllByIdentitiferQueryBuilder(array $skuList)

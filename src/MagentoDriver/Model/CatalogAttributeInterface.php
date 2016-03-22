@@ -2,7 +2,6 @@
 
 namespace Luni\Component\MagentoDriver\Model;
 
-interface CatalogAttributeInterface
-    extends AttributeInterface, CatalogAttributeExtensionInterface
+interface CatalogAttributeInterface extends AttributeInterface, CatalogAttributeExtensionInterface
 {
 }

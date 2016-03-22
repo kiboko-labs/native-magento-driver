@@ -8,31 +8,36 @@ interface FamilyQueryBuilderInterface
 {
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindQueryBuilder($alias);
 
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindAllQueryBuilder($alias);
 
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindOneByIdQueryBuilder($alias);
 
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindOneByNameQueryBuilder($alias);
 
     /**
-     * @param string $alias
+     * @param string      $alias
      * @param array|int[] $idList
+     *
      * @return QueryBuilder
      */
     public function createFindAllByIdQueryBuilder($alias, array $idList);
@@ -49,6 +54,7 @@ interface FamilyQueryBuilderInterface
 
     /**
      * @param array|int[] $idList
+     *
      * @return QueryBuilder
      */
     public function createDeleteAllByIdQueryBuilder(array $idList);

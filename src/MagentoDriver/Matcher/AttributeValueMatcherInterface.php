@@ -8,6 +8,7 @@ interface AttributeValueMatcherInterface
 {
     /**
      * @param AttributeInterface $attributeValue
+     *
      * @return bool
      */
     public function match(AttributeInterface $attributeValue);

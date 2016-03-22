@@ -33,12 +33,14 @@ trait DataInfileDatabaseWriterTrait
     private $insertedIds = [];
 
     /**
-     * @param string $prefix
-     * @param string $path
-     * @param string $table
-     * @param array $tableFields
+     * @param string     $prefix
+     * @param string     $path
+     * @param string     $table
+     * @param array      $tableFields
      * @param \Generator $messenger
+     *
      * @return int
+     *
      * @throws \Doctrine\DBAL\DBALException
      */
     private function doWrite($prefix, $path, $table, array $tableFields, \Generator $messenger = null)
@@ -49,7 +51,7 @@ trait DataInfileDatabaseWriterTrait
         }
         $serializedKeys = implode(',', $keys);
 
-        $query =<<<SQL_EOF
+        $query = <<<SQL_EOF
 {$prefix} {$this->connection->quote($path)}
 REPLACE INTO TABLE {$this->connection->quoteIdentifier($table)}
 FIELDS
@@ -66,7 +68,7 @@ SQL_EOF;
         if ($messenger !== null) {
             // $this->connection->lastInertId() seems to be buggy with MariaDB 10.0.15
             $statement = $this->connection
-                ->executeQuery("SELECT LAST_INSERT_ID()");
+                ->executeQuery('SELECT LAST_INSERT_ID()');
             $statement->execute();
             $lastId = $statement->fetchColumn();
 

@@ -9,8 +9,7 @@ use Luni\Component\MagentoDriver\Model\Immutable\ImmutableVarcharAttributeValue;
 use Luni\Component\MagentoDriver\Repository\AttributeRepositoryInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-class OptionAttributeValueDenormalization
-    implements DenormalizerInterface
+class OptionAttributeValueDenormalization implements DenormalizerInterface
 {
     /**
      * @var AttributeRepositoryInterface
@@ -24,7 +23,7 @@ class OptionAttributeValueDenormalization
 
     /**
      * @param AttributeRepositoryInterface $attributeRepository
-     * @param OptionMapperInterface $optionsMapper
+     * @param OptionMapperInterface        $optionsMapper
      */
     public function __construct(
         AttributeRepositoryInterface $attributeRepository,
@@ -35,18 +34,19 @@ class OptionAttributeValueDenormalization
     }
 
     /**
-     * @param mixed $data
+     * @param mixed  $data
      * @param string $class
-     * @param null $format
-     * @param array $context
+     * @param null   $format
+     * @param array  $context
+     *
      * @return AttributeValueInterface
      */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize($data, $class, $format = null, array $context = [])
     {
         $attribute = $this->attributeRepository->findOneByCode('catalog_product', $data['attribute']);
 
         if (!$attribute) {
-            return null;
+            return;
         }
 
         if ($attribute->getBackendType() === 'int') {
@@ -56,7 +56,7 @@ class OptionAttributeValueDenormalization
                 null,
                 isset($data['channel']) || isset($data['locale']) ? 0 : null
             );
-        } else if ($attribute->getBackendType() === 'varchar') {
+        } elseif ($attribute->getBackendType() === 'varchar') {
             return new ImmutableVarcharAttributeValue(
                 $attribute,
                 $data['value'],
@@ -65,13 +65,14 @@ class OptionAttributeValueDenormalization
             );
         }
 
-        return null;
+        return;
     }
 
     /**
-     * @param mixed $data
+     * @param mixed  $data
      * @param string $type
-     * @param null $format
+     * @param null   $format
+     *
      * @return bool
      */
     public function supportsDenormalization($data, $type, $format = null)

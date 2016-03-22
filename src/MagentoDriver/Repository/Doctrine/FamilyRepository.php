@@ -9,8 +9,7 @@ use Luni\Component\MagentoDriver\Model\FamilyInterface;
 use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\FamilyQueryBuilderInterface;
 use Luni\Component\MagentoDriver\Repository\FamilyRepositoryInterface;
 
-class FamilyRepository
-    implements FamilyRepositoryInterface
+class FamilyRepository implements FamilyRepositoryInterface
 {
     /**
      * @var FamilyQueryBuilderInterface
@@ -28,9 +27,9 @@ class FamilyRepository
     private $familyFactory;
 
     /**
-     * @param Connection $connection
+     * @param Connection                  $connection
      * @param FamilyQueryBuilderInterface $queryBuilder
-     * @param FamilyFactoryInterface $familyFactory
+     * @param FamilyFactoryInterface      $familyFactory
      */
     public function __construct(
         Connection $connection,
@@ -44,6 +43,7 @@ class FamilyRepository
 
     /**
      * @param array $options
+     *
      * @return FamilyInterface
      */
     protected function createNewFamilyInstanceFromDatabase(array $options)
@@ -53,6 +53,7 @@ class FamilyRepository
 
     /**
      * @param int $id
+     *
      * @return FamilyInterface
      */
     public function findOneById($id)
@@ -65,15 +66,17 @@ class FamilyRepository
         }
 
         if ($statement->rowCount() < 1) {
-            return null;
+            return;
         }
 
         $options = $statement->fetch();
+
         return $this->createNewFamilyInstanceFromDatabase($options);
     }
 
     /**
      * @param string $name
+     *
      * @return FamilyInterface
      */
     public function findOneByName($name)
@@ -86,10 +89,11 @@ class FamilyRepository
         }
 
         if ($statement->rowCount() < 1) {
-            return null;
+            return;
         }
 
         $options = $statement->fetch();
+
         return $this->createNewFamilyInstanceFromDatabase($options);
     }
 }

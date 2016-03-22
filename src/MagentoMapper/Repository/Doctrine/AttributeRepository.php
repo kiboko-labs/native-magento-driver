@@ -7,8 +7,7 @@ use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
 use Luni\Component\MagentoMapper\QueryBuilder\Doctrine\AttributeQueryBuilder;
 use Luni\Component\MagentoMapper\Repository\AttributeRepositoryInterface;
 
-class AttributeRepository
-    implements AttributeRepositoryInterface
+class AttributeRepository implements AttributeRepositoryInterface
 {
     /**
      * @var Connection
@@ -22,7 +21,8 @@ class AttributeRepository
 
     /**
      * AttributeRepository constructor.
-     * @param Connection $connection
+     *
+     * @param Connection            $connection
      * @param AttributeQueryBuilder $queryBuilder
      */
     public function __construct(
@@ -35,7 +35,9 @@ class AttributeRepository
 
     /**
      * @param string $code
+     *
      * @return null|int
+     *
      * @throws \Doctrine\DBAL\DBALException
      */
     public function findOneByCode($code)
@@ -50,12 +52,12 @@ class AttributeRepository
         }
 
         if ($statement->rowCount() < 1) {
-            return null;
+            return;
         }
 
         $id = $statement->fetchColumn(0);
         if ($id === false) {
-            return null;
+            return;
         }
 
         return $id;
@@ -63,6 +65,7 @@ class AttributeRepository
 
     /**
      * @return int[]
+     *
      * @throws \Doctrine\DBAL\DBALException
      */
     public function findAll()

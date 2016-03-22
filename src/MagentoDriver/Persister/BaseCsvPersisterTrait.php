@@ -28,7 +28,7 @@ trait BaseCsvPersisterTrait
     private $tableName;
 
     /**
-     * Flushes data into the DB
+     * Flushes data into the DB.
      */
     public function doFlush()
     {

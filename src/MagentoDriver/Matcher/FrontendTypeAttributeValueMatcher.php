@@ -4,8 +4,7 @@ namespace Luni\Component\MagentoDriver\Matcher;
 
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 
-class FrontendTypeAttributeValueMatcher
-    implements AttributeValueMatcherInterface
+class FrontendTypeAttributeValueMatcher implements AttributeValueMatcherInterface
 {
     /**
      * @var string
@@ -18,7 +17,7 @@ class FrontendTypeAttributeValueMatcher
     private $next;
 
     /**
-     * @param string $expectedType
+     * @param string                              $expectedType
      * @param AttributeValueMatcherInterface|null $next
      */
     public function __construct($expectedType, AttributeValueMatcherInterface $next = null)
@@ -29,6 +28,7 @@ class FrontendTypeAttributeValueMatcher
 
     /**
      * @param AttributeInterface $attributeValue
+     *
      * @return bool
      */
     public function match(AttributeInterface $attributeValue)

@@ -8,6 +8,7 @@ interface FamilyFactoryInterface
 {
     /**
      * @param array $options
+     *
      * @return FamilyInterface
      */
     public function buildNew(array $options);

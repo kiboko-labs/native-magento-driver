@@ -5,8 +5,7 @@ namespace Luni\Component\MagentoDriver\Model;
 use Luni\Component\MagentoDriver\Entity\Product\ConfigurableProductInterface;
 use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
 
-class ProductSuperAttribute
-    implements SuperAttributeInterface
+class ProductSuperAttribute implements SuperAttributeInterface
 {
     /**
      * @var int
@@ -30,8 +29,8 @@ class ProductSuperAttribute
 
     /**
      * @param AttributeInterface $attribute
-     * @param ProductInterface $product
-     * @param int $position
+     * @param ProductInterface   $product
+     * @param int                $position
      */
     public function __construct(
         AttributeInterface $attribute,
@@ -43,10 +42,11 @@ class ProductSuperAttribute
     }
 
     /**
-     * @param int $id
+     * @param int                $id
      * @param AttributeInterface $attribute
-     * @param ProductInterface $product
-     * @param int $position
+     * @param ProductInterface   $product
+     * @param int                $position
+     *
      * @return static
      */
     public static function buildNewWith(
@@ -96,6 +96,7 @@ class ProductSuperAttribute
 
     /**
      * @param ConfigurableProductInterface $configurable
+     *
      * @return bool
      */
     public function isProduct(ConfigurableProductInterface $configurable)
@@ -105,6 +106,7 @@ class ProductSuperAttribute
 
     /**
      * @param AttributeInterface $attribute
+     *
      * @return bool
      */
     public function isAttribute(AttributeInterface $attribute)

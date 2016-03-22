@@ -7,8 +7,7 @@ use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\DBAL\Schema\Table;
 use Luni\Component\MagentoMapper\SchemaManager\MappingSchemaManagerInterface;
 
-class CategoryMappingSchemaManager
-    implements MappingSchemaManagerInterface
+class CategoryMappingSchemaManager implements MappingSchemaManagerInterface
 {
     /**
      * @var Connection
@@ -27,9 +26,10 @@ class CategoryMappingSchemaManager
 
     /**
      * OptionMappingSchemaManager constructor.
+     *
      * @param Connection $connection
-     * @param string $tableName
-     * @param string $categoriesTableName
+     * @param string     $tableName
+     * @param string     $categoriesTableName
      */
     public function __construct(
         Connection $connection,
@@ -59,11 +59,11 @@ class CategoryMappingSchemaManager
         $table = new Table($this->tableName);
 
         $table->addColumn('category_id', 'smallint', [
-            'unsigned' => true
+            'unsigned' => true,
         ]);
 
         $table->addColumn('category_code', 'string', [
-            'length' => 255
+            'length' => 255,
         ]);
 
         $table->addIndex(['category_id']);
@@ -87,9 +87,6 @@ class CategoryMappingSchemaManager
         return $table;
     }
 
-    /**
-     *
-     */
     public function createTable()
     {
         $manager = $this->connection->getSchemaManager();
@@ -99,6 +96,7 @@ class CategoryMappingSchemaManager
 
     /**
      * @param string $pimgentoTableName
+     *
      * @throws \Doctrine\DBAL\DBALException
      */
     public function initializeFromPimgento($pimgentoTableName)
@@ -113,7 +111,7 @@ class CategoryMappingSchemaManager
 
         $queryBuilder
             ->select([
-                'attribute_id'   => 'pim.entity_id',
+                'attribute_id' => 'pim.entity_id',
                 'attribute_code' => 'pim.code',
             ])
             ->from($pimgentoTableName, 'pim')
@@ -122,9 +120,9 @@ class CategoryMappingSchemaManager
 
         $this->connection->executeQuery(
             "INSERT INTO {$this->connection->quoteIdentifier($this->tableName)} "
-                . $queryBuilder->getSQL(),
+                .$queryBuilder->getSQL(),
             [
-                'attribute'
+                'attribute',
             ]
         );
     }

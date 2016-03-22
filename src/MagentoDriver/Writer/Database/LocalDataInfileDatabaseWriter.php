@@ -8,8 +8,7 @@ use League\Flysystem\File;
 use League\Flysystem\Filesystem;
 use Luni\Component\MagentoDriver\Exception\InvalidArgumentException;
 
-class LocalDataInfileDatabaseWriter
-    implements DatabaseWriterInterface
+class LocalDataInfileDatabaseWriter implements DatabaseWriterInterface
 {
     use DataInfileDatabaseWriterTrait;
 
@@ -25,12 +24,13 @@ class LocalDataInfileDatabaseWriter
 
     /**
      * DataInfileDatabaseWriter constructor.
+     *
      * @param Connection $connection
      * @param Filesystem $filesystem
-     * @param File $file
-     * @param string $delimiter
-     * @param string $enclosure
-     * @param string $escaper
+     * @param File       $file
+     * @param string     $delimiter
+     * @param string     $enclosure
+     * @param string     $escaper
      */
     public function __construct(
         Connection $connection,
@@ -49,9 +49,10 @@ class LocalDataInfileDatabaseWriter
     }
 
     /**
-     * @param string $table
-     * @param array $tableFields
+     * @param string     $table
+     * @param array      $tableFields
      * @param \Generator $messenger
+     *
      * @return int
      */
     public function write($table, array $tableFields, \Generator $messenger = null)

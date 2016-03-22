@@ -13,8 +13,7 @@ use Luni\Component\MagentoDriver\Model\FamilyInterface;
 use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductQueryBuilderInterface;
 use Luni\Component\MagentoDriver\Repository\ProductRepositoryInterface;
 
-class ProductRepository
-    implements ProductRepositoryInterface
+class ProductRepository implements ProductRepositoryInterface
 {
     /**
      * @var ProductQueryBuilderInterface
@@ -32,9 +31,9 @@ class ProductRepository
     private $productFactory;
 
     /**
-     * @param Connection $connection
+     * @param Connection                   $connection
      * @param ProductQueryBuilderInterface $queryBuilder
-     * @param ProductFactoryInterface $productFactory
+     * @param ProductFactoryInterface      $productFactory
      */
     public function __construct(
         Connection $connection,
@@ -48,6 +47,7 @@ class ProductRepository
 
     /**
      * @param array $options
+     *
      * @return ProductInterface
      */
     protected function createNewProductInstanceFromDatabase(array $options)
@@ -62,6 +62,7 @@ class ProductRepository
 
     /**
      * @param string $code
+     *
      * @return ProductInterface
      */
     public function findOneByIdentifier($code)
@@ -76,15 +77,17 @@ class ProductRepository
         }
 
         if ($statement->rowCount() < 1) {
-            return null;
+            return;
         }
 
         $options = $statement->fetch();
+
         return $this->createNewProductInstanceFromDatabase($options);
     }
 
     /**
      * @param int $id
+     *
      * @return ProductInterface
      */
     public function findOneById($id)
@@ -98,15 +101,17 @@ class ProductRepository
         }
 
         if ($statement->rowCount() < 1) {
-            return null;
+            return;
         }
 
         $options = $statement->fetch();
+
         return $this->createNewProductInstanceFromDatabase($options);
     }
 
     /**
      * @param array $identifierList
+     *
      * @return Collection|ProductInterface[]
      */
     public function findAllByIdentifier(array $identifierList)
@@ -132,6 +137,7 @@ class ProductRepository
 
     /**
      * @param array|int[] $idList
+     *
      * @return Collection|ProductInterface[]
      */
     public function findAllById(array $idList)
@@ -157,6 +163,7 @@ class ProductRepository
 
     /**
      * @param FamilyInterface $family
+     *
      * @return Collection|ProductInterface[]
      */
     public function findAllByFamily(FamilyInterface $family)
@@ -182,6 +189,7 @@ class ProductRepository
 
     /**
      * @param CategoryInterface $category
+     *
      * @return Collection|ProductInterface[]
      */
     public function findAllByCategory(CategoryInterface $category)
@@ -207,6 +215,7 @@ class ProductRepository
 
     /**
      * @param string $productType
+     *
      * @return Collection|ProductInterface[]
      */
     public function findAllByType($productType)

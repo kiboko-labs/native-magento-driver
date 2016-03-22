@@ -2,11 +2,11 @@
 
 namespace Luni\Component\MagentoDriver\QueryBuilder\Doctrine;
 
-class ProductMediaGalleryAttributeValueQueryBuilder
-    implements ProductMediaGalleryAttributeValueQueryBuilderInterface
+class ProductMediaGalleryAttributeValueQueryBuilder implements ProductMediaGalleryAttributeValueQueryBuilderInterface
 {
     /**
      * @param null $prefix
+     *
      * @return string
      */
     public static function getDefaultImageTable($prefix = null)
@@ -20,6 +20,7 @@ class ProductMediaGalleryAttributeValueQueryBuilder
 
     /**
      * @param null $prefix
+     *
      * @return string
      */
     public static function getDefaultLocaleTable($prefix = null)

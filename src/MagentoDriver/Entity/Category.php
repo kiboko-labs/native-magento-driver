@@ -5,8 +5,7 @@ namespace Luni\Component\MagentoDriver\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-class Category
-    implements CategoryInterface
+class Category implements CategoryInterface
 {
     /**
      * @var int
@@ -15,6 +14,7 @@ class Category
 
     /**
      * @param int $id
+     *
      * @return static
      */
     public static function buildNewWith($id)

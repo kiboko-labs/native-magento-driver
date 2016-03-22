@@ -8,11 +8,9 @@ use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
 use Luni\Component\MagentoDriver\Exception\InvalidArgumentException;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
-use Luni\Component\MagentoDriver\Repository\ProductAttributeRepositoryInterface;
 use Luni\Component\MagentoDriver\Repository\ProductAttributeValueRepositoryInterface;
 
-class ProductAttributeValueHydrator
-    implements ProductAttributeValueHydratorInterface
+class ProductAttributeValueHydrator implements ProductAttributeValueHydratorInterface
 {
     /**
      * @var ProductAttributeValueRepositoryInterface
@@ -30,7 +28,7 @@ class ProductAttributeValueHydrator
 
     /**
      * @param ProductInterface $product
-     * @param int $storeId
+     * @param int              $storeId
      */
     public function hydrate(ProductInterface $product, $storeId = null)
     {
@@ -44,9 +42,9 @@ class ProductAttributeValueHydrator
     }
 
     /**
-     * @param ProductInterface $product
+     * @param ProductInterface     $product
      * @param AttributeInterface[] $attributeList
-     * @param int $storeId
+     * @param int                  $storeId
      */
     public function hydrateByAttributeList(ProductInterface $product, array $attributeList, $storeId = null)
     {
@@ -61,6 +59,7 @@ class ProductAttributeValueHydrator
 
     /**
      * @param ProductInterface[] $productList
+     *
      * @return Collection|ProductInterface[]
      */
     private function transformListToCollection(array $productList)
@@ -81,7 +80,7 @@ class ProductAttributeValueHydrator
 
     /**
      * @param ProductInterface[] $productList
-     * @param int $storeId
+     * @param int                $storeId
      */
     public function hydrateList(array $productList, $storeId = null)
     {
@@ -103,9 +102,9 @@ class ProductAttributeValueHydrator
     }
 
     /**
-     * @param ProductInterface[] $productList
+     * @param ProductInterface[]   $productList
      * @param AttributeInterface[] $attributeList
-     * @param int $storeId
+     * @param int                  $storeId
      */
     public function hydrateListByAttributeList(array $productList, array $attributeList, $storeId = null)
     {

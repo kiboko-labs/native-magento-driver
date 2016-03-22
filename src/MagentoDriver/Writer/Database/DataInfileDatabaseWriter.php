@@ -4,8 +4,7 @@ namespace Luni\Component\MagentoDriver\Writer\Database;
 
 use Doctrine\DBAL\Connection;
 
-class DataInfileDatabaseWriter
-    implements DatabaseWriterInterface
+class DataInfileDatabaseWriter implements DatabaseWriterInterface
 {
     use DataInfileDatabaseWriterTrait;
 
@@ -16,11 +15,12 @@ class DataInfileDatabaseWriter
 
     /**
      * DataInfileDatabaseWriter constructor.
+     *
      * @param Connection $connection
-     * @param string $path
-     * @param string $delimiter
-     * @param string $enclosure
-     * @param string $escaper
+     * @param string     $path
+     * @param string     $delimiter
+     * @param string     $enclosure
+     * @param string     $escaper
      */
     public function __construct(
         Connection $connection,
@@ -37,9 +37,10 @@ class DataInfileDatabaseWriter
     }
 
     /**
-     * @param string $table
-     * @param array $tableFields
+     * @param string     $table
+     * @param array      $tableFields
      * @param \Generator $messenger
+     *
      * @return int
      */
     public function write($table, array $tableFields, \Generator $messenger = null)

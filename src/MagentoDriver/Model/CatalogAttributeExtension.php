@@ -2,8 +2,7 @@
 
 namespace Luni\Component\MagentoDriver\Model;
 
-class CatalogAttributeExtension
-    implements CatalogAttributeExtensionInterface
+class CatalogAttributeExtension implements CatalogAttributeExtensionInterface
 {
     /**
      * @var int
@@ -131,31 +130,31 @@ class CatalogAttributeExtension
     private $additionalData;
 
     /**
-     * @param int $attributeId
-     * @param bool $frontendInputRendererClassName,
-     * @param int $global,
-     * @param bool $visible,
-     * @param bool $searchable,
-     * @param bool $filterable,
-     * @param bool $comparable,
-     * @param bool $visibleOnFront,
-     * @param bool $htmlAllowedOnFront,
-     * @param bool $usedForPriceRules,
-     * @param bool $filterableInSearch,
-     * @param bool $usedInProductListing,
-     * @param bool $usedForSortBy,
-     * @param bool $configurable,
-     * @param bool $visibleInAdvancedSearch,
-     * @param bool $wysiwygEnabled,
-     * @param bool $usedForPromoRules,
-     * @param bool $requiredInAdminStore,
-     * @param bool $usedInGrid,
-     * @param bool $visibleInGrid,
-     * @param bool $filterableInGrid,
-     * @param bool $position,
-     * @param bool $searchWeight,
-     * @param array $productTypesApplyingTo,
-     * @param array $additionalData,
+     * @param int    $attributeId
+     * @param bool   $frontendInputRendererClassName,
+     * @param int    $global,
+     * @param bool   $visible,
+     * @param bool   $searchable,
+     * @param bool   $filterable,
+     * @param bool   $comparable,
+     * @param bool   $visibleOnFront,
+     * @param bool   $htmlAllowedOnFront,
+     * @param bool   $usedForPriceRules,
+     * @param bool   $filterableInSearch,
+     * @param bool   $usedInProductListing,
+     * @param bool   $usedForSortBy,
+     * @param bool   $configurable,
+     * @param bool   $visibleInAdvancedSearch,
+     * @param bool   $wysiwygEnabled,
+     * @param bool   $usedForPromoRules,
+     * @param bool   $requiredInAdminStore,
+     * @param bool   $usedInGrid,
+     * @param bool   $visibleInGrid,
+     * @param bool   $filterableInGrid,
+     * @param bool   $position,
+     * @param bool   $searchWeight,
+     * @param array  $productTypesApplyingTo,
+     * @param array  $additionalData,
      * @param string $note
      */
     public function __construct(

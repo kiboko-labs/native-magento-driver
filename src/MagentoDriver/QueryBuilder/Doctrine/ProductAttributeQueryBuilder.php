@@ -5,8 +5,7 @@ namespace Luni\Component\MagentoDriver\QueryBuilder\Doctrine;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
 
-class ProductAttributeQueryBuilder
-    implements ProductAttributeQueryBuilderInterface
+class ProductAttributeQueryBuilder implements ProductAttributeQueryBuilderInterface
 {
     use AttributeQueryBuilderTrait;
 
@@ -22,13 +21,13 @@ class ProductAttributeQueryBuilder
 
     /**
      * @param Connection $connection
-     * @param string $table
-     * @param string $extraTable
-     * @param string $variantAxisTable
-     * @param string $entityTable
-     * @param string $familyTable
-     * @param array $fields
-     * @param array $extraFields
+     * @param string     $table
+     * @param string     $extraTable
+     * @param string     $variantAxisTable
+     * @param string     $entityTable
+     * @param string     $familyTable
+     * @param array      $fields
+     * @param array      $extraFields
      */
     public function __construct(
         Connection $connection,
@@ -104,6 +103,7 @@ class ProductAttributeQueryBuilder
 
     /**
      * @param string $prefix
+     *
      * @return string
      */
     public static function getDefaultTable($prefix = null)
@@ -117,6 +117,7 @@ class ProductAttributeQueryBuilder
 
     /**
      * @param string $prefix
+     *
      * @return string
      */
     public static function getDefaultEntityTable($prefix = null)
@@ -130,6 +131,7 @@ class ProductAttributeQueryBuilder
 
     /**
      * @param string $prefix
+     *
      * @return string
      */
     public static function getDefaultExtraTable($prefix = null)
@@ -143,6 +145,7 @@ class ProductAttributeQueryBuilder
 
     /**
      * @param string $prefix
+     *
      * @return string
      */
     public static function getDefaultVariantTable($prefix = null)
@@ -156,6 +159,7 @@ class ProductAttributeQueryBuilder
 
     /**
      * @param string $prefix
+     *
      * @return string
      */
     public static function getDefaultFamilyTable($prefix = null)
@@ -172,6 +176,7 @@ class ProductAttributeQueryBuilder
      * @param string $extraAlias
      * @param string $entityAlias
      * @param string $variantAxisAlias
+     *
      * @return QueryBuilder
      */
     public function createFindAllVariantAxisByEntityQueryBuilder($alias, $extraAlias, $entityAlias, $variantAxisAlias)
@@ -192,6 +197,7 @@ class ProductAttributeQueryBuilder
      * @param string $extraAlias
      * @param string $entityAlias
      * @param string $familyAlias
+     *
      * @return QueryBuilder
      */
     public function createFindAllByFamilyQueryBuilder($alias, $extraAlias, $entityAlias, $familyAlias)
@@ -212,6 +218,7 @@ class ProductAttributeQueryBuilder
      * @param string $extraAlias
      * @param string $entityAlias
      * @param string $familyAlias
+     *
      * @return QueryBuilder
      */
     public function createFindAllMandatoryByFamilyQueryBuilder($alias, $extraAlias, $entityAlias, $familyAlias)

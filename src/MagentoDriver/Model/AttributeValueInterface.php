@@ -23,12 +23,14 @@ interface AttributeValueInterface
 
     /**
      * @param ProductInterface $product
+     *
      * @return AttributeValueInterface
      */
     public function attachToProduct(ProductInterface $product);
 
     /**
      * @return AttributeInterface
+     *
      * @internal
      */
     public function getAttribute();
@@ -50,6 +52,7 @@ interface AttributeValueInterface
 
     /**
      * @param AttributeInterface $friend
+     *
      * @return bool
      */
     public function isAttribute(AttributeInterface $friend);
@@ -61,6 +64,7 @@ interface AttributeValueInterface
 
     /**
      * @param string $key
+     *
      * @return string
      */
     public function getAttributeOption($key);

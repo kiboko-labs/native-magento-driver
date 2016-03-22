@@ -9,8 +9,5 @@ interface TemporaryWriterInterface
      */
     public function persistRow(array $row);
 
-    /**
-     *
-     */
     public function flush();
 }

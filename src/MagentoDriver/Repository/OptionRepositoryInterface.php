@@ -10,18 +10,21 @@ interface OptionRepositoryInterface
 {
     /**
      * @param int $id
+     *
      * @return OptionInterface
      */
     public function findOneById($id);
 
     /**
      * @param array|int[] $idList
+     *
      * @return Collection|OptionInterface[]
      */
     public function findAllById(array $idList);
 
     /**
      * @param AttributeInterface $attribute
+     *
      * @return Collection|OptionInterface[]
      */
     public function findAllByAttribute(AttributeInterface $attribute);

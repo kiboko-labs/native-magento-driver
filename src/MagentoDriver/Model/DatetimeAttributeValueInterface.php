@@ -2,8 +2,7 @@
 
 namespace Luni\Component\MagentoDriver\Model;
 
-interface DatetimeAttributeValueInterface
-    extends ScopableAttributeValueInterface
+interface DatetimeAttributeValueInterface extends ScopableAttributeValueInterface
 {
     /**
      * @return \DateTimeInterface

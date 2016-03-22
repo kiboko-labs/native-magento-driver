@@ -10,17 +10,17 @@ use Luni\Component\MagentoDriver\Model\ScopableAttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\VarcharAttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\VarcharAttributeValueTrait;
 
-class MutableVarcharAttributeValue
-    implements MutableAttributeValueInterface, ScopableAttributeValueInterface, VarcharAttributeValueInterface
+class MutableVarcharAttributeValue implements MutableAttributeValueInterface, ScopableAttributeValueInterface, VarcharAttributeValueInterface
 {
     use VarcharAttributeValueTrait;
 
     /**
      * MediaGalleryAttributeValue constructor.
+     *
      * @param AttributeInterface $attribute
-     * @param string $payload
-     * @param ProductInterface $product
-     * @param int $storeId
+     * @param string             $payload
+     * @param ProductInterface   $product
+     * @param int                $storeId
      */
     public function __construct(
         AttributeInterface $attribute,
@@ -60,6 +60,7 @@ class MutableVarcharAttributeValue
 
     /**
      * @param $storeId
+     *
      * @return AttributeValueInterface
      */
     public function copyToStoreId($storeId)

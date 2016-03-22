@@ -9,8 +9,7 @@ use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 
-class ProductAttributeValueRepositoryFacade
-    implements ProductAttributeValueRepositoryInterface
+class ProductAttributeValueRepositoryFacade implements ProductAttributeValueRepositoryInterface
 {
     /**
      * @var ProductAttributeValueRepositoryBrokerInterface
@@ -28,6 +27,7 @@ class ProductAttributeValueRepositoryFacade
 
     /**
      * @param ProductInterface $product
+     *
      * @return Collection|AttributeValueInterface[]
      */
     public function findAllByProduct(ProductInterface $product)
@@ -45,6 +45,7 @@ class ProductAttributeValueRepositoryFacade
 
     /**
      * @param ProductInterface $product
+     *
      * @return Collection|AttributeValueInterface[]
      */
     public function findAllVariantAxisByProductFromDefault(ProductInterface $product)
@@ -62,7 +63,8 @@ class ProductAttributeValueRepositoryFacade
 
     /**
      * @param ProductInterface $product
-     * @param int $storeId
+     * @param int              $storeId
+     *
      * @return Collection|AttributeValueInterface[]
      */
     public function findAllVariantAxisByProductFromStoreId(ProductInterface $product, $storeId)
@@ -110,8 +112,9 @@ class ProductAttributeValueRepositoryFacade
     }
 
     /**
-     * @param ProductInterface $product
+     * @param ProductInterface   $product
      * @param AttributeInterface $attribute
+     *
      * @return AttributeValueInterface|null
      */
     public function findOneByProductAndAttributeFromDefault(
@@ -126,13 +129,14 @@ class ProductAttributeValueRepositoryFacade
             return $repository->findOneByProductAndAttributeFromDefault($product, $attribute);
         }
 
-        return null;
+        return;
     }
 
     /**
-     * @param ProductInterface $product
+     * @param ProductInterface   $product
      * @param AttributeInterface $attribute
-     * @param int $storeId
+     * @param int                $storeId
+     *
      * @return AttributeValueInterface|null
      */
     public function findOneByProductAndAttributeFromStoreId(
@@ -148,7 +152,7 @@ class ProductAttributeValueRepositoryFacade
             return $repository->findOneByProductAndAttributeFromStoreId($product, $attribute, $storeId);
         }
 
-        return null;
+        return;
     }
 
     public function findAllByProductListFromDefault(
@@ -213,6 +217,7 @@ class ProductAttributeValueRepositoryFacade
 
     /**
      * @param ProductInterface $product
+     *
      * @return Collection|AttributeValueInterface[]
      */
     public function findAllByProductFromDefault(ProductInterface $product)
@@ -230,7 +235,8 @@ class ProductAttributeValueRepositoryFacade
 
     /**
      * @param ProductInterface $product
-     * @param int $storeId
+     * @param int              $storeId
+     *
      * @return Collection|AttributeValueInterface[]
      */
     public function findAllByProductFromStoreId(ProductInterface $product, $storeId)

@@ -10,17 +10,17 @@ use Luni\Component\MagentoDriver\Model\IntegerAttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\IntegerAttributeValueTrait;
 use Luni\Component\MagentoDriver\Model\ScopableAttributeValueInterface;
 
-class MutableIntegerAttributeValue
-    implements MutableAttributeValueInterface, ScopableAttributeValueInterface, IntegerAttributeValueInterface
+class MutableIntegerAttributeValue implements MutableAttributeValueInterface, ScopableAttributeValueInterface, IntegerAttributeValueInterface
 {
     use IntegerAttributeValueTrait;
 
     /**
      * MediaGalleryAttributeValue constructor.
+     *
      * @param AttributeInterface $attribute
-     * @param int $payload
-     * @param ProductInterface $product
-     * @param int $storeId
+     * @param int                $payload
+     * @param ProductInterface   $product
+     * @param int                $storeId
      */
     public function __construct(
         AttributeInterface $attribute,
@@ -60,6 +60,7 @@ class MutableIntegerAttributeValue
 
     /**
      * @param $storeId
+     *
      * @return AttributeValueInterface
      */
     public function copyToStoreId($storeId)

@@ -7,8 +7,7 @@ use Luni\Component\MagentoDriver\Exception\InvalidProductTypeException;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 
-class StandardProductAttributeValueFactory
-    implements ProductAttributeValueFactoryInterface
+class StandardProductAttributeValueFactory implements ProductAttributeValueFactoryInterface
 {
     /**
      * @var \SplObjectStorage
@@ -44,13 +43,14 @@ class StandardProductAttributeValueFactory
 
     /**
      * @param AttributeInterface $attribute
-     * @param array $options
+     * @param array              $options
+     *
      * @return AttributeValueInterface
      */
     public function buildNew(AttributeInterface $attribute, array $options)
     {
         /**
-         * @var \Closure $matcher
+         * @var \Closure
          * @var \Closure $builder
          */
         foreach ($this->walkBuildersList() as $matcher => $builder) {

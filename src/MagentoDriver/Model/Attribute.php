@@ -2,8 +2,7 @@
 
 namespace Luni\Component\MagentoDriver\Model;
 
-class Attribute
-    implements AttributeInterface
+class Attribute implements AttributeInterface
 {
     /**
      * @var int
@@ -91,7 +90,7 @@ class Attribute
     private $note;
 
     /**
-     * @param int $entityTypeId
+     * @param int    $entityTypeId
      * @param string $code
      * @param string $modelClass
      * @param string $backendType
@@ -103,9 +102,9 @@ class Attribute
      * @param string $frontendLabel
      * @param string $frontendViewClass
      * @param string $sourceModelClass
-     * @param bool $required
-     * @param bool $userDefined
-     * @param bool $unique
+     * @param bool   $required
+     * @param bool   $userDefined
+     * @param bool   $unique
      * @param string $defaultValue
      * @param string $note
      */
@@ -148,8 +147,8 @@ class Attribute
     }
 
     /**
-     * @param int $attributeId
-     * @param int $entityTypeId
+     * @param int    $attributeId
+     * @param int    $entityTypeId
      * @param string $code
      * @param string $modelClass
      * @param string $backendType
@@ -161,11 +160,12 @@ class Attribute
      * @param string $frontendLabel
      * @param string $frontendViewClass
      * @param string $sourceModelClass
-     * @param bool $required
-     * @param bool $userDefined
-     * @param bool $unique
+     * @param bool   $required
+     * @param bool   $userDefined
+     * @param bool   $unique
      * @param string $defaultValue
      * @param string $note
+     *
      * @return AttributeInterface
      */
     public static function buildNewWith(

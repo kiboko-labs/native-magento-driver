@@ -16,11 +16,9 @@ use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuil
 use Luni\Component\MagentoDriver\Repository\ProductAttributeRepositoryInterface;
 
 /**
- * Class ProductAttributeRepository
- * @package Luni\Component\MagentoDriver\Repository\Doctrine
+ * Class ProductAttributeRepository.
  */
-class ProductAttributeRepository
-    implements ProductAttributeRepositoryInterface
+class ProductAttributeRepository implements ProductAttributeRepositoryInterface
 {
     /**
      * @var ProductAttributeQueryBuilderInterface
@@ -34,7 +32,8 @@ class ProductAttributeRepository
 
     /**
      * ProductAttributeRepository constructor.
-     * @param Connection $connection
+     *
+     * @param Connection                            $connection
      * @param ProductAttributeQueryBuilderInterface $queryBuilder
      */
     public function __construct(
@@ -47,6 +46,7 @@ class ProductAttributeRepository
 
     /**
      * @param array $options
+     *
      * @return CatalogAttributeExtensionInterface
      */
     protected function createNewAttributeInstanceFromDatabase(array $options)
@@ -105,6 +105,7 @@ class ProductAttributeRepository
     /**
      * @param string $entityTypeCode
      * @param string $code
+     *
      * @return CatalogAttributeExtensionInterface
      */
     public function findOneByCode($code, $entityTypeCode)
@@ -117,15 +118,17 @@ class ProductAttributeRepository
         }
 
         if ($statement->rowCount() < 1) {
-            return null;
+            return;
         }
 
         $options = $statement->fetch();
+
         return $this->createNewAttributeInstanceFromDatabase($options);
     }
 
     /**
      * @param int $id
+     *
      * @return CatalogAttributeExtensionInterface
      */
     public function findOneById($id)
@@ -138,16 +141,18 @@ class ProductAttributeRepository
         }
 
         if ($statement->rowCount() < 1) {
-            return null;
+            return;
         }
 
         $options = $statement->fetch();
+
         return $this->createNewAttributeInstanceFromDatabase($options);
     }
 
     /**
-     * @param string $entityTypeCode
+     * @param string         $entityTypeCode
      * @param array|string[] $codeList
+     *
      * @return Collection|CatalogAttributeExtensionInterface[]
      */
     public function findAllByCode($entityTypeCode, array $codeList)
@@ -173,6 +178,7 @@ class ProductAttributeRepository
 
     /**
      * @param array|int[] $idList
+     *
      * @return Collection|CatalogAttributeExtensionInterface[]
      */
     public function findAllById(array $idList)
@@ -222,6 +228,7 @@ class ProductAttributeRepository
 
     /**
      * @param ProductInterface $product
+     *
      * @return Collection|CatalogAttributeExtensionInterface[]
      */
     public function findAllByEntity(ProductInterface $product)
@@ -231,6 +238,7 @@ class ProductAttributeRepository
 
     /**
      * @param string $entityTypeCode
+     *
      * @return Collection|CatalogAttributeExtensionInterface[]
      */
     public function findAllByEntityTypeCode($entityTypeCode)
@@ -256,6 +264,7 @@ class ProductAttributeRepository
 
     /**
      * @param int $entityTypeId
+     *
      * @return Collection|CatalogAttributeExtensionInterface[]
      */
     public function findAllByEntityTypeId($entityTypeId)
@@ -283,6 +292,7 @@ class ProductAttributeRepository
 
     /**
      * @param ProductInterface $product
+     *
      * @return Collection|CatalogAttributeExtensionInterface[]
      */
     public function findAllVariantAxisByEntity(ProductInterface $product)
@@ -312,6 +322,7 @@ class ProductAttributeRepository
 
     /**
      * @param FamilyInterface $family
+     *
      * @return Collection|CatalogAttributeExtensionInterface[]
      */
     public function findAllByFamily(FamilyInterface $family)
@@ -337,6 +348,7 @@ class ProductAttributeRepository
 
     /**
      * @param FamilyInterface $family
+     *
      * @return Collection|CatalogAttributeExtensionInterface[]
      */
     public function findAllMandatoryByFamily(FamilyInterface $family)

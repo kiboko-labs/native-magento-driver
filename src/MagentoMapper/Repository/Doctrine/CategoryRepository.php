@@ -7,8 +7,7 @@ use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
 use Luni\Component\MagentoMapper\QueryBuilder\Doctrine\CategoryQueryBuilder;
 use Luni\Component\MagentoMapper\Repository\CategoryRepositoryInterface;
 
-class CategoryRepository
-    implements CategoryRepositoryInterface
+class CategoryRepository implements CategoryRepositoryInterface
 {
     /**
      * @var Connection
@@ -22,7 +21,8 @@ class CategoryRepository
 
     /**
      * AttributeRepository constructor.
-     * @param Connection $connection
+     *
+     * @param Connection           $connection
      * @param CategoryQueryBuilder $queryBuilder
      */
     public function __construct(
@@ -35,7 +35,9 @@ class CategoryRepository
 
     /**
      * @param string $code
+     *
      * @return null|int
+     *
      * @throws \Doctrine\DBAL\DBALException
      */
     public function findOneByCode($code)
@@ -50,12 +52,12 @@ class CategoryRepository
         }
 
         if ($statement->rowCount() < 1) {
-            return null;
+            return;
         }
 
         $id = $statement->fetchColumn(0);
         if ($id === false) {
-            return null;
+            return;
         }
 
         return $id;
@@ -63,7 +65,9 @@ class CategoryRepository
 
     /**
      * @param string[] $codes
+     *
      * @return int[]
+     *
      * @throws \Doctrine\DBAL\DBALException
      */
     public function findAllByCodes(array $codes)
@@ -96,6 +100,7 @@ class CategoryRepository
 
     /**
      * @return int[]
+     *
      * @throws \Doctrine\DBAL\DBALException
      */
     public function findAll()

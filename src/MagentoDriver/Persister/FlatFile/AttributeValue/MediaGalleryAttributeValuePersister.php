@@ -17,8 +17,7 @@ use Luni\Component\MagentoDriver\Persister\AttributeValuePersisterInterface;
 use Luni\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
 use Luni\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;
 
-class MediaGalleryAttributeValuePersister
-    implements AttributeValuePersisterInterface
+class MediaGalleryAttributeValuePersister implements AttributeValuePersisterInterface
 {
     /**
      * @var TemporaryWriterInterface
@@ -107,13 +106,13 @@ class MediaGalleryAttributeValuePersister
     /**
      * @param TemporaryWriterInterface $temporaryImageWriter
      * @param TemporaryWriterInterface $temporaryLocaleWriter
-     * @param DatabaseWriterInterface $databaseImagesWriter
-     * @param DatabaseWriterInterface $databaseLocaleWriter
-     * @param FileMoverInterface $fileMover
-     * @param string $imageTableName
-     * @param string $localeTableName
-     * @param FilesystemInterface $imagesFs
-     * @param FilesystemInterface $remoteFs
+     * @param DatabaseWriterInterface  $databaseImagesWriter
+     * @param DatabaseWriterInterface  $databaseLocaleWriter
+     * @param FileMoverInterface       $fileMover
+     * @param string                   $imageTableName
+     * @param string                   $localeTableName
+     * @param FilesystemInterface      $imagesFs
+     * @param FilesystemInterface      $remoteFs
      */
     public function __construct(
         TemporaryWriterInterface $temporaryImageWriter,
@@ -159,10 +158,10 @@ class MediaGalleryAttributeValuePersister
         /** @var ImageAttributeValueInterface $mediaAsset */
         foreach ($value as $mediaAsset) {
             $this->temporaryImageWriter->persistRow([
-                'value_id'     => $mediaAsset->getId(),
+                'value_id' => $mediaAsset->getId(),
                 'attribute_id' => $mediaAsset->getAttributeId(),
-                'entity_id'    => $mediaAsset->getProductId(),
-                'value'        => $mediaAsset->getFile()->getPath(),
+                'entity_id' => $mediaAsset->getProductId(),
+                'value' => $mediaAsset->getFile()->getPath(),
             ]);
 
             /** @var ImageMetadataAttributeValueInterface $metadata */
@@ -170,7 +169,7 @@ class MediaGalleryAttributeValuePersister
                 $this->temporaryLocaleWriter->persistRow([
                     'value_id' => $mediaAsset->getId(),
                     'store_id' => $metadata->getStoreId(),
-                    'label'    => $metadata->getLabel(),
+                    'label' => $metadata->getLabel(),
                     'position' => $metadata->getPosition(),
                     'disabled' => $metadata->isExcluded(),
                 ]);
@@ -180,7 +179,6 @@ class MediaGalleryAttributeValuePersister
 
     /**
      * @param AttributeValueInterface $value
-     * @return void
      */
     public function __invoke(AttributeValueInterface $value)
     {
@@ -188,7 +186,7 @@ class MediaGalleryAttributeValuePersister
     }
 
     /**
-     * Flushes data into the DB
+     * Flushes data into the DB.
      */
     public function flush()
     {

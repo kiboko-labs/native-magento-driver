@@ -10,17 +10,17 @@ use Luni\Component\MagentoDriver\Model\ScopableAttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\TextAttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\TextAttributeValueTrait;
 
-class ImmutableTextAttributeValue
-    implements ImmutableAttributeValueInterface, ScopableAttributeValueInterface, TextAttributeValueInterface
+class ImmutableTextAttributeValue implements ImmutableAttributeValueInterface, ScopableAttributeValueInterface, TextAttributeValueInterface
 {
     use TextAttributeValueTrait;
 
     /**
      * MediaGalleryAttributeValue constructor.
+     *
      * @param AttributeInterface $attribute
-     * @param string $payload
-     * @param ProductInterface $product
-     * @param int $storeId
+     * @param string             $payload
+     * @param ProductInterface   $product
+     * @param int                $storeId
      */
     public function __construct(
         AttributeInterface $attribute,
@@ -52,6 +52,7 @@ class ImmutableTextAttributeValue
 
     /**
      * @param $storeId
+     *
      * @return AttributeValueInterface
      */
     public function copyToStoreId($storeId)

@@ -3,7 +3,6 @@
 namespace Luni\Component\MagentoDriver\Model;
 
 use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
 
 trait IntegerAttributeValueTrait
 {
@@ -16,10 +15,11 @@ trait IntegerAttributeValueTrait
 
     /**
      * DatetimeAttributeValueTrait constructor.
+     *
      * @param AttributeInterface $attribute
-     * @param int $payload
-     * @param ProductInterface $product
-     * @param int $storeId
+     * @param int                $payload
+     * @param ProductInterface   $product
+     * @param int                $storeId
      */
     abstract public function __construct(
         AttributeInterface $attribute,
@@ -30,10 +30,11 @@ trait IntegerAttributeValueTrait
 
     /**
      * @param AttributeInterface $attribute
-     * @param int $valueId
-     * @param int $payload
-     * @param ProductInterface $product
-     * @param int $storeId
+     * @param int                $valueId
+     * @param int                $payload
+     * @param ProductInterface   $product
+     * @param int                $storeId
+     *
      * @return IntegerAttributeValueInterface
      */
     public static function buildNewWith(

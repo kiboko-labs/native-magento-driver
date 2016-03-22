@@ -5,12 +5,8 @@ namespace Luni\Component\MagentoDriver\Persister\Direct\AttributeValue;
 use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Persister\AttributeValuePersisterInterface;
 
-class StaticAttributeValuePersister
-    implements AttributeValuePersisterInterface
+class StaticAttributeValuePersister implements AttributeValuePersisterInterface
 {
-    /**
-     *
-     */
     public function initialize()
     {
     }
@@ -24,7 +20,6 @@ class StaticAttributeValuePersister
 
     /**
      * @param AttributeValueInterface $value
-     * @return void
      */
     public function __invoke(AttributeValueInterface $value)
     {

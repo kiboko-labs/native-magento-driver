@@ -6,8 +6,7 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Luni\Component\MagentoMapper\QueryBuilder\OptionQueryBuilderInterface;
 
-class OptionQueryBuilder
-    implements OptionQueryBuilderInterface
+class OptionQueryBuilder implements OptionQueryBuilderInterface
 {
     /**
      * @var Connection
@@ -26,8 +25,8 @@ class OptionQueryBuilder
 
     /**
      * @param Connection $connection
-     * @param string $table
-     * @param array $fields
+     * @param string     $table
+     * @param array      $fields
      */
     public function __construct(
         Connection $connection,
@@ -53,6 +52,7 @@ class OptionQueryBuilder
 
     /**
      * @param string $prefix
+     *
      * @return string
      */
     public static function getDefaultTable($prefix = null)
@@ -66,6 +66,7 @@ class OptionQueryBuilder
 
     /**
      * @param string $prefix
+     *
      * @return string
      */
     public static function getAttributeDefaultTable($prefix = null)
@@ -79,6 +80,7 @@ class OptionQueryBuilder
 
     /**
      * @param string $prefix
+     *
      * @return string
      */
     public static function getOptionDefaultTable($prefix = null)
@@ -91,8 +93,9 @@ class OptionQueryBuilder
     }
 
     /**
-     * @param array $fields
+     * @param array  $fields
      * @param string $alias
+     *
      * @return array
      */
     protected function createFieldsList(array $fields, $alias)
@@ -107,6 +110,7 @@ class OptionQueryBuilder
 
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindQueryBuilder($alias)
@@ -119,6 +123,7 @@ class OptionQueryBuilder
 
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindOneByAttributeQueryBuilder($alias)
@@ -137,6 +142,7 @@ class OptionQueryBuilder
 
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindOneByAttributeCodeQueryBuilder($alias)
@@ -155,6 +161,7 @@ class OptionQueryBuilder
 
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindAllByAttributeQueryBuilder($alias)

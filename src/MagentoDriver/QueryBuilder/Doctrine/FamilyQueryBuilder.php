@@ -5,8 +5,7 @@ namespace Luni\Component\MagentoDriver\QueryBuilder\Doctrine;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
 
-class FamilyQueryBuilder
-    implements FamilyQueryBuilderInterface
+class FamilyQueryBuilder implements FamilyQueryBuilderInterface
 {
     /**
      * @var Connection
@@ -25,8 +24,8 @@ class FamilyQueryBuilder
 
     /**
      * @param Connection $connection
-     * @param string $table
-     * @param array $fields
+     * @param string     $table
+     * @param array      $fields
      */
     public function __construct(
         Connection $connection,
@@ -60,8 +59,9 @@ class FamilyQueryBuilder
     }
 
     /**
-     * @param array $fields
+     * @param array  $fields
      * @param string $alias
+     *
      * @return array
      */
     protected function createFieldsList(array $fields, $alias)
@@ -76,6 +76,7 @@ class FamilyQueryBuilder
 
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindQueryBuilder($alias)
@@ -88,6 +89,7 @@ class FamilyQueryBuilder
 
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindAllQueryBuilder($alias)
@@ -101,6 +103,7 @@ class FamilyQueryBuilder
 
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindOneByIdQueryBuilder($alias)
@@ -118,6 +121,7 @@ class FamilyQueryBuilder
 
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindOneByNameQueryBuilder($alias)
@@ -171,6 +175,7 @@ class FamilyQueryBuilder
 
     /**
      * @param array $idList
+     *
      * @return QueryBuilder
      */
     public function createDeleteAllByIdQueryBuilder(array $idList)

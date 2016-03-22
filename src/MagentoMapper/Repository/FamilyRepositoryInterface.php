@@ -6,6 +6,7 @@ interface FamilyRepositoryInterface
 {
     /**
      * @param string $code
+     *
      * @return int
      */
     public function findOneByCode($code);

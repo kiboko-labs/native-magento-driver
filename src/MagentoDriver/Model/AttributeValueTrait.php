@@ -33,6 +33,7 @@ trait AttributeValueTrait
 
     /**
      * @param AttributeInterface $friend
+     *
      * @return bool
      */
     public function isAttribute(AttributeInterface $friend)
@@ -62,7 +63,7 @@ trait AttributeValueTrait
     public function getProductId()
     {
         if ($this->product === null) {
-            return null;
+            return;
         }
 
         return $this->product->getId();
@@ -70,6 +71,7 @@ trait AttributeValueTrait
 
     /**
      * @param ProductInterface $product
+     *
      * @return AttributeValueInterface
      */
     public function attachToProduct(ProductInterface $product)
@@ -87,6 +89,7 @@ trait AttributeValueTrait
 
     /**
      * @return AttributeInterface
+     *
      * @internal
      */
     public function getAttribute()
@@ -120,6 +123,7 @@ trait AttributeValueTrait
 
     /**
      * @param string $key
+     *
      * @return string
      */
     public function getAttributeOption($key)

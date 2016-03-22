@@ -38,8 +38,9 @@ trait AttributeQueryBuilderTrait
     private $entityTable;
 
     /**
-     * @param array $fields
+     * @param array  $fields
      * @param string $alias
+     *
      * @return array
      */
     protected function createFieldsList(array $fields, $alias)
@@ -54,6 +55,7 @@ trait AttributeQueryBuilderTrait
 
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindQueryBuilder($alias)
@@ -67,7 +69,8 @@ trait AttributeQueryBuilderTrait
     /**
      * @param string $alias
      * @param string $extraAlias
-     * @param array $excludedIds
+     * @param array  $excludedIds
+     *
      * @return QueryBuilder
      */
     public function createFindAllQueryBuilder($alias, $extraAlias, array $excludedIds = [])
@@ -91,7 +94,8 @@ trait AttributeQueryBuilderTrait
      * @param string $alias
      * @param string $extraAlias
      * @param string $entityAlias
-     * @param array $excludedIds
+     * @param array  $excludedIds
+     *
      * @return QueryBuilder
      */
     public function createFindAllByEntityTypeQueryBuilder($alias, $extraAlias, $entityAlias, array $excludedIds = [])
@@ -111,6 +115,7 @@ trait AttributeQueryBuilderTrait
      * @param string $alias
      * @param string $extraAlias
      * @param string $entityAlias
+     *
      * @return QueryBuilder
      */
     public function createFindOneByCodeQueryBuilder($alias, $extraAlias, $entityAlias)
@@ -125,6 +130,7 @@ trait AttributeQueryBuilderTrait
     /**
      * @param string $alias
      * @param string $extraAlias
+     *
      * @return QueryBuilder
      */
     public function createFindOneByIdQueryBuilder($alias, $extraAlias)
@@ -137,10 +143,11 @@ trait AttributeQueryBuilderTrait
     }
 
     /**
-     * @param string $alias
-     * @param string $extraAlias
-     * @param string $entityAlias
+     * @param string         $alias
+     * @param string         $extraAlias
+     * @param string         $entityAlias
      * @param array|string[] $codeList
+     *
      * @return QueryBuilder
      */
     public function createFindAllByCodeQueryBuilder($alias, $extraAlias, $entityAlias, array $codeList)
@@ -154,9 +161,10 @@ trait AttributeQueryBuilderTrait
     }
 
     /**
-     * @param string $alias
-     * @param string $extraAlias
+     * @param string      $alias
+     * @param string      $extraAlias
      * @param array|int[] $idList
+     *
      * @return QueryBuilder
      */
     public function createFindAllByIdQueryBuilder($alias, $extraAlias, array $idList)
@@ -206,6 +214,7 @@ trait AttributeQueryBuilderTrait
 
     /**
      * @param array|string[] $codeList
+     *
      * @return QueryBuilder
      */
     public function createDeleteAllByCodeQueryBuilder(array $codeList)
@@ -220,6 +229,7 @@ trait AttributeQueryBuilderTrait
 
     /**
      * @param array|int[] $idList
+     *
      * @return QueryBuilder
      */
     public function createDeleteAllByIdQueryBuilder(array $idList)

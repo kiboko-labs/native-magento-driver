@@ -2,7 +2,6 @@
 
 namespace Luni\Component\MagentoDriver\Exception;
 
-class DatabaseFetchingFailureException
-    extends RuntimeErrorException
+class DatabaseFetchingFailureException extends RuntimeErrorException
 {
 }

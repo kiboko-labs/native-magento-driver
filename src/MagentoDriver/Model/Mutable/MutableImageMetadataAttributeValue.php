@@ -9,18 +9,18 @@ use Luni\Component\MagentoDriver\Model\ImageMetadataAttributeValueTrait;
 use Luni\Component\MagentoDriver\Model\Immutable\ImmutableImageMetadataAttributeValue;
 use Luni\Component\MagentoDriver\Model\ScopableAttributeValueInterface;
 
-class MutableImageMetadataAttributeValue
-    implements MutableAttributeValueInterface, ScopableAttributeValueInterface, ImageMetadataAttributeValueInterface
+class MutableImageMetadataAttributeValue implements MutableAttributeValueInterface, ScopableAttributeValueInterface, ImageMetadataAttributeValueInterface
 {
     use ImageMetadataAttributeValueTrait;
 
     /**
      * DatetimeAttributeValueTrait constructor.
+     *
      * @param AttributeInterface $attribute
-     * @param string $label
-     * @param int $position
-     * @param bool $excluded
-     * @param null $storeId
+     * @param string             $label
+     * @param int                $position
+     * @param bool               $excluded
+     * @param null               $storeId
      */
     public function __construct(
         AttributeInterface $attribute,
@@ -77,6 +77,7 @@ class MutableImageMetadataAttributeValue
 
     /**
      * @param $storeId
+     *
      * @return AttributeValueInterface
      */
     public function copyToStoreId($storeId)

@@ -9,8 +9,7 @@ use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\FamilyInterface;
 use Luni\Component\MagentoDriver\Model\SuperLinkInterface;
 
-class SimpleProduct
-    implements SimpleProductInterface
+class SimpleProduct implements SimpleProductInterface
 {
     use BaseProductTrait;
 
@@ -20,8 +19,8 @@ class SimpleProduct
     private $configurables;
 
     /**
-     * @param string $identifier
-     * @param FamilyInterface $family,
+     * @param string                  $identifier
+     * @param FamilyInterface         $family,
      * @param \DateTimeInterface|null $creationDate
      * @param \DateTimeInterface|null $modificationDate
      */
@@ -42,12 +41,13 @@ class SimpleProduct
     }
 
     /**
-     * @param int $id
-     * @param string $identifier
-     * @param FamilyInterface $family
-     * @param \DateTimeInterface $creationDate
-     * @param \DateTimeInterface $modificationDate
+     * @param int                                  $id
+     * @param string                               $identifier
+     * @param FamilyInterface                      $family
+     * @param \DateTimeInterface                   $creationDate
+     * @param \DateTimeInterface                   $modificationDate
      * @param Collection|AttributeValueInterface[] $values
+     *
      * @return static
      */
     public static function buildNewWith(
@@ -81,7 +81,7 @@ class SimpleProduct
 
     /**
      * @param ConfigurableProductInterface $configurable
-     * @param SuperLinkInterface $superLink
+     * @param SuperLinkInterface           $superLink
      */
     public function addToConfigurable(
         ConfigurableProductInterface $configurable,
@@ -103,6 +103,7 @@ class SimpleProduct
 
     /**
      * @param ConfigurableProductInterface $configurable
+     *
      * @return bool
      */
     public function hasConfigurable(ConfigurableProductInterface $configurable)

@@ -6,6 +6,7 @@ interface AttributeRepositoryInterface
 {
     /**
      * @param string $code
+     *
      * @return int
      */
     public function findOneByCode($code);

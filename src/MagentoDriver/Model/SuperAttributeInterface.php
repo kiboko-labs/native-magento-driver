@@ -28,12 +28,14 @@ interface SuperAttributeInterface
 
     /**
      * @param ConfigurableProductInterface $configurable
+     *
      * @return bool
      */
     public function isProduct(ConfigurableProductInterface $configurable);
 
     /**
      * @param AttributeInterface $attribute
+     *
      * @return bool
      */
     public function isAttribute(AttributeInterface $attribute);

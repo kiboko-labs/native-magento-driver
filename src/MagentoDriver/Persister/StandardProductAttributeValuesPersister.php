@@ -5,12 +5,9 @@ namespace Luni\Component\MagentoDriver\Persister;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Persister\AttributeValuePersisterInterface;
 use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
-use Luni\Component\MagentoDriver\Persister\ProductPersisterInterface;
 
-class StandardProductAttributeValuesPersister
-    implements ProductPersisterInterface
+class StandardProductAttributeValuesPersister implements ProductPersisterInterface
 {
     /**
      * @var AttributeValuePersisterInterface
@@ -24,7 +21,7 @@ class StandardProductAttributeValuesPersister
 
     /**
      * @param AttributeValuePersisterInterface $persister
-     * @param Collection $attributeList
+     * @param Collection                       $attributeList
      */
     public function __construct(
         AttributeValuePersisterInterface $persister,
@@ -42,9 +39,6 @@ class StandardProductAttributeValuesPersister
         }
     }
 
-    /**
-     *
-     */
     public function initialize()
     {
         $this->attributeValuesPersister->initialize();
@@ -70,9 +64,6 @@ class StandardProductAttributeValuesPersister
         $this->persist($product);
     }
 
-    /**
-     *
-     */
     public function flush()
     {
         $this->attributeValuesPersister->flush();

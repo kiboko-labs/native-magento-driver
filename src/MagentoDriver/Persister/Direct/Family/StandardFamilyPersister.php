@@ -6,8 +6,7 @@ use Doctrine\DBAL\Connection;
 use Luni\Component\MagentoDriver\Model\FamilyInterface;
 use Luni\Component\MagentoDriver\Persister\FamilyPersisterInterface;
 
-class StandardFamilyPersister
-    implements FamilyPersisterInterface
+class StandardFamilyPersister implements FamilyPersisterInterface
 {
     /**
      * @var Connection
@@ -26,7 +25,7 @@ class StandardFamilyPersister
 
     /**
      * @param Connection $connection
-     * @param string $tableName
+     * @param string     $tableName
      */
     public function __construct(
         Connection $connection,
@@ -45,9 +44,6 @@ class StandardFamilyPersister
         return $this->tableName;
     }
 
-    /**
-     * @return void
-     */
     public function initialize()
     {
         $this->dataQueue = new \SplQueue();
@@ -61,29 +57,26 @@ class StandardFamilyPersister
         $this->dataQueue->push($family);
     }
 
-    /**
-     * @return void
-     */
     public function flush()
     {
         foreach ($this->dataQueue as $family) {
             if ($family->getId()) {
                 $this->connection->update($this->tableName,
                     [
-                        'entity_type_id'     => 4,
+                        'entity_type_id' => 4,
                         'attribute_set_name' => $family->getLabel(),
-                        'sort_order'         => 0,
+                        'sort_order' => 0,
                     ],
                     [
-                        'attribute_set_id'   => $family->getId(),
+                        'attribute_set_id' => $family->getId(),
                     ]
                 );
             } else {
                 $this->connection->insert($this->tableName,
                     [
-                        'entity_type_id'     => 4,
+                        'entity_type_id' => 4,
                         'attribute_set_name' => $family->getLabel(),
-                        'sort_order'         => 0,
+                        'sort_order' => 0,
                     ]
                 );
 
@@ -94,7 +87,6 @@ class StandardFamilyPersister
 
     /**
      * @param FamilyInterface $family
-     * @return void
      */
     public function __invoke(FamilyInterface $family)
     {

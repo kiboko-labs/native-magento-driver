@@ -7,8 +7,7 @@ use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
 use Luni\Component\MagentoMapper\QueryBuilder\FamilyQueryBuilderInterface;
 use Luni\Component\MagentoMapper\Repository\FamilyRepositoryInterface;
 
-class FamilyRepository
-    implements FamilyRepositoryInterface
+class FamilyRepository implements FamilyRepositoryInterface
 {
     /**
      * @var Connection
@@ -22,7 +21,8 @@ class FamilyRepository
 
     /**
      * AttributeRepository constructor.
-     * @param Connection $connection
+     *
+     * @param Connection                  $connection
      * @param FamilyQueryBuilderInterface $queryBuilder
      */
     public function __construct(
@@ -35,7 +35,9 @@ class FamilyRepository
 
     /**
      * @param string $code
+     *
      * @return null|int
+     *
      * @throws \Doctrine\DBAL\DBALException
      */
     public function findOneByCode($code)
@@ -50,12 +52,12 @@ class FamilyRepository
         }
 
         if ($statement->rowCount() < 1) {
-            return null;
+            return;
         }
 
         $id = $statement->fetchColumn(0);
         if ($id === false) {
-            return null;
+            return;
         }
 
         return $id;
@@ -63,6 +65,7 @@ class FamilyRepository
 
     /**
      * @return int[]
+     *
      * @throws \Doctrine\DBAL\DBALException
      */
     public function findAll()

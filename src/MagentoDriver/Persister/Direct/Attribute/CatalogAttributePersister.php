@@ -7,8 +7,7 @@ use Luni\Component\MagentoDriver\Persister\AttributePersisterInterface;
 use Luni\Component\MagentoDriver\Persister\CatalogAttributeExtensionPersisterInterface;
 use Luni\Component\MagentoDriver\Persister\CatalogAttributePersisterInterface;
 
-class CatalogAttributePersister
-    implements CatalogAttributePersisterInterface
+class CatalogAttributePersister implements CatalogAttributePersisterInterface
 {
     /**
      * @var AttributePersisterInterface
@@ -21,7 +20,7 @@ class CatalogAttributePersister
     protected $catalogAttributeExtensionPersister;
 
     /**
-     * @param AttributePersisterInterface $standardAttributePersister
+     * @param AttributePersisterInterface                 $standardAttributePersister
      * @param CatalogAttributeExtensionPersisterInterface $catalogAttributeExtensionPersister
      */
     public function __construct(
@@ -32,9 +31,6 @@ class CatalogAttributePersister
         $this->catalogAttributeExtensionPersister = $catalogAttributeExtensionPersister;
     }
 
-    /**
-     * @return void
-     */
     public function initialize()
     {
         $this->standardAttributePersister->initialize();
@@ -50,9 +46,6 @@ class CatalogAttributePersister
         $this->catalogAttributeExtensionPersister->persist($attribute);
     }
 
-    /**
-     * @return void
-     */
     public function flush()
     {
         $this->standardAttributePersister->flush();

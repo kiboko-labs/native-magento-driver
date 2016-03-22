@@ -7,8 +7,7 @@ use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\DBAL\Schema\Table;
 use Luni\Component\MagentoMapper\SchemaManager\MappingSchemaManagerInterface;
 
-class OptionMappingSchemaManager
-    implements MappingSchemaManagerInterface
+class OptionMappingSchemaManager implements MappingSchemaManagerInterface
 {
     /**
      * @var Connection
@@ -32,10 +31,11 @@ class OptionMappingSchemaManager
 
     /**
      * OptionMappingSchemaManager constructor.
+     *
      * @param Connection $connection
-     * @param string $tableName
-     * @param string $optionsTableName
-     * @param string $attributesTableName
+     * @param string     $tableName
+     * @param string     $optionsTableName
+     * @param string     $attributesTableName
      */
     public function __construct(
         Connection $connection,
@@ -67,15 +67,15 @@ class OptionMappingSchemaManager
         $table = new Table($this->tableName);
 
         $table->addColumn('option_id', 'integer', [
-            'unsigned' => true
+            'unsigned' => true,
         ]);
 
         $table->addColumn('attribute_id', 'smallint', [
-            'unsigned' => true
+            'unsigned' => true,
         ]);
 
         $table->addColumn('option_code', 'string', [
-            'length' => 255
+            'length' => 255,
         ]);
 
         $table->addUniqueIndex(['option_id']);
@@ -115,9 +115,6 @@ class OptionMappingSchemaManager
         return $table;
     }
 
-    /**
-     *
-     */
     public function createTable()
     {
         $manager = $this->connection->getSchemaManager();
@@ -127,6 +124,7 @@ class OptionMappingSchemaManager
 
     /**
      * @param string $pimgentoTableName
+     *
      * @throws \Doctrine\DBAL\DBALException
      */
     public function initializeFromPimgento($pimgentoTableName)
@@ -141,8 +139,8 @@ class OptionMappingSchemaManager
 
         $queryBuilder
             ->select([
-                'option_id'      => 'pim.entity_id',
-                'attribute_id'   => 'o.attribute_id',
+                'option_id' => 'pim.entity_id',
+                'attribute_id' => 'o.attribute_id',
                 'attribute_code' => 'INSERT(pim.code, LOCATE(a.attribute_code, pim.code), LENGTH(a.attribute_code) + 1, "")',
             ])
             ->from($pimgentoTableName, 'pim')
@@ -155,9 +153,9 @@ class OptionMappingSchemaManager
 
         $this->connection->executeQuery(
             "INSERT INTO {$this->connection->quoteIdentifier($this->tableName)} "
-                . $queryBuilder->getSQL(),
+                .$queryBuilder->getSQL(),
             [
-                'option'
+                'option',
             ]
         );
     }

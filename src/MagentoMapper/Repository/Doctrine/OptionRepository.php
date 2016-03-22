@@ -8,8 +8,7 @@ use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoMapper\QueryBuilder\OptionQueryBuilderInterface;
 use Luni\Component\MagentoMapper\Repository\OptionRepositoryInterface;
 
-class OptionRepository
-    implements OptionRepositoryInterface
+class OptionRepository implements OptionRepositoryInterface
 {
     /**
      * @var Connection
@@ -23,7 +22,8 @@ class OptionRepository
 
     /**
      * AttributeRepository constructor.
-     * @param Connection $connection
+     *
+     * @param Connection                  $connection
      * @param OptionQueryBuilderInterface $queryBuilder
      */
     public function __construct(
@@ -37,7 +37,9 @@ class OptionRepository
     /**
      * @param AttributeInterface $attribute
      * @param $optionCode
+     *
      * @return null|int
+     *
      * @throws \Doctrine\DBAL\DBALException
      */
     public function findOneByAttribute(AttributeInterface $attribute, $optionCode)
@@ -53,12 +55,12 @@ class OptionRepository
         }
 
         if ($statement->rowCount() < 1) {
-            return null;
+            return;
         }
 
         $id = $statement->fetchColumn(0);
         if ($id === false) {
-            return null;
+            return;
         }
 
         return $id;
@@ -67,7 +69,9 @@ class OptionRepository
     /**
      * @param int $attributeId
      * @param $optionCode
+     *
      * @return null|int
+     *
      * @throws \Doctrine\DBAL\DBALException
      */
     public function findOneByAttributeId($attributeId, $optionCode)
@@ -83,12 +87,12 @@ class OptionRepository
         }
 
         if ($statement->rowCount() < 1) {
-            return null;
+            return;
         }
 
         $id = $statement->fetchColumn(0);
         if ($id === false) {
-            return null;
+            return;
         }
 
         return $id;
@@ -97,7 +101,9 @@ class OptionRepository
     /**
      * @param string $attributeCode
      * @param $optionCode
+     *
      * @return null|int
+     *
      * @throws \Doctrine\DBAL\DBALException
      */
     public function findOneByAttributeCode($attributeCode, $optionCode)
@@ -113,12 +119,12 @@ class OptionRepository
         }
 
         if ($statement->rowCount() < 1) {
-            return null;
+            return;
         }
 
         $id = $statement->fetchColumn(0);
         if ($id === false) {
-            return null;
+            return;
         }
 
         return $id;
@@ -126,7 +132,9 @@ class OptionRepository
 
     /**
      * @param AttributeInterface $attribute
+     *
      * @return int[]
+     *
      * @throws \Doctrine\DBAL\DBALException
      */
     public function findAllByAttribute(AttributeInterface $attribute)

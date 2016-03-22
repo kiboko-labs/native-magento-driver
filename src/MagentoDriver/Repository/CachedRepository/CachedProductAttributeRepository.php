@@ -4,21 +4,15 @@ namespace Luni\Component\MagentoDriver\Repository\Doctrine;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Connection;
-use Luni\Component\MagentoDriver\Model\Attribute;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Model\FamilyInterface;
 use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
-use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilderInterface;
 use Luni\Component\MagentoDriver\Repository\ProductAttributeRepositoryInterface;
 
 /**
- * Class ProductAttributeRepository
- * @package Luni\Component\MagentoDriver\Repository\Doctrine
+ * Class ProductAttributeRepository.
  */
-class CachedProductAttributeRepository
-    implements ProductAttributeRepositoryInterface
+class CachedProductAttributeRepository implements ProductAttributeRepositoryInterface
 {
     /**
      * @var ProductAttributeRepositoryInterface
@@ -37,6 +31,7 @@ class CachedProductAttributeRepository
 
     /**
      * ProductAttributeRepository constructor.
+     *
      * @param ProductAttributeRepositoryInterface $repository
      */
     public function __construct(
@@ -51,6 +46,7 @@ class CachedProductAttributeRepository
     /**
      * @param string $code
      * @param string $entityTypeId
+     *
      * @return AttributeInterface
      */
     public function findOneByCode($code, $entityTypeId)
@@ -69,6 +65,7 @@ class CachedProductAttributeRepository
 
     /**
      * @param int $id
+     *
      * @return AttributeInterface
      */
     public function findOneById($id)
@@ -86,8 +83,9 @@ class CachedProductAttributeRepository
     }
 
     /**
-     * @param string $entityTypeCode
+     * @param string         $entityTypeCode
      * @param array|string[] $codeList
+     *
      * @return Collection|AttributeInterface[]
      */
     public function findAllByCode($entityTypeCode, array $codeList)
@@ -121,6 +119,7 @@ class CachedProductAttributeRepository
 
     /**
      * @param array|int[] $idList
+     *
      * @return Collection|AttributeInterface[]
      */
     public function findAllById(array $idList)
@@ -162,6 +161,7 @@ class CachedProductAttributeRepository
 
     /**
      * @param ProductInterface $product
+     *
      * @return Collection|AttributeInterface[]
      */
     public function findAllByEntity(ProductInterface $product)
@@ -171,6 +171,7 @@ class CachedProductAttributeRepository
 
     /**
      * @param ProductInterface $product
+     *
      * @return Collection|AttributeInterface[]
      */
     public function findAllVariantAxisByEntity(ProductInterface $product)
@@ -180,6 +181,7 @@ class CachedProductAttributeRepository
 
     /**
      * @param FamilyInterface $family
+     *
      * @return Collection|AttributeInterface[]
      */
     public function findAllByFamily(FamilyInterface $family)
@@ -189,6 +191,7 @@ class CachedProductAttributeRepository
 
     /**
      * @param FamilyInterface $family
+     *
      * @return Collection|AttributeInterface[]
      */
     public function findAllMandatoryByFamily(FamilyInterface $family)

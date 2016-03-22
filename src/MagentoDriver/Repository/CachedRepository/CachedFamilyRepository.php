@@ -5,8 +5,7 @@ namespace Luni\Component\MagentoDriver\Repository\CachedRepository;
 use Luni\Component\MagentoDriver\Model\FamilyInterface;
 use Luni\Component\MagentoDriver\Repository\FamilyRepositoryInterface;
 
-class CachedFamilyRepository
-    implements FamilyRepositoryInterface
+class CachedFamilyRepository implements FamilyRepositoryInterface
 {
     /**
      * @var FamilyRepositoryInterface
@@ -25,6 +24,7 @@ class CachedFamilyRepository
 
     /**
      * CachedFamilyRepository constructor.
+     *
      * @param FamilyRepositoryInterface $familyRepository
      */
     public function __construct(FamilyRepositoryInterface $familyRepository)
@@ -36,6 +36,7 @@ class CachedFamilyRepository
 
     /**
      * @param int $id
+     *
      * @return FamilyInterface|null
      */
     public function findOneById($id)
@@ -46,7 +47,7 @@ class CachedFamilyRepository
 
         $family = $this->decorated->findOneById($id);
         if ($family === null) {
-            return null;
+            return;
         }
 
         $this->cacheById[$family->getId()] = $family;
@@ -57,6 +58,7 @@ class CachedFamilyRepository
 
     /**
      * @param string $name
+     *
      * @return FamilyInterface|null
      */
     public function findOneByName($name)
@@ -67,7 +69,7 @@ class CachedFamilyRepository
 
         $family = $this->decorated->findOneByName($name);
         if ($family === null) {
-            return null;
+            return;
         }
 
         $this->cacheById[$family->getId()] = $family;

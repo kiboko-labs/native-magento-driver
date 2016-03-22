@@ -2,7 +2,6 @@
 
 namespace Luni\Component\MagentoDriver\Model;
 
-interface MediaGalleryAttributeInterface
-    extends AttributeInterface
+interface MediaGalleryAttributeInterface extends AttributeInterface
 {
 }

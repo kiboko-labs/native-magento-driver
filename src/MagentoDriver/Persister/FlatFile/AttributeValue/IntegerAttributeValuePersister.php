@@ -10,16 +10,15 @@ use Luni\Component\MagentoDriver\Exception\InvalidAttributePersisterTypeExceptio
 use Luni\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
 use Luni\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;
 
-class IntegerAttributeValuePersister
-    implements AttributeValuePersisterInterface
+class IntegerAttributeValuePersister implements AttributeValuePersisterInterface
 {
     use BaseFlatFilePersisterTrait;
 
     /**
      * @param TemporaryWriterInterface $temporaryWriter
-     * @param DatabaseWriterInterface $databaseWriter
-     * @param string $tableName
-     * @param array $tableKeys
+     * @param DatabaseWriterInterface  $databaseWriter
+     * @param string                   $tableName
+     * @param array                    $tableKeys
      */
     public function __construct(
         TemporaryWriterInterface $temporaryWriter,
@@ -52,18 +51,17 @@ class IntegerAttributeValuePersister
         }
 
         $this->temporaryWriter->persistRow([
-            'value_id'       => $value->getId(),
+            'value_id' => $value->getId(),
             'entity_type_id' => 4,
-            'attribute_id'   => $value->getAttributeId(),
-            'store_id'       => $value->getStoreId(),
-            'entity_id'      => $value->getProductId(),
-            'value'          => number_format($value->getValue(), 0),
+            'attribute_id' => $value->getAttributeId(),
+            'store_id' => $value->getStoreId(),
+            'entity_id' => $value->getProductId(),
+            'value' => number_format($value->getValue(), 0),
         ]);
     }
 
     /**
      * @param AttributeValueInterface $value
-     * @return void
      */
     public function __invoke(AttributeValueInterface $value)
     {
@@ -71,7 +69,7 @@ class IntegerAttributeValuePersister
     }
 
     /**
-     * Flushes data into the DB
+     * Flushes data into the DB.
      */
     public function flush()
     {

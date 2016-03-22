@@ -9,7 +9,6 @@ use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Model\MediaGalleryAttributeInterface;
 use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\Immutable\ImmutableAttributeValueInterface;
-use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
 use Luni\Component\MagentoDriver\Exception\ImmutableValueException;
 use Luni\Component\MagentoDriver\Model\FamilyInterface;
 use Luni\Component\MagentoDriver\Model\Mutable\MutableAttributeValueInterface;
@@ -66,7 +65,7 @@ trait BaseProductTrait
     {
         if ($dateTime === null) {
             return new \DateTimeImmutable();
-        } else if ($dateTime instanceof \DateTime) {
+        } elseif ($dateTime instanceof \DateTime) {
             return \DateTimeImmutable::createFromMutable($dateTime);
         } else {
             return $dateTime;
@@ -83,6 +82,7 @@ trait BaseProductTrait
 
     /**
      * @param int $id
+     *
      * @return ProductInterface
      */
     public function persistedToId($id)
@@ -131,7 +131,7 @@ trait BaseProductTrait
     public function getFamilyId()
     {
         if ($this->getFamily() === null) {
-            return null;
+            return;
         }
 
         return $this->getFamily()->getId();
@@ -230,7 +230,8 @@ trait BaseProductTrait
 
     /**
      * @param AttributeInterface $attribute
-     * @param int $storeId
+     * @param int                $storeId
+     *
      * @return bool
      */
     public function hasValueFor(AttributeInterface $attribute, $storeId = null)
@@ -253,7 +254,8 @@ trait BaseProductTrait
 
     /**
      * @param AttributeInterface $attribute
-     * @param int $storeId
+     * @param int                $storeId
+     *
      * @return ImmutableAttributeValueInterface
      */
     public function getValueFor(AttributeInterface $attribute, $storeId = null)
@@ -282,7 +284,8 @@ trait BaseProductTrait
 
     /**
      * @param AttributeInterface $attribute
-     * @param int $storeId
+     * @param int                $storeId
+     *
      * @return ImmutableAttributeValueInterface
      */
     public function getImmutableValueFor(AttributeInterface $attribute, $storeId)
@@ -291,7 +294,7 @@ trait BaseProductTrait
 
         if ($attributeValue instanceof ImmutableAttributeValueInterface) {
             return $attributeValue;
-        } else if ($attributeValue instanceof MutableAttributeValueInterface) {
+        } elseif ($attributeValue instanceof MutableAttributeValueInterface) {
             return $attributeValue->switchToImmutable();
         }
 
@@ -300,7 +303,8 @@ trait BaseProductTrait
 
     /**
      * @param AttributeInterface $attribute
-     * @param int $storeId
+     * @param int                $storeId
+     *
      * @return MutableAttributeValueInterface
      */
     public function getMutableValueFor(AttributeInterface $attribute, $storeId)
@@ -308,12 +312,12 @@ trait BaseProductTrait
         $attributeValue = $this->getValueFor($attribute, $storeId);
 
         if ($attributeValue === null) {
-            return null;
+            return;
         }
 
         if ($attributeValue instanceof MutableAttributeValueInterface) {
             return $attributeValue;
-        } else if ($attributeValue instanceof ImmutableAttributeValueInterface) {
+        } elseif ($attributeValue instanceof ImmutableAttributeValueInterface) {
             return $attributeValue->switchToMutable();
         }
 
@@ -322,6 +326,7 @@ trait BaseProductTrait
 
     /**
      * @param AttributeInterface $attribute
+     *
      * @return Collection|AttributeValueInterface[]
      */
     public function getAllValuesFor(AttributeInterface $attribute)
@@ -367,7 +372,7 @@ trait BaseProductTrait
 
     /**
      * @param MediaGalleryAttributeInterface $attribute
-     * @param int $storeId
+     * @param int                            $storeId
      */
     public function getMediaGalleryFor(MediaGalleryAttributeInterface $attribute, $storeId)
     {
@@ -383,7 +388,7 @@ trait BaseProductTrait
     }
 
     /**
-     * return Collection
+     * return Collection.
      */
     public function getRequiredOptions()
     {

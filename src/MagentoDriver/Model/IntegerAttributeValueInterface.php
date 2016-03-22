@@ -2,8 +2,7 @@
 
 namespace Luni\Component\MagentoDriver\Model;
 
-interface IntegerAttributeValueInterface
-    extends ScopableAttributeValueInterface
+interface IntegerAttributeValueInterface extends ScopableAttributeValueInterface
 {
     /**
      * @return int

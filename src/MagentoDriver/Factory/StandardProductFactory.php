@@ -7,8 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
 use Luni\Component\MagentoDriver\Exception\InvalidProductTypeException;
 
-class StandardProductFactory
-    implements ProductFactoryInterface
+class StandardProductFactory implements ProductFactoryInterface
 {
     /**
      * @var Collection
@@ -27,13 +26,14 @@ class StandardProductFactory
 
     /**
      * @param string $type
-     * @param array $options
+     * @param array  $options
+     *
      * @return ProductInterface
      */
     public function buildNew($type, array $options)
     {
         /**
-         * @var string $expectedType
+         * @var string
          * @var \Closure $builder
          */
         foreach ($this->builders as $expectedType => $builder) {

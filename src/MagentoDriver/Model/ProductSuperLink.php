@@ -5,8 +5,7 @@ namespace Luni\Component\MagentoDriver\Model;
 use Luni\Component\MagentoDriver\Entity\Product\ConfigurableProductInterface;
 use Luni\Component\MagentoDriver\Entity\Product\SimpleProductInterface;
 
-class ProductSuperLink
-    implements SuperLinkInterface
+class ProductSuperLink implements SuperLinkInterface
 {
     /**
      * @var int
@@ -25,7 +24,7 @@ class ProductSuperLink
 
     /**
      * @param ConfigurableProductInterface $configurable
-     * @param SimpleProductInterface $variant
+     * @param SimpleProductInterface       $variant
      */
     public function __construct(
         ConfigurableProductInterface $configurable,
@@ -36,9 +35,10 @@ class ProductSuperLink
     }
 
     /**
-     * @param int $id
+     * @param int                          $id
      * @param ConfigurableProductInterface $configurable
-     * @param SimpleProductInterface $variant
+     * @param SimpleProductInterface       $variant
+     *
      * @return static
      */
     public static function buildNewWith(
@@ -79,6 +79,7 @@ class ProductSuperLink
 
     /**
      * @param ConfigurableProductInterface $configurable
+     *
      * @return bool
      */
     public function isConfigurable(ConfigurableProductInterface $configurable)
@@ -88,6 +89,7 @@ class ProductSuperLink
 
     /**
      * @param SimpleProductInterface $variant
+     *
      * @return bool
      */
     public function isVariant(SimpleProductInterface $variant)

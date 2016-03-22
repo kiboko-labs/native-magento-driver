@@ -16,12 +16,14 @@ interface OptionInterface
 
     /**
      * @param int $storeId
+     *
      * @return OptionLocaleInterface
      */
     public function getLocale($storeId);
 
     /**
      * @param int $storeId
+     *
      * @return OptionLocaleInterface
      */
     public function getLocaleOrDefault($storeId);
@@ -33,12 +35,14 @@ interface OptionInterface
 
     /**
      * @param int $storeId
+     *
      * @return string
      */
     public function getLocaleLabel($storeId);
 
     /**
      * @param int $storeId
+     *
      * @return string
      */
     public function getLocaleOrDefaultLabel($storeId);

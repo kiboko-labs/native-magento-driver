@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: gplanchat
  * Date: 18/02/2016
- * Time: 15:11
+ * Time: 15:11.
  */
 
 namespace Luni\Component\MagentoSerializer\Decoder;
@@ -12,8 +12,7 @@ use Luni\Component\MagentoDriver\Repository\ProductAttributeRepositoryInterface;
 use Luni\Component\MagentoMapper\Repository\CategoryRepositoryInterface;
 use Symfony\Component\Serializer\Encoder\DecoderInterface;
 
-class ProductDecoder
-    implements DecoderInterface
+class ProductDecoder implements DecoderInterface
 {
     private $headers;
     private $headersCount;
@@ -31,7 +30,7 @@ class ProductDecoder
         $this->categoryMapperRepository = $categoryMapperRepository;
     }
 
-    public function decode($data, $format, array $context = array())
+    public function decode($data, $format, array $context = [])
     {
         $reader = new \SplFileObject($data, 'r');
         while (!$reader->eof()) {
@@ -68,10 +67,10 @@ class ProductDecoder
             if ($field === 'sku') {
                 $data['sku'] = $value;
                 continue;
-            } else if ($field === 'code') {
+            } elseif ($field === 'code') {
                 $data['sku'] = $value;
                 continue;
-            } else if ($field === 'family') {
+            } elseif ($field === 'family') {
                 $data['family'] = $value;
                 continue;
             }
@@ -83,7 +82,7 @@ class ProductDecoder
                 $fieldName = substr($field, 0, $position);
                 $options = explode('-', substr($field, $position + 1));
 
-                if (in_array('unit', $options) ) {
+                if (in_array('unit', $options)) {
                     continue;
                 }
             }
@@ -99,39 +98,39 @@ class ProductDecoder
                 ) {
                     $finalValue = [
                         'attribute' => $fieldName,
-                        'value'     => $value,
+                        'value' => $value,
                     ];
                 } else {
                     $finalValue = [
                         'attribute' => $fieldName,
-                        'value'     => $value === '' ? [] : (strpos(',', $value) === false ? [$value] : explode(',', $value)),
+                        'value' => $value === '' ? [] : (strpos(',', $value) === false ? [$value] : explode(',', $value)),
                     ];
                 }
-            } else if ($fieldName === 'groups') {
+            } elseif ($fieldName === 'groups') {
                 $data['visibility'] = [
                     [
                         'attribute' => 'visibility',
-                        'value'     => 1,
-                    ]
+                        'value' => 1,
+                    ],
                 ];
 
                 $data['groups'] = $value === '' ? [] : (strpos(',', $value) === false ? [$value] : explode(',', $value));
                 continue;
-            } else if ($fieldName === 'categories') {
+            } elseif ($fieldName === 'categories') {
                 $data['categories'] = $this->categoryMapperRepository->findAllByCodes(explode(',', $value));
                 continue;
-            } else if ($fieldName === 'axis') {
+            } elseif ($fieldName === 'axis') {
                 $data['axis'] = $this->productAttributeRepository->findAllByCode('catalog_product', explode(',', $value));
                 continue;
             } else {
                 continue;
             }
 
-            if (isset($rawData[$fieldName . '-unit'])) {
+            if (isset($rawData[$fieldName.'-unit'])) {
                 $finalValue = array_merge(
                     $finalValue,
                     [
-                        'unit'  => $rawData[$fieldName . '-unit'],
+                        'unit' => $rawData[$fieldName.'-unit'],
                     ]
                 );
             }
@@ -141,7 +140,7 @@ class ProductDecoder
                 $finalValue = array_merge(
                     $finalValue,
                     [
-                        'locale'  => $option,
+                        'locale' => $option,
                     ]
                 );
                 $option = array_shift($options);
@@ -154,7 +153,7 @@ class ProductDecoder
                 $finalValue = array_merge(
                     $finalValue,
                     [
-                        'currency'  => $option,
+                        'currency' => $option,
                     ]
                 );
                 $option = array_shift($options);
@@ -164,60 +163,60 @@ class ProductDecoder
                 $finalValue = array_merge(
                     $finalValue,
                     [
-                        'channel'  => $option,
+                        'channel' => $option,
                     ]
                 );
             }
 
             $data[$fieldName] = [
-                $finalValue
+                $finalValue,
             ];
         }
 
         $data['options_container'] = [
             [
                 'attribute' => 'options_container',
-                'locale'    => 'fr_FR',
-                'channel'   => 'ecommerce_luni',
-                'value'     => 'container2',
-            ]
+                'locale' => 'fr_FR',
+                'channel' => 'ecommerce_luni',
+                'value' => 'container2',
+            ],
         ];
 
         if (!isset($data['groups'])) {
             $data['visibility'] = [
                 [
                     'attribute' => 'visibility',
-                    'value'     => 4,
-                ]
+                    'value' => 4,
+                ],
             ];
         } else {
             $data['visibility'] = [
                 [
                     'attribute' => 'visibility',
-                    'value'     => 1,
-                ]
+                    'value' => 1,
+                ],
             ];
         }
 
         $data['status'] = [
             [
                 'attribute' => 'status',
-                'value'     => 1,
-            ]
+                'value' => 1,
+            ],
         ];
 
         $data['tax_class_id'] = [
             [
                 'attribute' => 'tax_class_id',
-                'value'     => 2,
-            ]
+                'value' => 2,
+            ],
         ];
 
         $data['weight'] = [
             [
                 'attribute' => 'weight',
-                'value'     => .1,
-            ]
+                'value' => .1,
+            ],
         ];
 
         return $data;

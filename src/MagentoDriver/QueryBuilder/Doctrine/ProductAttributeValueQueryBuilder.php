@@ -5,8 +5,7 @@ namespace Luni\Component\MagentoDriver\QueryBuilder\Doctrine;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
 
-class ProductAttributeValueQueryBuilder
-    implements ProductAttributeValueQueryBuilderInterface
+class ProductAttributeValueQueryBuilder implements ProductAttributeValueQueryBuilderInterface
 {
     /**
      * @var Connection
@@ -30,9 +29,9 @@ class ProductAttributeValueQueryBuilder
 
     /**
      * @param Connection $connection
-     * @param string $table
-     * @param string $variantAxisTable
-     * @param array $fields
+     * @param string     $table
+     * @param string     $variantAxisTable
+     * @param array      $fields
      */
     public function __construct(
         Connection $connection,
@@ -64,6 +63,7 @@ class ProductAttributeValueQueryBuilder
     /**
      * @param $backend
      * @param null $prefix
+     *
      * @return string
      */
     public static function getDefaultTable($backend, $prefix = null)
@@ -73,6 +73,7 @@ class ProductAttributeValueQueryBuilder
 
     /**
      * @param null $prefix
+     *
      * @return string
      */
     public static function getDefaultVariantAxisTable($prefix = null)
@@ -81,8 +82,9 @@ class ProductAttributeValueQueryBuilder
     }
 
     /**
-     * @param array $fields
+     * @param array  $fields
      * @param string $alias
+     *
      * @return array
      */
     private function createFieldsList(array $fields, $alias)
@@ -96,9 +98,10 @@ class ProductAttributeValueQueryBuilder
     }
 
     /**
-     * @param array $fields
+     * @param array  $fields
      * @param string $defaultAlias
      * @param string $storeAlias
+     *
      * @return array
      */
     private function createFallbackFieldsList(array $fields, $defaultAlias, $storeAlias)
@@ -113,7 +116,8 @@ class ProductAttributeValueQueryBuilder
 
     /**
      * @param string $alias
-     * @param array $fieldList
+     * @param array  $fieldList
+     *
      * @return QueryBuilder
      */
     private function createBaseQueryBuilder($alias, array $fieldList)
@@ -127,6 +131,7 @@ class ProductAttributeValueQueryBuilder
 
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     private function createBaseQueryBuilderWithStoreFilter($alias)
@@ -141,6 +146,7 @@ class ProductAttributeValueQueryBuilder
     /**
      * @param string $defaultAlias
      * @param string $storeAlias
+     *
      * @return QueryBuilder
      */
     private function createBaseQueryBuilderWithDefaultAndStoreFilter($defaultAlias, $storeAlias)
@@ -163,6 +169,7 @@ class ProductAttributeValueQueryBuilder
 
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindQueryBuilder($alias)
@@ -172,6 +179,7 @@ class ProductAttributeValueQueryBuilder
 
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindAllFromStoreIdQueryBuilder($alias)
@@ -182,6 +190,7 @@ class ProductAttributeValueQueryBuilder
     /**
      * @param string $defaultAlias
      * @param string $storeAlias
+     *
      * @return QueryBuilder
      */
     public function createFindAllFromStoreIdOrDefaultQueryBuilder($defaultAlias, $storeAlias)
@@ -191,6 +200,7 @@ class ProductAttributeValueQueryBuilder
 
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindOneByIdQueryBuilder($alias)
@@ -204,7 +214,8 @@ class ProductAttributeValueQueryBuilder
 
     /**
      * @param string $alias
-     * @param array $valueIds
+     * @param array  $valueIds
+     *
      * @return QueryBuilder
      */
     public function createFindAllByIdQueryBuilder($alias, array $valueIds)
@@ -219,6 +230,7 @@ class ProductAttributeValueQueryBuilder
 
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindOneByProductIdAndAttributeIdFromStoreIdQueryBuilder($alias)
@@ -234,6 +246,7 @@ class ProductAttributeValueQueryBuilder
     /**
      * @param string $defaultAlias
      * @param string $storeAlias
+     *
      * @return QueryBuilder
      */
     public function createFindOneByProductIdAndAttributeIdFromStoreIdOrDefaultQueryBuilder($defaultAlias, $storeAlias)
@@ -248,6 +261,7 @@ class ProductAttributeValueQueryBuilder
 
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindAllByProductIdFromStoreIdQueryBuilder($alias)
@@ -262,6 +276,7 @@ class ProductAttributeValueQueryBuilder
     /**
      * @param string $defaultAlias
      * @param string $storeAlias
+     *
      * @return QueryBuilder
      */
     public function createFindAllByProductIdFromStoreIdOrDefaultQueryBuilder($defaultAlias, $storeAlias)
@@ -276,6 +291,7 @@ class ProductAttributeValueQueryBuilder
     /**
      * @param string $defaultAlias
      * @param string $variantAxisAlias
+     *
      * @return QueryBuilder
      */
     public function createFindAllVariantAxisByProductIdFromStoreIdQueryBuilder($defaultAlias, $variantAxisAlias)
@@ -293,6 +309,7 @@ class ProductAttributeValueQueryBuilder
      * @param string $defaultAlias
      * @param string $storeAlias
      * @param string $variantAxisAlias
+     *
      * @return QueryBuilder
      */
     public function createFindAllVariantAxisByProductIdFromStoreIdOrDefaultQueryBuilder($defaultAlias, $storeAlias, $variantAxisAlias)
@@ -308,6 +325,7 @@ class ProductAttributeValueQueryBuilder
 
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindAllByProductIdQueryBuilder($alias)

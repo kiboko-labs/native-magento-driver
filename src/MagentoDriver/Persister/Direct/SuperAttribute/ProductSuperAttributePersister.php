@@ -6,8 +6,7 @@ use Doctrine\DBAL\Connection;
 use Luni\Component\MagentoDriver\Model\SuperAttributeInterface;
 use Luni\Component\MagentoDriver\Persister\SuperAttributePersisterInterface;
 
-class ProductSuperAttributePersister
-    implements SuperAttributePersisterInterface
+class ProductSuperAttributePersister implements SuperAttributePersisterInterface
 {
     /**
      * @var Connection
@@ -26,7 +25,7 @@ class ProductSuperAttributePersister
 
     /**
      * @param Connection $connection
-     * @param string $tableName
+     * @param string     $tableName
      */
     public function __construct(
         Connection $connection,
@@ -45,9 +44,6 @@ class ProductSuperAttributePersister
         return $this->tableName;
     }
 
-    /**
-     * @return void
-     */
     public function initialize()
     {
     }
@@ -60,18 +56,15 @@ class ProductSuperAttributePersister
         $this->dataQueue->push($superAttribute);
     }
 
-    /**
-     * @return void
-     */
     public function flush()
     {
         foreach ($this->dataQueue as $superAttribute) {
             if ($superAttribute->getId()) {
                 $this->connection->update($this->tableName,
                     [
-                        'product_id'   => $superAttribute->getProductId(),
+                        'product_id' => $superAttribute->getProductId(),
                         'attribute_id' => $superAttribute->getAttributeId(),
-                        'position'     => $superAttribute->getPosition() ?: 0,
+                        'position' => $superAttribute->getPosition() ?: 0,
                     ],
                     [
                         'product_super_attribute_id' => $superAttribute->getId(),
@@ -80,9 +73,9 @@ class ProductSuperAttributePersister
             } else {
                 $this->connection->insert($this->tableName,
                     [
-                        'product_id'                 => $superAttribute->getProductId(),
-                        'attribute_id'               => $superAttribute->getAttributeId(),
-                        'position'                   => $superAttribute->getPosition() ?: 0,
+                        'product_id' => $superAttribute->getProductId(),
+                        'attribute_id' => $superAttribute->getAttributeId(),
+                        'position' => $superAttribute->getPosition() ?: 0,
                     ]
                 );
 
@@ -93,7 +86,6 @@ class ProductSuperAttributePersister
 
     /**
      * @param SuperAttributeInterface $superAttribute
-     * @return void
      */
     public function __invoke(SuperAttributeInterface $superAttribute)
     {

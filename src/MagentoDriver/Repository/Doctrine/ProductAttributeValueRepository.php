@@ -15,11 +15,9 @@ use Luni\Component\MagentoDriver\Repository\AttributeRepositoryInterface;
 use Luni\Component\MagentoDriver\Repository\ProductAttributeValueRepositoryBackendInterface;
 
 /**
- * Class ProductAttributeValueRepository
- * @package Luni\Component\MagentoDriver\Repository\Doctrine
+ * Class ProductAttributeValueRepository.
  */
-class ProductAttributeValueRepository
-    implements ProductAttributeValueRepositoryBackendInterface
+class ProductAttributeValueRepository implements ProductAttributeValueRepositoryBackendInterface
 {
     /**
      * @var ProductAttributeValueQueryBuilderInterface
@@ -43,10 +41,11 @@ class ProductAttributeValueRepository
 
     /**
      * ProductAttributeRepository constructor.
-     * @param Connection $connection
+     *
+     * @param Connection                                 $connection
      * @param ProductAttributeValueQueryBuilderInterface $queryBuilder
-     * @param AttributeRepositoryInterface $attributeRepository
-     * @param AttributeValueFactoryInterface $valueFactory
+     * @param AttributeRepositoryInterface               $attributeRepository
+     * @param AttributeValueFactoryInterface             $valueFactory
      */
     public function __construct(
         Connection $connection,
@@ -62,6 +61,7 @@ class ProductAttributeValueRepository
 
     /**
      * @param array $options
+     *
      * @return AttributeValueInterface
      */
     protected function createNewAttributeValueInstanceFromDatabase(array $options)
@@ -71,7 +71,7 @@ class ProductAttributeValueRepository
 
         $attribute = $this->attributeRepository->findOneById($attributeId);
         if (!$attribute) {
-            return null;
+            return;
         }
 
         return $this->valueFactory->buildNew($attribute, $options);
@@ -79,6 +79,7 @@ class ProductAttributeValueRepository
 
     /**
      * @param int $valueId
+     *
      * @return AttributeValueInterface
      */
     public function findOneById($valueId)
@@ -91,15 +92,17 @@ class ProductAttributeValueRepository
         }
 
         if ($statement->rowCount() < 1) {
-            return null;
+            return;
         }
 
         $options = $statement->fetch();
+
         return $this->createNewAttributeValueInstanceFromDatabase($options);
     }
 
     /**
      * @param array|int[] $idList
+     *
      * @return Collection|AttributeValueInterface[]
      */
     public function findAllById(array $idList)
@@ -125,6 +128,7 @@ class ProductAttributeValueRepository
 
     /**
      * @param ProductInterface $product
+     *
      * @return Collection|AttributeValueInterface[]
      */
     public function findAllByProduct(ProductInterface $product)
@@ -150,6 +154,7 @@ class ProductAttributeValueRepository
 
     /**
      * @param ProductInterface $product
+     *
      * @return Collection|AttributeValueInterface[]
      */
     public function findAllVariantAxisByProductFromDefault(ProductInterface $product)
@@ -159,7 +164,8 @@ class ProductAttributeValueRepository
 
     /**
      * @param ProductInterface $product
-     * @param int $storeId
+     * @param int              $storeId
+     *
      * @return Collection|AttributeValueInterface[]
      */
     public function findAllVariantAxisByProductFromStoreId(ProductInterface $product, $storeId)
@@ -188,8 +194,9 @@ class ProductAttributeValueRepository
     }
 
     /**
-     * @param ProductInterface $product
+     * @param ProductInterface   $product
      * @param AttributeInterface $attribute
+     *
      * @return AttributeValueInterface
      */
     public function findOneByProductAndAttributeFromDefault(
@@ -200,9 +207,10 @@ class ProductAttributeValueRepository
     }
 
     /**
-     * @param ProductInterface $product
+     * @param ProductInterface   $product
      * @param AttributeInterface $attribute
-     * @param int $storeId
+     * @param int                $storeId
+     *
      * @return AttributeValueInterface
      */
     public function findOneByProductAndAttributeFromStoreId(
@@ -222,16 +230,18 @@ class ProductAttributeValueRepository
         }
 
         if ($statement->rowCount() < 1) {
-            return null;
+            return;
         }
 
         $options = $statement->fetch();
+
         return $this->createNewAttributeValueInstanceFromDatabase($options);
     }
 
     /**
      * @param ProductInterface $product
-     * @param array $attributeList
+     * @param array            $attributeList
+     *
      * @return Collection|AttributeValueInterface[]
      */
     public function findAllByProductAndAttributeListFromDefault(
@@ -243,8 +253,9 @@ class ProductAttributeValueRepository
 
     /**
      * @param ProductInterface $product
-     * @param array $attributeList
-     * @param int $storeId
+     * @param array            $attributeList
+     * @param int              $storeId
+     *
      * @return Collection|AttributeValueInterface[]
      */
     public function findAllByProductAndAttributeListFromStoreId(
@@ -258,7 +269,7 @@ class ProductAttributeValueRepository
             $query = $this->queryBuilder->createFindAllByProductIdFromStoreIdOrDefaultQueryBuilder('v', 'l');
         }
 
-        $attributeIdList = array_map(function(AttributeInterface $item) {
+        $attributeIdList = array_map(function (AttributeInterface $item) {
             return $item->getId();
         }, $attributeList);
 
@@ -284,6 +295,7 @@ class ProductAttributeValueRepository
 
     /**
      * @param array $productList
+     *
      * @return Collection|AttributeValueInterface[]
      */
     public function findAllByProductListFromDefault(
@@ -294,7 +306,8 @@ class ProductAttributeValueRepository
 
     /**
      * @param array $productList
-     * @param int $storeId
+     * @param int   $storeId
+     *
      * @return Collection|AttributeValueInterface[]
      */
     public function findAllByProductListFromStoreId(
@@ -307,7 +320,7 @@ class ProductAttributeValueRepository
             $query = $this->queryBuilder->createFindAllFromStoreIdOrDefaultQueryBuilder('v', 'l');
         }
 
-        $productIdList = array_map(function(ProductInterface $item) {
+        $productIdList = array_map(function (ProductInterface $item) {
             return $item->getId();
         }, $productList);
 
@@ -334,6 +347,7 @@ class ProductAttributeValueRepository
     /**
      * @param array $productList
      * @param array $attributeList
+     *
      * @return Collection|AttributeValueInterface[]
      */
     public function findAllByProductListAndAttributeListFromDefault(
@@ -346,7 +360,8 @@ class ProductAttributeValueRepository
     /**
      * @param array $productList
      * @param array $attributeList
-     * @param int $storeId
+     * @param int   $storeId
+     *
      * @return Collection|AttributeValueInterface[]
      */
     public function findAllByProductListAndAttributeListFromStoreId(
@@ -360,14 +375,14 @@ class ProductAttributeValueRepository
             $query = $this->queryBuilder->createFindAllFromStoreIdOrDefaultQueryBuilder('v', 'l');
         }
 
-        $productIdList = array_map(function(ProductInterface $item) {
+        $productIdList = array_map(function (ProductInterface $item) {
             return $item->getId();
         }, $productList);
 
         $expr = array_pad([], count($productIdList), $query->expr()->eq('v.entity_id', '?'));
         $query->andWhere($query->expr()->orX(...$expr));
 
-        $attributeIdList = array_map(function(AttributeInterface $item) {
+        $attributeIdList = array_map(function (AttributeInterface $item) {
             return $item->getId();
         }, $attributeList);
 
@@ -393,6 +408,7 @@ class ProductAttributeValueRepository
 
     /**
      * @param ProductInterface $product
+     *
      * @return Collection|AttributeValueInterface[]
      */
     public function findAllByProductFromDefault(ProductInterface $product)
@@ -402,7 +418,8 @@ class ProductAttributeValueRepository
 
     /**
      * @param ProductInterface $product
-     * @param int $storeId
+     * @param int              $storeId
+     *
      * @return Collection|AttributeValueInterface[]
      */
     public function findAllByProductFromStoreId(ProductInterface $product, $storeId)

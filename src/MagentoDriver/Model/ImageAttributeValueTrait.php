@@ -5,7 +5,6 @@ namespace Luni\Component\MagentoDriver\Model;
 use Doctrine\Common\Collections\Collection;
 use League\Flysystem\File;
 use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
 
 trait ImageAttributeValueTrait
 {
@@ -23,10 +22,11 @@ trait ImageAttributeValueTrait
 
     /**
      * DatetimeAttributeValueTrait constructor.
+     *
      * @param AttributeInterface $attribute
-     * @param File $file
-     * @param ProductInterface $product
-     * @param array $metadata
+     * @param File               $file
+     * @param ProductInterface   $product
+     * @param array              $metadata
      */
     abstract public function __construct(
         AttributeInterface $attribute,
@@ -37,10 +37,11 @@ trait ImageAttributeValueTrait
 
     /**
      * @param AttributeInterface $attribute
-     * @param int $valueId
-     * @param File $file
-     * @param ProductInterface $product
-     * @param array $metadata
+     * @param int                $valueId
+     * @param File               $file
+     * @param ProductInterface   $product
+     * @param array              $metadata
+     *
      * @return ImageAttributeValueInterface
      */
     public static function buildNewWith(
@@ -83,6 +84,7 @@ trait ImageAttributeValueTrait
 
     /**
      * @param int $storeId
+     *
      * @return ImageMetadataAttributeValueInterface|null
      */
     public function getMetadataForStoreId($storeId)

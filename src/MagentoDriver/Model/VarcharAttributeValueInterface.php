@@ -2,8 +2,7 @@
 
 namespace Luni\Component\MagentoDriver\Model;
 
-interface VarcharAttributeValueInterface
-    extends ScopableAttributeValueInterface
+interface VarcharAttributeValueInterface extends ScopableAttributeValueInterface
 {
     /**
      * @return string

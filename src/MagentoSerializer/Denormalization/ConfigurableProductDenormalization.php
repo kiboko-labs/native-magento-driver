@@ -25,8 +25,7 @@ use Luni\Component\MagentoDriver\Repository\FamilyRepositoryInterface;
 use Luni\Component\MagentoMapper\Repository\OptionRepositoryInterface as OptionMappingRepositoryInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-class ConfigurableProductDenormalization
-    implements DenormalizerInterface
+class ConfigurableProductDenormalization implements DenormalizerInterface
 {
     /**
      * @var FamilyMapperInterface
@@ -61,11 +60,11 @@ class ConfigurableProductDenormalization
     /**
      * ProductDenormalization constructor.
      *
-     * @param FamilyMapperInterface $familyMapper
-     * @param FamilyRepositoryInterface $familyRepository
-     * @param AttributeRepositoryInterface $attributeRepository
-     * @param OptionMappingRepositoryInterface $optionMappingRepository
-     * @param ProductFactoryInterface $productFactory
+     * @param FamilyMapperInterface                 $familyMapper
+     * @param FamilyRepositoryInterface             $familyRepository
+     * @param AttributeRepositoryInterface          $attributeRepository
+     * @param OptionMappingRepositoryInterface      $optionMappingRepository
+     * @param ProductFactoryInterface               $productFactory
      * @param ProductAttributeValueFactoryInterface $valueFactory
      */
     public function __construct(
@@ -98,46 +97,52 @@ class ConfigurableProductDenormalization
                     $this->attributeRepository
                 );
                 $this->attributeDenormalizers->attach($attribute, $denormalizer);
+
                 return $denormalizer;
-            } else if ($attribute->getFrontendType() === 'weight') {
+            } elseif ($attribute->getFrontendType() === 'weight') {
                 $denormalizer = new DecimalAttributeValueDenormalization(
                     $this->attributeRepository
                 );
                 $this->attributeDenormalizers->attach($attribute, $denormalizer);
+
                 return $denormalizer;
-            } else if ($attribute->getFrontendType() === 'text') {
+            } elseif ($attribute->getFrontendType() === 'text') {
                 $denormalizer = new DecimalAttributeValueDenormalization(
                     $this->attributeRepository
                 );
                 $this->attributeDenormalizers->attach($attribute, $denormalizer);
+
                 return $denormalizer;
             } else {
                 throw new RuntimeErrorException('Unexpected attribute type.');
             }
-        } else if ($attribute->getBackendType() === 'datetime') {
+        } elseif ($attribute->getBackendType() === 'datetime') {
             if ($attribute->getFrontendType() === 'date') {
                 $denormalizer = new DatetimeAttributeValueDenormalization(
                     $this->attributeRepository
                 );
                 $this->attributeDenormalizers->attach($attribute, $denormalizer);
+
                 return $denormalizer;
             } else {
                 throw new RuntimeErrorException('Unexpected attribute type.');
             }
-        } else if ($attribute->getBackendType() === 'int') {
+        } elseif ($attribute->getBackendType() === 'int') {
             if ($attribute->getFrontendType() === null) {
                 $denormalizer = new IntegerAttributeValueDenormalization(
                     $this->attributeRepository
                 );
                 $this->attributeDenormalizers->attach($attribute, $denormalizer);
+
                 return $denormalizer;
-            } else if ($attribute->getFrontendType() === 'text') {
+            } elseif ($attribute->getFrontendType() === 'text') {
                 $denormalizer = new IntegerAttributeValueDenormalization(
                     $this->attributeRepository
                 );
                 $this->attributeDenormalizers->attach($attribute, $denormalizer);
+
                 return $denormalizer;
-            } else if ($attribute->getFrontendType() === 'select') {
+            } elseif ($attribute->getFrontendType() === 'select') {
                 $denormalizer = new OptionAttributeValueDenormalization(
                     $this->attributeRepository,
                     new DefaultOptionMapper(
@@ -145,24 +150,27 @@ class ConfigurableProductDenormalization
                     )
                 );
                 $this->attributeDenormalizers->attach($attribute, $denormalizer);
+
                 return $denormalizer;
             } else {
                 throw new RuntimeErrorException('Unexpected attribute type.');
             }
-        } else if ($attribute->getBackendType() === 'text') {
+        } elseif ($attribute->getBackendType() === 'text') {
             if ($attribute->getFrontendType() === 'textarea') {
                 $denormalizer = new TextAttributeValueDenormalization(
                     $this->attributeRepository
                 );
                 $this->attributeDenormalizers->attach($attribute, $denormalizer);
+
                 return $denormalizer;
-            } else if ($attribute->getFrontendType() === 'text') {
+            } elseif ($attribute->getFrontendType() === 'text') {
                 $denormalizer = new TextAttributeValueDenormalization(
                     $this->attributeRepository
                 );
                 $this->attributeDenormalizers->attach($attribute, $denormalizer);
+
                 return $denormalizer;
-            } else if ($attribute->getFrontendType() === 'multiselect') {
+            } elseif ($attribute->getFrontendType() === 'multiselect') {
                 $denormalizer = new MultipleOptionsAttributeValueDenormalization(
                     $this->attributeRepository,
                     new DefaultOptionMapper(
@@ -170,8 +178,9 @@ class ConfigurableProductDenormalization
                     )
                 );
                 $this->attributeDenormalizers->attach($attribute, $denormalizer);
+
                 return $denormalizer;
-            } else if ($attribute->getFrontendType() === 'select') {
+            } elseif ($attribute->getFrontendType() === 'select') {
                 $denormalizer = new OptionAttributeValueDenormalization(
                     $this->attributeRepository,
                     new DefaultOptionMapper(
@@ -179,30 +188,34 @@ class ConfigurableProductDenormalization
                     )
                 );
                 $this->attributeDenormalizers->attach($attribute, $denormalizer);
+
                 return $denormalizer;
             } else {
                 throw new RuntimeErrorException('Unexpected attribute type.');
             }
-        } else if ($attribute->getBackendType() === 'varchar') {
+        } elseif ($attribute->getBackendType() === 'varchar') {
             if ($attribute->getFrontendType() === null) {
                 $denormalizer = new VarcharAttributeValueDenormalization(
                     $this->attributeRepository
                 );
                 $this->attributeDenormalizers->attach($attribute, $denormalizer);
+
                 return $denormalizer;
-            } else if ($attribute->getFrontendType() === 'textarea') {
+            } elseif ($attribute->getFrontendType() === 'textarea') {
                 $denormalizer = new VarcharAttributeValueDenormalization(
                     $this->attributeRepository
                 );
                 $this->attributeDenormalizers->attach($attribute, $denormalizer);
+
                 return $denormalizer;
-            } else if ($attribute->getFrontendType() === 'text') {
+            } elseif ($attribute->getFrontendType() === 'text') {
                 $denormalizer = new VarcharAttributeValueDenormalization(
                     $this->attributeRepository
                 );
                 $this->attributeDenormalizers->attach($attribute, $denormalizer);
+
                 return $denormalizer;
-            } else if ($attribute->getFrontendType() === 'multiselect') {
+            } elseif ($attribute->getFrontendType() === 'multiselect') {
                 $denormalizer = new MultipleOptionsAttributeValueDenormalization(
                     $this->attributeRepository,
                     new DefaultOptionMapper(
@@ -210,8 +223,9 @@ class ConfigurableProductDenormalization
                     )
                 );
                 $this->attributeDenormalizers->attach($attribute, $denormalizer);
+
                 return $denormalizer;
-            } else if ($attribute->getFrontendType() === 'select') {
+            } elseif ($attribute->getFrontendType() === 'select') {
                 $denormalizer = new OptionAttributeValueDenormalization(
                     $this->attributeRepository,
                     new DefaultOptionMapper(
@@ -219,16 +233,19 @@ class ConfigurableProductDenormalization
                     )
                 );
                 $this->attributeDenormalizers->attach($attribute, $denormalizer);
+
                 return $denormalizer;
-            } else if ($attribute->getFrontendType() === 'media_image') {
+            } elseif ($attribute->getFrontendType() === 'media_image') {
                 // TODO: add support for media attributes
                 $denormalizer = new DummyAttributeValueDenormalization();
                 $this->attributeDenormalizers->attach($attribute, $denormalizer);
+
                 return $denormalizer;
-            } else if ($attribute->getFrontendType() === 'gallery') {
+            } elseif ($attribute->getFrontendType() === 'gallery') {
                 // TODO: add support for media attributes
                 $denormalizer = new DummyAttributeValueDenormalization();
                 $this->attributeDenormalizers->attach($attribute, $denormalizer);
+
                 return $denormalizer;
             } else {
                 throw new RuntimeErrorException('Unexpected attribute type.');
@@ -239,13 +256,14 @@ class ConfigurableProductDenormalization
     }
 
     /**
-     * @param mixed $data
+     * @param mixed  $data
      * @param string $class
-     * @param null $format
-     * @param array $context
+     * @param null   $format
+     * @param array  $context
+     *
      * @return ProductInterface
      */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize($data, $class, $format = null, array $context = [])
     {
         if (isset($data['family'])) {
             $familyId = $this->familyMapper->map($data['family']);
@@ -261,7 +279,7 @@ class ConfigurableProductDenormalization
 
         if (isset($data['sku'])) {
             $identifier = $data['sku'];
-        } else if (isset($data['code'])) {
+        } elseif (isset($data['code'])) {
             $identifier = $data['code'];
         } else {
             throw new RuntimeErrorException('No identifier field found.');
@@ -319,9 +337,10 @@ class ConfigurableProductDenormalization
     }
 
     /**
-     * @param mixed $data
+     * @param mixed  $data
      * @param string $type
-     * @param null $format
+     * @param null   $format
+     *
      * @return bool
      */
     public function supportsDenormalization($data, $type, $format = null)

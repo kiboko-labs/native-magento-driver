@@ -2,8 +2,7 @@
 
 namespace Luni\Component\MagentoMapper\Mapper;
 
-class DefaultFamilyMapper
-    implements FamilyMapperInterface
+class DefaultFamilyMapper implements FamilyMapperInterface
 {
     private $mapping = [
         'bag' => 47,
@@ -75,7 +74,7 @@ class DefaultFamilyMapper
     public function map($identifier)
     {
         if (!isset($this->mapping[$identifier])) {
-            return null;
+            return;
         }
 
         return $this->mapping[$identifier];

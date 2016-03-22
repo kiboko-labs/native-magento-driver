@@ -8,6 +8,7 @@ interface AttributeMapperInterface
 {
     /**
      * @param string $identifier
+     *
      * @return AttributeInterface
      */
     public function map($identifier);

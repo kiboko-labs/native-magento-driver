@@ -3,7 +3,6 @@
 namespace Luni\Component\MagentoDriver\Model;
 
 use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
 
 trait DatetimeAttributeValueTrait
 {
@@ -16,10 +15,11 @@ trait DatetimeAttributeValueTrait
 
     /**
      * DatetimeAttributeValueTrait constructor.
+     *
      * @param AttributeInterface $attribute
      * @param \DateTimeInterface $payload
-     * @param ProductInterface $product
-     * @param int $storeId
+     * @param ProductInterface   $product
+     * @param int                $storeId
      */
     abstract public function __construct(
         AttributeInterface $attribute,
@@ -30,10 +30,11 @@ trait DatetimeAttributeValueTrait
 
     /**
      * @param AttributeInterface $attribute
-     * @param int $valueId
+     * @param int                $valueId
      * @param \DateTimeInterface $payload
-     * @param ProductInterface $product
-     * @param int $storeId
+     * @param ProductInterface   $product
+     * @param int                $storeId
+     *
      * @return DatetimeAttributeValueInterface
      */
     public static function buildNewWith(

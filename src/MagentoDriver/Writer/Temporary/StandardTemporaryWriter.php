@@ -5,8 +5,7 @@ namespace Luni\Component\MagentoDriver\Writer\Temporary;
 use League\Flysystem\File;
 use Luni\Component\MagentoDriver\Exception\RuntimeErrorException;
 
-class StandardTemporaryWriter
-    implements TemporaryWriterInterface
+class StandardTemporaryWriter implements TemporaryWriterInterface
 {
     /**
      * @var File
@@ -35,7 +34,8 @@ class StandardTemporaryWriter
 
     /**
      * DataInfileDatabaseWriter constructor.
-     * @param File $file
+     *
+     * @param File   $file
      * @param string $delimiter
      * @param string $enclosure
      * @param string $escaper
@@ -66,9 +66,6 @@ class StandardTemporaryWriter
         }
     }
 
-    /**
-     *
-     */
     public function flush()
     {
         $this->file->putStream($this->stream);

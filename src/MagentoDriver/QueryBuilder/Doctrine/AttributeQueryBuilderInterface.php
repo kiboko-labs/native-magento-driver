@@ -8,6 +8,7 @@ interface AttributeQueryBuilderInterface
 {
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindQueryBuilder($alias);
@@ -15,7 +16,8 @@ interface AttributeQueryBuilderInterface
     /**
      * @param string $alias
      * @param string $extraAlias
-     * @param array $excludedIds
+     * @param array  $excludedIds
+     *
      * @return QueryBuilder
      */
     public function createFindAllQueryBuilder($alias, $extraAlias, array $excludedIds = []);
@@ -24,7 +26,8 @@ interface AttributeQueryBuilderInterface
      * @param string $alias
      * @param string $extraAlias
      * @param string $entityAlias
-     * @param array $excludedIds
+     * @param array  $excludedIds
+     *
      * @return QueryBuilder
      */
     public function createFindAllByEntityTypeQueryBuilder($alias, $extraAlias, $entityAlias, array $excludedIds = []);
@@ -33,6 +36,7 @@ interface AttributeQueryBuilderInterface
      * @param string $alias
      * @param string $extraAlias
      * @param string $entityAlias
+     *
      * @return QueryBuilder
      */
     public function createFindOneByCodeQueryBuilder($alias, $extraAlias, $entityAlias);
@@ -40,23 +44,26 @@ interface AttributeQueryBuilderInterface
     /**
      * @param string $alias
      * @param string $extraAlias
+     *
      * @return QueryBuilder
      */
     public function createFindOneByIdQueryBuilder($alias, $extraAlias);
 
     /**
-     * @param string $alias
-     * @param string $extraAlias
-     * @param string $entityAlias
+     * @param string         $alias
+     * @param string         $extraAlias
+     * @param string         $entityAlias
      * @param array|string[] $codeList
+     *
      * @return QueryBuilder
      */
     public function createFindAllByCodeQueryBuilder($alias, $extraAlias, $entityAlias, array $codeList);
 
     /**
-     * @param string $alias
-     * @param string $extraAlias
+     * @param string      $alias
+     * @param string      $extraAlias
      * @param array|int[] $idList
+     *
      * @return QueryBuilder
      */
     public function createFindAllByIdQueryBuilder($alias, $extraAlias, array $idList);
@@ -78,12 +85,14 @@ interface AttributeQueryBuilderInterface
 
     /**
      * @param array|string[] $codeList
+     *
      * @return QueryBuilder
      */
     public function createDeleteAllByCodeQueryBuilder(array $codeList);
 
     /**
      * @param array|int[] $idList
+     *
      * @return QueryBuilder
      */
     public function createDeleteAllByIdQueryBuilder(array $idList);

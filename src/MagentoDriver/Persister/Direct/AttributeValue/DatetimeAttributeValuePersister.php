@@ -8,8 +8,7 @@ use Luni\Component\MagentoDriver\Model\DatetimeAttributeValueInterface;
 use Luni\Component\MagentoDriver\Persister\AttributeValuePersisterInterface;
 use Luni\Component\MagentoDriver\Exception\InvalidAttributePersisterTypeException;
 
-class DatetimeAttributeValuePersister
-    implements AttributeValuePersisterInterface
+class DatetimeAttributeValuePersister implements AttributeValuePersisterInterface
 {
     /**
      * @var Connection
@@ -28,7 +27,7 @@ class DatetimeAttributeValuePersister
 
     /**
      * @param Connection $connection
-     * @param string $tableName
+     * @param string     $tableName
      */
     public function __construct(
         Connection $connection,
@@ -47,9 +46,6 @@ class DatetimeAttributeValuePersister
         return $this->tableName;
     }
 
-    /**
-     * @return void
-     */
     public function initialize()
     {
         $this->dataQueue = new \SplQueue();
@@ -72,9 +68,6 @@ class DatetimeAttributeValuePersister
         $this->dataQueue->push($value);
     }
 
-    /**
-     * @return void
-     */
     public function flush()
     {
         /** @var DatetimeAttributeValueInterface $value */
@@ -83,23 +76,23 @@ class DatetimeAttributeValuePersister
                 $this->connection->update($this->tableName,
                     [
                         'entity_type_id' => 4,
-                        'attribute_id'   => $value->getAttributeId(),
-                        'store_id'       => $value->getStoreId(),
-                        'entity_id'      => $value->getProductId(),
-                        'value'          => $value->getValue()->format('Y-m-d H:i:s'),
+                        'attribute_id' => $value->getAttributeId(),
+                        'store_id' => $value->getStoreId(),
+                        'entity_id' => $value->getProductId(),
+                        'value' => $value->getValue()->format('Y-m-d H:i:s'),
                     ],
                     [
-                        'value_id'       => $value->getId(),
+                        'value_id' => $value->getId(),
                     ]
                 );
             } else {
                 $this->connection->insert($this->tableName,
                     [
                         'entity_type_id' => 4,
-                        'attribute_id'   => $value->getAttributeId(),
-                        'store_id'       => $value->getStoreId(),
-                        'entity_id'      => $value->getProductId(),
-                        'value'          => $value->getValue()->format('Y-m-d H:i:s'),
+                        'attribute_id' => $value->getAttributeId(),
+                        'store_id' => $value->getStoreId(),
+                        'entity_id' => $value->getProductId(),
+                        'value' => $value->getValue()->format('Y-m-d H:i:s'),
                     ]
                 );
 
@@ -110,7 +103,6 @@ class DatetimeAttributeValuePersister
 
     /**
      * @param AttributeValueInterface $value
-     * @return void
      */
     public function __invoke(AttributeValueInterface $value)
     {

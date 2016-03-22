@@ -6,8 +6,7 @@ use Doctrine\Common\Collections\Collection;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Model\SuperLinkInterface;
 
-interface ConfigurableProductInterface
-    extends ProductInterface
+interface ConfigurableProductInterface extends ProductInterface
 {
     /**
      * @param AttributeInterface $superAttribute
@@ -21,6 +20,7 @@ interface ConfigurableProductInterface
 
     /**
      * @param AttributeInterface $attribute
+     *
      * @return bool
      */
     public function hasAxisAttribute(AttributeInterface $attribute);
@@ -47,6 +47,7 @@ interface ConfigurableProductInterface
 
     /**
      * @param SimpleProductInterface $variant
+     *
      * @return bool
      */
     public function hasVariant(SimpleProductInterface $variant);
@@ -61,7 +62,6 @@ interface ConfigurableProductInterface
      */
     public function getVariants();
 
-
     /**
      * @param SuperLinkInterface $superLink
      */
@@ -74,6 +74,7 @@ interface ConfigurableProductInterface
 
     /**
      * @param SuperLinkInterface $superLink
+     *
      * @return bool
      */
     public function hasSuperLink(SuperLinkInterface $superLink);

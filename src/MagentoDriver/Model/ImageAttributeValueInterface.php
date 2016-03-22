@@ -5,8 +5,7 @@ namespace Luni\Component\MagentoDriver\Model;
 use Doctrine\Common\Collections\Collection;
 use League\Flysystem\File;
 
-interface ImageAttributeValueInterface
-    extends AttributeValueInterface
+interface ImageAttributeValueInterface extends AttributeValueInterface
 {
     /**
      * @return File
@@ -20,6 +19,7 @@ interface ImageAttributeValueInterface
 
     /**
      * @param int $storeId
+     *
      * @return ImageMetadataAttributeValueInterface|null
      */
     public function getMetadataForStoreId($storeId);

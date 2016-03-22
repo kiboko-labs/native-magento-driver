@@ -4,8 +4,7 @@ namespace Luni\Component\MagentoDriver\Matcher;
 
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 
-class ClosureAttributeValueMatcher
-    implements AttributeValueMatcherInterface
+class ClosureAttributeValueMatcher implements AttributeValueMatcherInterface
 {
     /**
      * @var \Closure
@@ -18,7 +17,7 @@ class ClosureAttributeValueMatcher
     private $next;
 
     /**
-     * @param \Closure $matcher
+     * @param \Closure                            $matcher
      * @param AttributeValueMatcherInterface|null $next
      */
     public function __construct(\Closure $matcher, AttributeValueMatcherInterface $next = null)
@@ -28,6 +27,7 @@ class ClosureAttributeValueMatcher
 
     /**
      * @param AttributeInterface $attributeValue
+     *
      * @return bool
      */
     public function match(AttributeInterface $attributeValue)

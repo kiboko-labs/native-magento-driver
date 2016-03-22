@@ -6,8 +6,7 @@ use Doctrine\Common\Collections\Collection;
 use League\Flysystem\File;
 use League\Flysystem\FilesystemInterface;
 
-class StandardFileMover
-    implements FileMoverInterface
+class StandardFileMover implements FileMoverInterface
 {
     public function move(
         FilesystemInterface $source,

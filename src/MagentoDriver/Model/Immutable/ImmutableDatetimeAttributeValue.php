@@ -10,17 +10,17 @@ use Luni\Component\MagentoDriver\Model\DatetimeAttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\DatetimeAttributeValueTrait;
 use Luni\Component\MagentoDriver\Model\ScopableAttributeValueInterface;
 
-class ImmutableDatetimeAttributeValue
-    implements ImmutableAttributeValueInterface, ScopableAttributeValueInterface, DatetimeAttributeValueInterface
+class ImmutableDatetimeAttributeValue implements ImmutableAttributeValueInterface, ScopableAttributeValueInterface, DatetimeAttributeValueInterface
 {
     use DatetimeAttributeValueTrait;
 
     /**
      * MediaGalleryAttributeValue constructor.
+     *
      * @param AttributeInterface $attribute
      * @param \DateTimeInterface $payload
-     * @param ProductInterface $product
-     * @param int $storeId
+     * @param ProductInterface   $product
+     * @param int                $storeId
      */
     public function __construct(
         AttributeInterface $attribute,
@@ -31,7 +31,7 @@ class ImmutableDatetimeAttributeValue
         $this->attribute = $attribute;
         if ($payload instanceof \DateTime) {
             $this->payload = \DateTimeImmutable::createFromMutable($payload);
-        } else if ($payload instanceof \DateTimeImmutable) {
+        } elseif ($payload instanceof \DateTimeImmutable) {
             $this->payload = $payload;
         }
         if ($product !== null) {
@@ -56,6 +56,7 @@ class ImmutableDatetimeAttributeValue
 
     /**
      * @param $storeId
+     *
      * @return AttributeValueInterface
      */
     public function copyToStoreId($storeId)

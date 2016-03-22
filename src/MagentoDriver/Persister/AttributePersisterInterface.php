@@ -6,9 +6,6 @@ use Luni\Component\MagentoDriver\Model\AttributeInterface;
 
 interface AttributePersisterInterface
 {
-    /**
-     * @return void
-     */
     public function initialize();
 
     /**
@@ -21,8 +18,5 @@ interface AttributePersisterInterface
      */
     public function __invoke(AttributeInterface $attribute);
 
-    /**
-     * @return void
-     */
     public function flush();
 }

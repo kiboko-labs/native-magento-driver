@@ -6,9 +6,6 @@ use Luni\Component\MagentoDriver\Model\CatalogAttributeExtensionInterface;
 
 interface CatalogAttributeExtensionPersisterInterface
 {
-    /**
-     * @return void
-     */
     public function initialize();
 
     /**
@@ -21,8 +18,5 @@ interface CatalogAttributeExtensionPersisterInterface
      */
     public function __invoke(CatalogAttributeExtensionInterface $attribute);
 
-    /**
-     * @return void
-     */
     public function flush();
 }

@@ -11,26 +11,30 @@ interface ProductAttributeValueRepositoryInterface
 {
     /**
      * @param ProductInterface $product
+     *
      * @return Collection|AttributeValueInterface[]
      */
     public function findAllByProduct(ProductInterface $product);
 
     /**
      * @param ProductInterface $product
+     *
      * @return Collection|AttributeValueInterface[]
      */
     public function findAllVariantAxisByProductFromDefault(ProductInterface $product);
 
     /**
      * @param ProductInterface $product
-     * @param int $storeId
+     * @param int              $storeId
+     *
      * @return Collection|AttributeValueInterface[]
      */
     public function findAllVariantAxisByProductFromStoreId(ProductInterface $product, $storeId);
 
     /**
-     * @param ProductInterface $product
+     * @param ProductInterface   $product
      * @param AttributeInterface $attribute
+     *
      * @return AttributeValueInterface|null
      */
     public function findOneByProductAndAttributeFromDefault(
@@ -39,9 +43,10 @@ interface ProductAttributeValueRepositoryInterface
     );
 
     /**
-     * @param ProductInterface $product
+     * @param ProductInterface   $product
      * @param AttributeInterface $attribute
-     * @param int $storeId
+     * @param int                $storeId
+     *
      * @return AttributeValueInterface|null
      */
     public function findOneByProductAndAttributeFromStoreId(
@@ -51,8 +56,9 @@ interface ProductAttributeValueRepositoryInterface
     );
 
     /**
-     * @param ProductInterface $product
+     * @param ProductInterface     $product
      * @param AttributeInterface[] $attributeList
+     *
      * @return AttributeValueInterface|null
      */
     public function findAllByProductAndAttributeListFromDefault(
@@ -61,9 +67,10 @@ interface ProductAttributeValueRepositoryInterface
     );
 
     /**
-     * @param ProductInterface $product
+     * @param ProductInterface     $product
      * @param AttributeInterface[] $attributeList
-     * @param int $storeId
+     * @param int                  $storeId
+     *
      * @return AttributeValueInterface|null
      */
     public function findAllByProductAndAttributeListFromStoreId(
@@ -74,6 +81,7 @@ interface ProductAttributeValueRepositoryInterface
 
     /**
      * @param ProductInterface[] $productList
+     *
      * @return AttributeValueInterface|null
      */
     public function findAllByProductListFromDefault(
@@ -82,7 +90,8 @@ interface ProductAttributeValueRepositoryInterface
 
     /**
      * @param ProductInterface[] $productList
-     * @param int $storeId
+     * @param int                $storeId
+     *
      * @return AttributeValueInterface|null
      */
     public function findAllByProductListFromStoreId(
@@ -91,8 +100,9 @@ interface ProductAttributeValueRepositoryInterface
     );
 
     /**
-     * @param ProductInterface[] $productList
+     * @param ProductInterface[]   $productList
      * @param AttributeInterface[] $attributeList
+     *
      * @return AttributeValueInterface|null
      */
     public function findAllByProductListAndAttributeListFromDefault(
@@ -101,9 +111,10 @@ interface ProductAttributeValueRepositoryInterface
     );
 
     /**
-     * @param ProductInterface[] $productList
+     * @param ProductInterface[]   $productList
      * @param AttributeInterface[] $attributeList
-     * @param int $storeId
+     * @param int                  $storeId
+     *
      * @return AttributeValueInterface|null
      */
     public function findAllByProductListAndAttributeListFromStoreId(
@@ -114,13 +125,15 @@ interface ProductAttributeValueRepositoryInterface
 
     /**
      * @param ProductInterface $product
+     *
      * @return Collection|AttributeValueInterface[]
      */
     public function findAllByProductFromDefault(ProductInterface $product);
 
     /**
      * @param ProductInterface $product
-     * @param int $storeId
+     * @param int              $storeId
+     *
      * @return Collection|AttributeValueInterface[]
      */
     public function findAllByProductFromStoreId(ProductInterface $product, $storeId);

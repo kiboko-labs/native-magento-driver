@@ -2,7 +2,6 @@
 
 namespace Luni\Component\MagentoDriver\Exception;
 
-class ImmutableValueException
-    extends RuntimeErrorException
+class ImmutableValueException extends RuntimeErrorException
 {
 }

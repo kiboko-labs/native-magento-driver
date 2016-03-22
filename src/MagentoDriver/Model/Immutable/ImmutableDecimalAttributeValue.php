@@ -10,17 +10,17 @@ use Luni\Component\MagentoDriver\Model\DecimalAttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\DecimalAttributeValueTrait;
 use Luni\Component\MagentoDriver\Model\ScopableAttributeValueInterface;
 
-class ImmutableDecimalAttributeValue
-    implements ImmutableAttributeValueInterface, ScopableAttributeValueInterface, DecimalAttributeValueInterface
+class ImmutableDecimalAttributeValue implements ImmutableAttributeValueInterface, ScopableAttributeValueInterface, DecimalAttributeValueInterface
 {
     use DecimalAttributeValueTrait;
 
     /**
      * MediaGalleryAttributeValue constructor.
+     *
      * @param AttributeInterface $attribute
-     * @param float $payload
-     * @param ProductInterface $product
-     * @param int $storeId
+     * @param float              $payload
+     * @param ProductInterface   $product
+     * @param int                $storeId
      */
     public function __construct(
         AttributeInterface $attribute,
@@ -52,6 +52,7 @@ class ImmutableDecimalAttributeValue
 
     /**
      * @param $storeId
+     *
      * @return AttributeValueInterface
      */
     public function copyToStoreId($storeId)

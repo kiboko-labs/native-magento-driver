@@ -8,8 +8,7 @@ use Luni\Component\MagentoDriver\Persister\SuperAttribute\SuperAttributePersiste
 use Luni\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
 use Luni\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;
 
-class ProductSuperAttributePersister
-    implements SuperAttributePersisterInterface
+class ProductSuperAttributePersister implements SuperAttributePersisterInterface
 {
     use BaseFlatFilePersisterTrait;
 
@@ -20,9 +19,9 @@ class ProductSuperAttributePersister
 
     /**
      * @param TemporaryWriterInterface $temporaryWriter
-     * @param DatabaseWriterInterface $databaseWriter
-     * @param string $tableName
-     * @param array $tableKeys
+     * @param DatabaseWriterInterface  $databaseWriter
+     * @param string                   $tableName
+     * @param array                    $tableKeys
      */
     public function __construct(
         TemporaryWriterInterface $temporaryWriter,
@@ -37,9 +36,6 @@ class ProductSuperAttributePersister
         $this->superAttributeQueue = new \SplQueue();
     }
 
-    /**
-     * @return void
-     */
     public function initialize()
     {
     }
@@ -55,9 +51,9 @@ class ProductSuperAttributePersister
 
         $this->temporaryWriter->persistRow([
             'catalog_product_super_attribute_id' => $superAttribute->getId(),
-            'product_id'                         => $superAttribute->getProductId(),
-            'attribute_id'                       => $superAttribute->getAttributeId(),
-            'position'                           => $superAttribute->getPosition(),
+            'product_id' => $superAttribute->getProductId(),
+            'attribute_id' => $superAttribute->getAttributeId(),
+            'position' => $superAttribute->getPosition(),
         ]);
     }
 
@@ -69,9 +65,6 @@ class ProductSuperAttributePersister
         $this->persist($superAttribute);
     }
 
-    /**
-     * @return void
-     */
     public function flush()
     {
         $this->doFlush();

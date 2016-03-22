@@ -7,8 +7,7 @@ use Luni\Component\MagentoDriver\Deleter\FamilyDeleterInterface;
 use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
 use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\FamilyQueryBuilderInterface;
 
-class FamilyDeleter
-    implements FamilyDeleterInterface
+class FamilyDeleter implements FamilyDeleterInterface
 {
     /**
      * @var FamilyQueryBuilderInterface
@@ -21,7 +20,7 @@ class FamilyDeleter
     private $connection;
 
     /**
-     * @param Connection $connection
+     * @param Connection                  $connection
      * @param FamilyQueryBuilderInterface $queryBuilder
      */
     public function __construct(
@@ -34,7 +33,9 @@ class FamilyDeleter
 
     /**
      * @param int $id
+     *
      * @return int
+     *
      * @throws \Doctrine\DBAL\DBALException
      * @throws DatabaseFetchingFailureException
      */
@@ -52,7 +53,9 @@ class FamilyDeleter
 
     /**
      * @param int[] $idList
+     *
      * @return int
+     *
      * @throws \Doctrine\DBAL\DBALException
      * @throws DatabaseFetchingFailureException
      */

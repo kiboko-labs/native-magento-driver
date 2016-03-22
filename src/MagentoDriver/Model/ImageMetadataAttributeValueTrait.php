@@ -2,10 +2,6 @@
 
 namespace Luni\Component\MagentoDriver\Model;
 
-use Doctrine\Common\Collections\Collection;
-use League\Flysystem\File;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
-
 trait ImageMetadataAttributeValueTrait
 {
     use AttributeValueTrait;
@@ -27,11 +23,12 @@ trait ImageMetadataAttributeValueTrait
 
     /**
      * DatetimeAttributeValueTrait constructor.
+     *
      * @param AttributeInterface $attribute
-     * @param string $label
-     * @param int $position
-     * @param bool $excluded
-     * @param null $storeId
+     * @param string             $label
+     * @param int                $position
+     * @param bool               $excluded
+     * @param null               $storeId
      */
     abstract public function __construct(
         AttributeInterface $attribute,
@@ -43,11 +40,12 @@ trait ImageMetadataAttributeValueTrait
 
     /**
      * @param AttributeInterface $attribute
-     * @param int $valueId
-     * @param string $label
-     * @param int $storeId
-     * @param int $position
-     * @param bool $excluded
+     * @param int                $valueId
+     * @param string             $label
+     * @param int                $storeId
+     * @param int                $position
+     * @param bool               $excluded
+     *
      * @return ImageMetadataAttributeValueInterface
      */
     public static function buildNewWith(

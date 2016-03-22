@@ -6,8 +6,7 @@ use Doctrine\DBAL\Connection;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Persister\AttributePersisterInterface;
 
-class StandardAttributePersister
-    implements AttributePersisterInterface
+class StandardAttributePersister implements AttributePersisterInterface
 {
     /**
      * @var Connection
@@ -26,7 +25,7 @@ class StandardAttributePersister
 
     /**
      * @param Connection $connection
-     * @param string $tableName
+     * @param string     $tableName
      */
     public function __construct(
         Connection $connection,
@@ -45,9 +44,6 @@ class StandardAttributePersister
         return $this->tableName;
     }
 
-    /**
-     * @return void
-     */
     public function initialize()
     {
         $this->dataQueue = new \SplQueue();
@@ -61,9 +57,6 @@ class StandardAttributePersister
         $this->dataQueue->push($attribute);
     }
 
-    /**
-     * @return void
-     */
     public function flush()
     {
         /** @var AttributeInterface $attribute */
@@ -71,22 +64,22 @@ class StandardAttributePersister
             if ($attribute->getId()) {
                 $this->connection->update($this->tableName,
                     [
-                        'entity_type_id'  => $attribute->getEntityTypeId(),
-                        'attribute_code'  => $attribute->getCode(),
+                        'entity_type_id' => $attribute->getEntityTypeId(),
+                        'attribute_code' => $attribute->getCode(),
                         'attribute_model' => $attribute->getModelClass(),
-                        'backend_type'    => $attribute->getBackendType(),
-                        'backend_model'   => $attribute->getBackendModelClass(),
-                        'backend_table'   => $attribute->getBackendTable(),
-                        'frontend_model'  => $attribute->getFrontendModelClass(),
-                        'frontend_input'  => $attribute->getFrontendViewClass(),
-                        'frontend_label'  => $attribute->getFrontendLabel(),
-                        'frontend_class'  => $attribute->getFrontendModelClass(),
-                        'source_model'    => $attribute->getSourceModelClass(),
-                        'is_required'     => $attribute->isRequired(),
+                        'backend_type' => $attribute->getBackendType(),
+                        'backend_model' => $attribute->getBackendModelClass(),
+                        'backend_table' => $attribute->getBackendTable(),
+                        'frontend_model' => $attribute->getFrontendModelClass(),
+                        'frontend_input' => $attribute->getFrontendViewClass(),
+                        'frontend_label' => $attribute->getFrontendLabel(),
+                        'frontend_class' => $attribute->getFrontendModelClass(),
+                        'source_model' => $attribute->getSourceModelClass(),
+                        'is_required' => $attribute->isRequired(),
                         'is_user_defined' => $attribute->isUserDefined(),
-                        'is_unique'       => $attribute->isUnique(),
-                        'default_value'   => $attribute->getDefaultValue(),
-                        'note'            => $attribute->getNote(),
+                        'is_unique' => $attribute->isUnique(),
+                        'default_value' => $attribute->getDefaultValue(),
+                        'note' => $attribute->getNote(),
                     ],
                     [
                         'attribute_id' => $attribute->getId(),
@@ -95,22 +88,22 @@ class StandardAttributePersister
             } else {
                 $this->connection->insert($this->tableName,
                     [
-                        'entity_type_id'  => $attribute->getEntityTypeId(),
-                        'attribute_code'  => $attribute->getCode(),
+                        'entity_type_id' => $attribute->getEntityTypeId(),
+                        'attribute_code' => $attribute->getCode(),
                         'attribute_model' => $attribute->getModelClass(),
-                        'backend_type'    => $attribute->getBackendType(),
-                        'backend_model'   => $attribute->getBackendModelClass(),
-                        'backend_table'   => $attribute->getBackendTable(),
-                        'frontend_model'  => $attribute->getFrontendModelClass(),
-                        'frontend_input'  => $attribute->getFrontendViewClass(),
-                        'frontend_label'  => $attribute->getFrontendLabel(),
-                        'frontend_class'  => $attribute->getFrontendModelClass(),
-                        'source_model'    => $attribute->getSourceModelClass(),
-                        'is_required'     => $attribute->isRequired(),
+                        'backend_type' => $attribute->getBackendType(),
+                        'backend_model' => $attribute->getBackendModelClass(),
+                        'backend_table' => $attribute->getBackendTable(),
+                        'frontend_model' => $attribute->getFrontendModelClass(),
+                        'frontend_input' => $attribute->getFrontendViewClass(),
+                        'frontend_label' => $attribute->getFrontendLabel(),
+                        'frontend_class' => $attribute->getFrontendModelClass(),
+                        'source_model' => $attribute->getSourceModelClass(),
+                        'is_required' => $attribute->isRequired(),
                         'is_user_defined' => $attribute->isUserDefined(),
-                        'is_unique'       => $attribute->isUnique(),
-                        'default_value'   => $attribute->getDefaultValue(),
-                        'note'            => $attribute->getNote(),
+                        'is_unique' => $attribute->isUnique(),
+                        'default_value' => $attribute->getDefaultValue(),
+                        'note' => $attribute->getNote(),
                     ]
                 );
 

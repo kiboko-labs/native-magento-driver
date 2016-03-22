@@ -6,8 +6,7 @@ use Luni\Component\MagentoDriver\Matcher\AttributeValueMatcherInterface;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Repository\ProductAttributeValueRepositoryInterface;
 
-class ProductAttributeValueRepositoryBroker
-    implements ProductAttributeValueRepositoryBrokerInterface
+class ProductAttributeValueRepositoryBroker implements ProductAttributeValueRepositoryBrokerInterface
 {
     /**
      * @var \SplObjectStorage
@@ -24,7 +23,7 @@ class ProductAttributeValueRepositoryBroker
 
     /**
      * @param ProductAttributeValueRepositoryInterface $repository
-     * @param AttributeValueMatcherInterface $matcher
+     * @param AttributeValueMatcherInterface           $matcher
      */
     public function addRepository(
         ProductAttributeValueRepositoryInterface $repository,
@@ -45,12 +44,13 @@ class ProductAttributeValueRepositoryBroker
 
     /**
      * @param AttributeInterface $attribute
+     *
      * @return ProductAttributeValueRepositoryInterface|null
      */
     public function findFor(AttributeInterface $attribute)
     {
         /**
-         * @var AttributeValueMatcherInterface $matcher
+         * @var AttributeValueMatcherInterface
          * @var ProductAttributeValueRepositoryInterface $repository
          */
         foreach ($this->walkRepositoryList() as $matcher => $repository) {
@@ -61,6 +61,6 @@ class ProductAttributeValueRepositoryBroker
             return $repository;
         }
 
-        return null;
+        return;
     }
 }

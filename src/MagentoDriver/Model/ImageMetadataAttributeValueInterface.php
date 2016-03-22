@@ -2,10 +2,7 @@
 
 namespace Luni\Component\MagentoDriver\Model;
 
-use League\Flysystem\File;
-
-interface ImageMetadataAttributeValueInterface
-    extends AttributeValueInterface
+interface ImageMetadataAttributeValueInterface extends AttributeValueInterface
 {
     /**
      * @return string

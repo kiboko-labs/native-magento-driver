@@ -5,8 +5,7 @@ namespace Luni\Component\MagentoDriver\QueryBuilder\Doctrine;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
 
-class ProductSuperAttributeQueryBuilder
-    implements ProductSuperAttributeQueryBuilderInterface
+class ProductSuperAttributeQueryBuilder implements ProductSuperAttributeQueryBuilderInterface
 {
     /**
      * @var Connection
@@ -25,8 +24,8 @@ class ProductSuperAttributeQueryBuilder
 
     /**
      * @param Connection $connection
-     * @param string $table
-     * @param array $fields
+     * @param string     $table
+     * @param array      $fields
      */
     public function __construct(
         Connection $connection,
@@ -54,6 +53,7 @@ class ProductSuperAttributeQueryBuilder
 
     /**
      * @param string $prefix
+     *
      * @return string
      */
     public static function getDefaultTable($prefix = null)
@@ -66,8 +66,9 @@ class ProductSuperAttributeQueryBuilder
     }
 
     /**
-     * @param array $fields
+     * @param array  $fields
      * @param string $alias
+     *
      * @return array
      */
     protected function createFieldsList(array $fields, $alias)
@@ -82,6 +83,7 @@ class ProductSuperAttributeQueryBuilder
 
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindQueryBuilder($alias)

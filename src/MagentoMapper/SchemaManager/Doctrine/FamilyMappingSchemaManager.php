@@ -7,8 +7,7 @@ use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\DBAL\Schema\Table;
 use Luni\Component\MagentoMapper\SchemaManager\MappingSchemaManagerInterface;
 
-class FamilyMappingSchemaManager
-    implements MappingSchemaManagerInterface
+class FamilyMappingSchemaManager implements MappingSchemaManagerInterface
 {
     /**
      * @var Connection
@@ -27,9 +26,10 @@ class FamilyMappingSchemaManager
 
     /**
      * OptionMappingSchemaManager constructor.
+     *
      * @param Connection $connection
-     * @param string $tableName
-     * @param string $attributeSetsTableName
+     * @param string     $tableName
+     * @param string     $attributeSetsTableName
      */
     public function __construct(
         Connection $connection,
@@ -59,11 +59,11 @@ class FamilyMappingSchemaManager
         $table = new Table($this->tableName);
 
         $table->addColumn('attribute_set_id', 'smallint', [
-            'unsigned' => true
+            'unsigned' => true,
         ]);
 
         $table->addColumn('family_code', 'string', [
-            'length' => 255
+            'length' => 255,
         ]);
 
         $table->addIndex(['attribute_set_id']);
@@ -87,9 +87,6 @@ class FamilyMappingSchemaManager
         return $table;
     }
 
-    /**
-     *
-     */
     public function createTable()
     {
         $manager = $this->connection->getSchemaManager();
@@ -99,6 +96,7 @@ class FamilyMappingSchemaManager
 
     /**
      * @param string $pimgentoTableName
+     *
      * @throws \Doctrine\DBAL\DBALException
      */
     public function initializeFromPimgento($pimgentoTableName)
@@ -114,7 +112,7 @@ class FamilyMappingSchemaManager
         $queryBuilder
             ->select([
                 'attribute_set_id' => 'pim.entity_id',
-                'family_code'      => 'pim.code',
+                'family_code' => 'pim.code',
             ])
             ->from($pimgentoTableName, 'pim')
             ->where($queryBuilder->expr()->eq('pim.import', '?'))
@@ -122,9 +120,9 @@ class FamilyMappingSchemaManager
 
         $this->connection->executeQuery(
             "INSERT INTO {$this->connection->quoteIdentifier($this->tableName)} "
-                . $queryBuilder->getSQL(),
+                .$queryBuilder->getSQL(),
             [
-                'family'
+                'family',
             ]
         );
     }

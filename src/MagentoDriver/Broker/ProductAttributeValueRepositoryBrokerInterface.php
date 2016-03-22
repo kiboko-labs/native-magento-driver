@@ -10,7 +10,7 @@ interface ProductAttributeValueRepositoryBrokerInterface
 {
     /**
      * @param ProductAttributeValueRepositoryInterface $repository
-     * @param AttributeValueMatcherInterface $matcher
+     * @param AttributeValueMatcherInterface           $matcher
      */
     public function addRepository(
         ProductAttributeValueRepositoryInterface $repository,
@@ -24,6 +24,7 @@ interface ProductAttributeValueRepositoryBrokerInterface
 
     /**
      * @param AttributeInterface $attribute
+     *
      * @return ProductAttributeValueRepositoryInterface|null
      */
     public function findFor(AttributeInterface $attribute);

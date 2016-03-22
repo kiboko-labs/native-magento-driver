@@ -6,9 +6,6 @@ use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
 
 interface ProductPersisterInterface
 {
-    /**
-     * @return void
-     */
     public function initialize();
 
     /**
@@ -21,8 +18,5 @@ interface ProductPersisterInterface
      */
     public function __invoke(ProductInterface $product);
 
-    /**
-     * @return void
-     */
     public function flush();
 }

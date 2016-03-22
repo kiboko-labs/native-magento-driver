@@ -8,8 +8,7 @@ use Luni\Component\MagentoDriver\Model\VarcharAttributeValueInterface;
 use Luni\Component\MagentoDriver\Persister\AttributeValuePersisterInterface;
 use Luni\Component\MagentoDriver\Exception\InvalidAttributePersisterTypeException;
 
-class VarcharAttributeValuePersister
-    implements AttributeValuePersisterInterface
+class VarcharAttributeValuePersister implements AttributeValuePersisterInterface
 {
     /**
      * @var Connection
@@ -28,7 +27,7 @@ class VarcharAttributeValuePersister
 
     /**
      * @param Connection $connection
-     * @param string $tableName
+     * @param string     $tableName
      */
     public function __construct(
         Connection $connection,
@@ -47,9 +46,6 @@ class VarcharAttributeValuePersister
         return $this->tableName;
     }
 
-    /**
-     * @return void
-     */
     public function initialize()
     {
         $this->dataQueue = new \SplQueue();
@@ -72,9 +68,6 @@ class VarcharAttributeValuePersister
         $this->dataQueue->push($value);
     }
 
-    /**
-     * @return void
-     */
     public function flush()
     {
         /** @var VarcharAttributeValueInterface $value */
@@ -83,23 +76,23 @@ class VarcharAttributeValuePersister
                 $this->connection->update($this->tableName,
                     [
                         'entity_type_id' => 4,
-                        'attribute_id'   => $value->getAttributeId(),
-                        'store_id'       => $value->getStoreId(),
-                        'entity_id'      => $value->getProductId(),
-                        'value'          => $value->getValue(),
+                        'attribute_id' => $value->getAttributeId(),
+                        'store_id' => $value->getStoreId(),
+                        'entity_id' => $value->getProductId(),
+                        'value' => $value->getValue(),
                     ],
                     [
-                        'value_id'       => $value->getId(),
+                        'value_id' => $value->getId(),
                     ]
                 );
             } else {
                 $this->connection->insert($this->tableName,
                     [
                         'entity_type_id' => 4,
-                        'attribute_id'   => $value->getAttributeId(),
-                        'store_id'       => $value->getStoreId(),
-                        'entity_id'      => $value->getProductId(),
-                        'value'          => $value->getValue(),
+                        'attribute_id' => $value->getAttributeId(),
+                        'store_id' => $value->getStoreId(),
+                        'entity_id' => $value->getProductId(),
+                        'value' => $value->getValue(),
                     ]
                 );
 
@@ -110,7 +103,6 @@ class VarcharAttributeValuePersister
 
     /**
      * @param AttributeValueInterface $value
-     * @return void
      */
     public function __invoke(AttributeValueInterface $value)
     {

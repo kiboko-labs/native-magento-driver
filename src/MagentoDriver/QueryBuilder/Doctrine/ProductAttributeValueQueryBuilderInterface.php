@@ -8,12 +8,14 @@ interface ProductAttributeValueQueryBuilderInterface
 {
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindQueryBuilder($alias);
 
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindAllFromStoreIdQueryBuilder($alias);
@@ -21,25 +23,29 @@ interface ProductAttributeValueQueryBuilderInterface
     /**
      * @param string $defaultAlias
      * @param string $storeAlias
+     *
      * @return QueryBuilder
      */
     public function createFindAllFromStoreIdOrDefaultQueryBuilder($defaultAlias, $storeAlias);
 
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindOneByIdQueryBuilder($alias);
 
     /**
      * @param string $alias
-     * @param array $valueIds
+     * @param array  $valueIds
+     *
      * @return QueryBuilder
      */
     public function createFindAllByIdQueryBuilder($alias, array $valueIds);
 
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindOneByProductIdAndAttributeIdFromStoreIdQueryBuilder($alias);
@@ -47,12 +53,14 @@ interface ProductAttributeValueQueryBuilderInterface
     /**
      * @param string $defaultAlias
      * @param string $storeAlias
+     *
      * @return QueryBuilder
      */
     public function createFindOneByProductIdAndAttributeIdFromStoreIdOrDefaultQueryBuilder($defaultAlias, $storeAlias);
 
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindAllByProductIdFromStoreIdQueryBuilder($alias);
@@ -60,6 +68,7 @@ interface ProductAttributeValueQueryBuilderInterface
     /**
      * @param string $defaultAlias
      * @param string $storeAlias
+     *
      * @return QueryBuilder
      */
     public function createFindAllByProductIdFromStoreIdOrDefaultQueryBuilder($defaultAlias, $storeAlias);
@@ -67,6 +76,7 @@ interface ProductAttributeValueQueryBuilderInterface
     /**
      * @param string $alias
      * @param string $variantAxisAlias
+     *
      * @return QueryBuilder
      */
     public function createFindAllVariantAxisByProductIdFromStoreIdQueryBuilder($alias, $variantAxisAlias);
@@ -75,12 +85,14 @@ interface ProductAttributeValueQueryBuilderInterface
      * @param string $defaultAlias
      * @param string $storeAlias
      * @param string $variantAxisAlias
+     *
      * @return QueryBuilder
      */
     public function createFindAllVariantAxisByProductIdFromStoreIdOrDefaultQueryBuilder($defaultAlias, $storeAlias, $variantAxisAlias);
 
     /**
      * @param string $alias
+     *
      * @return QueryBuilder
      */
     public function createFindAllByProductIdQueryBuilder($alias);

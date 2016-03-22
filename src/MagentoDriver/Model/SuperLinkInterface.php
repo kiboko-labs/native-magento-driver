@@ -24,12 +24,14 @@ interface SuperLinkInterface
 
     /**
      * @param ConfigurableProductInterface $configurable
+     *
      * @return bool
      */
     public function isConfigurable(ConfigurableProductInterface $configurable);
 
     /**
      * @param SimpleProductInterface $variant
+     *
      * @return bool
      */
     public function isVariant(SimpleProductInterface $variant);

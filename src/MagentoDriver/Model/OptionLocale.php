@@ -2,8 +2,7 @@
 
 namespace Luni\Component\MagentoDriver\Model;
 
-class OptionLocale
-    implements OptionLocaleInterface
+class OptionLocale implements OptionLocaleInterface
 {
     /**
      * @var string
@@ -16,7 +15,7 @@ class OptionLocale
     private $storeId;
 
     /**
-     * @param string $label
+     * @param string   $label
      * @param null|int $storeId
      */
     public function __construct($label, $storeId = null)
