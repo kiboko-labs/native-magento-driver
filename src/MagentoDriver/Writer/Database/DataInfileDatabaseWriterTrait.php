@@ -51,6 +51,16 @@ trait DataInfileDatabaseWriterTrait
         }
         $serializedKeys = implode(',', $keys);
 
+        $statement = $this->connection
+            ->executeQuery('SELECT @@SESSION.sql_mode');
+        $statement->execute();
+        $originalModes = explode(',', $statement->fetchColumn());
+        if (!in_array('NO_AUTO_VALUE_ON_ZERO', $originalModes)) {
+            $this->connection->exec(sprintf('SET SESSION sql_mode="%s"',
+                implode(',', array_merge($originalModes, ['NO_AUTO_VALUE_ON_ZERO']))
+            ));
+        }
+
         $query = <<<SQL_EOF
 {$prefix} {$this->connection->quote($path)}
 REPLACE INTO TABLE {$this->connection->quoteIdentifier($table)}
@@ -62,7 +72,19 @@ FIELDS
 SQL_EOF;
 
         if (($count = $this->connection->exec($query)) < 0) {
+            if (!in_array('NO_AUTO_VALUE_ON_ZERO', $originalModes)) {
+                $this->connection->exec(sprintf('SET SESSION sql_mode="%s"',
+                    implode(',', $originalModes)
+                ));
+            }
+
             throw new RuntimeErrorException(sprintf('Failed to import data from file %s', $path));
+        }
+
+        if (!in_array('NO_AUTO_VALUE_ON_ZERO', $originalModes)) {
+            $this->connection->exec(sprintf('SET SESSION sql_mode="%s"',
+                implode(',', $originalModes)
+            ));
         }
 
         if ($messenger !== null) {
