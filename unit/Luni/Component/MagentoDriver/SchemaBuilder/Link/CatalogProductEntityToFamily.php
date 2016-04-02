@@ -13,6 +13,7 @@ class CatalogProductEntityToFamily
 
     /**
      * SchemaBuilder constructor.
+     *
      * @param Schema $schema
      */
     public function __construct(Schema $schema)
@@ -22,6 +23,7 @@ class CatalogProductEntityToFamily
 
     /**
      * @param string $magentoVersion
+     *
      * @return \Doctrine\DBAL\Schema\Table
      */
     public function build($magentoVersion = null)
@@ -38,14 +40,14 @@ class CatalogProductEntityToFamily
         $catalogAttributeTable->addForeignKeyConstraint(
             $attributeTable,
             [
-                'attribute_set_id'
+                'attribute_set_id',
             ],
             [
-                'attribute_set_id'
+                'attribute_set_id',
             ],
             [
                 'onUpdate' => 'CASCADE',
-                'onDelete' => 'CASCADE'
+                'onDelete' => 'CASCADE',
             ]
         );
     }

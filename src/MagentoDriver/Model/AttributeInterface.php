@@ -6,7 +6,7 @@ interface AttributeInterface
 {
     /**
      * @return int
-     * @MagentoODM\Field('attribute_id', version='*')
+     * @field attribute_id
      */
     public function getId();
 
@@ -17,79 +17,79 @@ interface AttributeInterface
 
     /**
      * @return int
-     * @MagentoODM\Field('entity_type_id', version='*')
+     * @field entity_type_id
      */
     public function getEntityTypeId();
 
     /**
      * @return string
-     * @MagentoODM\Field('attribute_code', version='*')
+     * @field attribute_code
      */
     public function getCode();
 
     /**
      * @return string
-     * @MagentoODM\Field('attribute_model', version='*')
+     * @field attribute_model
      */
     public function getModelClass();
 
     /**
      * @return string
-     * @MagentoODM\Field('backend_type', version='*')
+     * @field backend_type
      */
     public function getBackendType();
 
     /**
      * @return string
-     * @MagentoODM\Field('backend_model', version='*')
+     * @field backend_model
      */
     public function getBackendModelClass();
 
     /**
      * @return string
-     * @MagentoODM\Field('backend_table', version='*')
+     * @field backend_table
      */
     public function getBackendTable();
 
     /**
      * @return string
-     * @MagentoODM\Field('frontend_model', version='*')
+     * @field frontend_model
      */
     public function getFrontendModelClass();
 
     /**
      * @return string
-     * @MagentoODM\Field('frontend_input', version='*')
+     * @field frontend_input
      */
     public function getFrontendInput();
 
     /**
      * @return string
-     * @MagentoODM\Field('frontend_label', version='*')
+     * @field frontend_label
      */
     public function getFrontendLabel();
 
     /**
      * @return string
-     * @MagentoODM\Field('frontend_class', version='*')
+     * @field frontend_class
      */
     public function getFrontendViewClass();
 
     /**
      * @return string
-     * @MagentoODM\Field('source_model', version='*')
+     * @field source_model
      */
     public function getSourceModelClass();
 
     /**
      * @return bool
-     * @MagentoODM\Field('is_required', version='*')
+     * @field is_required
      */
     public function isRequired();
 
     /**
      * @return bool
-     * @MagentoODM\Field('is_user_defined', version='*')
+     * @field is_user_defined
      */
     public function isUserDefined();
 
@@ -100,19 +100,19 @@ interface AttributeInterface
 
     /**
      * @return bool
-     * @MagentoODM\Field('is_unique', version='*')
+     * @field is_unique
      */
     public function isUnique();
 
     /**
      * @return string
-     * @MagentoODM\Field('default_value', version='*')
+     * @field default_value
      */
     public function getDefaultValue();
 
     /**
      * @return string
-     * @MagentoODM\Field('note', version='*')
+     * @field note
      */
     public function getNote();
 }

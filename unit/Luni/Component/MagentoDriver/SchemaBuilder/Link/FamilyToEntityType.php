@@ -13,6 +13,7 @@ class FamilyToEntityType
 
     /**
      * SchemaBuilder constructor.
+     *
      * @param Schema $schema
      */
     public function __construct(Schema $schema)
@@ -22,6 +23,7 @@ class FamilyToEntityType
 
     /**
      * @param string $magentoVersion
+     *
      * @return \Doctrine\DBAL\Schema\Table
      */
     public function build($magentoVersion = null)
@@ -38,14 +40,14 @@ class FamilyToEntityType
         $familyTable->addForeignKeyConstraint(
             $entityTypeTable,
             [
-                'entity_type_id'
+                'entity_type_id',
             ],
             [
-                'entity_type_id'
+                'entity_type_id',
             ],
             [
                 'onUpdate' => 'CASCADE',
-                'onDelete' => 'CASCADE'
+                'onDelete' => 'CASCADE',
             ]
         );
     }

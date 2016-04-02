@@ -28,10 +28,11 @@ class CatalogProductAttributeValue
 
     /**
      * SchemaBuilder constructor.
+     *
      * @param Schema $schema
      * @param string $backendType
      * @param string $backendName
-     * @param array $backendOptions
+     * @param array  $backendOptions
      */
     public function __construct(Schema $schema, $backendType, $backendName, array $backendOptions = [])
     {
@@ -43,6 +44,7 @@ class CatalogProductAttributeValue
 
     /**
      * @param string $magentoVersion
+     *
      * @return \Doctrine\DBAL\Schema\Table
      */
     public function build($magentoVersion = null)

@@ -9,11 +9,12 @@ use Luni\Component\MagentoDriver\Model\Immutable\ImmutableDatetimeAttributeValue
 use Luni\Component\MagentoDriver\Persister\AttributeValuePersisterInterface;
 use Luni\Component\MagentoDriver\Persister\Direct\AttributeValue\DatetimeAttributeValuePersister;
 use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeValueQueryBuilder;
+
+use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
 use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 
-class DatetimeAttributeValuePersisterTest
-    extends \PHPUnit_Framework_TestCase
+class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
 {
     use DatabaseConnectionAwareTrait;
 
@@ -27,43 +28,52 @@ class DatetimeAttributeValuePersisterTest
      */
     private $persister;
 
+    /**
+     * @return PHPUnit_Extensions_Database_DataSet_IDataSet
+     */
+    protected function getDataSet()
+    {
+        $dataSet = new \PHPUnit_Extensions_Database_DataSet_CsvDataSet();
+
+        return $dataSet;
+    }
+
     private function truncateTables($backendType)
     {
-        $platform = $this->getConnection()->getDatabasePlatform();
+        $platform = $this->getDoctrineConnection()->getDatabasePlatform();
 
-        $this->getConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
-        $this->getConnection()->exec(
+        $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
+        $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('eav_entity_type')
         );
 
-        $this->getConnection()->exec(
+        $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('eav_attribute')
         );
 
-        $this->getConnection()->exec(
+        $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('core_store')
         );
 
-        $this->getConnection()->exec(
+        $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('catalog_product_entity')
         );
 
-        $this->getConnection()->exec(
+        $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL(sprintf('catalog_product_entity_%s', $backendType))
         );
-        $this->getConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
+        $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
     }
 
     protected function setUp()
     {
         parent::setUp();
-        $this->initConnection();
 
-        $currentSchema = $this->getConnection()->getSchemaManager()->createSchema();
+        $currentSchema = $this->getDoctrineConnection()->getSchemaManager()->createSchema();
 
         $this->schema = new Schema();
 
-        $schemaBuilder = new DoctrineSchemaBuilder($this->connection, $this->schema);
+        $schemaBuilder = new DoctrineSchemaBuilder($this->getDoctrineConnection(), $this->schema);
         $schemaBuilder->ensureEntityTypeTable();
         $schemaBuilder->ensureAttributeTable();
         $schemaBuilder->ensureStoreTable();
@@ -78,8 +88,8 @@ class DatetimeAttributeValuePersisterTest
         $comparator = new \Doctrine\DBAL\Schema\Comparator();
         $schemaDiff = $comparator->compare($currentSchema, $this->schema);
 
-        foreach ($schemaDiff->toSql($this->getConnection()->getDatabasePlatform()) as $sql) {
-            $this->getConnection()->exec($sql);
+        foreach ($schemaDiff->toSql($this->getDoctrineConnection()->getDatabasePlatform()) as $sql) {
+            $this->getDoctrineConnection()->exec($sql);
         }
 
         $this->truncateTables('datetime');
@@ -89,7 +99,7 @@ class DatetimeAttributeValuePersisterTest
         $schemaBuilder->hydrateCatalogProductEntityTable('1.9', 'ce');
 
         $this->persister = new DatetimeAttributeValuePersister(
-            $this->getConnection(),
+            $this->getDoctrineConnection(),
             ProductAttributeValueQueryBuilder::getDefaultTable('datetime')
         );
     }
@@ -97,7 +107,6 @@ class DatetimeAttributeValuePersisterTest
     protected function tearDown()
     {
         $this->truncateTables('datetime');
-        $this->closeConnection();
         parent::tearDown();
 
         $this->persister = null;
@@ -136,9 +145,9 @@ class DatetimeAttributeValuePersisterTest
     public function testInsertOne()
     {
         $value = new ImmutableDatetimeAttributeValue(
-            $this->getAttributeMock(1),
+            $this->getAttributeMock(167),
             new \DateTime('2016-07-13 12:34:56'),
-            $this->getProductMock(1)
+            $this->getProductMock(3)
         );
 
         $this->persister->initialize();

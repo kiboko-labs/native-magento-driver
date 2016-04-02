@@ -4,9 +4,6 @@ namespace unit\Luni\Component\MagentoDriver\SchemaBuilder;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Schema\Schema;
-use unit\Luni\Component\MagentoDriver\SchemaBuilder\Fixture;
-use unit\Luni\Component\MagentoDriver\SchemaBuilder\Link;
-use unit\Luni\Component\MagentoDriver\SchemaBuilder\Table;
 
 class DoctrineSchemaBuilder
 {
@@ -22,8 +19,9 @@ class DoctrineSchemaBuilder
 
     /**
      * SchemaBuilder constructor.
+     *
      * @param Connection $connection
-     * @param Schema $schema
+     * @param Schema     $schema
      */
     public function __construct(Connection $connection, Schema $schema)
     {
@@ -33,6 +31,7 @@ class DoctrineSchemaBuilder
 
     /**
      * @return \Doctrine\DBAL\Schema\Table
+     *
      * @throws \Doctrine\DBAL\Schema\SchemaException
      */
     public function ensureStoreTable()
@@ -42,6 +41,7 @@ class DoctrineSchemaBuilder
 
     /**
      * @return \Doctrine\DBAL\Schema\Table
+     *
      * @throws \Doctrine\DBAL\Schema\SchemaException
      */
     public function ensureEntityTypeTable()
@@ -51,6 +51,7 @@ class DoctrineSchemaBuilder
 
     /**
      * @return \Doctrine\DBAL\Schema\Table
+     *
      * @throws \Doctrine\DBAL\Schema\SchemaException
      */
     public function ensureFamilyTable()
@@ -60,6 +61,7 @@ class DoctrineSchemaBuilder
 
     /**
      * @return \Doctrine\DBAL\Schema\Table
+     *
      * @throws \Doctrine\DBAL\Schema\SchemaException
      */
     public function ensureAttributeTable()
@@ -69,6 +71,7 @@ class DoctrineSchemaBuilder
 
     /**
      * @return \Doctrine\DBAL\Schema\Table
+     *
      * @throws \Doctrine\DBAL\Schema\SchemaException
      */
     public function ensureCatalogAttributeExtensionsTable()
@@ -78,6 +81,7 @@ class DoctrineSchemaBuilder
 
     /**
      * @return \Doctrine\DBAL\Schema\Table
+     *
      * @throws \Doctrine\DBAL\Schema\SchemaException
      */
     public function ensureCatalogProductEntityTable()
@@ -88,8 +92,10 @@ class DoctrineSchemaBuilder
     /**
      * @param string $backendName
      * @param string $backendType
-     * @param array $backendOptions
+     * @param array  $backendOptions
+     *
      * @return \Doctrine\DBAL\Schema\Table
+     *
      * @throws \Doctrine\DBAL\Schema\SchemaException
      */
     public function ensureCatalogProductAttributeValueTable($backendName, $backendType, array $backendOptions = [])
@@ -175,7 +181,6 @@ class DoctrineSchemaBuilder
     }
 
     /**
-     * @return void
      * @throws \Doctrine\DBAL\Schema\SchemaException
      */
     public function ensureFamilyToEntityTypeLinks()
@@ -184,7 +189,6 @@ class DoctrineSchemaBuilder
     }
 
     /**
-     * @return void
      * @throws \Doctrine\DBAL\Schema\SchemaException
      */
     public function ensureAttributeToEntityTypeLinks()
@@ -193,7 +197,6 @@ class DoctrineSchemaBuilder
     }
 
     /**
-     * @return void
      * @throws \Doctrine\DBAL\Schema\SchemaException
      */
     public function ensureCatalogAttributeExtensionsToAttributeLinks()
@@ -202,7 +205,6 @@ class DoctrineSchemaBuilder
     }
 
     /**
-     * @return void
      * @throws \Doctrine\DBAL\Schema\SchemaException
      */
     public function ensureCatalogProductEntityToFamilyLinks()
@@ -212,7 +214,7 @@ class DoctrineSchemaBuilder
 
     /**
      * @param string $backendType
-     * @return void
+     *
      * @throws \Doctrine\DBAL\Schema\SchemaException
      */
     public function ensureCatalogProductAttributeValueToEntityTypeLinks($backendType)
@@ -222,7 +224,7 @@ class DoctrineSchemaBuilder
 
     /**
      * @param string $backendType
-     * @return void
+     *
      * @throws \Doctrine\DBAL\Schema\SchemaException
      */
     public function ensureCatalogProductAttributeValueToAttributeLinks($backendType)
@@ -232,7 +234,7 @@ class DoctrineSchemaBuilder
 
     /**
      * @param string $backendType
-     * @return void
+     *
      * @throws \Doctrine\DBAL\Schema\SchemaException
      */
     public function ensureCatalogProductAttributeValueToStoreLinks($backendType)
@@ -242,7 +244,7 @@ class DoctrineSchemaBuilder
 
     /**
      * @param string $backendType
-     * @return void
+     *
      * @throws \Doctrine\DBAL\Schema\SchemaException
      */
     public function ensureCatalogProductAttributeValueToCatalogProductEntityLinks($backendType)

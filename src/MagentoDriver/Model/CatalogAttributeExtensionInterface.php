@@ -6,151 +6,151 @@ interface CatalogAttributeExtensionInterface
 {
     /**
      * @return int
-     * @MagentoODM\Field('attribute_id', version='*')
+     * @field attribute_id
      */
     public function getId();
 
     /**
      * @return string
-     * @MagentoODM\Field('frontend_input_renderer', version='*')
+     * @field frontend_input_renderer
      */
     public function getFrontendInputRendererClassName();
 
     /**
      * @return bool
-     * @MagentoODM\Field('is_global', version='*')
+     * @field is_global
      */
     public function isGlobal();
 
     /**
      * @return bool
-     * @MagentoODM\Field('is_visible', version='*')
+     * @field is_visible
      */
     public function isVisible();
 
     /**
      * @return bool
-     * @MagentoODM\Field('is_searchable', version='*')
+     * @field is_searchable
      */
     public function isSearchable();
 
     /**
      * @return bool
-     * @MagentoODM\Field('is_filterable', version='*')
+     * @field is_filterable
      */
     public function isFilterable();
 
     /**
      * @return bool
-     * @MagentoODM\Field('is_comparable', version='*')
+     * @field is_comparable
      */
     public function isComparable();
 
     /**
      * @return bool
-     * @MagentoODM\Field('is_visible_on_front', version='*')
+     * @field is_visible_on_front
      */
     public function isVisibleOnFront();
 
     /**
      * @return bool
-     * @MagentoODM\Field('is_html_allowed_on_front', version='*')
+     * @field is_html_allowed_on_front
      */
     public function isHtmlAllowedOnFront();
 
     /**
      * @return bool
-     * @MagentoODM\Field('is_used_for_price_rules', version='*')
+     * @field is_used_for_price_rules
      */
     public function isUsedForPriceRules();
 
     /**
      * @return bool
-     * @MagentoODM\Field('is_filterable_in_search', version='*')
+     * @field is_filterable_in_search
      */
     public function isFilterableInSearch();
 
     /**
      * @return bool
-     * @MagentoODM\Field('used_in_product_listing', version='*')
+     * @field used_in_product_listing
      */
     public function isUsedInProductListing();
 
     /**
      * @return bool
-     * @MagentoODM\Field('used_for_sort_by', version='*')
+     * @field used_for_sort_by
      */
     public function isUsedForSortBy();
 
     /**
      * @return bool
-     * @MagentoODM\Field('is_configurable', version='1.*')
+     * @field is_configurable
      */
     public function isConfigurable();
 
     /**
      * @return bool
-     * @MagentoODM\Field('is_visible_in_advanced_search', version='*')
+     * @field is_visible_in_advanced_search
      */
     public function isVisibleInAdvancedSearch();
 
     /**
      * @return bool
-     * @MagentoODM\Field('is_wysiwyg_enabled', version='*')
+     * @field is_wysiwyg_enabled
      */
     public function isWysiwygEnabled();
 
     /**
      * @return bool
-     * @MagentoODM\Field('is_used_for_promo_rules', version='*')
+     * @field is_used_for_promo_rules
      */
     public function isUsedForPromoRules();
 
     /**
      * @return bool
-     * @MagentoODM\Field('is_required_in_admin_store', version='2.*')
+     * @field is_required_in_admin_store
      */
     public function isRequiredInAdminStore();
 
     /**
      * @return bool
-     * @MagentoODM\Field('is_used_in_grid', version='2.*')
+     * @field is_used_in_grid
      */
     public function isUsedInGrid();
 
     /**
      * @return bool
-     * @MagentoODM\Field('is_visible_in_grid', version='2.*')
+     * @field is_visible_in_grid
      */
     public function isVisibleInGrid();
 
     /**
      * @return bool
-     * @MagentoODM\Field('is_filterable_in_grid', version='2.*')
+     * @field is_filterable_in_grid
      */
     public function isFilterableInGrid();
 
     /**
      * @return int
-     * @MagentoODM\Field('position', version='*')
+     * @field position
      */
     public function getPosition();
 
     /**
      * @return int
-     * @MagentoODM\Field('search_weight', version='2.*')
+     * @field search_weight
      */
     public function getSearchWeight();
 
     /**
      * @return string[]
-     * @MagentoODM\Field('apply_to', version='*')
+     * @field apply_to
      */
     public function getProductTypesApplyingTo();
 
     /**
      * @return array
-     * @MagentoODM\Field('additional_data', version='2.*')
+     * @field additional_data
      */
     public function getAdditionalData();
 }

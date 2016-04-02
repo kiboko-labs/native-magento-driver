@@ -18,6 +18,7 @@ class CatalogProductAttributeValueToStore
 
     /**
      * SchemaBuilder constructor.
+     *
      * @param Schema $schema
      * @param string $backendName
      */
@@ -29,6 +30,7 @@ class CatalogProductAttributeValueToStore
 
     /**
      * @param string $magentoVersion
+     *
      * @return \Doctrine\DBAL\Schema\Table
      */
     public function build($magentoVersion = null)
@@ -46,14 +48,14 @@ class CatalogProductAttributeValueToStore
         $entityTable->addForeignKeyConstraint(
             $storeTable,
             [
-                'store_id'
+                'store_id',
             ],
             [
-                'store_id'
+                'store_id',
             ],
             [
                 'onUpdate' => 'CASCADE',
-                'onDelete' => 'CASCADE'
+                'onDelete' => 'CASCADE',
             ]
         );
     }

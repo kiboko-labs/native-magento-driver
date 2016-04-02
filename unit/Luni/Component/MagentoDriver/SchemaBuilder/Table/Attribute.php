@@ -13,6 +13,7 @@ class Attribute
 
     /**
      * SchemaBuilder constructor.
+     *
      * @param Schema $schema
      */
     public function __construct(Schema $schema)
@@ -22,6 +23,7 @@ class Attribute
 
     /**
      * @param string $magentoVersion
+     *
      * @return \Doctrine\DBAL\Schema\Table
      */
     public function build($magentoVersion = null)

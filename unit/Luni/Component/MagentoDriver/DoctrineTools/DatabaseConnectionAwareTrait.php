@@ -7,39 +7,61 @@ use Doctrine\DBAL\DriverManager;
 
 trait DatabaseConnectionAwareTrait
 {
+    use \PHPUnit_Extensions_Database_TestCase_Trait;
+
     /**
-     * @var Connection
+     * @var \PDO
+     */
+    private $pdo;
+
+    /**
+     * @var \PHPUnit_Extensions_Database_DB_IDatabaseConnection
      */
     private $connection;
 
     /**
-     * @throws \Doctrine\DBAL\DBALException
+     * @var Connection
      */
-    protected function initConnection()
-    {
-        $this->connection = DriverManager::getConnection(
-            [
-                'driver'   => isset($GLOBALS['DB_DRIVER'])   ? $GLOBALS['DB_DRIVER']   : 'mysqli',
-                'dbname'   => isset($GLOBALS['DB_NAME'])     ? $GLOBALS['DB_NAME']     : 'magento',
-                'user'     => isset($GLOBALS['DB_USERNAME']) ? $GLOBALS['DB_USERNAME'] : 'magento',
-                'password' => isset($GLOBALS['DB_PASSWORD']) ? $GLOBALS['DB_PASSWORD'] : 'password',
-                'host'     => isset($GLOBALS['DB_HOSTNAME']) ? $GLOBALS['DB_HOSTNAME'] : '127.0.0.1',
-                'port'     => isset($GLOBALS['DB_PORT'])     ? $GLOBALS['DB_HOSTNAME'] : 3306,
-            ]
-        );
-    }
+    private $doctrineConnection;
 
-    protected function closeConnection()
+    final public function getConnection()
     {
-        $this->connection->close();
-        $this->connection = null;
+        if ($this->connection === null) {
+            $this->connection = $this->createDefaultDBConnection($this->getPdoConnection(), $GLOBALS['DB_NAME']);
+        }
+
+        return $this->connection;
     }
 
     /**
-     * @return Connection
+     * @return \PDO
      */
-    public function getConnection()
+    private function getPdoConnection()
     {
-        return $this->connection;
+        if ($this->pdo === null) {
+            $dsn = sprintf('mysql:dbname=%s;hostname=%s;port=%s',
+                isset($GLOBALS['DB_NAME'])     ? $GLOBALS['DB_NAME']     : 'magento',
+                isset($GLOBALS['DB_HOSTNAME']) ? $GLOBALS['DB_HOSTNAME'] : '127.0.0.1',
+                isset($GLOBALS['DB_PORT'])     ? $GLOBALS['DB_HOSTNAME'] : 3306
+            );
+
+            $this->pdo = new \PDO($dsn, $GLOBALS['DB_USERNAME'], $GLOBALS['DB_PASSWORD'] );
+        }
+
+        return $this->pdo;
+    }
+
+    /**
+     * @return \Doctrine\DBAL\Connection
+     */
+    protected function getDoctrineConnection()
+    {
+        if ($this->doctrineConnection === null) {
+            $this->doctrineConnection = DriverManager::getConnection([
+                'pdo' => $this->getPdoConnection()
+            ]);
+        }
+
+        return $this->doctrineConnection;
     }
 }

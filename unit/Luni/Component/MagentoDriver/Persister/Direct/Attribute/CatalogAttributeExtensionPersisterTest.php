@@ -7,12 +7,13 @@ use Luni\Component\MagentoDriver\Model\CatalogAttributeExtension;
 use Luni\Component\MagentoDriver\Persister\CatalogAttributeExtensionPersisterInterface;
 use Luni\Component\MagentoDriver\Persister\Direct\Attribute\CatalogAttributeExtensionPersister;
 use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilder;
+
+use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
 use unit\Luni\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
 
-class CatalogAttributeExtensionPersisterTest
-    extends \PHPUnit_Framework_TestCase
+class CatalogAttributeExtensionPersisterTest extends \PHPUnit_Framework_TestCase
 {
     use DatabaseConnectionAwareTrait;
 
@@ -26,35 +27,44 @@ class CatalogAttributeExtensionPersisterTest
      */
     private $persister;
 
+    /**
+     * @return PHPUnit_Extensions_Database_DataSet_IDataSet
+     */
+    protected function getDataSet()
+    {
+        $dataSet = new \PHPUnit_Extensions_Database_DataSet_CsvDataSet();
+
+        return $dataSet;
+    }
+
     private function truncateTables()
     {
-        $platform = $this->getConnection()->getDatabasePlatform();
+        $platform = $this->getDoctrineConnection()->getDatabasePlatform();
 
-        $this->getConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
-        $this->getConnection()->exec(
+        $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
+        $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('eav_entity_type')
         );
 
-        $this->getConnection()->exec(
+        $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('eav_attribute')
         );
 
-        $this->getConnection()->exec(
+        $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('catalog_eav_attribute')
         );
-        $this->getConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
+        $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
     }
 
     protected function setUp()
     {
         parent::setUp();
-        $this->initConnection();
 
-        $currentSchema = $this->getConnection()->getSchemaManager()->createSchema();
+        $currentSchema = $this->getDoctrineConnection()->getSchemaManager()->createSchema();
 
         $this->schema = new Schema();
 
-        $schemaBuilder = new DoctrineSchemaBuilder($this->connection, $this->schema);
+        $schemaBuilder = new DoctrineSchemaBuilder($this->getDoctrineConnection(), $this->schema);
         $schemaBuilder->ensureEntityTypeTable();
         $schemaBuilder->ensureAttributeTable();
         $schemaBuilder->ensureCatalogAttributeExtensionsTable();
@@ -64,8 +74,8 @@ class CatalogAttributeExtensionPersisterTest
         $comparator = new \Doctrine\DBAL\Schema\Comparator();
         $schemaDiff = $comparator->compare($currentSchema, $this->schema);
 
-        foreach ($schemaDiff->toSql($this->getConnection()->getDatabasePlatform()) as $sql) {
-            $this->getConnection()->exec($sql);
+        foreach ($schemaDiff->toSql($this->getDoctrineConnection()->getDatabasePlatform()) as $sql) {
+            $this->getDoctrineConnection()->exec($sql);
         }
 
         $this->truncateTables();
@@ -73,7 +83,7 @@ class CatalogAttributeExtensionPersisterTest
         $schemaBuilder->hydrateAttributeTable('1.9', 'ce');
 
         $this->persister = new CatalogAttributeExtensionPersister(
-            $this->getConnection(),
+            $this->getDoctrineConnection(),
             ProductAttributeQueryBuilder::getDefaultExtraTable()
         );
     }
@@ -81,7 +91,6 @@ class CatalogAttributeExtensionPersisterTest
     protected function tearDown()
     {
         $this->truncateTables();
-        $this->closeConnection();
         parent::tearDown();
 
         $this->persister = null;
@@ -95,7 +104,7 @@ class CatalogAttributeExtensionPersisterTest
 
     public function testInsertOne()
     {
-        $dataLoader = new Loader($this->connection, 'catalog_eav_attribute');
+        $dataLoader = new Loader($this->getDoctrineConnection(), 'catalog_eav_attribute');
 
         $data = $dataLoader->readData('1.9', 'ce');
         $attribute = new CatalogAttributeExtension(

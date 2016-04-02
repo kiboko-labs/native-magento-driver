@@ -18,7 +18,7 @@ class Loader
 
     /**
      * @param Connection $connection
-     * @param string $tableName
+     * @param string     $tableName
      */
     public function __construct(
         Connection $connection,
@@ -31,35 +31,60 @@ class Loader
     /**
      * @param string $magentoVersion
      * @param string $magentoEdition
+     *
      * @return string
      */
     private function getPathname($magentoVersion, $magentoEdition)
     {
-        return __DIR__ . sprintf('/data-%s-%s/%s.csv', $magentoEdition, $magentoVersion, $this->tableName);
+        return __DIR__.sprintf('/data-%s-%s/%s.csv', $magentoEdition, $magentoVersion, $this->tableName);
     }
 
     /**
      * @param string $magentoVersion
      * @param string $magentoEdition
+     * @return $this
      */
     public function hydrate($magentoVersion, $magentoEdition = 'ce')
     {
         $file = new \SplFileObject($this->getPathname($magentoVersion, $magentoEdition), 'r');
 
+        $statement = $this->connection
+            ->executeQuery('SELECT @@SESSION.sql_mode');
+        $statement->execute();
+        $originalModes = explode(',', $statement->fetchColumn());
+        if (!in_array('NO_AUTO_VALUE_ON_ZERO', $originalModes)) {
+            $this->connection->exec(sprintf('SET SESSION sql_mode="%s"',
+                implode(',', array_merge($originalModes, ['NO_AUTO_VALUE_ON_ZERO']))
+            ));
+        }
+
         $firstLine = $file->fgetcsv(',', '"', '"');
         $columnCount = count($firstLine);
-        while (!$file->eof()) {
-            $thisLine = $file->fgetcsv(',', '"', '"');
+        try {
+            while (!$file->eof()) {
+                $thisLine = $file->fgetcsv(',', '"', '"');
 
-            if (count($thisLine) !== $columnCount) {
-                continue;
+                if (count($thisLine) !== $columnCount) {
+                    continue;
+                }
+
+                $this->connection->insert(
+                    $this->tableName,
+                    array_combine($firstLine, $thisLine)
+                );
+            }
+        } catch (\Exception $e) {
+            if (!in_array('NO_AUTO_VALUE_ON_ZERO', $originalModes)) {
+                $this->connection->exec(sprintf('SET SESSION sql_mode=%s',
+                    implode(',', $originalModes)
+                ));
             }
 
-            $this->connection->insert(
-                $this->tableName,
-                array_combine($firstLine, $thisLine)
-            );
+            throw new \RuntimeException(sprintf(
+                'Failed to import fixtures from file %s', $file->getPathname()), $e);
         }
+
+        return $this;
     }
 
     /**
@@ -67,6 +92,7 @@ class Loader
      * @param $magentoVersion
      * @param int $offset
      * @param int $count
+     *
      * @return \Generator
      */
     public function walkData($magentoEdition, $magentoVersion, $offset = 0, $count = null)
@@ -99,6 +125,7 @@ class Loader
      * @param $magentoEdition
      * @param $magentoVersion
      * @param int $offset
+     *
      * @return \Generator
      */
     public function readData($magentoEdition, $magentoVersion, $offset = 0)
