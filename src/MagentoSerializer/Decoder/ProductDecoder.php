@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: gplanchat
- * Date: 18/02/2016
- * Time: 15:11.
- */
 
 namespace Luni\Component\MagentoSerializer\Decoder;
 

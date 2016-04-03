@@ -5,7 +5,7 @@ namespace Luni\Component\MagentoDriver\Persister\FlatFile\AttributeValue;
 use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\DatetimeAttributeValueInterface;
 use Luni\Component\MagentoDriver\Persister\AttributeValuePersisterInterface;
-use Luni\Component\MagentoDriver\Persister\BaseFlatFilePersisterTrait;
+use Luni\Component\MagentoDriver\Persister\FlatFile\BaseFlatFilePersisterTrait;
 use Luni\Component\MagentoDriver\Exception\InvalidAttributePersisterTypeException;
 use Luni\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
 use Luni\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;

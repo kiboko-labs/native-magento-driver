@@ -3,12 +3,12 @@
     "description": "A Magento driver for Akeneo PIM",
     "type": "library",
     "require-dev": {
-        "akeneo/pim-community-dev": "1.4.*",
         "phpspec/phpspec": "~2.0",
         "fzaninotto/faker": "dev-master",
-        "phpunit/phpunit": "^5.2",
-        "phpunit/dbunit": ">=1.2",
-        "fabpot/php-cs-fixer": "^1.11"
+        "phpunit/phpunit": "~5.2",
+        "phpunit/dbunit": "dev-master",
+        "fabpot/php-cs-fixer": "~1.11",
+        "phploc/phploc": "*"
     },
     "license": "LGPL-3.0+",
     "authors": [
@@ -20,9 +20,10 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=5.5",
-        "league/flysystem": "1.0.*",
-        "doctrine/dbal": "~2.2",
-        "doctrine/annotations": "^1.2"
+        "league/flysystem": "~1.0",
+        "doctrine/dbal": "~2.5",
+        "doctrine/annotations": "~1.2",
+        "symfony/serializer": "~3.0"
     },
     "repositories": [
         {

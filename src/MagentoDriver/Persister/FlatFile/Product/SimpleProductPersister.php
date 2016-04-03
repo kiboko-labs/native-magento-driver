@@ -3,7 +3,7 @@
 namespace Luni\Component\MagentoDriver\Persister\FlatFile\Product;
 
 use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
-use Luni\Component\MagentoDriver\Persister\BaseFlatFilePersisterTrait;
+use Luni\Component\MagentoDriver\Persister\FlatFile\BaseFlatFilePersisterTrait;
 use Luni\Component\MagentoDriver\Persister\ProductPersisterInterface;
 use Luni\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
 use Luni\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;

@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Luni\Component\MagentoDriver\Persister\AttributeValue;
+namespace spec\Luni\Component\MagentoDriver\Persister;
 
 use Luni\Component\MagentoDriver\Broker\ProductAttributeValuePersisterBrokerInterface;
 use PhpSpec\ObjectBehavior;
@@ -11,6 +11,6 @@ class AttributeValuePersisterFacadeSpec extends ObjectBehavior
     function it_is_initializable(ProductAttributeValuePersisterBrokerInterface $broker)
     {
         $this->beConstructedWith($broker);
-        $this->shouldHaveType('Luni\Component\MagentoDriver\Persister\AttributeValue\AttributeValuePersisterFacade');
+        $this->shouldHaveType('Luni\Component\MagentoDriver\Persister\AttributeValuePersisterFacade');
     }
 }

@@ -6,7 +6,7 @@ use Luni\Component\MagentoDriver\Matcher\AttributeValueMatcherInterface;
 use Luni\Component\MagentoDriver\Matcher\ClosureAttributeValueMatcher;
 use Luni\Component\MagentoDriver\Model\Attribute;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Persister\AttributeValue\AttributeValuePersisterInterface;
+use Luni\Component\MagentoDriver\Persister\AttributeValuePersisterInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 

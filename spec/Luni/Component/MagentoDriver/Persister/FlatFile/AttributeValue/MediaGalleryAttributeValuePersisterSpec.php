@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Luni\Component\MagentoDriver\Persister\AttributeValue;
+namespace spec\Luni\Component\MagentoDriver\Persister\FlatFile\AttributeValue;
 
 use League\Flysystem\FilesystemInterface;
 use Luni\Component\MagentoDriver\Filesystem\FileMoverInterface;
@@ -31,6 +31,6 @@ class MediaGalleryAttributeValuePersisterSpec extends ObjectBehavior
             $imagesFs,
             $remoteFs
         );
-        $this->shouldHaveType('Luni\Component\MagentoDriver\Persister\AttributeValue\MediaGalleryAttributeValuePersister');
+        $this->shouldHaveType('Luni\Component\MagentoDriver\Persister\FlatFile\AttributeValue\MediaGalleryAttributeValuePersister');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Persister;
+namespace Luni\Component\MagentoDriver\Persister\FlatFile;
 
 use Luni\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
 use Luni\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;
