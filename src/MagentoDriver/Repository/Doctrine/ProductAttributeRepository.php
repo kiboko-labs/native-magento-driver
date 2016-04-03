@@ -118,7 +118,7 @@ class ProductAttributeRepository implements ProductAttributeRepositoryInterface
         }
 
         if ($statement->rowCount() < 1) {
-            return;
+            return null;
         }
 
         $options = $statement->fetch();
@@ -141,7 +141,7 @@ class ProductAttributeRepository implements ProductAttributeRepositoryInterface
         }
 
         if ($statement->rowCount() < 1) {
-            return;
+            return null;
         }
 
         $options = $statement->fetch();

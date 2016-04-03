@@ -12,31 +12,14 @@ use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeValueQuer
 use Luni\Component\MagentoDriver\Repository\AttributeRepositoryInterface;
 use Luni\Component\MagentoDriver\Repository\Doctrine\ProductAttributeValueRepository;
 use Luni\Component\MagentoDriver\Repository\ProductAttributeValueRepositoryInterface;
+
+use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
 
-class ProductAttributeDatetimeValueRepositoryTest
-    extends \PHPUnit_Framework_TestCase
+class ProductAttributeDatetimeValueRepositoryTest extends \PHPUnit_Framework_TestCase
 {
     use DatabaseConnectionAwareTrait;
-
-    const TEST_STORE_ID_0 = 0;
-    const TEST_STORE_ID_1 = 1;
-    const TEST_STORE_ID_2 = 2;
-
-    const TEST_ENTITY_TYPE_ID_1 = 1;
-
-    const TEST_ATTRIBUTE_SET_ID_1 = 4;
-    const TEST_ATTRIBUTE_SET_ID_2 = 5;
-
-    const TEST_ATTRIBUTE_ID_1 = 4;
-    const TEST_ATTRIBUTE_ID_2 = 8;
-
-    const TEST_ATTRIBUTE_CODE_1 = 'special_from_date';
-    const TEST_ATTRIBUTE_CODE_2 = 'special_to_date';
-
-    const TEST_ENTITY_ID_1 = 123;
-    const TEST_ENTITY_ID_2 = 134;
 
     /**
      * @var Schema
@@ -49,205 +32,44 @@ class ProductAttributeDatetimeValueRepositoryTest
     private $repository;
 
     /**
-     * @var array
+     * @var AttributeRepositoryInterface|\PHPUnit_Framework_MockObject_MockObject
      */
-    private $storeData = [
-        [
-            'store_id'   => self::TEST_STORE_ID_0,
-            'code'       => 'admin',
-            'website_id' => 0,
-            'group_id'   => 0,
-            'name'       => 'Admin store',
-            'sort_order' => 1,
-            'is_active'  => 1,
-        ],
-        [
-            'store_id'   => self::TEST_STORE_ID_1,
-            'code'       => 'default',
-            'website_id' => 1,
-            'group_id'   => 1,
-            'name'       => 'Default store',
-            'sort_order' => 1,
-            'is_active'  => 1,
-        ],
-        [
-            'store_id'   => self::TEST_STORE_ID_2,
-            'code'       => 'second',
-            'website_id' => 1,
-            'group_id'   => 1,
-            'name'       => 'Default store',
-            'sort_order' => 1,
-            'is_active'  => 1,
-        ],
-    ];
+    private $attributeRepositoryMock;
 
     /**
-     * @var array
+     * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
-    private $attributeData = [
-        [
-            'attribute_id'    => self::TEST_ATTRIBUTE_ID_1,
-            'entity_type_id'  => self::TEST_ENTITY_TYPE_ID_1,
-            'attribute_code'  => self::TEST_ATTRIBUTE_CODE_1,
-            'attribute_model' => null,
-            'backend_model'   => 'catalog/product_attribute_backend_startdate_specialprice',
-            'backend_type'    => 'datetime',
-            'backend_table'   => null,
-            'frontend_model'  => null,
-            'frontend_input'  => 'date',
-            'frontend_label'  => 'Special Price From Date',
-            'frontend_class'  => null,
-            'source_model'    => null,
-            'is_required'     => 0,
-            'is_user_defined' => 0,
-            'default_value'   => null,
-            'is_unique'       => 0,
-            'note'            => null,
-        ],
-        [
-            'attribute_id'    => self::TEST_ATTRIBUTE_ID_2,
-            'entity_type_id'  => self::TEST_ENTITY_TYPE_ID_1,
-            'attribute_code'  => self::TEST_ATTRIBUTE_CODE_2,
-            'attribute_model' => null,
-            'backend_model'   => 'eav/entity_attribute_backend_datetime',
-            'backend_type'    => 'datetime',
-            'backend_table'   => null,
-            'frontend_model'  => null,
-            'frontend_input'  => 'date',
-            'frontend_label'  => 'Special Price To Date',
-            'frontend_class'  => null,
-            'source_model'    => null,
-            'is_required'     => 0,
-            'is_user_defined' => 0,
-            'default_value'   => null,
-            'is_unique'       => 0,
-            'note'            => null,
-        ],
-    ];
+    protected function getDataSet()
+    {
+        $dataSet = new \PHPUnit_Extensions_Database_DataSet_CsvDataSet();
 
-    /**
-     * @var array
-     */
-    private $productEntityData = [
-        [
-            'entity_id'        => self::TEST_ENTITY_ID_1,
-            'entity_type_id'   => self::TEST_ENTITY_TYPE_ID_1,
-            'attribute_set_id' => self::TEST_ATTRIBUTE_SET_ID_1,
-            'type_id'          => 'simple',
-            'sku'              => 'PROD-000001.001',
-            'has_options'      => 0,
-            'required_options' => 0,
-            'created_at'       => '2016-01-04 20:15:42',
-            'updated_at'       => '2016-01-05 10:45:22',
-        ],
-        [
-            'entity_id'        => self::TEST_ENTITY_ID_2,
-            'entity_type_id'   => self::TEST_ENTITY_TYPE_ID_1,
-            'attribute_set_id' => self::TEST_ATTRIBUTE_SET_ID_2,
-            'type_id'          => 'simple',
-            'sku'              => 'PROD-000002.001',
-            'has_options'      => 0,
-            'required_options' => 0,
-            'created_at'       => '2016-01-04 20:15:42',
-            'updated_at'       => '2016-01-05 10:45:22',
-        ],
-    ];
-
-    /**
-     * @var array
-     */
-    private $productAttributeValueData = [
-        [
-            'value_id'       => 124,
-            'entity_type_id' => self::TEST_ATTRIBUTE_SET_ID_1,
-            'attribute_id'   => self::TEST_ATTRIBUTE_ID_1,
-            'store_id'       => self::TEST_STORE_ID_0,
-            'entity_id'      => self::TEST_ENTITY_ID_1,
-            'value'          => '2016-02-23 12:22:43',
-        ],
-        [
-            'value_id'       => 125,
-            'entity_type_id' => self::TEST_ATTRIBUTE_SET_ID_1,
-            'attribute_id'   => self::TEST_ATTRIBUTE_ID_2,
-            'store_id'       => self::TEST_STORE_ID_0,
-            'entity_id'      => self::TEST_ENTITY_ID_1,
-            'value'          => '2016-05-01 22:34:30',
-        ],
-        [
-            'value_id'       => 126,
-            'entity_type_id' => self::TEST_ATTRIBUTE_SET_ID_2,
-            'attribute_id'   => self::TEST_ATTRIBUTE_ID_1,
-            'store_id'       => self::TEST_STORE_ID_0,
-            'entity_id'      => self::TEST_ENTITY_ID_2,
-            'value'          => '2016-03-12 10:54:32',
-        ],
-        [
-            'value_id'       => 127,
-            'entity_type_id' => self::TEST_ATTRIBUTE_SET_ID_2,
-            'attribute_id'   => self::TEST_ATTRIBUTE_ID_2,
-            'store_id'       => self::TEST_STORE_ID_0,
-            'entity_id'      => self::TEST_ENTITY_ID_2,
-            'value'          => '2016-06-30 08:07:01',
-        ],
-
-        [
-            'value_id'       => 224,
-            'entity_type_id' => self::TEST_ATTRIBUTE_SET_ID_1,
-            'attribute_id'   => self::TEST_ATTRIBUTE_ID_1,
-            'store_id'       => self::TEST_STORE_ID_1,
-            'entity_id'      => self::TEST_ENTITY_ID_1,
-            'value'          => '2016-02-23 12:22:43',
-        ],
-        [
-            'value_id'       => 225,
-            'entity_type_id' => self::TEST_ATTRIBUTE_SET_ID_1,
-            'attribute_id'   => self::TEST_ATTRIBUTE_ID_2,
-            'store_id'       => self::TEST_STORE_ID_1,
-            'entity_id'      => self::TEST_ENTITY_ID_1,
-            'value'          => '2016-05-01 22:34:30',
-        ],
-        [
-            'value_id'       => 226,
-            'entity_type_id' => self::TEST_ATTRIBUTE_SET_ID_2,
-            'attribute_id'   => self::TEST_ATTRIBUTE_ID_1,
-            'store_id'       => self::TEST_STORE_ID_1,
-            'entity_id'      => self::TEST_ENTITY_ID_2,
-            'value'          => '2016-03-12 10:54:32',
-        ],
-        [
-            'value_id'       => 227,
-            'entity_type_id' => self::TEST_ATTRIBUTE_SET_ID_2,
-            'attribute_id'   => self::TEST_ATTRIBUTE_ID_2,
-            'store_id'       => self::TEST_STORE_ID_1,
-            'entity_id'      => self::TEST_ENTITY_ID_2,
-            'value'          => '2016-06-30 08:07:01',
-        ],
-    ];
+        return $dataSet;
+    }
 
     /**
      * @throws \Doctrine\DBAL\DBALException
      */
     private function truncateTables()
     {
-        $platform = $this->getConnection()->getDatabasePlatform();
+        $platform = $this->getDoctrineConnection()->getDatabasePlatform();
 
-        $this->getConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
-        $this->getConnection()->exec(
+        $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
+        $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('core_store')
         );
 
-        $this->getConnection()->exec(
+        $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('eav_attribute')
         );
 
-        $this->getConnection()->exec(
+        $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('catalog_product_entity')
         );
 
-        $this->getConnection()->exec(
+        $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('catalog_product_entity_datetime')
         );
-        $this->getConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
+        $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
     }
 
     /**
@@ -257,13 +79,14 @@ class ProductAttributeDatetimeValueRepositoryTest
     {
         parent::setUp();
 
-        $this->initConnection();
-
-        $currentSchema = $this->getConnection()->getSchemaManager()->createSchema();
+        $currentSchema = $this->getDoctrineConnection()
+            ->getSchemaManager()
+            ->createSchema()
+        ;
 
         $this->schema = new Schema();
 
-        $schemaBuilder = new DoctrineSchemaBuilder($this->connection, $this->schema);
+        $schemaBuilder = new DoctrineSchemaBuilder($this->getDoctrineConnection(), $this->schema);
         $schemaBuilder->ensureStoreTable();
         $schemaBuilder->ensureAttributeTable();
         $schemaBuilder->ensureCatalogProductEntityTable();
@@ -275,43 +98,27 @@ class ProductAttributeDatetimeValueRepositoryTest
         $comparator = new \Doctrine\DBAL\Schema\Comparator();
         $schemaDiff = $comparator->compare($currentSchema, $this->schema);
 
-        foreach ($schemaDiff->toSql($this->getConnection()->getDatabasePlatform()) as $sql) {
-            $this->getConnection()->exec($sql);
+        foreach ($schemaDiff->toSql($this->getDoctrineConnection()->getDatabasePlatform()) as $sql) {
+            $this->getDoctrineConnection()->exec($sql);
         }
 
         $this->truncateTables();
-
-        foreach ($this->storeData as $row) {
-            $this->getConnection()->insert('core_store', $row);
-
-            if ($row['store_id'] === 0) {
-                $this->getConnection()->update('core_store', ['store_id' => 0], [
-                    'store_id' => $this->getConnection()->lastInsertId()
-                ]);
-            }
-        }
-
-        foreach ($this->attributeData as $row) {
-            $this->getConnection()->insert('eav_attribute', $row);
-        }
-
-        foreach ($this->productEntityData as $row) {
-            $this->getConnection()->insert('catalog_product_entity', $row);
-        }
-
-        foreach ($this->productAttributeValueData as $row) {
-            $this->getConnection()->insert('catalog_product_entity_datetime', $row);
-        }
+        $schemaBuilder->hydrateStoreTable('1.9', 'ce');
+        $schemaBuilder->hydrateAttributeTable('1.9', 'ce');
+        $schemaBuilder->hydrateCatalogProductEntityTable('1.9', 'ce');
+        $schemaBuilder->hydrateCatalogProductAttributeValueTable('datetime', '1.9', 'ce');
 
         $this->repository = new ProductAttributeValueRepository(
-            $this->getConnection(),
+            $this->getDoctrineConnection(),
             new ProductAttributeValueQueryBuilder(
-                $this->getConnection(),
+                $this->getDoctrineConnection(),
                 ProductAttributeValueQueryBuilder::getDefaultTable('datetime'),
                 ProductAttributeValueQueryBuilder::getDefaultVariantAxisTable(),
                 ProductAttributeValueQueryBuilder::getDefaultFields()
             ),
-            $this->getAttributeRepositoryMock(),
+            $this->getAttributeRepositoryMock([
+                167, 'release_date'
+            ]),
             $this->getAttributeValueFactoryMock()
         );
     }
@@ -319,7 +126,6 @@ class ProductAttributeDatetimeValueRepositoryTest
     protected function tearDown()
     {
         $this->truncateTables();
-        $this->closeConnection();
 
         parent::tearDown();
 
@@ -327,18 +133,20 @@ class ProductAttributeDatetimeValueRepositoryTest
     }
 
     /**
+     * @param int $id
+     * @param string $code
      * @return \PHPUnit_Framework_MockObject_MockObject|AttributeRepositoryInterface
      */
-    private function getAttributeMock()
+    private function getAttributeMock($id, $code)
     {
         $mock = $this->getMock(AttributeInterface::class);
 
         $mock->method('getId')
-            ->willReturn(self::TEST_ATTRIBUTE_ID_1)
+            ->willReturn($id)
         ;
 
         $mock->method('getCode')
-            ->willReturn(self::TEST_ATTRIBUTE_CODE_1)
+            ->willReturn($code)
         ;
 
         return $mock;
@@ -349,15 +157,7 @@ class ProductAttributeDatetimeValueRepositoryTest
      */
     private function getAttributeRepositoryMock()
     {
-        $mock = $this->getMock(AttributeRepositoryInterface::class);
-
-        $mock->method('findOneById')
-            ->willReturn($this->getAttributeMock())
-        ;
-
-        $mock->method('findOneByCode')
-            ->willReturn($this->getAttributeMock())
-        ;
+        $this->attributeRepositoryMock = $mock = $this->getMock(AttributeRepositoryInterface::class);
 
         return $mock;
     }
@@ -371,7 +171,7 @@ class ProductAttributeDatetimeValueRepositoryTest
 
         $mock->method('buildNew')
             ->with($this->isInstanceOf(AttributeInterface::class), $this->isType('array'))
-            ->willReturnCallback(function($attribute, $data){
+            ->willReturnCallback(function ($attribute, $data) {
                 return ImmutableDatetimeAttributeValue::buildNewWith($attribute, 124, new \DateTimeImmutable(), null, 0);
             })
         ;
@@ -385,15 +185,17 @@ class ProductAttributeDatetimeValueRepositoryTest
         $product = $this->getMock(ProductInterface::class);
         $product
             ->method('getId')
-            ->willReturn(self::TEST_ENTITY_ID_1)
+            ->willReturn(3)
+        ;
+
+        $this->attributeRepositoryMock
+            ->method('findOneById')
+            ->with(167)
+            ->willReturn($this->getAttributeMock(167, 'release_date'))
         ;
 
         /** @var AttributeInterface $attribute */
-        $attribute = $this->getMock(AttributeInterface::class);
-        $attribute
-            ->method('getId')
-            ->willReturn(self::TEST_ATTRIBUTE_ID_1)
-        ;
+        $attribute = $this->getAttributeMock(167, 'release_date');
 
         /** @var DatetimeAttributeValueInterface $attributeValue */
         $attributeValue = $this->repository->findOneByProductAndAttributeFromDefault($product, $attribute);
@@ -408,15 +210,11 @@ class ProductAttributeDatetimeValueRepositoryTest
         $product = $this->getMock(ProductInterface::class);
         $product
             ->method('getId')
-            ->willReturn(3456)
+            ->willReturn(PHP_INT_MAX - 1)
         ;
 
         /** @var AttributeInterface $attribute */
-        $attribute = $this->getMock(AttributeInterface::class);
-        $attribute
-            ->method('getId')
-            ->willReturn(self::TEST_ATTRIBUTE_ID_1)
-        ;
+        $attribute = $this->getAttributeMock(167, 'release_date');
 
         $this->assertNull($this->repository->findOneByProductAndAttributeFromDefault($product, $attribute));
     }

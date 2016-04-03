@@ -94,9 +94,11 @@ class FamilyQueryBuilder implements FamilyQueryBuilderInterface
      */
     public function createFindAllQueryBuilder($alias)
     {
-        $queryBuilder = $this->createFindQueryBuilder($alias)
-            ->where(sprintf('%s.entity_type_id=4', $alias))
-        ;
+        $queryBuilder = $this->createFindQueryBuilder($alias);
+
+        $queryBuilder->where($queryBuilder->expr()->andX(
+            $queryBuilder->expr()->eq(sprintf('%s.entity_type_id', $alias), 4)
+        ));
 
         return $queryBuilder;
     }
@@ -154,7 +156,7 @@ class FamilyQueryBuilder implements FamilyQueryBuilderInterface
     {
         return (new QueryBuilder($this->connection))
             ->delete($this->table)
-            ->where('entity_type_id=4')
+            ->andWhere('entity_type_id=4')
         ;
     }
 
@@ -165,7 +167,8 @@ class FamilyQueryBuilder implements FamilyQueryBuilderInterface
     {
         $queryBuilder = $this->createDeleteQueryBuilder();
 
-        $queryBuilder->where($queryBuilder->expr()->eq('attribute_set_id', '?'))
+        $queryBuilder
+            ->andWhere($queryBuilder->expr()->eq('attribute_set_id', '?'))
             ->setFirstResult(0)
             ->setMaxResults(1)
         ;

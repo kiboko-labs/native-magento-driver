@@ -52,6 +52,9 @@ class AttributePersisterTest extends \PHPUnit_Framework_TestCase
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
     }
 
+    /**
+     * @throws \Doctrine\DBAL\DBALException
+     */
     protected function setUp()
     {
         parent::setUp();
@@ -136,7 +139,7 @@ class AttributePersisterTest extends \PHPUnit_Framework_TestCase
 
         $this->persister->initialize();
         foreach ($dataLoader->walkData('1.9', 'ce') as $data) {
-            $attribute = Attribute::buildNewWith(
+@            $attribute = Attribute::buildNewWith(
                 $data['attribute_id'],
                 $data['entity_type_id'],
                 $data['attribute_code'],

@@ -81,7 +81,7 @@ class Loader
             }
 
             throw new \RuntimeException(sprintf(
-                'Failed to import fixtures from file %s', $file->getPathname()), $e);
+                'Failed to import fixtures from file %s', $file->getPathname()), null, $e);
         }
 
         return $this;

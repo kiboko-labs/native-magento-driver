@@ -76,15 +76,15 @@ trait AttributeQueryBuilderTrait
     public function createFindAllQueryBuilder($alias, $extraAlias, array $excludedIds = [])
     {
         $queryBuilder = $this->createFindQueryBuilder($alias)
-            ->innerJoin($alias, $this->extraTable, $extraAlias,
-                sprintf('%s.attribute_id=%s.attribute_id', $extraAlias, $alias))
-            ->addSelect($this->createFieldsList($this->extraFields, $extraAlias))
-            ->where(sprintf('%s.entity_type_id=4', $alias))
+//            ->innerJoin($alias, $this->extraTable, $extraAlias,
+//                sprintf('%s.attribute_id=%s.attribute_id', $extraAlias, $alias))
+//            ->addSelect($this->createFieldsList($this->extraFields, $extraAlias))
+//            ->andWhere(sprintf('%s.entity_type_id=4', $alias))
         ;
 
         if (count($excludedIds) > 0) {
-            $expr = array_pad([], count($excludedIds), $queryBuilder->expr()->neq(sprintf('%s.attribute_id', $alias), '?'));
-            $queryBuilder->andWhere($queryBuilder->expr()->andX(...$expr));
+            //            $expr = array_pad([], count($excludedIds), $queryBuilder->expr()->neq(sprintf('%s.attribute_id', $alias), '?'));
+//            $queryBuilder->andWhere($queryBuilder->expr()->andX(...$expr));
         }
 
         return $queryBuilder;
@@ -106,7 +106,7 @@ trait AttributeQueryBuilderTrait
             $queryBuilder->expr()->eq(sprintf('%s.entity_type_id', $entityAlias), sprintf('%s.entity_type_id', $alias))
         );
 
-        $queryBuilder->where($queryBuilder->expr()->eq(sprintf('%s.entity_type_code', $entityAlias), '?'));
+        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.entity_type_code', $entityAlias), '?'));
 
         return $queryBuilder;
     }
@@ -136,7 +136,7 @@ trait AttributeQueryBuilderTrait
     public function createFindOneByIdQueryBuilder($alias, $extraAlias)
     {
         return $this->createFindAllQueryBuilder($alias, $extraAlias)
-            ->where(sprintf('%s.attribute_id = ?', $alias))
+            ->andWhere(sprintf('%s.attribute_id = ?', $alias))
             ->setFirstResult(0)
             ->setMaxResults(1)
         ;

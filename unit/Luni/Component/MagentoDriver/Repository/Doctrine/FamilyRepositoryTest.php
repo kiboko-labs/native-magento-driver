@@ -8,11 +8,12 @@ use Luni\Component\MagentoDriver\Model\FamilyInterface;
 use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\FamilyQueryBuilder;
 use Luni\Component\MagentoDriver\Repository\Doctrine\FamilyRepository;
 use Luni\Component\MagentoDriver\Repository\FamilyRepositoryInterface;
+
+use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
 
-class FamilyRepositoryTest
-    extends \PHPUnit_Framework_TestCase
+class FamilyRepositoryTest extends \PHPUnit_Framework_TestCase
 {
     use DatabaseConnectionAwareTrait;
 
@@ -27,63 +28,31 @@ class FamilyRepositoryTest
     private $repository;
 
     /**
-     * @var array
+     * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
-    private $entityTypeData = [
-        [
-            'entity_type_id'              => 4,
-            'entity_type_code'            => 'catalog_product',
-            'entity_model'                => 'catalog/product',
-            'attribute_model'             => 'catalog/resource_eav_attribute',
-            'entity_table'                => 'catalog/product',
-            'value_table_prefix'          => null,
-            'entity_id_field'             => null,
-            'is_data_sharing'             => 1,
-            'data_sharing_key'            => 'default',
-            'default_attribute_set_id'    => 4,
-            'increment_model'             => null,
-            'increment_per_store'         => 0,
-            'increment_pad_length'        => 8,
-            'increment_pad_char'          => 0,
-            'additional_attribute_table'  => 'catalog/eav_attribute',
-            'entity_attribute_collection' => 'catalog/product_attribute_collection',
-        ],
-    ];
+    protected function getDataSet()
+    {
+        $dataSet = new \PHPUnit_Extensions_Database_DataSet_CsvDataSet();
 
-    private $familiesData = [
-        [
-            'attribute_set_id'   => 4,
-            'entity_type_id'     => 4,
-            'attribute_set_name' => 'Default',
-            'sort_order'         => 1,
-        ],
-        [
-            'attribute_set_id'   => 5,
-            'entity_type_id'     => 4,
-            'attribute_set_name' => 'T-Shirt',
-            'sort_order'         => 1,
-        ],
-        [
-            'attribute_set_id'   => 6,
-            'entity_type_id'     => 4,
-            'attribute_set_name' => 'Jeans',
-            'sort_order'         => 1,
-        ],
-    ];
+        return $dataSet;
+    }
 
+    /**
+     * @throws \Doctrine\DBAL\DBALException
+     */
     private function truncateTables()
     {
-        $platform = $this->getConnection()->getDatabasePlatform();
+        $platform = $this->getDoctrineConnection()->getDatabasePlatform();
 
-        $this->getConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
-        $this->getConnection()->exec(
+        $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
+        $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('eav_entity_type')
         );
 
-        $this->getConnection()->exec(
+        $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('eav_attribute_set')
         );
-        $this->getConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
+        $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
     }
 
     /**
@@ -93,13 +62,14 @@ class FamilyRepositoryTest
     {
         parent::setUp();
 
-        $this->initConnection();
-
-        $currentSchema = $this->getConnection()->getSchemaManager()->createSchema();
+        $currentSchema = $this->getDoctrineConnection()
+            ->getSchemaManager()
+            ->createSchema()
+        ;
 
         $this->schema = new Schema();
 
-        $schemaBuilder = new DoctrineSchemaBuilder($this->connection, $this->schema);
+        $schemaBuilder = new DoctrineSchemaBuilder($this->getDoctrineConnection(), $this->schema);
         $schemaBuilder->ensureEntityTypeTable();
         $schemaBuilder->ensureFamilyTable();
         $schemaBuilder->ensureFamilyToEntityTypeLinks();
@@ -107,24 +77,18 @@ class FamilyRepositoryTest
         $comparator = new \Doctrine\DBAL\Schema\Comparator();
         $schemaDiff = $comparator->compare($currentSchema, $this->schema);
 
-        foreach ($schemaDiff->toSql($this->getConnection()->getDatabasePlatform()) as $sql) {
-            $this->getConnection()->exec($sql);
+        foreach ($schemaDiff->toSql($this->getDoctrineConnection()->getDatabasePlatform()) as $sql) {
+            $this->getDoctrineConnection()->exec($sql);
         }
 
         $this->truncateTables();
-
-        foreach ($this->entityTypeData as $row) {
-            $this->getConnection()->insert('eav_entity_type', $row);
-        }
-
-        foreach ($this->familiesData as $row) {
-            $this->getConnection()->insert('eav_attribute_set', $row);
-        }
+        $schemaBuilder->hydrateEntityTypeTable('1.9', 'ce');
+        $schemaBuilder->hydrateFamilyTable('1.9', 'ce');
 
         $this->repository = new FamilyRepository(
-            $this->getConnection(),
+            $this->getDoctrineConnection(),
             new FamilyQueryBuilder(
-                $this->getConnection(),
+                $this->getDoctrineConnection(),
                 FamilyQueryBuilder::getDefaultTable(),
                 FamilyQueryBuilder::getDefaultFields()
             ),
@@ -135,7 +99,6 @@ class FamilyRepositoryTest
     protected function tearDown()
     {
         $this->truncateTables();
-        $this->closeConnection();
 
         parent::tearDown();
 
@@ -144,11 +107,11 @@ class FamilyRepositoryTest
 
     public function testFetchingOneById()
     {
-        $family = $this->repository->findOneById(6);
+        $family = $this->repository->findOneById(4);
         $this->assertInstanceOf(FamilyInterface::class, $family);
 
-        $this->assertEquals($family->getId(), 6);
-        $this->assertEquals($family->getLabel(), 'Jeans');
+        $this->assertEquals($family->getId(), 4);
+        $this->assertEquals($family->getLabel(), 'Default');
     }
 
     public function testFetchingOneByIdButNonExistent()
@@ -158,11 +121,11 @@ class FamilyRepositoryTest
 
     public function testFetchingOneByName()
     {
-        $family = $this->repository->findOneByName('T-Shirt');
+        $family = $this->repository->findOneByName('Default');
         $this->assertInstanceOf(FamilyInterface::class, $family);
 
-        $this->assertEquals($family->getLabel(), 'T-Shirt');
-        $this->assertEquals($family->getId(), 5);
+        $this->assertEquals($family->getLabel(), 'Default');
+        $this->assertEquals($family->getId(), 4);
     }
 
     public function testFetchingOneByNameButNonExistent()
