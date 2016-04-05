@@ -1,6 +1,6 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Persister\Direct\Attribute;
+namespace Luni\Component\MagentoDriver\Persister;
 
 use Luni\Component\MagentoDriver\Model\CatalogAttributeInterface;
 use Luni\Component\MagentoDriver\Persister\AttributePersisterInterface;

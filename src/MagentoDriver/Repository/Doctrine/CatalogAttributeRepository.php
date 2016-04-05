@@ -18,7 +18,7 @@ use Luni\Component\MagentoDriver\Repository\ProductAttributeRepositoryInterface;
 /**
  * Class ProductAttributeRepository.
  */
-class ProductAttributeRepository implements ProductAttributeRepositoryInterface
+class CatalogAttributeRepository implements ProductAttributeRepositoryInterface
 {
     /**
      * @var ProductAttributeQueryBuilderInterface

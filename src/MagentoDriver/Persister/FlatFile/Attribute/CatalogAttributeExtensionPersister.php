@@ -7,7 +7,7 @@ use Luni\Component\MagentoDriver\Persister\AttributePersisterInterface;
 use Luni\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
 use Luni\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;
 
-class ProductAttributePersister implements AttributePersisterInterface
+class CatalogAttributeExtensionPersister implements AttributePersisterInterface
 {
     /**
      * @var AttributePersisterInterface
@@ -82,24 +82,25 @@ class ProductAttributePersister implements AttributePersisterInterface
 
         $this->extendedTemporaryWriter->persistRow([
             'attribute_id' => $attribute->getId(),
-            'frontend_input_renderer' => $attribute->getOptionOrDefault('frontend_input_renderer'),
-            'is_global' => $attribute->getOptionOrDefault('is_global'),
-            'is_visible' => $attribute->getOptionOrDefault('is_visible'),
-            'is_searchable' => $attribute->getOptionOrDefault('is_searchable'),
-            'is_filterable' => $attribute->getOptionOrDefault('is_filterable'),
-            'is_comparable' => $attribute->getOptionOrDefault('is_comparable'),
-            'is_visible_on_front' => $attribute->getOptionOrDefault('is_visible_on_front'),
-            'is_html_allowed_on_front' => $attribute->getOptionOrDefault('is_html_allowed_on_front'),
-            'is_used_for_price_rules' => $attribute->getOptionOrDefault('is_used_for_price_rules'),
-            'is_filterable_in_search' => $attribute->getOptionOrDefault('is_filterable_in_search'),
-            'used_in_product_listing' => $attribute->getOptionOrDefault('used_in_product_listing'),
-            'used_for_sort_by' => $attribute->getOptionOrDefault('used_for_sort_by'),
-            'is_configurable' => $attribute->getOptionOrDefault('is_configurable'),
-            'apply_to' => $attribute->getOptionOrDefault('apply_to'),
-            'is_visible_in_advanced_search' => $attribute->getOptionOrDefault('is_visible_in_advanced_search'),
-            'position' => $attribute->getOptionOrDefault('position'),
-            'is_wysiwyg_enabled' => $attribute->getOptionOrDefault('is_wysiwyg_enabled'),
-            'is_used_for_promo_rules' => $attribute->getOptionOrDefault('is_used_for_promo_rules'),
+            'frontend_input_renderer' => $attribute->getFrontendInputRendererClassName(),
+            'is_global' => $attribute->isGlobal(),
+            'is_visible' => $attribute->isVisible(),
+            'is_searchable' => $attribute->isSearchable(),
+            'is_filterable' => $attribute->isFilterable(),
+            'is_comparable' => $attribute->isComparable(),
+            'is_visible_on_front' => $attribute->isVisibleOnFront(),
+            'is_html_allowed_on_front' => $attribute->isHtmlAllowedOnFront(),
+            'is_used_for_price_rules' => $attribute->isUsedForPriceRules(),
+            'is_filterable_in_search' => $attribute->isFilterableInSearch(),
+            'used_in_product_listing' => $attribute->isUsedInProductListing(),
+            'used_for_sort_by' => $attribute->isUsedForSortBy(),
+            'is_configurable' => $attribute->isConfigurable(),
+            'apply_to' => empty($attribute->getProductTypesApplyingTo()) ?
+                null : implode(',', $attribute->getProductTypesApplyingTo()),
+            'is_visible_in_advanced_search' => $attribute->isVisibleInAdvancedSearch(),
+            'position' => $attribute->getPosition(),
+            'is_wysiwyg_enabled' => $attribute->isWysiwygEnabled(),
+            'is_used_for_promo_rules' => $attribute->isUsedForPromoRules(),
         ]);
     }
 
