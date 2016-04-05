@@ -1,170 +1,261 @@
-# Entity types
+# Entities
 
-* [ ] read
+## Entity types (table `eav_entity_type`)
+
+* [ ] reader
+
+## Entity configuration by store (table `eav_entity_store`)
+
+* [ ] reader
+* [ ] persister
+* [ ] deleter
 
 # Families
 
-## Global families data
+## Global families data (table `eav_attribute_set`)
 
-* [x] read
-* [x] persist
-* [x] delete
+* [x] reader [Interface](src/MagentoDriver/Repository/FamilyRepositoryInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/FamilyRepository.php)
+* [x] persister [Interface](src/MagentoDriver/Persister/FamilyPersisterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Family/StandardFamilyPersister.php)
+  * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/Family/StandardFamilyPersister.php)
+* [x] deleter [Interface](src/MagentoDriver/Deleter/FamilyDeleterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Deleter/Doctrine/FamilyDeleter.php)
 
 # Attributes
 
-## Global attributes data
+## Global attributes data (table `eav_attribute`)
 
-* [x] read
-* [x] persist
-* [ ] delete
+* [x] reader [Interface](src/MagentoDriver/Repository/AttributeRepositoryInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/CatalogAttributeRepository.php)
+* [x] persister [Interface](src/MagentoDriver/Persister/AttributePersisterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Attribute/StandardAttributePersister.php)
+  * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/Attribute/StandardAttributePersister.php)
+* [ ] deleter
 
-## Attribute groups
+## Attribute groups (table `eav_attribute_group`)
 
-* [ ] read
-* [ ] persist
-* [ ] delete
+* [ ] reader
+* [ ] persister
+* [ ] deleter
 
-## Product Attributes extensions
+## Attribute labels (table `eav_attribute_label`)
 
-* [x] read
-* [x] persist
-* [ ] delete
+* [ ] reader
+* [ ] persister
+* [ ] deleter
 
-## Category Attributes extensions
+## Attribute options (table `eav_attribute_option`)
 
-* [ ] read
-* [ ] persist
-* [ ] delete
+* [ ] reader
+* [ ] persister
+* [ ] deleter
+
+## Attribute option values (table `eav_attribute_option_value`)
+
+* [ ] reader
+* [ ] persister
+* [ ] deleter
+
+## Attribute to entity linking (table `eav_entity_attribute`)
+
+* [ ] reader
+* [ ] persister
+* [ ] deleter
+
+## Catalog Attributes extensions (table `catalog_eav_attribute`)
+
+* [x] reader [Interface](src/MagentoDriver/Repository/AttributeRepositoryInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/CatalogAttributeRepository.php)
+* [x] persister [Interface](src/MagentoDriver/Repository/CatalogAttributeExtensionPersisterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Attribute/CatalogAttributeExtensionPersister.php)
+  * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/Attribute/CatalogAttributeExtensionPersister.php)
+* [ ] deleter
 
 # Products
 
-## Product entities
+## Product entities (table `catalog_product_entity`)
 
-* [x] read
-* [x] persist
-* [x] delete
+* [x] reader [Interface](src/MagentoDriver/Repository/ProductRepositoryInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/ProductRepository.php)
+* [x] persister [Interface](src/MagentoDriver/Persister/ProductPersisterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Product/SimpleProductPersister.php.php)
+  * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/Product/SimpleProductPersister.php.php)
+* [x] delete [Interface](src/MagentoDriver/Deleter/ProductDeleterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Deleter/Doctrine/ProductDeleter.php)
 
-## Datetime values
+## Datetime values (table `catalog_product_entity_datetime`)
 
-* [x] read
-* [x] persist
-* [ ] delete
+* [x] reader [Interface](src/MagentoDriver/Repository/ProductAttributeValueRepositoryBackendInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/ProductAttributeValueRepository.php)
+* [x] persister [Interface](src/MagentoDriver/Persister/AttributeValuePersisterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/AttributeValue/DecimalAttributeValuePersister.php)
+  * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/AttributeValue/DatetimeAttributeValuePersister.php)
+* [ ] deleter
 
-## Decimal values
+## Decimal values (table `catalog_product_entity_decimal`)
 
-* [x] read
-* [x] persist
-* [ ] delete
+* [x] reader [Interface](src/MagentoDriver/Repository/ProductAttributeValueRepositoryBackendInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/ProductAttributeValueRepository.php)
+* [x] persister [Interface](src/MagentoDriver/Persister/AttributeValuePersisterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/AttributeValue/DecimalAttributeValuePersister.php)
+  * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/AttributeValue/DecimalAttributeValuePersister.php)
+* [ ] deleter
 
-## Integer values
+## Integer values (table `catalog_product_entity_int`)
 
-* [x] read
-* [x] persist
-* [ ] delete
+* [x] reader [Interface](src/MagentoDriver/Repository/ProductAttributeValueRepositoryBackendInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/ProductAttributeValueRepository.php)
+* [x] persister [Interface](src/MagentoDriver/Persister/AttributeValuePersisterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/AttributeValue/IntegerAttributeValuePersister.php)
+  * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/AttributeValue/IntegerAttributeValuePersister.php)
+* [ ] deleter
 
-## Text values
+## Text values (table `catalog_product_entity_text`)
 
-* [x] read
-* [x] persist
-* [ ] delete
+* [x] reader [Interface](src/MagentoDriver/Repository/ProductAttributeValueRepositoryBackendInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/ProductAttributeValueRepository.php)
+* [x] persister [Interface](src/MagentoDriver/Persister/AttributeValuePersisterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/AttributeValue/TextAttributeValuePersister.php)
+  * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/AttributeValue/TextAttributeValuePersister.php)
+* [ ] deleter
 
-## Varchar values
+## Varchar values (table `catalog_product_entity_varchar`)
 
-* [x] read
-* [x] persist
-* [ ] delete
+* [x] reader [Interface](src/MagentoDriver/Repository/ProductAttributeValueRepositoryBackendInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/ProductAttributeValueRepository.php)
+* [x] persister [Interface](src/MagentoDriver/Persister/AttributeValuePersisterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/AttributeValue/VarcharAttributeValuePersister.php)
+  * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/AttributeValue/VarcharAttributeValuePersister.php)
+* [ ] deleter
 
-## Super attribute relations
+## Super attribute relations (table `catalog_product_entity_super_attribute`)
 
 * [ ] read
-* [x] persist
-* [ ] delete
+* [x] persister [Interface](src/MagentoDriver/Persister/SuperAttributePersisterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/SuperAttribute/ProductSuperAttributePersister.php)
+  * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/SuperAttribute/ProductSuperAttributePersister.php)
+* [ ] deleter
 
-## Super link relations
+## Super link relations (table `catalog_product_entity_super_link`)
 
 * [ ] read
-* [x] persist
-* [ ] delete
+* [x] persister [Interface](src/MagentoDriver/Persister/SuperLinkPersisterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/SuperLink/ProductSuperLinkPersister.php)
+  * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/SuperLink/ProductSuperLinkPersister.php)
+* [ ] deleter
+
+## Super link attribute label (table `catalog_product_entity_super_attribute_label`)
+
+* [ ] read
+* [ ] persister
+* [ ] deleter
+
+## Super link attribute pricing (table `catalog_product_entity_super_attribute_pricing`)
+
+* [ ] read
+* [ ] persister
+* [ ] deleter
 
 # Categories
 
-## Category entities
+## Category entities (table `catalog_category_entity`)
 
-* [ ] read
-* [ ] persist
-* [ ] delete
+* [ ] reader
+* [x] persister [Interface](src/MagentoDriver/Persister/CategoryPersisterInterface.php)
+* [ ] deleter
 
-## Datetime values
+## Datetime values (table `catalog_category_entity_datetime`)
 
-* [ ] read
-* [ ] persist
-* [ ] delete
+* [ ] reader
+* [x] persister [Interface](src/MagentoDriver/Persister/AttributeValuePersisterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/AttributeValue/DecimalAttributeValuePersister.php)
+  * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/AttributeValue/DatetimeAttributeValuePersister.php)
+* [ ] deleter
 
-## Decimal values
+## Decimal values (table `catalog_category_entity_decimal`)
 
-* [ ] read
-* [ ] persist
-* [ ] delete
+* [ ] reader
+* [x] persister [Interface](src/MagentoDriver/Persister/AttributeValuePersisterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/AttributeValue/DecimalAttributeValuePersister.php)
+  * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/AttributeValue/DecimalAttributeValuePersister.php)
+* [ ] deleter
 
-## Integer values
+## Integer values (table `catalog_category_entity_int`)
 
-* [ ] read
-* [ ] persist
-* [ ] delete
+* [ ] reader
+* [x] persister [Interface](src/MagentoDriver/Persister/AttributeValuePersisterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/AttributeValue/IntegerAttributeValuePersister.php)
+  * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/AttributeValue/IntegerAttributeValuePersister.php)
+* [ ] deleter
 
-## Text values
+## Text values (table `catalog_category_entity_text`)
 
-* [ ] read
-* [ ] persist
-* [ ] delete
+* [ ] reader
+* [x] persister [Interface](src/MagentoDriver/Persister/AttributeValuePersisterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/AttributeValue/TextAttributeValuePersister.php)
+  * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/AttributeValue/TextAttributeValuePersister.php)
+* [ ] deleter
 
-## Varchar values
+## Varchar values (table `catalog_category_entity_varchar`)
 
-* [ ] read
-* [ ] persist
-* [ ] delete
+* [ ] reader
+* [x] persister [Interface](src/MagentoDriver/Persister/AttributeValuePersisterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/AttributeValue/VarcharAttributeValuePersister.php)
+  * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/AttributeValue/VarcharAttributeValuePersister.php)
+* [ ] deleter
+
+## Category product list (table `catalog_category_product`)
+
+* [ ] reader
+* [ ] persister
+* [ ] deleter
+
+## Category product list index (table `catalog_category_product_index`)
+
+* [ ] persister
 
 # Media gallery
 
-## Media assets
+## Media assets (table `catalog_product_entity_gallery`)
 
-* [ ] read
-* [ ] persist
-* [ ] delete
+* [ ] reader
+* [ ] persister
+* [ ] deleter
 
 ## Media attributes
 
-* [ ] read
-* [ ] persist
-* [ ] delete
+* [ ] reader
+* [ ] persister
+* [ ] deleter
 
 ## Media locales
 
-* [ ] read
-* [ ] persist
-* [ ] delete
+* [ ] reader
+* [ ] persister
+* [ ] deleter
 
 # Inventory
 
 ## Product inventories
 
-* [ ] read
-* [ ] persist
-* [ ] delete
+* [ ] reader
+* [ ] persister
+* [ ] deleter
 
 # Prices
 
 ## Base prices
 
-* [ ] read
-* [ ] persist
-* [ ] delete
+* [ ] reader
+* [ ] persister
+* [ ] deleter
 
 ## Special prices
 
-* [ ] read
-* [ ] persist
-* [ ] delete
+* [ ] reader
+* [ ] persister
+* [ ] deleter
 
 # Indexes
 
