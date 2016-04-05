@@ -157,6 +157,54 @@
 * [ ] persister
 * [ ] deleter
 
+## Tier prices (table `catalog_product_entity_tier_price`)
+
+* [ ] read
+* [ ] persister
+* [ ] deleter
+
+## Product price index (table `catalog_product_entity_group_price`)
+
+* [ ] read
+* [ ] persister
+* [ ] deleter
+
+## Product link types (table `catalog_product_link_type`)
+
+* [ ] read
+* [ ] persister
+* [ ] deleter
+
+## Product linking (table `catalog_product_link`)
+
+* [ ] read
+* [ ] persister
+* [ ] deleter
+
+## Product linking attribute setup (table `catalog_product_link_attribute`)
+
+* [ ] read
+* [ ] persister
+* [ ] deleter
+
+## Product linking attribute data - decimal (table `catalog_product_link_attribute_decimal`)
+
+* [ ] read
+* [ ] persister
+* [ ] deleter
+
+## Product linking attribute data - integer (table `catalog_product_link_attribute_int`)
+
+* [ ] read
+* [ ] persister
+* [ ] deleter
+
+## Product linking attribute data - varchar (table `catalog_product_link_attribute_varchar`)
+
+* [ ] read
+* [ ] persister
+* [ ] deleter
+
 # Categories
 
 ## Category entities (table `catalog_category_entity`)
@@ -223,13 +271,13 @@
 * [ ] persister
 * [ ] deleter
 
-## Media attributes
+## Media attributes (table `catalog_product_entity_media_gallery`)
 
 * [ ] reader
 * [ ] persister
 * [ ] deleter
 
-## Media locales
+## Media locales (table `catalog_product_entity_media_gallery_value`)
 
 * [ ] reader
 * [ ] persister
@@ -238,20 +286,6 @@
 # Inventory
 
 ## Product inventories
-
-* [ ] reader
-* [ ] persister
-* [ ] deleter
-
-# Prices
-
-## Base prices
-
-* [ ] reader
-* [ ] persister
-* [ ] deleter
-
-## Special prices
 
 * [ ] reader
 * [ ] persister
