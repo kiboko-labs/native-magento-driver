@@ -116,9 +116,7 @@ class ProductAttributeDecimalValueRepositoryTest extends \PHPUnit_Framework_Test
                 ProductAttributeValueQueryBuilder::getDefaultVariantAxisTable(),
                 ProductAttributeValueQueryBuilder::getDefaultFields()
             ),
-            $this->getAttributeRepositoryMock([
-                79, 'cost'
-            ]),
+            $this->getAttributeRepositoryMock(),
             $this->getAttributeValueFactoryMock()
         );
     }
@@ -172,7 +170,13 @@ class ProductAttributeDecimalValueRepositoryTest extends \PHPUnit_Framework_Test
         $mock->method('buildNew')
             ->with($this->isInstanceOf(AttributeInterface::class), $this->isType('array'))
             ->willReturnCallback(function ($attribute, $data) {
-                return ImmutableDecimalAttributeValue::buildNewWith($attribute, 124, 1., null, 0);
+                return ImmutableDecimalAttributeValue::buildNewWith(
+                    $attribute,
+                    $data['value_id'],
+                    $data['value'],
+                    null,
+                    $data['store_id']
+                );
             })
         ;
 
@@ -188,14 +192,14 @@ class ProductAttributeDecimalValueRepositoryTest extends \PHPUnit_Framework_Test
             ->willReturn(3)
         ;
 
+        /** @var AttributeInterface $attribute */
+        $attribute = $this->getAttributeMock(79, 'cost');
+
         $this->attributeRepositoryMock
             ->method('findOneById')
             ->with(79)
-            ->willReturn($this->getAttributeMock(79, 'cost'))
+            ->willReturn($attribute)
         ;
-
-        /** @var AttributeInterface $attribute */
-        $attribute = $this->getAttributeMock(79, 'cost');
 
         /** @var DecimalAttributeValueInterface $attributeValue */
         $attributeValue = $this->repository->findOneByProductAndAttributeFromDefault($product, $attribute);

@@ -6,13 +6,13 @@ use Doctrine\DBAL\Schema\Schema;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilder;
 use Luni\Component\MagentoDriver\Repository\AttributeRepositoryInterface;
-use Luni\Component\MagentoDriver\Repository\Doctrine\ProductAttributeRepository;
+use Luni\Component\MagentoDriver\Repository\Doctrine\CatalogAttributeRepository;
 
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
 
-class ProductAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
+class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
 {
     use DatabaseConnectionAwareTrait;
 
@@ -91,7 +91,7 @@ class ProductAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
         $schemaBuilder->hydrateAttributeTable('1.9', 'ce');
         $schemaBuilder->hydrateCatalogAttributeExtensionsTable('1.9', 'ce');
 
-        $this->repository = new ProductAttributeRepository(
+        $this->repository = new CatalogAttributeRepository(
             $this->getDoctrineConnection(),
             new ProductAttributeQueryBuilder(
                 $this->getDoctrineConnection(),

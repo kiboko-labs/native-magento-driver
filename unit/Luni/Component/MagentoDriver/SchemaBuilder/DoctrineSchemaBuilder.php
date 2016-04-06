@@ -100,7 +100,7 @@ class DoctrineSchemaBuilder
      */
     public function ensureCatalogProductAttributeValueTable($backendName, $backendType, array $backendOptions = [])
     {
-        return (new Table\CatalogProductAttributeValue($this->schema, $backendName, $backendType, $backendOptions))->build();
+        return (new Table\CatalogProductAttributeValue($this->schema, $backendType, $backendName, $backendOptions))->build();
     }
 
     /**

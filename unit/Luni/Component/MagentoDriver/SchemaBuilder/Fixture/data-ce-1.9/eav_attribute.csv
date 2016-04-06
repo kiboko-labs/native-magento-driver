@@ -3,7 +3,7 @@ attribute_id,entity_type_id,"attribute_code","attribute_model","backend_model","
 122,4,"gift_message_available",NULL,"catalog/product_attribute_backend_boolean","varchar",NULL,NULL,"select","Allow Gift Message",NULL,"eav/entity_attribute_source_boolean",0,0,NULL,0,NULL
 131,4,"links_exist",NULL,NULL,"int",NULL,NULL,NULL,NULL,NULL,NULL,0,0,"0",0,NULL
 167,4,"release_date",NULL,"eav/entity_attribute_backend_datetime","datetime",NULL,"eav/entity_attribute_frontend_datetime","date","Date de sortie",NULL,NULL,0,1,NULL,0,NULL
-210,4,"width_metric",NULL,NULL,"varchar",NULL,NULL,"text","Largeur",NULL,NULL,0,1,NULL,0,NULL
-218,4,"brand",NULL,NULL,"varchar",NULL,NULL,"text","Marque",NULL,NULL,0,1,NULL,0,NULL
+210,4,"description",NULL,NULL,"text",NULL,NULL,"text","Description",NULL,NULL,0,1,NULL,0,NULL
 226,4,"main_color",NULL,NULL,"int",NULL,NULL,"select","Couleur principale",NULL,"eav/entity_attribute_source_table",0,1,NULL,0,NULL
 232,4,"shoelace_length",NULL,"eav/entity_attribute_backend_array","varchar",NULL,NULL,"multiselect","Longueur de lacet",NULL,NULL,0,1,NULL,0,NULL
+300,4,"title",NULL,NULL,"text",NULL,NULL,"textarea","Description",NULL,NULL,0,1,NULL,0,NULL

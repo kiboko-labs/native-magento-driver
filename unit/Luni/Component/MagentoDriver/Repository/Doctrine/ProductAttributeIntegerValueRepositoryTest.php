@@ -3,12 +3,11 @@
 namespace unit\Luni\Component\MagentoDriver\Repository\Doctrine;
 
 use Doctrine\DBAL\Schema\Schema;
-use Faker\Provider\tr_TR\DateTime;
 use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
 use Luni\Component\MagentoDriver\Factory\AttributeValueFactoryInterface;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Model\DatetimeAttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\Immutable\ImmutableDatetimeAttributeValue;
+use Luni\Component\MagentoDriver\Model\IntegerAttributeValueInterface;
+use Luni\Component\MagentoDriver\Model\Immutable\ImmutableIntegerAttributeValue;
 use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeValueQueryBuilder;
 use Luni\Component\MagentoDriver\Repository\AttributeRepositoryInterface;
 use Luni\Component\MagentoDriver\Repository\Doctrine\ProductAttributeValueRepository;
@@ -18,7 +17,7 @@ use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
 
-class ProductAttributeDatetimeValueRepositoryTest extends \PHPUnit_Framework_TestCase
+class ProductAttributeIntegerValueRepositoryTest extends \PHPUnit_Framework_TestCase
 {
     use DatabaseConnectionAwareTrait;
 
@@ -68,7 +67,7 @@ class ProductAttributeDatetimeValueRepositoryTest extends \PHPUnit_Framework_Tes
         );
 
         $this->getDoctrineConnection()->exec(
-            $platform->getTruncateTableSQL('catalog_product_entity_datetime')
+            $platform->getTruncateTableSQL('catalog_product_entity_int')
         );
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
     }
@@ -91,10 +90,10 @@ class ProductAttributeDatetimeValueRepositoryTest extends \PHPUnit_Framework_Tes
         $schemaBuilder->ensureStoreTable();
         $schemaBuilder->ensureAttributeTable();
         $schemaBuilder->ensureCatalogProductEntityTable();
-        $schemaBuilder->ensureCatalogProductAttributeValueTable('datetime', 'datetime');
-        $schemaBuilder->ensureCatalogProductAttributeValueToStoreLinks('datetime');
-        $schemaBuilder->ensureCatalogProductAttributeValueToAttributeLinks('datetime');
-        $schemaBuilder->ensureCatalogProductAttributeValueToCatalogProductEntityLinks('datetime');
+        $schemaBuilder->ensureCatalogProductAttributeValueTable('int', 'integer');
+        $schemaBuilder->ensureCatalogProductAttributeValueToStoreLinks('int');
+        $schemaBuilder->ensureCatalogProductAttributeValueToAttributeLinks('int');
+        $schemaBuilder->ensureCatalogProductAttributeValueToCatalogProductEntityLinks('int');
 
         $comparator = new \Doctrine\DBAL\Schema\Comparator();
         $schemaDiff = $comparator->compare($currentSchema, $this->schema);
@@ -107,13 +106,13 @@ class ProductAttributeDatetimeValueRepositoryTest extends \PHPUnit_Framework_Tes
         $schemaBuilder->hydrateStoreTable('1.9', 'ce');
         $schemaBuilder->hydrateAttributeTable('1.9', 'ce');
         $schemaBuilder->hydrateCatalogProductEntityTable('1.9', 'ce');
-        $schemaBuilder->hydrateCatalogProductAttributeValueTable('datetime', '1.9', 'ce');
+        $schemaBuilder->hydrateCatalogProductAttributeValueTable('int', '1.9', 'ce');
 
         $this->repository = new ProductAttributeValueRepository(
             $this->getDoctrineConnection(),
             new ProductAttributeValueQueryBuilder(
                 $this->getDoctrineConnection(),
-                ProductAttributeValueQueryBuilder::getDefaultTable('datetime'),
+                ProductAttributeValueQueryBuilder::getDefaultTable('int'),
                 ProductAttributeValueQueryBuilder::getDefaultVariantAxisTable(),
                 ProductAttributeValueQueryBuilder::getDefaultFields()
             ),
@@ -171,10 +170,10 @@ class ProductAttributeDatetimeValueRepositoryTest extends \PHPUnit_Framework_Tes
         $mock->method('buildNew')
             ->with($this->isInstanceOf(AttributeInterface::class), $this->isType('array'))
             ->willReturnCallback(function ($attribute, $data) {
-                return ImmutableDatetimeAttributeValue::buildNewWith(
+                return ImmutableIntegerAttributeValue::buildNewWith(
                     $attribute,
                     $data['value_id'],
-                    \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $data['value']),
+                    $data['value'],
                     null,
                     $data['store_id']
                 );
@@ -194,19 +193,19 @@ class ProductAttributeDatetimeValueRepositoryTest extends \PHPUnit_Framework_Tes
         ;
 
         /** @var AttributeInterface $attribute */
-        $attribute = $this->getAttributeMock(167, 'release_date');
+        $attribute = $this->getAttributeMock(131, 'links_exist');
 
         $this->attributeRepositoryMock
             ->method('findOneById')
-            ->with(167)
+            ->with(131)
             ->willReturn($attribute)
         ;
 
-        /** @var DatetimeAttributeValueInterface $attributeValue */
+        /** @var IntegerAttributeValueInterface $attributeValue */
         $attributeValue = $this->repository->findOneByProductAndAttributeFromDefault($product, $attribute);
-        $this->assertInstanceOf(DatetimeAttributeValueInterface::class, $attributeValue);
+        $this->assertInstanceOf(IntegerAttributeValueInterface::class, $attributeValue);
 
-        $this->assertInstanceOf(\DateTimeInterface::class, $attributeValue->getValue());
+        $this->assertInternalType('int', $attributeValue->getValue());
     }
 
     public function testFetchingOneByProductAndAttributeFromDefaultButNonExistent()
@@ -219,7 +218,7 @@ class ProductAttributeDatetimeValueRepositoryTest extends \PHPUnit_Framework_Tes
         ;
 
         /** @var AttributeInterface $attribute */
-        $attribute = $this->getAttributeMock(167, 'release_date');
+        $attribute = $this->getAttributeMock(131, 'links_exist');
 
         $this->assertNull($this->repository->findOneByProductAndAttributeFromDefault($product, $attribute));
     }
