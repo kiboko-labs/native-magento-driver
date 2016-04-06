@@ -15,7 +15,7 @@
 ## Global families data (table `eav_attribute_set`)
 
 * [x] reader [Interface](src/MagentoDriver/Repository/FamilyRepositoryInterface.php)
-  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/FamilyRepository.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/FamilyRepository.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Repository/Doctrine/FamilyRepositoryTest.php))
 * [x] persister [Interface](src/MagentoDriver/Persister/FamilyPersisterInterface.php)
   * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Family/StandardFamilyPersister.php)
   * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/Family/StandardFamilyPersister.php)
@@ -66,7 +66,7 @@
 ## Catalog Attributes extensions (table `catalog_eav_attribute`)
 
 * [x] reader [Interface](src/MagentoDriver/Repository/AttributeRepositoryInterface.php)
-  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/CatalogAttributeRepository.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/CatalogAttributeRepository.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Repository/Doctrine/CatalogAttributeRepositoryTest.php))
 * [x] persister [Interface](src/MagentoDriver/Repository/CatalogAttributeExtensionPersisterInterface.php)
   * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Attribute/CatalogAttributeExtensionPersister.php)
   * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/Attribute/CatalogAttributeExtensionPersister.php)
@@ -87,7 +87,7 @@
 ## Datetime values (table `catalog_product_entity_datetime`)
 
 * [x] reader [Interface](src/MagentoDriver/Repository/ProductAttributeValueRepositoryBackendInterface.php)
-  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/ProductAttributeValueRepository.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/ProductAttributeValueRepository.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Repository/Doctrine/ProductAttributeDatetimeValueRepositoryTest.php))
 * [x] persister [Interface](src/MagentoDriver/Persister/AttributeValuePersisterInterface.php)
   * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/AttributeValue/DecimalAttributeValuePersister.php)
   * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/AttributeValue/DatetimeAttributeValuePersister.php)
@@ -96,7 +96,7 @@
 ## Decimal values (table `catalog_product_entity_decimal`)
 
 * [x] reader [Interface](src/MagentoDriver/Repository/ProductAttributeValueRepositoryBackendInterface.php)
-  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/ProductAttributeValueRepository.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/ProductAttributeValueRepository.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Repository/Doctrine/ProductAttributeDecimalValueRepositoryTest.php))
 * [x] persister [Interface](src/MagentoDriver/Persister/AttributeValuePersisterInterface.php)
   * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/AttributeValue/DecimalAttributeValuePersister.php)
   * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/AttributeValue/DecimalAttributeValuePersister.php)
@@ -105,7 +105,7 @@
 ## Integer values (table `catalog_product_entity_int`)
 
 * [x] reader [Interface](src/MagentoDriver/Repository/ProductAttributeValueRepositoryBackendInterface.php)
-  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/ProductAttributeValueRepository.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/ProductAttributeValueRepository.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Repository/Doctrine/ProductAttributeIntegerValueRepositoryTest.php))
 * [x] persister [Interface](src/MagentoDriver/Persister/AttributeValuePersisterInterface.php)
   * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/AttributeValue/IntegerAttributeValuePersister.php)
   * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/AttributeValue/IntegerAttributeValuePersister.php)
@@ -114,7 +114,7 @@
 ## Text values (table `catalog_product_entity_text`)
 
 * [x] reader [Interface](src/MagentoDriver/Repository/ProductAttributeValueRepositoryBackendInterface.php)
-  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/ProductAttributeValueRepository.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/ProductAttributeValueRepository.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Repository/Doctrine/ProductAttributeTextValueRepositoryTest.php))
 * [x] persister [Interface](src/MagentoDriver/Persister/AttributeValuePersisterInterface.php)
   * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/AttributeValue/TextAttributeValuePersister.php)
   * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/AttributeValue/TextAttributeValuePersister.php)
@@ -123,7 +123,7 @@
 ## Varchar values (table `catalog_product_entity_varchar`)
 
 * [x] reader [Interface](src/MagentoDriver/Repository/ProductAttributeValueRepositoryBackendInterface.php)
-  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/ProductAttributeValueRepository.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/ProductAttributeValueRepository.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Repository/Doctrine/ProductAttributeVarcharValueRepositoryTest.php))
 * [x] persister [Interface](src/MagentoDriver/Persister/AttributeValuePersisterInterface.php)
   * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/AttributeValue/VarcharAttributeValuePersister.php)
   * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/AttributeValue/VarcharAttributeValuePersister.php)
