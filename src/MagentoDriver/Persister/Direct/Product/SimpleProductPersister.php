@@ -46,6 +46,7 @@ class SimpleProductPersister implements ProductPersisterInterface
 
     public function initialize()
     {
+        $this->dataQueue = new \SplQueue();
     }
 
     /**
@@ -59,8 +60,9 @@ class SimpleProductPersister implements ProductPersisterInterface
     public function flush()
     {
         foreach ($this->dataQueue as $product) {
+            $count = 0;
             if ($product->getId()) {
-                $this->connection->update($this->tableName,
+                $count = $this->connection->update($this->tableName,
                     [
                         'entity_type_id' => 4,
                         'attribute_set_id' => $product->getFamilyId(),
@@ -75,9 +77,12 @@ class SimpleProductPersister implements ProductPersisterInterface
                         'entity_id' => $product->getId(),
                     ]
                 );
-            } else {
+            }
+
+            if ($count <= 0) {
                 $this->connection->insert($this->tableName,
                     [
+                        'entity_id' => $product->getId(),
                         'entity_type_id' => 4,
                         'attribute_set_id' => $product->getFamilyId(),
                         'type_id' => $product->getType(),

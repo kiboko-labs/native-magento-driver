@@ -72,8 +72,9 @@ class IntegerAttributeValuePersister implements AttributeValuePersisterInterface
     {
         /** @var IntegerAttributeValueInterface $value */
         foreach ($this->dataQueue as $value) {
+            $count = 0;
             if ($value->getId()) {
-                $this->connection->update($this->tableName,
+                $count = $this->connection->update($this->tableName,
                     [
                         'entity_type_id' => 4,
                         'attribute_id' => $value->getAttributeId(),
@@ -85,9 +86,12 @@ class IntegerAttributeValuePersister implements AttributeValuePersisterInterface
                         'value_id' => $value->getId(),
                     ]
                 );
-            } else {
+            }
+
+            if ($count <= 0) {
                 $this->connection->insert($this->tableName,
                     [
+                        'value_id' => $value->getId(),
                         'entity_type_id' => 4,
                         'attribute_id' => $value->getAttributeId(),
                         'store_id' => $value->getStoreId(),

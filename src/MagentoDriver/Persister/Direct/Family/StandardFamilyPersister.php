@@ -60,8 +60,9 @@ class StandardFamilyPersister implements FamilyPersisterInterface
     public function flush()
     {
         foreach ($this->dataQueue as $family) {
+            $count = 0;
             if ($family->getId()) {
-                $this->connection->update($this->tableName,
+                $count = $this->connection->update($this->tableName,
                     [
                         'entity_type_id' => 4,
                         'attribute_set_name' => $family->getLabel(),
@@ -71,9 +72,12 @@ class StandardFamilyPersister implements FamilyPersisterInterface
                         'attribute_set_id' => $family->getId(),
                     ]
                 );
-            } else {
+            }
+
+            if ($count <= 0) {
                 $this->connection->insert($this->tableName,
                     [
+                        'attribute_set_id' => $family->getId(),
                         'entity_type_id' => 4,
                         'attribute_set_name' => $family->getLabel(),
                         'sort_order' => 0,

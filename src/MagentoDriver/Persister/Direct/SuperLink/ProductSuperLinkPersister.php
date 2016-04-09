@@ -46,6 +46,7 @@ class ProductSuperLinkPersister implements SuperLinkPersisterInterface
 
     public function initialize()
     {
+        $this->dataQueue = new \SplQueue();
     }
 
     /**
@@ -59,8 +60,9 @@ class ProductSuperLinkPersister implements SuperLinkPersisterInterface
     public function flush()
     {
         foreach ($this->dataQueue as $superLink) {
+            $count = 0;
             if ($superLink->getId()) {
-                $this->connection->update($this->tableName,
+                $count = $this->connection->update($this->tableName,
                     [
                         'parent_id' => $superLink->getConfigurableId(),
                         'product_id' => $superLink->getVariantId(),
@@ -69,9 +71,12 @@ class ProductSuperLinkPersister implements SuperLinkPersisterInterface
                         'link_id' => $superLink->getId(),
                     ]
                 );
-            } else {
+            }
+
+            if ($count <= 0) {
                 $this->connection->insert($this->tableName,
                     [
+                        'link_id' => $superLink->getId(),
                         'parent_id' => $superLink->getConfigurableId(),
                         'product_id' => $superLink->getVariantId(),
                     ]

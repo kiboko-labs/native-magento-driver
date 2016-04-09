@@ -61,8 +61,9 @@ class StandardAttributePersister implements AttributePersisterInterface
     {
         /** @var AttributeInterface $attribute */
         foreach ($this->dataQueue as $attribute) {
+            $count = 0;
             if ($attribute->getId()) {
-                $this->connection->update($this->tableName,
+                $count = $this->connection->update($this->tableName,
                     [
                         'entity_type_id' => $attribute->getEntityTypeId(),
                         'attribute_code' => $attribute->getCode(),
@@ -85,9 +86,12 @@ class StandardAttributePersister implements AttributePersisterInterface
                         'attribute_id' => $attribute->getId(),
                     ]
                 );
-            } else {
+            }
+
+            if ($count <= 0) {
                 $this->connection->insert($this->tableName,
                     [
+                        'attribute_id' => $attribute->getId(),
                         'entity_type_id' => $attribute->getEntityTypeId(),
                         'attribute_code' => $attribute->getCode(),
                         'attribute_model' => $attribute->getModelClass(),

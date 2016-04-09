@@ -46,6 +46,7 @@ class ProductSuperAttributePersister implements SuperAttributePersisterInterface
 
     public function initialize()
     {
+        $this->dataQueue = new \SplQueue();
     }
 
     /**
@@ -59,6 +60,7 @@ class ProductSuperAttributePersister implements SuperAttributePersisterInterface
     public function flush()
     {
         foreach ($this->dataQueue as $superAttribute) {
+            $count = 0;
             if ($superAttribute->getId()) {
                 $this->connection->update($this->tableName,
                     [
@@ -70,9 +72,12 @@ class ProductSuperAttributePersister implements SuperAttributePersisterInterface
                         'product_super_attribute_id' => $superAttribute->getId(),
                     ]
                 );
-            } else {
+            }
+
+            if ($count <= 0) {
                 $this->connection->insert($this->tableName,
                     [
+                        'product_super_attribute_id' => $superAttribute->getId(),
                         'product_id' => $superAttribute->getProductId(),
                         'attribute_id' => $superAttribute->getAttributeId(),
                         'position' => $superAttribute->getPosition() ?: 0,
