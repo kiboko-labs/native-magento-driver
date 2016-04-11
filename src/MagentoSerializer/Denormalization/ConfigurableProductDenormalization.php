@@ -16,8 +16,8 @@ use Luni\Component\MagentoSerializer\Denormalization\AttributeValue\VarcharAttri
 use Luni\Component\MagentoDriver\Exception\RuntimeErrorException;
 use Luni\Component\MagentoDriver\Factory\ProductAttributeValueFactoryInterface;
 use Luni\Component\MagentoDriver\Factory\ProductFactoryInterface;
-use Luni\Component\MagentoDriver\Mapper\DefaultOptionMapper;
-use Luni\Component\MagentoDriver\Mapper\FamilyMapperInterface;
+use Luni\Component\MagentoMapper\Mapper\DefaultOptionMapper;
+use Luni\Component\MagentoMapper\Mapper\FamilyMapperInterface;
 use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Repository\AttributeRepositoryInterface;
