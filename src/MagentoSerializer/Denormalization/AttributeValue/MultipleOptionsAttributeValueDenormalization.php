@@ -2,7 +2,7 @@
 
 namespace Luni\Component\MagentoSerializer\Denormalization\AttributeValue;
 
-use Luni\Component\MagentoDriver\Mapper\OptionMapperInterface;
+use Luni\Component\MagentoMapper\Mapper\OptionMapperInterface;
 use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
 use Luni\Component\MagentoDriver\Model\Immutable\ImmutableVarcharAttributeValue;
 use Luni\Component\MagentoDriver\Repository\AttributeRepositoryInterface;

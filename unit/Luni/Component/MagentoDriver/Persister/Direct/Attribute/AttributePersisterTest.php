@@ -32,9 +32,10 @@ class AttributePersisterTest extends \PHPUnit_Framework_TestCase
      */
     protected function getDataSet()
     {
-        $dataSet = new \PHPUnit_Extensions_Database_DataSet_CsvDataSet();
+        $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
+            $this->getFixturesPathname('eav_entity_type', '1.9', 'ce'));
 
-        return $dataSet;
+        return $dataset;
     }
 
     private function truncateTables()
@@ -49,6 +50,7 @@ class AttributePersisterTest extends \PHPUnit_Framework_TestCase
         $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('eav_attribute')
         );
+
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
     }
 
@@ -57,8 +59,6 @@ class AttributePersisterTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        parent::setUp();
-
         $currentSchema = $this->getDoctrineConnection()->getSchemaManager()->createSchema();
 
         $this->schema = new Schema();
@@ -76,6 +76,9 @@ class AttributePersisterTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->truncateTables();
+
+        parent::setUp();
+
         $schemaBuilder->hydrateEntityTypeTable('1.9', 'ce');
 
         $this->persister = new StandardAttributePersister(
@@ -96,6 +99,8 @@ class AttributePersisterTest extends \PHPUnit_Framework_TestCase
     {
         $this->persister->initialize();
         $this->persister->flush();
+
+        $this->assertTableRowCount('eav_attribute', 0);
     }
 
     public function testInsertOne()
@@ -104,33 +109,37 @@ class AttributePersisterTest extends \PHPUnit_Framework_TestCase
 
         $this->persister->initialize();
         foreach ($dataLoader->walkData('1.9', 'ce') as $data) {
-            $attribute = new Attribute(
-                $data['entity_type_id'],
-                $data['attribute_code'],
-                $data['attribute_model'],
-                $data['backend_model'],
-                $data['backend_type'],
-                $data['backend_table'],
-                $data['frontend_model'],
-                $data['frontend_input'],
-                $data['frontend_label'],
-                $data['frontend_class'],
-                $data['source_model'],
-                $data['is_required'],
-                $data['is_user_defined'],
-                $data['default_value'],
-                $data['is_unique'],
+            $attribute = Attribute::buildNewWith(
+                $data['attribute_id'],    // AttributeId
+                $data['entity_type_id'],  // EntityTypeId
+                $data['attribute_code'],  // Identifier
+                $data['attribute_model'], // ModelClass
+                $data['backend_type'],    // BackendType
+                $data['backend_model'],   // BackendModelClass
+                $data['backend_table'],   // BackendTable
+                $data['frontend_input'],  // FrontedType
+                $data['frontend_model'],  // FrontendModelClass
+                $data['frontend_input'],  // FrontendInput
+                $data['frontend_label'],  // FrontendLabel
+                $data['frontend_class'],  // FrontendViewClass
+                $data['source_model'],    // SourceModelClass
+                $data['is_required'],     // IsRequired
+                $data['is_user_defined'], // IsUserDefined
+                $data['is_unique'],       // IsUnique
+                $data['default_value'],   // IsDefaultValue
                 $data['note']
             );
             $this->persister->persist($attribute);
         }
         $this->persister->flush();
 
-        $expected = new \PHPUnit_Extensions_Database_DataSet_CsvDataSet();
-        $expected->addTable('eav_attribute',
-            __DIR__ . '/../../../SchemaBuilder/Fixture/data-ce-1.9/eav_attribute.csv');
+        $expected = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
+            $this->getFixturesPathname('eav_attribute', '1.9', 'ce'));
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
+        $actual->addTable('eav_attribute');
+
+        $this->assertDataSetsEqual($expected, $actual);
     }
 
     public function testUpdateOneExisting()
@@ -139,27 +148,36 @@ class AttributePersisterTest extends \PHPUnit_Framework_TestCase
 
         $this->persister->initialize();
         foreach ($dataLoader->walkData('1.9', 'ce') as $data) {
-@            $attribute = Attribute::buildNewWith(
-                $data['attribute_id'],
-                $data['entity_type_id'],
-                $data['attribute_code'],
-                $data['attribute_model'],
-                $data['backend_model'],
-                $data['backend_type'],
-                $data['backend_table'],
-                $data['frontend_model'],
-                $data['frontend_input'],
-                $data['frontend_label'],
-                $data['frontend_class'],
-                $data['source_model'],
-                $data['is_required'],
-                $data['is_user_defined'],
-                $data['default_value'],
-                $data['is_unique'],
+            $attribute = Attribute::buildNewWith(
+                $data['attribute_id'],    // AttributeId
+                $data['entity_type_id'],  // EntityTypeId
+                $data['attribute_code'],  // Identifier
+                $data['attribute_model'], // ModelClass
+                $data['backend_type'],    // BackendType
+                $data['backend_model'],   // BackendModelClass
+                $data['backend_table'],   // BackendTable
+                $data['frontend_input'],  // FrontedType
+                $data['frontend_model'],  // FrontendModelClass
+                $data['frontend_input'],  // FrontendInput
+                $data['frontend_label'],  // FrontendLabel
+                $data['frontend_class'],  // FrontendViewClass
+                $data['source_model'],    // SourceModelClass
+                $data['is_required'],     // IsRequired
+                $data['is_user_defined'], // IsUserDefined
+                $data['is_unique'],       // IsUnique
+                $data['default_value'],   // IsDefaultValue
                 $data['note']
             );
             $this->persister->persist($attribute);
         }
         $this->persister->flush();
+
+        $expected = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
+            $this->getFixturesPathname('eav_attribute', '1.9', 'ce'));
+
+        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
+        $actual->addTable('eav_attribute');
+
+        $this->assertDataSetsEqual($expected, $actual);
     }
 }

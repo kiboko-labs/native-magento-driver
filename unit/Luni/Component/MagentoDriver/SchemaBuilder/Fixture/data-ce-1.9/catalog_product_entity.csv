@@ -1,3 +1,0 @@
-entity_id,entity_type_id,attribute_set_id,"type_id","sku",has_options,required_options,"created_at","updated_at"
-3,4,20,"simple","SIMPLE",0,0,"2015-12-01 15:13:05","2016-01-11 08:24:22"
-961,4,17,"configurable","CONFIGURABLE",0,0,"2015-12-02 09:49:08","2016-03-02 09:37:48"

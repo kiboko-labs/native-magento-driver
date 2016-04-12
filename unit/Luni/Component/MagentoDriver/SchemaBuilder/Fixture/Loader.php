@@ -47,9 +47,6 @@ class Loader
      */
     public function hydrate($magentoVersion, $magentoEdition = 'ce')
     {
-        $yaml = new Yaml();
-
-        $data = $yaml->parse(file_get_contents($filename = $this->getPathname($magentoVersion, $magentoEdition)));
         $statement = $this->connection
             ->executeQuery('SELECT @@SESSION.sql_mode');
         $statement->execute();
@@ -61,12 +58,7 @@ class Loader
         }
 
         try {
-            if (!isset($data[$this->tableName]) || !is_array($data[$this->tableName])) {
-                throw new \PHPUnit_Framework_SkippedTestError(
-                    sprintf('No fixtures for table "%s".', $this->tableName));
-            }
-
-            foreach ($data[$this->tableName] as $thisLine) {
+            foreach ($this->walkData($magentoVersion, $magentoEdition) as $thisLine) {
                 $this->connection->insert(
                     $this->tableName,
                     $thisLine
@@ -80,7 +72,8 @@ class Loader
             }
 
             throw new \PHPUnit_Framework_SkippedTestError(sprintf(
-                'Failed to import table %s fixtures from file %s', $this->tableName, $filename), null, $e);
+                'Failed to import table %s fixtures from file %s',
+                $this->tableName, $this->getPathname($magentoVersion, $magentoEdition)), null, $e);
         }
         if (!in_array('NO_AUTO_VALUE_ON_ZERO', $originalModes)) {
             $this->connection->exec(sprintf('SET SESSION sql_mode="%s"',
@@ -92,43 +85,23 @@ class Loader
     }
 
     /**
-     * @param $magentoEdition
-     * @param $magentoVersion
-     * @param int $offset
-     * @param int $count
+     * @param string $magentoVersion
+     * @param string $magentoEdition
      *
      * @return \Generator
      */
-    public function walkData($magentoEdition, $magentoVersion, $offset = 0, $count = null)
+    public function walkData($magentoVersion, $magentoEdition)
     {
-        $file = new \SplFileObject($this->getPathname($magentoEdition, $magentoVersion), 'r');
+        $yaml = new Yaml();
 
-        $firstLine = $file->fgetcsv(',', '"', '"');
-        $columnCount = count($firstLine);
-        $currentLine = 0;
-        $readLines = 0;
-        while (!$file->eof()) {
-            $thisLine = $file->fgetcsv(',', '"', '"');
-            if ($currentLine < $offset) {
-                continue;
-            }
+        $data = $yaml->parse(file_get_contents($this->getPathname($magentoVersion, $magentoEdition)));
+        if (!isset($data[$this->tableName]) || !is_array($data[$this->tableName])) {
+            throw new \PHPUnit_Framework_SkippedTestError(
+                sprintf('No fixtures for table "%s".', $this->tableName));
+        }
 
-            if ($count !== null && ++$readLines >= $count) {
-                break;
-            }
-
-            if (count($thisLine) !== $columnCount) {
-                continue;
-            }
-
-            foreach ($thisLine as &$field) {
-                if ($field === '') {
-                    $field = null;
-                }
-            }
-            unset($field);
-
-            yield array_combine($firstLine, $thisLine);
+        foreach ($data[$this->tableName] as $thisLine) {
+            yield $thisLine;
         }
     }
 }
