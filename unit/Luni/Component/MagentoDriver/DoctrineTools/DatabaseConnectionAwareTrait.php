@@ -64,4 +64,15 @@ trait DatabaseConnectionAwareTrait
 
         return $this->doctrineConnection;
     }
+
+    /**
+     * @param string $magentoVersion
+     * @param string $magentoEdition
+     *
+     * @return string
+     */
+    private function getFixturesPathname($magentoVersion, $magentoEdition)
+    {
+        return __DIR__.sprintf('/../fixture/data-%s-%s/dataset.yml', $magentoEdition, $magentoVersion);
+    }
 }

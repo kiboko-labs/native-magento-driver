@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<phpunit>
+<phpunit
+        beStrictAboutTestsThatDoNotTestAnything="true"
+        beStrictAboutOutputDuringTests="true"
+        beStrictAboutChangesToGlobalState="true"
+        bootstrap="vendor/autoload.php">
     <php>
         <var name="DB_DRIVER"   value="mysqli" />
         <var name="DB_NAME"     value="magento_test" />

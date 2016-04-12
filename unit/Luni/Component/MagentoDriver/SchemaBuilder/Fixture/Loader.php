@@ -3,6 +3,7 @@
 namespace unit\Luni\Component\MagentoDriver\SchemaBuilder\Fixture;
 
 use Doctrine\DBAL\Connection;
+use Symfony\Component\Yaml\Yaml;
 
 class Loader
 {
@@ -36,7 +37,7 @@ class Loader
      */
     private function getPathname($magentoVersion, $magentoEdition)
     {
-        return __DIR__.sprintf('/data-%s-%s/%s.csv', $magentoEdition, $magentoVersion, $this->tableName);
+        return __DIR__.sprintf('/../../fixture/data-%s-%s/dataset.yml', $magentoEdition, $magentoVersion);
     }
 
     /**
@@ -46,8 +47,9 @@ class Loader
      */
     public function hydrate($magentoVersion, $magentoEdition = 'ce')
     {
-        $file = new \SplFileObject($this->getPathname($magentoVersion, $magentoEdition), 'r');
+        $yaml = new Yaml();
 
+        $data = $yaml->parse(file_get_contents($filename = $this->getPathname($magentoVersion, $magentoEdition)));
         $statement = $this->connection
             ->executeQuery('SELECT @@SESSION.sql_mode');
         $statement->execute();
@@ -58,30 +60,32 @@ class Loader
             ));
         }
 
-        $firstLine = $file->fgetcsv(',', '"', '"');
-        $columnCount = count($firstLine);
         try {
-            while (!$file->eof()) {
-                $thisLine = $file->fgetcsv(',', '"', '"');
+            if (!isset($data[$this->tableName]) || !is_array($data[$this->tableName])) {
+                throw new \PHPUnit_Framework_SkippedTestError(
+                    sprintf('No fixtures for table "%s".', $this->tableName));
+            }
 
-                if (count($thisLine) !== $columnCount) {
-                    continue;
-                }
-
+            foreach ($data[$this->tableName] as $thisLine) {
                 $this->connection->insert(
                     $this->tableName,
-                    array_combine($firstLine, $thisLine)
+                    $thisLine
                 );
             }
         } catch (\Exception $e) {
             if (!in_array('NO_AUTO_VALUE_ON_ZERO', $originalModes)) {
-                $this->connection->exec(sprintf('SET SESSION sql_mode=%s',
+                $this->connection->exec(sprintf('SET SESSION sql_mode="%s"',
                     implode(',', $originalModes)
                 ));
             }
 
-            throw new \RuntimeException(sprintf(
-                'Failed to import fixtures from file %s', $file->getPathname()), null, $e);
+            throw new \PHPUnit_Framework_SkippedTestError(sprintf(
+                'Failed to import table %s fixtures from file %s', $this->tableName, $filename), null, $e);
+        }
+        if (!in_array('NO_AUTO_VALUE_ON_ZERO', $originalModes)) {
+            $this->connection->exec(sprintf('SET SESSION sql_mode="%s"',
+                implode(',', $originalModes)
+            ));
         }
 
         return $this;
@@ -117,38 +121,14 @@ class Loader
                 continue;
             }
 
+            foreach ($thisLine as &$field) {
+                if ($field === '') {
+                    $field = null;
+                }
+            }
+            unset($field);
+
             yield array_combine($firstLine, $thisLine);
         }
-    }
-
-    /**
-     * @param $magentoEdition
-     * @param $magentoVersion
-     * @param int $offset
-     *
-     * @return \Generator
-     */
-    public function readData($magentoEdition, $magentoVersion, $offset = 0)
-    {
-        $file = new \SplFileObject($this->getPathname($magentoEdition, $magentoVersion), 'r');
-
-        $firstLine = $file->fgetcsv(',', '"', '"');
-        $columnCount = count($firstLine);
-        $currentLine = 0;
-        $readLines = 0;
-        while (!$file->eof()) {
-            $thisLine = $file->fgetcsv(',', '"', '"');
-            if ($currentLine < $offset) {
-                continue;
-            }
-
-            if (count($thisLine) !== $columnCount) {
-                continue;
-            }
-
-            return array_combine($firstLine, $thisLine);
-        }
-
-        throw new \RuntimeException(sprintf('No fixture at offset %d in table %s.', $offset, $this->tableName));
     }
 }
