@@ -37,8 +37,8 @@ class CatalogProductEntity
         $table->addColumn('sku', 'string', ['length' => 64, 'notnull' => false]);
         $table->addColumn('has_options', 'smallint', ['unsigned' => true, 'default' => 0, 'notnull' => false]);
         $table->addColumn('required_options', 'smallint', ['unsigned' => true, 'default' => 0, 'notnull' => false]);
-        $table->addColumn('created_at', 'datetime', ['columnDefinition' => 'DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP']);
-        $table->addColumn('updated_at', 'datetime', ['columnDefinition' => 'DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP']);
+        $table->addColumn('created_at', 'datetime', ['columnDefinition' => 'DATETIME NULL DEFAULT NULL']);
+        $table->addColumn('updated_at', 'datetime', ['columnDefinition' => 'DATETIME NULL DEFAULT NULL']);
         $table->setPrimaryKey(['entity_id']);
         $table->addIndex(['attribute_set_id']);
         $table->addIndex(['sku']);
