@@ -74,6 +74,6 @@ trait DatabaseConnectionAwareTrait
      */
     private function getFixturesPathname($table, $magentoVersion, $magentoEdition)
     {
-        return __DIR__.sprintf('/../fixture/data-%s-%s/dataset-%s.yml', $magentoEdition, $magentoVersion, $table);
+        return __DIR__.sprintf('/../Fixture/data-%s-%s/dataset-%s.yml', $magentoEdition, $magentoVersion, $table);
     }
 }

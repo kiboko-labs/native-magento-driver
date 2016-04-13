@@ -37,7 +37,7 @@ class Loader
      */
     private function getPathname($magentoVersion, $magentoEdition)
     {
-        return __DIR__.sprintf('/../../fixture/data-%s-%s/dataset.yml', $magentoEdition, $magentoVersion);
+        return __DIR__.sprintf('/../../Fixture/data-%s-%s/dataset.yml', $magentoEdition, $magentoVersion);
     }
 
     /**
