@@ -13,7 +13,6 @@ use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeValueQuer
 use Luni\Component\MagentoDriver\Repository\AttributeRepositoryInterface;
 use Luni\Component\MagentoDriver\Repository\Doctrine\ProductAttributeValueRepository;
 use Luni\Component\MagentoDriver\Repository\ProductAttributeValueRepositoryInterface;
-
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
@@ -132,8 +131,9 @@ class ProductAttributeDatetimeValueRepositoryTest extends \PHPUnit_Framework_Tes
     }
 
     /**
-     * @param int $id
+     * @param int    $id
      * @param string $code
+     *
      * @return \PHPUnit_Framework_MockObject_MockObject|AttributeRepositoryInterface
      */
     private function getAttributeMock($id, $code)

@@ -7,7 +7,6 @@ use Luni\Component\MagentoDriver\Model\Attribute;
 use Luni\Component\MagentoDriver\Persister\AttributePersisterInterface;
 use Luni\Component\MagentoDriver\Persister\Direct\Attribute\StandardAttributePersister;
 use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilder;
-
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;

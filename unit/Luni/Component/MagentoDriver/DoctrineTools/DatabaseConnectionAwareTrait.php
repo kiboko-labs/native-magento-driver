@@ -45,7 +45,7 @@ trait DatabaseConnectionAwareTrait
                 isset($GLOBALS['DB_PORT'])     ? $GLOBALS['DB_HOSTNAME'] : 3306
             );
 
-            $this->pdo = new \PDO($dsn, $GLOBALS['DB_USERNAME'], $GLOBALS['DB_PASSWORD'] );
+            $this->pdo = new \PDO($dsn, $GLOBALS['DB_USERNAME'], $GLOBALS['DB_PASSWORD']);
         }
 
         return $this->pdo;
@@ -58,7 +58,7 @@ trait DatabaseConnectionAwareTrait
     {
         if ($this->doctrineConnection === null) {
             $this->doctrineConnection = DriverManager::getConnection([
-                'pdo' => $this->getPdoConnection()
+                'pdo' => $this->getPdoConnection(),
             ]);
         }
 

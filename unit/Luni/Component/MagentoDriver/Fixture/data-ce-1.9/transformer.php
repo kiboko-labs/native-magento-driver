@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/../../../../../../vendor/autoload.php';
+require __DIR__.'/../../../../../../vendor/autoload.php';
 
 $files = new FilesystemIterator(
     __DIR__,
@@ -57,4 +57,4 @@ foreach ($files as $fileInfo) {
 
 $yaml = new Symfony\Component\Yaml\Dumper();
 
-file_put_contents(__DIR__ . '/dataset.yml', $yaml->dump($data, 3));
+file_put_contents(__DIR__.'/dataset.yml', $yaml->dump($data, 3));

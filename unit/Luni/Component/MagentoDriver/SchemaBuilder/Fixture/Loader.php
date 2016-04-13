@@ -43,6 +43,7 @@ class Loader
     /**
      * @param string $magentoVersion
      * @param string $magentoEdition
+     *
      * @return $this
      */
     public function hydrate($magentoVersion, $magentoEdition = 'ce')

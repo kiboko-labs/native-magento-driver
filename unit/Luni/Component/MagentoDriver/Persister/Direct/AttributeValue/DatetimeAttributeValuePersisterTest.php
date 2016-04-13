@@ -9,7 +9,6 @@ use Luni\Component\MagentoDriver\Model\Immutable\ImmutableDatetimeAttributeValue
 use Luni\Component\MagentoDriver\Persister\AttributeValuePersisterInterface;
 use Luni\Component\MagentoDriver\Persister\Direct\AttributeValue\DatetimeAttributeValuePersister;
 use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeValueQueryBuilder;
-
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
 use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;

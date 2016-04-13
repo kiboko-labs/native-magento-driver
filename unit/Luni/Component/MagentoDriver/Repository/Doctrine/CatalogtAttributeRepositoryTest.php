@@ -7,12 +7,11 @@ use Luni\Component\MagentoDriver\Model\AttributeInterface;
 use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilder;
 use Luni\Component\MagentoDriver\Repository\AttributeRepositoryInterface;
 use Luni\Component\MagentoDriver\Repository\Doctrine\CatalogAttributeRepository;
-
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
 
-class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
+class CatalogtAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
 {
     use DatabaseConnectionAwareTrait;
 

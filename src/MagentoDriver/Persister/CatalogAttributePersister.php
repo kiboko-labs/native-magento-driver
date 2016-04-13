@@ -3,9 +3,6 @@
 namespace Luni\Component\MagentoDriver\Persister;
 
 use Luni\Component\MagentoDriver\Model\CatalogAttributeInterface;
-use Luni\Component\MagentoDriver\Persister\AttributePersisterInterface;
-use Luni\Component\MagentoDriver\Persister\CatalogAttributeExtensionPersisterInterface;
-use Luni\Component\MagentoDriver\Persister\CatalogAttributePersisterInterface;
 
 class CatalogAttributePersister implements CatalogAttributePersisterInterface
 {

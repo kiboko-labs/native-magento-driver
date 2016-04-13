@@ -8,7 +8,6 @@ use Luni\Component\MagentoDriver\Model\FamilyInterface;
 use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\FamilyQueryBuilder;
 use Luni\Component\MagentoDriver\Repository\Doctrine\FamilyRepository;
 use Luni\Component\MagentoDriver\Repository\FamilyRepositoryInterface;
-
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
