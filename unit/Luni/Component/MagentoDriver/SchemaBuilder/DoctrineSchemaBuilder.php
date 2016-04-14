@@ -110,7 +110,7 @@ class DoctrineSchemaBuilder
     public function hydrateStoreTable($magentoVersion, $magentoEdition)
     {
         (new Fixture\Loader($this->connection, 'core_store'))
-            ->hydrate($magentoVersion, $magentoEdition)
+                ->hydrate($magentoVersion, $magentoEdition)
         ;
     }
 
@@ -121,7 +121,7 @@ class DoctrineSchemaBuilder
     public function hydrateEntityTypeTable($magentoVersion, $magentoEdition)
     {
         (new Fixture\Loader($this->connection, 'eav_entity_type'))
-            ->hydrate($magentoVersion, $magentoEdition)
+                ->hydrate($magentoVersion, $magentoEdition)
         ;
     }
 
@@ -132,7 +132,7 @@ class DoctrineSchemaBuilder
     public function hydrateFamilyTable($magentoVersion, $magentoEdition)
     {
         (new Fixture\Loader($this->connection, 'eav_attribute_set'))
-            ->hydrate($magentoVersion, $magentoEdition)
+                ->hydrate($magentoVersion, $magentoEdition)
         ;
     }
 
@@ -143,7 +143,7 @@ class DoctrineSchemaBuilder
     public function hydrateAttributeTable($magentoVersion, $magentoEdition)
     {
         (new Fixture\Loader($this->connection, 'eav_attribute'))
-            ->hydrate($magentoVersion, $magentoEdition)
+                ->hydrate($magentoVersion, $magentoEdition)
         ;
     }
 
@@ -154,7 +154,7 @@ class DoctrineSchemaBuilder
     public function hydrateCatalogAttributeExtensionsTable($magentoVersion, $magentoEdition)
     {
         (new Fixture\Loader($this->connection, 'catalog_eav_attribute'))
-            ->hydrate($magentoVersion, $magentoEdition)
+                ->hydrate($magentoVersion, $magentoEdition)
         ;
     }
 
@@ -165,7 +165,7 @@ class DoctrineSchemaBuilder
     public function hydrateCatalogProductEntityTable($magentoVersion, $magentoEdition)
     {
         (new Fixture\Loader($this->connection, 'catalog_product_entity'))
-            ->hydrate($magentoVersion, $magentoEdition)
+                ->hydrate($magentoVersion, $magentoEdition)
         ;
     }
 
@@ -176,7 +176,7 @@ class DoctrineSchemaBuilder
     public function hydrateCatalogProductAttributeValueTable($backendType, $magentoVersion, $magentoEdition)
     {
         (new Fixture\Loader($this->connection, sprintf('catalog_product_entity_%s', $backendType)))
-            ->hydrate($magentoVersion, $magentoEdition)
+                ->hydrate($magentoVersion, $magentoEdition)
         ;
     }
 
