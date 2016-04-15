@@ -43,6 +43,14 @@ interface EntityTypeQueryBuilderInterface
     public function createFindAllByIdQueryBuilder($alias, array $idList);
 
     /**
+     * @param string      $alias
+     * @param array|int[] $codeList
+     *
+     * @return QueryBuilder
+     */
+    public function createFindAllByCodeQueryBuilder($alias, array $codeList);
+
+    /**
      * @return QueryBuilder
      */
     public function createDeleteQueryBuilder();

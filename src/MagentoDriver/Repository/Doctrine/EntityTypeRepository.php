@@ -32,9 +32,7 @@ class EntityTypeRepository implements EntityTypeRepositoryInterface
      * @param EntityTypeFactoryInterface      $entityFactory
      */
     public function __construct(
-        Connection $connection,
-        EntityTypeQueryBuilderInterface $queryBuilder,
-        EntityTypeFactoryInterface $entityFactory
+    Connection $connection, EntityTypeQueryBuilderInterface $queryBuilder, EntityTypeFactoryInterface $entityFactory
     ) {
         $this->connection = $connection;
         $this->queryBuilder = $queryBuilder;
@@ -48,7 +46,7 @@ class EntityTypeRepository implements EntityTypeRepositoryInterface
      */
     protected function createNewEntityTypeInstanceFromDatabase(array $options)
     {
-        return $this->familyFactory->buildNew($options);
+        return $this->entityFactory->buildNew($options);
     }
 
     /**
@@ -95,5 +93,45 @@ class EntityTypeRepository implements EntityTypeRepositoryInterface
         $options = $statement->fetch();
 
         return $this->createNewEntityTypeInstanceFromDatabase($options);
+    }
+
+    /**
+     * @param string $entityTypeCode
+     * @param array  $codeList
+     *
+     * @return Collection|EntityTypeInterface[]
+     */
+    public function findAllByCode($entityTypeCode, array $codeList)
+    {
+        $query = $this->queryBuilder->createFindAllByCodeQueryBuilder($entityTypeCode, $codeList);
+
+        $statement = $this->connection->prepare($query);
+        if (!$statement->execute([$code])) {
+            throw new DatabaseFetchingFailureException();
+        }
+
+        if ($statement->rowCount() < 1) {
+            return;
+        }
+
+        $options = $statement->fetch();
+
+        return $this->createNewEntityTypeInstanceFromDatabase($options);
+    }
+
+    /**
+     * @param array|int[] $idList
+     *
+     * @return Collection|EntityTypeInterface[]
+     */
+    public function findAllById(array $idList)
+    {
+    }
+
+    /**
+     * @return Collection|EntityTypeInterface[]
+     */
+    public function findAll()
+    {
     }
 }

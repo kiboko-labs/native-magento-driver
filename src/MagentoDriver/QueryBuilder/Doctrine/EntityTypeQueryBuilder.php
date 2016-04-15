@@ -28,9 +28,7 @@ class EntityTypeQueryBuilder implements EntityTypeQueryBuilderInterface
      * @param array      $fields
      */
     public function __construct(
-        Connection $connection,
-        $table,
-        array $fields
+    Connection $connection, $table, array $fields
     ) {
         $this->connection = $connection;
         $this->table = $table;
@@ -94,8 +92,8 @@ class EntityTypeQueryBuilder implements EntityTypeQueryBuilderInterface
     public function createFindQueryBuilder($alias)
     {
         return (new QueryBuilder($this->connection))
-            ->select($this->createFieldsList($this->fields, $alias))
-            ->from($this->table, $alias)
+                        ->select($this->createFieldsList($this->fields, $alias))
+                        ->from($this->table, $alias)
         ;
     }
 
@@ -109,7 +107,7 @@ class EntityTypeQueryBuilder implements EntityTypeQueryBuilderInterface
         $queryBuilder = $this->createFindQueryBuilder($alias);
 
         $queryBuilder->where($queryBuilder->expr()->andX(
-            $queryBuilder->expr()->eq(sprintf('%s.entity_type_id', $alias), 4)
+                        $queryBuilder->expr()->eq(sprintf('%s.entity_type_id', $alias), 4)
         ));
 
         return $queryBuilder;
@@ -125,12 +123,20 @@ class EntityTypeQueryBuilder implements EntityTypeQueryBuilderInterface
         $queryBuilder = $this->createFindAllQueryBuilder($alias);
 
         $queryBuilder
-            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.entity_type_id', $alias), '?'))
-            ->setFirstResult(0)
-            ->setMaxResults(1)
+                ->andWhere($queryBuilder->expr()->eq(sprintf('%s.entity_type_id', $alias), '?'))
+                ->setFirstResult(0)
+                ->setMaxResults(1)
         ;
 
         return $queryBuilder;
+    }
+
+    /**
+     * @param string $alias
+     * @param array  $codeList
+     */
+    public function createFindAllByCodeQueryBuilder($alias, array $codeList)
+    {
     }
 
     /**
@@ -143,9 +149,9 @@ class EntityTypeQueryBuilder implements EntityTypeQueryBuilderInterface
         $queryBuilder = $this->createFindAllQueryBuilder($alias);
 
         $queryBuilder
-            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.entity_type_code', $alias), '?'))
-            ->setFirstResult(0)
-            ->setMaxResults(1)
+                ->andWhere($queryBuilder->expr()->eq(sprintf('%s.entity_type_code', $alias), '?'))
+                ->setFirstResult(0)
+                ->setMaxResults(1)
         ;
 
         return $queryBuilder;
@@ -180,9 +186,9 @@ class EntityTypeQueryBuilder implements EntityTypeQueryBuilderInterface
         $queryBuilder = $this->createDeleteQueryBuilder();
 
         $queryBuilder
-            ->andWhere($queryBuilder->expr()->eq('entity_type_id', '?'))
-            ->setFirstResult(0)
-            ->setMaxResults(1)
+                ->andWhere($queryBuilder->expr()->eq('entity_type_id', '?'))
+                ->setFirstResult(0)
+                ->setMaxResults(1)
         ;
 
         return $queryBuilder;
