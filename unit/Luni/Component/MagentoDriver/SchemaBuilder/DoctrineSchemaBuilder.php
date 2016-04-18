@@ -48,6 +48,16 @@ class DoctrineSchemaBuilder
     {
         return (new Table\EntityType($this->schema))->build();
     }
+    
+    /**
+     * @return \Doctrine\DBAL\Schema\Table
+     *
+     * @throws \Doctrine\DBAL\Schema\SchemaException
+     */
+    public function ensureEntityStoreTable()
+    {
+        return (new Table\EntityStore($this->schema))->build();
+    }
 
     /**
      * @return \Doctrine\DBAL\Schema\Table
@@ -121,6 +131,17 @@ class DoctrineSchemaBuilder
     public function hydrateEntityTypeTable($magentoVersion, $magentoEdition)
     {
         (new Fixture\Loader($this->connection, 'eav_entity_type'))
+                ->hydrate($magentoVersion, $magentoEdition)
+        ;
+    }
+    
+    /**
+     * @param string $magentoVersion
+     * @param string $magentoEdition
+     */
+    public function hydrateEntityStoreTable($magentoVersion, $magentoEdition)
+    {
+        (new Fixture\Loader($this->connection, 'eav_entity_store'))
                 ->hydrate($magentoVersion, $magentoEdition)
         ;
     }

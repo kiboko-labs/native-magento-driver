@@ -158,7 +158,7 @@ class EntityType implements EntityTypeInterface
      * @param string $additionalAttributeTable
      * @param string $entityAttributeCollection
      *
-     * @return EntityInterface
+     * @return EntityTypeInterface
      */
     public static function buildNewWith(
         $entityTypeId,
