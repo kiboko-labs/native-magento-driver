@@ -197,11 +197,6 @@ class EntityType implements EntityTypeInterface
             $entityAttributeCollection
         );
 
-        $object->id = $entityTypeId;
-        /*
-         * @todo write all others fields
-         */
-
         return $object;
     }
 }

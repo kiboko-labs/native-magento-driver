@@ -2,7 +2,8 @@
 
 ## Entity types (table `eav_entity_type`)
 
-* [ ] reader
+* [x] reader [Interface](src/MagentoDriver/Repository/EntityTypeRepositoryInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/EntityTypeRepository.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Repository/Doctrine/EntityTypeRepositoryTest.php))
 
 ## Entity configuration by store (table `eav_entity_store`)
 
