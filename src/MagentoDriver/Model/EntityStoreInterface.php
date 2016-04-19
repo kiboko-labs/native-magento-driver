@@ -33,5 +33,4 @@ interface EntityStoreInterface
      * @return string
      */
     public function getIncrementLastId();
-
 }

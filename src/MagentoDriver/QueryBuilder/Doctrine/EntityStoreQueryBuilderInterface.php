@@ -6,7 +6,6 @@ use Doctrine\DBAL\Query\QueryBuilder;
 
 interface EntityStoreQueryBuilderInterface
 {
-
     /**
      * @param string $alias
      *
@@ -57,8 +56,7 @@ interface EntityStoreQueryBuilderInterface
      * @return QueryBuilder
      */
     public function createFindAllByStoreIdQueryBuilder($alias, array $storeIdList);
-    
-    
+
     /**
      * @param string      $alias
      * @param array|int[] $typeIdList

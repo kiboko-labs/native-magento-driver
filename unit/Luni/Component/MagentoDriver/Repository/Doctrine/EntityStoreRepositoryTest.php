@@ -14,7 +14,6 @@ use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait
 
 class EntityStoreRepositoryTest extends \PHPUnit_Framework_TestCase
 {
-
     use DatabaseConnectionAwareTrait;
 
     /**
@@ -24,6 +23,7 @@ class EntityStoreRepositoryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @var EntityStoreRepositoryInterface
+     *
      * @todo
      */
     private $repository;
@@ -80,7 +80,6 @@ class EntityStoreRepositoryTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->truncateTables();
-//        $schemaBuilder->hydrateEntityTypeTable('1.9', 'ce');
         $schemaBuilder->hydrateEntityStoreTable('1.9', 'ce');
 
         $this->repository = new EntityStoreRepository(
@@ -102,7 +101,7 @@ class EntityStoreRepositoryTest extends \PHPUnit_Framework_TestCase
     public function testFetchingOneById()
     {
         $entityStore = $this->repository->findOneById(6);
-        
+
         $this->assertInstanceOf(EntityStoreInterface::class, $entityStore);
 
         $this->assertEquals($entityStore->getId(), 6);
@@ -119,7 +118,7 @@ class EntityStoreRepositoryTest extends \PHPUnit_Framework_TestCase
         $entityStore = $this->repository->findOneByStoreId(2);
         $this->assertInstanceOf(EntityStoreInterface::class, $entityStore);
 
-        $this->assertEquals($entityStore->getStoreId(), '2');
+        $this->assertEquals($entityStore->getStoreId(), 2);
         $this->assertEquals($entityStore->getTypeId(), 4);
         $this->assertEquals($entityStore->getId(), 6);
     }
@@ -129,4 +128,28 @@ class EntityStoreRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($this->repository->findOneByStoreId(1337));
     }
 
+    public function testFetchingOneByTypeId()
+    {
+        $entityStore = $this->repository->findOneByTypeId(2);
+        $this->assertInstanceOf(EntityStoreInterface::class, $entityStore);
+
+        $this->assertEquals($entityStore->getStoreId(), 1);
+        $this->assertEquals($entityStore->getTypeId(), 2);
+        $this->assertEquals($entityStore->getId(), 7);
+    }
+
+    public function testFetchingOneByTypeIdButNonExistent()
+    {
+        $this->assertNull($this->repository->findOneByTypeId(1337));
+    }
+
+    public function testFetchingAll()
+    {
+        $entityStore = $this->repository->findAll();
+        $this->assertTrue(is_array($entityStore));
+        foreach ($entityStore as $singleEntityStore) {
+            $this->assertInstanceOf(EntityStoreInterface::class, $singleEntityStore);
+        }
+        $this->assertGreaterThanOrEqual(1, count($entityStore));
+    }
 }

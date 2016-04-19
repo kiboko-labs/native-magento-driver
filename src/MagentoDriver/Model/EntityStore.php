@@ -4,10 +4,8 @@ namespace Luni\Component\MagentoDriver\Model;
 
 class EntityStore implements EntityStoreInterface
 {
-
     /**
-     * 
-     * @param int $id
+     * @param int    $id
      * @param string $typeId
      * @param string $storeId
      * @param string $incrementPrefix
@@ -71,12 +69,12 @@ class EntityStore implements EntityStoreInterface
     }
 
     /**
-     * 
-     * @param int $id
+     * @param int    $id
      * @param string $typeId
      * @param string $storeId
      * @param string $incrementPrefix
      * @param string $incrementLastId
+     *
      * @return EntityStoreInterface
      */
     public static function buildNewWith($id, $typeId, $storeId, $incrementPrefix, $incrementLastId)
@@ -85,5 +83,4 @@ class EntityStore implements EntityStoreInterface
 
         return $object;
     }
-
 }

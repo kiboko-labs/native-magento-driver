@@ -30,7 +30,7 @@ class StandardEntityTypeFactory implements EntityTypeFactoryInterface
             $options['increment_pad_length'],
             $options['increment_pad_char'],
             $options['additional_attribute_table'],
-            $options['entity_attribute_collection']        
+            $options['entity_attribute_collection']
         );
     }
 }

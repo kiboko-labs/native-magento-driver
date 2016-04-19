@@ -48,7 +48,7 @@ class DoctrineSchemaBuilder
     {
         return (new Table\EntityType($this->schema))->build();
     }
-    
+
     /**
      * @return \Doctrine\DBAL\Schema\Table
      *
@@ -134,7 +134,7 @@ class DoctrineSchemaBuilder
                 ->hydrate($magentoVersion, $magentoEdition)
         ;
     }
-    
+
     /**
      * @param string $magentoVersion
      * @param string $magentoEdition

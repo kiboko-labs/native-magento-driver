@@ -29,8 +29,7 @@ class EntityStore
     public function build($magentoVersion = null)
     {
         $table = $this->schema->createTable('eav_entity_store');
-        
-        
+
         $table->addColumn('entity_store_id', 'smallint', ['unsigned' => true, 'autoincrement' => true]);
         $table->addColumn('entity_type_id', 'smallint', ['unsigned' => true, 'default' => 0]);
         $table->addColumn('store_id', 'smallint', ['unsigned' => true, 'default' => 0]);

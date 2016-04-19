@@ -11,7 +11,6 @@ use Luni\Component\MagentoDriver\Repository\EntityStoreRepositoryInterface;
 
 class EntityStoreRepository implements EntityStoreRepositoryInterface
 {
-
     /**
      * @var EntityStoreQueryBuilderInterface
      */
@@ -28,14 +27,13 @@ class EntityStoreRepository implements EntityStoreRepositoryInterface
     private $entityFactory;
 
     /**
-     * @param Connection                      $connection
+     * @param Connection                       $connection
      * @param EntityStoreQueryBuilderInterface $queryBuilder
      * @param EntityStoreFactoryInterface      $entityFactory
      */
     public function __construct(
     Connection $connection, EntityStoreQueryBuilderInterface $queryBuilder, EntityStoreFactoryInterface $entityFactory
-    )
-    {
+    ) {
         $this->connection = $connection;
         $this->queryBuilder = $queryBuilder;
         $this->entityFactory = $entityFactory;
@@ -98,16 +96,16 @@ class EntityStoreRepository implements EntityStoreRepositoryInterface
     }
 
     /**
-     * @param array  $storeIdList
+     * @param string $typeId
      *
-     * @return Collection|EntityStoreInterface[]
+     * @return EntityStoreInterface
      */
-    public function findAllByStoreId(array $storeIdList)
+    public function findOneByTypeId($typeId)
     {
-        $query = $this->queryBuilder->createFindAllByStoreIdQueryBuilder($storeIdList);
+        $query = $this->queryBuilder->createFindOneByTypeIdQueryBuilder('e');
 
         $statement = $this->connection->prepare($query);
-        if (!$statement->execute([$storeIdList])) {
+        if (!$statement->execute([$typeId])) {
             throw new DatabaseFetchingFailureException();
         }
 
@@ -121,40 +119,27 @@ class EntityStoreRepository implements EntityStoreRepositoryInterface
     }
 
     /**
-     * @param array|int[] $idList
-     *
-     * @return Collection|EntityStoreInterface[]
-     */
-    public function findAllById(array $idList)
-    {
-        
-    }
-
-    /**
      * @return Collection|EntityStoreInterface[]
      */
     public function findAll()
     {
-        
+        $query = $this->queryBuilder->createFindAllQueryBuilder('e');
+
+        $statement = $this->connection->prepare($query);
+        if (!$statement->execute()) {
+            throw new DatabaseFetchingFailureException();
+        }
+
+        if ($statement->rowCount() < 1) {
+            return;
+        }
+
+        $options = $statement->fetchAll();
+
+        foreach ($options as $option) {
+            $results[] = $this->createNewEntityStoreInstanceFromDatabase($option);
+        }
+
+        return $results;
     }
-
-    /**
-     * @param string $typeId
-     *
-     * @return EntityStoreInterface
-     */
-    public function findOneByTypeId($typeId){
-        
-    }
-
-
-    /**
-     * @param array  $typeIdList
-     *
-     * @return Collection|EntityStoreInterface[]
-     */
-    public function findAllByTypeId(array $typeIdList){
-        
-    }
-
 }

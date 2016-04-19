@@ -7,7 +7,8 @@
 
 ## Entity configuration by store (table `eav_entity_store`)
 
-* [ ] reader
+* [x] reader [Interface](src/MagentoDriver/Repository/EntityStoreRepositoryInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/EntityStoreRepository.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Repository/Doctrine/EntityStoreRepositoryTest.php))
 * [ ] persister
 * [ ] deleter
 

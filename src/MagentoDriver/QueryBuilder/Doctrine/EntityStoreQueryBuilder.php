@@ -7,7 +7,6 @@ use Doctrine\DBAL\Query\QueryBuilder;
 
 class EntityStoreQueryBuilder implements EntityStoreQueryBuilderInterface
 {
-
     /**
      * @var Connection
      */
@@ -30,8 +29,7 @@ class EntityStoreQueryBuilder implements EntityStoreQueryBuilderInterface
      */
     public function __construct(
     Connection $connection, $table, array $fields
-    )
-    {
+    ) {
         $this->connection = $connection;
         $this->table = $table;
         $this->fields = $fields;
@@ -97,10 +95,6 @@ class EntityStoreQueryBuilder implements EntityStoreQueryBuilderInterface
     {
         $queryBuilder = $this->createFindQueryBuilder($alias);
 
-        $queryBuilder->where($queryBuilder->expr()->andX(
-                        $queryBuilder->expr()->eq(sprintf('%s.entity_type_id', $alias), 4)
-        ));
-
         return $queryBuilder;
     }
 
@@ -111,7 +105,6 @@ class EntityStoreQueryBuilder implements EntityStoreQueryBuilderInterface
      */
     public function createFindOneByIdQueryBuilder($alias)
     {
-
         $queryBuilder = $this->createFindAllQueryBuilder($alias);
 
         $queryBuilder
@@ -130,7 +123,7 @@ class EntityStoreQueryBuilder implements EntityStoreQueryBuilderInterface
     {
         $queryBuilder = $this->createFindAllQueryBuilder($alias);
 
-        $expr = array_pad([], count($storeIdList), $queryBuilder->expr()->eq(sprintf('%s.entity_store_id', $alias), '?'));
+        $expr = array_pad([], count($storeIdList), $queryBuilder->expr()->eq(sprintf('%s.store_id', $alias), '?'));
         $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
 
         return $queryBuilder;
@@ -168,7 +161,6 @@ class EntityStoreQueryBuilder implements EntityStoreQueryBuilderInterface
      */
     public function createDeleteQueryBuilder()
     {
-        
     }
 
     /**
@@ -235,5 +227,4 @@ class EntityStoreQueryBuilder implements EntityStoreQueryBuilderInterface
 
         return $queryBuilder;
     }
-
 }
