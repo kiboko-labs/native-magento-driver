@@ -11,7 +11,7 @@ use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
 
-class CatalogtAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
+class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
 {
     use DatabaseConnectionAwareTrait;
 
