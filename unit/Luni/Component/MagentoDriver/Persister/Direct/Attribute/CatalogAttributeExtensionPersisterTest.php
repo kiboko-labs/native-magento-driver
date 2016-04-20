@@ -100,104 +100,89 @@ class CatalogAttributeExtensionPersisterTest extends \PHPUnit_Framework_TestCase
 
     public function testInsertNone()
     {
-        /*
-         * @author : Nolwennig
-         *  - Disable test to reduce cli noise during development
-         * @todo: mind to restart test before merge
-         */
-//        $this->persister->initialize();
-//        $this->persister->flush();
-//
-//        $this->assertTableRowCount('catalog_eav_attribute', 0);
+        $this->persister->initialize();
+        $this->persister->flush();
+
+        $this->assertTableRowCount('catalog_eav_attribute', 0);
     }
 
     public function testInsertOne()
     {
-        /*
-         * @author : Nolwennig
-         *  - Disable test to reduce cli noise during development
-         * @todo: mind to restart test before merge
-         */
-//        $dataLoader = new Loader($this->getDoctrineConnection(), 'catalog_eav_attribute');
-//
-//        $this->persister->initialize();
-//        foreach ($dataLoader->walkData('1.9', 'ce') as $data) {
-//            $attribute = new CatalogAttributeExtension(
-//                $data['attribute_id'],
-//                $data['frontend_input_renderer'],
-//                $data['is_global'],
-//                $data['is_visible'],
-//                $data['is_searchable'],
-//                $data['is_filterable'],
-//                $data['is_comparable'],
-//                $data['is_visible_on_front'],
-//                $data['is_html_allowed_on_front'],
-//                $data['is_used_for_price_rules'],
-//                $data['is_filterable_in_search'],
-//                $data['used_in_product_listing'],
-//                $data['used_for_sort_by'],
-//                $data['is_configurable'],
-//                $data['apply_to'],
-//                $data['is_visible_in_advanced_search'],
-//                $data['position'],
-//                $data['is_wysiwyg_enabled'],
-//                $data['is_used_for_promo_rules']
-//            );
-//            $this->persister->persist($attribute);
-//        }
-//        $this->persister->flush();
-//
-//        $expected = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-//            $this->getFixturesPathname('catalog_eav_attribute', '1.9', 'ce'));
-//
-//        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-//        $actual->addTable('catalog_eav_attribute');
-//
-//        $this->assertDataSetsEqual($expected, $actual);
+        $dataLoader = new Loader($this->getDoctrineConnection(), 'catalog_eav_attribute');
+
+        $this->persister->initialize();
+        foreach ($dataLoader->walkData('1.9', 'ce') as $data) {
+            $attribute = new CatalogAttributeExtension(
+                $data['attribute_id'],
+                $data['frontend_input_renderer'],
+                $data['is_global'],
+                $data['is_visible'],
+                $data['is_searchable'],
+                $data['is_filterable'],
+                $data['is_comparable'],
+                $data['is_visible_on_front'],
+                $data['is_html_allowed_on_front'],
+                $data['is_used_for_price_rules'],
+                $data['is_filterable_in_search'],
+                $data['used_in_product_listing'],
+                $data['used_for_sort_by'],
+                $data['is_configurable'],
+                $data['apply_to'],
+                $data['is_visible_in_advanced_search'],
+                $data['position'],
+                $data['is_wysiwyg_enabled'],
+                $data['is_used_for_promo_rules']
+            );
+            $this->persister->persist($attribute);
+        }
+        $this->persister->flush();
+
+        $expected = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
+            $this->getFixturesPathname('catalog_eav_attribute', '1.9', 'ce'));
+
+        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
+        $actual->addTable('catalog_eav_attribute');
+
+        $this->assertDataSetsEqual($expected, $actual);
     }
 
     public function testUpdateOneExisting()
     {
-        /*
-         * @author : Nolwennig
-         *  - Disable test to reduce cli noise during development
-         * @todo: mind to restart test before merge
-         */
-//        $dataLoader = new Loader($this->getDoctrineConnection(), 'catalog_eav_attribute');
-//
-//        $this->persister->initialize();
-//        foreach ($dataLoader->walkData('1.9', 'ce') as $data) {
-//            $attribute = new CatalogAttributeExtension(
-//                $data['attribute_id'],
-//                $data['frontend_input_renderer'],
-//                $data['is_global'],
-//                $data['is_visible'],
-//                $data['is_searchable'],
-//                $data['is_filterable'],
-//                $data['is_comparable'],
-//                $data['is_visible_on_front'],
-//                $data['is_html_allowed_on_front'],
-//                $data['is_used_for_price_rules'],
-//                $data['is_filterable_in_search'],
-//                $data['used_in_product_listing'],
-//                $data['used_for_sort_by'],
-//                $data['is_configurable'],
-//                $data['apply_to'],
-//                $data['is_visible_in_advanced_search'],
-//                $data['position'],
-//                $data['is_wysiwyg_enabled'],
-//                $data['is_used_for_promo_rules']
-//            );
-//            $this->persister->persist($attribute);
-//        }
-//        $this->persister->flush();
-//
-//        $expected = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-//            $this->getFixturesPathname('catalog_eav_attribute', '1.9', 'ce'));
-//
-//        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-//        $actual->addTable('eav_attribute');
-//
-//        $this->assertDataSetsEqual($expected, $actual);
+        $dataLoader = new Loader($this->getDoctrineConnection(), 'catalog_eav_attribute');
+
+        $this->persister->initialize();
+        foreach ($dataLoader->walkData('1.9', 'ce') as $data) {
+            $attribute = new CatalogAttributeExtension(
+                $data['attribute_id'],
+                $data['frontend_input_renderer'],
+                $data['is_global'],
+                $data['is_visible'],
+                $data['is_searchable'],
+                $data['is_filterable'],
+                $data['is_comparable'],
+                $data['is_visible_on_front'],
+                $data['is_html_allowed_on_front'],
+                $data['is_used_for_price_rules'],
+                $data['is_filterable_in_search'],
+                $data['used_in_product_listing'],
+                $data['used_for_sort_by'],
+                $data['is_configurable'],
+                $data['apply_to'],
+                $data['is_visible_in_advanced_search'],
+                $data['position'],
+                $data['is_wysiwyg_enabled'],
+                $data['is_used_for_promo_rules']
+            );
+            $this->persister->persist($attribute);
+        }
+        $this->persister->flush();
+
+        $expected = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
+            $this->getFixturesPathname('catalog_eav_attribute', '1.9', 'ce'));
+
+        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
+        $actual->addTable('eav_attribute');
+
+        $this->assertDataSetsEqual($expected, $actual);
     }
 }
