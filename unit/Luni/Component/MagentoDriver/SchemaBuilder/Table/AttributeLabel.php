@@ -30,7 +30,7 @@ class AttributeLabel
     {
         $table = $this->schema->createTable('eav_attribute_label');
 
-        $table->addColumn('attribute_label_id', 'smallint', ['unsigned' => true, 'autoincrement' => true]);
+        $table->addColumn('attribute_label_id', 'integer', ['unsigned' => true, 'autoincrement' => true]);
         $table->addColumn('attribute_id', 'smallint', ['unsigned' => true, 'default' => 0]);
         $table->addColumn('store_id', 'smallint', ['unsigned' => true, 'default' => 0]);
         $table->addColumn('value', 'string', ['length' => 255, 'notnull' => false]);

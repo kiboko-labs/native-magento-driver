@@ -30,7 +30,7 @@ class AttributeOption
     {
         $table = $this->schema->createTable('eav_attribute_option');
 
-        $table->addColumn('option_id', 'smallint', ['unsigned' => true, 'autoincrement' => true]);
+        $table->addColumn('option_id', 'integer', ['unsigned' => true, 'autoincrement' => true]);
         $table->addColumn('attribute_id', 'smallint', ['unsigned' => true, 'default' => 0]);
         $table->addColumn('sort_order', 'smallint', ['unsigned' => true, 'default' => 0]);
 

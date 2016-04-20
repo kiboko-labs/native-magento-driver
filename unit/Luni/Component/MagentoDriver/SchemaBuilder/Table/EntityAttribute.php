@@ -30,7 +30,7 @@ class EntityAttribute
     {
         $table = $this->schema->createTable('eav_entity_attribute');
         
-        $table->addColumn('entity_attribute_id', 'smallint', ['unsigned' => true, 'autoincrement' => true]);
+        $table->addColumn('entity_attribute_id', 'integer', ['unsigned' => true, 'autoincrement' => true]);
         $table->addColumn('entity_type_id', 'smallint', ['unsigned' => true, 'default' => 0]);
         $table->addColumn('attribute_set_id', 'smallint', ['unsigned' => true, 'default' => 0]);
         $table->addColumn('attribute_group_id', 'smallint', ['unsigned' => true, 'default' => 0]);
