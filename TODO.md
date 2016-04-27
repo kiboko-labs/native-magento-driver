@@ -28,9 +28,9 @@
 
 ## Global attributes data (table `eav_attribute`)
 
-* [x] reader [Interface](src/MagentoDriver/Repository/AttributeRepositoryInterface.php)
+* [x] reader [Interface](src/MagentoDriver/Repository/AttributeRepositoryInterface.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Repository/Doctrine/CatalogAttributeRepositoryTest.php))
   * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/CatalogAttributeRepository.php)
-* [x] persister [Interface](src/MagentoDriver/Persister/AttributePersisterInterface.php)
+* [x] persister [Interface](src/MagentoDriver/Persister/AttributePersisterInterface.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Persister/Direct/Attribute/AttributePersisterTest.php))
   * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Attribute/StandardAttributePersister.php)
   * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/Attribute/StandardAttributePersister.php)
 * [ ] deleter
