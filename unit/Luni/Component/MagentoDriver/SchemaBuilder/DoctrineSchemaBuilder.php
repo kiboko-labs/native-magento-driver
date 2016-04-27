@@ -7,6 +7,7 @@ use Doctrine\DBAL\Schema\Schema;
 
 class DoctrineSchemaBuilder
 {
+
     /**
      * @var Schema
      */
@@ -54,6 +55,16 @@ class DoctrineSchemaBuilder
      *
      * @throws \Doctrine\DBAL\Schema\SchemaException
      */
+    public function ensureEntityStoreTable()
+    {
+        return (new Table\EntityStore($this->schema))->build();
+    }
+
+    /**
+     * @return \Doctrine\DBAL\Schema\Table
+     *
+     * @throws \Doctrine\DBAL\Schema\SchemaException
+     */
     public function ensureFamilyTable()
     {
         return (new Table\Family($this->schema))->build();
@@ -67,6 +78,56 @@ class DoctrineSchemaBuilder
     public function ensureAttributeTable()
     {
         return (new Table\Attribute($this->schema))->build();
+    }
+    
+    /**
+     * @return \Doctrine\DBAL\Schema\Table
+     *
+     * @throws \Doctrine\DBAL\Schema\SchemaException
+     */
+    public function ensureEntityAttributeTable()
+    {
+        return (new Table\EntityAttribute($this->schema))->build();
+    }
+
+    /**
+     * @return \Doctrine\DBAL\Schema\Table
+     *
+     * @throws \Doctrine\DBAL\Schema\SchemaException
+     */
+    public function ensureAttributeGroupTable()
+    {
+        return (new Table\AttributeGroup($this->schema))->build();
+    }
+
+    /**
+     * @return \Doctrine\DBAL\Schema\Table
+     *
+     * @throws \Doctrine\DBAL\Schema\SchemaException
+     */
+    public function ensureAttributeLabelTable()
+    {
+        return (new Table\AttributeLabel($this->schema))->build();
+    }
+
+    /**
+     * @return \Doctrine\DBAL\Schema\Table
+     *
+     * @throws \Doctrine\DBAL\Schema\SchemaException
+     */
+    public function ensureAttributeOptionTable()
+    {
+        return (new Table\AttributeOption($this->schema))->build();
+    }
+    
+    /**
+     * @return \Doctrine\DBAL\Schema\Table
+     *
+     * @throws \Doctrine\DBAL\Schema\SchemaException
+     */
+    public function ensureAttributeOptionValueTable()
+    {
+        return (new Table\AttributeOptionValue($this->schema))->build();
     }
 
     /**
@@ -88,6 +149,81 @@ class DoctrineSchemaBuilder
     {
         return (new Table\CatalogProductEntity($this->schema))->build();
     }
+    
+    /**
+     * @return \Doctrine\DBAL\Schema\Table
+     *
+     * @throws \Doctrine\DBAL\Schema\SchemaException
+     */
+    public function ensureCatalogCategoryEntityTable()
+    {
+        return (new Table\CatalogCategoryEntity($this->schema))->build();
+    }
+    
+    /**
+     * @return \Doctrine\DBAL\Schema\Table
+     *
+     * @throws \Doctrine\DBAL\Schema\SchemaException
+     */
+    public function ensureCatalogCategoryProductIndexTable()
+    {
+        return (new Table\CatalogCategoryProductIndex($this->schema))->build();
+    }
+    
+    /**
+     * @return \Doctrine\DBAL\Schema\Table
+     *
+     * @throws \Doctrine\DBAL\Schema\SchemaException
+     */
+    public function ensureCatalogCategoryProductTable()
+    {
+        return (new Table\CatalogCategoryProduct($this->schema))->build();
+    }
+    
+    /**
+     * @return \Doctrine\DBAL\Schema\Table
+     *
+     * @throws \Doctrine\DBAL\Schema\SchemaException
+     */
+    public function ensureCatalogProductLinkTable()
+    {
+        return (new Table\CatalogProductLink($this->schema))->build();
+    }
+    
+    /**
+     * @return \Doctrine\DBAL\Schema\Table
+     *
+     * @throws \Doctrine\DBAL\Schema\SchemaException
+     */
+    public function ensureCatalogProductLinkTypeTable()
+    {
+        return (new Table\CatalogProductLinkType($this->schema))->build();
+    }
+    
+    /**
+     * @return \Doctrine\DBAL\Schema\Table
+     *
+     * @throws \Doctrine\DBAL\Schema\SchemaException
+     */
+    public function ensureCatalogProductLinkAttributeTable()
+    {
+        return (new Table\CatalogProductLinkAttribute($this->schema))->build();
+    }
+    
+    /**
+     * @param string $backendName
+     * @param string $backendType
+     * @param array  $backendOptions
+     *
+     * @return \Doctrine\DBAL\Schema\Table
+     *
+     * @throws \Doctrine\DBAL\Schema\SchemaException
+     */
+    public function ensureCatalogProductLinkAttributeValueTable($backendName, $backendType, array $backendOptions = [])
+    {
+        return (new Table\CatalogProductLinkAttributeValue($this->schema, $backendType, $backendName, $backendOptions))->build();
+        
+    }
 
     /**
      * @param string $backendName
@@ -102,6 +238,51 @@ class DoctrineSchemaBuilder
     {
         return (new Table\CatalogProductAttributeValue($this->schema, $backendType, $backendName, $backendOptions))->build();
     }
+    
+    /**
+     * @param string $backendName
+     * @param string $backendType
+     * @param array  $backendOptions
+     *
+     * @return \Doctrine\DBAL\Schema\Table
+     *
+     * @throws \Doctrine\DBAL\Schema\SchemaException
+     */
+    public function ensureCatalogCategoryAttributeValueTable($backendName, $backendType, array $backendOptions = [])
+    {
+        return (new Table\CatalogCategoryAttributeValue($this->schema, $backendType, $backendName, $backendOptions))->build();
+    }
+    
+    
+    /**
+     * @return \Doctrine\DBAL\Schema\Table
+     *
+     * @throws \Doctrine\DBAL\Schema\SchemaException
+     */
+    public function ensureCatalogProductGalleryTable()
+    {
+        return (new Table\CatalogProductGallery($this->schema))->build();
+    }
+    
+    /**
+     * @return \Doctrine\DBAL\Schema\Table
+     *
+     * @throws \Doctrine\DBAL\Schema\SchemaException
+     */
+    public function ensureCatalogProductMediaGalleryTable()
+    {
+        return (new Table\CatalogProductMediaGallery($this->schema))->build();
+    }
+    
+    /**
+     * @return \Doctrine\DBAL\Schema\Table
+     *
+     * @throws \Doctrine\DBAL\Schema\SchemaException
+     */
+    public function ensureCatalogProductMediaGalleryAttributeValueTable()
+    {
+        return (new Table\CatalogProductMediaGalleryAttributeValue($this->schema))->build();
+    }
 
     /**
      * @param string $magentoVersion
@@ -110,7 +291,7 @@ class DoctrineSchemaBuilder
     public function hydrateStoreTable($magentoVersion, $magentoEdition)
     {
         (new Fixture\Loader($this->connection, 'core_store'))
-            ->hydrate($magentoVersion, $magentoEdition)
+                ->hydrate($magentoVersion, $magentoEdition)
         ;
     }
 
@@ -121,7 +302,18 @@ class DoctrineSchemaBuilder
     public function hydrateEntityTypeTable($magentoVersion, $magentoEdition)
     {
         (new Fixture\Loader($this->connection, 'eav_entity_type'))
-            ->hydrate($magentoVersion, $magentoEdition)
+                ->hydrate($magentoVersion, $magentoEdition)
+        ;
+    }
+
+    /**
+     * @param string $magentoVersion
+     * @param string $magentoEdition
+     */
+    public function hydrateEntityStoreTable($magentoVersion, $magentoEdition)
+    {
+        (new Fixture\Loader($this->connection, 'eav_entity_store'))
+                ->hydrate($magentoVersion, $magentoEdition)
         ;
     }
 
@@ -132,7 +324,7 @@ class DoctrineSchemaBuilder
     public function hydrateFamilyTable($magentoVersion, $magentoEdition)
     {
         (new Fixture\Loader($this->connection, 'eav_attribute_set'))
-            ->hydrate($magentoVersion, $magentoEdition)
+                ->hydrate($magentoVersion, $magentoEdition)
         ;
     }
 
@@ -143,7 +335,7 @@ class DoctrineSchemaBuilder
     public function hydrateAttributeTable($magentoVersion, $magentoEdition)
     {
         (new Fixture\Loader($this->connection, 'eav_attribute'))
-            ->hydrate($magentoVersion, $magentoEdition)
+                ->hydrate($magentoVersion, $magentoEdition)
         ;
     }
 
@@ -154,7 +346,7 @@ class DoctrineSchemaBuilder
     public function hydrateCatalogAttributeExtensionsTable($magentoVersion, $magentoEdition)
     {
         (new Fixture\Loader($this->connection, 'catalog_eav_attribute'))
-            ->hydrate($magentoVersion, $magentoEdition)
+                ->hydrate($magentoVersion, $magentoEdition)
         ;
     }
 
@@ -165,7 +357,7 @@ class DoctrineSchemaBuilder
     public function hydrateCatalogProductEntityTable($magentoVersion, $magentoEdition)
     {
         (new Fixture\Loader($this->connection, 'catalog_product_entity'))
-            ->hydrate($magentoVersion, $magentoEdition)
+                ->hydrate($magentoVersion, $magentoEdition)
         ;
     }
 
@@ -176,7 +368,7 @@ class DoctrineSchemaBuilder
     public function hydrateCatalogProductAttributeValueTable($backendType, $magentoVersion, $magentoEdition)
     {
         (new Fixture\Loader($this->connection, sprintf('catalog_product_entity_%s', $backendType)))
-            ->hydrate($magentoVersion, $magentoEdition)
+                ->hydrate($magentoVersion, $magentoEdition)
         ;
     }
 
@@ -211,7 +403,7 @@ class DoctrineSchemaBuilder
     {
         (new Link\CatalogProductEntityToFamily($this->schema))->build();
     }
-
+    
     /**
      * @param string $backendType
      *
@@ -251,4 +443,5 @@ class DoctrineSchemaBuilder
     {
         (new Link\CatalogProductAttributeValueToCatalogProductEntity($this->schema, $backendType))->build();
     }
+
 }
