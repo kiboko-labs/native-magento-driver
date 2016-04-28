@@ -183,6 +183,50 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
        $this->assertNull($this->repository->findOneByIdentifier('UNKNOWN')); 
     }
 
-    
+    public function testFetchingAllByIdentifier()
+    {
+        $products = $this->repository->findAllByIdentifier(array('SIMPLE', 'CONFIGURABLE'));
+        foreach($products as $product){
+            $this->assertInstanceOf(ProductInterface::class, $product);
+        
+            $this->assertTrue($product->getIdentifier() === 'CONFIGURABLE' | $product->getIdentifier() === 'SIMPLE');
+            $this->assertTrue($product->getType() === 'configurable' | $product->getType() === 'simple');
+            $this->assertInstanceOf(DateTimeInterface::class, $product->getCreationDate());
+            $this->assertInstanceOf(DateTimeInterface::class, $product->getModificationDate());
+            $this->assertInstanceOf(FamilyInterface::class, $product->getFamily()); 
+        }
+    }
+
+    public function testFetchingAllById()
+    {
+        $products = $this->repository->findAllById(array(3, 961));
+        foreach($products as $product){
+            $this->assertTrue($product->getId() === 3 | $product->getId() === 961);
+            $this->assertInstanceOf(DateTimeInterface::class, $product->getCreationDate());
+            $this->assertInstanceOf(DateTimeInterface::class, $product->getModificationDate());
+            $this->assertInstanceOf(FamilyInterface::class, $product->getFamily());
+        }
+    }
+
+    public function testFetchingAll()
+    {
+        $products = $this->repository->findAll();
+        foreach($products as $product){
+            $this->assertInstanceOf(ProductInterface::class, $product);
+        
+            $this->assertTrue(is_int($product->getId()));
+            $this->assertTrue($product->getId() > 0);
+            $this->assertTrue(is_string($product->getType()));
+            $this->assertTrue(is_bool($product->isConfigurable()));
+            $this->assertTrue(is_string($product->getIdentifier()));
+            $this->assertTrue(is_int($product->getFamilyId()));
+            $this->assertTrue($product->getFamilyId() > 0);
+            
+            $this->assertInstanceOf(DateTimeInterface::class, $product->getCreationDate());
+            $this->assertInstanceOf(DateTimeInterface::class, $product->getModificationDate());
+            $this->assertInstanceOf(FamilyInterface::class, $product->getFamily());
+        }
+        
+    }
 
 }
