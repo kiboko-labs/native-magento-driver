@@ -79,7 +79,7 @@
 ## Product entities (table `catalog_product_entity`)
 
 * [x] reader [Interface](src/MagentoDriver/Repository/ProductRepositoryInterface.php)
-  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/ProductRepository.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/ProductRepository.php)  ([PHPUnit](unit/Luni/Component/MagentoDriver/Repository/Doctrine/ProductRepositoryTest.php))
 * [x] persister [Interface](src/MagentoDriver/Persister/ProductPersisterInterface.php)
   * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Product/SimpleProductPersister.php.php)
   * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/Product/SimpleProductPersister.php.php)
