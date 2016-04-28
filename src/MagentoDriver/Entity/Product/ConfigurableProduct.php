@@ -34,7 +34,7 @@ class ConfigurableProduct implements ConfigurableProductInterface
 
     /**
      * @param string                  $identifier
-     * @param FamilyInterface         $family,
+     * @param FamilyInterface         $family
      * @param \DateTimeInterface|null $creationDate
      * @param \DateTimeInterface|null $modificationDate
      */
