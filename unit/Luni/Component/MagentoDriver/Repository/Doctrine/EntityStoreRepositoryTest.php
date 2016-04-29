@@ -105,7 +105,7 @@ class EntityStoreRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(EntityStoreInterface::class, $entityStore);
 
         $this->assertEquals($entityStore->getId(), 6);
-        $this->assertEquals($entityStore->getStoreId(), '2');
+        $this->assertEquals($entityStore->getStoreId(), '3');
     }
 
     public function testFetchingOneByIdButNonExistent()
@@ -120,7 +120,7 @@ class EntityStoreRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($entityStore->getStoreId(), 2);
         $this->assertEquals($entityStore->getTypeId(), 4);
-        $this->assertEquals($entityStore->getId(), 6);
+        $this->assertEquals($entityStore->getId(), 2);
     }
 
     public function testFetchingOneByStoreIdButNonExistent()
@@ -135,7 +135,7 @@ class EntityStoreRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($entityStore->getStoreId(), 1);
         $this->assertEquals($entityStore->getTypeId(), 2);
-        $this->assertEquals($entityStore->getId(), 7);
+        $this->assertEquals($entityStore->getId(), 3);
     }
 
     public function testFetchingOneByTypeIdButNonExistent()
