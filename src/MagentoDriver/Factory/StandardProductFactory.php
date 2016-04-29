@@ -27,8 +27,8 @@ class StandardProductFactory implements ProductFactoryInterface
                     $options['entity_id'],
                     $options['sku'],
                     Family::buildNewWith(
-                        $options['attribute_set_id'], /* $familyId */ /** @todo: this section must be review */
-                        'Default' /* // $options['attribute_set_name'] // $label */ /** @todo: this section must be review */
+                        $options['attribute_set_id'],
+                        ucfirst($type).'AttributeSet' /* // $options['attribute_set_name'] // $label */ /** @todo: this section must be review */
                     ),
                     new \DateTime($options['created_at']),
                     new \DateTime($options['updated_at'])
@@ -36,14 +36,14 @@ class StandardProductFactory implements ProductFactoryInterface
             }
         );
         $this->addBuilder(
-                'configurable', 
-                function($type, $options) {
+            'configurable', 
+            function($type, $options) {
                 return ConfigurableProduct::buildNewWith(
                     $options['entity_id'],
                     $options['sku'],
                     Family::buildNewWith(
-                        $options['attribute_set_id'], /* $familyId */ /** @todo: this section must be review */
-                        'Default' /* // $options['attribute_set_name'] // $label */ /** @todo: this section must be review */
+                        $options['attribute_set_id'],
+                        ucfirst($type).'AttributeSet' /* // $options['attribute_set_name'] // $label */ /** @todo: this section must be review */
                     ),
                     new \DateTime($options['created_at']),
                     new \DateTime($options['updated_at'])
