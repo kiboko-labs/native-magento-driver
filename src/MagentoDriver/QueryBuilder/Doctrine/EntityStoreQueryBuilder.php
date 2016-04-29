@@ -161,6 +161,9 @@ class EntityStoreQueryBuilder implements EntityStoreQueryBuilderInterface
      */
     public function createDeleteQueryBuilder()
     {
+        return (new QueryBuilder($this->connection))
+            ->delete($this->table);
+        
     }
 
     /**
@@ -169,12 +172,10 @@ class EntityStoreQueryBuilder implements EntityStoreQueryBuilderInterface
     public function createDeleteOneByIdQueryBuilder()
     {
         $queryBuilder = $this->createDeleteQueryBuilder();
-
-        $queryBuilder
-                ->andWhere($queryBuilder->expr()->eq('entity_store_id', '?'))
-                ->setFirstResult(0)
-                ->setMaxResults(1)
-        ;
+        
+        $queryBuilder->where(
+            $queryBuilder->expr()->eq('entity_store_id', '?')
+        );
 
         return $queryBuilder;
     }
