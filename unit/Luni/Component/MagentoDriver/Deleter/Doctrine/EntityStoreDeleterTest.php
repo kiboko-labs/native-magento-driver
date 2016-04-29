@@ -40,7 +40,7 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
     protected function getDataSet()
     {
         $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-                $this->getFixturesPathname('eav_entity_store', '1.9', 'ce'));
+                $this->getDeleterFixturesPathname('eav_entity_store', '1.9', 'ce'));
 
         return $dataset;
     }
@@ -130,12 +130,12 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
 
     public function testRemoveOne()
     {
-
         $this->persister->initialize();
         $this->deleter->deleteOneById(2);
 
-        $this->assertTableRowCount('eav_entity_store', 8);
-        $this->assertNull($this->repository->findOneById(2));
-    }
+        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
+        $actual->addTable('eav_entity_store');
 
+        $this->assertDataSetsEqual($this->getDataSet(), $actual);
+    }
 }

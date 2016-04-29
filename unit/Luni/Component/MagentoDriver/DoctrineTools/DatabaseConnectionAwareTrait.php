@@ -76,4 +76,16 @@ trait DatabaseConnectionAwareTrait
     {
         return __DIR__.sprintf('/../Fixture/data-%s-%s/dataset-%s.yml', $magentoEdition, $magentoVersion, $table);
     }
+
+    /**
+     * @param string $table
+     * @param string $magentoVersion
+     * @param string $magentoEdition
+     *
+     * @return string
+     */
+    private function getDeleterFixturesPathname($table, $magentoVersion, $magentoEdition)
+    {
+        return __DIR__.sprintf('/../Fixture/data-%s-%s/dataset-%s-deleter.yml', $magentoEdition, $magentoVersion, $table);
+    }
 }
