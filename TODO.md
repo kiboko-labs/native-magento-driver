@@ -12,7 +12,8 @@
 * [x] persister [Interface](src/MagentoDriver/Persister/EntityStorePersisterInterface.php)
   * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Entity/StandardEntityStorePersister.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Persister/Direct/Entity/EntityStorePersisterTest.php))
   * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/Entity/StandardEntityStorePersister.php)
-* [ ] deleter
+* [x] deleter [Interface](src/MagentoDriver/Deleter/EntityStoreDeleterInterface.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Deleter/Doctrine/EntityStoreDeleterTest.php))
+  * [Doctrine DBAL implementation](src/MagentoDriver/Deleter/Doctrine/EntityStoreDeleter.php)
 
 # Families
 

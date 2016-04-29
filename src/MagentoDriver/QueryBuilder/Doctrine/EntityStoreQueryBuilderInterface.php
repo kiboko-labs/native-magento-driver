@@ -77,7 +77,7 @@ interface EntityStoreQueryBuilderInterface
 
     /**
      * @param array|int[] $idList
-     *
+     * 
      * @return QueryBuilder
      */
     public function createDeleteAllByIdQueryBuilder(array $idList);
