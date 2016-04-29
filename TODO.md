@@ -10,7 +10,7 @@
 * [x] reader [Interface](src/MagentoDriver/Repository/EntityStoreRepositoryInterface.php)
   * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/EntityStoreRepository.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Repository/Doctrine/EntityStoreRepositoryTest.php))
 * [x] persister [Interface](src/MagentoDriver/Persister/EntityStorePersisterInterface.php)
-  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/EntityStorePersisterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Entity/StandardEntityStorePersister.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Persister/Direct/Entity/EntityStorePersisterTest.php))
   * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/Entity/StandardEntityStorePersister.php)
 * [ ] deleter
 
