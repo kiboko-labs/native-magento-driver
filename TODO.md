@@ -36,7 +36,8 @@
 * [x] persister [Interface](src/MagentoDriver/Persister/AttributePersisterInterface.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Persister/Direct/Attribute/AttributePersisterTest.php))
   * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Attribute/StandardAttributePersister.php)
   * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/Attribute/StandardAttributePersister.php)
-* [ ] deleter
+* [x] deleter [Interface](src/MagentoDriver/Deleter/AttributeDeleterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Deleter/Doctrine/AttributeDeleter.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Deleter/Doctrine/AttributeDeleterTest.php))
 
 ## Attribute groups (table `eav_attribute_group`)
 
