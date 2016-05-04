@@ -41,7 +41,7 @@ class EntityStoreDeleter implements EntityStoreDeleterInterface
      */
     public function deleteOneById($id)
     {
-        $query = $this->queryBuilder->createDeleteOneByIdQueryBuilder('e');
+        $query = $this->queryBuilder->createDeleteOneByIdQueryBuilder();
 
         $statement = $this->connection->prepare($query);
         if (!$statement->execute([$id])) {
@@ -61,7 +61,7 @@ class EntityStoreDeleter implements EntityStoreDeleterInterface
      */
     public function deleteAllById(array $idList)
     {
-        $query = $this->queryBuilder->createDeleteAllByIdQueryBuilder('e');
+        $query = $this->queryBuilder->createDeleteAllByIdQueryBuilder($idList);
 
         $statement = $this->connection->prepare($query);
         if (!$statement->execute($idList)) {

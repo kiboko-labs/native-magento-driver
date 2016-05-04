@@ -124,10 +124,21 @@ class FamilyDeleterTest extends \PHPUnit_Framework_TestCase
         $this->assertDataSetsEqual($this->getOriginalDataSet(), $actual);
     }
 
-    public function testRemoveOne()
+    public function testRemoveOneById()
     {
         $this->persister->initialize();
         $this->deleter->deleteOneById(2);
+
+        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
+        $actual->addTable('eav_attribute_set');
+
+        $this->assertDataSetsEqual($this->getDataSet(), $actual);
+    }
+    
+    public function testRemoveAllById()
+    {
+        $this->persister->initialize();
+        $this->deleter->deleteAllById(array(2));
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_set');
