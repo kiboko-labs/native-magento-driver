@@ -3,8 +3,6 @@
 namespace unit\Luni\Component\MagentoDriver\Deleter\Doctrine\EntityStore;
 
 use Doctrine\DBAL\Schema\Schema;
-use Luni\Component\MagentoDriver\Factory\StandardEntityStoreFactory;
-use Luni\Component\MagentoDriver\Repository\Doctrine\EntityStoreRepository;
 use Luni\Component\MagentoDriver\Persister\EntityStorePersisterInterface;
 use Luni\Component\MagentoDriver\Deleter\EntityStoreDeleterInterface;
 use Luni\Component\MagentoDriver\Persister\Direct\Entity\StandardEntityStorePersister;
@@ -41,6 +39,17 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
     {
         $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
                 $this->getDeleterFixturesPathname('eav_entity_store', '1.9', 'ce'));
+
+        return $dataset;
+    }
+    
+    /**
+     * @return PHPUnit_Extensions_Database_DataSet_IDataSet
+     */
+    protected function getOriginalDataSet()
+    {
+        $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
+                $this->getFixturesPathname('eav_entity_store', '1.9', 'ce'));
 
         return $dataset;
     }
@@ -101,16 +110,6 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
                 EntityStoreQueryBuilder::getDefaultFields()
             )
         );
-        
-        $this->repository = new EntityStoreRepository(
-            $this->getDoctrineConnection(), 
-            new EntityStoreQueryBuilder(
-                $this->getDoctrineConnection(), 
-                EntityStoreQueryBuilder::getDefaultTable(), 
-                EntityStoreQueryBuilder::getDefaultFields()
-            ),
-            new StandardEntityStoreFactory()
-        );
     }
 
     protected function tearDown()
@@ -118,12 +117,17 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
         $this->truncateTables();
         parent::tearDown();
 
-        $this->persister = $this->deleter = $this->repository = null;
+        $this->persister = $this->deleter = null;
     }
 
     public function testRemoveNone()
     {
         $this->persister->initialize();
+        
+        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
+        $actual->addTable('eav_entity_store');
+        
+        $this->assertDataSetsEqual($this->getOriginalDataSet(), $actual);
 
         $this->assertTableRowCount('eav_entity_store', 9);
     }
