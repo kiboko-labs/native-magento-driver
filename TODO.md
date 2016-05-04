@@ -22,10 +22,10 @@
 * [x] reader [Interface](src/MagentoDriver/Repository/FamilyRepositoryInterface.php)
   * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/FamilyRepository.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Repository/Doctrine/FamilyRepositoryTest.php))
 * [x] persister [Interface](src/MagentoDriver/Persister/FamilyPersisterInterface.php)
-  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Family/StandardFamilyPersister.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Family/StandardFamilyPersister.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Persister/Direct/Family/StandardFamilyPersisterTest.php))
   * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/Family/StandardFamilyPersister.php)
 * [x] deleter [Interface](src/MagentoDriver/Deleter/FamilyDeleterInterface.php)
-  * [Doctrine DBAL implementation](src/MagentoDriver/Deleter/Doctrine/FamilyDeleter.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Deleter/Doctrine/FamilyDeleter.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Deleter/Doctrine/FamilyDeleterTest.php))
 
 # Attributes
 

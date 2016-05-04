@@ -66,7 +66,7 @@ class StandardFamilyPersister implements FamilyPersisterInterface
                     [
                         'entity_type_id' => 4,
                         'attribute_set_name' => $family->getLabel(),
-                        'sort_order' => 0,
+                        'sort_order' => $family->getSortOrder(),
                     ],
                     [
                         'attribute_set_id' => $family->getId(),
@@ -80,7 +80,7 @@ class StandardFamilyPersister implements FamilyPersisterInterface
                         'attribute_set_id' => $family->getId(),
                         'entity_type_id' => 4,
                         'attribute_set_name' => $family->getLabel(),
-                        'sort_order' => 0,
+                        'sort_order' => $family->getSortOrder(),
                     ]
                 );
 

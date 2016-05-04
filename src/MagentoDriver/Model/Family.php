@@ -13,6 +13,11 @@ class Family implements FamilyInterface
      * @var string
      */
     private $label;
+    
+    /**
+     * @var int
+     */
+    private $sortOrder;
 
     /**
      * @param string $label
@@ -37,21 +42,40 @@ class Family implements FamilyInterface
     {
         return $this->label;
     }
+    
+    /**
+     * @return int
+     */
+    public function getSortOrder()
+    {
+        return $this->sortOrder;
+    }
 
     /**
-     * @param int    $familyId
-     * @param string $label
-     *
+     * @param type $familyId
+     * @param type $label
+     * @param type $sortOrder
+     * 
      * @return FamilyInterface
      */
     public static function buildNewWith(
         $familyId,
-        $label
+        $label,
+        $sortOrder    
     ) {
         $object = new static($label);
 
         $object->id = $familyId;
+        $object->sortOrder = $sortOrder;
 
         return $object;
+    }
+    
+    /**
+     * @param int $id
+     */
+    public function persistedToId($id)
+    {
+        $this->id = $id;
     }
 }
