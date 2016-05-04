@@ -33,8 +33,8 @@
 
 * [x] reader [Interface](src/MagentoDriver/Repository/AttributeRepositoryInterface.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Repository/Doctrine/CatalogAttributeRepositoryTest.php))
   * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/CatalogAttributeRepository.php)
-* [x] persister [Interface](src/MagentoDriver/Persister/AttributePersisterInterface.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Persister/Direct/Attribute/AttributePersisterTest.php))
-  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Attribute/StandardAttributePersister.php)
+* [x] persister [Interface](src/MagentoDriver/Persister/AttributePersisterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Attribute/StandardAttributePersister.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Persister/Direct/Attribute/AttributePersisterTest.php))
   * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/Attribute/StandardAttributePersister.php)
 * [x] deleter [Interface](src/MagentoDriver/Deleter/AttributeDeleterInterface.php)
   * [Doctrine DBAL implementation](src/MagentoDriver/Deleter/Doctrine/AttributeDeleter.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Deleter/Doctrine/AttributeDeleterTest.php))
