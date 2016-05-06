@@ -338,6 +338,17 @@ class DoctrineSchemaBuilder
                 ->hydrate($magentoVersion, $magentoEdition)
         ;
     }
+    
+    /**
+     * @param string $magentoVersion
+     * @param string $magentoEdition
+     */
+    public function hydrateAttributeGroupTable($magentoVersion, $magentoEdition)
+    {
+        (new Fixture\Loader($this->connection, 'eav_attribute_group'))
+                ->hydrate($magentoVersion, $magentoEdition)
+        ;
+    }
 
     /**
      * @param string $magentoVersion
