@@ -42,7 +42,9 @@
 ## Attribute groups (table `eav_attribute_group`)
 
 * [ ] reader
-* [ ] persister
+* [x] persister [Interface](src/MagentoDriver/Persister/AttributeGroupPersisterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Attribute/AttributeGroupPersister.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Persister/Direct/Attribute/AttributeGroupPersisterTest.php))
+  * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/Attribute/AttributeGroupPersister.php)
 * [ ] deleter
 
 ## Attribute labels (table `eav_attribute_label`)
