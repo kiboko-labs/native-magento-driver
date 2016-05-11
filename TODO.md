@@ -52,8 +52,12 @@
 ## Attribute labels (table `eav_attribute_label`)
 
 * [ ] reader
-* [ ] persister
-* [ ] deleter
+  * [Doctrine DBAL implementation]( ) ([PHPUnit](unit/Luni/Component/MagentoDriver/Repository/Doctrine/AttributeLabelRepositoryTest.php))
+* [ ] persister [Interface]( )
+  * [Doctrine DBAL implementation]( ) ([PHPUnit](unit/Luni/Component/MagentoDriver/Persister/Direct/Attribute/AttributeLabelPersisterTest.php))
+  * [Doctrine DBAL + FILE implementation]( )
+* [ ] deleter [Interface]( )
+  * [Doctrine DBAL implementation]( ) ([PHPUnit](unit/Luni/Component/MagentoDriver/Deleter/Doctrine/AttributeLabelDeleterTest.php))
 
 ## Attribute options (table `eav_attribute_option`)
 
