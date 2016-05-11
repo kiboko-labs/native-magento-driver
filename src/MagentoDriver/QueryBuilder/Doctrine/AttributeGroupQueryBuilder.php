@@ -43,9 +43,9 @@ class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
     public static function getDefaultFields()
     {
         return [
-            'attrubute_group_id',
+            'attribute_group_id',
             'attribute_set_id',
-            'attrubute_group_name',
+            'attribute_group_name',
             'sort_order',
             'default_id'
         ];
@@ -171,12 +171,12 @@ class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
      * 
      * @return QueryBuilder
      */
-    public function createDeleteOneByIdQueryBuilder($id)
+    public function createDeleteOneByIdQueryBuilder()
     {
         $queryBuilder = $this->createDeleteQueryBuilder();
 
         $queryBuilder
-                ->andWhere($queryBuilder->expr()->eq('attribute_group_id', $id))
+                ->andWhere($queryBuilder->expr()->eq('attribute_group_id', '?'))
                 ->setFirstResult(0)
                 ->setMaxResults(1)
         ;
@@ -204,12 +204,12 @@ class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
      * 
      * @return QueryBuilder
      */
-    public function createDeleteOneByNameQueryBuilder($name)
+    public function createDeleteOneByNameQueryBuilder()
     {
         $queryBuilder = $this->createDeleteQueryBuilder();
 
         $queryBuilder
-                ->andWhere($queryBuilder->expr()->eq('attribute_group_name', $name))
+                ->andWhere($queryBuilder->expr()->eq('attribute_group_name', '?'))
                 ->setFirstResult(0)
                 ->setMaxResults(1)
         ;

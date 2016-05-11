@@ -16,7 +16,8 @@ class StandardFamilyFactory implements FamilyFactoryInterface
     {
         return Family::buildNewWith(
             $options['attribute_set_id'],
-            $options['attribute_set_name']
+            $options['attribute_set_name'],
+            $options['sort_order']
         );
     }
 }

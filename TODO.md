@@ -41,7 +41,8 @@
 
 ## Attribute groups (table `eav_attribute_group`)
 
-* [ ] reader
+* [x] reader [Interface](src/MagentoDriver/Repository/AttributeGroupRepositoryInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/AttributeGroupRepository.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Repository/Doctrine/AttributeGroupRepositoryTest.php))
 * [x] persister [Interface](src/MagentoDriver/Persister/AttributeGroupPersisterInterface.php)
   * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Attribute/AttributeGroupPersister.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Persister/Direct/Attribute/AttributeGroupPersisterTest.php))
   * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/Attribute/AttributeGroupPersister.php)
