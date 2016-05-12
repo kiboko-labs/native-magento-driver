@@ -360,6 +360,17 @@ class DoctrineSchemaBuilder
                 ->hydrate($magentoVersion, $magentoEdition)
         ;
     }
+    
+    /**
+     * @param string $magentoVersion
+     * @param string $magentoEdition
+     */
+    public function hydrateAttributeOptionTable($magentoVersion, $magentoEdition)
+    {
+        (new Fixture\Loader($this->connection, 'eav_attribute_option'))
+                ->hydrate($magentoVersion, $magentoEdition)
+        ;
+    }
 
     /**
      * @param string $magentoVersion

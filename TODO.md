@@ -63,7 +63,8 @@
 
 * [ ] reader
 * [ ] persister
-* [ ] deleter
+* [x] deleter [Interface](src/MagentoDriver/Deleter/AttributeOptionDeleterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Deleter/Doctrine/AttributeOptionDeleter.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Deleter/Doctrine/AttributeOptionDeleterTest.php))
 
 ## Attribute option values (table `eav_attribute_option_value`)
 

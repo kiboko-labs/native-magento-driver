@@ -1,0 +1,27 @@
+eav_attribute_option:
+# eav_attribute.attribute_id: 226 (eav_attribute.attribute_code: main_color)
+    -
+        # red
+        option_id: '1'
+        attribute_id: '226'
+        sort_order: '0'
+    -
+        # green
+        option_id: '2'
+        attribute_id: '226'
+        sort_order: '10'
+    -
+        # blue
+        option_id: '3'
+        attribute_id: '226'
+        sort_order: '20'
+    -
+        # black
+        option_id: '4'
+        attribute_id: '226'
+        sort_order: '30'
+    -
+        # white
+        option_id: '5'
+        attribute_id: '226'
+        sort_order: '40'        
