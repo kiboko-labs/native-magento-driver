@@ -146,7 +146,7 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
     public function testRemoveAllById()
     {
         $this->persister->initialize();
-        $this->deleter->deleteAllById(array(2));/**/
+        $this->deleter->deleteAllById(array(2));
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_entity_store');
