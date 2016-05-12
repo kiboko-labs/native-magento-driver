@@ -101,7 +101,7 @@ class AttributeLabelPersisterTest extends \PHPUnit_Framework_TestCase
     {
         $this->persister->initialize();
 
-        $this->assertTableRowCount('eav_attribute_label', 4);
+        $this->assertTableRowCount('eav_attribute_label', 0);
     }
 
     public function testInsertOne()
