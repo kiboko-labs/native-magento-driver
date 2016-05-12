@@ -51,13 +51,13 @@
 
 ## Attribute labels (table `eav_attribute_label`)
 
-* [ ] reader
-  * [Doctrine DBAL implementation]( ) ([PHPUnit](unit/Luni/Component/MagentoDriver/Repository/Doctrine/AttributeLabelRepositoryTest.php))
-* [ ] persister [Interface]( )
-  * [Doctrine DBAL implementation]( ) ([PHPUnit](unit/Luni/Component/MagentoDriver/Persister/Direct/Attribute/AttributeLabelPersisterTest.php))
-  * [Doctrine DBAL + FILE implementation]( )
-* [ ] deleter [Interface]( )
-  * [Doctrine DBAL implementation]( ) ([PHPUnit](unit/Luni/Component/MagentoDriver/Deleter/Doctrine/AttributeLabelDeleterTest.php))
+* [x] reader [Interface](src/MagentoDriver/Repository/AttributeLabelRepositoryInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/AttributeLabelRepository.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Repository/Doctrine/AttributeLabelRepositoryTest.php))
+* [x] persister [Interface](src/MagentoDriver/Persister/AttributeLabelPersisterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Attribute/AttributeLabelPersister.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Persister/Direct/Attribute/AttributeLabelPersisterTest.php))
+  * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/Attribute/AttributeGroupPersister.php)
+* [x] deleter [Interface](src/MagentoDriver/Deleter/AttributeLabelDeleterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Deleter/Doctrine/AttributeLabelDeleter.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Deleter/Doctrine/AttributeLabelDeleterTest.php))
 
 ## Attribute options (table `eav_attribute_option`)
 
