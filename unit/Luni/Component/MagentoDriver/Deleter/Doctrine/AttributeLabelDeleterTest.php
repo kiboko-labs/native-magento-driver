@@ -3,16 +3,16 @@
 namespace unit\Luni\Component\MagentoDriver\Deleter\Doctrine\Family;
 
 use Doctrine\DBAL\Schema\Schema;
-use Luni\Component\MagentoDriver\Persister\AttributeGroupPersisterInterface;
-use Luni\Component\MagentoDriver\Deleter\AttributeGroupDeleterInterface;
-use Luni\Component\MagentoDriver\Persister\Direct\Attribute\AttributeGroupPersister;
-use Luni\Component\MagentoDriver\Deleter\Doctrine\AttributeGroupDeleter;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeGroupQueryBuilder;
+use Luni\Component\MagentoDriver\Persister\AttributeLabelPersisterInterface;
+use Luni\Component\MagentoDriver\Deleter\AttributeLabelDeleterInterface;
+use Luni\Component\MagentoDriver\Persister\Direct\Attribute\AttributeLabelPersister;
+use Luni\Component\MagentoDriver\Deleter\Doctrine\AttributeLabelDeleter;
+use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeLabelQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
 
-class AttributeGroupDeleterTest extends \PHPUnit_Framework_TestCase
+class AttributeLabelDeleterTest extends \PHPUnit_Framework_TestCase
 {
 
     use DatabaseConnectionAwareTrait;
@@ -23,12 +23,12 @@ class AttributeGroupDeleterTest extends \PHPUnit_Framework_TestCase
     private $schema;
 
     /**
-     * @var AttributeGroupDeleterInterface
+     * @var AttributeLabelDeleterInterface
      */
     private $deleter;
     
     /**
-     * @var AttributeGroupPersisterInterface
+     * @var AttributeLabelPersisterInterface
      */
     private $persister;
 
@@ -38,7 +38,7 @@ class AttributeGroupDeleterTest extends \PHPUnit_Framework_TestCase
     protected function getDataSet()
     {
         $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-                    $this->getDeleterFixturesPathname('eav_attribute_group', '1.9', 'ce'));
+                    $this->getDeleterFixturesPathname('eav_attribute_label', '1.9', 'ce'));
 
         return $dataset;
     }
@@ -49,7 +49,7 @@ class AttributeGroupDeleterTest extends \PHPUnit_Framework_TestCase
     protected function getOriginalDataSet()
     {
         $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-                $this->getFixturesPathname('eav_attribute_group', '1.9', 'ce'));
+                $this->getFixturesPathname('eav_attribute_label', '1.9', 'ce'));
 
         return $dataset;
     }
@@ -59,8 +59,17 @@ class AttributeGroupDeleterTest extends \PHPUnit_Framework_TestCase
         $platform = $this->getDoctrineConnection()->getDatabasePlatform();
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
+        
         $this->getDoctrineConnection()->exec(
-                $platform->getTruncateTableSQL('eav_attribute_group')
+            $platform->getTruncateTableSQL('core_store')
+        );
+        
+        $this->getDoctrineConnection()->exec(
+            $platform->getTruncateTableSQL('eav_attribute')
+        );
+        
+        $this->getDoctrineConnection()->exec(
+            $platform->getTruncateTableSQL('eav_attribute_label')
         );
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
@@ -76,7 +85,9 @@ class AttributeGroupDeleterTest extends \PHPUnit_Framework_TestCase
         $this->schema = new Schema();
 
         $schemaBuilder = new DoctrineSchemaBuilder($this->getDoctrineConnection(), $this->schema);
-        $schemaBuilder->ensureAttributeGroupTable();
+        $schemaBuilder->ensureStoreTable();
+        $schemaBuilder->ensureAttributeTable();
+        $schemaBuilder->ensureAttributeLabelTable();
 
         $comparator = new \Doctrine\DBAL\Schema\Comparator();
         $schemaDiff = $comparator->compare($currentSchema, $this->schema);
@@ -89,19 +100,21 @@ class AttributeGroupDeleterTest extends \PHPUnit_Framework_TestCase
 
         parent::setUp();
 
-        $schemaBuilder->hydrateAttributeGroupTable('1.9', 'ce');
+        $schemaBuilder->hydrateStoreTable('1.9', 'ce');
+        $schemaBuilder->hydrateAttributeTable('1.9', 'ce');
+        $schemaBuilder->hydrateAttributeLabelTable('1.9', 'ce');
 
-        $this->persister = new AttributeGroupPersister(
+        $this->persister = new AttributeLabelPersister(
             $this->getDoctrineConnection(), 
-            AttributeGroupQueryBuilder::getDefaultTable()
+            AttributeLabelQueryBuilder::getDefaultTable()
         );
         
-        $this->deleter = new AttributeGroupDeleter(
+        $this->deleter = new AttributeLabelDeleter(
             $this->getDoctrineConnection(),
-            new AttributeGroupQueryBuilder(
+            new AttributeLabelQueryBuilder(
                 $this->getDoctrineConnection(), 
-                AttributeGroupQueryBuilder::getDefaultTable(), 
-                AttributeGroupQueryBuilder::getDefaultFields()
+                AttributeLabelQueryBuilder::getDefaultTable(), 
+                AttributeLabelQueryBuilder::getDefaultFields()
             )
         );
     }
@@ -119,7 +132,7 @@ class AttributeGroupDeleterTest extends \PHPUnit_Framework_TestCase
         $this->persister->initialize();
         
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable('eav_attribute_group');
+        $actual->addTable('eav_attribute_label');
 
         $this->assertDataSetsEqual($this->getOriginalDataSet(), $actual);
     }
@@ -130,7 +143,7 @@ class AttributeGroupDeleterTest extends \PHPUnit_Framework_TestCase
         $this->deleter->deleteOneById(2);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable('eav_attribute_group');
+        $actual->addTable('eav_attribute_label');
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
     }
@@ -141,7 +154,7 @@ class AttributeGroupDeleterTest extends \PHPUnit_Framework_TestCase
         $this->deleter->deleteAllById(array(2));
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable('eav_attribute_group');
+        $actual->addTable('eav_attribute_label');
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
     }

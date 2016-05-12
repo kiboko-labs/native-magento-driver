@@ -349,6 +349,17 @@ class DoctrineSchemaBuilder
                 ->hydrate($magentoVersion, $magentoEdition)
         ;
     }
+    
+    /**
+     * @param string $magentoVersion
+     * @param string $magentoEdition
+     */
+    public function hydrateAttributeLabelTable($magentoVersion, $magentoEdition)
+    {
+        (new Fixture\Loader($this->connection, 'eav_attribute_label'))
+                ->hydrate($magentoVersion, $magentoEdition)
+        ;
+    }
 
     /**
      * @param string $magentoVersion
