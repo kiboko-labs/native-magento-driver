@@ -1,6 +1,6 @@
 <?php
 
-namespace unit\Luni\Component\MagentoDriver\Deleter\Doctrine\Family;
+namespace unit\Luni\Component\MagentoDriver\Deleter\Doctrine\Attribute;
 
 use Doctrine\DBAL\Schema\Schema;
 use Luni\Component\MagentoDriver\Persister\AttributeLabelPersisterInterface;
