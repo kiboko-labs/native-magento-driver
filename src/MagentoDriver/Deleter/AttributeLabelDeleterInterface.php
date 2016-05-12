@@ -2,7 +2,7 @@
 
 namespace Luni\Component\MagentoDriver\Deleter;
 
-interface AttributeGroupDeleterInterface
+interface AttributeLabelDeleterInterface
 {
     /**
      * @param int $id

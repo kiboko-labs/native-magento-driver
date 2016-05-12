@@ -2,14 +2,14 @@
 
 namespace Luni\Component\MagentoDriver\Factory;
 
-use Luni\Component\MagentoDriver\Model\AttributeGroupInterface;
+use Luni\Component\MagentoDriver\Model\AttributeLabelInterface;
 
-interface AttributeGroupFactoryInterface
+interface AttributeLabelFactoryInterface
 {
     /**
      * @param array $options
      *
-     * @return AttributeGroupInterface
+     * @return AttributeLabelInterface
      */
     public function buildNew(array $options);
 }

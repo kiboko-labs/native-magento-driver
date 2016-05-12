@@ -3,14 +3,14 @@
 namespace Luni\Component\MagentoDriver\Deleter\Doctrine;
 
 use Doctrine\DBAL\Connection;
-use Luni\Component\MagentoDriver\Deleter\AttributeGroupDeleterInterface;
+use Luni\Component\MagentoDriver\Deleter\AttributeLabelDeleterInterface;
 use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeGroupQueryBuilderInterface;
+use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeLabelQueryBuilderInterface;
 
-class AttributeGroupDeleter implements AttributeGroupDeleterInterface
+class AttributeLabelDeleter implements AttributeLabelDeleterInterface
 {
     /**
-     * @var AttributeGroupQueryBuilderInterface
+     * @var AttributeLabelQueryBuilderInterface
      */
     private $queryBuilder;
 
@@ -21,11 +21,11 @@ class AttributeGroupDeleter implements AttributeGroupDeleterInterface
 
     /**
      * @param Connection                          $connection
-     * @param AttributeGroupQueryBuilderInterface $queryBuilder
+     * @param AttributeLabelQueryBuilderInterface $queryBuilder
      */
     public function __construct(
         Connection $connection,
-        AttributeGroupQueryBuilderInterface $queryBuilder
+        AttributeLabelQueryBuilderInterface $queryBuilder
     ) {
         $this->connection = $connection;
         $this->queryBuilder = $queryBuilder;

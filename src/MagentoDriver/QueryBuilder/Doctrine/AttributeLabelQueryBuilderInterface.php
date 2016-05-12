@@ -4,7 +4,7 @@ namespace Luni\Component\MagentoDriver\QueryBuilder\Doctrine;
 
 use Doctrine\DBAL\Query\QueryBuilder;
 
-interface AttributeGroupQueryBuilderInterface
+interface AttributeLabelQueryBuilderInterface
 {
     /**
      * @param string $alias
@@ -21,13 +21,6 @@ interface AttributeGroupQueryBuilderInterface
     public function createFindOneByIdQueryBuilder($alias);
 
     /**
-     * @param string $alias
-     *
-     * @return QueryBuilder
-     */
-    public function createFindOneByNameQueryBuilder($alias);
-
-    /**
      * @param string      $alias
      * @param array|int[] $idList
      *
@@ -35,14 +28,6 @@ interface AttributeGroupQueryBuilderInterface
      */
     public function createFindAllByIdQueryBuilder($alias, array $idList);
     
-    /**
-     * @param string         $alias
-     * @param array|string[] $nameList
-     *
-     * @return QueryBuilder
-     */
-    public function createFindAllByNameQueryBuilder($alias, array $nameList);
-
     /**
      * @return QueryBuilder
      */
@@ -59,16 +44,4 @@ interface AttributeGroupQueryBuilderInterface
      * @return QueryBuilder
      */
     public function createDeleteAllByIdQueryBuilder(array $idList);
-    
-    /**
-     * @return QueryBuilder
-     */
-    public function createDeleteOneByNameQueryBuilder();
-
-    /**
-     * @param array|string[] $nameList
-     *
-     * @return QueryBuilder
-     */
-    public function createDeleteAllByNameQueryBuilder(array $nameList);
 }

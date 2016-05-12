@@ -2,7 +2,7 @@
 
 namespace Luni\Component\MagentoDriver\Model;
 
-class AttributeGroup implements AttributeGroupInterface
+class AttributeLabel implements AttributeLabelInterface
 {
 
     /**
@@ -13,32 +13,26 @@ class AttributeGroup implements AttributeGroupInterface
     /**
      * @var int
      */
-    private $familyId;
+    private $attributeId;
+
+    /**
+     * @var int
+     */
+    private $storeId;
 
     /**
      * @var string
      */
-    private $label;
-
-    /**
-     * @var int
-     */
-    private $sortOrder;
-
-    /**
-     * @var int
-     */
-    private $defaultId;
+    private $value;
 
     /**
      * 
-     * @param int $familyId
+     * @param int $attributeId
      * @param string $label
      */
-    public function __construct($familyId, $label)
+    public function __construct($id)
     {
-        $this->familyId = $familyId;
-        $this->label = $label;
+        $this->id = $id;
     }
 
     /**
@@ -52,55 +46,45 @@ class AttributeGroup implements AttributeGroupInterface
     /**
      * @return int
      */
-    public function getFamilyId()
+    public function getAttributeId()
     {
-        return $this->familyId;
+        return $this->attributeId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStoreId()
+    {
+        return $this->storeId;
     }
 
     /**
      * @return string
      */
-    public function getLabel()
+    public function getValue()
     {
-        return $this->label;
+        return $this->value;
     }
 
     /**
-     * @return int
-     */
-    public function getSortOrder()
-    {
-        return $this->sortOrder;
-    }
-
-    /**
-     * @return int
-     */
-    public function getDefaultId()
-    {
-        return $this->defaultId;
-    }
-
-    /**
-     * @param int $attributeGroupId
-     * @param int familyId
-     * @param string $label
-     * @param int $sortOrder
-     * @param int $defaultId
+     * @param int $attributeLabelId
+     * @param int attributeId
+     * @param int $storeId
+     * @param string $value
      * 
-     * @return AttributeGroupInterface
+     * @return AttributeLabelInterface
      */
     public static function buildNewWith(
-    $attributeGroupId, $familyId, $label, $sortOrder, $defaultId = 0
+    $attributeLabelId, $attributeId, $storeId, $value = null
     )
     {
-        $object = new static($familyId, $label);
+        $object = new static($attributeLabelId);
 
-        $object->id = $attributeGroupId;
-        $object->familyId = $familyId;
-        $object->label = $label;
-        $object->sortOrder = $sortOrder;
-        $object->defaultId = $defaultId;
+        $object->id = $attributeLabelId;
+        $object->attributeId = $attributeId;
+        $object->storeId = $storeId;
+        $object->value = $value;
 
         return $object;
     }

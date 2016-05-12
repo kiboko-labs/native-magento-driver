@@ -2,21 +2,21 @@
 
 namespace Luni\Component\MagentoDriver\Persister;
 
-use Luni\Component\MagentoDriver\Model\AttributeGroupInterface;
+use Luni\Component\MagentoDriver\Model\AttributeLabelInterface;
 
-interface AttributeGroupPersisterInterface
+interface AttributeLabelPersisterInterface
 {
     public function initialize();
 
     /**
-     * @param AttributeGroupInterface $attributeGroup
+     * @param AttributeLabelInterface $attributeLabel
      */
-    public function persist(AttributeGroupInterface $attributeGroup);
+    public function persist(AttributeLabelInterface $attributeLabel);
 
     /**
-     * @param AttributeGroupInterface $attributeGroup
+     * @param AttributeLabelInterface $attributeLabel
      */
-    public function __invoke(AttributeGroupInterface $attributeGroup);
+    public function __invoke(AttributeLabelInterface $attributeLabel);
 
     public function flush();
 }

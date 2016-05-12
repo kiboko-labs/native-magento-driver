@@ -3,10 +3,10 @@
 namespace Luni\Component\MagentoDriver\Persister\Direct\Attribute;
 
 use Doctrine\DBAL\Connection;
-use Luni\Component\MagentoDriver\Model\AttributeGroupInterface;
-use Luni\Component\MagentoDriver\Persister\AttributeGroupPersisterInterface;
+use Luni\Component\MagentoDriver\Model\AttributeLabelInterface;
+use Luni\Component\MagentoDriver\Persister\AttributeLabelPersisterInterface;
 
-class AttributeGroupPersister implements AttributeGroupPersisterInterface
+class AttributeLabelPersister implements AttributeLabelPersisterInterface
 {
     /**
      * @var Connection
@@ -50,27 +50,26 @@ class AttributeGroupPersister implements AttributeGroupPersisterInterface
     }
 
     /**
-     * @param AttributeGroupInterface $attributeGroup
+     * @param AttributeLabelInterface $attributeLabel
      */
-    public function persist(AttributeGroupInterface $attributeGroup)
+    public function persist(AttributeLabelInterface $attributeLabel)
     {
-        $this->dataQueue->push($attributeGroup);
+        $this->dataQueue->push($attributeLabel);
     }
 
     public function flush()
     {
-        foreach ($this->dataQueue as $attributeGroup) {
+        foreach ($this->dataQueue as $attributeLabel) {
             $count = 0;
-            if ($attributeGroup->getId()) {
+            if ($attributeLabel->getId()) {
                 $count = $this->connection->update($this->tableName,
                     [
-                        'attribute_set_id' => $attributeGroup->getFamilyId(),
-                        'attribute_group_name' => $attributeGroup->getLabel(),
-                        'sort_order' => $attributeGroup->getSortOrder(),
-                        'default_id' => $attributeGroup->getDefaultId(),
+                        'attribute_id' => $attributeLabel->getAttributeId(),
+                        'store_id' => $attributeLabel->getStoreId(),
+                        'value' => $attributeLabel->getValue(),
                     ],
                     [
-                        'attribute_group_id' => $attributeGroup->getId(),
+                        'attribute_label_id' => $attributeLabel->getId(),
                     ]
                 );
             }
@@ -78,24 +77,23 @@ class AttributeGroupPersister implements AttributeGroupPersisterInterface
             if ($count <= 0) {
                 $this->connection->insert($this->tableName,
                     [
-                        'attribute_group_id' => $attributeGroup->getId(),
-                        'attribute_set_id' => $attributeGroup->getFamilyId(),
-                        'attribute_group_name' => $attributeGroup->getLabel(),
-                        'sort_order' => $attributeGroup->getSortOrder(),
-                        'default_id' => $attributeGroup->getDefaultId(),
+                        'attribute_label_id' => $attributeLabel->getId(),
+                        'attribute_id' => $attributeLabel->getAttributeId(),
+                        'store_id' => $attributeLabel->getStoreId(),
+                        'value' => $attributeLabel->getValue(),
                     ]
                 );
 
-                $attributeGroup->persistedToId($this->connection->lastInsertId());
+                $attributeLabel->persistedToId($this->connection->lastInsertId());
             }
         }
     }
 
     /**
-     * @param AttributeGroupInterface $attributeGroup
+     * @param AttributeLabelInterface $attributeLabel
      */
-    public function __invoke(AttributeGroupInterface $attributeGroup)
+    public function __invoke(AttributeLabelInterface $attributeLabel)
     {
-        $this->persist($attributeGroup);
+        $this->persist($attributeLabel);
     }
 }

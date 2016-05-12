@@ -4,15 +4,15 @@ namespace Luni\Component\MagentoDriver\Repository\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
-use Luni\Component\MagentoDriver\Factory\AttributeGroupFactoryInterface;
-use Luni\Component\MagentoDriver\Model\AttributeGroupInterface;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeGroupQueryBuilderInterface;
-use Luni\Component\MagentoDriver\Repository\AttributeGroupRepositoryInterface;
+use Luni\Component\MagentoDriver\Factory\AttributeLabelFactoryInterface;
+use Luni\Component\MagentoDriver\Model\AttributeLabelInterface;
+use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeLabelQueryBuilderInterface;
+use Luni\Component\MagentoDriver\Repository\AttributeLabelRepositoryInterface;
 
-class AttributeGroupRepository implements AttributeGroupRepositoryInterface
+class AttributeLabelRepository implements AttributeLabelRepositoryInterface
 {
     /**
-     * @var AttributeGroupQueryBuilderInterface
+     * @var AttributeLabelQueryBuilderInterface
      */
     private $queryBuilder;
 
@@ -22,43 +22,43 @@ class AttributeGroupRepository implements AttributeGroupRepositoryInterface
     private $connection;
 
     /**
-     * @var AttributeGroupFactoryInterface
+     * @var AttributeLabelFactoryInterface
      */
-    private $attributeGroupFactory;
+    private $attributeLabelFactory;
 
     /**
      * @param Connection                          $connection
-     * @param AttributeGroupQueryBuilderInterface $queryBuilder
-     * @param AttributeGroupFactoryInterface      $attributeGroupFactory
+     * @param AttributeLabelQueryBuilderInterface $queryBuilder
+     * @param AttributeLabelFactoryInterface      $attributeLabelFactory
      */
     public function __construct(
         Connection $connection,
-        AttributeGroupQueryBuilderInterface $queryBuilder,
-        AttributeGroupFactoryInterface $attributeGroupFactory
+        AttributeLabelQueryBuilderInterface $queryBuilder,
+        AttributeLabelFactoryInterface $attributeLabelFactory
     ) {
         $this->connection = $connection;
         $this->queryBuilder = $queryBuilder;
-        $this->attributeGroupFactory = $attributeGroupFactory;
+        $this->attributeLabelFactory = $attributeLabelFactory;
     }
 
     /**
      * @param array $options
      *
-     * @return AttributeGroupInterface
+     * @return AttributeLabelInterface
      */
-    protected function createNewAttributeGroupInstanceFromDatabase(array $options)
+    protected function createNewAttributeLabelInstanceFromDatabase(array $options)
     {
-        return $this->attributeGroupFactory->buildNew($options);
+        return $this->attributeLabelFactory->buildNew($options);
     }
 
     /**
      * @param int $id
      *
-     * @return AttributeGroupInterface
+     * @return AttributeLabelInterface
      */
     public function findOneById($id)
     {
-        $query = $this->queryBuilder->createFindOneByIdQueryBuilder('eav_g');
+        $query = $this->queryBuilder->createFindOneByIdQueryBuilder('eav_l');
 
         $statement = $this->connection->prepare($query);
         if (!$statement->execute([$id])) {
@@ -71,29 +71,7 @@ class AttributeGroupRepository implements AttributeGroupRepositoryInterface
 
         $options = $statement->fetch();
 
-        return $this->createNewAttributeGroupInstanceFromDatabase($options);
+        return $this->createNewAttributeLabelInstanceFromDatabase($options);
     }
 
-    /**
-     * @param string $name
-     *
-     * @return AttributeGroupInterface
-     */
-    public function findOneByName($name)
-    {
-        $query = $this->queryBuilder->createFindOneByNameQueryBuilder('eav_g');
-
-        $statement = $this->connection->prepare($query);
-        if (!$statement->execute([$name])) {
-            throw new DatabaseFetchingFailureException();
-        }
-
-        if ($statement->rowCount() < 1) {
-            return;
-        }
-
-        $options = $statement->fetch();
-
-        return $this->createNewAttributeGroupInstanceFromDatabase($options);
-    }
 }

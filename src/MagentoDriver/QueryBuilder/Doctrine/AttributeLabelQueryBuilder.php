@@ -5,7 +5,7 @@ namespace Luni\Component\MagentoDriver\QueryBuilder\Doctrine;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
 
-class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
+class AttributeLabelQueryBuilder implements AttributeLabelQueryBuilderInterface
 {
 
     /**
@@ -43,11 +43,10 @@ class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
     public static function getDefaultFields()
     {
         return [
-            'attribute_group_id',
-            'attribute_set_id',
-            'attribute_group_name',
-            'sort_order',
-            'default_id'
+            'attribute_label_id',
+            'attribute_id',
+            'store_id',
+            'value'
         ];
     }
 
@@ -56,7 +55,7 @@ class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
      */
     public static function getDefaultTable()
     {
-        return 'eav_attribute_group';
+        return 'eav_attribute_label';
     }
 
     /**
@@ -98,7 +97,7 @@ class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
         $queryBuilder = $this->createFindQueryBuilder($alias);
 
         $queryBuilder
-                ->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_group_id', $alias), '?'))
+                ->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_label_id', $alias), '?'))
                 ->setFirstResult(0)
                 ->setMaxResults(1)
         ;
@@ -116,41 +115,7 @@ class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
     {
         $queryBuilder = $this->createFindQueryBuilder($alias);
 
-        $expr = array_pad([], count($idList), $queryBuilder->expr()->eq(sprintf('%s.attribute_group_id', $alias), '?'));
-        $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
-
-        return $queryBuilder;
-    }
-    
-    /**
-     * @param string $alias
-     *
-     * @return QueryBuilder
-     */
-    public function createFindOneByNameQueryBuilder($alias)
-    {
-        $queryBuilder = $this->createFindQueryBuilder($alias);
-
-        $queryBuilder
-                ->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_group_name', $alias), '?'))
-                ->setFirstResult(0)
-                ->setMaxResults(1)
-        ;
-
-        return $queryBuilder;
-    }
-    
-    /**
-     * 
-     * @param string   $alias
-     * @param string[] $nameList
-     * @return type
-     */
-    public function createFindAllByNameQueryBuilder($alias, array $nameList)
-    {
-        $queryBuilder = $this->createFindQueryBuilder($alias);
-
-        $expr = array_pad([], count($nameList), $queryBuilder->expr()->eq(sprintf('%s.attribute_group_name', $alias), '?'));
+        $expr = array_pad([], count($idList), $queryBuilder->expr()->eq(sprintf('%s.attribute_label_id', $alias), '?'));
         $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
 
         return $queryBuilder;
@@ -176,7 +141,7 @@ class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
         $queryBuilder = $this->createDeleteQueryBuilder();
 
         $queryBuilder
-                ->andWhere($queryBuilder->expr()->eq('attribute_group_id', '?'))
+                ->andWhere($queryBuilder->expr()->eq('attribute_label_id', '?'))
                 ->setFirstResult(0)
                 ->setMaxResults(1)
         ;
@@ -193,40 +158,7 @@ class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
     {
         $queryBuilder = $this->createDeleteQueryBuilder();
 
-        $expr = array_pad([], count($idList), $queryBuilder->expr()->eq('attribute_group_id', '?'));
-        $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
-
-        return $queryBuilder;
-    }
-
-    /**
-     * @param string $name
-     * 
-     * @return QueryBuilder
-     */
-    public function createDeleteOneByNameQueryBuilder()
-    {
-        $queryBuilder = $this->createDeleteQueryBuilder();
-
-        $queryBuilder
-                ->andWhere($queryBuilder->expr()->eq('attribute_group_name', '?'))
-                ->setFirstResult(0)
-                ->setMaxResults(1)
-        ;
-
-        return $queryBuilder;
-    }
-
-    /**
-     * @param array|string[] $nameList
-     *
-     * @return QueryBuilder
-     */
-    public function createDeleteAllByNameQueryBuilder(array $nameList)
-    {
-        $queryBuilder = $this->createDeleteQueryBuilder();
-
-        $expr = array_pad([], count($nameList), $queryBuilder->expr()->eq('attribute_group_name', '?'));
+        $expr = array_pad([], count($idList), $queryBuilder->expr()->eq('attribute_label_id', '?'));
         $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
 
         return $queryBuilder;

@@ -2,24 +2,23 @@
 
 namespace Luni\Component\MagentoDriver\Factory;
 
-use Luni\Component\MagentoDriver\Model\AttributeGroup;
-use Luni\Component\MagentoDriver\Model\AttributeGroupInterface;
+use Luni\Component\MagentoDriver\Model\AttributeLabel;
+use Luni\Component\MagentoDriver\Model\AttributeLabelInterface;
 
-class AttributeGroupFactory implements AttributeGroupFactoryInterface
+class AttributeLabelFactory implements AttributeLabelFactoryInterface
 {
     /**
      * @param array $options
      *
-     * @return AttributeGroupInterface
+     * @return AttributeLabelInterface
      */
     public function buildNew(array $options)
     {
-        return AttributeGroup::buildNewWith(
-            $options['attribute_group_id'],
-            $options['attribute_set_id'],
-            $options['attribute_group_name'],
-            $options['sort_order'],
-            isset($options['default_id']) ? $options['default_id'] : null
+        return AttributeLabel::buildNewWith(
+            $options['attribute_label_id'],
+            $options['attribute_id'],
+            $options['store_id'],
+            isset($options['value']) ? $options['value'] : null
         );
     }
 }
