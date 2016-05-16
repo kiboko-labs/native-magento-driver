@@ -2,7 +2,7 @@
 
 namespace Luni\Component\MagentoDriver\Model;
 
-class AttributeLabel implements AttributeLabelInterface
+class AttributeOptionValue implements AttributeOptionValueInterface
 {
 
     /**
@@ -13,7 +13,7 @@ class AttributeLabel implements AttributeLabelInterface
     /**
      * @var int
      */
-    private $attributeId;
+    private $optionId;
 
     /**
      * @var int
@@ -27,11 +27,15 @@ class AttributeLabel implements AttributeLabelInterface
 
     /**
      * 
-     * @param int $id
+     * @param type $id
+     * @param type $optionId
+     * @param type $storeId
      */
-    public function __construct($id)
+    public function __construct($id, $optionId, $storeId)
     {
         $this->id = $id;
+        $this->optionId = $optionId;
+        $this->storeId = $storeId;
     }
 
     /**
@@ -45,9 +49,9 @@ class AttributeLabel implements AttributeLabelInterface
     /**
      * @return int
      */
-    public function getAttributeId()
+    public function getOptionId()
     {
-        return $this->attributeId;
+        return $this->optionId;
     }
 
     /**
@@ -67,23 +71,25 @@ class AttributeLabel implements AttributeLabelInterface
     }
 
     /**
-     * @param int $attributeLabelId
-     * @param int $attributeId
+     * @param int $attributeOptionValueId
+     * @param int $optionId
      * @param int $storeId
      * @param string $value
      * 
-     * @return AttributeLabelInterface
+     * @return AttributeOptionValueInterface
      */
     public static function buildNewWith(
-    $attributeLabelId, $attributeId, $storeId, $value = null
+    $attributeOptionValueId, $optionId, $storeId, $value = null
     )
     {
-        $object = new static($attributeLabelId);
+        $object = new static($attributeOptionValueId, $optionId, $storeId);
 
-        $object->id = $attributeLabelId;
-        $object->attributeId = $attributeId;
+        $object->id = $attributeOptionValueId;
+        $object->optionId = $optionId;
         $object->storeId = $storeId;
-        $object->value = $value;
+        $object->value = (isset($value))
+                ? $value
+                : null;
 
         return $object;
     }

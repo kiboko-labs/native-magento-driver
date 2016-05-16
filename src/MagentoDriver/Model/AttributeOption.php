@@ -22,8 +22,7 @@ class AttributeOption implements AttributeOptionInterface
 
     /**
      * 
-     * @param int $attributeId
-     * @param string $label
+     * @param int $id
      */
     public function __construct($id)
     {
@@ -56,7 +55,7 @@ class AttributeOption implements AttributeOptionInterface
 
     /**
      * @param int $attributeOptionId
-     * @param int attributeId
+     * @param int $attributeId
      * @param int $sortOrder
      * 
      * @return AttributeOptionInterface

@@ -1060,4 +1060,55 @@ eav_attribute_option:
         # white
         option_id: '5'
         attribute_id: '226'
-        sort_order: '40'        
+        sort_order: '40'
+eav_attribute_option_value:
+    -
+        value_id: 1
+        option_id: 1
+        store_id: 0
+        value: 'red'
+    -
+        value_id: 2
+        option_id: 1
+        store_id: 1
+        value: 'Rouge'
+    -
+        value_id: 3
+        option_id: 2
+        store_id: 0
+        value: 'green'
+    -
+        value_id: 4
+        option_id: 2
+        store_id: 1
+        value: 'Vert'
+    -
+        value_id: 5
+        option_id: 3
+        store_id: 0
+        value: 'blue'
+    -
+        value_id: 6
+        option_id: 3
+        store_id: 1
+        value: 'Bleu'
+    -
+        value_id: 7
+        option_id: 4
+        store_id: 0
+        value: 'black'
+    -
+        value_id: 8
+        option_id: 4
+        store_id: 1
+        value: 'Noir'
+    -
+        value_id: 9
+        option_id: 5
+        store_id: 0
+        value: 'white'
+    -
+        value_id: 10
+        option_id: 5
+        store_id: 1
+        value: 'Blanc'

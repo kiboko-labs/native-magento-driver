@@ -71,9 +71,13 @@
 
 ## Attribute option values (table `eav_attribute_option_value`)
 
-* [ ] reader
-* [ ] persister
-* [ ] deleter
+* [x] reader [Interface](src/MagentoDriver/Repository/AttributeOptionValueRepositoryInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/AttributeOptionValueRepository.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Repository/Doctrine/AttributeOptionValueRepositoryTest.php))
+* [x] persister [Interface](src/MagentoDriver/Persister/AttributeOptionValuePersisterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Attribute/AttributeOptionValuePersister.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Persister/Direct/Attribute/AttributeOptionValuePersisterTest.php))
+  * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/Attribute/AttributeOptionValuePersister.php)
+* [x] deleter [Interface](src/MagentoDriver/Deleter/AttributeOptionValueDeleterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Deleter/Doctrine/AttributeOptionValueDeleter.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Deleter/Doctrine/AttributeOptionValueDeleterTest.php))
 
 ## Attribute to entity linking (table `eav_entity_attribute`)
 
