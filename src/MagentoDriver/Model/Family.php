@@ -52,16 +52,16 @@ class Family implements FamilyInterface
     }
 
     /**
-     * @param type $familyId
-     * @param type $label
-     * @param type $sortOrder
+     * @param int $familyId
+     * @param string $label
+     * @param int $sortOrder
      * 
      * @return FamilyInterface
      */
     public static function buildNewWith(
         $familyId,
         $label,
-        $sortOrder    
+        $sortOrder = null    
     ) {
         $object = new static($label);
 

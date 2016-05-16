@@ -28,7 +28,10 @@ class StandardProductFactory implements ProductFactoryInterface
                     $options['sku'],
                     Family::buildNewWith(
                         $options['attribute_set_id'],
-                        ucfirst($type).'AttributeSet' /* // $options['attribute_set_name'] // $label */ /** @todo: this section must be review */
+                        // $options['attribute_set_name']
+                        // $label
+                        /** @todo: this section must be review */
+                        ucfirst($type).'AttributeSet'
                     ),
                     new \DateTime($options['created_at']),
                     new \DateTime($options['updated_at'])
