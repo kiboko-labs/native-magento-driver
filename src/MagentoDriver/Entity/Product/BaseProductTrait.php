@@ -126,14 +126,14 @@ trait BaseProductTrait
     }
 
     /**
-     * @return FamilyInterface
+     * @return int
      */
     public function getFamilyId()
     {
         if ($this->getFamily() === null) {
             return;
         }
-
+        
         return $this->getFamily()->getId();
     }
 

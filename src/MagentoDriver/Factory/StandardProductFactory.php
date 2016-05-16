@@ -2,6 +2,9 @@
 
 namespace Luni\Component\MagentoDriver\Factory;
 
+use Luni\Component\MagentoDriver\Entity\Product\SimpleProduct;
+use Luni\Component\MagentoDriver\Entity\Product\ConfigurableProduct;
+use Luni\Component\MagentoDriver\Model\Family;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
@@ -17,6 +20,36 @@ class StandardProductFactory implements ProductFactoryInterface
     public function __construct()
     {
         $this->builders = new ArrayCollection();
+        $this->addBuilder(
+            'simple', 
+            function($type, $options) {
+                return SimpleProduct::buildNewWith(
+                    $options['entity_id'],
+                    $options['sku'],
+                    Family::buildNewWith(
+                        $options['attribute_set_id'],
+                        ucfirst($type).'AttributeSet' /* // $options['attribute_set_name'] // $label */ /** @todo: this section must be review */
+                    ),
+                    new \DateTime($options['created_at']),
+                    new \DateTime($options['updated_at'])
+                );
+            }
+        );
+        $this->addBuilder(
+            'configurable', 
+            function($type, $options) {
+                return ConfigurableProduct::buildNewWith(
+                    $options['entity_id'],
+                    $options['sku'],
+                    Family::buildNewWith(
+                        $options['attribute_set_id'],
+                        ucfirst($type).'AttributeSet' /* // $options['attribute_set_name'] // $label */ /** @todo: this section must be review */
+                    ),
+                    new \DateTime($options['created_at']),
+                    new \DateTime($options['updated_at'])
+                );
+            }
+        );
     }
 
     public function addBuilder($type, \Closure $callback)
@@ -40,7 +73,7 @@ class StandardProductFactory implements ProductFactoryInterface
             if ($expectedType !== $type) {
                 continue;
             }
-
+            
             return $builder($type, $options);
         }
 

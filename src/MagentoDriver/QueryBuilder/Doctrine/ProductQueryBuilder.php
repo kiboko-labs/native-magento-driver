@@ -75,7 +75,7 @@ class ProductQueryBuilder implements ProductQueryBuilderInterface
     /**
      * @param string $prefix
      *
-     * @return string
+     * @return string $prefix.'catalog_product_entity'
      */
     public static function getDefaultTable($prefix = null)
     {
@@ -89,7 +89,7 @@ class ProductQueryBuilder implements ProductQueryBuilderInterface
     /**
      * @param string $prefix
      *
-     * @return string
+     * @return string $prefix.'eav_attribute_set'
      */
     public static function getDefaultFamilyTable($prefix = null)
     {
@@ -103,7 +103,7 @@ class ProductQueryBuilder implements ProductQueryBuilderInterface
     /**
      * @param string $prefix
      *
-     * @return string
+     * @return string $prefix.'catalog_category_product'
      */
     public static function getDefaultCategoryProductTable($prefix = null)
     {
