@@ -55,14 +55,17 @@
   * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/AttributeLabelRepository.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Repository/Doctrine/AttributeLabelRepositoryTest.php))
 * [x] persister [Interface](src/MagentoDriver/Persister/AttributeLabelPersisterInterface.php)
   * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Attribute/AttributeLabelPersister.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Persister/Direct/Attribute/AttributeLabelPersisterTest.php))
-  * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/Attribute/AttributeGroupPersister.php)
+  * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/Attribute/AttributeLabelPersister.php)
 * [x] deleter [Interface](src/MagentoDriver/Deleter/AttributeLabelDeleterInterface.php)
   * [Doctrine DBAL implementation](src/MagentoDriver/Deleter/Doctrine/AttributeLabelDeleter.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Deleter/Doctrine/AttributeLabelDeleterTest.php))
 
 ## Attribute options (table `eav_attribute_option`)
 
-* [ ] reader
-* [ ] persister
+* [x] reader [Interface](src/MagentoDriver/Repository/AttributeOptionRepositoryInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/AttributeOptionRepository.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Repository/Doctrine/AttributeOptionRepositoryTest.php))
+* [x] persister [Interface](src/MagentoDriver/Persister/AttributeOptionPersisterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Attribute/AttributeOptionPersister.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Persister/Direct/Attribute/AttributeOptionPersisterTest.php))
+  * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/Attribute/AttributeOptionPersister.php)
 * [x] deleter [Interface](src/MagentoDriver/Deleter/AttributeOptionDeleterInterface.php)
   * [Doctrine DBAL implementation](src/MagentoDriver/Deleter/Doctrine/AttributeOptionDeleter.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Deleter/Doctrine/AttributeOptionDeleterTest.php))
 
