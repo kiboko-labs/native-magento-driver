@@ -81,9 +81,12 @@
 
 ## Attribute to entity linking (table `eav_entity_attribute`)
 
-* [ ] reader
-* [ ] persister
-* [ ] deleter
+* [x] reader [Interface](src/MagentoDriver/Repository/EntityAttributeRepositoryInterface.php) 
+  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/EntityAttributeRepository.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Repository/Doctrine/EntityAttributeRepositoryTest.php))
+* [x] persister [Interface](src/MagentoDriver/Persister/EntityAttributePersisterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Attribute/StandardEntityAttributePersister.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Persister/Direct/Attribute/EntityAttributePersisterTest.php))
+* [x] deleter [Interface](src/MagentoDriver/Deleter/EntityAttributeDeleterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Deleter/Doctrine/EntityAttributeDeleter.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Deleter/Doctrine/EntityAttributeDeleterTest.php))
 
 ## Catalog Attributes extensions (table `catalog_eav_attribute`)
 
