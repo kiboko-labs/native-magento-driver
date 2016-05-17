@@ -1,0 +1,60 @@
+eav_entity_attribute:
+# Inspired from : magento-sample-data-1.9.1.0.eav_entity_attribute
+    -
+        entity_attribute_id: 1
+        entity_type_id: 4
+        attribute_set_id: 4
+        attribute_group_id: 7
+        attribute_id: 79
+        sort_order: 10
+# @author: Nolwennig
+# @notice: An internal tacit rule stipulates that the id 2 is removed by default        
+#    -  
+#        entity_attribute_id: 2
+#        entity_type_id: 4
+#        attribute_set_id: 4
+#        attribute_group_id: 7
+#        attribute_id: 122
+#        sort_order: 20
+    -  
+        entity_attribute_id: 3
+        entity_type_id: 4
+        attribute_set_id: 4
+        attribute_group_id: 7
+        attribute_id: 131
+        sort_order: 30
+    -  
+        entity_attribute_id: 4
+        entity_type_id: 4
+        attribute_set_id: 4
+        attribute_group_id: 7
+        attribute_id: 167
+        sort_order: 40
+    -  
+        entity_attribute_id: 5
+        entity_type_id: 4
+        attribute_set_id: 4
+        attribute_group_id: 7
+        attribute_id: 210
+        sort_order: 50
+    -  
+        entity_attribute_id: 6
+        entity_type_id: 4
+        attribute_set_id: 4
+        attribute_group_id: 7
+        attribute_id: 226
+        sort_order: 60
+    -  
+        entity_attribute_id: 7
+        entity_type_id: 4
+        attribute_set_id: 4
+        attribute_group_id: 7
+        attribute_id: 232
+        sort_order: 70
+    -  
+        entity_attribute_id: 8
+        entity_type_id: 4
+        attribute_set_id: 4
+        attribute_group_id: 7
+        attribute_id: 300
+        sort_order: 80
