@@ -381,7 +381,7 @@ eav_attribute:
         backend_table: null
         frontend_model: null
         frontend_input: price
-        frontend_label: Coût
+        frontend_label: Cout
         frontend_class: null
         source_model: null
         is_required: 0
@@ -1018,7 +1018,7 @@ eav_attribute_label:
         attribute_label_id: '1'
         attribute_id: '79'
         store_id: '1'
-        value: 'Coût'
+        value: 'Cout'
     -
         attribute_label_id: '2'
         attribute_id: '122'
