@@ -20,7 +20,7 @@ class SimpleProduct implements SimpleProductInterface
 
     /**
      * @param string                  $identifier
-     * @param FamilyInterface         $family,
+     * @param FamilyInterface         $family
      * @param \DateTimeInterface|null $creationDate
      * @param \DateTimeInterface|null $modificationDate
      */
