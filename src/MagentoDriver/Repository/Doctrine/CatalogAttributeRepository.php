@@ -15,9 +15,6 @@ use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
 use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilderInterface;
 use Luni\Component\MagentoDriver\Repository\ProductAttributeRepositoryInterface;
 
-/**
- * Class ProductAttributeRepository.
- */
 class CatalogAttributeRepository implements ProductAttributeRepositoryInterface
 {
     /**
