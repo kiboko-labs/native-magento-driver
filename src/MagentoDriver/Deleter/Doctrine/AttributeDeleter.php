@@ -9,7 +9,6 @@ use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeQueryBuilderInte
 
 class AttributeDeleter implements AttributeDeleterInterface
 {
-
     /**
      * @var AttributeQueryBuilderInterface
      */
@@ -26,8 +25,7 @@ class AttributeDeleter implements AttributeDeleterInterface
      */
     public function __construct(
     Connection $connection, AttributeQueryBuilderInterface $queryBuilder
-    )
-    {
+    ) {
         $this->connection = $connection;
         $this->queryBuilder = $queryBuilder;
     }
@@ -111,5 +109,4 @@ class AttributeDeleter implements AttributeDeleterInterface
 
         return $statement->rowCount();
     }
-
 }

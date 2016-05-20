@@ -25,11 +25,11 @@ class CatalogAttributeExtensionPersisterTest extends \PHPUnit_Framework_TestCase
      * @var CatalogAttributeExtensionPersisterInterface
      */
     private $persister;
-    
+
     private $magentoVersion;
-    
+
     private $magentoEdition;
-    
+
     /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
@@ -88,13 +88,13 @@ class CatalogAttributeExtensionPersisterTest extends \PHPUnit_Framework_TestCase
         $this->truncateTables();
 
         parent::setUp();
-        
+
         $this->magentoVersion = '1.9';
         $this->magentoEdition = 'ce';
-        
+
         $schemaBuilder->hydrateEntityTypeTable($this->magentoVersion, $this->magentoEdition);
         $schemaBuilder->hydrateAttributeTable($this->magentoVersion, $this->magentoEdition);
-        
+
         $this->persister = new CatalogAttributeExtensionPersister(
             $this->getDoctrineConnection(),
             ProductAttributeQueryBuilder::getDefaultExtraTable()
@@ -120,9 +120,9 @@ class CatalogAttributeExtensionPersisterTest extends \PHPUnit_Framework_TestCase
     public function testInsertOne()
     {
         $dataLoader = new Loader($this->getDoctrineConnection(), 'catalog_eav_attribute');
-        
+
         $this->persister->initialize();
-        
+
         foreach ($dataLoader->walkData($this->magentoVersion, $this->magentoEdition) as $data) {
             $attribute = new CatalogAttributeExtension(
                 $data['attribute_id'],
@@ -147,9 +147,9 @@ class CatalogAttributeExtensionPersisterTest extends \PHPUnit_Framework_TestCase
             );
             $this->persister->persist($attribute);
         }
-        
+
         $this->persister->flush();
-        
+
         $this->assertTableRowCount('catalog_eav_attribute', 8);
 
         $expected = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
@@ -191,7 +191,7 @@ class CatalogAttributeExtensionPersisterTest extends \PHPUnit_Framework_TestCase
             $this->persister->persist($attribute);
         }
         $this->persister->flush();
-        
+
         $this->assertTableRowCount('catalog_eav_attribute', 8);
 
         $expected = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(

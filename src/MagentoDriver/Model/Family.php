@@ -13,7 +13,7 @@ class Family implements FamilyInterface
      * @var string
      */
     private $label;
-    
+
     /**
      * @var int
      */
@@ -42,7 +42,7 @@ class Family implements FamilyInterface
     {
         return $this->label;
     }
-    
+
     /**
      * @return int
      */
@@ -52,16 +52,16 @@ class Family implements FamilyInterface
     }
 
     /**
-     * @param int $familyId
+     * @param int    $familyId
      * @param string $label
-     * @param int $sortOrder
-     * 
+     * @param int    $sortOrder
+     *
      * @return FamilyInterface
      */
     public static function buildNewWith(
         $familyId,
         $label,
-        $sortOrder = null    
+        $sortOrder = null
     ) {
         $object = new static($label);
 
@@ -70,7 +70,7 @@ class Family implements FamilyInterface
 
         return $object;
     }
-    
+
     /**
      * @param int $id
      */

@@ -44,11 +44,11 @@ class AttributeOptionRepositoryTest extends \PHPUnit_Framework_TestCase
         $platform = $this->getDoctrineConnection()->getDatabasePlatform();
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
-        
+
         $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('eav_attribute')
         );
-        
+
         $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('eav_attribute_option')
         );
@@ -62,7 +62,7 @@ class AttributeOptionRepositoryTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        
+
         $currentSchema = $this->getDoctrineConnection()
             ->getSchemaManager()
             ->createSchema()
@@ -110,7 +110,7 @@ class AttributeOptionRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $attributeOption = $this->repository->findOneById(2);
         $this->assertInstanceOf(AttributeOptionInterface::class, $attributeOption);
-        
+
         $this->assertEquals($attributeOption->getId(), 2);
         $this->assertEquals($attributeOption->getAttributeId(), 226);
         $this->assertEquals($attributeOption->getSortOrder(), 10);
@@ -120,5 +120,4 @@ class AttributeOptionRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertNull($this->repository->findOneById(123));
     }
-
 }

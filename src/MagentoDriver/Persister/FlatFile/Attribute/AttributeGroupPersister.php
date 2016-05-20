@@ -44,7 +44,7 @@ class AttributeGroupPersister implements AttributeGroupPersisterInterface
             'attribute_set_id' => $attributeGroupInterface->getFamilyId(),
             'attribute_group_name' => $attributeGroupInterface->getLabel(),
             'sort_order' => $attributeGroupInterface->getSortOrder(),
-            'default_d' => $attributeGroupInterface->getDefaultId()
+            'default_d' => $attributeGroupInterface->getDefaultId(),
         ]);
     }
 

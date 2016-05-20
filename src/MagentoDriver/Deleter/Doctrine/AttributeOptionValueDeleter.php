@@ -20,7 +20,7 @@ class AttributeOptionValueDeleter implements AttributeOptionValueDeleterInterfac
     private $connection;
 
     /**
-     * @param Connection                          $connection
+     * @param Connection                                $connection
      * @param AttributeOptionValueQueryBuilderInterface $queryBuilder
      */
     public function __construct(

@@ -64,13 +64,13 @@ class StandardEntityStorePersister implements EntityStorePersisterInterface
             if ($entityStore->getId()) {
                 $count = $this->connection->update($this->tableName,
                     [
-                        'entity_type_id'    => $entityStore->getTypeId(),
-                        'store_id'          => $entityStore->getStoreId(),
-                        'increment_prefix'  => $entityStore->getIncrementPrefix(),
-                        'increment_last_id' => $entityStore->getIncrementLastId()
+                        'entity_type_id' => $entityStore->getTypeId(),
+                        'store_id' => $entityStore->getStoreId(),
+                        'increment_prefix' => $entityStore->getIncrementPrefix(),
+                        'increment_last_id' => $entityStore->getIncrementLastId(),
                     ],
                     [
-                        'entity_store_id'   => $entityStore->getId()
+                        'entity_store_id' => $entityStore->getId(),
                     ]
                 );
             }
@@ -78,13 +78,13 @@ class StandardEntityStorePersister implements EntityStorePersisterInterface
             if ($count <= 0) {
                 $this->connection->insert($this->tableName,
                     [
-                        'entity_type_id'    => $entityStore->getTypeId(),
-                        'store_id'          => $entityStore->getStoreId(),
-                        'increment_prefix'  => $entityStore->getIncrementPrefix(),
-                        'increment_last_id' => $entityStore->getIncrementLastId()
+                        'entity_type_id' => $entityStore->getTypeId(),
+                        'store_id' => $entityStore->getStoreId(),
+                        'increment_prefix' => $entityStore->getIncrementPrefix(),
+                        'increment_last_id' => $entityStore->getIncrementLastId(),
                     ],
                     [
-                        'entity_store_id'   => $entityStore->getId()
+                        'entity_store_id' => $entityStore->getId(),
                     ]
                 );
 

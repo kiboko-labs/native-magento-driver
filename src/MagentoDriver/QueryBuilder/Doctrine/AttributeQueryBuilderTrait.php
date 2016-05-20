@@ -184,11 +184,11 @@ trait AttributeQueryBuilderTrait
     {
         $queryBuilder = new QueryBuilder($this->connection);
         $queryBuilder->delete($this->table);
-        
-        if($this->table !== 'catalog_eav_attribute'){
-            $queryBuilder->where('entity_type_id=4'); 
+
+        if ($this->table !== 'catalog_eav_attribute') {
+            $queryBuilder->where('entity_type_id=4');
         }
-        
+
         return $queryBuilder;
     }
 

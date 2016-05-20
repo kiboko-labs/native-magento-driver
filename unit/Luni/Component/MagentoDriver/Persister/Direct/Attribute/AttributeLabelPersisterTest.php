@@ -42,15 +42,15 @@ class AttributeLabelPersisterTest extends \PHPUnit_Framework_TestCase
         $platform = $this->getDoctrineConnection()->getDatabasePlatform();
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
-        
+
         $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('core_store')
         );
-        
+
         $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('eav_attribute')
         );
-        
+
         $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('eav_attribute_label')
         );

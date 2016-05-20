@@ -29,7 +29,7 @@ class AttributeOptionValue
     public function build($magentoVersion = null)
     {
         $table = $this->schema->createTable('eav_attribute_option_value');
-        
+
         $table->addColumn('value_id', 'integer', ['unsigned' => true, 'autoincrement' => true]);
         $table->addColumn('option_id', 'integer', ['unsigned' => true, 'default' => 0]);
         $table->addColumn('store_id', 'smallint', ['unsigned' => true, 'default' => 0]);

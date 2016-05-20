@@ -7,7 +7,6 @@ use Doctrine\DBAL\Query\QueryBuilder;
 
 class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
 {
-
     /**
      * @var Connection
      */
@@ -30,8 +29,7 @@ class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
      */
     public function __construct(
     Connection $connection, $table, array $fields
-    )
-    {
+    ) {
         $this->connection = $connection;
         $this->table = $table;
         $this->fields = $fields;
@@ -47,7 +45,7 @@ class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
             'attribute_set_id',
             'attribute_group_name',
             'sort_order',
-            'default_id'
+            'default_id',
         ];
     }
 
@@ -107,9 +105,9 @@ class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
     }
 
     /**
-     * 
      * @param string $alias
-     * @param int[] $idList
+     * @param int[]  $idList
+     *
      * @return type
      */
     public function createFindAllByIdQueryBuilder($alias, array $idList)
@@ -121,7 +119,7 @@ class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
 
         return $queryBuilder;
     }
-    
+
     /**
      * @param string $alias
      *
@@ -139,11 +137,11 @@ class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
 
         return $queryBuilder;
     }
-    
+
     /**
-     * 
      * @param string   $alias
      * @param string[] $nameList
+     *
      * @return type
      */
     public function createFindAllByNameQueryBuilder($alias, array $nameList)
@@ -168,7 +166,7 @@ class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
 
     /**
      * @param int $id
-     * 
+     *
      * @return QueryBuilder
      */
     public function createDeleteOneByIdQueryBuilder()
@@ -201,7 +199,7 @@ class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
 
     /**
      * @param string $name
-     * 
+     *
      * @return QueryBuilder
      */
     public function createDeleteOneByNameQueryBuilder()
@@ -231,5 +229,4 @@ class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
 
         return $queryBuilder;
     }
-
 }

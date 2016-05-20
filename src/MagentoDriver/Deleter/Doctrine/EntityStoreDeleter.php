@@ -20,7 +20,7 @@ class EntityStoreDeleter implements EntityStoreDeleterInterface
     private $connection;
 
     /**
-     * @param Connection $connection
+     * @param Connection                       $connection
      * @param EntityStoreQueryBuilderInterface $queryBuilder
      */
     public function __construct(

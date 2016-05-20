@@ -73,5 +73,4 @@ class AttributeLabelRepository implements AttributeLabelRepositoryInterface
 
         return $this->createNewAttributeLabelInstanceFromDatabase($options);
     }
-
 }

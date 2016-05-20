@@ -73,5 +73,4 @@ class AttributeOptionRepository implements AttributeOptionRepositoryInterface
 
         return $this->createNewAttributeOptionInstanceFromDatabase($options);
     }
-
 }

@@ -46,15 +46,15 @@ class EntityAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
         $platform = $this->getDoctrineConnection()->getDatabasePlatform();
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
-        
+
         $this->getDoctrineConnection()->exec(
                 $platform->getTruncateTableSQL('eav_attribute_group')
         );
-        
+
         $this->getDoctrineConnection()->exec(
                 $platform->getTruncateTableSQL('eav_attribute')
         );
-        
+
         $this->getDoctrineConnection()->exec(
                 $platform->getTruncateTableSQL('eav_entity_attribute')
         );
@@ -89,19 +89,19 @@ class EntityAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->truncateTables();
-        
+
         $magentoVersion = '1.9';
         $magentoEdition = 'ce';
-        
+
         $schemaBuilder->hydrateAttributeGroupTable($magentoVersion, $magentoEdition);
         $schemaBuilder->hydrateAttributeTable($magentoVersion, $magentoEdition);
         $schemaBuilder->hydrateEntityAttributeTable($magentoVersion, $magentoEdition);
 
         $this->repository = new EntityAttributeRepository(
-                $this->getDoctrineConnection(), 
+                $this->getDoctrineConnection(),
                 new EntityAttributeQueryBuilder(
-                    $this->getDoctrineConnection(), 
-                    EntityAttributeQueryBuilder::getDefaultTable(), 
+                    $this->getDoctrineConnection(),
+                    EntityAttributeQueryBuilder::getDefaultTable(),
                     EntityAttributeQueryBuilder::getDefaultFields()
                 ),
                 new EntityAttributeFactory()
@@ -145,7 +145,7 @@ class EntityAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
         }
         $this->assertGreaterThanOrEqual(1, count($entityAttribute));
     }
-    
+
     public function testFetchingOneByAttributeIdAndGroupId()
     {
         $entityAttribute = $this->repository->findOneByAttributeIdAndGroupId(79, 7);
@@ -159,7 +159,7 @@ class EntityAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($entityAttribute->getAttributeId(), 79);
         $this->assertEquals($entityAttribute->getSortOrder(), 10);
     }
-    
+
     public function testFetchingOneByAttributeIdAndSetId()
     {
         $entityAttribute = $this->repository->findOneByAttributeIdAndSetId(131, 4);

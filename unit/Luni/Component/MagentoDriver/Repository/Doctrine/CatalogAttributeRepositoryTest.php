@@ -28,7 +28,7 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
      * @var AttributeRepositoryInterface
      */
     private $repository;
-    
+
     /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
@@ -99,9 +99,9 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
         $schemaBuilder->hydrateCatalogAttributeExtensionsTable($magentoVersion, $magentoEdition);
 
         $this->repository = new CatalogAttributeRepository(
-                $this->getDoctrineConnection(), 
+                $this->getDoctrineConnection(),
                 new ProductAttributeQueryBuilder(
-                    $this->getDoctrineConnection(), 
+                    $this->getDoctrineConnection(),
                     ProductAttributeQueryBuilder::getDefaultTable(),
                     ProductAttributeQueryBuilder::getDefaultExtraTable(),
                     ProductAttributeQueryBuilder::getDefaultEntityTable(),
@@ -152,8 +152,8 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testFetchingAllByCode()
     {
-        $attributes = $this->repository->findAllByCode('catalog_product', array(
-            'release_date', 'gift_message_available'));
+        $attributes = $this->repository->findAllByCode('catalog_product', [
+            'release_date', 'gift_message_available', ]);
 
         foreach ($attributes as $attribute) {
             $this->assertInstanceOf(AttributeInterface::class, $attribute);
@@ -169,11 +169,11 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
     public function testFetchingAllByCodeButNonExistent()
     {
         $attributes = $this->repository->findAllByCode(
-            'catalog_product', 
-            array(
+            'catalog_product',
+            [
                 'non_existent',
-                'non_existent_too'
-            )
+                'non_existent_too',
+            ]
         );
 
         $this->assertInstanceOf(ArrayCollection::class, $attributes);
@@ -183,7 +183,7 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testFetchingAllById()
     {
-        $attributes = $this->repository->findAllById(array(167, 122));
+        $attributes = $this->repository->findAllById([167, 122]);
 
         foreach ($attributes as $attribute) {
             $this->assertInstanceOf(AttributeInterface::class, $attribute);
@@ -199,8 +199,8 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testFetchingAllByIdButNonExistent()
     {
-        $attributes = $this->repository->findAllById(array(1337, 8695));
-        
+        $attributes = $this->repository->findAllById([1337, 8695]);
+
         $this->assertInstanceOf(\Doctrine\Common\Collections\ArrayCollection::class, $attributes);
 
         $this->assertEquals($attributes->count(), 0);
@@ -209,168 +209,167 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
     public function testFetchingAll()
     {
         $attributes = $this->repository->findAll();
-        
+
         foreach ($attributes as $attribute) {
             $this->assertInstanceOf(AttributeInterface::class, $attribute);
         }
         $this->assertEquals($attributes->count(), 8);
-        
+
         $expected = $this->getDataSet();
-        
+
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('catalog_eav_attribute');
-        
+
         $this->assertDataSetsEqual($expected, $actual);
     }
 
     public function testFetchingAllSimpleProductByEntity()
     {
         $simpleProduct = new SimpleProduct(
-            'SIMPLE_PRODUCT', 
+            'SIMPLE_PRODUCT',
             Family::buildNewWith(4, 'Default', 1),
-            new \DateTime('now'), 
+            new \DateTime('now'),
             new \DateTime('now')
         );
-        
+
         $simples = $this->repository->findAllByEntity($simpleProduct);
-        
+
         /** @todo $simples is null ? */
-        foreach ($simples as $attribute){
+        foreach ($simples as $attribute) {
             $this->assertInstanceOf(AttributeInterface::class, $attribute);
         }
     }
-    
+
     public function testFetchingAllConfigurableProductByEntity()
     {
         $configurableProduct = new ConfigurableProduct(
-            'CONFIGURABLE_PRODUCT', 
+            'CONFIGURABLE_PRODUCT',
             Family::buildNewWith(8, 'Clothing', 1),
-            new \DateTime('now'), 
+            new \DateTime('now'),
             new \DateTime('now')
         );
-        
+
         $configurables = $this->repository->findAllByEntity($configurableProduct);
-        
+
         /** @todo $configurables is null ? */
-        foreach ($configurables as $attribute){
+        foreach ($configurables as $attribute) {
             $this->assertInstanceOf(AttributeInterface::class, $attribute);
         }
     }
-    
-    
+
     public function testFetchingAllSimpleProductByEntityButNonExistent()
     {
         $simpleProduct = new SimpleProduct(
-            'SIMPLE_PRODUCT', 
+            'SIMPLE_PRODUCT',
             Family::buildNewWith(8695, 'non_existent', 1),
-            new \DateTime('now'), 
+            new \DateTime('now'),
             new \DateTime('now')
         );
-        
+
         $simples = $this->repository->findAllByEntity($simpleProduct);
-        
+
         $this->assertCount(0, $simples);
     }
-    
+
     public function testFetchingAllConfigurableProductByEntityButNonExistent()
     {
         $configurableProduct = new ConfigurableProduct(
-            'CONFIGURABLE_PRODUCT', 
+            'CONFIGURABLE_PRODUCT',
             Family::buildNewWith(1331, 'non_existent', 1),
-            new \DateTime('now'), 
+            new \DateTime('now'),
             new \DateTime('now')
         );
-        
+
         $configurables = $this->repository->findAllByEntity($configurableProduct);
-        
-        $this->assertCount(0, $configurables);    
+
+        $this->assertCount(0, $configurables);
     }
-    
+
     public function testFetchingAllByEntityTypeCode()
     {
         $attributes = $this->repository->findAllByEntityTypeCode('catalog_product');
-        
+
         $this->assertCount(8, $attributes);
-        
-        foreach ($attributes as $attribute){
+
+        foreach ($attributes as $attribute) {
             $this->assertInstanceOf(AttributeInterface::class, $attribute);
-            /** @todo: $attribute->getEntityTypeId() is null ? */
-            $this->assertEquals(4, $attribute->getEntityTypeId()); 
-        }
-    }
-    
-    public function testFetchingAllByEntityTypeCodeButNonExistent()
-    {
-        $attributes = $this->repository->findAllByEntityTypeCode('non_existent');
-        
-        /** @todo: return 8 ? */
-        $this->assertCount(0, $attributes);
-    }
-    
-    public function testFetchingAllByEntityTypeId()
-    {
-        $attributes = $this->repository->findAllByEntityTypeId(4);
-        
-        $this->assertCount(8, $attributes);
-        
-        foreach ($attributes as $attribute){
-            $this->assertInstanceOf(AttributeInterface::class, $attribute);
-            /** @todo $attribute->getEntityTypeId() is null ? */
+            /* @todo: $attribute->getEntityTypeId() is null ? */
             $this->assertEquals(4, $attribute->getEntityTypeId());
         }
     }
-    
+
+    public function testFetchingAllByEntityTypeCodeButNonExistent()
+    {
+        $attributes = $this->repository->findAllByEntityTypeCode('non_existent');
+
+        /* @todo: return 8 ? */
+        $this->assertCount(0, $attributes);
+    }
+
+    public function testFetchingAllByEntityTypeId()
+    {
+        $attributes = $this->repository->findAllByEntityTypeId(4);
+
+        $this->assertCount(8, $attributes);
+
+        foreach ($attributes as $attribute) {
+            $this->assertInstanceOf(AttributeInterface::class, $attribute);
+            /* @todo $attribute->getEntityTypeId() is null ? */
+            $this->assertEquals(4, $attribute->getEntityTypeId());
+        }
+    }
+
     public function testFetchingAllByEntityTypeIdButNonExistent()
     {
         $attributes = $this->repository->findAllByEntityTypeId(1337);
-        
+
         $this->assertCount(0, $attributes);
     }
-    
+
     /**
      * @todo: SQL Error: Table catalog_product_super_attribute not found
      */
     public function testFetchingAllVariantAxisByEntity()
     {
-//        $product = new ConfigurableProduct(
-//            'CONFIGURABLE_PRODUCT', 
+        //        $product = new ConfigurableProduct(
+//            'CONFIGURABLE_PRODUCT',
 //            Family::buildNewWith(4, 'Default', 1),
-//            new \DateTime('now'), 
+//            new \DateTime('now'),
 //            new \DateTime('now')
 //        );
-//        
+//
 //        $attributes = $this->repository->findAllVariantAxisByEntity($product);
-//        
+//
 //        $this->assertCount(8, $attributes);
-//        
+//
 //        foreach ($attributes as $attribute){
 //            $this->assertInstanceOf(AttributeInterface::class, $attribute);
 //            $this->assertEquals(4, $attribute->getEntityTypeId());
 //        }
     }
-    
+
     public function testFetchingAllVariantAxisByEntityButNonExistent()
     {
         $product = new SimpleProduct(
-            'SIMPLE_PRODUCT', 
+            'SIMPLE_PRODUCT',
             Family::buildNewWith(8695, 'non_existent', 1),
-            new \DateTime('now'), 
+            new \DateTime('now'),
             new \DateTime('now')
         );
-        
+
         $attributes = $this->repository->findAllVariantAxisByEntity($product);
-        
+
         $this->assertCount(0, $attributes);
     }
-    
+
     public function testFetchingAllByFamily()
     {
         $attributes = $this->repository->findAllByFamily(Family::buildNewWith(4, 'Default', 1));
-        
-        /** @todo: return 0 ? */
+
+        /* @todo: return 0 ? */
         $this->assertCount(8, $attributes);
-        
-        foreach ($attributes as $attribute){
+
+        foreach ($attributes as $attribute) {
             $this->assertInstanceOf(AttributeInterface::class, $attribute);
             $this->assertEquals(4, $attribute->getEntityTypeId());
         }
@@ -378,27 +377,27 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
     public function testFetchingAllByFamilyButNonExistent()
     {
         $attributes = $this->repository->findAllByFamily(Family::buildNewWith(8695, 'non_existent', 1));
-        
+
         $this->assertCount(0, $attributes);
     }
-    
+
     public function testFetchingAllMandatoryByFamily()
     {
         $attributes = $this->repository->findAllMandatoryByFamily(Family::buildNewWith(4, 'Default', 1));
-        
-        /** @todo: return 0 ? */
+
+        /* @todo: return 0 ? */
         $this->assertCount(8, $attributes);
-        
-        foreach ($attributes as $attribute){
+
+        foreach ($attributes as $attribute) {
             $this->assertInstanceOf(AttributeInterface::class, $attribute);
             $this->assertEquals(4, $attribute->getEntityTypeId());
         }
     }
- 
+
     public function testFetchingAllMandatoryByFamilyButNonExistent()
     {
         $attributes = $this->repository->findAllMandatoryByFamily(Family::buildNewWith(8695, 'non_existent', 1));
-        
+
         $this->assertCount(0, $attributes);
     }
-}   
+}

@@ -35,10 +35,10 @@ class CatalogProductMediaGalleryAttributeValue
         $table->addColumn('label', 'string', ['length' => 255, 'notnul' => false]);
         $table->addColumn('position', 'integer', ['unsigned' => true, 'notnull' => false]);
         $table->addColumn('disabled', 'smallint', ['unsigned' => true, 'default' => 0]);
-        
+
         $table->setPrimaryKey(['value_id', 'store_id']);
         $table->addIndex(['store_id']);
-        
+
         return $table;
     }
 }

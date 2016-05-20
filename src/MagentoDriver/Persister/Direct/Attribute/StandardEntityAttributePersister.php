@@ -69,10 +69,10 @@ class StandardEntityAttributePersister implements EntityAttributePersisterInterf
                         'attribute_set_id' => $entityAttribute->getAttributeSetId(),
                         'attribute_group_id' => $entityAttribute->getAttributeGroupId(),
                         'attribute_id' => $entityAttribute->getAttributeId(),
-                        'sort_order' => $entityAttribute->getSortOrder()
+                        'sort_order' => $entityAttribute->getSortOrder(),
                     ],
                     [
-                        'entity_attribute_id' => $entityAttribute->getId()
+                        'entity_attribute_id' => $entityAttribute->getId(),
                     ]
                 );
             }
@@ -85,7 +85,7 @@ class StandardEntityAttributePersister implements EntityAttributePersisterInterf
                         'attribute_set_id' => $entityAttribute->getAttributeSetId(),
                         'attribute_group_id' => $entityAttribute->getAttributeGroupId(),
                         'attribute_id' => $entityAttribute->getAttributeId(),
-                        'sort_order' => $entityAttribute->getSortOrder()
+                        'sort_order' => $entityAttribute->getSortOrder(),
                     ]
                 );
 

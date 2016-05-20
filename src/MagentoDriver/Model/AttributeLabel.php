@@ -4,7 +4,6 @@ namespace Luni\Component\MagentoDriver\Model;
 
 class AttributeLabel implements AttributeLabelInterface
 {
-
     /**
      * @var int
      */
@@ -26,7 +25,6 @@ class AttributeLabel implements AttributeLabelInterface
     private $value;
 
     /**
-     * 
      * @param int $id
      */
     public function __construct($id)
@@ -67,17 +65,16 @@ class AttributeLabel implements AttributeLabelInterface
     }
 
     /**
-     * @param int $attributeLabelId
-     * @param int $attributeId
-     * @param int $storeId
+     * @param int    $attributeLabelId
+     * @param int    $attributeId
+     * @param int    $storeId
      * @param string $value
-     * 
+     *
      * @return AttributeLabelInterface
      */
     public static function buildNewWith(
     $attributeLabelId, $attributeId, $storeId, $value = null
-    )
-    {
+    ) {
         $object = new static($attributeLabelId);
 
         $object->id = $attributeLabelId;
@@ -95,5 +92,4 @@ class AttributeLabel implements AttributeLabelInterface
     {
         $this->id = $id;
     }
-
 }

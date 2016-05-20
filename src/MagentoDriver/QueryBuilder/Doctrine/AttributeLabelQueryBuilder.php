@@ -7,7 +7,6 @@ use Doctrine\DBAL\Query\QueryBuilder;
 
 class AttributeLabelQueryBuilder implements AttributeLabelQueryBuilderInterface
 {
-
     /**
      * @var Connection
      */
@@ -30,8 +29,7 @@ class AttributeLabelQueryBuilder implements AttributeLabelQueryBuilderInterface
      */
     public function __construct(
     Connection $connection, $table, array $fields
-    )
-    {
+    ) {
         $this->connection = $connection;
         $this->table = $table;
         $this->fields = $fields;
@@ -46,7 +44,7 @@ class AttributeLabelQueryBuilder implements AttributeLabelQueryBuilderInterface
             'attribute_label_id',
             'attribute_id',
             'store_id',
-            'value'
+            'value',
         ];
     }
 
@@ -106,9 +104,9 @@ class AttributeLabelQueryBuilder implements AttributeLabelQueryBuilderInterface
     }
 
     /**
-     * 
      * @param string $alias
-     * @param int[] $idList
+     * @param int[]  $idList
+     *
      * @return type
      */
     public function createFindAllByIdQueryBuilder($alias, array $idList)
@@ -133,7 +131,7 @@ class AttributeLabelQueryBuilder implements AttributeLabelQueryBuilderInterface
 
     /**
      * @param int $id
-     * 
+     *
      * @return QueryBuilder
      */
     public function createDeleteOneByIdQueryBuilder()
@@ -163,5 +161,4 @@ class AttributeLabelQueryBuilder implements AttributeLabelQueryBuilderInterface
 
         return $queryBuilder;
     }
-
 }

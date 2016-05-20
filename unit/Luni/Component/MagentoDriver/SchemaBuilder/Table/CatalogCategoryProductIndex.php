@@ -36,7 +36,7 @@ class CatalogCategoryProductIndex
         $table->addColumn('is_parent', 'smallint', ['unsigned' => true, 'default' => 0]);
         $table->addColumn('store_id', 'smallint', ['unsigned' => true, 'default' => 0]);
         $table->addColumn('visibility', 'smallint', ['unsigned' => true]);
-        
+
         $table->setPrimaryKey(['category_id', 'product_id', 'store_id']);
         $table->addIndex(['product_id', 'store_id', 'category_id', 'visibility']);
         $table->addIndex(['store_id', 'category_id', 'visibility', 'is_parent', 'position']);

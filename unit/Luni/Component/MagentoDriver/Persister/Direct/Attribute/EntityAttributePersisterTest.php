@@ -42,11 +42,11 @@ class EntityAttributePersisterTest extends \PHPUnit_Framework_TestCase
         $platform = $this->getDoctrineConnection()->getDatabasePlatform();
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
-        
+
         $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('eav_attribute_group')
         );
-        
+
         $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('eav_attribute')
         );
@@ -82,7 +82,7 @@ class EntityAttributePersisterTest extends \PHPUnit_Framework_TestCase
         $this->truncateTables();
 
         parent::setUp();
-        
+
         $this->persister = new StandardEntityAttributePersister(
             $this->getDoctrineConnection(),
             EntityAttributeQueryBuilder::getDefaultTable()
@@ -101,7 +101,7 @@ class EntityAttributePersisterTest extends \PHPUnit_Framework_TestCase
     {
         $this->persister->initialize();
         $this->persister->flush();
-        
+
         $this->assertTableRowCount('eav_entity_attribute', 0);
     }
 
@@ -131,7 +131,7 @@ class EntityAttributePersisterTest extends \PHPUnit_Framework_TestCase
         $actual->addTable('eav_entity_attribute');
 
         $this->assertDataSetsEqual($expected, $actual);
-        
+
         $this->assertTableRowCount('eav_entity_attribute', $this->getDataSet()->getIterator()->getTable()->getRowCount());
     }
 
@@ -147,7 +147,7 @@ class EntityAttributePersisterTest extends \PHPUnit_Framework_TestCase
                 $data['attribute_set_id'],
                 $data['attribute_group_id'],
                 $data['attribute_id'],
-                $data['sort_order']    
+                $data['sort_order']
             );
             $this->persister->persist($attribute);
         }

@@ -14,7 +14,6 @@ use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait
 
 class AttributeLabelDeleterTest extends \PHPUnit_Framework_TestCase
 {
-
     use DatabaseConnectionAwareTrait;
 
     /**
@@ -26,7 +25,7 @@ class AttributeLabelDeleterTest extends \PHPUnit_Framework_TestCase
      * @var AttributeLabelDeleterInterface
      */
     private $deleter;
-    
+
     /**
      * @var AttributeLabelPersisterInterface
      */
@@ -42,7 +41,7 @@ class AttributeLabelDeleterTest extends \PHPUnit_Framework_TestCase
 
         return $dataset;
     }
-    
+
     /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
@@ -59,15 +58,15 @@ class AttributeLabelDeleterTest extends \PHPUnit_Framework_TestCase
         $platform = $this->getDoctrineConnection()->getDatabasePlatform();
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
-        
+
         $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('core_store')
         );
-        
+
         $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('eav_attribute')
         );
-        
+
         $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('eav_attribute_label')
         );
@@ -105,15 +104,15 @@ class AttributeLabelDeleterTest extends \PHPUnit_Framework_TestCase
         $schemaBuilder->hydrateAttributeLabelTable('1.9', 'ce');
 
         $this->persister = new AttributeLabelPersister(
-            $this->getDoctrineConnection(), 
+            $this->getDoctrineConnection(),
             AttributeLabelQueryBuilder::getDefaultTable()
         );
-        
+
         $this->deleter = new AttributeLabelDeleter(
             $this->getDoctrineConnection(),
             new AttributeLabelQueryBuilder(
-                $this->getDoctrineConnection(), 
-                AttributeLabelQueryBuilder::getDefaultTable(), 
+                $this->getDoctrineConnection(),
+                AttributeLabelQueryBuilder::getDefaultTable(),
                 AttributeLabelQueryBuilder::getDefaultFields()
             )
         );
@@ -130,7 +129,7 @@ class AttributeLabelDeleterTest extends \PHPUnit_Framework_TestCase
     public function testRemoveNone()
     {
         $this->persister->initialize();
-        
+
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_label');
 
@@ -147,11 +146,11 @@ class AttributeLabelDeleterTest extends \PHPUnit_Framework_TestCase
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
     }
-    
+
     public function testRemoveAllById()
     {
         $this->persister->initialize();
-        $this->deleter->deleteAllById(array(2));
+        $this->deleter->deleteAllById([2]);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_label');

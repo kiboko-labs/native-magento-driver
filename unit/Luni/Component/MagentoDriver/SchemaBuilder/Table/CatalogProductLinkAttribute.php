@@ -29,12 +29,12 @@ class CatalogProductLinkAttribute
     public function build($magentoVersion = null)
     {
         $table = $this->schema->createTable('catalog_product_link_attribute');
-        
+
         $table->addColumn('product_link_attribute_id', 'smallint', ['unsigned' => true, 'autoincrement' => true]);
         $table->addColumn('link_type_id', 'smallint', ['unsigned' => true, 'default' => 0]);
         $table->addColumn('product_link_attribute_code', 'string', ['length' => 32, 'notnull' => false]);
         $table->addColumn('data_type', 'string', ['length' => 32, 'notnull' => false]);
-        
+
         $table->setPrimaryKey(['product_link_attribute_id']);
         $table->addIndex(['link_type_id']);
 

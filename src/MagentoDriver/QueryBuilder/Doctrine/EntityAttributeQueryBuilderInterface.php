@@ -19,23 +19,24 @@ interface EntityAttributeQueryBuilderInterface
      * @return QueryBuilder
      */
     public function createFindOneByIdQueryBuilder($alias);
-    
-    /**
-      * @param string $alias
-      * @param int $attributeId
-      * @param int $attributeGroupId
-      * @return QueryBuilder
-      */
-    public function createFindOneByAttributeIdAndGroupIdQueryBuilder($alias, $attributeId, $attributeGroupId);
-    
-    /**
-      * @param string $alias
-      * @param int $attributeId
-      * @param int $attributeSetId
-      * @return QueryBuilder
-      */
-    public function createFindOneByAttributeIdAndSetIdQueryBuilder($alias, $attributeId, $attributeSetId);
 
+    /**
+     * @param string $alias
+     * @param int    $attributeId
+     * @param int    $attributeGroupId
+     *
+     * @return QueryBuilder
+     */
+    public function createFindOneByAttributeIdAndGroupIdQueryBuilder($alias, $attributeId, $attributeGroupId);
+
+    /**
+     * @param string $alias
+     * @param int    $attributeId
+     * @param int    $attributeSetId
+     *
+     * @return QueryBuilder
+     */
+    public function createFindOneByAttributeIdAndSetIdQueryBuilder($alias, $attributeId, $attributeSetId);
 
     /**
      * @param string      $alias
@@ -44,7 +45,7 @@ interface EntityAttributeQueryBuilderInterface
      * @return QueryBuilder
      */
     public function createFindAllByIdQueryBuilder($alias, array $idList);
-    
+
     /**
      * @return QueryBuilder
      */

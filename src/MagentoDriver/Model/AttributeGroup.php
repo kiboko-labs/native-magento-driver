@@ -4,7 +4,6 @@ namespace Luni\Component\MagentoDriver\Model;
 
 class AttributeGroup implements AttributeGroupInterface
 {
-
     /**
      * @var int
      */
@@ -31,8 +30,7 @@ class AttributeGroup implements AttributeGroupInterface
     private $defaultId;
 
     /**
-     * 
-     * @param int $familyId
+     * @param int    $familyId
      * @param string $label
      */
     public function __construct($familyId, $label)
@@ -85,15 +83,14 @@ class AttributeGroup implements AttributeGroupInterface
      * @param int $attributeGroupId
      * @param int familyId
      * @param string $label
-     * @param int $sortOrder
-     * @param int $defaultId
-     * 
+     * @param int    $sortOrder
+     * @param int    $defaultId
+     *
      * @return AttributeGroupInterface
      */
     public static function buildNewWith(
     $attributeGroupId, $familyId, $label, $sortOrder, $defaultId = 0
-    )
-    {
+    ) {
         $object = new static($familyId, $label);
 
         $object->id = $attributeGroupId;
@@ -112,5 +109,4 @@ class AttributeGroup implements AttributeGroupInterface
     {
         $this->id = $id;
     }
-
 }

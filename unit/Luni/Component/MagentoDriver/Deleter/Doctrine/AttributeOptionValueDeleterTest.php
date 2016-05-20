@@ -14,7 +14,6 @@ use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait
 
 class AttributeOptionValueDeleterTest extends \PHPUnit_Framework_TestCase
 {
-
     use DatabaseConnectionAwareTrait;
 
     /**
@@ -26,7 +25,7 @@ class AttributeOptionValueDeleterTest extends \PHPUnit_Framework_TestCase
      * @var AttributeOptionValueDeleterInterface
      */
     private $deleter;
-    
+
     /**
      * @var AttributeOptionValuePersisterInterface
      */
@@ -42,7 +41,7 @@ class AttributeOptionValueDeleterTest extends \PHPUnit_Framework_TestCase
 
         return $dataset;
     }
-    
+
     /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
@@ -59,19 +58,19 @@ class AttributeOptionValueDeleterTest extends \PHPUnit_Framework_TestCase
         $platform = $this->getDoctrineConnection()->getDatabasePlatform();
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
-        
+
         $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('eav_attribute')
         );
-        
+
         $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('eav_attribute_option')
         );
-        
+
         $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('core_store')
         );
-        
+
         $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('eav_attribute_option_value')
         );
@@ -104,7 +103,7 @@ class AttributeOptionValueDeleterTest extends \PHPUnit_Framework_TestCase
         $this->truncateTables();
 
         parent::setUp();
-        
+
         $magentoVersion = '1.9';
         $magentoEdition = 'ce';
 
@@ -114,15 +113,15 @@ class AttributeOptionValueDeleterTest extends \PHPUnit_Framework_TestCase
         $schemaBuilder->hydrateAttributeOptionValueTable($magentoVersion, $magentoEdition);
 
         $this->persister = new AttributeOptionValuePersister(
-            $this->getDoctrineConnection(), 
+            $this->getDoctrineConnection(),
             AttributeOptionValueQueryBuilder::getDefaultTable()
         );
-        
+
         $this->deleter = new AttributeOptionValueDeleter(
             $this->getDoctrineConnection(),
             new AttributeOptionValueQueryBuilder(
-                $this->getDoctrineConnection(), 
-                AttributeOptionValueQueryBuilder::getDefaultTable(), 
+                $this->getDoctrineConnection(),
+                AttributeOptionValueQueryBuilder::getDefaultTable(),
                 AttributeOptionValueQueryBuilder::getDefaultFields()
             )
         );
@@ -139,7 +138,7 @@ class AttributeOptionValueDeleterTest extends \PHPUnit_Framework_TestCase
     public function testRemoveNone()
     {
         $this->persister->initialize();
-        
+
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_option_value');
 
@@ -156,11 +155,11 @@ class AttributeOptionValueDeleterTest extends \PHPUnit_Framework_TestCase
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
     }
-    
+
     public function testRemoveAllById()
     {
         $this->persister->initialize();
-        $this->deleter->deleteAllById(array(2));
+        $this->deleter->deleteAllById([2]);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_option_value');

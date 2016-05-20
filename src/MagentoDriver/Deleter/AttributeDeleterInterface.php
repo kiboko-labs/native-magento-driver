@@ -13,7 +13,7 @@ interface AttributeDeleterInterface
      * @param int[] $idList
      */
     public function deleteAllById(array $idList);
-    
+
     /**
      * @param string $code
      */

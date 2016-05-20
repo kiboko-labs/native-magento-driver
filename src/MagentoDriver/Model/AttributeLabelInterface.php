@@ -4,7 +4,6 @@ namespace Luni\Component\MagentoDriver\Model;
 
 interface AttributeLabelInterface
 {
-
     /**
      * @return int
      */

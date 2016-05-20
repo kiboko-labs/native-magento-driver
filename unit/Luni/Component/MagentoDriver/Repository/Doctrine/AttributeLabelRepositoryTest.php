@@ -44,15 +44,15 @@ class AttributeLabelRepositoryTest extends \PHPUnit_Framework_TestCase
         $platform = $this->getDoctrineConnection()->getDatabasePlatform();
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
-        
+
         $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('core_store')
         );
-        
+
         $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('eav_attribute')
         );
-        
+
         $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('eav_attribute_label')
         );
@@ -66,7 +66,7 @@ class AttributeLabelRepositoryTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        
+
         $currentSchema = $this->getDoctrineConnection()
             ->getSchemaManager()
             ->createSchema()
@@ -116,7 +116,7 @@ class AttributeLabelRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $attributeLabel = $this->repository->findOneById(2);
         $this->assertInstanceOf(AttributeLabelInterface::class, $attributeLabel);
-        
+
         $this->assertEquals($attributeLabel->getId(), 2);
         $this->assertEquals($attributeLabel->getAttributeId(), 122);
         $this->assertEquals($attributeLabel->getStoreId(), 1);
@@ -127,5 +127,4 @@ class AttributeLabelRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertNull($this->repository->findOneById(123));
     }
-
 }

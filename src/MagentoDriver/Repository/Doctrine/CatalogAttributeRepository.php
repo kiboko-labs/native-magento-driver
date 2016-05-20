@@ -160,7 +160,7 @@ class CatalogAttributeRepository implements ProductAttributeRepositoryInterface
         if (!$statement->execute(array_merge([$entityTypeCode], $codeList))) {
             throw new DatabaseFetchingFailureException();
         }
-        
+
         $attributeList = new ArrayCollection();
         if ($statement->rowCount() < 1) {
             return $attributeList;

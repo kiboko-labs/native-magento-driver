@@ -42,7 +42,7 @@ class AttributeOptionPersister implements AttributeOptionPersisterInterface
         $this->temporaryWriter->persistRow([
             'option_id' => $attributeOptionInterface->getId(),
             'attribute_id' => $attributeOptionInterface->getAttributeId(),
-            'sort_order' => $attributeOptionInterface->getSortOrder()
+            'sort_order' => $attributeOptionInterface->getSortOrder(),
         ]);
     }
 

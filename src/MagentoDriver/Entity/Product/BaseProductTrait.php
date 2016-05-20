@@ -133,7 +133,7 @@ trait BaseProductTrait
         if ($this->getFamily() === null) {
             return;
         }
-        
+
         return $this->getFamily()->getId();
     }
 

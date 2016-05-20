@@ -21,8 +21,8 @@ class StandardProductFactory implements ProductFactoryInterface
     {
         $this->builders = new ArrayCollection();
         $this->addBuilder(
-            'simple', 
-            function($type, $options) {
+            'simple',
+            function ($type, $options) {
                 return SimpleProduct::buildNewWith(
                     $options['entity_id'],
                     $options['sku'],
@@ -30,7 +30,7 @@ class StandardProductFactory implements ProductFactoryInterface
                         $options['attribute_set_id'],
                         // $options['attribute_set_name']
                         // $label
-                        /** @todo: this section must be review */
+                        /* @todo: this section must be review */
                         ucfirst($type).'AttributeSet'
                     ),
                     new \DateTime($options['created_at']),
@@ -39,14 +39,14 @@ class StandardProductFactory implements ProductFactoryInterface
             }
         );
         $this->addBuilder(
-            'configurable', 
-            function($type, $options) {
+            'configurable',
+            function ($type, $options) {
                 return ConfigurableProduct::buildNewWith(
                     $options['entity_id'],
                     $options['sku'],
                     Family::buildNewWith(
                         $options['attribute_set_id'],
-                        ucfirst($type).'AttributeSet' /* // $options['attribute_set_name'] // $label */ /** @todo: this section must be review */
+                        ucfirst($type).'AttributeSet' /* // $options['attribute_set_name'] // $label */ /* @todo: this section must be review */
                     ),
                     new \DateTime($options['created_at']),
                     new \DateTime($options['updated_at'])
@@ -76,7 +76,7 @@ class StandardProductFactory implements ProductFactoryInterface
             if ($expectedType !== $type) {
                 continue;
             }
-            
+
             return $builder($type, $options);
         }
 

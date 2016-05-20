@@ -27,7 +27,7 @@ class AttributeOptionValueRepository implements AttributeOptionValueRepositoryIn
     private $attributeOptionValueFactory;
 
     /**
-     * @param Connection                           $connection
+     * @param Connection                                $connection
      * @param AttributeOptionValueQueryBuilderInterface $queryBuilder
      * @param AttributeOptionValueFactoryInterface      $attributeOptionValueFactory
      */
@@ -73,5 +73,4 @@ class AttributeOptionValueRepository implements AttributeOptionValueRepositoryIn
 
         return $this->createNewAttributeOptionValueInstanceFromDatabase($options);
     }
-
 }

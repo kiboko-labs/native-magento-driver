@@ -6,7 +6,6 @@ use Luni\Component\MagentoDriver\Model\AttributeLabelInterface;
 
 interface AttributeLabelRepositoryInterface
 {
-
     /**
      * @param int $id
      *

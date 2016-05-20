@@ -6,7 +6,6 @@ use Luni\Component\MagentoDriver\Model\AttributeOptionValueInterface;
 
 interface AttributeOptionValueRepositoryInterface
 {
-
     /**
      * @param int $id
      *

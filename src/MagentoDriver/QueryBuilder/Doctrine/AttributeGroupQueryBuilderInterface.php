@@ -34,7 +34,7 @@ interface AttributeGroupQueryBuilderInterface
      * @return QueryBuilder
      */
     public function createFindAllByIdQueryBuilder($alias, array $idList);
-    
+
     /**
      * @param string         $alias
      * @param array|string[] $nameList
@@ -59,7 +59,7 @@ interface AttributeGroupQueryBuilderInterface
      * @return QueryBuilder
      */
     public function createDeleteAllByIdQueryBuilder(array $idList);
-    
+
     /**
      * @return QueryBuilder
      */

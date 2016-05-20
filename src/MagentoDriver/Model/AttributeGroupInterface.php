@@ -8,7 +8,7 @@ interface AttributeGroupInterface
      * @return int
      */
     public function getId();
-    
+
     /**
      * @return int
      */
@@ -18,12 +18,12 @@ interface AttributeGroupInterface
      * @return string
      */
     public function getLabel();
-    
+
     /**
      * @return int
      */
     public function getSortOrder();
-    
+
     /**
      * @return int
      */

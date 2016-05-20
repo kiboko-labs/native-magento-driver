@@ -44,15 +44,15 @@ class AttributeGroupRepositoryTest extends \PHPUnit_Framework_TestCase
         $platform = $this->getDoctrineConnection()->getDatabasePlatform();
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
-        
+
         $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('eav_attribute_set')
         );
-        
+
         $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('eav_attribute_group')
         );
-        
+
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
     }
 
@@ -109,7 +109,7 @@ class AttributeGroupRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $family = $this->repository->findOneById(6);
         $this->assertInstanceOf(AttributeGroupInterface::class, $family);
-        
+
         $this->assertEquals($family->getId(), 6);
         $this->assertEquals($family->getFamilyId(), 3);
         $this->assertEquals($family->getLabel(), 'Custom Design');

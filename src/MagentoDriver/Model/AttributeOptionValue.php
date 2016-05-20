@@ -4,7 +4,6 @@ namespace Luni\Component\MagentoDriver\Model;
 
 class AttributeOptionValue implements AttributeOptionValueInterface
 {
-
     /**
      * @var int
      */
@@ -26,7 +25,6 @@ class AttributeOptionValue implements AttributeOptionValueInterface
     private $value;
 
     /**
-     * 
      * @param type $id
      * @param type $optionId
      * @param type $storeId
@@ -71,17 +69,16 @@ class AttributeOptionValue implements AttributeOptionValueInterface
     }
 
     /**
-     * @param int $attributeOptionValueId
-     * @param int $optionId
-     * @param int $storeId
+     * @param int    $attributeOptionValueId
+     * @param int    $optionId
+     * @param int    $storeId
      * @param string $value
-     * 
+     *
      * @return AttributeOptionValueInterface
      */
     public static function buildNewWith(
     $attributeOptionValueId, $optionId, $storeId, $value = null
-    )
-    {
+    ) {
         $object = new static($attributeOptionValueId, $optionId, $storeId);
 
         $object->id = $attributeOptionValueId;
@@ -101,5 +98,4 @@ class AttributeOptionValue implements AttributeOptionValueInterface
     {
         $this->id = $id;
     }
-
 }

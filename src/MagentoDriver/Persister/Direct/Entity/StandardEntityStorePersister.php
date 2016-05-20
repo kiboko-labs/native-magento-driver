@@ -67,10 +67,10 @@ class StandardEntityStorePersister implements EntityStorePersisterInterface
                         'entity_type_id' => $entityStore->getTypeId(),
                         'store_id' => $entityStore->getStoreId(),
                         'increment_prefix' => $entityStore->getIncrementPrefix(),
-                        'increment_last_id' => $entityStore->getIncrementLastId()
+                        'increment_last_id' => $entityStore->getIncrementLastId(),
                     ],
                     [
-                        'entity_store_id' => $entityStore->getId()
+                        'entity_store_id' => $entityStore->getId(),
                     ]
                 );
             }
@@ -81,10 +81,10 @@ class StandardEntityStorePersister implements EntityStorePersisterInterface
                         'entity_type_id' => $entityStore->getTypeId(),
                         'store_id' => $entityStore->getStoreId(),
                         'increment_prefix' => $entityStore->getIncrementPrefix(),
-                        'increment_last_id' => $entityStore->getIncrementLastId()
+                        'increment_last_id' => $entityStore->getIncrementLastId(),
                     ],
                     [
-                        'entity_store_id' => $entityStore->getId()
+                        'entity_store_id' => $entityStore->getId(),
                     ]
                 );
 

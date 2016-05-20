@@ -16,7 +16,6 @@ use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait
 
 class CatalogAttributeDeleterTest extends \PHPUnit_Framework_TestCase
 {
-
     use DatabaseConnectionAwareTrait;
 
     /**
@@ -33,7 +32,7 @@ class CatalogAttributeDeleterTest extends \PHPUnit_Framework_TestCase
      * @var CatalogAttributePersisterInterface
      */
     private $persister;
-    
+
     /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
@@ -64,7 +63,7 @@ class CatalogAttributeDeleterTest extends \PHPUnit_Framework_TestCase
         $this->getDoctrineConnection()->exec(
                 $platform->getTruncateTableSQL('eav_attribute')
         );
-        
+
         $this->getDoctrineConnection()->exec(
                 $platform->getTruncateTableSQL('catalog_eav_attribute')
         );
@@ -77,13 +76,12 @@ class CatalogAttributeDeleterTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-
         $currentSchema = $this->getDoctrineConnection()->getSchemaManager()->createSchema();
 
         $this->schema = new Schema();
 
         $schemaBuilder = new DoctrineSchemaBuilder($this->getDoctrineConnection(), $this->schema);
-        
+
         $schemaBuilder->ensureAttributeTable();
         $schemaBuilder->ensureCatalogAttributeExtensionsTable();
 
@@ -97,7 +95,7 @@ class CatalogAttributeDeleterTest extends \PHPUnit_Framework_TestCase
         $this->truncateTables();
 
         parent::setUp();
-        
+
         $magentoVersion = '1.9';
         $magentoEdition = 'ce';
 
@@ -105,10 +103,10 @@ class CatalogAttributeDeleterTest extends \PHPUnit_Framework_TestCase
         $schemaBuilder->hydrateCatalogAttributeExtensionsTable($magentoVersion, $magentoEdition);
 
         $this->setPersister($magentoEdition);
-        
+
         $this->setDeleter();
     }
-    
+
     /**
      * @param string $magentoEdition
      */
@@ -116,27 +114,27 @@ class CatalogAttributeDeleterTest extends \PHPUnit_Framework_TestCase
     {
         $this->persister = new CatalogAttributePersister(
             new StandardAttributePersister(
-                $this->getDoctrineConnection(), 
+                $this->getDoctrineConnection(),
                 ProductAttributeQueryBuilder::getDefaultTable()
-            ), 
+            ),
             new CatalogAttributeExtensionPersister(
                 $this->getDoctrineConnection(),
                 $magentoEdition
             )
         );
     }
-    
+
     private function setDeleter()
     {
         $this->deleter = new CatalogAttributeDeleter(
-            $this->getDoctrineConnection(), 
+            $this->getDoctrineConnection(),
             new ProductAttributeQueryBuilder(
-                $this->getDoctrineConnection(), 
-                ProductAttributeQueryBuilder::getDefaultExtraTable(), 
-                ProductAttributeQueryBuilder::getDefaultTable(), 
-                ProductAttributeQueryBuilder::getDefaultEntityTable(), 
-                ProductAttributeQueryBuilder::getDefaultVariantTable(), 
-                ProductAttributeQueryBuilder::getDefaultFamilyTable(), 
+                $this->getDoctrineConnection(),
+                ProductAttributeQueryBuilder::getDefaultExtraTable(),
+                ProductAttributeQueryBuilder::getDefaultTable(),
+                ProductAttributeQueryBuilder::getDefaultEntityTable(),
+                ProductAttributeQueryBuilder::getDefaultVariantTable(),
+                ProductAttributeQueryBuilder::getDefaultFamilyTable(),
                 ProductAttributeQueryBuilder::getDefaultExtraFields(),
                 ProductAttributeQueryBuilder::getDefaultFields()
             )
@@ -178,8 +176,7 @@ class CatalogAttributeDeleterTest extends \PHPUnit_Framework_TestCase
         $this->persister->initialize();
 
 //        die;
-        $this->deleter->deleteAllById(array(122));
-        
+        $this->deleter->deleteAllById([122]);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('catalog_eav_attribute');

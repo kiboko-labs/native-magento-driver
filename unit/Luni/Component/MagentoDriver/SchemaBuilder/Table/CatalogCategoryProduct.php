@@ -33,7 +33,7 @@ class CatalogCategoryProduct
         $table->addColumn('category_id', 'integer', ['unsigned' => true, 'default' => 0]);
         $table->addColumn('product_id', 'integer', ['unsigned' => true, 'default' => 0]);
         $table->addColumn('position', 'integer', ['default' => 0]);
-        
+
         $table->setPrimaryKey(['category_id', 'product_id']);
         $table->addIndex(['product_id']);
 

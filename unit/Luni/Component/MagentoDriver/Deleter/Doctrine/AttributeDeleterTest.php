@@ -14,7 +14,6 @@ use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait
 
 class AttributeDeleterTest extends \PHPUnit_Framework_TestCase
 {
-
     use DatabaseConnectionAwareTrait;
 
     /**
@@ -31,7 +30,7 @@ class AttributeDeleterTest extends \PHPUnit_Framework_TestCase
      * @var AttributePersisterInterface
      */
     private $persister;
-    
+
     /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
@@ -71,7 +70,6 @@ class AttributeDeleterTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-
         $currentSchema = $this->getDoctrineConnection()->getSchemaManager()->createSchema();
 
         $this->schema = new Schema();
@@ -137,7 +135,7 @@ class AttributeDeleterTest extends \PHPUnit_Framework_TestCase
     {
         $this->persister->initialize();
 
-        $this->deleter->deleteAllById(array(79));
+        $this->deleter->deleteAllById([79]);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute');
@@ -161,12 +159,11 @@ class AttributeDeleterTest extends \PHPUnit_Framework_TestCase
     {
         $this->persister->initialize();
 
-        $this->deleter->deleteAllByCode(array('cost'));
+        $this->deleter->deleteAllByCode(['cost']);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute');
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
     }
-
 }

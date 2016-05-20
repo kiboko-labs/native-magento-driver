@@ -13,7 +13,7 @@ interface FamilyInterface
      * @return string
      */
     public function getLabel();
-    
+
     /**
      * @return int
      */

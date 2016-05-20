@@ -7,7 +7,6 @@ use Doctrine\DBAL\Query\QueryBuilder;
 
 class AttributeOptionQueryBuilder implements AttributeOptionQueryBuilderInterface
 {
-
     /**
      * @var Connection
      */
@@ -30,8 +29,7 @@ class AttributeOptionQueryBuilder implements AttributeOptionQueryBuilderInterfac
      */
     public function __construct(
     Connection $connection, $table, array $fields
-    )
-    {
+    ) {
         $this->connection = $connection;
         $this->table = $table;
         $this->fields = $fields;
@@ -45,7 +43,7 @@ class AttributeOptionQueryBuilder implements AttributeOptionQueryBuilderInterfac
         return [
             'option_id',
             'attribute_id',
-            'sort_order'
+            'sort_order',
         ];
     }
 
@@ -105,9 +103,9 @@ class AttributeOptionQueryBuilder implements AttributeOptionQueryBuilderInterfac
     }
 
     /**
-     * 
      * @param string $alias
-     * @param int[] $idList
+     * @param int[]  $idList
+     *
      * @return type
      */
     public function createFindAllByIdQueryBuilder($alias, array $idList)
@@ -132,7 +130,7 @@ class AttributeOptionQueryBuilder implements AttributeOptionQueryBuilderInterfac
 
     /**
      * @param int $id
-     * 
+     *
      * @return QueryBuilder
      */
     public function createDeleteOneByIdQueryBuilder()
@@ -162,5 +160,4 @@ class AttributeOptionQueryBuilder implements AttributeOptionQueryBuilderInterfac
 
         return $queryBuilder;
     }
-
 }

@@ -4,7 +4,6 @@ namespace Luni\Component\MagentoDriver\Model;
 
 class AttributeOption implements AttributeOptionInterface
 {
-
     /**
      * @var int
      */
@@ -21,7 +20,6 @@ class AttributeOption implements AttributeOptionInterface
     private $sortOrder;
 
     /**
-     * 
      * @param int $id
      */
     public function __construct($id)
@@ -57,13 +55,12 @@ class AttributeOption implements AttributeOptionInterface
      * @param int $attributeOptionId
      * @param int $attributeId
      * @param int $sortOrder
-     * 
+     *
      * @return AttributeOptionInterface
      */
     public static function buildNewWith(
     $attributeOptionId, $attributeId, $sortOrder
-    )
-    {
+    ) {
         $object = new static($attributeOptionId);
 
         $object->id = $attributeOptionId;
@@ -80,5 +77,4 @@ class AttributeOption implements AttributeOptionInterface
     {
         $this->id = $id;
     }
-
 }

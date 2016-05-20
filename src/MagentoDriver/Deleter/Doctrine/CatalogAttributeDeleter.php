@@ -9,7 +9,6 @@ use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeQueryBuilderInte
 
 class CatalogAttributeDeleter implements CatalogAttributeDeleterInterface
 {
-
     /**
      * @var AttributeQueryBuilderInterface
      */
@@ -27,8 +26,7 @@ class CatalogAttributeDeleter implements CatalogAttributeDeleterInterface
     public function __construct(
         Connection $connection,
         AttributeQueryBuilderInterface $queryBuilder
-    )
-    {
+    ) {
         $this->connection = $connection;
         $this->queryBuilder = $queryBuilder;
     }

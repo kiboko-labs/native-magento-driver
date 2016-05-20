@@ -14,7 +14,6 @@ use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait
 
 class EntityAttributeDeleterTest extends \PHPUnit_Framework_TestCase
 {
-
     use DatabaseConnectionAwareTrait;
 
     /**
@@ -26,7 +25,7 @@ class EntityAttributeDeleterTest extends \PHPUnit_Framework_TestCase
      * @var EntityAttributeDeleterInterface
      */
     private $deleter;
-    
+
     /**
      * @var EntityAttributePersisterInterface
      */
@@ -42,7 +41,7 @@ class EntityAttributeDeleterTest extends \PHPUnit_Framework_TestCase
 
         return $dataset;
     }
-    
+
     /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
@@ -62,7 +61,7 @@ class EntityAttributeDeleterTest extends \PHPUnit_Framework_TestCase
         $this->getDoctrineConnection()->exec(
                 $platform->getTruncateTableSQL('eav_attribute_group')
         );
-        
+
         $this->getDoctrineConnection()->exec(
                 $platform->getTruncateTableSQL('eav_attribute')
         );
@@ -101,21 +100,21 @@ class EntityAttributeDeleterTest extends \PHPUnit_Framework_TestCase
 
         $magentoVersion = '1.9';
         $magentoEdition = 'ce';
-                
+
         $schemaBuilder->hydrateAttributeGroupTable($magentoVersion, $magentoEdition);
         $schemaBuilder->hydrateAttributeTable($magentoVersion, $magentoEdition);
         $schemaBuilder->hydrateEntityAttributeTable($magentoVersion, $magentoEdition);
 
         $this->persister = new StandardEntityAttributePersister(
-            $this->getDoctrineConnection(), 
+            $this->getDoctrineConnection(),
             EntityAttributeQueryBuilder::getDefaultTable()
         );
-        
+
         $this->deleter = new EntityAttributeDeleter(
             $this->getDoctrineConnection(),
             new EntityAttributeQueryBuilder(
-                $this->getDoctrineConnection(), 
-                EntityAttributeQueryBuilder::getDefaultTable(), 
+                $this->getDoctrineConnection(),
+                EntityAttributeQueryBuilder::getDefaultTable(),
                 EntityAttributeQueryBuilder::getDefaultFields()
             )
         );
@@ -132,10 +131,10 @@ class EntityAttributeDeleterTest extends \PHPUnit_Framework_TestCase
     public function testRemoveNone()
     {
         $this->persister->initialize();
-        
+
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_entity_attribute');
-        
+
         $this->assertDataSetsEqual($this->getOriginalDataSet(), $actual);
 
         $this->assertTableRowCount('eav_entity_attribute', $this->getOriginalDataSet()->getIterator()->getTable()->getRowCount());
@@ -150,20 +149,20 @@ class EntityAttributeDeleterTest extends \PHPUnit_Framework_TestCase
         $actual->addTable('eav_entity_attribute');
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
-        
+
         $this->assertTableRowCount('eav_entity_attribute', $this->getDataSet()->getIterator()->getTable()->getRowCount());
     }
-    
+
     public function testRemoveAllById()
     {
         $this->persister->initialize();
-        $this->deleter->deleteAllById(array(2));
+        $this->deleter->deleteAllById([2]);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_entity_attribute');
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
-        
+
         $this->assertTableRowCount('eav_entity_attribute', $this->getDataSet()->getIterator()->getTable()->getRowCount());
     }
 }

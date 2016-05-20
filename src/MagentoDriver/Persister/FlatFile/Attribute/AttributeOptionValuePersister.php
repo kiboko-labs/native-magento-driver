@@ -43,7 +43,7 @@ class AttributeOptionValuePersister implements AttributeOptionValuePersisterInte
             'value_id' => $attributeOptionValueInterface->getId(),
             'option_id' => $attributeOptionValueInterface->getOptionId(),
             'store_id' => $attributeOptionValueInterface->getStoreId(),
-            'value' => $attributeOptionValueInterface->getValue()
+            'value' => $attributeOptionValueInterface->getValue(),
         ]);
     }
 

@@ -73,10 +73,10 @@ class EntityAttributeRepository implements EntityAttributeRepositoryInterface
 
         return $this->createNewEntityAttributeInstanceFromDatabase($options);
     }
-    
+
     /**
-     * 
      * @return Collection|EntityAttributeInterface[]
+     *
      * @throws DatabaseFetchingFailureException
      */
     public function findAll()
@@ -100,10 +100,9 @@ class EntityAttributeRepository implements EntityAttributeRepositoryInterface
 
         return $results;
     }
-    
+
     public function findOneByAttributeIdAndGroupId($attributeId, $attributeGroupId)
     {
-        
         $query = $this->queryBuilder->createFindOneByAttributeIdAndGroupIdQueryBuilder('eav_e', $attributeId, $attributeGroupId);
 
         $statement = $this->connection->prepare($query);
@@ -119,7 +118,7 @@ class EntityAttributeRepository implements EntityAttributeRepositoryInterface
 
         return $this->createNewEntityAttributeInstanceFromDatabase($options);
     }
-    
+
     public function findOneByAttributeIdAndSetId($attributeId, $attributeSetId)
     {
         $query = $this->queryBuilder->createFindOneByAttributeIdAndSetIdQueryBuilder('eav_e', $attributeId, $attributeSetId);
@@ -137,5 +136,4 @@ class EntityAttributeRepository implements EntityAttributeRepositoryInterface
 
         return $this->createNewEntityAttributeInstanceFromDatabase($options);
     }
-
 }

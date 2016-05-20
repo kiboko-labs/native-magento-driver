@@ -27,7 +27,7 @@ interface AttributeOptionValueQueryBuilderInterface
      * @return QueryBuilder
      */
     public function createFindAllByIdQueryBuilder($alias, array $idList);
-    
+
     /**
      * @return QueryBuilder
      */

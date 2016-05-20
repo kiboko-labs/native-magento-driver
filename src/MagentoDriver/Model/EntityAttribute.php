@@ -4,22 +4,21 @@ namespace Luni\Component\MagentoDriver\Model;
 
 class EntityAttribute implements EntityAttributeInterface
 {
-
     /**
      * @var int
      */
     private $id;
-    
+
     /**
      * @var int
      */
     private $typeId;
-    
+
     /**
      * @var int
      */
     private $attributeSetId;
-    
+
     /**
      * @var int
      */
@@ -36,7 +35,6 @@ class EntityAttribute implements EntityAttributeInterface
     private $sortOrder;
 
     /**
-     * 
      * @param int $id
      */
     public function __construct($id)
@@ -51,7 +49,7 @@ class EntityAttribute implements EntityAttributeInterface
     {
         return $this->id;
     }
-    
+
     /**
      * @return int
      */
@@ -59,7 +57,7 @@ class EntityAttribute implements EntityAttributeInterface
     {
         return $this->typeId;
     }
-    
+
     /**
      * @return int
      */
@@ -67,7 +65,7 @@ class EntityAttribute implements EntityAttributeInterface
     {
         return $this->attributeSetId;
     }
-    
+
     /**
      * @return int
      */
@@ -99,7 +97,7 @@ class EntityAttribute implements EntityAttributeInterface
      * @param int $attributeGroupId
      * @param int $attributeId
      * @param int $sortOrder
-     * 
+     *
      * @return AttributeLabelInterface
      */
     public static function buildNewWith(
@@ -109,8 +107,7 @@ class EntityAttribute implements EntityAttributeInterface
         $attributeGroupId,
         $attributeId,
         $sortOrder
-    )
-    {
+    ) {
         $object = new static($entityAttributeId);
 
         $object->id = $entityAttributeId;
@@ -130,5 +127,4 @@ class EntityAttribute implements EntityAttributeInterface
     {
         $this->id = $id;
     }
-
 }

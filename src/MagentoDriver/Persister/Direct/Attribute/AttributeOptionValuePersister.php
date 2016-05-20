@@ -66,7 +66,7 @@ class AttributeOptionValuePersister implements AttributeOptionValuePersisterInte
                     [
                         'option_id' => $attributeOptionValue->getOptionId(),
                         'store_id' => $attributeOptionValue->getStoreId(),
-                        'value' => $attributeOptionValue->getValue()
+                        'value' => $attributeOptionValue->getValue(),
                     ],
                     [
                         'value_id' => $attributeOptionValue->getId(),
@@ -80,7 +80,7 @@ class AttributeOptionValuePersister implements AttributeOptionValuePersisterInte
                         'value_id' => $attributeOptionValue->getId(),
                         'option_id' => $attributeOptionValue->getOptionId(),
                         'store_id' => $attributeOptionValue->getStoreId(),
-                        'value' => $attributeOptionValue->getValue()
+                        'value' => $attributeOptionValue->getValue(),
                     ]
                 );
 

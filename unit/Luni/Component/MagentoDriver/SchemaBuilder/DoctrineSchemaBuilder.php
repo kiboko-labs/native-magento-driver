@@ -7,7 +7,6 @@ use Doctrine\DBAL\Schema\Schema;
 
 class DoctrineSchemaBuilder
 {
-
     /**
      * @var Schema
      */
@@ -79,7 +78,7 @@ class DoctrineSchemaBuilder
     {
         return (new Table\Attribute($this->schema))->build();
     }
-    
+
     /**
      * @return \Doctrine\DBAL\Schema\Table
      *
@@ -119,7 +118,7 @@ class DoctrineSchemaBuilder
     {
         return (new Table\AttributeOption($this->schema))->build();
     }
-    
+
     /**
      * @return \Doctrine\DBAL\Schema\Table
      *
@@ -149,7 +148,7 @@ class DoctrineSchemaBuilder
     {
         return (new Table\CatalogProductEntity($this->schema))->build();
     }
-    
+
     /**
      * @return \Doctrine\DBAL\Schema\Table
      *
@@ -159,7 +158,7 @@ class DoctrineSchemaBuilder
     {
         return (new Table\CatalogCategoryEntity($this->schema))->build();
     }
-    
+
     /**
      * @return \Doctrine\DBAL\Schema\Table
      *
@@ -169,7 +168,7 @@ class DoctrineSchemaBuilder
     {
         return (new Table\CatalogCategoryProductIndex($this->schema))->build();
     }
-    
+
     /**
      * @return \Doctrine\DBAL\Schema\Table
      *
@@ -179,7 +178,7 @@ class DoctrineSchemaBuilder
     {
         return (new Table\CatalogCategoryProduct($this->schema))->build();
     }
-    
+
     /**
      * @return \Doctrine\DBAL\Schema\Table
      *
@@ -189,7 +188,7 @@ class DoctrineSchemaBuilder
     {
         return (new Table\CatalogProductLink($this->schema))->build();
     }
-    
+
     /**
      * @return \Doctrine\DBAL\Schema\Table
      *
@@ -199,7 +198,7 @@ class DoctrineSchemaBuilder
     {
         return (new Table\CatalogProductLinkType($this->schema))->build();
     }
-    
+
     /**
      * @return \Doctrine\DBAL\Schema\Table
      *
@@ -209,7 +208,7 @@ class DoctrineSchemaBuilder
     {
         return (new Table\CatalogProductLinkAttribute($this->schema))->build();
     }
-    
+
     /**
      * @param string $backendName
      * @param string $backendType
@@ -222,7 +221,6 @@ class DoctrineSchemaBuilder
     public function ensureCatalogProductLinkAttributeValueTable($backendName, $backendType, array $backendOptions = [])
     {
         return (new Table\CatalogProductLinkAttributeValue($this->schema, $backendType, $backendName, $backendOptions))->build();
-        
     }
 
     /**
@@ -238,7 +236,7 @@ class DoctrineSchemaBuilder
     {
         return (new Table\CatalogProductAttributeValue($this->schema, $backendType, $backendName, $backendOptions))->build();
     }
-    
+
     /**
      * @param string $backendName
      * @param string $backendType
@@ -252,8 +250,7 @@ class DoctrineSchemaBuilder
     {
         return (new Table\CatalogCategoryAttributeValue($this->schema, $backendType, $backendName, $backendOptions))->build();
     }
-    
-    
+
     /**
      * @return \Doctrine\DBAL\Schema\Table
      *
@@ -263,7 +260,7 @@ class DoctrineSchemaBuilder
     {
         return (new Table\CatalogProductGallery($this->schema))->build();
     }
-    
+
     /**
      * @return \Doctrine\DBAL\Schema\Table
      *
@@ -273,7 +270,7 @@ class DoctrineSchemaBuilder
     {
         return (new Table\CatalogProductMediaGallery($this->schema))->build();
     }
-    
+
     /**
      * @return \Doctrine\DBAL\Schema\Table
      *
@@ -316,7 +313,7 @@ class DoctrineSchemaBuilder
                 ->hydrate($magentoVersion, $magentoEdition)
         ;
     }
-    
+
     /**
      * @param string $magentoVersion
      * @param string $magentoEdition
@@ -349,7 +346,7 @@ class DoctrineSchemaBuilder
                 ->hydrate($magentoVersion, $magentoEdition)
         ;
     }
-    
+
     /**
      * @param string $magentoVersion
      * @param string $magentoEdition
@@ -360,7 +357,7 @@ class DoctrineSchemaBuilder
                 ->hydrate($magentoVersion, $magentoEdition)
         ;
     }
-    
+
     /**
      * @param string $magentoVersion
      * @param string $magentoEdition
@@ -371,7 +368,7 @@ class DoctrineSchemaBuilder
                 ->hydrate($magentoVersion, $magentoEdition)
         ;
     }
-    
+
     /**
      * @param string $magentoVersion
      * @param string $magentoEdition
@@ -382,7 +379,7 @@ class DoctrineSchemaBuilder
                 ->hydrate($magentoVersion, $magentoEdition)
         ;
     }
-    
+
     /**
      * @param string $magentoVersion
      * @param string $magentoEdition
@@ -458,7 +455,7 @@ class DoctrineSchemaBuilder
     {
         (new Link\CatalogProductEntityToFamily($this->schema))->build();
     }
-    
+
     /**
      * @param string $backendType
      *
@@ -498,5 +495,4 @@ class DoctrineSchemaBuilder
     {
         (new Link\CatalogProductAttributeValueToCatalogProductEntity($this->schema, $backendType))->build();
     }
-
 }

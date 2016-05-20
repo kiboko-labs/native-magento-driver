@@ -44,19 +44,19 @@ class AttributeOptionValueRepositoryTest extends \PHPUnit_Framework_TestCase
         $platform = $this->getDoctrineConnection()->getDatabasePlatform();
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
-        
+
         $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('eav_attribute')
         );
-        
+
         $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('eav_attribute_option')
         );
-        
+
         $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('core_store')
         );
-        
+
         $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('eav_attribute_option_value')
         );
@@ -70,7 +70,7 @@ class AttributeOptionValueRepositoryTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        
+
         $currentSchema = $this->getDoctrineConnection()
             ->getSchemaManager()
             ->createSchema()
@@ -92,7 +92,7 @@ class AttributeOptionValueRepositoryTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->truncateTables();
-        
+
         $magentoVersion = '1.9';
         $magentoEdition = 'ce';
 
@@ -125,7 +125,7 @@ class AttributeOptionValueRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $attributeOptionValue = $this->repository->findOneById(2);
         $this->assertInstanceOf(AttributeOptionValueInterface::class, $attributeOptionValue);
-        
+
         $this->assertEquals($attributeOptionValue->getId(), 2);
         $this->assertEquals($attributeOptionValue->getOptionId(), 1);
         $this->assertEquals($attributeOptionValue->getStoreId(), 1);
@@ -136,5 +136,4 @@ class AttributeOptionValueRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertNull($this->repository->findOneById(123));
     }
-
 }

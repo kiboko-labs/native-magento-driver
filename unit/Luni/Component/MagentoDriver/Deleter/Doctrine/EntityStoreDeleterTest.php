@@ -14,7 +14,6 @@ use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait
 
 class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
 {
-
     use DatabaseConnectionAwareTrait;
 
     /**
@@ -26,7 +25,7 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
      * @var EntityStoreDeleterInterface
      */
     private $deleter;
-    
+
     /**
      * @var EntityStorePersisterInterface
      */
@@ -42,7 +41,7 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
 
         return $dataset;
     }
-    
+
     /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
@@ -98,15 +97,15 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
         $schemaBuilder->hydrateEntityStoreTable('1.9', 'ce');
 
         $this->persister = new StandardEntityStorePersister(
-            $this->getDoctrineConnection(), 
+            $this->getDoctrineConnection(),
             EntityStoreQueryBuilder::getDefaultTable()
         );
-        
+
         $this->deleter = new EntityStoreDeleter(
             $this->getDoctrineConnection(),
             new EntityStoreQueryBuilder(
-                $this->getDoctrineConnection(), 
-                EntityStoreQueryBuilder::getDefaultTable(), 
+                $this->getDoctrineConnection(),
+                EntityStoreQueryBuilder::getDefaultTable(),
                 EntityStoreQueryBuilder::getDefaultFields()
             )
         );
@@ -123,10 +122,10 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
     public function testRemoveNone()
     {
         $this->persister->initialize();
-        
+
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_entity_store');
-        
+
         $this->assertDataSetsEqual($this->getOriginalDataSet(), $actual);
 
         $this->assertTableRowCount('eav_entity_store', 9);
@@ -142,11 +141,11 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
     }
-    
+
     public function testRemoveAllById()
     {
         $this->persister->initialize();
-        $this->deleter->deleteAllById(array(2));
+        $this->deleter->deleteAllById([2]);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_entity_store');

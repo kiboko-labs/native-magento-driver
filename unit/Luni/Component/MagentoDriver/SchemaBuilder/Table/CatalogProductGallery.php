@@ -40,7 +40,7 @@ class CatalogProductGallery
 
         $table->setPrimaryKey(['value_id']);
         $table->addUniqueIndex(['entity_type_id', 'entity_id', 'attribute_id', 'store_id']);
-        
+
         $table->addIndex(['entity_id']);
         $table->addIndex(['attribute_id']);
         $table->addIndex(['store_id']);

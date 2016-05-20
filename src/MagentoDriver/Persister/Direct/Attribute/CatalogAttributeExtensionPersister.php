@@ -65,7 +65,7 @@ class CatalogAttributeExtensionPersister implements CatalogAttributeExtensionPer
             if (!$attribute->getId()) {
                 throw new RuntimeErrorException('Attribute #id should be defined.');
             }
-            
+
             $count = $this->connection->update($this->tableName,
                 [
                     'frontend_input_renderer' => $attribute->getFrontendInputRendererClassName(),
@@ -92,7 +92,7 @@ class CatalogAttributeExtensionPersister implements CatalogAttributeExtensionPer
                     'attribute_id' => $attribute->getId(),
                 ]
             );
-            
+
             if ($count <= 0) {
                 $this->connection->insert($this->tableName,
                     [

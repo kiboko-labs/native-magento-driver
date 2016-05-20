@@ -7,7 +7,6 @@ use Doctrine\DBAL\Query\QueryBuilder;
 
 class EntityAttributeQueryBuilder implements EntityAttributeQueryBuilderInterface
 {
-
     /**
      * @var Connection
      */
@@ -30,8 +29,7 @@ class EntityAttributeQueryBuilder implements EntityAttributeQueryBuilderInterfac
      */
     public function __construct(
     Connection $connection, $table, array $fields
-    )
-    {
+    ) {
         $this->connection = $connection;
         $this->table = $table;
         $this->fields = $fields;
@@ -48,7 +46,7 @@ class EntityAttributeQueryBuilder implements EntityAttributeQueryBuilderInterfac
             'attribute_set_id',
             'attribute_group_id',
             'attribute_id',
-            'sort_order'
+            'sort_order',
         ];
     }
 
@@ -106,39 +104,39 @@ class EntityAttributeQueryBuilder implements EntityAttributeQueryBuilderInterfac
 
         return $queryBuilder;
     }
-    
+
     public function createFindOneByAttributeIdAndGroupIdQueryBuilder($alias, $attributeId, $attributeGroupId)
     {
         $queryBuilder = $this->createFindQueryBuilder($alias);
-        
+
         $queryBuilder
                 ->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_id', $alias), $attributeId))
                 ->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_group_id', $alias), $attributeGroupId))
                 ->setFirstResult(0)
                 ->setMaxResults(1)
         ;
-        
+
         return $queryBuilder;
     }
-    
+
     public function createFindOneByAttributeIdAndSetIdQueryBuilder($alias, $attributeId, $attributeSetId)
     {
         $queryBuilder = $this->createFindQueryBuilder($alias);
-        
+
         $queryBuilder
                 ->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_id', $alias), $attributeId))
                 ->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_set_id', $alias), $attributeSetId))
                 ->setFirstResult(0)
                 ->setMaxResults(1)
         ;
-        
+
         return $queryBuilder;
     }
 
     /**
-     * 
      * @param string $alias
-     * @param int[] $idList
+     * @param int[]  $idList
+     *
      * @return type
      */
     public function createFindAllByIdQueryBuilder($alias, array $idList)
@@ -163,7 +161,7 @@ class EntityAttributeQueryBuilder implements EntityAttributeQueryBuilderInterfac
 
     /**
      * @param int $id
-     * 
+     *
      * @return QueryBuilder
      */
     public function createDeleteOneByIdQueryBuilder()
@@ -193,5 +191,4 @@ class EntityAttributeQueryBuilder implements EntityAttributeQueryBuilderInterfac
 
         return $queryBuilder;
     }
-
 }

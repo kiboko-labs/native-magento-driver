@@ -65,7 +65,7 @@ class AttributeOptionPersister implements AttributeOptionPersisterInterface
                 $count = $this->connection->update($this->tableName,
                     [
                         'attribute_id' => $attributeOption->getAttributeId(),
-                        'sort_order' => $attributeOption->getSortOrder()
+                        'sort_order' => $attributeOption->getSortOrder(),
                     ],
                     [
                         'option_id' => $attributeOption->getId(),
@@ -78,7 +78,7 @@ class AttributeOptionPersister implements AttributeOptionPersisterInterface
                     [
                         'option_id' => $attributeOption->getId(),
                         'attribute_id' => $attributeOption->getAttributeId(),
-                        'sort_order' => $attributeOption->getSortOrder()
+                        'sort_order' => $attributeOption->getSortOrder(),
                     ]
                 );
 

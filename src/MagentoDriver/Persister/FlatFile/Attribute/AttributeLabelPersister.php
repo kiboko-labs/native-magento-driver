@@ -43,7 +43,7 @@ class AttributeLabelPersister implements AttributeLabelPersisterInterface
             'attribute_label_id' => $attributeLabelInterface->getId(),
             'attribute_id' => $attributeLabelInterface->getAttributeId(),
             'store_id' => $attributeLabelInterface->getStoreId(),
-            'value' => $attributeLabelInterface->getValue()
+            'value' => $attributeLabelInterface->getValue(),
         ]);
     }
 
