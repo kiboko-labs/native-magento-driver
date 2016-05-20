@@ -95,7 +95,8 @@
 * [x] persister [Interface](src/MagentoDriver/Repository/CatalogAttributeExtensionPersisterInterface.php)
   * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Attribute/CatalogAttributeExtensionPersister.php)
   * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/Attribute/CatalogAttributeExtensionPersister.php)
-* [ ] deleter
+* [x] deleter [Interface](src/MagentoDriver/Deleter/CatalogAttributeDeleterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Deleter/Doctrine/CatalogAttributeDeleter.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Deleter/Doctrine/CatalogAttributeDeleterTest.php))
 
 # Products
 

@@ -54,7 +54,7 @@ catalog_eav_attribute:
         used_in_product_listing: '1'
         used_for_sort_by: 0
         is_configurable: 0
-        apply_to: downloadable
+        apply_to: "downloadable"
         is_visible_in_advanced_search: 0
         position: 0
         is_wysiwyg_enabled: 0
@@ -74,7 +74,7 @@ catalog_eav_attribute:
         used_in_product_listing: 0
         used_for_sort_by: 0
         is_configurable: 0
-        apply_to: null
+        apply_to: "virtual,downloadable"
         is_visible_in_advanced_search: 0
         position: 0
         is_wysiwyg_enabled: 0
@@ -381,7 +381,7 @@ eav_attribute:
         backend_table: null
         frontend_model: null
         frontend_input: price
-        frontend_label: Coût
+        frontend_label: Cout
         frontend_class: null
         source_model: null
         is_required: 0
@@ -1018,7 +1018,7 @@ eav_attribute_label:
         attribute_label_id: '1'
         attribute_id: '79'
         store_id: '1'
-        value: 'Coût'
+        value: 'Cout'
     -
         attribute_label_id: '2'
         attribute_id: '122'

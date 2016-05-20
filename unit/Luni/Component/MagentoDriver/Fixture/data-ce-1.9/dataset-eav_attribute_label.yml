@@ -3,7 +3,7 @@ eav_attribute_label:
         attribute_label_id: '1'
         attribute_id: '79'
         store_id: '1'
-        value: 'Coût'
+        value: 'Cout'
     -
         attribute_label_id: '2'
         attribute_id: '122'

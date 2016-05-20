@@ -15,9 +15,6 @@ use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
 use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilderInterface;
 use Luni\Component\MagentoDriver\Repository\ProductAttributeRepositoryInterface;
 
-/**
- * Class ProductAttributeRepository.
- */
 class CatalogAttributeRepository implements ProductAttributeRepositoryInterface
 {
     /**
@@ -103,8 +100,8 @@ class CatalogAttributeRepository implements ProductAttributeRepositoryInterface
     }
 
     /**
-     * @param string $entityTypeCode
      * @param string $code
+     * @param string $entityTypeCode
      *
      * @return CatalogAttributeExtensionInterface
      */
@@ -160,10 +157,10 @@ class CatalogAttributeRepository implements ProductAttributeRepositoryInterface
         $query = $this->queryBuilder->createFindAllByCodeQueryBuilder('a', 'x', 'e', $codeList);
 
         $statement = $this->connection->prepare($query);
-        if (!$statement->execute(array_merge(['catalog_product'], $codeList))) {
+        if (!$statement->execute(array_merge([$entityTypeCode], $codeList))) {
             throw new DatabaseFetchingFailureException();
         }
-
+        
         $attributeList = new ArrayCollection();
         if ($statement->rowCount() < 1) {
             return $attributeList;

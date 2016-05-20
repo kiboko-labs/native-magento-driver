@@ -3,7 +3,7 @@ eav_attribute_label:
         attribute_label_id: '1'
         attribute_id: '79'
         store_id: '1'
-        value: 'Coût'
+        value: 'Cout'
 # @author: Nolwennig
 # @notice: An internal tacit rule stipulates that the id 2 is removed by default        
 #    -
