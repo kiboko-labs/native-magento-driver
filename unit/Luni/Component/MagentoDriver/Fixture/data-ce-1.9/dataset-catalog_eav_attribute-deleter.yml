@@ -54,7 +54,7 @@ catalog_eav_attribute:
         used_in_product_listing: '1'
         used_for_sort_by: 0
         is_configurable: 0
-        apply_to: downloadable
+        apply_to: "downloadable"
         is_visible_in_advanced_search: 0
         position: 0
         is_wysiwyg_enabled: 0
@@ -62,7 +62,7 @@ catalog_eav_attribute:
     -
         attribute_id: '167'
         frontend_input_renderer: null
-        is_global: '2'
+        is_global: '1'
         is_visible: '1'
         is_searchable: 0
         is_filterable: 0
@@ -74,7 +74,7 @@ catalog_eav_attribute:
         used_in_product_listing: 0
         used_for_sort_by: 0
         is_configurable: 0
-        apply_to: null
+        apply_to: "virtual,downloadable"
         is_visible_in_advanced_search: 0
         position: 0
         is_wysiwyg_enabled: 0
