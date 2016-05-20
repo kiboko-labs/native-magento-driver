@@ -65,10 +65,9 @@ class CatalogAttributeExtensionPersister implements CatalogAttributeExtensionPer
             if (!$attribute->getId()) {
                 throw new RuntimeErrorException('Attribute #id should be defined.');
             }
-
-            $this->connection->update($this->tableName,
+            
+            $count = $this->connection->update($this->tableName,
                 [
-                    'attribute_id' => $attribute->getId(),
                     'frontend_input_renderer' => $attribute->getFrontendInputRendererClassName(),
                     'is_global' => $attribute->isGlobal(),
                     'is_visible' => $attribute->isVisible(),
@@ -93,6 +92,33 @@ class CatalogAttributeExtensionPersister implements CatalogAttributeExtensionPer
                     'attribute_id' => $attribute->getId(),
                 ]
             );
+            
+            if ($count <= 0) {
+                $this->connection->insert($this->tableName,
+                    [
+                        'attribute_id' => $attribute->getId(),
+                        'frontend_input_renderer' => $attribute->getFrontendInputRendererClassName(),
+                        'is_global' => $attribute->isGlobal(),
+                        'is_visible' => $attribute->isVisible(),
+                        'is_searchable' => $attribute->isSearchable(),
+                        'is_filterable' => $attribute->isFilterable(),
+                        'is_comparable' => $attribute->isComparable(),
+                        'is_visible_on_front' => $attribute->isVisibleOnFront(),
+                        'is_html_allowed_on_front' => $attribute->isHtmlAllowedOnFront(),
+                        'is_used_for_price_rules' => $attribute->isUsedForPriceRules(),
+                        'is_filterable_in_search' => $attribute->isFilterableInSearch(),
+                        'used_in_product_listing' => $attribute->isUsedInProductListing(),
+                        'used_for_sort_by' => $attribute->isUsedForSortBy(),
+                        'is_configurable' => $attribute->isConfigurable(),
+                        'apply_to' => empty($attribute->getProductTypesApplyingTo()) ?
+                            null : implode(',', $attribute->getProductTypesApplyingTo()),
+                        'is_visible_in_advanced_search' => $attribute->isVisibleInAdvancedSearch(),
+                        'position' => $attribute->getPosition(),
+                        'is_wysiwyg_enabled' => $attribute->isWysiwygEnabled(),
+                        'is_used_for_promo_rules' => $attribute->isUsedForPromoRules(),
+                    ]
+                );
+            }
         }
     }
 

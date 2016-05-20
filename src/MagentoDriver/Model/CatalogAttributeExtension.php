@@ -72,7 +72,7 @@ class CatalogAttributeExtension implements CatalogAttributeExtensionInterface
     /**
      * @var bool
      */
-    private $isConfigurable;
+    private $configurable;
 
     /**
      * @var bool
@@ -131,30 +131,30 @@ class CatalogAttributeExtension implements CatalogAttributeExtensionInterface
 
     /**
      * @param int    $attributeId
-     * @param bool   $frontendInputRendererClassName,
-     * @param int    $global,
-     * @param bool   $visible,
-     * @param bool   $searchable,
-     * @param bool   $filterable,
-     * @param bool   $comparable,
-     * @param bool   $visibleOnFront,
-     * @param bool   $htmlAllowedOnFront,
-     * @param bool   $usedForPriceRules,
-     * @param bool   $filterableInSearch,
-     * @param bool   $usedInProductListing,
-     * @param bool   $usedForSortBy,
-     * @param bool   $configurable,
-     * @param bool   $visibleInAdvancedSearch,
-     * @param bool   $wysiwygEnabled,
-     * @param bool   $usedForPromoRules,
-     * @param bool   $requiredInAdminStore,
-     * @param bool   $usedInGrid,
-     * @param bool   $visibleInGrid,
-     * @param bool   $filterableInGrid,
-     * @param bool   $position,
-     * @param bool   $searchWeight,
-     * @param array  $productTypesApplyingTo,
-     * @param array  $additionalData,
+     * @param bool   $frontendInputRendererClassName
+     * @param int    $global
+     * @param bool   $visible
+     * @param bool   $searchable
+     * @param bool   $filterable
+     * @param bool   $comparable
+     * @param bool   $visibleOnFront
+     * @param bool   $htmlAllowedOnFront
+     * @param bool   $usedForPriceRules
+     * @param bool   $filterableInSearch
+     * @param bool   $usedInProductListing
+     * @param bool   $usedForSortBy
+     * @param bool   $configurable
+     * @param string $productTypesApplyingTo
+     * @param bool   $visibleInAdvancedSearch
+     * @param bool   $position
+     * @param bool   $wysiwygEnabled
+     * @param bool   $usedForPromoRules
+     * @param bool   $requiredInAdminStore
+     * @param bool   $usedInGrid
+     * @param bool   $visibleInGrid
+     * @param bool   $filterableInGrid
+     * @param bool   $searchWeight
+     * @param array  $additionalData
      * @param string $note
      */
     public function __construct(
@@ -172,16 +172,16 @@ class CatalogAttributeExtension implements CatalogAttributeExtensionInterface
         $usedInProductListing = false,
         $usedForSortBy = false,
         $configurable = false,
+        $productTypesApplyingTo = null,
         $visibleInAdvancedSearch = false,
+        $position = false,
         $wysiwygEnabled = false,
         $usedForPromoRules = false,
         $requiredInAdminStore = false,
         $usedInGrid = false,
         $visibleInGrid = false,
         $filterableInGrid = false,
-        $position = false,
         $searchWeight = false,
-        array $productTypesApplyingTo = [],
         array $additionalData = [],
         $note = null
     ) {
@@ -199,16 +199,16 @@ class CatalogAttributeExtension implements CatalogAttributeExtensionInterface
         $this->usedInProductListing = (bool) $usedInProductListing;
         $this->usedForSortBy = (bool) $usedForSortBy;
         $this->configurable = (bool) $configurable;
+        $this->productTypesApplyingTo = (array) $productTypesApplyingTo;
         $this->visibleInAdvancedSearch = (bool) $visibleInAdvancedSearch;
+        $this->position = $position;
         $this->wysiwygEnabled = (bool) $wysiwygEnabled;
         $this->usedForPromoRules = (bool) $usedForPromoRules;
         $this->requiredInAdminStore = (bool) $requiredInAdminStore;
         $this->usedInGrid = (bool) $usedInGrid;
         $this->visibleInGrid = (bool) $visibleInGrid;
         $this->filterableInGrid = (bool) $filterableInGrid;
-        $this->position = $position;
         $this->searchWeight = $searchWeight;
-        $this->productTypesApplyingTo = $productTypesApplyingTo;
         $this->additionalData = $additionalData;
         $this->note = $note;
     }
@@ -232,12 +232,12 @@ class CatalogAttributeExtension implements CatalogAttributeExtensionInterface
     }
 
     /**
-     * @return bool
+     * @return int
      * @MagentoODM\Field('is_global', version='*')
      */
     public function isGlobal()
     {
-        return (bool) $this->global;
+        return (int) $this->global;
     }
 
     /**

@@ -62,7 +62,7 @@ catalog_eav_attribute:
     -
         attribute_id: '167'
         frontend_input_renderer: null
-        is_global: '1'
+        is_global: '2'
         is_visible: '1'
         is_searchable: 0
         is_filterable: 0
