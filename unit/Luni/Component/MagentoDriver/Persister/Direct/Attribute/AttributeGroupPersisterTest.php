@@ -95,6 +95,7 @@ class AttributeGroupPersisterTest extends \PHPUnit_Framework_TestCase
     public function testInsertNone()
     {
         $this->persister->initialize();
+        $this->persister->flush();
 
         $this->assertTableRowCount('eav_attribute_group', 0);
     }
