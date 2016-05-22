@@ -1,0 +1,52 @@
+parameters:
+  kiboko.magento_driver.repository.attribute_group.class:         Luni\Component\MagentoDriver\Repository\Doctrine\AttributeGroupRepository
+  kiboko.magento_driver.repository.catalog_attribute.class:       Luni\Component\MagentoDriver\Repository\Doctrine\CatalogAttributeRepository
+  kiboko.magento_driver.repository.entity_store.class:            Luni\Component\MagentoDriver\Repository\Doctrine\EntityStoreRepository
+  kiboko.magento_driver.repository.entity_type.class:             Luni\Component\MagentoDriver\Repository\Doctrine\EntityTypeRepository
+  kiboko.magento_driver.repository.family.class:                  Luni\Component\MagentoDriver\Repository\Doctrine\FamilyRepository
+  kiboko.magento_driver.repository.product_attribute_value.class: Luni\Component\MagentoDriver\Repository\Doctrine\ProuctAttributeValueRepository
+  kiboko.magento_driver.repository.product.class:                 Luni\Component\MagentoDriver\Repository\Doctrine\ProuctRepository
+
+services:
+  kiboko.magento_driver.repository.attribute_group:
+    class: '%kiboko.magento_driver.repository.attribute_group.class%'
+    arguments:
+      - '@database.connection'
+      - '@kiboko.magento_driver.repository.attribute_group'
+
+  kiboko.magento_driver.repository.catalog_attribute:
+    class: '%kiboko.magento_driver.repository.catalog_attribute.class%'
+    arguments:
+      - '@database.connection'
+      - '@kiboko.magento_driver.repository.catalog_attribute'
+
+  kiboko.magento_driver.repository.entity_store:
+    class: '%kiboko.magento_driver.repository.entity_store.class%'
+    arguments:
+      - '@database.connection'
+      - '@kiboko.magento_driver.repository.entity_store'
+
+  kiboko.magento_driver.repository.entity_type:
+    class: '%kiboko.magento_driver.repository.entity_type.class%'
+    arguments:
+      - '@database.connection'
+      - '@kiboko.magento_driver.repository.entity_type'
+
+  kiboko.magento_driver.repository.family:
+    class: '%kiboko.magento_driver.repository.family.class%'
+    arguments:
+      - '@database.connection'
+      - '@kiboko.magento_driver.repository.family'
+
+  kiboko.magento_driver.repository.product_attribute_value:
+    class: '%kiboko.magento_driver.repository.product_attribute_value.class%'
+    arguments:
+      - '@database.connection'
+      - '@kiboko.magento_driver.repository.product_attribute_value'
+
+  kiboko.magento_driver.repository.product:
+    class: '%kiboko.magento_driver.repository.product.class%'
+    arguments:
+      - '@database.connection'
+      - '@kiboko.magento_driver.repository.product'
+

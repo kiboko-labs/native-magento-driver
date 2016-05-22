@@ -1,0 +1,13 @@
+parameters:
+  database.connection.class: Doctrine\DBAL\Connection
+  database.adapter.mysqli.class: Doctrine\DBAL\Driver\Mysqli\Driver
+
+services:
+  database.adapter.mysqli:
+    class: '%database.adapter.mysqli.class%'
+
+  database.connection:
+    class: '%database.connection.class%'
+    arguments:
+      - {dbname: '%database.dbname%', user: '%database.user%', password: '%database.password%', host: '%database.host%'}
+      - '@database.adapter.mysqli'

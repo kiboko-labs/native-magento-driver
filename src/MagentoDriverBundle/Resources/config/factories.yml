@@ -1,0 +1,21 @@
+parameters:
+  kiboko.magento_driver.factory.product.standard.class: Luni\Component\MagentoDriver\Factory\StandardProductFactory
+  kiboko.magento_driver.factory.product.simple.class: Luni\Component\MagentoDriver\Factory\Product\SimpleProductFactory
+  kiboko.magento_driver.factory.product.configurable.class: Luni\Component\MagentoDriver\Factory\Product\ConfigurableProductFactory
+
+services:
+  kiboko.magento_driver.factory.product.simple:
+    class: '%kiboko.magento_driver.factory.product.simple.class%'
+    arguments:
+      - '@kiboko.magento_driver.repository.family'
+
+  kiboko.magento_driver.factory.product.configurable:
+    class: '%kiboko.magento_driver.factory.product.configurable.class%'
+    arguments:
+      - '@kiboko.magento_driver.repository.family'
+
+  kiboko.magento_driver.factory.product.standard:
+    class: '%kiboko.magento_driver.factory.product.standard.Class%'
+    calls:
+      - ['addBuilder', ['simple', '@kiboko.magento_driver.factory.product.simple']]
+      - ['addBuilder', ['configurable', '@kiboko.magento_driver.factory.product.configurable']]

@@ -223,6 +223,14 @@ class CatalogAttributeExtension implements CatalogAttributeExtensionInterface
     }
 
     /**
+     * @param int $id
+     */
+    public function persistedToId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
      * @return string
      * @MagentoODM\Field('frontend_input_renderer', version='*')
      */

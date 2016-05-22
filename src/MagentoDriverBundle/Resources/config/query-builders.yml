@@ -1,0 +1,82 @@
+parameters:
+  kiboko.magento_driver.query_builder.attribute.class:               Luni\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeQueryBuilder
+  kiboko.magento_driver.query_builder.attribute_group.class:         Luni\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeGroupQueryBuilder
+  kiboko.magento_driver.query_builder.entity_store.class:            Luni\Component\MagentoDriver\QueryBuilder\Doctrine\EntityStoreQueryBuilder
+  kiboko.magento_driver.query_builder.entity_type.class:             Luni\Component\MagentoDriver\QueryBuilder\Doctrine\EntityTypeQueryBuilder
+  kiboko.magento_driver.query_builder.family.class:                  Luni\Component\MagentoDriver\QueryBuilder\Doctrine\FamilyQueryBuilder
+  kiboko.magento_driver.query_builder.product_attribute.class:       Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilder
+  kiboko.magento_driver.query_builder.product_attribute_value.class: Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeValueQueryBuilder
+  kiboko.magento_driver.query_builder.product.class:                 Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductQueryBuilder
+  kiboko.magento_driver.query_builder.product_super_attribute.class: Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductSuperAttributeQueryBuilder
+
+services:
+  kiboko.magento_driver.query_builder.attribute:
+    class: '%kiboko.magento_driver.query_builder.attribute.class%'
+    arguments:
+      - '@database.connection'
+      - '%kiboko.magento_driver.backend.attribute.table%'
+      - '%kiboko.magento_driver.backend.attribute.fields%'
+
+  kiboko.magento_driver.query_builder.attribute_group:
+    class: '%kiboko.magento_driver.query_builder.attribute_group.class%'
+    arguments:
+      - '@database.connection'
+      - '%kiboko.magento_driver.backend.attribute_group.table%'
+      - '%kiboko.magento_driver.backend.attribute_group.fields%'
+
+  kiboko.magento_driver.query_builder.entity_store:
+    class: '%kiboko.magento_driver.query_builder.entity_store.class%'
+    arguments:
+      - '@database.connection'
+      - '%kiboko.magento_driver.backend.entity_store.table%'
+      - '%kiboko.magento_driver.backend.entity_store.fields%'
+
+  kiboko.magento_driver.query_builder.entity_type:
+    class: '%kiboko.magento_driver.query_builder.entity_type.class%'
+    arguments:
+      - '@database.connection'
+      - '%kiboko.magento_driver.backend.entity_type.table%'
+      - '%kiboko.magento_driver.backend.entity_type.fields%'
+
+  kiboko.magento_driver.query_builder.family:
+    class: '%kiboko.magento_driver.query_builder.family.class%'
+    arguments:
+      - '@database.connection'
+      - '%kiboko.magento_driver.backend.family.table%'
+      - '%kiboko.magento_driver.backend.family.fields%'
+
+  kiboko.magento_driver.query_builder.product_attribute:
+    class: '%kiboko.magento_driver.query_builder.product_attribute.class%'
+    arguments:
+      - '@database.connection'
+      - '%kiboko.magento_driver.backend.product_attribute.table%'
+      - '%kiboko.magento_driver.backend.product_attribute.extra_table%'
+      - '%kiboko.magento_driver.backend.product_attribute.entity_table%'
+      - '%kiboko.magento_driver.backend.variant_axis.table%'
+      - '%kiboko.magento_driver.backend.family.table%'
+      - '%kiboko.magento_driver.backend.product_attribute.fields%'
+      - '%kiboko.magento_driver.backend.product_attribute.extra_fields%'
+
+  kiboko.magento_driver.query_builder.product_attribute_value:
+    class: '%kiboko.magento_driver.query_builder.product_attribute_value.class%'
+    arguments:
+      - '@database.connection'
+      - '%kiboko.magento_driver.backend.product_attribute_value.table%'
+      - '%kiboko.magento_driver.backend.variant_axis.table%'
+      - '%kiboko.magento_driver.backend.product_attribute_value.fields%'
+
+  kiboko.magento_driver.query_builder.product:
+    class: '%kiboko.magento_driver.query_builder.product.class%'
+    arguments:
+      - '@database.connection'
+      - '%kiboko.magento_driver.backend.product.table%'
+      - '%kiboko.magento_driver.backend.family.table%'
+      - '%kiboko.magento_driver.backend.category_product.table%'
+      - '%kiboko.magento_driver.backend.product.fields%'
+
+  kiboko.magento_driver.query_builder.product_super_attribute:
+    class: '%kiboko.magento_driver.query_builder.product_super_attribute.class%'
+    arguments:
+      - '@database.connection'
+      - '%kiboko.magento_driver.backend.product_super_attribute.table%'
+      - '%kiboko.magento_driver.backend.product_super_attribute.fields%'
