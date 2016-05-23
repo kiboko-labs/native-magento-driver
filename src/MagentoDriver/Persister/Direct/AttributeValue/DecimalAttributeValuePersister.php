@@ -1,12 +1,12 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Persister\Direct\AttributeValue;
+namespace Kiboko\Component\MagentoDriver\Persister\Direct\AttributeValue;
 
 use Doctrine\DBAL\Connection;
-use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\DecimalAttributeValueInterface;
-use Luni\Component\MagentoDriver\Persister\AttributeValuePersisterInterface;
-use Luni\Component\MagentoDriver\Exception\InvalidAttributePersisterTypeException;
+use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Model\DecimalAttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Persister\AttributeValuePersisterInterface;
+use Kiboko\Component\MagentoDriver\Exception\InvalidAttributePersisterTypeException;
 
 class DecimalAttributeValuePersister implements AttributeValuePersisterInterface
 {

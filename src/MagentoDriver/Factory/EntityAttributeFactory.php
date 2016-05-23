@@ -1,9 +1,9 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Factory;
+namespace Kiboko\Component\MagentoDriver\Factory;
 
-use Luni\Component\MagentoDriver\Model\EntityAttribute;
-use Luni\Component\MagentoDriver\Model\EntityAttributeInterface;
+use Kiboko\Component\MagentoDriver\Model\EntityAttribute;
+use Kiboko\Component\MagentoDriver\Model\EntityAttributeInterface;
 
 class EntityAttributeFactory implements EntityAttributeFactoryInterface
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Factory;
+namespace Kiboko\Component\MagentoDriver\Factory;
 
-use Luni\Component\MagentoDriver\Model\EntityStore;
-use Luni\Component\MagentoDriver\Model\EntityStoreInterface;
+use Kiboko\Component\MagentoDriver\Model\EntityStore;
+use Kiboko\Component\MagentoDriver\Model\EntityStoreInterface;
 
 class StandardEntityStoreFactory implements EntityStoreFactoryInterface
 {

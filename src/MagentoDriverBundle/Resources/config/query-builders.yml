@@ -1,13 +1,13 @@
 parameters:
-  kiboko.magento_driver.query_builder.attribute.class:               Luni\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeQueryBuilder
-  kiboko.magento_driver.query_builder.attribute_group.class:         Luni\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeGroupQueryBuilder
-  kiboko.magento_driver.query_builder.entity_store.class:            Luni\Component\MagentoDriver\QueryBuilder\Doctrine\EntityStoreQueryBuilder
-  kiboko.magento_driver.query_builder.entity_type.class:             Luni\Component\MagentoDriver\QueryBuilder\Doctrine\EntityTypeQueryBuilder
-  kiboko.magento_driver.query_builder.family.class:                  Luni\Component\MagentoDriver\QueryBuilder\Doctrine\FamilyQueryBuilder
-  kiboko.magento_driver.query_builder.product_attribute.class:       Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilder
-  kiboko.magento_driver.query_builder.product_attribute_value.class: Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeValueQueryBuilder
-  kiboko.magento_driver.query_builder.product.class:                 Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductQueryBuilder
-  kiboko.magento_driver.query_builder.product_super_attribute.class: Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductSuperAttributeQueryBuilder
+  kiboko.magento_driver.query_builder.attribute.class:               Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeQueryBuilder
+  kiboko.magento_driver.query_builder.attribute_group.class:         Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeGroupQueryBuilder
+  kiboko.magento_driver.query_builder.entity_store.class:            Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\EntityStoreQueryBuilder
+  kiboko.magento_driver.query_builder.entity_type.class:             Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\EntityTypeQueryBuilder
+  kiboko.magento_driver.query_builder.family.class:                  Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\FamilyQueryBuilder
+  kiboko.magento_driver.query_builder.product_attribute.class:       Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilder
+  kiboko.magento_driver.query_builder.product_attribute_value.class: Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeValueQueryBuilder
+  kiboko.magento_driver.query_builder.product.class:                 Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductQueryBuilder
+  kiboko.magento_driver.query_builder.product_super_attribute.class: Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductSuperAttributeQueryBuilder
 
 services:
   kiboko.magento_driver.query_builder.attribute:

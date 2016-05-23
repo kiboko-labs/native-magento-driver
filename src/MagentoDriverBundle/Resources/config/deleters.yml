@@ -1,9 +1,9 @@
 parameters:
-  kiboko.magento_driver.deleter.attribute.class: Luni\Component\MagentoDriver\Deleter\Doctrine\AttributeDeleter
-  kiboko.magento_driver.deleter.attribute_group.class: Luni\Component\MagentoDriver\Deleter\Doctrine\AttributeGroupDeleter
-  kiboko.magento_driver.deleter.entity_store.class: Luni\Component\MagentoDriver\Deleter\Doctrine\EntityStoreDeleter
-  kiboko.magento_driver.deleter.family.class: Luni\Component\MagentoDriver\Deleter\Doctrine\FamilyDeleter
-  kiboko.magento_driver.deleter.product.class: Luni\Component\MagentoDriver\Deleter\Doctrine\ProductDeleter
+  kiboko.magento_driver.deleter.attribute.class: Kiboko\Component\MagentoDriver\Deleter\Doctrine\AttributeDeleter
+  kiboko.magento_driver.deleter.attribute_group.class: Kiboko\Component\MagentoDriver\Deleter\Doctrine\AttributeGroupDeleter
+  kiboko.magento_driver.deleter.entity_store.class: Kiboko\Component\MagentoDriver\Deleter\Doctrine\EntityStoreDeleter
+  kiboko.magento_driver.deleter.family.class: Kiboko\Component\MagentoDriver\Deleter\Doctrine\FamilyDeleter
+  kiboko.magento_driver.deleter.product.class: Kiboko\Component\MagentoDriver\Deleter\Doctrine\ProductDeleter
 
 services:
   kiboko.magento_driver.deleter.attribute:

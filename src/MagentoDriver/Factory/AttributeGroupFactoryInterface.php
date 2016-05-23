@@ -1,8 +1,8 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Factory;
+namespace Kiboko\Component\MagentoDriver\Factory;
 
-use Luni\Component\MagentoDriver\Model\AttributeGroupInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeGroupInterface;
 
 interface AttributeGroupFactoryInterface
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Persister;
+namespace Kiboko\Component\MagentoDriver\Persister;
 
-use Luni\Component\MagentoDriver\Entity\CategoryInterface;
+use Kiboko\Component\MagentoDriver\Entity\CategoryInterface;
 
 interface CategoryPersisterInterface
 {

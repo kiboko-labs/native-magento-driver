@@ -1,10 +1,10 @@
 <?php
 
-namespace Luni\Component\MagentoMapper\QueryBuilder\Doctrine;
+namespace Kiboko\Component\MagentoMapper\QueryBuilder\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
-use Luni\Component\MagentoMapper\QueryBuilder\FamilyQueryBuilderInterface;
+use Kiboko\Component\MagentoMapper\QueryBuilder\FamilyQueryBuilderInterface;
 
 class FamilyQueryBuilder implements FamilyQueryBuilderInterface
 {

@@ -1,16 +1,16 @@
 <?php
 
-namespace unit\Luni\Component\MagentoDriver\Deleter\Doctrine\Attribute;
+namespace unit\Kiboko\Component\MagentoDriver\Deleter\Doctrine\Attribute;
 
 use Doctrine\DBAL\Schema\Schema;
-use Luni\Component\MagentoDriver\Persister\AttributeOptionPersisterInterface;
-use Luni\Component\MagentoDriver\Deleter\AttributeOptionDeleterInterface;
-use Luni\Component\MagentoDriver\Persister\Direct\Attribute\AttributeOptionPersister;
-use Luni\Component\MagentoDriver\Deleter\Doctrine\AttributeOptionDeleter;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeOptionQueryBuilder;
+use Kiboko\Component\MagentoDriver\Persister\AttributeOptionPersisterInterface;
+use Kiboko\Component\MagentoDriver\Deleter\AttributeOptionDeleterInterface;
+use Kiboko\Component\MagentoDriver\Persister\Direct\Attribute\AttributeOptionPersister;
+use Kiboko\Component\MagentoDriver\Deleter\Doctrine\AttributeOptionDeleter;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeOptionQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
-use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
-use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
+use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
 
 class AttributeOptionDeleterTest extends \PHPUnit_Framework_TestCase
 {

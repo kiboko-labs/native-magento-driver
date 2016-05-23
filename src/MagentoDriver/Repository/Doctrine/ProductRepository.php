@@ -1,17 +1,17 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Repository\Doctrine;
+namespace Kiboko\Component\MagentoDriver\Repository\Doctrine;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Connection;
-use Luni\Component\MagentoDriver\Entity\CategoryInterface;
-use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
-use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
-use Luni\Component\MagentoDriver\Factory\ProductFactoryInterface;
-use Luni\Component\MagentoDriver\Model\FamilyInterface;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductQueryBuilderInterface;
-use Luni\Component\MagentoDriver\Repository\ProductRepositoryInterface;
+use Kiboko\Component\MagentoDriver\Entity\CategoryInterface;
+use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
+use Kiboko\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
+use Kiboko\Component\MagentoDriver\Factory\ProductFactoryInterface;
+use Kiboko\Component\MagentoDriver\Model\FamilyInterface;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductQueryBuilderInterface;
+use Kiboko\Component\MagentoDriver\Repository\ProductRepositoryInterface;
 
 class ProductRepository implements ProductRepositoryInterface
 {

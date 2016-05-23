@@ -1,14 +1,14 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Model\Immutable;
+namespace Kiboko\Component\MagentoDriver\Model\Immutable;
 
-use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\Mutable\MutableDecimalAttributeValue;
-use Luni\Component\MagentoDriver\Model\DecimalAttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\DecimalAttributeValueTrait;
-use Luni\Component\MagentoDriver\Model\ScopableAttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Model\Mutable\MutableDecimalAttributeValue;
+use Kiboko\Component\MagentoDriver\Model\DecimalAttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Model\DecimalAttributeValueTrait;
+use Kiboko\Component\MagentoDriver\Model\ScopableAttributeValueInterface;
 
 class ImmutableDecimalAttributeValue implements ImmutableAttributeValueInterface, ScopableAttributeValueInterface, DecimalAttributeValueInterface
 {

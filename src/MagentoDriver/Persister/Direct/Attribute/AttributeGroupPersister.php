@@ -1,10 +1,10 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Persister\Direct\Attribute;
+namespace Kiboko\Component\MagentoDriver\Persister\Direct\Attribute;
 
 use Doctrine\DBAL\Connection;
-use Luni\Component\MagentoDriver\Model\AttributeGroupInterface;
-use Luni\Component\MagentoDriver\Persister\AttributeGroupPersisterInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeGroupInterface;
+use Kiboko\Component\MagentoDriver\Persister\AttributeGroupPersisterInterface;
 
 class AttributeGroupPersister implements AttributeGroupPersisterInterface
 {

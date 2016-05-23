@@ -1,9 +1,9 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Persister\Direct\AttributeValue;
+namespace Kiboko\Component\MagentoDriver\Persister\Direct\AttributeValue;
 
-use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
-use Luni\Component\MagentoDriver\Persister\AttributeValuePersisterInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Persister\AttributeValuePersisterInterface;
 
 class StaticAttributeValuePersister implements AttributeValuePersisterInterface
 {

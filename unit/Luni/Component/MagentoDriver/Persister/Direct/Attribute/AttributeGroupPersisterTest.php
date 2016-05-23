@@ -1,16 +1,16 @@
 <?php
 
-namespace unit\Luni\Component\MagentoDriver\Persister\Direct\Attribute;
+namespace unit\Kiboko\Component\MagentoDriver\Persister\Direct\Attribute;
 
 use Doctrine\DBAL\Schema\Schema;
-use Luni\Component\MagentoDriver\Model\AttributeGroup;
-use Luni\Component\MagentoDriver\Persister\AttributeGroupPersisterInterface;
-use Luni\Component\MagentoDriver\Persister\Direct\Attribute\AttributeGroupPersister;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeGroupQueryBuilder;
+use Kiboko\Component\MagentoDriver\Model\AttributeGroup;
+use Kiboko\Component\MagentoDriver\Persister\AttributeGroupPersisterInterface;
+use Kiboko\Component\MagentoDriver\Persister\Direct\Attribute\AttributeGroupPersister;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeGroupQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
-use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
-use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
-use unit\Luni\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
+use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
 
 class AttributeGroupPersisterTest extends \PHPUnit_Framework_TestCase
 {

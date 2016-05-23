@@ -1,11 +1,11 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Persister\Direct\Attribute;
+namespace Kiboko\Component\MagentoDriver\Persister\Direct\Attribute;
 
 use Doctrine\DBAL\Connection;
-use Luni\Component\MagentoDriver\Exception\RuntimeErrorException;
-use Luni\Component\MagentoDriver\Model\CatalogAttributeExtensionInterface;
-use Luni\Component\MagentoDriver\Persister\CatalogAttributeExtensionPersisterInterface;
+use Kiboko\Component\MagentoDriver\Exception\RuntimeErrorException;
+use Kiboko\Component\MagentoDriver\Model\CatalogAttributeExtensionInterface;
+use Kiboko\Component\MagentoDriver\Persister\CatalogAttributeExtensionPersisterInterface;
 
 class CatalogAttributeExtensionPersister implements CatalogAttributeExtensionPersisterInterface
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Luni\Component\MagentoMapper\Mapper;
+namespace Kiboko\Component\MagentoMapper\Mapper;
 
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoMapper\Repository\OptionRepositoryInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoMapper\Repository\OptionRepositoryInterface;
 
 class EnhancedOptionMapper extends DefaultOptionMapper
 {

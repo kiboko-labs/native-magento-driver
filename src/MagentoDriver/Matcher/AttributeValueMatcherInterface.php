@@ -1,8 +1,8 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Matcher;
+namespace Kiboko\Component\MagentoDriver\Matcher;
 
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
 
 interface AttributeValueMatcherInterface
 {

@@ -1,16 +1,16 @@
 <?php
 
-namespace unit\Luni\Component\MagentoDriver\Persister\Direct\EntityStore;
+namespace unit\Kiboko\Component\MagentoDriver\Persister\Direct\EntityStore;
 
 use Doctrine\DBAL\Schema\Schema;
-use Luni\Component\MagentoDriver\Model\EntityStore;
-use Luni\Component\MagentoDriver\Persister\EntityStorePersisterInterface;
-use Luni\Component\MagentoDriver\Persister\Direct\Entity\StandardEntityStorePersister;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\EntityStoreQueryBuilder;
+use Kiboko\Component\MagentoDriver\Model\EntityStore;
+use Kiboko\Component\MagentoDriver\Persister\EntityStorePersisterInterface;
+use Kiboko\Component\MagentoDriver\Persister\Direct\Entity\StandardEntityStorePersister;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\EntityStoreQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
-use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
-use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
-use unit\Luni\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
+use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
 
 class EntityStorePersisterTest extends \PHPUnit_Framework_TestCase
 {

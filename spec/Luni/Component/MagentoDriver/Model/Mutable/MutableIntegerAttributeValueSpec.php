@@ -1,8 +1,8 @@
 <?php
 
-namespace spec\Luni\Component\MagentoDriver\Model\Mutable;
+namespace spec\Kiboko\Component\MagentoDriver\Model\Mutable;
 
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -11,7 +11,7 @@ class MutableIntegerAttributeValueSpec extends ObjectBehavior
     function it_is_an_MutableAttributeValueInterface(AttributeInterface $attribute)
     {
         $this->beConstructedWith($attribute, 1.5);
-        $this->shouldImplement('Luni\Component\MagentoDriver\Model\Mutable\MutableAttributeValueInterface');
+        $this->shouldImplement('Kiboko\Component\MagentoDriver\Model\Mutable\MutableAttributeValueInterface');
     }
 
     function it_should_contain_integer_value(AttributeInterface $attribute)

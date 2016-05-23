@@ -1,9 +1,9 @@
 <?php
 
-namespace spec\Luni\Component\MagentoDriver\Model\Mutable;
+namespace spec\Kiboko\Component\MagentoDriver\Model\Mutable;
 
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Model\Mutable\MutableImageMetadataAttributeValue;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoDriver\Model\Mutable\MutableImageMetadataAttributeValue;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -12,7 +12,7 @@ class MutableImageMetadataAttributeValueSpec extends ObjectBehavior
     function it_is_an_ImmutableAttributeValueInterface(AttributeInterface $attribute)
     {
         $this->beConstructedWith($attribute, 'Lorem ipsum', 1, false, 0);
-        $this->shouldImplement('Luni\Component\MagentoDriver\Model\Mutable\MutableAttributeValueInterface');
+        $this->shouldImplement('Kiboko\Component\MagentoDriver\Model\Mutable\MutableAttributeValueInterface');
     }
 
     function it_should_contain_label_value_as_string(AttributeInterface $attribute)

@@ -1,14 +1,14 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Model\Immutable;
+namespace Kiboko\Component\MagentoDriver\Model\Immutable;
 
-use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\Mutable\MutableVarcharAttributeValue;
-use Luni\Component\MagentoDriver\Model\ScopableAttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\VarcharAttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\VarcharAttributeValueTrait;
+use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Model\Mutable\MutableVarcharAttributeValue;
+use Kiboko\Component\MagentoDriver\Model\ScopableAttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Model\VarcharAttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Model\VarcharAttributeValueTrait;
 
 class ImmutableVarcharAttributeValue implements ImmutableAttributeValueInterface, ScopableAttributeValueInterface, VarcharAttributeValueInterface
 {

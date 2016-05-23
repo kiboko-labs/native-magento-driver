@@ -1,8 +1,8 @@
 <?php
 
-namespace spec\Luni\Component\MagentoDriver\Entity\Product;
+namespace spec\Kiboko\Component\MagentoDriver\Entity\Product;
 
-use Luni\Component\MagentoDriver\Model\FamilyInterface;
+use Kiboko\Component\MagentoDriver\Model\FamilyInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -12,6 +12,6 @@ class SimpleProductSpec extends ObjectBehavior
         FamilyInterface $family
     ) {
         $this->beConstructedWith(1337, $family);
-        $this->shouldHaveType('Luni\Component\MagentoDriver\Entity\Product\SimpleProduct');
+        $this->shouldHaveType('Kiboko\Component\MagentoDriver\Entity\Product\SimpleProduct');
     }
 }

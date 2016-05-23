@@ -1,6 +1,6 @@
 <?php
 
-namespace unit\Luni\Component\MagentoDriver\SchemaBuilder\Link;
+namespace unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Link;
 
 use Doctrine\DBAL\Schema\Schema;
 

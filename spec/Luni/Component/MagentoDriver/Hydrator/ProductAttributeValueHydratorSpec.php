@@ -1,9 +1,9 @@
 <?php
 
-namespace spec\Luni\Component\MagentoDriver\Hydrator;
+namespace spec\Kiboko\Component\MagentoDriver\Hydrator;
 
-use Luni\Component\MagentoDriver\Repository\ProductAttributeRepositoryInterface;
-use Luni\Component\MagentoDriver\Repository\ProductAttributeValueRepositoryInterface;
+use Kiboko\Component\MagentoDriver\Repository\ProductAttributeRepositoryInterface;
+use Kiboko\Component\MagentoDriver\Repository\ProductAttributeValueRepositoryInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -14,6 +14,6 @@ class ProductAttributeValueHydratorSpec extends ObjectBehavior
         ProductAttributeRepositoryInterface $attributeRepository
     ) {
         $this->beConstructedWith($attributeValueRepository, $attributeRepository);
-        $this->shouldHaveType('Luni\Component\MagentoDriver\Hydrator\ProductAttributeValueHydrator');
+        $this->shouldHaveType('Kiboko\Component\MagentoDriver\Hydrator\ProductAttributeValueHydrator');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Writer\Temporary;
+namespace Kiboko\Component\MagentoDriver\Writer\Temporary;
 
 interface TemporaryWriterInterface
 {

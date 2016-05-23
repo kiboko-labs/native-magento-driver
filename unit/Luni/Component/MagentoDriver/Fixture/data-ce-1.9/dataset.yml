@@ -709,7 +709,7 @@ eav_entity_type:
         increment_pad_char: '0'
         additional_attribute_table: null
         entity_attribute_collection: null
-# Exactly same content as unit/Luni/Component/MagentoDriver/Fixture/data-ce-1.9/dataset-eav_entity_type.yml
+# Exactly same content as unit/Kiboko/Component/MagentoDriver/Fixture/data-ce-1.9/dataset-eav_entity_type.yml
 eav_entity_store:
     -
         entity_store_id: '1'

@@ -1,12 +1,12 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Persister\FlatFile\Attribute;
+namespace Kiboko\Component\MagentoDriver\Persister\FlatFile\Attribute;
 
-use Luni\Component\MagentoDriver\Model\AttributeOptionValueInterface;
-use Luni\Component\MagentoDriver\Persister\FlatFile\BaseFlatFilePersisterTrait;
-use Luni\Component\MagentoDriver\Persister\AttributeOptionValuePersisterInterface;
-use Luni\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
-use Luni\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeOptionValueInterface;
+use Kiboko\Component\MagentoDriver\Persister\FlatFile\BaseFlatFilePersisterTrait;
+use Kiboko\Component\MagentoDriver\Persister\AttributeOptionValuePersisterInterface;
+use Kiboko\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
+use Kiboko\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;
 
 class AttributeOptionValuePersister implements AttributeOptionValuePersisterInterface
 {

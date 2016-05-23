@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Luni\Component\MagentoDriver\Model;
+namespace spec\Kiboko\Component\MagentoDriver\Model;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -11,6 +11,6 @@ class AttributeSpec extends ObjectBehavior
     {
         $this->beConstructedWith('lorem_ipsum', []);
 
-        $this->shouldHaveType('Luni\Component\MagentoDriver\Model\Attribute');
+        $this->shouldHaveType('Kiboko\Component\MagentoDriver\Model\Attribute');
     }
 }

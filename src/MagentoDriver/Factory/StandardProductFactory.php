@@ -1,14 +1,14 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Factory;
+namespace Kiboko\Component\MagentoDriver\Factory;
 
-use Luni\Component\MagentoDriver\Entity\Product\SimpleProduct;
-use Luni\Component\MagentoDriver\Entity\Product\ConfigurableProduct;
-use Luni\Component\MagentoDriver\Model\Family;
+use Kiboko\Component\MagentoDriver\Entity\Product\SimpleProduct;
+use Kiboko\Component\MagentoDriver\Entity\Product\ConfigurableProduct;
+use Kiboko\Component\MagentoDriver\Model\Family;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
-use Luni\Component\MagentoDriver\Exception\InvalidProductTypeException;
+use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
+use Kiboko\Component\MagentoDriver\Exception\InvalidProductTypeException;
 
 class StandardProductFactory implements ProductFactoryInterface
 {

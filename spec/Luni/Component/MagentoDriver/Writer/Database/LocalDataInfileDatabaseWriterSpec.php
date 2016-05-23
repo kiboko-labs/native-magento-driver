@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Luni\Component\MagentoDriver\Writer\Database;
+namespace spec\Kiboko\Component\MagentoDriver\Writer\Database;
 
 use Doctrine\DBAL\Connection;
 use League\Flysystem\File;
@@ -13,6 +13,6 @@ class LocalDataInfileDatabaseWriterSpec extends ObjectBehavior
     function it_is_initializable(Connection $connection, Filesystem $filesystem, File $file)
     {
         $this->beConstructedWith($connection, $filesystem, $file, ';', '"', '"');
-        $this->shouldHaveType('Luni\Component\MagentoDriver\Writer\Database\LocalDataInfileDatabaseWriter');
+        $this->shouldHaveType('Kiboko\Component\MagentoDriver\Writer\Database\LocalDataInfileDatabaseWriter');
     }
 }

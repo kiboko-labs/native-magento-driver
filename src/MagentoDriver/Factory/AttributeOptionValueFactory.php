@@ -1,9 +1,9 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Factory;
+namespace Kiboko\Component\MagentoDriver\Factory;
 
-use Luni\Component\MagentoDriver\Model\AttributeOptionValue;
-use Luni\Component\MagentoDriver\Model\AttributeOptionValueInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeOptionValue;
+use Kiboko\Component\MagentoDriver\Model\AttributeOptionValueInterface;
 
 class AttributeOptionValueFactory implements AttributeOptionValueFactoryInterface
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Luni\Component\MagentoMapper\Repository;
+namespace Kiboko\Component\MagentoMapper\Repository;
 
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
 
 interface OptionRepositoryInterface
 {

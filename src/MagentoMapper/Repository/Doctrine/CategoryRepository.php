@@ -1,11 +1,11 @@
 <?php
 
-namespace Luni\Component\MagentoMapper\Repository\Doctrine;
+namespace Kiboko\Component\MagentoMapper\Repository\Doctrine;
 
 use Doctrine\DBAL\Connection;
-use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
-use Luni\Component\MagentoMapper\QueryBuilder\Doctrine\CategoryQueryBuilder;
-use Luni\Component\MagentoMapper\Repository\CategoryRepositoryInterface;
+use Kiboko\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
+use Kiboko\Component\MagentoMapper\QueryBuilder\Doctrine\CategoryQueryBuilder;
+use Kiboko\Component\MagentoMapper\Repository\CategoryRepositoryInterface;
 
 class CategoryRepository implements CategoryRepositoryInterface
 {

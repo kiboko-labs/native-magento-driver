@@ -1,11 +1,11 @@
 <?php
 
-namespace spec\Luni\Component\MagentoDriver\Repository\Doctrine;
+namespace spec\Kiboko\Component\MagentoDriver\Repository\Doctrine;
 
 use Doctrine\DBAL\Connection;
-use Luni\Component\MagentoDriver\Factory\AttributeValueFactoryInterface;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeValueQueryBuilderInterface;
-use Luni\Component\MagentoDriver\Repository\AttributeRepositoryInterface;
+use Kiboko\Component\MagentoDriver\Factory\AttributeValueFactoryInterface;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeValueQueryBuilderInterface;
+use Kiboko\Component\MagentoDriver\Repository\AttributeRepositoryInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -18,6 +18,6 @@ class ProductAttributeValueRepositorySpec extends ObjectBehavior
         AttributeValueFactoryInterface $valueFactory
     ) {
         $this->beConstructedWith($connection, $queryBuilder, $attributeRepository, $valueFactory);
-        $this->shouldHaveType('Luni\Component\MagentoDriver\Repository\Doctrine\ProductAttributeValueRepository');
+        $this->shouldHaveType('Kiboko\Component\MagentoDriver\Repository\Doctrine\ProductAttributeValueRepository');
     }
 }

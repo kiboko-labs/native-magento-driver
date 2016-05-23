@@ -1,8 +1,8 @@
 parameters:
-  kiboko.magento_driver.writer.database.local_data_infile.class:  Luni\Component\MagentoDriver\Writer\Database\LocalDataInfileDatabaseWriter
-  kiboko.magento_driver.writer.database.remote_data_infile.class: Luni\Component\MagentoDriver\Writer\Database\DataInfileDatabaseWriter
-  kiboko.magento_driver.writer.database.temporary_writer.class:   Luni\Component\MagentoDriver\Writer\Database\DataInfileDatabaseWriter
-  kiboko.magento_driver.writer.database.file_mover.class:         Luni\Component\MagentoDriver\Writer\Temporary\StandardTemporaryWriter
+  kiboko.magento_driver.writer.database.local_data_infile.class:  Kiboko\Component\MagentoDriver\Writer\Database\LocalDataInfileDatabaseWriter
+  kiboko.magento_driver.writer.database.remote_data_infile.class: Kiboko\Component\MagentoDriver\Writer\Database\DataInfileDatabaseWriter
+  kiboko.magento_driver.writer.database.temporary_writer.class:   Kiboko\Component\MagentoDriver\Writer\Database\DataInfileDatabaseWriter
+  kiboko.magento_driver.writer.database.file_mover.class:         Kiboko\Component\MagentoDriver\Writer\Temporary\StandardTemporaryWriter
 
 services:
   kiboko.magento_driver.writer.database.local_data_infile:

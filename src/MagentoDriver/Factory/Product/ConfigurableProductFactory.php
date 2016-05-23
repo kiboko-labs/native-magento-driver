@@ -1,11 +1,11 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Factory\Product;
+namespace Kiboko\Component\MagentoDriver\Factory\Product;
 
-use Luni\Component\MagentoDriver\Entity\Product\ConfigurableProduct;
-use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
-use Luni\Component\MagentoDriver\Factory\ProductFactoryInterface;
-use Luni\Component\MagentoDriver\Repository\FamilyRepositoryInterface;
+use Kiboko\Component\MagentoDriver\Entity\Product\ConfigurableProduct;
+use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
+use Kiboko\Component\MagentoDriver\Factory\ProductFactoryInterface;
+use Kiboko\Component\MagentoDriver\Repository\FamilyRepositoryInterface;
 
 class ConfigurableProductFactory
     implements ProductFactoryInterface

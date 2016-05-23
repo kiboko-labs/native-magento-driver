@@ -1,8 +1,8 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Repository;
+namespace Kiboko\Component\MagentoDriver\Repository;
 
-use Luni\Component\MagentoDriver\Model\EntityStoreInterface;
+use Kiboko\Component\MagentoDriver\Model\EntityStoreInterface;
 
 interface EntityStoreRepositoryInterface
 {

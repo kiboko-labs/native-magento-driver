@@ -1,8 +1,8 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Factory;
+namespace Kiboko\Component\MagentoDriver\Factory;
 
-use Luni\Component\MagentoDriver\Model\EntityTypeInterface;
+use Kiboko\Component\MagentoDriver\Model\EntityTypeInterface;
 
 interface EntityTypeFactoryInterface
 {

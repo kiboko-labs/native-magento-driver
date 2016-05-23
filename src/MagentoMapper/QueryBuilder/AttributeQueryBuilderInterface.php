@@ -1,6 +1,6 @@
 <?php
 
-namespace Luni\Component\MagentoMapper\QueryBuilder;
+namespace Kiboko\Component\MagentoMapper\QueryBuilder;
 
 use Doctrine\DBAL\Query\QueryBuilder;
 

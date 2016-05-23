@@ -1,11 +1,11 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Persister\FlatFile\Attribute;
+namespace Kiboko\Component\MagentoDriver\Persister\FlatFile\Attribute;
 
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Persister\AttributePersisterInterface;
-use Luni\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
-use Luni\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoDriver\Persister\AttributePersisterInterface;
+use Kiboko\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
+use Kiboko\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;
 
 class CatalogAttributeExtensionPersister implements AttributePersisterInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Writer\Database;
+namespace Kiboko\Component\MagentoDriver\Writer\Database;
 
 use Doctrine\DBAL\Connection;
 

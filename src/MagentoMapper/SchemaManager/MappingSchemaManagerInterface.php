@@ -1,6 +1,6 @@
 <?php
 
-namespace Luni\Component\MagentoMapper\SchemaManager;
+namespace Kiboko\Component\MagentoMapper\SchemaManager;
 
 interface MappingSchemaManagerInterface
 {

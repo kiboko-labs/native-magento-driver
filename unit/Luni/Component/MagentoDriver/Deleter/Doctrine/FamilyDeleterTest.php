@@ -1,16 +1,16 @@
 <?php
 
-namespace unit\Luni\Component\MagentoDriver\Deleter\Doctrine\Family;
+namespace unit\Kiboko\Component\MagentoDriver\Deleter\Doctrine\Family;
 
 use Doctrine\DBAL\Schema\Schema;
-use Luni\Component\MagentoDriver\Persister\FamilyPersisterInterface;
-use Luni\Component\MagentoDriver\Deleter\FamilyDeleterInterface;
-use Luni\Component\MagentoDriver\Persister\Direct\Family\StandardFamilyPersister;
-use Luni\Component\MagentoDriver\Deleter\Doctrine\FamilyDeleter;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\FamilyQueryBuilder;
+use Kiboko\Component\MagentoDriver\Persister\FamilyPersisterInterface;
+use Kiboko\Component\MagentoDriver\Deleter\FamilyDeleterInterface;
+use Kiboko\Component\MagentoDriver\Persister\Direct\Family\StandardFamilyPersister;
+use Kiboko\Component\MagentoDriver\Deleter\Doctrine\FamilyDeleter;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\FamilyQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
-use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
-use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
+use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
 
 class FamilyDeleterTest extends \PHPUnit_Framework_TestCase
 {

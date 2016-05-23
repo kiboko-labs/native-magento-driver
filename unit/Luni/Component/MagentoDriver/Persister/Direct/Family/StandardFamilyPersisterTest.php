@@ -1,16 +1,16 @@
 <?php
 
-namespace unit\Luni\Component\MagentoDriver\Persister\Direct\Family;
+namespace unit\Kiboko\Component\MagentoDriver\Persister\Direct\Family;
 
 use Doctrine\DBAL\Schema\Schema;
-use Luni\Component\MagentoDriver\Model\Family;
-use Luni\Component\MagentoDriver\Persister\FamilyPersisterInterface;
-use Luni\Component\MagentoDriver\Persister\Direct\Family\StandardFamilyPersister;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\FamilyQueryBuilder;
+use Kiboko\Component\MagentoDriver\Model\Family;
+use Kiboko\Component\MagentoDriver\Persister\FamilyPersisterInterface;
+use Kiboko\Component\MagentoDriver\Persister\Direct\Family\StandardFamilyPersister;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\FamilyQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
-use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
-use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
-use unit\Luni\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
+use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
 
 class StandardFamilyPersisterTest extends \PHPUnit_Framework_TestCase
 {

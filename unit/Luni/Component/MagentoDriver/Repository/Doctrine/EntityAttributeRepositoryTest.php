@@ -1,16 +1,16 @@
 <?php
 
-namespace unit\Luni\Component\MagentoDriver\Repository\Doctrine;
+namespace unit\Kiboko\Component\MagentoDriver\Repository\Doctrine;
 
 use Doctrine\DBAL\Schema\Schema;
-use Luni\Component\MagentoDriver\Factory\EntityAttributeFactory;
-use Luni\Component\MagentoDriver\Model\EntityAttributeInterface;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\EntityAttributeQueryBuilder;
-use Luni\Component\MagentoDriver\Repository\Doctrine\EntityAttributeRepository;
-use Luni\Component\MagentoDriver\Repository\EntityAttributeRepositoryInterface;
+use Kiboko\Component\MagentoDriver\Factory\EntityAttributeFactory;
+use Kiboko\Component\MagentoDriver\Model\EntityAttributeInterface;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\EntityAttributeQueryBuilder;
+use Kiboko\Component\MagentoDriver\Repository\Doctrine\EntityAttributeRepository;
+use Kiboko\Component\MagentoDriver\Repository\EntityAttributeRepositoryInterface;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
-use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
-use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
+use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
 
 class EntityAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace spec\Luni\Component\MagentoDriver\Model\Mutable;
+namespace spec\Kiboko\Component\MagentoDriver\Model\Mutable;
 
 use League\Flysystem\Adapter\NullAdapter;
 use League\Flysystem\File;
 use League\Flysystem\Filesystem;
 use League\Flysystem\FilesystemInterface;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -27,7 +27,7 @@ class MutableImageAttributeValueSpec extends ObjectBehavior
     function it_is_an_MutableAttributeValueInterface(AttributeInterface $attribute, File $file)
     {
         $this->beConstructedWith($attribute, $file);
-        $this->shouldImplement('Luni\Component\MagentoDriver\Model\Mutable\MutableAttributeValueInterface');
+        $this->shouldImplement('Kiboko\Component\MagentoDriver\Model\Mutable\MutableAttributeValueInterface');
     }
 
     function it_should_contain_flysystem_file_value(AttributeInterface $attribute,  File $file)

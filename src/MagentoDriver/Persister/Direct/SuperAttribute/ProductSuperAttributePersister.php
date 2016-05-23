@@ -1,10 +1,10 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Persister\Direct\SuperAttribute;
+namespace Kiboko\Component\MagentoDriver\Persister\Direct\SuperAttribute;
 
 use Doctrine\DBAL\Connection;
-use Luni\Component\MagentoDriver\Model\SuperAttributeInterface;
-use Luni\Component\MagentoDriver\Persister\SuperAttributePersisterInterface;
+use Kiboko\Component\MagentoDriver\Model\SuperAttributeInterface;
+use Kiboko\Component\MagentoDriver\Persister\SuperAttributePersisterInterface;
 
 class ProductSuperAttributePersister implements SuperAttributePersisterInterface
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Persister\Direct\Attribute;
+namespace Kiboko\Component\MagentoDriver\Persister\Direct\Attribute;
 
 use Doctrine\DBAL\Connection;
-use Luni\Component\MagentoDriver\Model\AttributeOptionValueInterface;
-use Luni\Component\MagentoDriver\Persister\AttributeOptionValuePersisterInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeOptionValueInterface;
+use Kiboko\Component\MagentoDriver\Persister\AttributeOptionValuePersisterInterface;
 
 class AttributeOptionValuePersister implements AttributeOptionValuePersisterInterface
 {

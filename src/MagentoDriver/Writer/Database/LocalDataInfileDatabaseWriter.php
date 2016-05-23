@@ -1,12 +1,12 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Writer\Database;
+namespace Kiboko\Component\MagentoDriver\Writer\Database;
 
 use Doctrine\DBAL\Connection;
 use League\Flysystem\Adapter\AbstractAdapter;
 use League\Flysystem\File;
 use League\Flysystem\Filesystem;
-use Luni\Component\MagentoDriver\Exception\InvalidArgumentException;
+use Kiboko\Component\MagentoDriver\Exception\InvalidArgumentException;
 
 class LocalDataInfileDatabaseWriter implements DatabaseWriterInterface
 {

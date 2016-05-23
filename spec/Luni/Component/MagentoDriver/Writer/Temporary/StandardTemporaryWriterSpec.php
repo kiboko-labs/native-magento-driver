@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Luni\Component\MagentoDriver\Writer\Temporary;
+namespace spec\Kiboko\Component\MagentoDriver\Writer\Temporary;
 
 use League\Flysystem\File;
 use PhpSpec\ObjectBehavior;
@@ -11,7 +11,7 @@ class StandardTemporaryWriterSpec extends ObjectBehavior
     function it_is_initializable(File $file)
     {
         $this->beConstructedWith($file, ';', '"', '"');
-        $this->shouldHaveType('Luni\Component\MagentoDriver\Writer\Temporary\StandardTemporaryWriter');
+        $this->shouldHaveType('Kiboko\Component\MagentoDriver\Writer\Temporary\StandardTemporaryWriter');
     }
 
     function it_writes_to_file(File $file)

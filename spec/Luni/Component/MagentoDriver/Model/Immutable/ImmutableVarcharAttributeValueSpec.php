@@ -1,8 +1,8 @@
 <?php
 
-namespace spec\Luni\Component\MagentoDriver\Model\Immutable;
+namespace spec\Kiboko\Component\MagentoDriver\Model\Immutable;
 
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -11,7 +11,7 @@ class ImmutableVarcharAttributeValueSpec extends ObjectBehavior
     function it_is_an_ImmutableAttributeValueInterface(AttributeInterface $attribute)
     {
         $this->beConstructedWith($attribute, 'Lorem ipsum');
-        $this->shouldImplement('Luni\Component\MagentoDriver\Model\Immutable\ImmutableAttributeValueInterface');
+        $this->shouldImplement('Kiboko\Component\MagentoDriver\Model\Immutable\ImmutableAttributeValueInterface');
     }
 
     function it_should_contain_string_value(AttributeInterface $attribute)

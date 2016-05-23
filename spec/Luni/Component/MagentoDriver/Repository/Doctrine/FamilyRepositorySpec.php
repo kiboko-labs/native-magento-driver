@@ -1,10 +1,10 @@
 <?php
 
-namespace spec\Luni\Component\MagentoDriver\Repository\Doctrine;
+namespace spec\Kiboko\Component\MagentoDriver\Repository\Doctrine;
 
 use Doctrine\DBAL\Connection;
-use Luni\Component\MagentoDriver\Factory\FamilyFactoryInterface;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\FamilyQueryBuilderInterface;
+use Kiboko\Component\MagentoDriver\Factory\FamilyFactoryInterface;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\FamilyQueryBuilderInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -16,6 +16,6 @@ class FamilyRepositorySpec extends ObjectBehavior
         FamilyFactoryInterface $familyFactory
     ) {
         $this->beConstructedWith($connection, $queryBuilder, $familyFactory);
-        $this->shouldHaveType('Luni\Component\MagentoDriver\Repository\Doctrine\FamilyRepository');
+        $this->shouldHaveType('Kiboko\Component\MagentoDriver\Repository\Doctrine\FamilyRepository');
     }
 }

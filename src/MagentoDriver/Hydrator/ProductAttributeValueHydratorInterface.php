@@ -1,9 +1,9 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Hydrator;
+namespace Kiboko\Component\MagentoDriver\Hydrator;
 
-use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
 
 interface ProductAttributeValueHydratorInterface
 {

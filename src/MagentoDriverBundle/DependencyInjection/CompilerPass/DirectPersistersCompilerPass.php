@@ -2,9 +2,9 @@
 
 namespace Kiboko\Bundle\MagentoDriverBundle\DependencyInjection\CompilerPass;
 
-use Luni\Component\MagentoDriver\Matcher\BackendTypeAttributeValueMatcher;
-use Luni\Component\MagentoDriver\Matcher\FrontendAndBackendTypeAttributeValueMatcher;
-use Luni\Component\MagentoDriver\Matcher\FrontendTypeAttributeValueMatcher;
+use Kiboko\Component\MagentoDriver\Matcher\BackendTypeAttributeValueMatcher;
+use Kiboko\Component\MagentoDriver\Matcher\FrontendAndBackendTypeAttributeValueMatcher;
+use Kiboko\Component\MagentoDriver\Matcher\FrontendTypeAttributeValueMatcher;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Reference;

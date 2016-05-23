@@ -1,18 +1,18 @@
 <?php
 
-namespace unit\Luni\Component\MagentoDriver\Deleter\Doctrine\Attribute;
+namespace unit\Kiboko\Component\MagentoDriver\Deleter\Doctrine\Attribute;
 
 use Doctrine\DBAL\Schema\Schema;
-use Luni\Component\MagentoDriver\Persister\CatalogAttributePersisterInterface;
-use Luni\Component\MagentoDriver\Persister\CatalogAttributePersister;
-use Luni\Component\MagentoDriver\Persister\Direct\Attribute\CatalogAttributeExtensionPersister;
-use Luni\Component\MagentoDriver\Persister\Direct\Attribute\StandardAttributePersister;
-use Luni\Component\MagentoDriver\Deleter\CatalogAttributeDeleterInterface;
-use Luni\Component\MagentoDriver\Deleter\Doctrine\CatalogAttributeDeleter;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilder;
+use Kiboko\Component\MagentoDriver\Persister\CatalogAttributePersisterInterface;
+use Kiboko\Component\MagentoDriver\Persister\CatalogAttributePersister;
+use Kiboko\Component\MagentoDriver\Persister\Direct\Attribute\CatalogAttributeExtensionPersister;
+use Kiboko\Component\MagentoDriver\Persister\Direct\Attribute\StandardAttributePersister;
+use Kiboko\Component\MagentoDriver\Deleter\CatalogAttributeDeleterInterface;
+use Kiboko\Component\MagentoDriver\Deleter\Doctrine\CatalogAttributeDeleter;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
-use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
-use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
+use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
 
 class CatalogAttributeDeleterTest extends \PHPUnit_Framework_TestCase
 {

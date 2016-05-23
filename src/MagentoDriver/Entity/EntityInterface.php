@@ -1,10 +1,10 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Entity;
+namespace Kiboko\Component\MagentoDriver\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
 
 interface EntityInterface
 {

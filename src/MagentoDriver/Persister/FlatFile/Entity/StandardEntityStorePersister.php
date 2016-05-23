@@ -1,10 +1,10 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Persister\Direct\EntityStore;
+namespace Kiboko\Component\MagentoDriver\Persister\Direct\EntityStore;
 
 use Doctrine\DBAL\Connection;
-use Luni\Component\MagentoDriver\Model\EntityStoreInterface;
-use Luni\Component\MagentoDriver\Persister\EntityStorePersisterInterface;
+use Kiboko\Component\MagentoDriver\Model\EntityStoreInterface;
+use Kiboko\Component\MagentoDriver\Persister\EntityStorePersisterInterface;
 
 class StandardEntityStorePersister implements EntityStorePersisterInterface
 {

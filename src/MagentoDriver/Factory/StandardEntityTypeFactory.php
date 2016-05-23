@@ -1,9 +1,9 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Factory;
+namespace Kiboko\Component\MagentoDriver\Factory;
 
-use Luni\Component\MagentoDriver\Model\EntityType;
-use Luni\Component\MagentoDriver\Model\EntityTypeInterface;
+use Kiboko\Component\MagentoDriver\Model\EntityType;
+use Kiboko\Component\MagentoDriver\Model\EntityTypeInterface;
 
 class StandardEntityTypeFactory implements EntityTypeFactoryInterface
 {

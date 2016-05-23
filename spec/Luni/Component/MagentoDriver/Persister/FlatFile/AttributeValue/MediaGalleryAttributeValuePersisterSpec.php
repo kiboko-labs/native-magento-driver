@@ -1,11 +1,11 @@
 <?php
 
-namespace spec\Luni\Component\MagentoDriver\Persister\FlatFile\AttributeValue;
+namespace spec\Kiboko\Component\MagentoDriver\Persister\FlatFile\AttributeValue;
 
 use League\Flysystem\FilesystemInterface;
-use Luni\Component\MagentoDriver\Filesystem\FileMoverInterface;
-use Luni\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
-use Luni\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;
+use Kiboko\Component\MagentoDriver\Filesystem\FileMoverInterface;
+use Kiboko\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
+use Kiboko\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -31,6 +31,6 @@ class MediaGalleryAttributeValuePersisterSpec extends ObjectBehavior
             $imagesFs,
             $remoteFs
         );
-        $this->shouldHaveType('Luni\Component\MagentoDriver\Persister\FlatFile\AttributeValue\MediaGalleryAttributeValuePersister');
+        $this->shouldHaveType('Kiboko\Component\MagentoDriver\Persister\FlatFile\AttributeValue\MediaGalleryAttributeValuePersister');
     }
 }

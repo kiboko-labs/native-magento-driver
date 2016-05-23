@@ -1,10 +1,10 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Model;
+namespace Kiboko\Component\MagentoDriver\Model;
 
 use Doctrine\Common\Collections\Collection;
 use League\Flysystem\File;
-use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
+use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
 
 trait ImageAttributeValueTrait
 {

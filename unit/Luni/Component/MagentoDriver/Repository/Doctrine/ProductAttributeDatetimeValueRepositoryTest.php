@@ -1,21 +1,21 @@
 <?php
 
-namespace unit\Luni\Component\MagentoDriver\Repository\Doctrine;
+namespace unit\Kiboko\Component\MagentoDriver\Repository\Doctrine;
 
 use Doctrine\DBAL\Schema\Schema;
 use Faker\Provider\tr_TR\DateTime;
-use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
-use Luni\Component\MagentoDriver\Factory\AttributeValueFactoryInterface;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Model\DatetimeAttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\Immutable\ImmutableDatetimeAttributeValue;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeValueQueryBuilder;
-use Luni\Component\MagentoDriver\Repository\AttributeRepositoryInterface;
-use Luni\Component\MagentoDriver\Repository\Doctrine\ProductAttributeValueRepository;
-use Luni\Component\MagentoDriver\Repository\ProductAttributeValueRepositoryInterface;
+use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
+use Kiboko\Component\MagentoDriver\Factory\AttributeValueFactoryInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoDriver\Model\DatetimeAttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Model\Immutable\ImmutableDatetimeAttributeValue;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeValueQueryBuilder;
+use Kiboko\Component\MagentoDriver\Repository\AttributeRepositoryInterface;
+use Kiboko\Component\MagentoDriver\Repository\Doctrine\ProductAttributeValueRepository;
+use Kiboko\Component\MagentoDriver\Repository\ProductAttributeValueRepositoryInterface;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
-use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
-use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
+use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
 
 class ProductAttributeDatetimeValueRepositoryTest extends \PHPUnit_Framework_TestCase
 {

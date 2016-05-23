@@ -1,16 +1,16 @@
 <?php
 
-namespace unit\Luni\Component\MagentoDriver\Persister\Direct\Attribute;
+namespace unit\Kiboko\Component\MagentoDriver\Persister\Direct\Attribute;
 
 use Doctrine\DBAL\Schema\Schema;
-use Luni\Component\MagentoDriver\Model\Attribute;
-use Luni\Component\MagentoDriver\Persister\AttributePersisterInterface;
-use Luni\Component\MagentoDriver\Persister\Direct\Attribute\StandardAttributePersister;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilder;
+use Kiboko\Component\MagentoDriver\Model\Attribute;
+use Kiboko\Component\MagentoDriver\Persister\AttributePersisterInterface;
+use Kiboko\Component\MagentoDriver\Persister\Direct\Attribute\StandardAttributePersister;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
-use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
-use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
-use unit\Luni\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
+use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
 
 class AttributePersisterTest extends \PHPUnit_Framework_TestCase
 {
@@ -77,8 +77,6 @@ class AttributePersisterTest extends \PHPUnit_Framework_TestCase
         $this->truncateTables();
 
         parent::setUp();
-
-        $schemaBuilder->hydrateEntityTypeTable('1.9', 'ce');
 
         $this->persister = new StandardAttributePersister(
             $this->getDoctrineConnection(),

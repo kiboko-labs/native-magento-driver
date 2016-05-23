@@ -1,16 +1,16 @@
 <?php
 
-namespace unit\Luni\Component\MagentoDriver\Repository\Doctrine;
+namespace unit\Kiboko\Component\MagentoDriver\Repository\Doctrine;
 
 use Doctrine\DBAL\Schema\Schema;
-use Luni\Component\MagentoDriver\Factory\AttributeOptionFactory;
-use Luni\Component\MagentoDriver\Model\AttributeOptionInterface;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeOptionQueryBuilder;
-use Luni\Component\MagentoDriver\Repository\Doctrine\AttributeOptionRepository;
-use Luni\Component\MagentoDriver\Repository\AttributeOptionRepositoryInterface;
+use Kiboko\Component\MagentoDriver\Factory\AttributeOptionFactory;
+use Kiboko\Component\MagentoDriver\Model\AttributeOptionInterface;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeOptionQueryBuilder;
+use Kiboko\Component\MagentoDriver\Repository\Doctrine\AttributeOptionRepository;
+use Kiboko\Component\MagentoDriver\Repository\AttributeOptionRepositoryInterface;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
-use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
-use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
+use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
 
 class AttributeOptionRepositoryTest extends \PHPUnit_Framework_TestCase
 {

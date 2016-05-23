@@ -1,16 +1,16 @@
 <?php
 
-namespace unit\Luni\Component\MagentoDriver\Deleter\Doctrine\Attribute;
+namespace unit\Kiboko\Component\MagentoDriver\Deleter\Doctrine\Attribute;
 
 use Doctrine\DBAL\Schema\Schema;
-use Luni\Component\MagentoDriver\Persister\AttributeGroupPersisterInterface;
-use Luni\Component\MagentoDriver\Deleter\AttributeGroupDeleterInterface;
-use Luni\Component\MagentoDriver\Persister\Direct\Attribute\AttributeGroupPersister;
-use Luni\Component\MagentoDriver\Deleter\Doctrine\AttributeGroupDeleter;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeGroupQueryBuilder;
+use Kiboko\Component\MagentoDriver\Persister\AttributeGroupPersisterInterface;
+use Kiboko\Component\MagentoDriver\Deleter\AttributeGroupDeleterInterface;
+use Kiboko\Component\MagentoDriver\Persister\Direct\Attribute\AttributeGroupPersister;
+use Kiboko\Component\MagentoDriver\Deleter\Doctrine\AttributeGroupDeleter;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeGroupQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
-use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
-use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
+use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
 
 class AttributeGroupDeleterTest extends \PHPUnit_Framework_TestCase
 {

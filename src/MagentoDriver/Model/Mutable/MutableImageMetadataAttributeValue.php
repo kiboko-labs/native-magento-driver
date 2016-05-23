@@ -1,13 +1,13 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Model\Mutable;
+namespace Kiboko\Component\MagentoDriver\Model\Mutable;
 
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\ImageMetadataAttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\ImageMetadataAttributeValueTrait;
-use Luni\Component\MagentoDriver\Model\Immutable\ImmutableImageMetadataAttributeValue;
-use Luni\Component\MagentoDriver\Model\ScopableAttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Model\ImageMetadataAttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Model\ImageMetadataAttributeValueTrait;
+use Kiboko\Component\MagentoDriver\Model\Immutable\ImmutableImageMetadataAttributeValue;
+use Kiboko\Component\MagentoDriver\Model\ScopableAttributeValueInterface;
 
 class MutableImageMetadataAttributeValue implements MutableAttributeValueInterface, ScopableAttributeValueInterface, ImageMetadataAttributeValueInterface
 {

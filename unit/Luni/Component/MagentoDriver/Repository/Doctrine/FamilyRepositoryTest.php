@@ -1,16 +1,16 @@
 <?php
 
-namespace unit\Luni\Component\MagentoDriver\Repository\Doctrine;
+namespace unit\Kiboko\Component\MagentoDriver\Repository\Doctrine;
 
 use Doctrine\DBAL\Schema\Schema;
-use Luni\Component\MagentoDriver\Factory\StandardFamilyFactory;
-use Luni\Component\MagentoDriver\Model\FamilyInterface;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\FamilyQueryBuilder;
-use Luni\Component\MagentoDriver\Repository\Doctrine\FamilyRepository;
-use Luni\Component\MagentoDriver\Repository\FamilyRepositoryInterface;
+use Kiboko\Component\MagentoDriver\Factory\StandardFamilyFactory;
+use Kiboko\Component\MagentoDriver\Model\FamilyInterface;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\FamilyQueryBuilder;
+use Kiboko\Component\MagentoDriver\Repository\Doctrine\FamilyRepository;
+use Kiboko\Component\MagentoDriver\Repository\FamilyRepositoryInterface;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
-use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
-use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
+use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
 
 class FamilyRepositoryTest extends \PHPUnit_Framework_TestCase
 {

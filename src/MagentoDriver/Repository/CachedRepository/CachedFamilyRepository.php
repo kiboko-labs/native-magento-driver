@@ -1,9 +1,9 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Repository\CachedRepository;
+namespace Kiboko\Component\MagentoDriver\Repository\CachedRepository;
 
-use Luni\Component\MagentoDriver\Model\FamilyInterface;
-use Luni\Component\MagentoDriver\Repository\FamilyRepositoryInterface;
+use Kiboko\Component\MagentoDriver\Model\FamilyInterface;
+use Kiboko\Component\MagentoDriver\Repository\FamilyRepositoryInterface;
 
 class CachedFamilyRepository implements FamilyRepositoryInterface
 {

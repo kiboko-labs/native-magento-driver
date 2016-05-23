@@ -1,16 +1,16 @@
 <?php
 
-namespace unit\Luni\Component\MagentoDriver\Persister\Direct\EntityAttribute;
+namespace unit\Kiboko\Component\MagentoDriver\Persister\Direct\EntityAttribute;
 
 use Doctrine\DBAL\Schema\Schema;
-use Luni\Component\MagentoDriver\Model\EntityAttribute;
-use Luni\Component\MagentoDriver\Persister\EntityAttributePersisterInterface;
-use Luni\Component\MagentoDriver\Persister\Direct\Attribute\StandardEntityAttributePersister;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\EntityAttributeQueryBuilder;
+use Kiboko\Component\MagentoDriver\Model\EntityAttribute;
+use Kiboko\Component\MagentoDriver\Persister\EntityAttributePersisterInterface;
+use Kiboko\Component\MagentoDriver\Persister\Direct\Attribute\StandardEntityAttributePersister;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\EntityAttributeQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
-use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
-use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
-use unit\Luni\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
+use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
 
 class EntityAttributePersisterTest extends \PHPUnit_Framework_TestCase
 {

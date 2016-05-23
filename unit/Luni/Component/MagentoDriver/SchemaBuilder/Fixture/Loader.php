@@ -1,6 +1,6 @@
 <?php
 
-namespace unit\Luni\Component\MagentoDriver\SchemaBuilder\Fixture;
+namespace unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture;
 
 use Doctrine\DBAL\Connection;
 use Symfony\Component\Yaml\Yaml;

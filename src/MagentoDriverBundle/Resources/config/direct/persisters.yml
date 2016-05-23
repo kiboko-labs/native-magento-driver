@@ -1,25 +1,25 @@
 parameters:
-  kiboko.magento_driver.persister.direct.entity_attribute.standard.class: Luni\Component\MagentoDriver\Persister\Direct\Attribute\StandardEntityAttributePersister
+  kiboko.magento_driver.persister.direct.entity_attribute.standard.class: Kiboko\Component\MagentoDriver\Persister\Direct\Attribute\StandardEntityAttributePersister
 
-  kiboko.magento_driver.persister.direct.attribute.standard.class: Luni\Component\MagentoDriver\Persister\Direct\Attribute\StandardAttributePersister
-  kiboko.magento_driver.persister.direct.attribute.catalog_extras.class:  Luni\Component\MagentoDriver\Persister\Direct\Attribute\CatalogAttributeExtensionPersister
-  kiboko.magento_driver.persister.direct.attribute.catalog.class:  Luni\Component\MagentoDriver\Persister\CatalogAttributePersister
+  kiboko.magento_driver.persister.direct.attribute.standard.class: Kiboko\Component\MagentoDriver\Persister\Direct\Attribute\StandardAttributePersister
+  kiboko.magento_driver.persister.direct.attribute.catalog_extras.class:  Kiboko\Component\MagentoDriver\Persister\Direct\Attribute\CatalogAttributeExtensionPersister
+  kiboko.magento_driver.persister.direct.attribute.catalog.class:  Kiboko\Component\MagentoDriver\Persister\CatalogAttributePersister
 
-  kiboko.magento_driver.persister.direct.attribute_group.class:        Luni\Component\MagentoDriver\Persister\Direct\Attribute\AttributeGroupPersister
-  kiboko.magento_driver.persister.direct.attribute_label.class:        Luni\Component\MagentoDriver\Persister\Direct\Attribute\AttributeLabelPersister
-  kiboko.magento_driver.persister.direct.attribute_option.class:       Luni\Component\MagentoDriver\Persister\Direct\Attribute\AttributeOptionPersister
-  kiboko.magento_driver.persister.direct.attribute_option_value.class: Luni\Component\MagentoDriver\Persister\Direct\Attribute\AttributeOptionValuePersister
+  kiboko.magento_driver.persister.direct.attribute_group.class:        Kiboko\Component\MagentoDriver\Persister\Direct\Attribute\AttributeGroupPersister
+  kiboko.magento_driver.persister.direct.attribute_label.class:        Kiboko\Component\MagentoDriver\Persister\Direct\Attribute\AttributeLabelPersister
+  kiboko.magento_driver.persister.direct.attribute_option.class:       Kiboko\Component\MagentoDriver\Persister\Direct\Attribute\AttributeOptionPersister
+  kiboko.magento_driver.persister.direct.attribute_option_value.class: Kiboko\Component\MagentoDriver\Persister\Direct\Attribute\AttributeOptionValuePersister
 
-  kiboko.magento_driver.persister.direct.attribute_value.datetime.class: Luni\Component\MagentoDriver\Persister\Direct\AttributeValue\DatetimeAttributeValuePersister
-  kiboko.magento_driver.persister.direct.attribute_value.decimal.class:  Luni\Component\MagentoDriver\Persister\Direct\AttributeValue\DecimalAttributeValuePersister
-  kiboko.magento_driver.persister.direct.attribute_value.integer.class:  Luni\Component\MagentoDriver\Persister\Direct\AttributeValue\IntegerAttributeValuePersister
-  kiboko.magento_driver.persister.direct.attribute_value.static.class:   Luni\Component\MagentoDriver\Persister\Direct\AttributeValue\StaticAttributeValuePersister
-  kiboko.magento_driver.persister.direct.attribute_value.text.class:     Luni\Component\MagentoDriver\Persister\Direct\AttributeValue\TextAttributeValuePersister
-  kiboko.magento_driver.persister.direct.attribute_value.varchar.class:  Luni\Component\MagentoDriver\Persister\Direct\AttributeValue\VarcharAttributeValuePersister
+  kiboko.magento_driver.persister.direct.attribute_value.datetime.class: Kiboko\Component\MagentoDriver\Persister\Direct\AttributeValue\DatetimeAttributeValuePersister
+  kiboko.magento_driver.persister.direct.attribute_value.decimal.class:  Kiboko\Component\MagentoDriver\Persister\Direct\AttributeValue\DecimalAttributeValuePersister
+  kiboko.magento_driver.persister.direct.attribute_value.integer.class:  Kiboko\Component\MagentoDriver\Persister\Direct\AttributeValue\IntegerAttributeValuePersister
+  kiboko.magento_driver.persister.direct.attribute_value.static.class:   Kiboko\Component\MagentoDriver\Persister\Direct\AttributeValue\StaticAttributeValuePersister
+  kiboko.magento_driver.persister.direct.attribute_value.text.class:     Kiboko\Component\MagentoDriver\Persister\Direct\AttributeValue\TextAttributeValuePersister
+  kiboko.magento_driver.persister.direct.attribute_value.varchar.class:  Kiboko\Component\MagentoDriver\Persister\Direct\AttributeValue\VarcharAttributeValuePersister
 
-  kiboko.magento_driver.persister.direct.entity_store.class: Luni\Component\MagentoDriver\Persister\Direct\Entity\StandardEntityStorePersister
+  kiboko.magento_driver.persister.direct.entity_store.class: Kiboko\Component\MagentoDriver\Persister\Direct\Entity\StandardEntityStorePersister
 
-  kiboko.magento_driver.persister.direct.family.class: Luni\Component\MagentoDriver\Persister\Direct\Family\StandardFamilyPersister
+  kiboko.magento_driver.persister.direct.family.class: Kiboko\Component\MagentoDriver\Persister\Direct\Family\StandardFamilyPersister
 
 services:
   kiboko.magento_driver.persister.direct.attribute_value.broker:

@@ -1,13 +1,13 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Repository\Doctrine;
+namespace Kiboko\Component\MagentoDriver\Repository\Doctrine;
 
 use Doctrine\DBAL\Connection;
-use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
-use Luni\Component\MagentoDriver\Factory\AttributeLabelFactoryInterface;
-use Luni\Component\MagentoDriver\Model\AttributeLabelInterface;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeLabelQueryBuilderInterface;
-use Luni\Component\MagentoDriver\Repository\AttributeLabelRepositoryInterface;
+use Kiboko\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
+use Kiboko\Component\MagentoDriver\Factory\AttributeLabelFactoryInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeLabelInterface;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeLabelQueryBuilderInterface;
+use Kiboko\Component\MagentoDriver\Repository\AttributeLabelRepositoryInterface;
 
 class AttributeLabelRepository implements AttributeLabelRepositoryInterface
 {

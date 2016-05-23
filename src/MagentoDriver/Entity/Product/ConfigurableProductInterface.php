@@ -1,10 +1,10 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Entity\Product;
+namespace Kiboko\Component\MagentoDriver\Entity\Product;
 
 use Doctrine\Common\Collections\Collection;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Model\SuperLinkInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoDriver\Model\SuperLinkInterface;
 
 interface ConfigurableProductInterface extends ProductInterface
 {

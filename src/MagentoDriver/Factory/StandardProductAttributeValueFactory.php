@@ -1,11 +1,11 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Factory;
+namespace Kiboko\Component\MagentoDriver\Factory;
 
 use Closure;
-use Luni\Component\MagentoDriver\Exception\InvalidProductTypeException;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Exception\InvalidProductTypeException;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
 
 class StandardProductAttributeValueFactory implements ProductAttributeValueFactoryInterface
 {

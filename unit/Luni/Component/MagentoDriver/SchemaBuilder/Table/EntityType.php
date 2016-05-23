@@ -1,6 +1,6 @@
 <?php
 
-namespace unit\Luni\Component\MagentoDriver\SchemaBuilder\Table;
+namespace unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Table;
 
 use Doctrine\DBAL\Schema\Schema;
 

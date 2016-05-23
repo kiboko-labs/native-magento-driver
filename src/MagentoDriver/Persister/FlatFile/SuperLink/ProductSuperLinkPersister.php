@@ -1,12 +1,12 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Persister\FlatFile\SuperLink;
+namespace Kiboko\Component\MagentoDriver\Persister\FlatFile\SuperLink;
 
-use Luni\Component\MagentoDriver\Model\SuperLinkInterface;
-use Luni\Component\MagentoDriver\Persister\FlatFile\BaseFlatFilePersisterTrait;
-use Luni\Component\MagentoDriver\Persister\SuperLinkPersisterInterface;
-use Luni\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
-use Luni\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;
+use Kiboko\Component\MagentoDriver\Model\SuperLinkInterface;
+use Kiboko\Component\MagentoDriver\Persister\FlatFile\BaseFlatFilePersisterTrait;
+use Kiboko\Component\MagentoDriver\Persister\SuperLinkPersisterInterface;
+use Kiboko\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
+use Kiboko\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;
 
 class ProductSuperLinkPersister implements SuperLinkPersisterInterface
 {

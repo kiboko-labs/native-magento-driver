@@ -1,16 +1,16 @@
 <?php
 
-namespace unit\Luni\Component\MagentoDriver\Persister\Direct\Attribute;
+namespace unit\Kiboko\Component\MagentoDriver\Persister\Direct\Attribute;
 
 use Doctrine\DBAL\Schema\Schema;
-use Luni\Component\MagentoDriver\Model\AttributeOptionValue;
-use Luni\Component\MagentoDriver\Persister\AttributeOptionValuePersisterInterface;
-use Luni\Component\MagentoDriver\Persister\Direct\Attribute\AttributeOptionValuePersister;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeOptionValueQueryBuilder;
+use Kiboko\Component\MagentoDriver\Model\AttributeOptionValue;
+use Kiboko\Component\MagentoDriver\Persister\AttributeOptionValuePersisterInterface;
+use Kiboko\Component\MagentoDriver\Persister\Direct\Attribute\AttributeOptionValuePersister;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeOptionValueQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
-use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
-use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
-use unit\Luni\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
+use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
 
 class AttributeOptionValuePersisterTest extends \PHPUnit_Framework_TestCase
 {

@@ -1,18 +1,18 @@
 <?php
 
-namespace unit\Luni\Component\MagentoDriver\Repository\Doctrine;
+namespace unit\Kiboko\Component\MagentoDriver\Repository\Doctrine;
 
 use Doctrine\DBAL\Schema\Schema;
 use DateTimeInterface;
-use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
-use Luni\Component\MagentoDriver\Model\FamilyInterface;
-use Luni\Component\MagentoDriver\Factory\StandardProductFactory;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductQueryBuilder;
-use Luni\Component\MagentoDriver\Repository\Doctrine\ProductRepository;
-use Luni\Component\MagentoDriver\Repository\ProductRepositoryInterface;
+use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
+use Kiboko\Component\MagentoDriver\Model\FamilyInterface;
+use Kiboko\Component\MagentoDriver\Factory\StandardProductFactory;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductQueryBuilder;
+use Kiboko\Component\MagentoDriver\Repository\Doctrine\ProductRepository;
+use Kiboko\Component\MagentoDriver\Repository\ProductRepositoryInterface;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
-use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
-use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
+use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
 
 class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
 {

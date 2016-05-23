@@ -1,17 +1,17 @@
 <?php
 
-namespace unit\Luni\Component\MagentoDriver\Persister\Direct\AttributeValue;
+namespace unit\Kiboko\Component\MagentoDriver\Persister\Direct\AttributeValue;
 
 use Doctrine\DBAL\Schema\Schema;
-use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Model\Immutable\ImmutableDatetimeAttributeValue;
-use Luni\Component\MagentoDriver\Persister\AttributeValuePersisterInterface;
-use Luni\Component\MagentoDriver\Persister\Direct\AttributeValue\DatetimeAttributeValuePersister;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeValueQueryBuilder;
+use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoDriver\Model\Immutable\ImmutableDatetimeAttributeValue;
+use Kiboko\Component\MagentoDriver\Persister\AttributeValuePersisterInterface;
+use Kiboko\Component\MagentoDriver\Persister\Direct\AttributeValue\DatetimeAttributeValuePersister;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeValueQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
-use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
-use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
+use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 
 class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
 {
@@ -32,9 +32,13 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
      */
     protected function getDataSet()
     {
-        $dataSet = new \PHPUnit_Extensions_Database_DataSet_CsvDataSet();
+        $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
+            $this->getFixturesPathname('eav_entity_type', '1.9', 'ce'));
+        $dataset->addYamlFile($this->getFixturesPathname('eav_attribute', '1.9', 'ce'));
+        $dataset->addYamlFile($this->getFixturesPathname('core_store', '1.9', 'ce'));
+        $dataset->addYamlFile($this->getFixturesPathname('catalog_product_entity', '1.9', 'ce'));
 
-        return $dataSet;
+        return $dataset;
     }
 
     private function truncateTables($backendType)
@@ -64,10 +68,11 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
     }
 
+    /**
+     * @throws \Doctrine\DBAL\DBALException
+     */
     protected function setUp()
     {
-        parent::setUp();
-
         $currentSchema = $this->getDoctrineConnection()->getSchemaManager()->createSchema();
 
         $this->schema = new Schema();
@@ -92,10 +97,8 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->truncateTables('datetime');
-        $schemaBuilder->hydrateEntityTypeTable('1.9', 'ce');
-        $schemaBuilder->hydrateAttributeTable('1.9', 'ce');
-        $schemaBuilder->hydrateStoreTable('1.9', 'ce');
-        $schemaBuilder->hydrateCatalogProductEntityTable('1.9', 'ce');
+
+        parent::setUp();
 
         $this->persister = new DatetimeAttributeValuePersister(
             $this->getDoctrineConnection(),
@@ -139,6 +142,8 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
     {
         $this->persister->initialize();
         $this->persister->flush();
+
+        $this->assertTableRowCount(sprintf('catalog_product_entity_%s', 'datetime'), 0);
     }
 
     public function testInsertOne()

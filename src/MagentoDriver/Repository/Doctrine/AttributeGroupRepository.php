@@ -1,13 +1,13 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Repository\Doctrine;
+namespace Kiboko\Component\MagentoDriver\Repository\Doctrine;
 
 use Doctrine\DBAL\Connection;
-use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
-use Luni\Component\MagentoDriver\Factory\AttributeGroupFactoryInterface;
-use Luni\Component\MagentoDriver\Model\AttributeGroupInterface;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeGroupQueryBuilderInterface;
-use Luni\Component\MagentoDriver\Repository\AttributeGroupRepositoryInterface;
+use Kiboko\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
+use Kiboko\Component\MagentoDriver\Factory\AttributeGroupFactoryInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeGroupInterface;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeGroupQueryBuilderInterface;
+use Kiboko\Component\MagentoDriver\Repository\AttributeGroupRepositoryInterface;
 
 class AttributeGroupRepository implements AttributeGroupRepositoryInterface
 {

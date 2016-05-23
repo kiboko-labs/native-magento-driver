@@ -1,10 +1,10 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Persister\Direct\SuperLink;
+namespace Kiboko\Component\MagentoDriver\Persister\Direct\SuperLink;
 
 use Doctrine\DBAL\Connection;
-use Luni\Component\MagentoDriver\Model\SuperLinkInterface;
-use Luni\Component\MagentoDriver\Persister\SuperLinkPersisterInterface;
+use Kiboko\Component\MagentoDriver\Model\SuperLinkInterface;
+use Kiboko\Component\MagentoDriver\Persister\SuperLinkPersisterInterface;
 
 class ProductSuperLinkPersister implements SuperLinkPersisterInterface
 {

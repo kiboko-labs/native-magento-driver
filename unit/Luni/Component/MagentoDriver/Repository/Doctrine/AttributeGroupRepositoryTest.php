@@ -1,16 +1,16 @@
 <?php
 
-namespace unit\Luni\Component\MagentoDriver\Repository\Doctrine;
+namespace unit\Kiboko\Component\MagentoDriver\Repository\Doctrine;
 
 use Doctrine\DBAL\Schema\Schema;
-use Luni\Component\MagentoDriver\Factory\AttributeGroupFactory;
-use Luni\Component\MagentoDriver\Model\AttributeGroupInterface;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeGroupQueryBuilder;
-use Luni\Component\MagentoDriver\Repository\Doctrine\AttributeGroupRepository;
-use Luni\Component\MagentoDriver\Repository\AttributeGroupRepositoryInterface;
+use Kiboko\Component\MagentoDriver\Factory\AttributeGroupFactory;
+use Kiboko\Component\MagentoDriver\Model\AttributeGroupInterface;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeGroupQueryBuilder;
+use Kiboko\Component\MagentoDriver\Repository\Doctrine\AttributeGroupRepository;
+use Kiboko\Component\MagentoDriver\Repository\AttributeGroupRepositoryInterface;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
-use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
-use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
+use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
 
 class AttributeGroupRepositoryTest extends \PHPUnit_Framework_TestCase
 {

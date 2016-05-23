@@ -1,10 +1,10 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Persister\Direct\Attribute;
+namespace Kiboko\Component\MagentoDriver\Persister\Direct\Attribute;
 
 use Doctrine\DBAL\Connection;
-use Luni\Component\MagentoDriver\Model\AttributeLabelInterface;
-use Luni\Component\MagentoDriver\Persister\AttributeLabelPersisterInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeLabelInterface;
+use Kiboko\Component\MagentoDriver\Persister\AttributeLabelPersisterInterface;
 
 class AttributeLabelPersister implements AttributeLabelPersisterInterface
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Persister\Direct\Attribute;
+namespace Kiboko\Component\MagentoDriver\Persister\Direct\Attribute;
 
 use Doctrine\DBAL\Connection;
-use Luni\Component\MagentoDriver\Model\EntityAttributeInterface;
-use Luni\Component\MagentoDriver\Persister\EntityAttributePersisterInterface;
+use Kiboko\Component\MagentoDriver\Model\EntityAttributeInterface;
+use Kiboko\Component\MagentoDriver\Persister\EntityAttributePersisterInterface;
 
 class StandardEntityAttributePersister implements EntityAttributePersisterInterface
 {

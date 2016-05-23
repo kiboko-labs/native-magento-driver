@@ -1,8 +1,8 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Persister;
+namespace Kiboko\Component\MagentoDriver\Persister;
 
-use Luni\Component\MagentoDriver\Model\AttributeLabelInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeLabelInterface;
 
 interface AttributeLabelPersisterInterface
 {

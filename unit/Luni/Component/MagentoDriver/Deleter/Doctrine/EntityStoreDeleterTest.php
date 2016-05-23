@@ -1,16 +1,16 @@
 <?php
 
-namespace unit\Luni\Component\MagentoDriver\Deleter\Doctrine\EntityStore;
+namespace unit\Kiboko\Component\MagentoDriver\Deleter\Doctrine\EntityStore;
 
 use Doctrine\DBAL\Schema\Schema;
-use Luni\Component\MagentoDriver\Persister\EntityStorePersisterInterface;
-use Luni\Component\MagentoDriver\Deleter\EntityStoreDeleterInterface;
-use Luni\Component\MagentoDriver\Persister\Direct\Entity\StandardEntityStorePersister;
-use Luni\Component\MagentoDriver\Deleter\Doctrine\EntityStoreDeleter;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\EntityStoreQueryBuilder;
+use Kiboko\Component\MagentoDriver\Persister\EntityStorePersisterInterface;
+use Kiboko\Component\MagentoDriver\Deleter\EntityStoreDeleterInterface;
+use Kiboko\Component\MagentoDriver\Persister\Direct\Entity\StandardEntityStorePersister;
+use Kiboko\Component\MagentoDriver\Deleter\Doctrine\EntityStoreDeleter;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\EntityStoreQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
-use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
-use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
+use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
 
 class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
 {

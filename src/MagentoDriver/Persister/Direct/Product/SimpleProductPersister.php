@@ -1,10 +1,10 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Persister\Direct\Product;
+namespace Kiboko\Component\MagentoDriver\Persister\Direct\Product;
 
 use Doctrine\DBAL\Connection;
-use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
-use Luni\Component\MagentoDriver\Persister\ProductPersisterInterface;
+use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
+use Kiboko\Component\MagentoDriver\Persister\ProductPersisterInterface;
 
 class SimpleProductPersister implements ProductPersisterInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Filesystem;
+namespace Kiboko\Component\MagentoDriver\Filesystem;
 
 use Doctrine\Common\Collections\Collection;
 use League\Flysystem\FilesystemInterface;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Deleter;
+namespace Kiboko\Component\MagentoDriver\Deleter;
 
 interface AttributeDeleterInterface
 {

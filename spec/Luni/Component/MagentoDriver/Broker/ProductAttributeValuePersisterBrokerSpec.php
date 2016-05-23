@@ -1,12 +1,12 @@
 <?php
 
-namespace spec\Luni\Component\MagentoDriver\Broker;
+namespace spec\Kiboko\Component\MagentoDriver\Broker;
 
-use Luni\Component\MagentoDriver\Matcher\AttributeValueMatcherInterface;
-use Luni\Component\MagentoDriver\Matcher\ClosureAttributeValueMatcher;
-use Luni\Component\MagentoDriver\Model\Attribute;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Persister\AttributeValuePersisterInterface;
+use Kiboko\Component\MagentoDriver\Matcher\AttributeValueMatcherInterface;
+use Kiboko\Component\MagentoDriver\Matcher\ClosureAttributeValueMatcher;
+use Kiboko\Component\MagentoDriver\Model\Attribute;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoDriver\Persister\AttributeValuePersisterInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -14,7 +14,7 @@ class ProductAttributeValuePersisterBrokerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Luni\Component\MagentoDriver\Broker\ProductAttributeValuePersisterBroker');
+        $this->shouldHaveType('Kiboko\Component\MagentoDriver\Broker\ProductAttributeValuePersisterBroker');
     }
 
     function it_should_accept_persisters(
@@ -40,7 +40,7 @@ class ProductAttributeValuePersisterBrokerSpec extends ObjectBehavior
         $attribute = new Attribute('spec', 'string');
 
         $this->findFor($attribute)
-            ->shouldReturnAnInstanceOf('Luni\Component\MagentoDriver\Persister\AttributeValue\AttributeValuePersisterInterface')
+            ->shouldReturnAnInstanceOf('Kiboko\Component\MagentoDriver\Persister\AttributeValue\AttributeValuePersisterInterface')
         ;
     }
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Model;
+namespace Kiboko\Component\MagentoDriver\Model;
 
-use Luni\Component\MagentoDriver\Entity\Product\ConfigurableProductInterface;
-use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
+use Kiboko\Component\MagentoDriver\Entity\Product\ConfigurableProductInterface;
+use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
 
 class ProductSuperAttribute implements SuperAttributeInterface
 {

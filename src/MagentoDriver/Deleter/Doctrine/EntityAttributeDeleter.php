@@ -1,11 +1,11 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Deleter\Doctrine;
+namespace Kiboko\Component\MagentoDriver\Deleter\Doctrine;
 
 use Doctrine\DBAL\Connection;
-use Luni\Component\MagentoDriver\Deleter\EntityAttributeDeleterInterface;
-use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\EntityAttributeQueryBuilderInterface;
+use Kiboko\Component\MagentoDriver\Deleter\EntityAttributeDeleterInterface;
+use Kiboko\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\EntityAttributeQueryBuilderInterface;
 
 class EntityAttributeDeleter implements EntityAttributeDeleterInterface
 {

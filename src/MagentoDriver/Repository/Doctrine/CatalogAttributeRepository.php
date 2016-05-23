@@ -1,19 +1,19 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Repository\Doctrine;
+namespace Kiboko\Component\MagentoDriver\Repository\Doctrine;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Connection;
-use Luni\Component\MagentoDriver\Model\Attribute;
-use Luni\Component\MagentoDriver\Model\CatalogAttribute;
-use Luni\Component\MagentoDriver\Model\CatalogAttributeExtension;
-use Luni\Component\MagentoDriver\Model\CatalogAttributeExtensionInterface;
-use Luni\Component\MagentoDriver\Model\FamilyInterface;
-use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
-use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilderInterface;
-use Luni\Component\MagentoDriver\Repository\ProductAttributeRepositoryInterface;
+use Kiboko\Component\MagentoDriver\Model\Attribute;
+use Kiboko\Component\MagentoDriver\Model\CatalogAttribute;
+use Kiboko\Component\MagentoDriver\Model\CatalogAttributeExtension;
+use Kiboko\Component\MagentoDriver\Model\CatalogAttributeExtensionInterface;
+use Kiboko\Component\MagentoDriver\Model\FamilyInterface;
+use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
+use Kiboko\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilderInterface;
+use Kiboko\Component\MagentoDriver\Repository\ProductAttributeRepositoryInterface;
 
 class CatalogAttributeRepository implements ProductAttributeRepositoryInterface
 {

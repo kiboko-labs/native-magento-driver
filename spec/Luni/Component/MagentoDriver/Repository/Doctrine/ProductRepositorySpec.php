@@ -1,10 +1,10 @@
 <?php
 
-namespace spec\Luni\Component\MagentoDriver\Repository\Doctrine;
+namespace spec\Kiboko\Component\MagentoDriver\Repository\Doctrine;
 
 use Doctrine\DBAL\Connection;
-use Luni\Component\MagentoDriver\Factory\ProductFactoryInterface;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductQueryBuilderInterface;
+use Kiboko\Component\MagentoDriver\Factory\ProductFactoryInterface;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductQueryBuilderInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -16,6 +16,6 @@ class ProductRepositorySpec extends ObjectBehavior
         ProductFactoryInterface $productFactory
     ) {
         $this->beConstructedWith($connection, $queryBuilder, $productFactory);
-        $this->shouldHaveType('Luni\Component\MagentoDriver\Repository\Doctrine\ProductRepository');
+        $this->shouldHaveType('Kiboko\Component\MagentoDriver\Repository\Doctrine\ProductRepository');
     }
 }

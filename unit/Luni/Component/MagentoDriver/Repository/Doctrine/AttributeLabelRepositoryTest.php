@@ -1,16 +1,16 @@
 <?php
 
-namespace unit\Luni\Component\MagentoDriver\Repository\Doctrine;
+namespace unit\Kiboko\Component\MagentoDriver\Repository\Doctrine;
 
 use Doctrine\DBAL\Schema\Schema;
-use Luni\Component\MagentoDriver\Factory\AttributeLabelFactory;
-use Luni\Component\MagentoDriver\Model\AttributeLabelInterface;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeLabelQueryBuilder;
-use Luni\Component\MagentoDriver\Repository\Doctrine\AttributeLabelRepository;
-use Luni\Component\MagentoDriver\Repository\AttributeLabelRepositoryInterface;
+use Kiboko\Component\MagentoDriver\Factory\AttributeLabelFactory;
+use Kiboko\Component\MagentoDriver\Model\AttributeLabelInterface;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeLabelQueryBuilder;
+use Kiboko\Component\MagentoDriver\Repository\Doctrine\AttributeLabelRepository;
+use Kiboko\Component\MagentoDriver\Repository\AttributeLabelRepositoryInterface;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
-use unit\Luni\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
-use unit\Luni\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
+use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
 
 class AttributeLabelRepositoryTest extends \PHPUnit_Framework_TestCase
 {

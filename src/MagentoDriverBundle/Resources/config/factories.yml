@@ -1,7 +1,7 @@
 parameters:
-  kiboko.magento_driver.factory.product.standard.class: Luni\Component\MagentoDriver\Factory\StandardProductFactory
-  kiboko.magento_driver.factory.product.simple.class: Luni\Component\MagentoDriver\Factory\Product\SimpleProductFactory
-  kiboko.magento_driver.factory.product.configurable.class: Luni\Component\MagentoDriver\Factory\Product\ConfigurableProductFactory
+  kiboko.magento_driver.factory.product.standard.class: Kiboko\Component\MagentoDriver\Factory\StandardProductFactory
+  kiboko.magento_driver.factory.product.simple.class: Kiboko\Component\MagentoDriver\Factory\Product\SimpleProductFactory
+  kiboko.magento_driver.factory.product.configurable.class: Kiboko\Component\MagentoDriver\Factory\Product\ConfigurableProductFactory
 
 services:
   kiboko.magento_driver.factory.product.simple:

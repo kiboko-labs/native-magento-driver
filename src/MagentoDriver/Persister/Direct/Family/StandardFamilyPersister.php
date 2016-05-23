@@ -1,10 +1,10 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Persister\Direct\Family;
+namespace Kiboko\Component\MagentoDriver\Persister\Direct\Family;
 
 use Doctrine\DBAL\Connection;
-use Luni\Component\MagentoDriver\Model\FamilyInterface;
-use Luni\Component\MagentoDriver\Persister\FamilyPersisterInterface;
+use Kiboko\Component\MagentoDriver\Model\FamilyInterface;
+use Kiboko\Component\MagentoDriver\Persister\FamilyPersisterInterface;
 
 class StandardFamilyPersister implements FamilyPersisterInterface
 {

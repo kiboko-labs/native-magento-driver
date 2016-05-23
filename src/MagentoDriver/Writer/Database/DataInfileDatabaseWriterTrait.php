@@ -1,9 +1,9 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Writer\Database;
+namespace Kiboko\Component\MagentoDriver\Writer\Database;
 
 use Doctrine\DBAL\Connection;
-use Luni\Component\MagentoDriver\Exception\RuntimeErrorException;
+use Kiboko\Component\MagentoDriver\Exception\RuntimeErrorException;
 
 trait DataInfileDatabaseWriterTrait
 {

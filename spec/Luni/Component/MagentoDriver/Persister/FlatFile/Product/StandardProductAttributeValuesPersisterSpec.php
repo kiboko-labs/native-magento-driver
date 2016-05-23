@@ -1,10 +1,10 @@
 <?php
 
-namespace spec\Luni\Component\MagentoDriver\Persister\FlatFile\Product;
+namespace spec\Kiboko\Component\MagentoDriver\Persister\FlatFile\Product;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Luni\Component\MagentoDriver\Persister\AttributeValuePersisterInterface;
+use Kiboko\Component\MagentoDriver\Persister\AttributeValuePersisterInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -15,6 +15,6 @@ class StandardProductAttributeValuesPersisterSpec extends ObjectBehavior
         Collection $collection
     ) {
         $this->beConstructedWith($persister, $collection);
-        $this->shouldHaveType('Luni\Component\MagentoDriver\Persister\FlatFile\Product\StandardProductAttributeValuesPersister');
+        $this->shouldHaveType('Kiboko\Component\MagentoDriver\Persister\FlatFile\Product\StandardProductAttributeValuesPersister');
     }
 }

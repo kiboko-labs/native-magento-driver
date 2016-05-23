@@ -1,11 +1,11 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Repository;
+namespace Kiboko\Component\MagentoDriver\Repository;
 
 use Doctrine\Common\Collections\Collection;
-use Luni\Component\MagentoDriver\Entity\CategoryInterface;
-use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
-use Luni\Component\MagentoDriver\Model\FamilyInterface;
+use Kiboko\Component\MagentoDriver\Entity\CategoryInterface;
+use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
+use Kiboko\Component\MagentoDriver\Model\FamilyInterface;
 
 interface ProductRepositoryInterface
 {

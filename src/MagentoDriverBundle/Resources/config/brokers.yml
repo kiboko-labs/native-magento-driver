@@ -1,5 +1,5 @@
 parameters:
-  kiboko.magento_driver.persister.broker.class: Luni\Component\MagentoDriver\Broker\ProductAttributeValuePersisterBroker
+  kiboko.magento_driver.persister.broker.class: Kiboko\Component\MagentoDriver\Broker\ProductAttributeValuePersisterBroker
 
 services:
   kiboko.magento_driver.persister.broker:

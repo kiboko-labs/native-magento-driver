@@ -1,6 +1,6 @@
 <?php
 
-namespace unit\Luni\Component\MagentoDriver\DoctrineTools;
+namespace unit\Kiboko\Component\MagentoDriver\DoctrineTools;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;

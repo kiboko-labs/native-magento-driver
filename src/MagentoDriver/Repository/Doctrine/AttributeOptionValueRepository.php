@@ -1,13 +1,13 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Repository\Doctrine;
+namespace Kiboko\Component\MagentoDriver\Repository\Doctrine;
 
 use Doctrine\DBAL\Connection;
-use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
-use Luni\Component\MagentoDriver\Factory\AttributeOptionValueFactoryInterface;
-use Luni\Component\MagentoDriver\Model\AttributeOptionValueInterface;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeOptionValueQueryBuilderInterface;
-use Luni\Component\MagentoDriver\Repository\AttributeOptionValueRepositoryInterface;
+use Kiboko\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
+use Kiboko\Component\MagentoDriver\Factory\AttributeOptionValueFactoryInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeOptionValueInterface;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeOptionValueQueryBuilderInterface;
+use Kiboko\Component\MagentoDriver\Repository\AttributeOptionValueRepositoryInterface;
 
 class AttributeOptionValueRepository implements AttributeOptionValueRepositoryInterface
 {

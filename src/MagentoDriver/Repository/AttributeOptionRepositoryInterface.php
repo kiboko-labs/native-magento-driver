@@ -1,8 +1,8 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Repository;
+namespace Kiboko\Component\MagentoDriver\Repository;
 
-use Luni\Component\MagentoDriver\Model\AttributeOptionInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeOptionInterface;
 
 interface AttributeOptionRepositoryInterface
 {

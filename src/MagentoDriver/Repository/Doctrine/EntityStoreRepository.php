@@ -1,13 +1,13 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Repository\Doctrine;
+namespace Kiboko\Component\MagentoDriver\Repository\Doctrine;
 
 use Doctrine\DBAL\Connection;
-use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
-use Luni\Component\MagentoDriver\Factory\EntityStoreFactoryInterface;
-use Luni\Component\MagentoDriver\Model\EntityStoreInterface;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\EntityStoreQueryBuilderInterface;
-use Luni\Component\MagentoDriver\Repository\EntityStoreRepositoryInterface;
+use Kiboko\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
+use Kiboko\Component\MagentoDriver\Factory\EntityStoreFactoryInterface;
+use Kiboko\Component\MagentoDriver\Model\EntityStoreInterface;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\EntityStoreQueryBuilderInterface;
+use Kiboko\Component\MagentoDriver\Repository\EntityStoreRepositoryInterface;
 
 class EntityStoreRepository implements EntityStoreRepositoryInterface
 {
