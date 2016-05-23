@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f0b9ac1cb12860e96a75e43da480ffbf",
-    "content-hash": "fb26ed9dc81b4ee6216d4e015dd01285",
+    "hash": "5a6143cd55807befcfead8f7e7c61bb1",
+    "content-hash": "df07c10672e5a75a93404f2a44ed4fa1",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -2899,6 +2899,47 @@
                 "imagine"
             ],
             "time": "2014-01-24 18:59:15"
+        },
+        {
+            "name": "lunistore/akeneo-connector-base",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lunistore/akeneo-connector-base.git",
+                "reference": "85be7dfb3a21820ef0cbbbfcde7efe0f83a030e7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lunistore/akeneo-connector-base/zipball/85be7dfb3a21820ef0cbbbfcde7efe0f83a030e7",
+                "reference": "85be7dfb3a21820ef0cbbbfcde7efe0f83a030e7",
+                "shasum": ""
+            },
+            "require-dev": {
+                "akeneo/pim-community-dev": "1.4.*",
+                "fzaninotto/faker": "dev-master",
+                "phpspec/phpspec": "~2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Luni\\Component\\Connector\\": "src/Connector/"
+                }
+            },
+            "license": [
+                "LGPL"
+            ],
+            "authors": [
+                {
+                    "name": "Grégory Planchat",
+                    "email": "gregory@luni.fr"
+                }
+            ],
+            "description": "Base tools to build Akeneo connectors",
+            "support": {
+                "source": "https://github.com/lunistore/akeneo-connector-base/tree/v1.0.0",
+                "issues": "https://github.com/lunistore/akeneo-connector-base/issues"
+            },
+            "time": "2016-03-16 14:53:19"
         },
         {
             "name": "michelf/php-markdown",

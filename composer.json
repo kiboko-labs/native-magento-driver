@@ -9,6 +9,7 @@
         "phpunit/dbunit": "dev-master",
         "fabpot/php-cs-fixer": "~1.11",
         "akeneo/pim-community-dev": "~1.4",
+        "lunistore/akeneo-connector-base": "~1.0",
         "phploc/phploc": "*"
     },
     "license": "proprietary",
@@ -30,6 +31,10 @@
             "type": "vcs",
             "url": "https://github.com/akeneo/pim-community-dev.git",
             "branch": "master"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/lunistore/akeneo-connector-base.git"
         },
         {
             "type": "vcs",
