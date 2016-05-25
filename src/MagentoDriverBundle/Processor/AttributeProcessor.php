@@ -28,16 +28,13 @@ class AttributeProcessor
     private $attributeTransformer;
 
     /**
-     * @var AttributeMapperInterface
+     * AttributeProcessor constructor.
+     * @param AttributeTransformerInterface $attributeTransformer
      */
-    private $attributeMapper;
-
     public function __construct(
-        AttributeTransformerInterface $attributeTransformer,
-        AttributeMapperInterface $attributeMapper
+        AttributeTransformerInterface $attributeTransformer
     ) {
         $this->attributeTransformer = $attributeTransformer;
-        $this->attributeMapper = $attributeMapper;
     }
 
     /**
