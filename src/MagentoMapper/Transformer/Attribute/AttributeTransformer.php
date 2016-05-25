@@ -8,7 +8,7 @@ use Kiboko\Component\MagentoMapper\Transformer\AttributeTransformerInterface;
 use Kiboko\Component\MagentoMapper\Mapper\AttributeMapperInterface as RemoteAttributeMapperInterface;
 use Pim\Bundle\CatalogBundle\Model\AttributeInterface;
 
-class AttributeModelMapper
+class AttributeTransformer
     implements AttributeTransformerInterface
 {
     /**
@@ -23,8 +23,9 @@ class AttributeModelMapper
 
     /**
      * AttributeModelMapper constructor.
+     *
      * @param RemoteAttributeMapperInterface $mapper
-     * @param array $attributeTransformers
+     * @param array                          $attributeTransformers
      */
     public function __construct(
         RemoteAttributeMapperInterface $mapper,
@@ -44,6 +45,7 @@ class AttributeModelMapper
 
     /**
      * @param AttributeInterface $attribute
+     *
      * @return \Kiboko\Component\MagentoDriver\Model\AttributeInterface|null
      */
     public function transform(AttributeInterface $attribute)
@@ -62,11 +64,12 @@ class AttributeModelMapper
             return $attribute;
         }
 
-        return null;
+        return;
     }
 
     /**
      * @param AttributeInterface $attribute
+     *
      * @return bool
      */
     public function supportsTransformation(AttributeInterface $attribute)

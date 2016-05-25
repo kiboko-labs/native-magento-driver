@@ -9,12 +9,14 @@ interface AttributeTransformerInterface
 {
     /**
      * @param PimAttributeInterface $attribute
+     *
      * @return KibokoAttributeInterface
      */
     public function transform(PimAttributeInterface $attribute);
 
     /**
      * @param PimAttributeInterface $attribute
+     *
      * @return bool
      */
     public function supportsTransformation(PimAttributeInterface $attribute);

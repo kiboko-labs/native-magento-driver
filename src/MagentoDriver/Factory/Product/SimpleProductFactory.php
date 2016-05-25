@@ -2,7 +2,6 @@
 
 namespace Kiboko\Component\MagentoDriver\Factory\Product;
 
-
 use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
 use Kiboko\Component\MagentoDriver\Entity\Product\SimpleProduct;
 use Kiboko\Component\MagentoDriver\Factory\ProductFactoryInterface;
@@ -18,6 +17,7 @@ class SimpleProductFactory
 
     /**
      * SimpleProductFactory constructor.
+     *
      * @param FamilyRepositoryInterface $familyRepository
      */
     public function __construct(FamilyRepositoryInterface $familyRepository)
@@ -27,7 +27,8 @@ class SimpleProductFactory
 
     /**
      * @param string $type
-     * @param array $options
+     * @param array  $options
+     *
      * @return ProductInterface
      */
     public function buildNew($type, array $options)

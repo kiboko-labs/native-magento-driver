@@ -17,6 +17,7 @@ class ConfigurableProductFactory
 
     /**
      * SimpleProductFactory constructor.
+     *
      * @param FamilyRepositoryInterface $familyRepository
      */
     public function __construct(FamilyRepositoryInterface $familyRepository)
@@ -26,7 +27,8 @@ class ConfigurableProductFactory
 
     /**
      * @param string $type
-     * @param array $options
+     * @param array  $options
+     *
      * @return ProductInterface
      */
     public function buildNew($type, array $options)

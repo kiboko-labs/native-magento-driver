@@ -28,7 +28,8 @@ class WeightAttributeTransformer
 
     /**
      * @param PimAttributeInterface $attribute
-     * @param int|null $mappedId
+     * @param int|null              $mappedId
+     *
      * @return KibokoAttributeInterface
      */
     public function transform(PimAttributeInterface $attribute, $mappedId = null)
@@ -56,6 +57,7 @@ class WeightAttributeTransformer
 
     /**
      * @param PimAttributeInterface $attribute
+     *
      * @return bool
      */
     public function supportsTransformation(PimAttributeInterface $attribute)

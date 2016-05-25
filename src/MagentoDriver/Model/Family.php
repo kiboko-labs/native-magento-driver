@@ -13,7 +13,7 @@ class Family implements FamilyInterface
      * @var string
      */
     private $label;
-    
+
     /**
      * @var int
      */
@@ -21,7 +21,7 @@ class Family implements FamilyInterface
 
     /**
      * @param string $label
-     * @param int $sortOrder
+     * @param int    $sortOrder
      */
     public function __construct($label, $sortOrder = 1)
     {
@@ -44,7 +44,7 @@ class Family implements FamilyInterface
     {
         return $this->label;
     }
-    
+
     /**
      * @return int
      */
@@ -72,7 +72,7 @@ class Family implements FamilyInterface
 
         return $object;
     }
-    
+
     /**
      * @param int $id
      */

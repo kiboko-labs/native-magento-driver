@@ -2,13 +2,11 @@
 
 namespace Kiboko\Component\MagentoTransformer\Attribute\Type;
 
-use Akeneo\Bundle\MeasureBundle\Family\WeightFamilyInterface;
 use Kiboko\Component\MagentoDriver\Model\Attribute;
 use Kiboko\Component\MagentoDriver\Model\AttributeInterface as KibokoAttributeInterface;
 use Kiboko\Component\MagentoMapper\Mapper\EntityTypeMapperInterface;
 use Kiboko\Component\MagentoMapper\Transformer\AttributeTransformerInterface;
 use Pim\Bundle\CatalogBundle\Model\AttributeInterface as PimAttributeInterface;
-use Pim\Bundle\CatalogBundle\Model\MetricInterface;
 
 class SimpleSelectAttributeTransformer
     implements AttributeTransformerInterface
@@ -29,7 +27,8 @@ class SimpleSelectAttributeTransformer
 
     /**
      * @param PimAttributeInterface $attribute
-     * @param int|null $mappedId
+     * @param int|null              $mappedId
+     *
      * @return KibokoAttributeInterface
      */
     public function transform(PimAttributeInterface $attribute, $mappedId = null)
@@ -57,6 +56,7 @@ class SimpleSelectAttributeTransformer
 
     /**
      * @param PimAttributeInterface $attribute
+     *
      * @return bool
      */
     public function supportsTransformation(PimAttributeInterface $attribute)

@@ -6,7 +6,6 @@ use Akeneo\Bundle\BatchBundle\Item\AbstractConfigurableStepElement;
 use Akeneo\Bundle\BatchBundle\Item\ItemProcessorInterface;
 use Akeneo\Bundle\BatchBundle\Item\UnexpectedInputException;
 use Akeneo\Bundle\BatchBundle\Step\StepExecutionAwareInterface;
-use Doctrine\Common\Util\ClassUtils;
 use Kiboko\Component\MagentoMapper\Mapper\AttributeMapperInterface;
 use Kiboko\Component\MagentoMapper\Transformer\AttributeTransformerInterface;
 use Luni\Component\Connector\ConfigurationAwareTrait;
@@ -51,7 +50,9 @@ class AttributeProcessor
 
     /**
      * @param PimAttributeInterface $data
+     *
      * @return KibokoAttributeInterface
+     *
      * @throws UnexpectedInputException
      */
     public function process($data)
@@ -61,7 +62,7 @@ class AttributeProcessor
                 PimAttributeInterface::class, get_class($data)
             ));
         }
-        
+
         $magentoAttribute = $this->attributeTransformer->transform(
             $data
         );

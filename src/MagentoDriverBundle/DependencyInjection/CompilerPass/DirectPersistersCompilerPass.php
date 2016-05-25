@@ -29,9 +29,9 @@ class DirectPersistersCompilerPass implements CompilerPassInterface
             foreach ($tags as $attributes) {
                 if (isset($attributes['frontend']) && isset($attributes['backend'])) {
                     $matcher = new BackendTypeAttributeValueMatcher($attributes['backend']);
-                } else if (isset($attributes['frontend'])) {
+                } elseif (isset($attributes['frontend'])) {
                     $matcher = new FrontendTypeAttributeValueMatcher($attributes['frontend']);
-                } else if (isset($attributes['backend'])) {
+                } elseif (isset($attributes['backend'])) {
                     $matcher = new FrontendAndBackendTypeAttributeValueMatcher(
                         $attributes['frontend'], $attributes['backend']);
                 } else {
