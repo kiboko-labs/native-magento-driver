@@ -2,7 +2,7 @@
 
 namespace Kiboko\Component\MagentoMapper\Mapper;
 
-interface AttributeMapperInterface
+interface EntityTypeMapperInterface
 {
     /**
      * @param string $identifier
