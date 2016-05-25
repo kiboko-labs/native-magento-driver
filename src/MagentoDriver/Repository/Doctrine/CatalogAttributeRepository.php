@@ -57,7 +57,6 @@ class CatalogAttributeRepository implements ProductAttributeRepositoryInterface
                 isset($options['backend_type'])    ? $options['backend_type']           : null,
                 isset($options['backend_model'])   ? $options['backend_model']          : null,
                 isset($options['backend_table'])   ? $options['backend_table']          : null,
-                isset($options['frontend_type'])   ? $options['frontend_type']          : null,
                 isset($options['frontend_model'])  ? $options['frontend_model']         : null,
                 isset($options['frontend_input'])  ? $options['frontend_input']         : null,
                 isset($options['frontend_label'])  ? $options['frontend_label']         : null,
