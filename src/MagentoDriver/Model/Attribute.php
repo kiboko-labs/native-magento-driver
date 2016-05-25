@@ -96,7 +96,6 @@ class Attribute implements AttributeInterface
      * @param string $backendType
      * @param string $backendModelClass
      * @param string $backendTable
-     * @param string $frontendType
      * @param string $frontendModelClass
      * @param string $frontendInput
      * @param string $frontendLabel
@@ -115,7 +114,6 @@ class Attribute implements AttributeInterface
         $backendType,
         $backendModelClass,
         $backendTable,
-        $frontendType,
         $frontendModelClass,
         $frontendInput,
         $frontendLabel,
@@ -133,7 +131,6 @@ class Attribute implements AttributeInterface
         $this->backendType = $backendType;
         $this->backendModelClass = $backendModelClass;
         $this->backendTable = $backendTable;
-        $this->frontendType = $frontendType;
         $this->frontendModelClass = $frontendModelClass;
         $this->frontendInput = $frontendInput;
         $this->frontendLabel = $frontendLabel;
@@ -154,7 +151,6 @@ class Attribute implements AttributeInterface
      * @param string $backendType
      * @param string $backendModelClass
      * @param string $backendTable
-     * @param string $frontendType
      * @param string $frontendModelClass
      * @param string $frontendInput
      * @param string $frontendLabel
@@ -176,7 +172,6 @@ class Attribute implements AttributeInterface
         $backendType,
         $backendModelClass,
         $backendTable,
-        $frontendType,
         $frontendModelClass,
         $frontendInput,
         $frontendLabel,
@@ -195,7 +190,6 @@ class Attribute implements AttributeInterface
             $backendType,
             $backendModelClass,
             $backendTable,
-            $frontendType,
             $frontendModelClass,
             $frontendInput,
             $frontendLabel,

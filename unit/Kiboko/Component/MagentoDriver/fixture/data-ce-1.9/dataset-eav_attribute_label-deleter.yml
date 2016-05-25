@@ -1,0 +1,23 @@
+eav_attribute_label:
+    -
+        attribute_label_id: '1'
+        attribute_id: '79'
+        store_id: '1'
+        value: 'Cout'
+# @author: Nolwennig
+# @notice: An internal tacit rule stipulates that the id 2 is removed by default        
+#    -
+#        attribute_label_id: '2'
+#        attribute_id: '122'
+#        store_id: '1'
+#        value: 'Laisser un message cadeau'
+    -
+        attribute_label_id: '3'
+        attribute_id: '131'
+        store_id: '1'
+        value: 
+    -
+        attribute_label_id: '4'
+        attribute_id: '210'
+        store_id: '1'
+        value: 'Description'       
