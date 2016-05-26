@@ -1,0 +1,8 @@
+parameters:
+  kiboko.magento_driver.processor.transformation.attribute.class: Kiboko\Bundle\MagentoDriverBundle\Processor\Transformer\AttributeProcessor
+
+services:
+  kiboko.magento_driver.processor.transformation.attribute:
+    class: '%kiboko.magento_driver.processor.transformation.attribute.class%'
+    arguments:
+      - '@kiboko.magento_driver.transformer.attribute'

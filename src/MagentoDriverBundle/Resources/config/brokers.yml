@@ -4,4 +4,4 @@ parameters:
 services:
   kiboko.magento_driver.persister.broker:
     abstract: true
-    class: '%kiboko.magento_driver.persister.broker%'
+    class: '%kiboko.magento_driver.persister.broker.class%'

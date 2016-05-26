@@ -1,6 +1,6 @@
 <?php
 
-namespace Kiboko\Component\MagentoTransformer\Attribute\Type;
+namespace Kiboko\Component\MagentoMapper\Transformer\Attribute\Type;
 
 use Akeneo\Bundle\MeasureBundle\Family\WeightFamilyInterface;
 use Kiboko\Component\MagentoDriver\Model\Attribute;

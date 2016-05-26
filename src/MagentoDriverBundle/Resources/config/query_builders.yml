@@ -14,15 +14,15 @@ services:
     class: '%kiboko.magento_driver.query_builder.attribute.class%'
     arguments:
       - '@database.connection'
-      - '%kiboko.magento_driver.backend.attribute.table%'
-      - '%kiboko.magento_driver.backend.attribute.fields%'
+      - '%kiboko.magento_driver.backend.attribute.standard.table%'
+      - '%kiboko.magento_driver.backend.attribute.standard.fields%'
 
   kiboko.magento_driver.query_builder.attribute_group:
     class: '%kiboko.magento_driver.query_builder.attribute_group.class%'
     arguments:
       - '@database.connection'
-      - '%kiboko.magento_driver.backend.attribute_group.table%'
-      - '%kiboko.magento_driver.backend.attribute_group.fields%'
+      - '%kiboko.magento_driver.backend.attribute.group.table%'
+      - '%kiboko.magento_driver.backend.attribute.group.fields%'
 
   kiboko.magento_driver.query_builder.entity_store:
     class: '%kiboko.magento_driver.query_builder.entity_store.class%'
@@ -49,20 +49,52 @@ services:
     class: '%kiboko.magento_driver.query_builder.product_attribute.class%'
     arguments:
       - '@database.connection'
-      - '%kiboko.magento_driver.backend.product_attribute.table%'
-      - '%kiboko.magento_driver.backend.product_attribute.extra_table%'
-      - '%kiboko.magento_driver.backend.product_attribute.entity_table%'
-      - '%kiboko.magento_driver.backend.variant_axis.table%'
-      - '%kiboko.magento_driver.backend.family.table%'
-      - '%kiboko.magento_driver.backend.product_attribute.fields%'
-      - '%kiboko.magento_driver.backend.product_attribute.extra_fields%'
+      - '%kiboko.magento_driver.backend.attribute.standard.table%'
+      - '%kiboko.magento_driver.backend.attribute.catalog_extras.table%'
+      - '%kiboko.magento_driver.backend.attribute.catalog_entity.table%'
+      - '%kiboko.magento_driver.backend.attribute.variant_axis.table%'
+      - '%kiboko.magento_driver.backend.attribute.family.table%'
+      - '%kiboko.magento_driver.backend.attribute.standard.fields%'
+      - '%kiboko.magento_driver.backend.attribute.catalog_extras.fields%'
 
-  kiboko.magento_driver.query_builder.product_attribute_value:
+  kiboko.magento_driver.query_builder.product_attribute_value.datetime:
     class: '%kiboko.magento_driver.query_builder.product_attribute_value.class%'
     arguments:
       - '@database.connection'
-      - '%kiboko.magento_driver.backend.product_attribute_value.table%'
-      - '%kiboko.magento_driver.backend.variant_axis.table%'
+      - '%kiboko.magento_driver.backend.product_attribute_value.datetime.table%'
+      - '%kiboko.magento_driver.backend.product_attribute_value.variant_axis.table%'
+      - '%kiboko.magento_driver.backend.product_attribute_value.fields%'
+
+  kiboko.magento_driver.query_builder.product_attribute_value.integer:
+    class: '%kiboko.magento_driver.query_builder.product_attribute_value.class%'
+    arguments:
+      - '@database.connection'
+      - '%kiboko.magento_driver.backend.product_attribute_value.integer.table%'
+      - '%kiboko.magento_driver.backend.product_attribute_value.variant_axis.table%'
+      - '%kiboko.magento_driver.backend.product_attribute_value.fields%'
+
+  kiboko.magento_driver.query_builder.product_attribute_value.decimal:
+    class: '%kiboko.magento_driver.query_builder.product_attribute_value.class%'
+    arguments:
+      - '@database.connection'
+      - '%kiboko.magento_driver.backend.product_attribute_value.decimal.table%'
+      - '%kiboko.magento_driver.backend.product_attribute_value.variant_axis.table%'
+      - '%kiboko.magento_driver.backend.product_attribute_value.fields%'
+
+  kiboko.magento_driver.query_builder.product_attribute_value.text:
+    class: '%kiboko.magento_driver.query_builder.product_attribute_value.class%'
+    arguments:
+      - '@database.connection'
+      - '%kiboko.magento_driver.backend.product_attribute_value.text.table%'
+      - '%kiboko.magento_driver.backend.product_attribute_value.variant_axis.table%'
+      - '%kiboko.magento_driver.backend.product_attribute_value.fields%'
+
+  kiboko.magento_driver.query_builder.product_attribute_value.varchar:
+    class: '%kiboko.magento_driver.query_builder.product_attribute_value.class%'
+    arguments:
+      - '@database.connection'
+      - '%kiboko.magento_driver.backend.product_attribute_value.varchar.table%'
+      - '%kiboko.magento_driver.backend.product_attribute_value.variant_axis.table%'
       - '%kiboko.magento_driver.backend.product_attribute_value.fields%'
 
   kiboko.magento_driver.query_builder.product:

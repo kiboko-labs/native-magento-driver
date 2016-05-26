@@ -1,12 +1,11 @@
 <?php
 
-namespace Kiboko\Bundle\MagentoDriverBundle\Processor;
+namespace Kiboko\Bundle\MagentoDriverBundle\Processor\Transformer;
 
 use Akeneo\Bundle\BatchBundle\Item\AbstractConfigurableStepElement;
 use Akeneo\Bundle\BatchBundle\Item\ItemProcessorInterface;
 use Akeneo\Bundle\BatchBundle\Item\UnexpectedInputException;
 use Akeneo\Bundle\BatchBundle\Step\StepExecutionAwareInterface;
-use Kiboko\Component\MagentoMapper\Mapper\AttributeMapperInterface;
 use Kiboko\Component\MagentoMapper\Transformer\AttributeTransformerInterface;
 use Luni\Component\Connector\ConfigurationAwareTrait;
 use Luni\Component\Connector\NameAwareTrait;
@@ -54,7 +53,7 @@ class AttributeProcessor
      */
     public function process($data)
     {
-        if ($data instanceof PimAttributeInterface) {
+        if (!$data instanceof PimAttributeInterface) {
             throw new UnexpectedInputException(sprintf('Invalid item type, expected %s, got %s.',
                 PimAttributeInterface::class, get_class($data)
             ));

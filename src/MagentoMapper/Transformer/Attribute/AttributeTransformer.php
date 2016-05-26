@@ -1,18 +1,18 @@
 <?php
 
-namespace Kiboko\Component\MagentoTransformer\Attribute;
+namespace Kiboko\Component\MagentoMapper\Transformer\Attribute;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Kiboko\Component\MagentoMapper\Transformer\AttributeTransformerInterface;
-use Kiboko\Component\MagentoMapper\Mapper\AttributeMapperInterface as RemoteAttributeMapperInterface;
+use Kiboko\Component\MagentoMapper\Mapper\AttributeMapperInterface;
 use Pim\Bundle\CatalogBundle\Model\AttributeInterface;
 
 class AttributeTransformer
     implements AttributeTransformerInterface
 {
     /**
-     * @var RemoteAttributeMapperInterface
+     * @var AttributeMapperInterface
      */
     private $mapper;
 
@@ -24,15 +24,23 @@ class AttributeTransformer
     /**
      * AttributeModelMapper constructor.
      *
-     * @param RemoteAttributeMapperInterface $mapper
-     * @param array                          $attributeTransformers
+     * @param AttributeMapperInterface $mapper
+     * @param array                    $attributeTransformers
      */
     public function __construct(
-        RemoteAttributeMapperInterface $mapper,
+        AttributeMapperInterface $mapper,
         array $attributeTransformers = []
     ) {
         $this->mapper = $mapper;
 
+        $this->setAttributeTransformers($attributeTransformers);
+    }
+
+    /**
+     * @param Collection|AttributeTransformerInterface[] $attributeTransformers
+     */
+    public function setAttributeTransformers(array $attributeTransformers)
+    {
         $this->attributeTransformers = new ArrayCollection();
         foreach ($attributeTransformers as $transformer) {
             if (!$transformer instanceof AttributeTransformerInterface) {
@@ -41,6 +49,14 @@ class AttributeTransformer
 
             $this->attributeTransformers->add($transformer);
         }
+    }
+
+    /**
+     * @param AttributeTransformerInterface $attributeTransformer
+     */
+    public function addAttributeTransformer(AttributeTransformerInterface $attributeTransformer)
+    {
+        $this->attributeTransformers->add($attributeTransformer);
     }
 
     /**

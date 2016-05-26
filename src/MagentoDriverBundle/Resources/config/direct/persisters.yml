@@ -10,26 +10,26 @@ parameters:
   kiboko.magento_driver.persister.direct.attribute_option.class:       Kiboko\Component\MagentoDriver\Persister\Direct\Attribute\AttributeOptionPersister
   kiboko.magento_driver.persister.direct.attribute_option_value.class: Kiboko\Component\MagentoDriver\Persister\Direct\Attribute\AttributeOptionValuePersister
 
-  kiboko.magento_driver.persister.direct.attribute_value.datetime.class: Kiboko\Component\MagentoDriver\Persister\Direct\AttributeValue\DatetimeAttributeValuePersister
-  kiboko.magento_driver.persister.direct.attribute_value.decimal.class:  Kiboko\Component\MagentoDriver\Persister\Direct\AttributeValue\DecimalAttributeValuePersister
-  kiboko.magento_driver.persister.direct.attribute_value.integer.class:  Kiboko\Component\MagentoDriver\Persister\Direct\AttributeValue\IntegerAttributeValuePersister
-  kiboko.magento_driver.persister.direct.attribute_value.static.class:   Kiboko\Component\MagentoDriver\Persister\Direct\AttributeValue\StaticAttributeValuePersister
-  kiboko.magento_driver.persister.direct.attribute_value.text.class:     Kiboko\Component\MagentoDriver\Persister\Direct\AttributeValue\TextAttributeValuePersister
-  kiboko.magento_driver.persister.direct.attribute_value.varchar.class:  Kiboko\Component\MagentoDriver\Persister\Direct\AttributeValue\VarcharAttributeValuePersister
+  kiboko.magento_driver.persister.direct.product_attribute_value.datetime.class: Kiboko\Component\MagentoDriver\Persister\Direct\AttributeValue\DatetimeAttributeValuePersister
+  kiboko.magento_driver.persister.direct.product_attribute_value.decimal.class:  Kiboko\Component\MagentoDriver\Persister\Direct\AttributeValue\DecimalAttributeValuePersister
+  kiboko.magento_driver.persister.direct.product_attribute_value.integer.class:  Kiboko\Component\MagentoDriver\Persister\Direct\AttributeValue\IntegerAttributeValuePersister
+  kiboko.magento_driver.persister.direct.product_attribute_value.static.class:   Kiboko\Component\MagentoDriver\Persister\Direct\AttributeValue\StaticAttributeValuePersister
+  kiboko.magento_driver.persister.direct.product_attribute_value.text.class:     Kiboko\Component\MagentoDriver\Persister\Direct\AttributeValue\TextAttributeValuePersister
+  kiboko.magento_driver.persister.direct.product_attribute_value.varchar.class:  Kiboko\Component\MagentoDriver\Persister\Direct\AttributeValue\VarcharAttributeValuePersister
 
   kiboko.magento_driver.persister.direct.entity_store.class: Kiboko\Component\MagentoDriver\Persister\Direct\Entity\StandardEntityStorePersister
 
   kiboko.magento_driver.persister.direct.family.class: Kiboko\Component\MagentoDriver\Persister\Direct\Family\StandardFamilyPersister
 
 services:
-  kiboko.magento_driver.persister.direct.attribute_value.broker:
+  kiboko.magento_driver.persister.direct.product_attribute_value.broker:
     parent: kiboko.magento_driver.persister.broker
 
   kiboko.magento_driver.persister.direct.entity_attribute.standard:
     class: '%kiboko.magento_driver.persister.direct.entity_attribute.standard.class%'
     arguments:
       - '@database.connection'
-      - '%kiboko.magento_driver.backend.attribute.default.table%'
+      - '%kiboko.magento_driver.backend.attribute.standard.table%'
 
   kiboko.magento_driver.persister.direct.attribute.standard:
     class: '%kiboko.magento_driver.persister.direct.attribute.standard.class%'
@@ -53,76 +53,76 @@ services:
     class: '%kiboko.magento_driver.persister.direct.attribute_group.class%'
     arguments:
       - '@database.connection'
-      - '%kiboko.magento_driver.backend.attribute_group.table%'
+      - '%kiboko.magento_driver.backend.attribute.group.table%'
 
   kiboko.magento_driver.persister.direct.attribute_label:
     class: '%kiboko.magento_driver.persister.direct.attribute_label.class%'
     arguments:
       - '@database.connection'
-      - '%kiboko.magento_driver.backend.attribute_label.table%'
+      - '%kiboko.magento_driver.backend.attribute.label.table%'
 
   kiboko.magento_driver.persister.direct.attribute_option:
     class: '%kiboko.magento_driver.persister.direct.attribute_option.class%'
     arguments:
       - '@database.connection'
-      - '%kiboko.magento_driver.backend.attribute_option.table%'
+      - '%kiboko.magento_driver.backend.attribute.option.table%'
 
   kiboko.magento_driver.persister.direct.attribute_option_value:
     class: '%kiboko.magento_driver.persister.direct.attribute_option_value.class%'
     arguments:
       - '@database.connection'
-      - '%kiboko.magento_driver.backend.attribute_option_value.table%'
+      - '%kiboko.magento_driver.backend.attribute.option_value.table%'
 
-  kiboko.magento_driver.persister.direct.attribute_value.datetime:
-    class: '%kiboko.magento_driver.persister.direct.attribute_value.datetime.class%'
+  kiboko.magento_driver.persister.direct.product_attribute_value.datetime:
+    class: '%kiboko.magento_driver.persister.direct.product_attribute_value.datetime.class%'
     arguments:
       - '@database.connection'
-      - '%kiboko.magento_driver.backend.attribute_value.datetime.table%'
+      - '%kiboko.magento_driver.backend.product_attribute_value.datetime.table%'
     tags:
-      -  { name: kiboko.magento_driver.persister.direct.attribute_value, backend: 'datetime' }
+      -  { name: kiboko.magento_driver.persister.direct.product_attribute_value, backend: 'datetime' }
 
-  kiboko.magento_driver.persister.direct.attribute_value.decimal:
-    class: '%kiboko.magento_driver.persister.direct.attribute_value.decimal.class%'
+  kiboko.magento_driver.persister.direct.product_attribute_value.decimal:
+    class: '%kiboko.magento_driver.persister.direct.product_attribute_value.decimal.class%'
     arguments:
       - '@database.connection'
-      - '%kiboko.magento_driver.backend.attribute_value.decimal.table%'
+      - '%kiboko.magento_driver.backend.product_attribute_value.decimal.table%'
     tags:
-      -  { name: kiboko.magento_driver.persister.direct.attribute_value, backend: 'decimal' }
+      -  { name: kiboko.magento_driver.persister.direct.product_attribute_value, backend: 'decimal' }
 
-  kiboko.magento_driver.persister.direct.attribute_value.integer:
-    class: '%kiboko.magento_driver.persister.direct.attribute_value.integer.class%'
+  kiboko.magento_driver.persister.direct.product_attribute_value.integer:
+    class: '%kiboko.magento_driver.persister.direct.product_attribute_value.integer.class%'
     arguments:
       - '@database.connection'
-      - '%kiboko.magento_driver.backend.attribute_value.integer.table%'
+      - '%kiboko.magento_driver.backend.product_attribute_value.integer.table%'
     tags:
-      -  { name: kiboko.magento_driver.persister.direct.attribute_value, backend: 'integer' }
+      -  { name: kiboko.magento_driver.persister.direct.product_attribute_value, backend: 'integer' }
 
-  kiboko.magento_driver.persister.direct.attribute_value.static:
-    class: '%kiboko.magento_driver.persister.direct.attribute_value.static.class%'
+  kiboko.magento_driver.persister.direct.product_attribute_value.static:
+    class: '%kiboko.magento_driver.persister.direct.product_attribute_value.static.class%'
     tags:
-      -  { name: kiboko.magento_driver.persister.direct.attribute_value, backend: 'static' }
+      -  { name: kiboko.magento_driver.persister.direct.product_attribute_value, backend: 'static' }
 
-  kiboko.magento_driver.persister.direct.attribute_value.text:
-    class: '%kiboko.magento_driver.persister.direct.attribute_value.text.class%'
+  kiboko.magento_driver.persister.direct.product_attribute_value.text:
+    class: '%kiboko.magento_driver.persister.direct.product_attribute_value.text.class%'
     arguments:
       - '@database.connection'
-      - '%kiboko.magento_driver.backend.attribute_value.text.table%'
+      - '%kiboko.magento_driver.backend.product_attribute_value.text.table%'
     tags:
-      -  { name: kiboko.magento_driver.persister.direct.attribute_value, backend: 'text' }
+      -  { name: kiboko.magento_driver.persister.direct.product_attribute_value, backend: 'text' }
 
-  kiboko.magento_driver.persister.direct.attribute_value.varchar:
-    class: '%kiboko.magento_driver.persister.direct.attribute_value.varchar.class%'
+  kiboko.magento_driver.persister.direct.product_attribute_value.varchar:
+    class: '%kiboko.magento_driver.persister.direct.product_attribute_value.varchar.class%'
     arguments:
       - '@database.connection'
-      - '%kiboko.magento_driver.backend.attribute_value.text.varchar%'
+      - '%kiboko.magento_driver.backend.product_attribute_value.varchar.table%'
     tags:
-      -  { name: kiboko.magento_driver.persister.direct.attribute_value, backend: 'varchar' }
+      -  { name: kiboko.magento_driver.persister.direct.product_attribute_value, backend: 'varchar' }
 
   kiboko.magento_driver.persister.direct.entity_store:
     class: '%kiboko.magento_driver.persister.direct.entity_store.class%'
     arguments:
       - '@database.connection'
-      - '%kiboko.magento_driver.backend.entity_store.varchar%'
+      - '%kiboko.magento_driver.backend.entity_store.table%'
 
   kiboko.magento_driver.persister.direct.family:
     class: '%kiboko.magento_driver.persister.direct.family.class%'

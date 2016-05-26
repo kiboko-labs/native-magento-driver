@@ -1,4 +1,5 @@
 parameters:
+  kiboko.magento_driver.repository.attribute.class:               Kiboko\Component\MagentoDriver\Repository\Doctrine\AttributeRepository
   kiboko.magento_driver.repository.attribute_group.class:         Kiboko\Component\MagentoDriver\Repository\Doctrine\AttributeGroupRepository
   kiboko.magento_driver.repository.catalog_attribute.class:       Kiboko\Component\MagentoDriver\Repository\Doctrine\CatalogAttributeRepository
   kiboko.magento_driver.repository.entity_store.class:            Kiboko\Component\MagentoDriver\Repository\Doctrine\EntityStoreRepository
@@ -8,45 +9,57 @@ parameters:
   kiboko.magento_driver.repository.product.class:                 Kiboko\Component\MagentoDriver\Repository\Doctrine\ProuctRepository
 
 services:
+  kiboko.magento_driver.repository.attribute:
+    class: '%kiboko.magento_driver.repository.attribute.class%'
+    arguments:
+      - '@database.connection'
+      - '@kiboko.magento_driver.query_builder.attribute_group'
+
   kiboko.magento_driver.repository.attribute_group:
     class: '%kiboko.magento_driver.repository.attribute_group.class%'
     arguments:
       - '@database.connection'
-      - '@kiboko.magento_driver.repository.attribute_group'
+      - '@kiboko.magento_driver.query_builder.attribute_group'
 
   kiboko.magento_driver.repository.catalog_attribute:
     class: '%kiboko.magento_driver.repository.catalog_attribute.class%'
     arguments:
       - '@database.connection'
-      - '@kiboko.magento_driver.repository.catalog_attribute'
+      - '@kiboko.magento_driver.query_builder.product_attribute'
 
   kiboko.magento_driver.repository.entity_store:
     class: '%kiboko.magento_driver.repository.entity_store.class%'
     arguments:
       - '@database.connection'
-      - '@kiboko.magento_driver.repository.entity_store'
+      - '@kiboko.magento_driver.query_builder.entity_store'
 
   kiboko.magento_driver.repository.entity_type:
     class: '%kiboko.magento_driver.repository.entity_type.class%'
     arguments:
       - '@database.connection'
-      - '@kiboko.magento_driver.repository.entity_type'
+      - '@kiboko.magento_driver.query_builder.entity_type'
 
   kiboko.magento_driver.repository.family:
     class: '%kiboko.magento_driver.repository.family.class%'
     arguments:
       - '@database.connection'
-      - '@kiboko.magento_driver.repository.family'
+      - '@kiboko.magento_driver.query_builder.family'
 
   kiboko.magento_driver.repository.product_attribute_value:
     class: '%kiboko.magento_driver.repository.product_attribute_value.class%'
+    abstract: true
+
+  kiboko.magento_driver.repository.product_attribute_value.decimal:
+    parent: 'kiboko.magento_driver.repository.product_attribute_value'
     arguments:
       - '@database.connection'
-      - '@kiboko.magento_driver.repository.product_attribute_value'
+      - '@kiboko.magento_driver.query_builder.product_attribute_value.decimal'
+      - '@kiboko.magento_driver.repository.attribute'
+      - '@kiboko.magento_driver.factory.product_attribute_value.facade'
 
   kiboko.magento_driver.repository.product:
     class: '%kiboko.magento_driver.repository.product.class%'
     arguments:
       - '@database.connection'
-      - '@kiboko.magento_driver.repository.product'
+      - '@kiboko.magento_driver.query_builder.product'
 
