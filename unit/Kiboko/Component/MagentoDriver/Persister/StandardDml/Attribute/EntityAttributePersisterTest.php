@@ -1,18 +1,18 @@
 <?php
 
-namespace unit\Kiboko\Component\MagentoDriver\Deleter\Doctrine\EntityAttribute;
+namespace unit\Kiboko\Component\MagentoDriver\Persister\StandardDml\EntityAttribute;
 
 use Doctrine\DBAL\Schema\Schema;
+use Kiboko\Component\MagentoDriver\Model\EntityAttribute;
 use Kiboko\Component\MagentoDriver\Persister\EntityAttributePersisterInterface;
-use Kiboko\Component\MagentoDriver\Deleter\EntityAttributeDeleterInterface;
 use Kiboko\Component\MagentoDriver\Persister\StandardDml\Attribute\StandardEntityAttributePersister;
-use Kiboko\Component\MagentoDriver\Deleter\Doctrine\EntityAttributeDeleter;
 use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\EntityAttributeQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
 
-class EntityAttributeDeleterTest extends \PHPUnit_Framework_TestCase
+class EntityAttributePersisterTest extends \PHPUnit_Framework_TestCase
 {
     use DatabaseConnectionAwareTrait;
 
@@ -20,11 +20,6 @@ class EntityAttributeDeleterTest extends \PHPUnit_Framework_TestCase
      * @var Schema
      */
     private $schema;
-
-    /**
-     * @var EntityAttributeDeleterInterface
-     */
-    private $deleter;
 
     /**
      * @var EntityAttributePersisterInterface
@@ -37,18 +32,7 @@ class EntityAttributeDeleterTest extends \PHPUnit_Framework_TestCase
     protected function getDataSet()
     {
         $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-                $this->getDeleterFixturesPathname('eav_entity_attribute', '1.9', 'ce'));
-
-        return $dataset;
-    }
-
-    /**
-     * @return PHPUnit_Extensions_Database_DataSet_IDataSet
-     */
-    protected function getOriginalDataSet()
-    {
-        $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-                $this->getFixturesPathname('eav_entity_attribute', '1.9', 'ce'));
+            $this->getFixturesPathname('eav_entity_attribute', '1.9', 'ce'));
 
         return $dataset;
     }
@@ -58,16 +42,17 @@ class EntityAttributeDeleterTest extends \PHPUnit_Framework_TestCase
         $platform = $this->getDoctrineConnection()->getDatabasePlatform();
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
+
         $this->getDoctrineConnection()->exec(
-                $platform->getTruncateTableSQL('eav_attribute_group')
+            $platform->getTruncateTableSQL('eav_attribute_group')
         );
 
         $this->getDoctrineConnection()->exec(
-                $platform->getTruncateTableSQL('eav_attribute')
+            $platform->getTruncateTableSQL('eav_attribute')
         );
 
         $this->getDoctrineConnection()->exec(
-                $platform->getTruncateTableSQL('eav_entity_attribute')
+            $platform->getTruncateTableSQL('eav_entity_attribute')
         );
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
@@ -98,25 +83,9 @@ class EntityAttributeDeleterTest extends \PHPUnit_Framework_TestCase
 
         parent::setUp();
 
-        $magentoVersion = '1.9';
-        $magentoEdition = 'ce';
-
-        $schemaBuilder->hydrateAttributeGroupTable($magentoVersion, $magentoEdition);
-        $schemaBuilder->hydrateAttributeTable($magentoVersion, $magentoEdition);
-        $schemaBuilder->hydrateEntityAttributeTable($magentoVersion, $magentoEdition);
-
         $this->persister = new StandardEntityAttributePersister(
             $this->getDoctrineConnection(),
             EntityAttributeQueryBuilder::getDefaultTable()
-        );
-
-        $this->deleter = new EntityAttributeDeleter(
-            $this->getDoctrineConnection(),
-            new EntityAttributeQueryBuilder(
-                $this->getDoctrineConnection(),
-                EntityAttributeQueryBuilder::getDefaultTable(),
-                EntityAttributeQueryBuilder::getDefaultFields()
-            )
         );
     }
 
@@ -125,44 +94,71 @@ class EntityAttributeDeleterTest extends \PHPUnit_Framework_TestCase
         $this->truncateTables();
         parent::tearDown();
 
-        $this->persister = $this->deleter = null;
+        $this->persister = null;
     }
 
-    public function testRemoveNone()
+    public function testInsertNone()
     {
         $this->persister->initialize();
+        $this->persister->flush();
+
+        $this->assertTableRowCount('eav_entity_attribute', 0);
+    }
+
+    public function testInsertOne()
+    {
+        $dataLoader = new Loader($this->getDoctrineConnection(), 'eav_entity_attribute');
+
+        $this->persister->initialize();
+        foreach ($dataLoader->walkData('1.9', 'ce') as $data) {
+            $attribute = EntityAttribute::buildNewWith(
+                $data['entity_attribute_id'],
+                $data['entity_type_id'],
+                $data['attribute_set_id'],
+                $data['attribute_group_id'],
+                $data['attribute_id'],
+                $data['sort_order']
+            );
+            $this->persister->persist($attribute);
+        }
+        $this->persister->flush();
+
+        $expected = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
+            $this->getFixturesPathname('eav_entity_attribute', '1.9', 'ce')
+        );
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_entity_attribute');
 
-        $this->assertDataSetsEqual($this->getOriginalDataSet(), $actual);
-
-        $this->assertTableRowCount('eav_entity_attribute', $this->getOriginalDataSet()->getIterator()->getTable()->getRowCount());
-    }
-
-    public function testRemoveOneById()
-    {
-        $this->persister->initialize();
-        $this->deleter->deleteOneById(2);
-
-        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable('eav_entity_attribute');
-
-        $this->assertDataSetsEqual($this->getDataSet(), $actual);
+        $this->assertDataSetsEqual($expected, $actual);
 
         $this->assertTableRowCount('eav_entity_attribute', $this->getDataSet()->getIterator()->getTable()->getRowCount());
     }
 
-    public function testRemoveAllById()
+    public function testUpdateOneExisting()
     {
+        $dataLoader = new Loader($this->getDoctrineConnection(), 'eav_entity_attribute');
+
         $this->persister->initialize();
-        $this->deleter->deleteAllById([2]);
+        foreach ($dataLoader->walkData('1.9', 'ce') as $data) {
+            $attribute = EntityAttribute::buildNewWith(
+                $data['entity_attribute_id'],
+                $data['entity_type_id'],
+                $data['attribute_set_id'],
+                $data['attribute_group_id'],
+                $data['attribute_id'],
+                $data['sort_order']
+            );
+            $this->persister->persist($attribute);
+        }
+        $this->persister->flush();
+
+        $expected = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
+            $this->getFixturesPathname('eav_entity_attribute', '1.9', 'ce'));
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_entity_attribute');
 
-        $this->assertDataSetsEqual($this->getDataSet(), $actual);
-
-        $this->assertTableRowCount('eav_entity_attribute', $this->getDataSet()->getIterator()->getTable()->getRowCount());
+        $this->assertDataSetsEqual($expected, $actual);
     }
 }

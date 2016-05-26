@@ -2,7 +2,7 @@
 
 namespace Kiboko\Bundle\MagentoDriverBundle;
 
-use Kiboko\Bundle\MagentoDriverBundle\DependencyInjection\CompilerPass\DirectPersistersCompilerPass;
+use Kiboko\Bundle\MagentoDriverBundle\DependencyInjection\CompilerPass\StandardDmlPersistersCompilerPass;
 use Kiboko\Bundle\MagentoDriverBundle\DependencyInjection\CompilerPass\TransformersCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
@@ -24,7 +24,7 @@ class KibokoMagentoDriverBundle extends Bundle
     {
         parent::build($container);
 
-        $container->addCompilerPass(new DirectPersistersCompilerPass());
+        $container->addCompilerPass(new StandardDmlPersistersCompilerPass());
         $container->addCompilerPass(new TransformersCompilerPass());
     }
 }

@@ -1,18 +1,18 @@
 <?php
 
-namespace unit\Kiboko\Component\MagentoDriver\Deleter\Doctrine\Attribute;
+namespace unit\Kiboko\Component\MagentoDriver\Persister\StandardDml\Attribute;
 
 use Doctrine\DBAL\Schema\Schema;
+use Kiboko\Component\MagentoDriver\Model\AttributeOption;
 use Kiboko\Component\MagentoDriver\Persister\AttributeOptionPersisterInterface;
-use Kiboko\Component\MagentoDriver\Deleter\AttributeOptionDeleterInterface;
 use Kiboko\Component\MagentoDriver\Persister\StandardDml\Attribute\AttributeOptionPersister;
-use Kiboko\Component\MagentoDriver\Deleter\Doctrine\AttributeOptionDeleter;
 use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeOptionQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
 
-class AttributeOptionDeleterTest extends \PHPUnit_Framework_TestCase
+class AttributeOptionPersisterTest extends \PHPUnit_Framework_TestCase
 {
     use DatabaseConnectionAwareTrait;
 
@@ -20,11 +20,6 @@ class AttributeOptionDeleterTest extends \PHPUnit_Framework_TestCase
      * @var Schema
      */
     private $schema;
-
-    /**
-     * @var AttributeOptionDeleterInterface
-     */
-    private $deleter;
 
     /**
      * @var AttributeOptionPersisterInterface
@@ -37,18 +32,7 @@ class AttributeOptionDeleterTest extends \PHPUnit_Framework_TestCase
     protected function getDataSet()
     {
         $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-                    $this->getDeleterFixturesPathname('eav_attribute_option', '1.9', 'ce'));
-
-        return $dataset;
-    }
-
-    /**
-     * @return PHPUnit_Extensions_Database_DataSet_IDataSet
-     */
-    protected function getOriginalDataSet()
-    {
-        $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-                $this->getFixturesPathname('eav_attribute_option', '1.9', 'ce'));
+            $this->getFixturesPathname('eav_attribute_option', '1.9', 'ce'));
 
         return $dataset;
     }
@@ -94,21 +78,9 @@ class AttributeOptionDeleterTest extends \PHPUnit_Framework_TestCase
 
         parent::setUp();
 
-        $schemaBuilder->hydrateAttributeTable('1.9', 'ce');
-        $schemaBuilder->hydrateAttributeOptionTable('1.9', 'ce');
-
         $this->persister = new AttributeOptionPersister(
             $this->getDoctrineConnection(),
             AttributeOptionQueryBuilder::getDefaultTable()
-        );
-
-        $this->deleter = new AttributeOptionDeleter(
-            $this->getDoctrineConnection(),
-            new AttributeOptionQueryBuilder(
-                $this->getDoctrineConnection(),
-                AttributeOptionQueryBuilder::getDefaultTable(),
-                AttributeOptionQueryBuilder::getDefaultFields()
-            )
         );
     }
 
@@ -117,38 +89,62 @@ class AttributeOptionDeleterTest extends \PHPUnit_Framework_TestCase
         $this->truncateTables();
         parent::tearDown();
 
-        $this->persister = $this->deleter = null;
+        $this->persister = null;
     }
 
-    public function testRemoveNone()
+    public function testInsertNone()
     {
         $this->persister->initialize();
+        $this->persister->flush();
+
+        $this->assertTableRowCount('eav_attribute_option', 0);
+    }
+
+    public function testInsertOne()
+    {
+        $dataLoader = new Loader($this->getDoctrineConnection(), 'eav_attribute_option');
+
+        $this->persister->initialize();
+        foreach ($dataLoader->walkData('1.9', 'ce') as $data) {
+            $attribute = AttributeOption::buildNewWith(
+                $data['option_id'],
+                $data['attribute_id'],
+                $data['sort_order']
+            );
+            $this->persister->persist($attribute);
+        }
+        $this->persister->flush();
+
+        $expected = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
+            $this->getFixturesPathname('eav_attribute_option', '1.9', 'ce'));
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_option');
 
-        $this->assertDataSetsEqual($this->getOriginalDataSet(), $actual);
+        $this->assertDataSetsEqual($expected, $actual);
     }
 
-    public function testRemoveOneById()
+    public function testUpdateOneExisting()
     {
+        $dataLoader = new Loader($this->getDoctrineConnection(), 'eav_attribute_option');
+
         $this->persister->initialize();
-        $this->deleter->deleteOneById(2);
+        foreach ($dataLoader->walkData('1.9', 'ce') as $data) {
+            $attribute = AttributeOption::buildNewWith(
+                $data['option_id'],
+                $data['attribute_id'],
+                $data['sort_order']
+            );
+            $this->persister->persist($attribute);
+        }
+        $this->persister->flush();
+
+        $expected = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
+            $this->getFixturesPathname('eav_attribute_option', '1.9', 'ce'));
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_option');
 
-        $this->assertDataSetsEqual($this->getDataSet(), $actual);
-    }
-
-    public function testRemoveAllById()
-    {
-        $this->persister->initialize();
-        $this->deleter->deleteAllById([2]);
-
-        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable('eav_attribute_option');
-
-        $this->assertDataSetsEqual($this->getDataSet(), $actual);
+        $this->assertDataSetsEqual($expected, $actual);
     }
 }

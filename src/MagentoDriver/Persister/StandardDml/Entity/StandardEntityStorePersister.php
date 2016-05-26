@@ -1,6 +1,6 @@
 <?php
 
-namespace Kiboko\Component\MagentoDriver\Persister\StandardDml\EntityStore;
+namespace Kiboko\Component\MagentoDriver\Persister\StandardDml\Entity;
 
 use Doctrine\DBAL\Connection;
 use Kiboko\Component\MagentoDriver\Model\EntityStoreInterface;

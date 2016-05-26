@@ -1,18 +1,18 @@
 <?php
 
-namespace unit\Kiboko\Component\MagentoDriver\Deleter\Doctrine\EntityStore;
+namespace unit\Kiboko\Component\MagentoDriver\Persister\StandardDml\EntityStore;
 
 use Doctrine\DBAL\Schema\Schema;
+use Kiboko\Component\MagentoDriver\Model\EntityStore;
 use Kiboko\Component\MagentoDriver\Persister\EntityStorePersisterInterface;
-use Kiboko\Component\MagentoDriver\Deleter\EntityStoreDeleterInterface;
 use Kiboko\Component\MagentoDriver\Persister\StandardDml\Entity\StandardEntityStorePersister;
-use Kiboko\Component\MagentoDriver\Deleter\Doctrine\EntityStoreDeleter;
 use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\EntityStoreQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
 
-class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
+class EntityStorePersisterTest extends \PHPUnit_Framework_TestCase
 {
     use DatabaseConnectionAwareTrait;
 
@@ -20,11 +20,6 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
      * @var Schema
      */
     private $schema;
-
-    /**
-     * @var EntityStoreDeleterInterface
-     */
-    private $deleter;
 
     /**
      * @var EntityStorePersisterInterface
@@ -37,18 +32,7 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
     protected function getDataSet()
     {
         $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-                $this->getDeleterFixturesPathname('eav_entity_store', '1.9', 'ce'));
-
-        return $dataset;
-    }
-
-    /**
-     * @return PHPUnit_Extensions_Database_DataSet_IDataSet
-     */
-    protected function getOriginalDataSet()
-    {
-        $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-                $this->getFixturesPathname('eav_entity_store', '1.9', 'ce'));
+            $this->getFixturesPathname('eav_entity_store', '1.9', 'ce'));
 
         return $dataset;
     }
@@ -59,11 +43,11 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
         $this->getDoctrineConnection()->exec(
-                $platform->getTruncateTableSQL('eav_entity_type')
+            $platform->getTruncateTableSQL('eav_entity_type')
         );
 
         $this->getDoctrineConnection()->exec(
-                $platform->getTruncateTableSQL('eav_entity_store')
+            $platform->getTruncateTableSQL('eav_entity_store')
         );
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
@@ -94,20 +78,10 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
 
         $schemaBuilder->hydrateEntityTypeTable('1.9', 'ce');
-        $schemaBuilder->hydrateEntityStoreTable('1.9', 'ce');
 
         $this->persister = new StandardEntityStorePersister(
             $this->getDoctrineConnection(),
             EntityStoreQueryBuilder::getDefaultTable()
-        );
-
-        $this->deleter = new EntityStoreDeleter(
-            $this->getDoctrineConnection(),
-            new EntityStoreQueryBuilder(
-                $this->getDoctrineConnection(),
-                EntityStoreQueryBuilder::getDefaultTable(),
-                EntityStoreQueryBuilder::getDefaultFields()
-            )
         );
     }
 
@@ -116,40 +90,66 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
         $this->truncateTables();
         parent::tearDown();
 
-        $this->persister = $this->deleter = null;
+        $this->persister = null;
     }
 
-    public function testRemoveNone()
+    public function testInsertNone()
     {
         $this->persister->initialize();
+        $this->persister->flush();
+
+        $this->assertTableRowCount('eav_entity_store', 0);
+    }
+
+    public function testInsertOne()
+    {
+        $dataLoader = new Loader($this->getDoctrineConnection(), 'eav_entity_store');
+
+        $this->persister->initialize();
+        foreach ($dataLoader->walkData('1.9', 'ce') as $data) {
+            $attribute = EntityStore::buildNewWith(
+                $data['entity_store_id'],   // EntityStoreId
+                $data['entity_type_id'],    // EntityTypeId
+                $data['store_id'],          // StoreId
+                $data['increment_prefix'],  // IncrementPrefix
+                $data['increment_last_id']  // IncrementLastId
+            );
+            $this->persister->persist($attribute);
+        }
+        $this->persister->flush();
+
+        $expected = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
+            $this->getFixturesPathname('eav_entity_store', '1.9', 'ce'));
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_entity_store');
 
-        $this->assertDataSetsEqual($this->getOriginalDataSet(), $actual);
-
-        $this->assertTableRowCount('eav_entity_store', 9);
+        $this->assertDataSetsEqual($expected, $actual);
     }
 
-    public function testRemoveOneById()
+    public function testUpdateOneExisting()
     {
+        $dataLoader = new Loader($this->getDoctrineConnection(), 'eav_entity_store');
+
         $this->persister->initialize();
-        $this->deleter->deleteOneById(2);
+        foreach ($dataLoader->walkData('1.9', 'ce') as $data) {
+            $attribute = EntityStore::buildNewWith(
+                $data['entity_store_id'],   // EntityStoreId
+                $data['entity_type_id'],    // EntityTypeId
+                $data['store_id'],          // StoreId
+                $data['increment_prefix'],  // IncrementPrefix
+                $data['increment_last_id']  // IncrementLastId
+            );
+            $this->persister->persist($attribute);
+        }
+        $this->persister->flush();
+
+        $expected = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
+            $this->getFixturesPathname('eav_entity_store', '1.9', 'ce'));
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_entity_store');
 
-        $this->assertDataSetsEqual($this->getDataSet(), $actual);
-    }
-
-    public function testRemoveAllById()
-    {
-        $this->persister->initialize();
-        $this->deleter->deleteAllById([2]);
-
-        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable('eav_entity_store');
-
-        $this->assertDataSetsEqual($this->getDataSet(), $actual);
+        $this->assertDataSetsEqual($expected, $actual);
     }
 }

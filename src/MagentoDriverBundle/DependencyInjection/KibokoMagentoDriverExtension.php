@@ -25,7 +25,7 @@ class KibokoMagentoDriverExtension
         $loader->load('factories.yml');
         $loader->load('repositories.yml');
         $loader->load('deleters.yml');
-        $loader->load('direct/persisters.yml');
+        $loader->load('standard_dml/persisters.yml');
         //$loader->load('flatfile/persisters.yml');
     }
 }

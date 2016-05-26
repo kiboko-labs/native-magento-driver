@@ -4,7 +4,7 @@ namespace unit\Kiboko\Component\MagentoDriver\Deleter\Doctrine\Attribute;
 
 use Doctrine\DBAL\Schema\Schema;
 use Kiboko\Component\MagentoDriver\Persister\AttributePersisterInterface;
-use Kiboko\Component\MagentoDriver\Persister\Direct\Attribute\StandardAttributePersister;
+use Kiboko\Component\MagentoDriver\Persister\StandardDml\Attribute\StandardAttributePersister;
 use Kiboko\Component\MagentoDriver\Deleter\AttributeDeleterInterface;
 use Kiboko\Component\MagentoDriver\Deleter\Doctrine\AttributeDeleter;
 use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilder;
