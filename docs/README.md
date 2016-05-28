@@ -4,9 +4,9 @@
 
 This package is a toolset to manipulate data in a Magento database via `doctrine/dbal`, via a hybrid ORM/ODM.
 
-It is primariliy built to bring Magento synchronization into Akeneo PIM.
+It is built with love to bring Magento synchronization into Akeneo PIM and help you manage a complex hybryd flat/EAV database.
 
-It is built around 3 components and 1 Symfony bundle :
+3 components and 1 Symfony bundle are composing this package :
 
 * `Kiboko\MagentoDriver` is the ORM/ODM, bringing data representation objects and storage management.
 * `Kiboko\MagentoMapper` is used to ease the mapping between your Magento instance and your Akeneo PIM.
@@ -40,6 +40,8 @@ The driver is split into several tools, each of them having its implementation f
 * Data Deleters
 
 ## Usage
+
+### Entity types
 
 ### Product attributes
 

@@ -2,6 +2,7 @@
 
 namespace Kiboko\Component\MagentoDriver\Repository\Doctrine;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Connection;
 use Kiboko\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
 use Kiboko\Component\MagentoDriver\Factory\EntityTypeFactoryInterface;
@@ -32,7 +33,9 @@ class EntityTypeRepository implements EntityTypeRepositoryInterface
      * @param EntityTypeFactoryInterface      $entityFactory
      */
     public function __construct(
-    Connection $connection, EntityTypeQueryBuilderInterface $queryBuilder, EntityTypeFactoryInterface $entityFactory
+        Connection $connection,
+        EntityTypeQueryBuilderInterface $queryBuilder,
+        EntityTypeFactoryInterface $entityFactory
     ) {
         $this->connection = $connection;
         $this->queryBuilder = $queryBuilder;
@@ -56,7 +59,7 @@ class EntityTypeRepository implements EntityTypeRepositoryInterface
      */
     public function findOneById($id)
     {
-        $query = $this->queryBuilder->createFindOneByIdQueryBuilder('f');
+        $query = $this->queryBuilder->createFindOneByIdQueryBuilder('e');
 
         $statement = $this->connection->prepare($query);
         if (!$statement->execute([$id])) {
@@ -79,7 +82,7 @@ class EntityTypeRepository implements EntityTypeRepositoryInterface
      */
     public function findOneByCode($code)
     {
-        $query = $this->queryBuilder->createFindOneByCodeQueryBuilder('f');
+        $query = $this->queryBuilder->createFindOneByCodeQueryBuilder('e');
 
         $statement = $this->connection->prepare($query);
         if (!$statement->execute([$code])) {
@@ -96,17 +99,16 @@ class EntityTypeRepository implements EntityTypeRepositoryInterface
     }
 
     /**
-     * @param string $entityTypeCode
-     * @param array  $codeList
+     * @param array $codeList
      *
      * @return Collection|EntityTypeInterface[]
      */
-    public function findAllByCode($entityTypeCode, array $codeList)
+    public function findAllByCode(array $codeList)
     {
-        $query = $this->queryBuilder->createFindAllByCodeQueryBuilder($entityTypeCode, $codeList);
+        $query = $this->queryBuilder->createFindAllByCodeQueryBuilder('e', $codeList);
 
         $statement = $this->connection->prepare($query);
-        if (!$statement->execute([$code])) {
+        if (!$statement->execute([$codeList])) {
             throw new DatabaseFetchingFailureException();
         }
 
@@ -126,6 +128,20 @@ class EntityTypeRepository implements EntityTypeRepositoryInterface
      */
     public function findAllById(array $idList)
     {
+        $query = $this->queryBuilder->createFindAllByIdQueryBuilder('e', $idList);
+
+        $statement = $this->connection->prepare($query);
+        if (!$statement->execute([$idList])) {
+            throw new DatabaseFetchingFailureException();
+        }
+
+        if ($statement->rowCount() < 1) {
+            return;
+        }
+
+        $options = $statement->fetch();
+
+        return $this->createNewEntityTypeInstanceFromDatabase($options);
     }
 
     /**
@@ -133,5 +149,19 @@ class EntityTypeRepository implements EntityTypeRepositoryInterface
      */
     public function findAll()
     {
+        $query = $this->queryBuilder->createFindAllQueryBuilder('e');
+
+        $statement = $this->connection->prepare($query);
+        if (!$statement->execute()) {
+            throw new DatabaseFetchingFailureException();
+        }
+
+        if ($statement->rowCount() < 1) {
+            return;
+        }
+
+        $options = $statement->fetch();
+
+        return $this->createNewEntityTypeInstanceFromDatabase($options);
     }
 }
