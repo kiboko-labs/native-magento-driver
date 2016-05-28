@@ -5,7 +5,7 @@ namespace Kiboko\Component\MagentoDriver\Writer\Database;
 use Doctrine\DBAL\Connection;
 use Kiboko\Component\MagentoDriver\Exception\RuntimeErrorException;
 
-trait DataInfileDatabaseWriterTrait
+trait MySQLDataInfileDatabaseWriterTrait
 {
     /**
      * @var Connection

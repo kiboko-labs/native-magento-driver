@@ -8,7 +8,7 @@ use League\Flysystem\File;
 use League\Flysystem\Filesystem;
 use Kiboko\Component\MagentoDriver\Exception\InvalidArgumentException;
 
-class LocalDataInfileDatabaseWriter implements DatabaseWriterInterface
+class MySQLLocalDataInfileDatabaseWriter implements DatabaseWriterInterface
 {
     use DataInfileDatabaseWriterTrait;
 

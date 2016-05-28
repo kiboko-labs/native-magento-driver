@@ -24,7 +24,8 @@ class AttributeDeleter implements AttributeDeleterInterface
      * @param AttributeQueryBuilderInterface $queryBuilder
      */
     public function __construct(
-    Connection $connection, AttributeQueryBuilderInterface $queryBuilder
+        Connection $connection,
+        AttributeQueryBuilderInterface $queryBuilder
     ) {
         $this->connection = $connection;
         $this->queryBuilder = $queryBuilder;

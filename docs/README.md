@@ -1,45 +1,55 @@
 # Documentation
 
-## Initializing the `ProductAttributeQueryBuilder`
+## TL;DR
 
-This object creates Doctrine DBAL `QueryBuilder` objects for various usages, including repositories.
+This package is a toolset to manipulate data in a Magento database via `doctrine/dbal`, via a hybrid ORM/ODM.
 
-```php
-<?php
+It is primariliy built to bring Magento synchronization into Akeneo PIM.
 
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilder;
+It is built around 3 components and 1 Symfony bundle :
 
-$queryBuilder = new ProductAttributeQueryBuilder(
-    $connection,
-    ProductAttributeQueryBuilder::getDefaultTable(),
-    ProductAttributeQueryBuilder::getDefaultExtraTable(),
-    ProductAttributeQueryBuilder::getDefaultVariantTable(),
-    ProductAttributeQueryBuilder::getDefaultFamilyTable(),
-    ProductAttributeQueryBuilder::getDefaultFields(),
-    ProductAttributeQueryBuilder::getDefaultExtraFields()
-);
-```
+* `Kiboko\MagentoDriver` is the ORM/ODM, bringing data representation objects and storage management.
+* `Kiboko\MagentoMapper` is used to ease the mapping between your Magento instance and your Akeneo PIM.
+* `Kiboko\MagentoSerializer` a toolset to transform Akeneo PIM CSV files into Magento data representation objects and backwards
+* `Kiboko\MagentoDriverBundle` is the glue between all theses components and Akeneo PIM's **BatchBundle**
 
-## Loading an attribute from the `ProductAttributeRepository`
+## The Magento Driver, a hybrid ORM/ODM
 
-The `ProductAttributeRepository` makes easier the attribute object fetching.
+### What's inside the box?
 
-```php
-<?php
+This component has 3 primary actions :
 
-use Luni\Component\MagentoDriver\Repository\Doctrine\ProductAttributeRepository;
+* Load Magento Data
+* Write Magento Data
+* Delete Magento Data
 
-$productAttributeRepository = new ProductAttributeRepository(
-    $connection,
-    $queryBuilder
-);
+Additionally, there are 2 ways of writing data :
 
-$skuAttribute = $productAttributeRepository->findOneByCode('sku');
+* With standard *DML* queries (`INSERT` and `UPDATE` queries)
+* With MySQL CSV capabilities (`LOAD DATA INFILE` queries) for high volumes of data and high-speed requirements
 
-$attributeList = $productAttributeRepository->findAllByCode(['sku', 'image', 'name']);
+The component is built around Doctrine's DBAL and PHP League's Flysystem, two high end tools for data manipulation.
 
-$attributeList = $productAttributeRepository->findAllByid([74, 71, 85]);
-```
+### Architecture
+
+The driver is split into several tools, each of them having its implementation for a specific data type.
+
+* Query Builders
+* Data Repositories
+* Data Persisters
+* Data Deleters
+
+## Usage
+
+### Product attributes
+
+* [Initializing the Query Builder](product-attributes.md#initializing-the-query-builder)
+* [Initializing the Repository](product-attributes.md#initializing-the-repository)
+* [Using the Cached Repository](product-attributes.md#using-the-cached-repository)
+* [Persisting data](product-attributes.md#persisting-data)
+  * [Portable DML](product-attributes.md#portable-dml)
+  * [MySQL specific, CSV direct importer](product-attributes.md#mysql-specific-csv-direct-importer)
+* [Deleting data](product-attributes.md#deleting-data)
 
 ## Initialize the `DatetimeAttributeBackend` objects
 
@@ -340,3 +350,4 @@ foreach ($productList as $product) {
 }
 $backendFacade->flush();
 ```
+

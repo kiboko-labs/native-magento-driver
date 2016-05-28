@@ -1,6 +1,6 @@
 <?php
 
-namespace Kiboko\Component\MagentoDriver\Repository\Doctrine;
+namespace Kiboko\Component\MagentoDriver\Repository\CachedRepository;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;

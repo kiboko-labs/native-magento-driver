@@ -4,7 +4,7 @@ namespace Kiboko\Component\MagentoDriver\Writer\Database;
 
 use Doctrine\DBAL\Connection;
 
-class DataInfileDatabaseWriter implements DatabaseWriterInterface
+class MySQLDataInfileDatabaseWriter implements DatabaseWriterInterface
 {
     use DataInfileDatabaseWriterTrait;
 

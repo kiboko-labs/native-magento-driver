@@ -14,6 +14,7 @@ class KibokoMagentoDriverExtension
     {
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('database.yml');
+        $loader->load('parameters.yml');
         $loader->load('filesystem.yml');
         $loader->load('brokers.yml');
         $loader->load('writers.yml');
