@@ -1,9 +1,9 @@
 <?php
 
-namespace Luni\Component\MagentoSerializer\Decoder;
+namespace Kiboko\Component\MagentoSerializer\Decoder;
 
-use Luni\Component\MagentoDriver\Repository\ProductAttributeRepositoryInterface;
-use Luni\Component\MagentoMapper\Repository\CategoryRepositoryInterface;
+use Kiboko\Component\MagentoDriver\Repository\ProductAttributeRepositoryInterface;
+use Kiboko\Component\MagentoMapper\Repository\CategoryRepositoryInterface;
 use Symfony\Component\Serializer\Encoder\DecoderInterface;
 
 class ProductDecoder implements DecoderInterface

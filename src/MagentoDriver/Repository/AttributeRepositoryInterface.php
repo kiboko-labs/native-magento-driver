@@ -1,9 +1,9 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Repository;
+namespace Kiboko\Component\MagentoDriver\Repository;
 
 use Doctrine\Common\Collections\Collection;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
 
 interface AttributeRepositoryInterface
 {

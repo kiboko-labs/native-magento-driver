@@ -1,9 +1,9 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Writer\Temporary;
+namespace Kiboko\Component\MagentoDriver\Writer\Temporary;
 
 use League\Flysystem\File;
-use Luni\Component\MagentoDriver\Exception\RuntimeErrorException;
+use Kiboko\Component\MagentoDriver\Exception\RuntimeErrorException;
 
 class StandardTemporaryWriter implements TemporaryWriterInterface
 {

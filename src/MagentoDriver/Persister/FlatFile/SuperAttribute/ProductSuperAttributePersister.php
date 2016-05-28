@@ -1,12 +1,12 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Persister\FlatFile\SuperAttribute;
+namespace Kiboko\Component\MagentoDriver\Persister\FlatFile\SuperAttribute;
 
-use Luni\Component\MagentoDriver\Model\SuperAttributeInterface;
-use Luni\Component\MagentoDriver\Persister\FlatFile\BaseFlatFilePersisterTrait;
-use Luni\Component\MagentoDriver\Persister\SuperAttribute\SuperAttributePersisterInterface;
-use Luni\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
-use Luni\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;
+use Kiboko\Component\MagentoDriver\Model\SuperAttributeInterface;
+use Kiboko\Component\MagentoDriver\Persister\FlatFile\BaseFlatFilePersisterTrait;
+use Kiboko\Component\MagentoDriver\Persister\SuperAttribute\SuperAttributePersisterInterface;
+use Kiboko\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
+use Kiboko\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;
 
 class ProductSuperAttributePersister implements SuperAttributePersisterInterface
 {

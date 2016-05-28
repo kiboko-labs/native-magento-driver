@@ -1,14 +1,14 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Model\Mutable;
+namespace Kiboko\Component\MagentoDriver\Model\Mutable;
 
-use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\Immutable\ImmutableIntegerAttributeValue;
-use Luni\Component\MagentoDriver\Model\IntegerAttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\IntegerAttributeValueTrait;
-use Luni\Component\MagentoDriver\Model\ScopableAttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Model\Immutable\ImmutableIntegerAttributeValue;
+use Kiboko\Component\MagentoDriver\Model\IntegerAttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Model\IntegerAttributeValueTrait;
+use Kiboko\Component\MagentoDriver\Model\ScopableAttributeValueInterface;
 
 class MutableIntegerAttributeValue implements MutableAttributeValueInterface, ScopableAttributeValueInterface, IntegerAttributeValueInterface
 {

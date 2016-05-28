@@ -1,6 +1,6 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Entity;
+namespace Kiboko\Component\MagentoDriver\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;

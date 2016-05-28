@@ -2,13 +2,18 @@
 
 ## Entity types (table `eav_entity_type`)
 
-* [ ] reader
+* [x] reader [Interface](src/MagentoDriver/Repository/EntityTypeRepositoryInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/EntityTypeRepository.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Repository/Doctrine/EntityTypeRepositoryTest.php))
 
 ## Entity configuration by store (table `eav_entity_store`)
 
-* [ ] reader
-* [ ] persister
-* [ ] deleter
+* [x] reader [Interface](src/MagentoDriver/Repository/EntityStoreRepositoryInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/EntityStoreRepository.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Repository/Doctrine/EntityStoreRepositoryTest.php))
+* [x] persister [Interface](src/MagentoDriver/Persister/EntityStorePersisterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Entity/StandardEntityStorePersister.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Persister/Direct/Entity/EntityStorePersisterTest.php))
+  * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/Entity/StandardEntityStorePersister.php)
+* [x] deleter [Interface](src/MagentoDriver/Deleter/EntityStoreDeleterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Deleter/Doctrine/EntityStoreDeleter.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Deleter/Doctrine/EntityStoreDeleterTest.php))
 
 # Families
 
@@ -17,51 +22,71 @@
 * [x] reader [Interface](src/MagentoDriver/Repository/FamilyRepositoryInterface.php)
   * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/FamilyRepository.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Repository/Doctrine/FamilyRepositoryTest.php))
 * [x] persister [Interface](src/MagentoDriver/Persister/FamilyPersisterInterface.php)
-  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Family/StandardFamilyPersister.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Family/StandardFamilyPersister.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Persister/Direct/Family/StandardFamilyPersisterTest.php))
   * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/Family/StandardFamilyPersister.php)
 * [x] deleter [Interface](src/MagentoDriver/Deleter/FamilyDeleterInterface.php)
-  * [Doctrine DBAL implementation](src/MagentoDriver/Deleter/Doctrine/FamilyDeleter.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Deleter/Doctrine/FamilyDeleter.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Deleter/Doctrine/FamilyDeleterTest.php))
 
 # Attributes
 
 ## Global attributes data (table `eav_attribute`)
 
 * [x] reader [Interface](src/MagentoDriver/Repository/AttributeRepositoryInterface.php)
-  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/CatalogAttributeRepository.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/CatalogAttributeRepository.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Repository/Doctrine/CatalogAttributeRepositoryTest.php))
 * [x] persister [Interface](src/MagentoDriver/Persister/AttributePersisterInterface.php)
-  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Attribute/StandardAttributePersister.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Attribute/StandardAttributePersister.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Persister/Direct/Attribute/AttributePersisterTest.php))
   * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/Attribute/StandardAttributePersister.php)
-* [ ] deleter
+* [x] deleter [Interface](src/MagentoDriver/Deleter/AttributeDeleterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Deleter/Doctrine/AttributeDeleter.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Deleter/Doctrine/AttributeDeleterTest.php))
 
 ## Attribute groups (table `eav_attribute_group`)
 
-* [ ] reader
-* [ ] persister
-* [ ] deleter
+* [x] reader [Interface](src/MagentoDriver/Repository/AttributeGroupRepositoryInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/AttributeGroupRepository.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Repository/Doctrine/AttributeGroupRepositoryTest.php))
+* [x] persister [Interface](src/MagentoDriver/Persister/AttributeGroupPersisterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Attribute/AttributeGroupPersister.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Persister/Direct/Attribute/AttributeGroupPersisterTest.php))
+  * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/Attribute/AttributeGroupPersister.php)
+* [x] deleter [Interface](src/MagentoDriver/Deleter/AttributeGroupDeleterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Deleter/Doctrine/AttributeGroupDeleter.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Deleter/Doctrine/AttributeGroupDeleterTest.php))
 
 ## Attribute labels (table `eav_attribute_label`)
 
-* [ ] reader
-* [ ] persister
-* [ ] deleter
+* [x] reader [Interface](src/MagentoDriver/Repository/AttributeLabelRepositoryInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/AttributeLabelRepository.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Repository/Doctrine/AttributeLabelRepositoryTest.php))
+* [x] persister [Interface](src/MagentoDriver/Persister/AttributeLabelPersisterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Attribute/AttributeLabelPersister.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Persister/Direct/Attribute/AttributeLabelPersisterTest.php))
+  * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/Attribute/AttributeLabelPersister.php)
+* [x] deleter [Interface](src/MagentoDriver/Deleter/AttributeLabelDeleterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Deleter/Doctrine/AttributeLabelDeleter.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Deleter/Doctrine/AttributeLabelDeleterTest.php))
 
 ## Attribute options (table `eav_attribute_option`)
 
-* [ ] reader
-* [ ] persister
-* [ ] deleter
+* [x] reader [Interface](src/MagentoDriver/Repository/AttributeOptionRepositoryInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/AttributeOptionRepository.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Repository/Doctrine/AttributeOptionRepositoryTest.php))
+* [x] persister [Interface](src/MagentoDriver/Persister/AttributeOptionPersisterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Attribute/AttributeOptionPersister.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Persister/Direct/Attribute/AttributeOptionPersisterTest.php))
+  * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/Attribute/AttributeOptionPersister.php)
+* [x] deleter [Interface](src/MagentoDriver/Deleter/AttributeOptionDeleterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Deleter/Doctrine/AttributeOptionDeleter.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Deleter/Doctrine/AttributeOptionDeleterTest.php))
 
 ## Attribute option values (table `eav_attribute_option_value`)
 
-* [ ] reader
-* [ ] persister
-* [ ] deleter
+* [x] reader [Interface](src/MagentoDriver/Repository/AttributeOptionValueRepositoryInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/AttributeOptionValueRepository.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Repository/Doctrine/AttributeOptionValueRepositoryTest.php))
+* [x] persister [Interface](src/MagentoDriver/Persister/AttributeOptionValuePersisterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Attribute/AttributeOptionValuePersister.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Persister/Direct/Attribute/AttributeOptionValuePersisterTest.php))
+  * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/Attribute/AttributeOptionValuePersister.php)
+* [x] deleter [Interface](src/MagentoDriver/Deleter/AttributeOptionValueDeleterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Deleter/Doctrine/AttributeOptionValueDeleter.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Deleter/Doctrine/AttributeOptionValueDeleterTest.php))
 
 ## Attribute to entity linking (table `eav_entity_attribute`)
 
-* [ ] reader
-* [ ] persister
-* [ ] deleter
+* [x] reader [Interface](src/MagentoDriver/Repository/EntityAttributeRepositoryInterface.php) 
+  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/EntityAttributeRepository.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Repository/Doctrine/EntityAttributeRepositoryTest.php))
+* [x] persister [Interface](src/MagentoDriver/Persister/EntityAttributePersisterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Attribute/StandardEntityAttributePersister.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Persister/Direct/Attribute/EntityAttributePersisterTest.php))
+* [x] deleter [Interface](src/MagentoDriver/Deleter/EntityAttributeDeleterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Deleter/Doctrine/EntityAttributeDeleter.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Deleter/Doctrine/EntityAttributeDeleterTest.php))
 
 ## Catalog Attributes extensions (table `catalog_eav_attribute`)
 
@@ -70,14 +95,15 @@
 * [x] persister [Interface](src/MagentoDriver/Repository/CatalogAttributeExtensionPersisterInterface.php)
   * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Attribute/CatalogAttributeExtensionPersister.php)
   * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/Attribute/CatalogAttributeExtensionPersister.php)
-* [ ] deleter
+* [x] deleter [Interface](src/MagentoDriver/Deleter/CatalogAttributeDeleterInterface.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Deleter/Doctrine/CatalogAttributeDeleter.php) ([PHPUnit](unit/Luni/Component/MagentoDriver/Deleter/Doctrine/CatalogAttributeDeleterTest.php))
 
 # Products
 
 ## Product entities (table `catalog_product_entity`)
 
 * [x] reader [Interface](src/MagentoDriver/Repository/ProductRepositoryInterface.php)
-  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/ProductRepository.php)
+  * [Doctrine DBAL implementation](src/MagentoDriver/Repository/Doctrine/ProductRepository.php)  ([PHPUnit](unit/Luni/Component/MagentoDriver/Repository/Doctrine/ProductRepositoryTest.php))
 * [x] persister [Interface](src/MagentoDriver/Persister/ProductPersisterInterface.php)
   * [Doctrine DBAL implementation](src/MagentoDriver/Persister/Direct/Product/SimpleProductPersister.php.php)
   * [Doctrine DBAL + FILE implementation](src/MagentoDriver/Persister/FlatFile/Product/SimpleProductPersister.php.php)

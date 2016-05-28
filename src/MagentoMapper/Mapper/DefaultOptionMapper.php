@@ -1,9 +1,9 @@
 <?php
 
-namespace Luni\Component\MagentoMapper\Mapper;
+namespace Kiboko\Component\MagentoMapper\Mapper;
 
 use Doctrine\Common\Collections\Collection;
-use Luni\Component\MagentoDriver\Model\OptionInterface;
+use Kiboko\Component\MagentoDriver\Model\OptionInterface;
 
 class DefaultOptionMapper implements OptionMapperInterface
 {

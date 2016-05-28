@@ -1,12 +1,12 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Persister\FlatFile\Product;
+namespace Kiboko\Component\MagentoDriver\Persister\FlatFile\Product;
 
-use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
-use Luni\Component\MagentoDriver\Persister\FlatFile\BaseFlatFilePersisterTrait;
-use Luni\Component\MagentoDriver\Persister\ProductPersisterInterface;
-use Luni\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
-use Luni\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;
+use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
+use Kiboko\Component\MagentoDriver\Persister\FlatFile\BaseFlatFilePersisterTrait;
+use Kiboko\Component\MagentoDriver\Persister\ProductPersisterInterface;
+use Kiboko\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
+use Kiboko\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;
 
 class SimpleProductPersister implements ProductPersisterInterface
 {

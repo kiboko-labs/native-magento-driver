@@ -1,18 +1,18 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Repository\Doctrine;
+namespace Kiboko\Component\MagentoDriver\Repository\Doctrine;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Connection;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
-use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
-use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
-use Luni\Component\MagentoDriver\Factory\AttributeValueFactoryInterface;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeValueQueryBuilderInterface;
-use Luni\Component\MagentoDriver\Repository\AttributeRepositoryInterface;
-use Luni\Component\MagentoDriver\Repository\ProductAttributeValueRepositoryBackendInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
+use Kiboko\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
+use Kiboko\Component\MagentoDriver\Factory\AttributeValueFactoryInterface;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeValueQueryBuilderInterface;
+use Kiboko\Component\MagentoDriver\Repository\AttributeRepositoryInterface;
+use Kiboko\Component\MagentoDriver\Repository\ProductAttributeValueRepositoryBackendInterface;
 
 /**
  * Class ProductAttributeValueRepository.

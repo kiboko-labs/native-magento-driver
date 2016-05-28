@@ -1,8 +1,8 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Model;
+namespace Kiboko\Component\MagentoDriver\Model;
 
-use Luni\Component\MagentoDriver\Exception\RuntimeErrorException;
+use Kiboko\Component\MagentoDriver\Exception\RuntimeErrorException;
 
 class CatalogAttribute implements CatalogAttributeInterface
 {

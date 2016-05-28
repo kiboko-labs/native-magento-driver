@@ -1,17 +1,17 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Entity\Product;
+namespace Kiboko\Component\MagentoDriver\Entity\Product;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Luni\Component\MagentoDriver\Exception\RuntimeErrorException;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\FamilyInterface;
-use Luni\Component\MagentoDriver\Model\ProductSuperAttribute;
-use Luni\Component\MagentoDriver\Model\ProductSuperLink;
-use Luni\Component\MagentoDriver\Model\SuperAttributeInterface;
-use Luni\Component\MagentoDriver\Model\SuperLinkInterface;
+use Kiboko\Component\MagentoDriver\Exception\RuntimeErrorException;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Model\FamilyInterface;
+use Kiboko\Component\MagentoDriver\Model\ProductSuperAttribute;
+use Kiboko\Component\MagentoDriver\Model\ProductSuperLink;
+use Kiboko\Component\MagentoDriver\Model\SuperAttributeInterface;
+use Kiboko\Component\MagentoDriver\Model\SuperLinkInterface;
 
 class ConfigurableProduct implements ConfigurableProductInterface
 {
@@ -34,7 +34,7 @@ class ConfigurableProduct implements ConfigurableProductInterface
 
     /**
      * @param string                  $identifier
-     * @param FamilyInterface         $family,
+     * @param FamilyInterface         $family
      * @param \DateTimeInterface|null $creationDate
      * @param \DateTimeInterface|null $modificationDate
      */

@@ -1,18 +1,18 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Entity\Product;
+namespace Kiboko\Component\MagentoDriver\Entity\Product;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Luni\Component\MagentoDriver\Exception\RuntimeErrorException;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Model\MediaGalleryAttributeInterface;
-use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\Immutable\ImmutableAttributeValueInterface;
-use Luni\Component\MagentoDriver\Exception\ImmutableValueException;
-use Luni\Component\MagentoDriver\Model\FamilyInterface;
-use Luni\Component\MagentoDriver\Model\Mutable\MutableAttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\ScopableAttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Exception\RuntimeErrorException;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoDriver\Model\MediaGalleryAttributeInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Model\Immutable\ImmutableAttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Exception\ImmutableValueException;
+use Kiboko\Component\MagentoDriver\Model\FamilyInterface;
+use Kiboko\Component\MagentoDriver\Model\Mutable\MutableAttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Model\ScopableAttributeValueInterface;
 
 trait BaseProductTrait
 {
@@ -126,7 +126,7 @@ trait BaseProductTrait
     }
 
     /**
-     * @return FamilyInterface
+     * @return int
      */
     public function getFamilyId()
     {

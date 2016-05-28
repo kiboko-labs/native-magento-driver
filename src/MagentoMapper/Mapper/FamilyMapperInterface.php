@@ -1,6 +1,6 @@
 <?php
 
-namespace Luni\Component\MagentoMapper\Mapper;
+namespace Kiboko\Component\MagentoMapper\Mapper;
 
 interface FamilyMapperInterface
 {

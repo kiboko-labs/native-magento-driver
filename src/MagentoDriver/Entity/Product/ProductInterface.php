@@ -1,16 +1,16 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Entity\Product;
+namespace Kiboko\Component\MagentoDriver\Entity\Product;
 
 use Doctrine\Common\Collections\Collection;
-use Luni\Component\MagentoDriver\Entity\EntityInterface;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Model\Immutable\ImmutableAttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\MediaGalleryAttributeInterface;
-use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\MediaGalleryAttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\FamilyInterface;
-use Luni\Component\MagentoDriver\Model\Mutable\MutableAttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Entity\EntityInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoDriver\Model\Immutable\ImmutableAttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Model\MediaGalleryAttributeInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Model\MediaGalleryAttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Model\FamilyInterface;
+use Kiboko\Component\MagentoDriver\Model\Mutable\MutableAttributeValueInterface;
 
 interface ProductInterface extends EntityInterface
 {

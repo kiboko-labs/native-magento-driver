@@ -1,15 +1,13 @@
 <?php
 
-namespace Luni\Component\MagentoMapper\Mapper;
-
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
+namespace Kiboko\Component\MagentoMapper\Mapper;
 
 interface AttributeMapperInterface
 {
     /**
      * @param string $identifier
      *
-     * @return AttributeInterface
+     * @return int
      */
     public function map($identifier);
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace Luni\Component\MagentoSerializer\Denormalization\AttributeValue;
+namespace Kiboko\Component\MagentoSerializer\Denormalization\AttributeValue;
 
-use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\Immutable\ImmutableDecimalAttributeValue;
-use Luni\Component\MagentoDriver\Repository\AttributeRepositoryInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Model\Immutable\ImmutableDecimalAttributeValue;
+use Kiboko\Component\MagentoDriver\Repository\AttributeRepositoryInterface;
 
 class PriceAttributeValueDenormalization extends DecimalAttributeValueDenormalization implements DenormalizerInterface
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Repository\Doctrine;
+namespace Kiboko\Component\MagentoDriver\Repository\CachedRepository;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Model\FamilyInterface;
-use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
-use Luni\Component\MagentoDriver\Repository\ProductAttributeRepositoryInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoDriver\Model\FamilyInterface;
+use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
+use Kiboko\Component\MagentoDriver\Repository\ProductAttributeRepositoryInterface;
 
 /**
  * Class ProductAttributeRepository.

@@ -1,10 +1,10 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Broker;
+namespace Kiboko\Component\MagentoDriver\Broker;
 
-use Luni\Component\MagentoDriver\Matcher\AttributeValueMatcherInterface;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Repository\ProductAttributeValueRepositoryInterface;
+use Kiboko\Component\MagentoDriver\Matcher\AttributeValueMatcherInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoDriver\Repository\ProductAttributeValueRepositoryInterface;
 
 interface ProductAttributeValueRepositoryBrokerInterface
 {

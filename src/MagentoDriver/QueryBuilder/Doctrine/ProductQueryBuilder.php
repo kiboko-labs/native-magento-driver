@@ -1,6 +1,6 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\QueryBuilder\Doctrine;
+namespace Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
@@ -75,7 +75,7 @@ class ProductQueryBuilder implements ProductQueryBuilderInterface
     /**
      * @param string $prefix
      *
-     * @return string
+     * @return string $prefix.'catalog_product_entity'
      */
     public static function getDefaultTable($prefix = null)
     {
@@ -89,7 +89,7 @@ class ProductQueryBuilder implements ProductQueryBuilderInterface
     /**
      * @param string $prefix
      *
-     * @return string
+     * @return string $prefix.'eav_attribute_set'
      */
     public static function getDefaultFamilyTable($prefix = null)
     {
@@ -103,7 +103,7 @@ class ProductQueryBuilder implements ProductQueryBuilderInterface
     /**
      * @param string $prefix
      *
-     * @return string
+     * @return string $prefix.'catalog_category_product'
      */
     public static function getDefaultCategoryProductTable($prefix = null)
     {

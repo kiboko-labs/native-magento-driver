@@ -1,10 +1,10 @@
 <?php
 
-namespace Luni\Component\MagentoSerializer\Denormalization\AttributeValue;
+namespace Kiboko\Component\MagentoSerializer\Denormalization\AttributeValue;
 
-use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\Immutable\ImmutableIntegerAttributeValue;
-use Luni\Component\MagentoDriver\Repository\AttributeRepositoryInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Model\Immutable\ImmutableIntegerAttributeValue;
+use Kiboko\Component\MagentoDriver\Repository\AttributeRepositoryInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 class IntegerAttributeValueDenormalization implements DenormalizerInterface

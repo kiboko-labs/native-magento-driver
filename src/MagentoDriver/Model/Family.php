@@ -1,6 +1,6 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Model;
+namespace Kiboko\Component\MagentoDriver\Model;
 
 class Family implements FamilyInterface
 {
@@ -15,11 +15,18 @@ class Family implements FamilyInterface
     private $label;
 
     /**
-     * @param string $label
+     * @var int
      */
-    public function __construct($label)
+    private $sortOrder;
+
+    /**
+     * @param string $label
+     * @param int    $sortOrder
+     */
+    public function __construct($label, $sortOrder = 1)
     {
         $this->label = $label;
+        $this->sortOrder = $sortOrder;
     }
 
     /**
@@ -39,19 +46,38 @@ class Family implements FamilyInterface
     }
 
     /**
+     * @return int
+     */
+    public function getSortOrder()
+    {
+        return $this->sortOrder;
+    }
+
+    /**
      * @param int    $familyId
      * @param string $label
+     * @param int    $sortOrder
      *
      * @return FamilyInterface
      */
     public static function buildNewWith(
         $familyId,
-        $label
+        $label,
+        $sortOrder = 1
     ) {
         $object = new static($label);
 
         $object->id = $familyId;
+        $object->sortOrder = $sortOrder;
 
         return $object;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function persistedToId($id)
+    {
+        $this->id = $id;
     }
 }

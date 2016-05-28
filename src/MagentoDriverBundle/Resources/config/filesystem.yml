@@ -1,0 +1,14 @@
+parameters:
+  filesystem.adapter.local.class: League\Flysystem\Adapter\Local
+  filesystem.driver.class: League\Flysystem\Filesystem
+
+services:
+  filesystem.adapter.local:
+    class: '%filesystem.adapter.local.class%'
+    arguments:
+      - '%local_path%'
+
+  filesystem.driver:
+    class: '%filesystem.driver.class%'
+    arguments:
+      - '@filesystem.adapter.local'

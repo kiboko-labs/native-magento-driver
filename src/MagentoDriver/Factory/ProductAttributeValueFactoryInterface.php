@@ -1,9 +1,9 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Factory;
+namespace Kiboko\Component\MagentoDriver\Factory;
 
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
 
 interface ProductAttributeValueFactoryInterface extends AttributeValueFactoryInterface
 {

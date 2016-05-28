@@ -1,6 +1,6 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Model;
+namespace Kiboko\Component\MagentoDriver\Model;
 
 interface AttributeInterface
 {

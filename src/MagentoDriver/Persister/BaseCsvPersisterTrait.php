@@ -1,9 +1,9 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Persister;
+namespace Kiboko\Component\MagentoDriver\Persister;
 
-use Luni\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
-use Luni\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;
+use Kiboko\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
+use Kiboko\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;
 
 trait BaseCsvPersisterTrait
 {

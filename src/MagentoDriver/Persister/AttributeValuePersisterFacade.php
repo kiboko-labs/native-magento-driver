@@ -1,9 +1,9 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Persister;
+namespace Kiboko\Component\MagentoDriver\Persister;
 
-use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
-use Luni\Component\MagentoDriver\Broker\ProductAttributeValuePersisterBrokerInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Broker\ProductAttributeValuePersisterBrokerInterface;
 
 class AttributeValuePersisterFacade implements AttributeValuePersisterInterface
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Luni\Component\MagentoMapper\SchemaManager\Doctrine;
+namespace Kiboko\Component\MagentoMapper\SchemaManager\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\DBAL\Schema\Table;
-use Luni\Component\MagentoMapper\SchemaManager\MappingSchemaManagerInterface;
+use Kiboko\Component\MagentoMapper\SchemaManager\MappingSchemaManagerInterface;
 
 class FamilyMappingSchemaManager implements MappingSchemaManagerInterface
 {

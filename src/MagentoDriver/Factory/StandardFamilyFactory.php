@@ -1,9 +1,9 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Factory;
+namespace Kiboko\Component\MagentoDriver\Factory;
 
-use Luni\Component\MagentoDriver\Model\Family;
-use Luni\Component\MagentoDriver\Model\FamilyInterface;
+use Kiboko\Component\MagentoDriver\Model\Family;
+use Kiboko\Component\MagentoDriver\Model\FamilyInterface;
 
 class StandardFamilyFactory implements FamilyFactoryInterface
 {
@@ -16,7 +16,8 @@ class StandardFamilyFactory implements FamilyFactoryInterface
     {
         return Family::buildNewWith(
             $options['attribute_set_id'],
-            $options['attribute_set_name']
+            $options['attribute_set_name'],
+            $options['sort_order']
         );
     }
 }

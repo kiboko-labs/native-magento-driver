@@ -1,13 +1,13 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Repository\Doctrine;
+namespace Kiboko\Component\MagentoDriver\Repository\Doctrine;
 
 use Doctrine\DBAL\Connection;
-use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
-use Luni\Component\MagentoDriver\Factory\FamilyFactoryInterface;
-use Luni\Component\MagentoDriver\Model\FamilyInterface;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\FamilyQueryBuilderInterface;
-use Luni\Component\MagentoDriver\Repository\FamilyRepositoryInterface;
+use Kiboko\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
+use Kiboko\Component\MagentoDriver\Factory\FamilyFactoryInterface;
+use Kiboko\Component\MagentoDriver\Model\FamilyInterface;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\FamilyQueryBuilderInterface;
+use Kiboko\Component\MagentoDriver\Repository\FamilyRepositoryInterface;
 
 class FamilyRepository implements FamilyRepositoryInterface
 {

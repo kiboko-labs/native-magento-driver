@@ -8,6 +8,8 @@
         "phpunit/phpunit": "~5.2",
         "phpunit/dbunit": "dev-master",
         "fabpot/php-cs-fixer": "~1.11",
+        "akeneo/pim-community-dev": "~1.4",
+        "lunistore/akeneo-connector-base": "~1.0",
         "phploc/phploc": "*"
     },
     "license": "proprietary",
@@ -19,17 +21,20 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "php": ">=5.6",
+        "php": ">=5.5",
         "league/flysystem": "~1.0",
-        "doctrine/dbal": "~2.5",
-        "doctrine/annotations": "~1.2",
-        "symfony/serializer": "~3.0"
+        "doctrine/dbal": "~2.4",
+        "symfony/serializer": "~2.8"
     },
     "repositories": [
         {
             "type": "vcs",
             "url": "https://github.com/akeneo/pim-community-dev.git",
             "branch": "master"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/lunistore/akeneo-connector-base.git"
         },
         {
             "type": "vcs",
@@ -44,14 +49,15 @@
     ],
     "autoload": {
         "psr-4": {
-            "Luni\\Component\\MagentoDriver\\": "src/MagentoDriver/",
-            "Luni\\Component\\MagentoMapper\\": "src/MagentoMapper/",
-            "Luni\\Component\\MagentoSerializer\\": "src/MagentoSerializer/"
+            "Kiboko\\Bundle\\MagentoDriverBundle\\": "src/MagentoDriverBundle/",
+            "Kiboko\\Component\\MagentoDriver\\": "src/MagentoDriver/",
+            "Kiboko\\Component\\MagentoMapper\\": "src/MagentoMapper/",
+            "Kiboko\\Component\\MagentoSerializer\\": "src/MagentoSerializer/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "unit\\Luni\\Component\\MagentoDriver\\": "unit/Luni/Component/MagentoDriver/"
+            "unit\\Kiboko\\Component\\MagentoDriver\\": "unit/Kiboko/Component/MagentoDriver/"
         }
     },
     "config": {

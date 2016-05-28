@@ -1,6 +1,6 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\QueryBuilder\Doctrine;
+namespace Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
@@ -182,10 +182,14 @@ trait AttributeQueryBuilderTrait
      */
     public function createDeleteQueryBuilder()
     {
-        return (new QueryBuilder($this->connection))
-            ->delete($this->table)
-            ->where('entity_type_id=4')
-        ;
+        $queryBuilder = new QueryBuilder($this->connection);
+        $queryBuilder->delete($this->table);
+
+        if ($this->table !== 'catalog_eav_attribute') {
+            $queryBuilder->where('entity_type_id=4');
+        }
+
+        return $queryBuilder;
     }
 
     /**

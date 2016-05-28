@@ -1,21 +1,21 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Persister\FlatFile\AttributeValue;
+namespace Kiboko\Component\MagentoDriver\Persister\FlatFile\AttributeValue;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use League\Flysystem\File;
 use League\Flysystem\FilesystemInterface;
-use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\ImageAttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\ImageMetadataAttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\MediaGalleryAttributeValueInterface;
-use Luni\Component\MagentoDriver\Exception\InvalidAttributePersisterTypeException;
-use Luni\Component\MagentoDriver\Exception\RuntimeErrorException;
-use Luni\Component\MagentoDriver\Filesystem\FileMoverInterface;
-use Luni\Component\MagentoDriver\Persister\AttributeValuePersisterInterface;
-use Luni\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
-use Luni\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Model\ImageAttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Model\ImageMetadataAttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Model\MediaGalleryAttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Exception\InvalidAttributePersisterTypeException;
+use Kiboko\Component\MagentoDriver\Exception\RuntimeErrorException;
+use Kiboko\Component\MagentoDriver\Filesystem\FileMoverInterface;
+use Kiboko\Component\MagentoDriver\Persister\AttributeValuePersisterInterface;
+use Kiboko\Component\MagentoDriver\Writer\Database\DatabaseWriterInterface;
+use Kiboko\Component\MagentoDriver\Writer\Temporary\TemporaryWriterInterface;
 
 class MediaGalleryAttributeValuePersister implements AttributeValuePersisterInterface
 {

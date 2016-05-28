@@ -1,13 +1,13 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Repository;
+namespace Kiboko\Component\MagentoDriver\Repository;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Luni\Component\MagentoDriver\Broker\ProductAttributeValueRepositoryBrokerInterface;
-use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Broker\ProductAttributeValueRepositoryBrokerInterface;
+use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
 
 class ProductAttributeValueRepositoryFacade implements ProductAttributeValueRepositoryInterface
 {

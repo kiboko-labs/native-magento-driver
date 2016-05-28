@@ -1,6 +1,6 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Exception;
+namespace Kiboko\Component\MagentoDriver\Exception;
 
 class InvalidArgumentException extends \InvalidArgumentException
 {

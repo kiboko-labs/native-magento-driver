@@ -1,14 +1,14 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Model\Mutable;
+namespace Kiboko\Component\MagentoDriver\Model\Mutable;
 
-use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\Immutable\ImmutableTextAttributeValue;
-use Luni\Component\MagentoDriver\Model\ScopableAttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\TextAttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\TextAttributeValueTrait;
+use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Model\Immutable\ImmutableTextAttributeValue;
+use Kiboko\Component\MagentoDriver\Model\ScopableAttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Model\TextAttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Model\TextAttributeValueTrait;
 
 class MutableTextAttributeValue implements MutableAttributeValueInterface, ScopableAttributeValueInterface, TextAttributeValueInterface
 {

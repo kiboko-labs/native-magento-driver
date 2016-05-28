@@ -1,11 +1,14 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Factory;
+namespace Kiboko\Component\MagentoDriver\Factory;
 
+use Kiboko\Component\MagentoDriver\Entity\Product\SimpleProduct;
+use Kiboko\Component\MagentoDriver\Entity\Product\ConfigurableProduct;
+use Kiboko\Component\MagentoDriver\Model\Family;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
-use Luni\Component\MagentoDriver\Exception\InvalidProductTypeException;
+use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
+use Kiboko\Component\MagentoDriver\Exception\InvalidProductTypeException;
 
 class StandardProductFactory implements ProductFactoryInterface
 {
@@ -17,6 +20,39 @@ class StandardProductFactory implements ProductFactoryInterface
     public function __construct()
     {
         $this->builders = new ArrayCollection();
+        $this->addBuilder(
+            'simple',
+            function ($type, $options) {
+                return SimpleProduct::buildNewWith(
+                    $options['entity_id'],
+                    $options['sku'],
+                    Family::buildNewWith(
+                        $options['attribute_set_id'],
+                        // $options['attribute_set_name']
+                        // $label
+                        /* @todo: this section must be review */
+                        ucfirst($type).'AttributeSet'
+                    ),
+                    new \DateTime($options['created_at']),
+                    new \DateTime($options['updated_at'])
+                );
+            }
+        );
+        $this->addBuilder(
+            'configurable',
+            function ($type, $options) {
+                return ConfigurableProduct::buildNewWith(
+                    $options['entity_id'],
+                    $options['sku'],
+                    Family::buildNewWith(
+                        $options['attribute_set_id'],
+                        ucfirst($type).'AttributeSet' /* // $options['attribute_set_name'] // $label */ /* @todo: this section must be review */
+                    ),
+                    new \DateTime($options['created_at']),
+                    new \DateTime($options['updated_at'])
+                );
+            }
+        );
     }
 
     public function addBuilder($type, \Closure $callback)

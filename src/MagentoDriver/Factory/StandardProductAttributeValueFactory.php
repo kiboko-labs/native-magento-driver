@@ -1,11 +1,12 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Factory;
+namespace Kiboko\Component\MagentoDriver\Factory;
 
 use Closure;
-use Luni\Component\MagentoDriver\Exception\InvalidProductTypeException;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Exception\InvalidProductTypeException;
+use Kiboko\Component\MagentoDriver\Matcher\AttributeValueMatcherInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
 
 class StandardProductAttributeValueFactory implements ProductAttributeValueFactoryInterface
 {
@@ -23,10 +24,10 @@ class StandardProductAttributeValueFactory implements ProductAttributeValueFacto
     }
 
     /**
-     * @param Closure $matcher
-     * @param Closure $builder
+     * @param AttributeValueFactoryInterface $matcher
+     * @param AttributeValueMatcherInterface $builder
      */
-    public function addBuilder(Closure $matcher, Closure $builder)
+    public function addBuilder(AttributeValueFactoryInterface $matcher, AttributeValueMatcherInterface $builder)
     {
         $this->builders->attach($matcher, $builder);
     }
@@ -36,6 +37,7 @@ class StandardProductAttributeValueFactory implements ProductAttributeValueFacto
      */
     public function walkBuildersList()
     {
+        /** @var AttributeValueMatcherInterface $matcher */
         foreach ($this->builders as $matcher) {
             yield $matcher => $this->builders[$matcher];
         }
@@ -50,15 +52,15 @@ class StandardProductAttributeValueFactory implements ProductAttributeValueFacto
     public function buildNew(AttributeInterface $attribute, array $options)
     {
         /**
-         * @var \Closure
-         * @var \Closure $builder
+         * @var AttributeValueMatcherInterface $matcher
+         * @var AttributeValueFactoryInterface $builder
          */
         foreach ($this->walkBuildersList() as $matcher => $builder) {
-            if (!$matcher($attribute, $options)) {
+            if (!$matcher->match($attribute, $options)) {
                 continue;
             }
 
-            return $builder($attribute, $options);
+            return $builder->buildNew($attribute, $options);
         }
 
         throw new InvalidProductTypeException(sprintf('No attribute value bucket found for attribute "%s"', $attribute->getCode()));

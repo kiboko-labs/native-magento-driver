@@ -1,0 +1,17 @@
+parameters:
+  kiboko.magento_driver.transformer.attribute.class: Kiboko\Component\MagentoMapper\Transformer\Attribute\AttributeTransformer
+
+  kiboko.magento_driver.transformer.attribute.boolean.class: Kiboko\Component\MagentoMapper\Transformer\Attribute\Type\BooleanAttributeTransformer
+
+services:
+  kiboko.magento_driver.transformer.attribute:
+    class: '%kiboko.magento_driver.transformer.attribute.class%'
+    arguments:
+      - '@kiboko.magento_driver.mapper.attribute'
+
+  kiboko.magento_driver.transformer.attribute.boolean:
+    class: '%kiboko.magento_driver.transformer.attribute.boolean.class%'
+    arguments:
+      - '@kiboko.magento_driver.mapper.entity_type'
+    tags:
+      - { name: kiboko.magento_driver.transformer.attribute }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Luni\Component\MagentoMapper\Repository;
+namespace Kiboko\Component\MagentoMapper\Repository;
 
 interface FamilyRepositoryInterface
 {

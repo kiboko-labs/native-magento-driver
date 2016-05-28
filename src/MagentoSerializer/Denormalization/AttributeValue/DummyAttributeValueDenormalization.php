@@ -1,8 +1,8 @@
 <?php
 
-namespace Luni\Component\MagentoSerializer\Denormalization\AttributeValue;
+namespace Kiboko\Component\MagentoSerializer\Denormalization\AttributeValue;
 
-use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 class DummyAttributeValueDenormalization implements DenormalizerInterface

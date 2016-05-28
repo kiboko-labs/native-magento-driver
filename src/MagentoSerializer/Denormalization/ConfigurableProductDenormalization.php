@@ -1,28 +1,28 @@
 <?php
 
-namespace Luni\Component\MagentoSerializer\Denormalization;
+namespace Kiboko\Component\MagentoSerializer\Denormalization;
 
 use Doctrine\Common\Collections\Collection;
-use Luni\Component\MagentoDriver\Entity\Product\ConfigurableProductInterface;
-use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
-use Luni\Component\MagentoSerializer\Denormalization\AttributeValue\DummyAttributeValueDenormalization;
-use Luni\Component\MagentoSerializer\Denormalization\AttributeValue\DatetimeAttributeValueDenormalization;
-use Luni\Component\MagentoSerializer\Denormalization\AttributeValue\DecimalAttributeValueDenormalization;
-use Luni\Component\MagentoSerializer\Denormalization\AttributeValue\IntegerAttributeValueDenormalization;
-use Luni\Component\MagentoSerializer\Denormalization\AttributeValue\MultipleOptionsAttributeValueDenormalization;
-use Luni\Component\MagentoSerializer\Denormalization\AttributeValue\OptionAttributeValueDenormalization;
-use Luni\Component\MagentoSerializer\Denormalization\AttributeValue\TextAttributeValueDenormalization;
-use Luni\Component\MagentoSerializer\Denormalization\AttributeValue\VarcharAttributeValueDenormalization;
-use Luni\Component\MagentoDriver\Exception\RuntimeErrorException;
-use Luni\Component\MagentoDriver\Factory\ProductAttributeValueFactoryInterface;
-use Luni\Component\MagentoDriver\Factory\ProductFactoryInterface;
-use Luni\Component\MagentoMapper\Mapper\DefaultOptionMapper;
-use Luni\Component\MagentoMapper\Mapper\FamilyMapperInterface;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
-use Luni\Component\MagentoDriver\Repository\AttributeRepositoryInterface;
-use Luni\Component\MagentoDriver\Repository\FamilyRepositoryInterface;
-use Luni\Component\MagentoMapper\Repository\OptionRepositoryInterface as OptionMappingRepositoryInterface;
+use Kiboko\Component\MagentoDriver\Entity\Product\ConfigurableProductInterface;
+use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
+use Kiboko\Component\MagentoSerializer\Denormalization\AttributeValue\DummyAttributeValueDenormalization;
+use Kiboko\Component\MagentoSerializer\Denormalization\AttributeValue\DatetimeAttributeValueDenormalization;
+use Kiboko\Component\MagentoSerializer\Denormalization\AttributeValue\DecimalAttributeValueDenormalization;
+use Kiboko\Component\MagentoSerializer\Denormalization\AttributeValue\IntegerAttributeValueDenormalization;
+use Kiboko\Component\MagentoSerializer\Denormalization\AttributeValue\MultipleOptionsAttributeValueDenormalization;
+use Kiboko\Component\MagentoSerializer\Denormalization\AttributeValue\OptionAttributeValueDenormalization;
+use Kiboko\Component\MagentoSerializer\Denormalization\AttributeValue\TextAttributeValueDenormalization;
+use Kiboko\Component\MagentoSerializer\Denormalization\AttributeValue\VarcharAttributeValueDenormalization;
+use Kiboko\Component\MagentoDriver\Exception\RuntimeErrorException;
+use Kiboko\Component\MagentoDriver\Factory\ProductAttributeValueFactoryInterface;
+use Kiboko\Component\MagentoDriver\Factory\ProductFactoryInterface;
+use Kiboko\Component\MagentoMapper\Mapper\DefaultOptionMapper;
+use Kiboko\Component\MagentoMapper\Mapper\FamilyMapperInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Repository\AttributeRepositoryInterface;
+use Kiboko\Component\MagentoDriver\Repository\FamilyRepositoryInterface;
+use Kiboko\Component\MagentoMapper\Repository\OptionRepositoryInterface as OptionMappingRepositoryInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 class ConfigurableProductDenormalization implements DenormalizerInterface

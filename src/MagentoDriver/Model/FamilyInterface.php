@@ -1,6 +1,6 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Model;
+namespace Kiboko\Component\MagentoDriver\Model;
 
 interface FamilyInterface
 {
@@ -13,4 +13,9 @@ interface FamilyInterface
      * @return string
      */
     public function getLabel();
+
+    /**
+     * @return int
+     */
+    public function getSortOrder();
 }

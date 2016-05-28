@@ -1,10 +1,10 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Broker;
+namespace Kiboko\Component\MagentoDriver\Broker;
 
-use Luni\Component\MagentoDriver\Matcher\AttributeValueMatcherInterface;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Persister\AttributeValuePersisterInterface;
+use Kiboko\Component\MagentoDriver\Matcher\AttributeValueMatcherInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoDriver\Persister\AttributeValuePersisterInterface;
 
 class ProductAttributeValuePersisterBroker implements ProductAttributeValuePersisterBrokerInterface
 {
@@ -50,7 +50,7 @@ class ProductAttributeValuePersisterBroker implements ProductAttributeValuePersi
     public function findFor(AttributeInterface $attribute)
     {
         /**
-         * @var AttributeValueMatcherInterface
+         * @var AttributeValueMatcherInterface $matcher
          * @var AttributeValuePersisterInterface $backend
          */
         foreach ($this->walkPersisterList() as $matcher => $backend) {

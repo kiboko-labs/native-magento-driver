@@ -1,12 +1,12 @@
 <?php
 
-namespace Luni\Component\MagentoMapper\Repository\Doctrine;
+namespace Kiboko\Component\MagentoMapper\Repository\Doctrine;
 
 use Doctrine\DBAL\Connection;
-use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoMapper\QueryBuilder\OptionQueryBuilderInterface;
-use Luni\Component\MagentoMapper\Repository\OptionRepositoryInterface;
+use Kiboko\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoMapper\QueryBuilder\OptionQueryBuilderInterface;
+use Kiboko\Component\MagentoMapper\Repository\OptionRepositoryInterface;
 
 class OptionRepository implements OptionRepositoryInterface
 {

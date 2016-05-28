@@ -1,14 +1,14 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Model\Mutable;
+namespace Kiboko\Component\MagentoDriver\Model\Mutable;
 
-use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
-use Luni\Component\MagentoDriver\Model\AttributeInterface;
-use Luni\Component\MagentoDriver\Model\AttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\Immutable\ImmutableDatetimeAttributeValue;
-use Luni\Component\MagentoDriver\Model\DatetimeAttributeValueInterface;
-use Luni\Component\MagentoDriver\Model\DatetimeAttributeValueTrait;
-use Luni\Component\MagentoDriver\Model\ScopableAttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Model\Immutable\ImmutableDatetimeAttributeValue;
+use Kiboko\Component\MagentoDriver\Model\DatetimeAttributeValueInterface;
+use Kiboko\Component\MagentoDriver\Model\DatetimeAttributeValueTrait;
+use Kiboko\Component\MagentoDriver\Model\ScopableAttributeValueInterface;
 
 class MutableDatetimeAttributeValue implements MutableAttributeValueInterface, ScopableAttributeValueInterface, DatetimeAttributeValueInterface
 {

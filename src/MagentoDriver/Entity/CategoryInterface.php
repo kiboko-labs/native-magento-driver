@@ -1,6 +1,6 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Entity;
+namespace Kiboko\Component\MagentoDriver\Entity;
 
 interface CategoryInterface extends EntityInterface
 {

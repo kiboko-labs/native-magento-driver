@@ -1,23 +1,20 @@
 <?php
 
-namespace Luni\Component\MagentoDriver\Repository\Doctrine;
+namespace Kiboko\Component\MagentoDriver\Repository\Doctrine;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Connection;
-use Luni\Component\MagentoDriver\Model\Attribute;
-use Luni\Component\MagentoDriver\Model\CatalogAttribute;
-use Luni\Component\MagentoDriver\Model\CatalogAttributeExtension;
-use Luni\Component\MagentoDriver\Model\CatalogAttributeExtensionInterface;
-use Luni\Component\MagentoDriver\Model\FamilyInterface;
-use Luni\Component\MagentoDriver\Entity\Product\ProductInterface;
-use Luni\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
-use Luni\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilderInterface;
-use Luni\Component\MagentoDriver\Repository\ProductAttributeRepositoryInterface;
+use Kiboko\Component\MagentoDriver\Model\Attribute;
+use Kiboko\Component\MagentoDriver\Model\CatalogAttribute;
+use Kiboko\Component\MagentoDriver\Model\CatalogAttributeExtension;
+use Kiboko\Component\MagentoDriver\Model\CatalogAttributeExtensionInterface;
+use Kiboko\Component\MagentoDriver\Model\FamilyInterface;
+use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
+use Kiboko\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilderInterface;
+use Kiboko\Component\MagentoDriver\Repository\ProductAttributeRepositoryInterface;
 
-/**
- * Class ProductAttributeRepository.
- */
 class CatalogAttributeRepository implements ProductAttributeRepositoryInterface
 {
     /**
@@ -60,7 +57,6 @@ class CatalogAttributeRepository implements ProductAttributeRepositoryInterface
                 isset($options['backend_type'])    ? $options['backend_type']           : null,
                 isset($options['backend_model'])   ? $options['backend_model']          : null,
                 isset($options['backend_table'])   ? $options['backend_table']          : null,
-                isset($options['frontend_type'])   ? $options['frontend_type']          : null,
                 isset($options['frontend_model'])  ? $options['frontend_model']         : null,
                 isset($options['frontend_input'])  ? $options['frontend_input']         : null,
                 isset($options['frontend_label'])  ? $options['frontend_label']         : null,
@@ -103,8 +99,8 @@ class CatalogAttributeRepository implements ProductAttributeRepositoryInterface
     }
 
     /**
-     * @param string $entityTypeCode
      * @param string $code
+     * @param string $entityTypeCode
      *
      * @return CatalogAttributeExtensionInterface
      */
@@ -160,7 +156,7 @@ class CatalogAttributeRepository implements ProductAttributeRepositoryInterface
         $query = $this->queryBuilder->createFindAllByCodeQueryBuilder('a', 'x', 'e', $codeList);
 
         $statement = $this->connection->prepare($query);
-        if (!$statement->execute(array_merge(['catalog_product'], $codeList))) {
+        if (!$statement->execute(array_merge([$entityTypeCode], $codeList))) {
             throw new DatabaseFetchingFailureException();
         }
 
