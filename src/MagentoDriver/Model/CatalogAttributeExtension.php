@@ -130,6 +130,11 @@ class CatalogAttributeExtension implements CatalogAttributeExtensionInterface
     private $additionalData;
 
     /**
+     * @var string
+     */
+    private $note;
+
+    /**
      * @param int    $attributeId
      * @param bool   $frontendInputRendererClassName
      * @param int    $global
@@ -146,16 +151,17 @@ class CatalogAttributeExtension implements CatalogAttributeExtensionInterface
      * @param bool   $configurable
      * @param string $productTypesApplyingTo
      * @param bool   $visibleInAdvancedSearch
-     * @param bool   $position
+     * @param int    $position
      * @param bool   $wysiwygEnabled
      * @param bool   $usedForPromoRules
      * @param bool   $requiredInAdminStore
      * @param bool   $usedInGrid
      * @param bool   $visibleInGrid
      * @param bool   $filterableInGrid
-     * @param bool   $searchWeight
+     * @param int    $searchWeight
      * @param array  $additionalData
      * @param string $note
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public function __construct(
         $attributeId,
@@ -174,14 +180,14 @@ class CatalogAttributeExtension implements CatalogAttributeExtensionInterface
         $configurable = false,
         $productTypesApplyingTo = null,
         $visibleInAdvancedSearch = false,
-        $position = false,
+        $position = 0,
         $wysiwygEnabled = false,
         $usedForPromoRules = false,
         $requiredInAdminStore = false,
         $usedInGrid = false,
         $visibleInGrid = false,
         $filterableInGrid = false,
-        $searchWeight = false,
+        $searchWeight = 0,
         array $additionalData = [],
         $note = null
     ) {

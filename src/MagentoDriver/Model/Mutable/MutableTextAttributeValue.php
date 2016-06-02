@@ -46,6 +46,7 @@ class MutableTextAttributeValue implements MutableAttributeValueInterface, Scopa
 
     /**
      * @return ImmutableTextAttributeValue
+     * @SuppressWarnings(PHPMD.StaticAccess)
      */
     public function switchToImmutable()
     {
@@ -62,6 +63,7 @@ class MutableTextAttributeValue implements MutableAttributeValueInterface, Scopa
      * @param $storeId
      *
      * @return AttributeValueInterface
+     * @SuppressWarnings(PHPMD.StaticAccess)
      */
     public function copyToStoreId($storeId)
     {

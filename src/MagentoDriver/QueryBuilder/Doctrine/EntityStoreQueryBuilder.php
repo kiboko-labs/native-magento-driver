@@ -118,6 +118,8 @@ class EntityStoreQueryBuilder implements EntityStoreQueryBuilderInterface
     /**
      * @param string $alias
      * @param array  $storeIdList
+     *
+     * @return QueryBuilder
      */
     public function createFindAllByStoreIdQueryBuilder($alias, array $storeIdList)
     {
@@ -146,6 +148,11 @@ class EntityStoreQueryBuilder implements EntityStoreQueryBuilderInterface
         return $queryBuilder;
     }
 
+    /**
+     * @param string $alias
+     * @param array $idList
+     * @return QueryBuilder
+     */
     public function createFindAllByIdQueryBuilder($alias, array $idList)
     {
         $queryBuilder = $this->createFindAllQueryBuilder($alias);

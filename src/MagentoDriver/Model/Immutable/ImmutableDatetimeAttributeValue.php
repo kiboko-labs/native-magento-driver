@@ -21,6 +21,7 @@ class ImmutableDatetimeAttributeValue implements ImmutableAttributeValueInterfac
      * @param \DateTimeInterface $payload
      * @param ProductInterface   $product
      * @param int                $storeId
+     * @SuppressWarnings(PHPMD.StaticAccess)
      */
     public function __construct(
         AttributeInterface $attribute,
@@ -42,6 +43,7 @@ class ImmutableDatetimeAttributeValue implements ImmutableAttributeValueInterfac
 
     /**
      * @return MutableDatetimeAttributeValue
+     * @SuppressWarnings(PHPMD.StaticAccess)
      */
     public function switchToMutable()
     {
@@ -58,6 +60,7 @@ class ImmutableDatetimeAttributeValue implements ImmutableAttributeValueInterfac
      * @param $storeId
      *
      * @return AttributeValueInterface
+     * @SuppressWarnings(PHPMD.StaticAccess)
      */
     public function copyToStoreId($storeId)
     {

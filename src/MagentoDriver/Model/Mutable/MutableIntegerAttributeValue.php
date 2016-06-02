@@ -46,6 +46,7 @@ class MutableIntegerAttributeValue implements MutableAttributeValueInterface, Sc
 
     /**
      * @return ImmutableIntegerAttributeValue
+     * @SuppressWarnings(PHPMD.StaticAccess)
      */
     public function switchToImmutable()
     {
@@ -62,6 +63,7 @@ class MutableIntegerAttributeValue implements MutableAttributeValueInterface, Sc
      * @param $storeId
      *
      * @return AttributeValueInterface
+     * @SuppressWarnings(PHPMD.StaticAccess)
      */
     public function copyToStoreId($storeId)
     {

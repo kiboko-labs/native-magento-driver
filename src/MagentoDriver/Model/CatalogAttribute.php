@@ -186,7 +186,7 @@ class CatalogAttribute implements CatalogAttributeInterface
     }
 
     /**
-     * @return bool
+     * @return string
      */
     public function getFrontendInputRendererClassName()
     {
@@ -347,7 +347,7 @@ class CatalogAttribute implements CatalogAttributeInterface
     }
 
     /**
-     * @return bool
+     * @return int
      */
     public function getPosition()
     {
@@ -355,7 +355,7 @@ class CatalogAttribute implements CatalogAttributeInterface
     }
 
     /**
-     * @return bool
+     * @return int
      */
     public function getSearchWeight()
     {

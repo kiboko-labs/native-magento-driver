@@ -38,6 +38,7 @@ class ImmutableTextAttributeValue implements ImmutableAttributeValueInterface, S
 
     /**
      * @return MutableTextAttributeValue
+     * @SuppressWarnings(PHPMD.StaticAccess)
      */
     public function switchToMutable()
     {
@@ -54,6 +55,7 @@ class ImmutableTextAttributeValue implements ImmutableAttributeValueInterface, S
      * @param $storeId
      *
      * @return AttributeValueInterface
+     * @SuppressWarnings(PHPMD.StaticAccess)
      */
     public function copyToStoreId($storeId)
     {

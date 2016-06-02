@@ -46,6 +46,7 @@ class MutableVarcharAttributeValue implements MutableAttributeValueInterface, Sc
 
     /**
      * @return ImmutableVarcharAttributeValue
+     * @SuppressWarnings(PHPMD.StaticAccess)
      */
     public function switchToImmutable()
     {
@@ -62,6 +63,7 @@ class MutableVarcharAttributeValue implements MutableAttributeValueInterface, Sc
      * @param $storeId
      *
      * @return AttributeValueInterface
+     * @SuppressWarnings(PHPMD.StaticAccess)
      */
     public function copyToStoreId($storeId)
     {

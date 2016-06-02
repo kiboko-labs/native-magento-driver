@@ -47,6 +47,7 @@ class ImmutableImageAttributeValue implements ImmutableAttributeValueInterface, 
 
     /**
      * @return MutableImageAttributeValue
+     * @SuppressWarnings(PHPMD.StaticAccess)
      */
     public function switchToMutable()
     {

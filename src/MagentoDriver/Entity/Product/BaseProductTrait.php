@@ -61,15 +61,20 @@ trait BaseProductTrait
      */
     private $modificationDate;
 
+    /**
+     * @param \DateTimeInterface|null $dateTime
+     * @return \DateTimeImmutable|\DateTimeInterface
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
     private function initializeDate(\DateTimeInterface $dateTime = null)
     {
         if ($dateTime === null) {
             return new \DateTimeImmutable();
-        } elseif ($dateTime instanceof \DateTime) {
-            return \DateTimeImmutable::createFromMutable($dateTime);
-        } else {
-            return $dateTime;
         }
+        if ($dateTime instanceof \DateTime) {
+            return \DateTimeImmutable::createFromMutable($dateTime);
+        }
+        return $dateTime;
     }
 
     /**
