@@ -95,13 +95,13 @@ The repository has explicitly-named methods, for now 4 exist. You will need to k
 ```php
 <?php
 
-$attribute = $productAttributeRepository->findOneByCode('catalog_product');
+$entityType = $entityTypeRepository->findOneByCode('catalog_product');
 
-$attributeList = $productAttributeRepository->findAllByCode(['catalog_product', 'catalog_category']);
+$entityTypeList = $entityTypeRepository->findAllByCode(['catalog_product', 'catalog_category']);
 
-$attribute = $productAttributeRepository->findOneById(3);
+$entityType = $entityTypeRepository->findOneById(3);
 
-$attributeList = $productAttributeRepository->findAllById([3, 4]);
+$entityTypeList = $entityTypeRepository->findAllById([3, 4]);
 
-$attributeList = $productAttributeRepository->findAll();
+$entityTypeList = $entityTypeRepository->findAll();
 ```
