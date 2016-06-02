@@ -67,7 +67,7 @@ class MutableImageMetadataAttributeValue implements MutableAttributeValueInterfa
     {
         return ImmutableImageMetadataAttributeValue::buildNewWith(
             $this->attribute,
-            $this->id,
+            $this->identifier,
             $this->label,
             $this->position,
             $this->excluded,
@@ -84,7 +84,7 @@ class MutableImageMetadataAttributeValue implements MutableAttributeValueInterfa
     {
         return static::buildNewWith(
             $this->attribute,
-            $this->id,
+            $this->identifier,
             $this->label,
             $this->position,
             $this->excluded,

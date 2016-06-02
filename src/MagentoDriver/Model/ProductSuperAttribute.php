@@ -67,7 +67,7 @@ class ProductSuperAttribute implements SuperAttributeInterface
      */
     public function getId()
     {
-        return $this->id;
+        return $this->identifier;
     }
 
     /**
@@ -119,6 +119,6 @@ class ProductSuperAttribute implements SuperAttributeInterface
      */
     public function persistedToId($identifier)
     {
-        $this->id = $identifier;
+        $this->identifier = $identifier;
     }
 }

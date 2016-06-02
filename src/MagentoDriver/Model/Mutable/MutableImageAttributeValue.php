@@ -68,7 +68,7 @@ class MutableImageAttributeValue implements MutableAttributeValueInterface, Imag
     {
         return ImmutableImageAttributeValue::buildNewWith(
             $this->attribute,
-            $this->id,
+            $this->identifier,
             $this->file,
             $this->product,
             $this->metadata->toArray()

@@ -39,7 +39,7 @@ class EntityAttribute implements EntityAttributeInterface
      */
     public function __construct($identifier)
     {
-        $this->id = $identifier;
+        $this->identifier = $identifier;
     }
 
     /**
@@ -47,7 +47,7 @@ class EntityAttribute implements EntityAttributeInterface
      */
     public function getId()
     {
-        return $this->id;
+        return $this->identifier;
     }
 
     /**
@@ -125,6 +125,6 @@ class EntityAttribute implements EntityAttributeInterface
      */
     public function persistedToId($identifier)
     {
-        $this->id = $identifier;
+        $this->identifier = $identifier;
     }
 }

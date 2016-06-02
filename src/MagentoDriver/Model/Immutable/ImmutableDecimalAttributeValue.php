@@ -43,7 +43,7 @@ class ImmutableDecimalAttributeValue implements ImmutableAttributeValueInterface
     {
         return MutableDecimalAttributeValue::buildNewWith(
             $this->attribute,
-            $this->id,
+            $this->identifier,
             $this->payload,
             $this->product,
             $this->storeId
@@ -59,7 +59,7 @@ class ImmutableDecimalAttributeValue implements ImmutableAttributeValueInterface
     {
         return static::buildNewWith(
             $this->attribute,
-            $this->id,
+            $this->identifier,
             $this->payload,
             $this->product,
             $storeId

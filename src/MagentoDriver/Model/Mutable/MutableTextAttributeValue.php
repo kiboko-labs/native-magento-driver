@@ -51,7 +51,7 @@ class MutableTextAttributeValue implements MutableAttributeValueInterface, Scopa
     {
         return ImmutableTextAttributeValue::buildNewWith(
             $this->attribute,
-            $this->id,
+            $this->identifier,
             $this->payload,
             $this->product,
             $this->storeId
@@ -67,7 +67,7 @@ class MutableTextAttributeValue implements MutableAttributeValueInterface, Scopa
     {
         return static::buildNewWith(
             $this->attribute,
-            $this->id,
+            $this->identifier,
             $this->payload,
             $this->product,
             $storeId

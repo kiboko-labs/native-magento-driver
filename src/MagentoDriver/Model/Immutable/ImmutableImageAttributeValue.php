@@ -52,7 +52,7 @@ class ImmutableImageAttributeValue implements ImmutableAttributeValueInterface, 
     {
         return MutableImageAttributeValue::buildNewWith(
             $this->attribute,
-            $this->id,
+            $this->identifier,
             $this->file,
             $this->product,
             $this->metadata->toArray()

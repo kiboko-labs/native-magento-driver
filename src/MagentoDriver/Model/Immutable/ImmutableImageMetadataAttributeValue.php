@@ -43,7 +43,7 @@ class ImmutableImageMetadataAttributeValue implements ImmutableAttributeValueInt
     {
         return MutableImageMetadataAttributeValue::buildNewWith(
             $this->attribute,
-            $this->id,
+            $this->identifier,
             $this->label,
             $this->position,
             $this->excluded,
@@ -60,7 +60,7 @@ class ImmutableImageMetadataAttributeValue implements ImmutableAttributeValueInt
     {
         return static::buildNewWith(
             $this->attribute,
-            $this->id,
+            $this->identifier,
             $this->label,
             $this->position,
             $this->excluded,

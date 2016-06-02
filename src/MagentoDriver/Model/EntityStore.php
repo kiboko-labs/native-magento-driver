@@ -13,7 +13,7 @@ class EntityStore implements EntityStoreInterface
      */
     public function __construct($identifier, $typeId, $storeId, $incrementPrefix, $incrementLastId)
     {
-        $this->id = $identifier;
+        $this->identifier = $identifier;
         $this->typeId = $typeId;
         $this->storeId = $storeId;
         $this->incrementPrefix = $incrementPrefix;
@@ -25,7 +25,7 @@ class EntityStore implements EntityStoreInterface
      */
     public function getId()
     {
-        return $this->id;
+        return $this->identifier;
     }
 
     /**
@@ -33,7 +33,7 @@ class EntityStore implements EntityStoreInterface
      */
     public function persistToId($identifier)
     {
-        $this->id = $identifier;
+        $this->identifier = $identifier;
     }
 
     /**

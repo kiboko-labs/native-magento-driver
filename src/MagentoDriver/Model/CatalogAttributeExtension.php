@@ -185,7 +185,7 @@ class CatalogAttributeExtension implements CatalogAttributeExtensionInterface
         array $additionalData = [],
         $note = null
     ) {
-        $this->id = $attributeId;
+        $this->identifier = $attributeId;
         $this->frontendInputRendererClassName = $frontendInputRendererClassName;
         $this->global = $global;
         $this->visible = (bool) $visible;
@@ -219,7 +219,7 @@ class CatalogAttributeExtension implements CatalogAttributeExtensionInterface
      */
     public function getId()
     {
-        return $this->id;
+        return $this->identifier;
     }
 
     /**
@@ -227,7 +227,7 @@ class CatalogAttributeExtension implements CatalogAttributeExtensionInterface
      */
     public function persistedToId($identifier)
     {
-        $this->id = $identifier;
+        $this->identifier = $identifier;
     }
 
     /**

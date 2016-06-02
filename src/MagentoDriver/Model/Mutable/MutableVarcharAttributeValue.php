@@ -51,7 +51,7 @@ class MutableVarcharAttributeValue implements MutableAttributeValueInterface, Sc
     {
         return ImmutableVarcharAttributeValue::buildNewWith(
             $this->attribute,
-            $this->id,
+            $this->identifier,
             $this->payload,
             $this->product,
             $this->storeId
@@ -67,7 +67,7 @@ class MutableVarcharAttributeValue implements MutableAttributeValueInterface, Sc
     {
         return static::buildNewWith(
             $this->attribute,
-            $this->id,
+            $this->identifier,
             $this->payload,
             $this->product,
             $storeId

@@ -58,7 +58,7 @@ class ProductSuperLink implements SuperLinkInterface
      */
     public function getId()
     {
-        return $this->id;
+        return $this->identifier;
     }
 
     /**
@@ -102,6 +102,6 @@ class ProductSuperLink implements SuperLinkInterface
      */
     public function persistedToId($identifier)
     {
-        $this->id = $identifier;
+        $this->identifier = $identifier;
     }
 }

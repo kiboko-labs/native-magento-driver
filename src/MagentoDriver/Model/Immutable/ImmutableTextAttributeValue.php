@@ -43,7 +43,7 @@ class ImmutableTextAttributeValue implements ImmutableAttributeValueInterface, S
     {
         return MutableTextAttributeValue::buildNewWith(
             $this->attribute,
-            $this->id,
+            $this->identifier,
             $this->payload,
             $this->product,
             $this->storeId
@@ -59,7 +59,7 @@ class ImmutableTextAttributeValue implements ImmutableAttributeValueInterface, S
     {
         return static::buildNewWith(
             $this->attribute,
-            $this->id,
+            $this->identifier,
             $this->payload,
             $this->product,
             $storeId

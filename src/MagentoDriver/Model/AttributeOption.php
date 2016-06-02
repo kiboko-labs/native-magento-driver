@@ -24,7 +24,7 @@ class AttributeOption implements AttributeOptionInterface
      */
     public function __construct($identifier)
     {
-        $this->id = $identifier;
+        $this->identifier = $identifier;
     }
 
     /**
@@ -32,7 +32,7 @@ class AttributeOption implements AttributeOptionInterface
      */
     public function getId()
     {
-        return $this->id;
+        return $this->identifier;
     }
 
     /**
@@ -75,6 +75,6 @@ class AttributeOption implements AttributeOptionInterface
      */
     public function persistedToId($identifier)
     {
-        $this->id = $identifier;
+        $this->identifier = $identifier;
     }
 }

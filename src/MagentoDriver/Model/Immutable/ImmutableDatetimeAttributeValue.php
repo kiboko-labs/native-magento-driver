@@ -47,7 +47,7 @@ class ImmutableDatetimeAttributeValue implements ImmutableAttributeValueInterfac
     {
         return MutableDatetimeAttributeValue::buildNewWith(
             $this->attribute,
-            $this->id,
+            $this->identifier,
             $this->payload,
             $this->product,
             $this->storeId
@@ -63,7 +63,7 @@ class ImmutableDatetimeAttributeValue implements ImmutableAttributeValueInterfac
     {
         return static::buildNewWith(
             $this->attribute,
-            $this->id,
+            $this->identifier,
             $this->payload,
             $this->product,
             $storeId

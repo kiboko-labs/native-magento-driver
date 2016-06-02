@@ -46,7 +46,7 @@ trait AttributeValueTrait
      */
     public function getId()
     {
-        return $this->isScopable() ? $this->id : null;
+        return $this->isScopable() ? $this->identifier : null;
     }
 
     /**
@@ -54,7 +54,7 @@ trait AttributeValueTrait
      */
     public function persistedToId($identifier)
     {
-        $this->id = $identifier;
+        $this->identifier = $identifier;
     }
 
     /**

@@ -77,7 +77,7 @@ trait BaseProductTrait
      */
     public function getId()
     {
-        return $this->id;
+        return $this->identifier;
     }
 
     /**
@@ -87,10 +87,10 @@ trait BaseProductTrait
      */
     public function persistedToId($identifier)
     {
-        if ($this->id !== null) {
+        if ($this->identifier !== null) {
             throw new RuntimeErrorException('Product ID is immutable once set.');
         }
-        $this->id = $identifier;
+        $this->identifier = $identifier;
     }
 
     /**
