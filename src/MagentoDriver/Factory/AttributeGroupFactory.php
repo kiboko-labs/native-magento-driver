@@ -5,6 +5,9 @@ namespace Kiboko\Component\MagentoDriver\Factory;
 use Kiboko\Component\MagentoDriver\Model\AttributeGroup;
 use Kiboko\Component\MagentoDriver\Model\AttributeGroupInterface;
 
+/**
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ */
 class AttributeGroupFactory implements AttributeGroupFactoryInterface
 {
     /**

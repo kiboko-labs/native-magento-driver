@@ -5,6 +5,9 @@ namespace Kiboko\Component\MagentoDriver\Factory;
 use Kiboko\Component\MagentoDriver\Model\AttributeLabel;
 use Kiboko\Component\MagentoDriver\Model\AttributeLabelInterface;
 
+/**
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ */
 class AttributeLabelFactory implements AttributeLabelFactoryInterface
 {
     /**

@@ -5,6 +5,9 @@ namespace Kiboko\Component\MagentoDriver\Factory;
 use Kiboko\Component\MagentoDriver\Model\EntityStore;
 use Kiboko\Component\MagentoDriver\Model\EntityStoreInterface;
 
+/**
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ */
 class StandardEntityStoreFactory implements EntityStoreFactoryInterface
 {
     /**

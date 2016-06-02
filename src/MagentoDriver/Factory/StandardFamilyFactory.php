@@ -5,6 +5,9 @@ namespace Kiboko\Component\MagentoDriver\Factory;
 use Kiboko\Component\MagentoDriver\Model\Family;
 use Kiboko\Component\MagentoDriver\Model\FamilyInterface;
 
+/**
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ */
 class StandardFamilyFactory implements FamilyFactoryInterface
 {
     /**

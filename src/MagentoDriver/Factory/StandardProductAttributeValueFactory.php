@@ -8,6 +8,9 @@ use Kiboko\Component\MagentoDriver\Matcher\AttributeValueMatcherInterface;
 use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
 use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
 
+/**
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ */
 class StandardProductAttributeValueFactory implements ProductAttributeValueFactoryInterface
 {
     /**
