@@ -10,7 +10,7 @@ use Kiboko\Component\MagentoDriver\Exception\InvalidArgumentException;
 
 class MySQLLocalDataInfileDatabaseWriter implements DatabaseWriterInterface
 {
-    use DataInfileDatabaseWriterTrait;
+    use MySQLDataInfileDatabaseWriterTrait;
 
     /**
      * @var Filesystem

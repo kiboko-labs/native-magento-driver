@@ -6,7 +6,7 @@ use Doctrine\DBAL\Connection;
 
 class MySQLDataInfileDatabaseWriter implements DatabaseWriterInterface
 {
-    use DataInfileDatabaseWriterTrait;
+    use MySQLDataInfileDatabaseWriterTrait;
 
     /**
      * @var string
