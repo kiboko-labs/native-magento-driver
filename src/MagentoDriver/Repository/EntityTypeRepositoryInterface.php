@@ -2,6 +2,7 @@
 
 namespace Kiboko\Component\MagentoDriver\Repository;
 
+use Doctrine\Common\Collections\Collection;
 use Kiboko\Component\MagentoDriver\Model\EntityTypeInterface;
 
 interface EntityTypeRepositoryInterface
@@ -21,19 +22,11 @@ interface EntityTypeRepositoryInterface
     public function findOneByCode($code);
 
     /**
-     * @param string $entityTypeCode
-     * @param array  $codeList
+     * @param array|string[] $codeList
      *
      * @return Collection|EntityTypeInterface[]
      */
-    public function findAllByCode($entityTypeCode, array $codeList);
-
-    /**
-     * @param array|int[] $idList
-     *
-     * @return Collection|EntityTypeInterface[]
-     */
-    public function findAllById(array $idList);
+    public function findAllByCode(array $codeList);
 
     /**
      * @return Collection|EntityTypeInterface[]

@@ -20,7 +20,6 @@ This object creates Doctrine DBAL `QueryBuilder` objects for product attribute d
 /** @var \Doctrine\DBAL\Connection $connection */
 
 use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilder;
-use Kiboko\Bundle\MagentoDriverBundle\Factory\QueryBuilder\ProductAttributeQueryBuilderFactory;
 
 $queryBuilder = new ProductAttributeQueryBuilder(
     $connection,
