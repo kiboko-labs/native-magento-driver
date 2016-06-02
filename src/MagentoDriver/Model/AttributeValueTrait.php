@@ -9,7 +9,7 @@ trait AttributeValueTrait
     /**
      * @var int
      */
-    private $id;
+    private $identifier;
 
     /**
      * @var ProductInterface
@@ -50,11 +50,11 @@ trait AttributeValueTrait
     }
 
     /**
-     * @param int $id
+     * @param int $identifier
      */
-    public function persistedToId($id)
+    public function persistedToId($identifier)
     {
-        $this->id = $id;
+        $this->id = $identifier;
     }
 
     /**

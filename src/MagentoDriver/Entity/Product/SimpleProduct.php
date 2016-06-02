@@ -19,18 +19,18 @@ class SimpleProduct implements SimpleProductInterface
     private $configurables;
 
     /**
-     * @param string                  $identifier
+     * @param string                  $stringIdentifier
      * @param FamilyInterface         $family
      * @param \DateTimeInterface|null $creationDate
      * @param \DateTimeInterface|null $modificationDate
      */
     public function __construct(
-        $identifier,
+        $stringIdentifier,
         FamilyInterface $family = null,
         \DateTimeInterface $creationDate = null,
         \DateTimeInterface $modificationDate = null
     ) {
-        $this->identifier = $identifier;
+        $this->stringIdentifier = $stringIdentifier;
         $this->productType = ProductInterface::TYPE_SIMPLE;
         $this->family = $family;
         $this->values = new ArrayCollection();
@@ -41,8 +41,8 @@ class SimpleProduct implements SimpleProductInterface
     }
 
     /**
-     * @param int                                  $id
-     * @param string                               $identifier
+     * @param int                                  $identifier
+     * @param string                               $stringIdentifier
      * @param FamilyInterface                      $family
      * @param \DateTimeInterface                   $creationDate
      * @param \DateTimeInterface                   $modificationDate
@@ -51,16 +51,16 @@ class SimpleProduct implements SimpleProductInterface
      * @return static
      */
     public static function buildNewWith(
-        $id,
         $identifier,
+        $stringIdentifier,
         FamilyInterface $family,
         \DateTimeInterface $creationDate,
         \DateTimeInterface $modificationDate,
         Collection $values = null
     ) {
-        $instance = new self($identifier, $family, $creationDate, $modificationDate);
+        $instance = new self($stringIdentifier, $family, $creationDate, $modificationDate);
 
-        $instance->id = $id;
+        $instance->id = $identifier;
 
         if ($values !== null) {
             /** @var AttributeValueInterface $value */

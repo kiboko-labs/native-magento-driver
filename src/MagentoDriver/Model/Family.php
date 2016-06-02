@@ -7,7 +7,7 @@ class Family implements FamilyInterface
     /**
      * @var int
      */
-    private $id;
+    private $identifier;
 
     /**
      * @var string
@@ -74,10 +74,10 @@ class Family implements FamilyInterface
     }
 
     /**
-     * @param int $id
+     * @param int $identifier
      */
-    public function persistedToId($id)
+    public function persistedToId($identifier)
     {
-        $this->id = $id;
+        $this->id = $identifier;
     }
 }

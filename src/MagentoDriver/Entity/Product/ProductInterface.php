@@ -31,11 +31,11 @@ interface ProductInterface extends EntityInterface
     const ENTITY_CODE = 'catalog_product';
 
     /**
-     * @param int $id
+     * @param int $identifier
      *
      * @return ProductInterface
      */
-    public function persistedToId($id);
+    public function persistedToId($identifier);
 
     /**
      * @return string

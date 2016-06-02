@@ -37,7 +37,7 @@ interface SuperLinkInterface
     public function isVariant(SimpleProductInterface $variant);
 
     /**
-     * @param int $id
+     * @param int $identifier
      */
-    public function persistedToId($id);
+    public function persistedToId($identifier);
 }

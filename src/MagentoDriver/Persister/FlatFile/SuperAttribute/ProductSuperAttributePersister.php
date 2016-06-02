@@ -75,10 +75,10 @@ class ProductSuperAttributePersister implements SuperAttributePersisterInterface
      */
     protected function walkQueue()
     {
-        while ($this->superAttributeQueue->count() > 0 && $id = yield) {
+        while ($this->superAttributeQueue->count() > 0 && $identifier = yield) {
             /** @var SuperAttributeInterface $superAttribute */
             $superAttribute = $this->superAttributeQueue->dequeue();
-            $superAttribute->persistedToId($id);
+            $superAttribute->persistedToId($identifier);
         }
     }
 }

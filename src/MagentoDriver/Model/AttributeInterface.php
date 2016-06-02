@@ -11,9 +11,9 @@ interface AttributeInterface
     public function getId();
 
     /**
-     * @param int $id
+     * @param int $identifier
      */
-    public function persistedToId($id);
+    public function persistedToId($identifier);
 
     /**
      * @return int

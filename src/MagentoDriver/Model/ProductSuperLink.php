@@ -10,7 +10,7 @@ class ProductSuperLink implements SuperLinkInterface
     /**
      * @var int
      */
-    private $id;
+    private $identifier;
 
     /**
      * @var ConfigurableProductInterface
@@ -35,20 +35,20 @@ class ProductSuperLink implements SuperLinkInterface
     }
 
     /**
-     * @param int                          $id
+     * @param int                          $identifier
      * @param ConfigurableProductInterface $configurable
      * @param SimpleProductInterface       $variant
      *
      * @return static
      */
     public static function buildNewWith(
-        $id,
+        $identifier,
         ConfigurableProductInterface $configurable,
         SimpleProductInterface $variant
     ) {
         $instance = new self($configurable, $variant);
 
-        $instance->id = $id;
+        $instance->id = $identifier;
 
         return $instance;
     }
@@ -98,10 +98,10 @@ class ProductSuperLink implements SuperLinkInterface
     }
 
     /**
-     * @param int $id
+     * @param int $identifier
      */
-    public function persistedToId($id)
+    public function persistedToId($identifier)
     {
-        $this->id = $id;
+        $this->id = $identifier;
     }
 }

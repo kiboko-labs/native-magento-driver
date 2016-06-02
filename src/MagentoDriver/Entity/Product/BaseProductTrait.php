@@ -19,12 +19,12 @@ trait BaseProductTrait
     /**
      * @var int
      */
-    private $id;
+    private $identifier;
 
     /**
      * @var string
      */
-    private $identifier;
+    private $stringIdentifier;
 
     /**
      * @var Collection|AttributeInterface[]
@@ -81,16 +81,16 @@ trait BaseProductTrait
     }
 
     /**
-     * @param int $id
+     * @param int $identifier
      *
      * @return ProductInterface
      */
-    public function persistedToId($id)
+    public function persistedToId($identifier)
     {
         if ($this->id !== null) {
             throw new RuntimeErrorException('Product ID is immutable once set.');
         }
-        $this->id = $id;
+        $this->id = $identifier;
     }
 
     /**

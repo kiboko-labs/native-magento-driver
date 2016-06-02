@@ -16,11 +16,11 @@ interface AttributeRepositoryInterface
     public function findOneByCode($code, $entityTypeId);
 
     /**
-     * @param int $id
+     * @param int $identifier
      *
      * @return AttributeInterface
      */
-    public function findOneById($id);
+    public function findOneById($identifier);
 
     /**
      * @param string $entityTypeCode

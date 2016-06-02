@@ -35,17 +35,17 @@ class CachedFamilyRepository implements FamilyRepositoryInterface
     }
 
     /**
-     * @param int $id
+     * @param int $identifier
      *
      * @return FamilyInterface|null
      */
-    public function findOneById($id)
+    public function findOneById($identifier)
     {
-        if (isset($this->cacheById[$id])) {
-            return $this->cacheById[$id];
+        if (isset($this->cacheById[$identifier])) {
+            return $this->cacheById[$identifier];
         }
 
-        $family = $this->decorated->findOneById($id);
+        $family = $this->decorated->findOneById($identifier);
         if ($family === null) {
             return;
         }

@@ -7,11 +7,11 @@ use Kiboko\Component\MagentoDriver\Model\AttributeGroupInterface;
 interface AttributeGroupRepositoryInterface
 {
     /**
-     * @param int $id
+     * @param int $identifier
      *
      * @return AttributeGroupInterface
      */
-    public function findOneById($id);
+    public function findOneById($identifier);
 
     /**
      * @param string $name

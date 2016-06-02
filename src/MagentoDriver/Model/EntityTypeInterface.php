@@ -10,9 +10,9 @@ interface EntityTypeInterface
     public function getId();
 
     /**
-     * @param int $id
+     * @param int $identifier
      */
-    public function persistToId($id);
+    public function persistToId($identifier);
 
     /**
      * @return string

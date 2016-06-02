@@ -52,16 +52,16 @@ class EntityAttributeRepository implements EntityAttributeRepositoryInterface
     }
 
     /**
-     * @param int $id
+     * @param int $identifier
      *
      * @return EntityAttributeInterface
      */
-    public function findOneById($id)
+    public function findOneById($identifier)
     {
         $query = $this->queryBuilder->createFindOneByIdQueryBuilder('eav_e');
 
         $statement = $this->connection->prepare($query);
-        if (!$statement->execute([$id])) {
+        if (!$statement->execute([$identifier])) {
             throw new DatabaseFetchingFailureException();
         }
 

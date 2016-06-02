@@ -130,7 +130,7 @@ class AttributeOptionValueQueryBuilder implements AttributeOptionValueQueryBuild
     }
 
     /**
-     * @param int $id
+     * @param int $identifier
      *
      * @return QueryBuilder
      */

@@ -130,7 +130,7 @@ class AttributeLabelQueryBuilder implements AttributeLabelQueryBuilderInterface
     }
 
     /**
-     * @param int $id
+     * @param int $identifier
      *
      * @return QueryBuilder
      */

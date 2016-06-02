@@ -94,8 +94,8 @@ SQL_EOF;
             $statement->execute();
             $lastId = $statement->fetchColumn();
 
-            for ($id = 0; $id < $count; ++$id) {
-                $messenger->send($lastId + $id);
+            for ($identifier = 0; $identifier < $count; ++$identifier) {
+                $messenger->send($lastId + $identifier);
             }
         }
 

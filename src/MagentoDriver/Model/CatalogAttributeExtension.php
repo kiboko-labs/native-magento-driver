@@ -7,7 +7,7 @@ class CatalogAttributeExtension implements CatalogAttributeExtensionInterface
     /**
      * @var int
      */
-    private $id;
+    private $identifier;
 
     /**
      * @var string
@@ -223,11 +223,11 @@ class CatalogAttributeExtension implements CatalogAttributeExtensionInterface
     }
 
     /**
-     * @param int $id
+     * @param int $identifier
      */
-    public function persistedToId($id)
+    public function persistedToId($identifier)
     {
-        $this->id = $id;
+        $this->id = $identifier;
     }
 
     /**

@@ -41,12 +41,12 @@ class CatalogAttribute implements CatalogAttributeInterface
     }
 
     /**
-     * @param int $id
+     * @param int $identifier
      */
-    public function persistedToId($id)
+    public function persistedToId($identifier)
     {
-        $this->attribute->persistedToId($id);
-        $this->extension->persistedToId($id);
+        $this->attribute->persistedToId($identifier);
+        $this->extension->persistedToId($identifier);
     }
 
     /**

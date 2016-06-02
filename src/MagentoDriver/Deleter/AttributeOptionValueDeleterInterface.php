@@ -5,9 +5,9 @@ namespace Kiboko\Component\MagentoDriver\Deleter;
 interface AttributeOptionValueDeleterInterface
 {
     /**
-     * @param int $id
+     * @param int $identifier
      */
-    public function deleteOneById($id);
+    public function deleteOneById($identifier);
 
     /**
      * @param int[] $idList

@@ -7,7 +7,7 @@ class AttributeOptionValue implements AttributeOptionValueInterface
     /**
      * @var int
      */
-    private $id;
+    private $identifier;
 
     /**
      * @var int
@@ -25,13 +25,13 @@ class AttributeOptionValue implements AttributeOptionValueInterface
     private $value;
 
     /**
-     * @param type $id
+     * @param type $identifier
      * @param type $optionId
      * @param type $storeId
      */
-    public function __construct($id, $optionId, $storeId)
+    public function __construct($identifier, $optionId, $storeId)
     {
-        $this->id = $id;
+        $this->id = $identifier;
         $this->optionId = $optionId;
         $this->storeId = $storeId;
     }
@@ -92,10 +92,10 @@ class AttributeOptionValue implements AttributeOptionValueInterface
     }
 
     /**
-     * @param int $id
+     * @param int $identifier
      */
-    public function persistedToId($id)
+    public function persistedToId($identifier)
     {
-        $this->id = $id;
+        $this->id = $identifier;
     }
 }

@@ -80,10 +80,10 @@ class SimpleProductPersister implements ProductPersisterInterface
      */
     protected function walkQueue()
     {
-        while ($this->productQueue->count() > 0 && $id = yield) {
+        while ($this->productQueue->count() > 0 && $identifier = yield) {
             /** @var ProductInterface $product */
             $product = $this->productQueue->dequeue();
-            $product->persistedToId($id);
+            $product->persistedToId($identifier);
         }
     }
 }

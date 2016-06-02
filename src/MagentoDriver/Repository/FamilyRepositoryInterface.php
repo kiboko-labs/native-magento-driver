@@ -7,11 +7,11 @@ use Kiboko\Component\MagentoDriver\Model\FamilyInterface;
 interface FamilyRepositoryInterface
 {
     /**
-     * @param int $id
+     * @param int $identifier
      *
      * @return FamilyInterface
      */
-    public function findOneById($id);
+    public function findOneById($identifier);
 
     /**
      * @param string $name

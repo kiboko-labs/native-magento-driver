@@ -7,9 +7,9 @@ use Kiboko\Component\MagentoDriver\Model\AttributeOptionInterface;
 interface AttributeOptionRepositoryInterface
 {
     /**
-     * @param int $id
+     * @param int $identifier
      *
      * @return AttributeOptionInterface
      */
-    public function findOneById($id);
+    public function findOneById($identifier);
 }

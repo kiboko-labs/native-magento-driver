@@ -8,11 +8,11 @@ use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
 interface ProductAttributeValueRepositoryBackendInterface extends ProductAttributeValueRepositoryInterface
 {
     /**
-     * @param int $id
+     * @param int $identifier
      *
      * @return AttributeValueInterface
      */
-    public function findOneById($id);
+    public function findOneById($identifier);
 
     /**
      * @param array|int[] $idList

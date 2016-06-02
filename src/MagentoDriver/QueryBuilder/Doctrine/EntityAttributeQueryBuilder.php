@@ -160,7 +160,7 @@ class EntityAttributeQueryBuilder implements EntityAttributeQueryBuilderInterfac
     }
 
     /**
-     * @param int $id
+     * @param int $identifier
      *
      * @return QueryBuilder
      */

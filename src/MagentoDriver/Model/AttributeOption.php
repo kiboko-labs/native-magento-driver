@@ -7,7 +7,7 @@ class AttributeOption implements AttributeOptionInterface
     /**
      * @var int
      */
-    private $id;
+    private $identifier;
 
     /**
      * @var int
@@ -20,11 +20,11 @@ class AttributeOption implements AttributeOptionInterface
     private $sortOrder;
 
     /**
-     * @param int $id
+     * @param int $identifier
      */
-    public function __construct($id)
+    public function __construct($identifier)
     {
-        $this->id = $id;
+        $this->id = $identifier;
     }
 
     /**
@@ -71,10 +71,10 @@ class AttributeOption implements AttributeOptionInterface
     }
 
     /**
-     * @param int $id
+     * @param int $identifier
      */
-    public function persistedToId($id)
+    public function persistedToId($identifier)
     {
-        $this->id = $id;
+        $this->id = $identifier;
     }
 }

@@ -5,9 +5,9 @@ namespace Kiboko\Component\MagentoDriver\Deleter;
 interface ProductDeleterInterface
 {
     /**
-     * @param int $id
+     * @param int $identifier
      */
-    public function deleteOneById($id);
+    public function deleteOneById($identifier);
 
     /**
      * @param int[] $idList
@@ -15,9 +15,9 @@ interface ProductDeleterInterface
     public function deleteAllById(array $idList);
 
     /**
-     * @param int $id
+     * @param int $identifier
      */
-    public function deleteOneByIdentifier($id);
+    public function deleteOneByIdentifier($identifier);
 
     /**
      * @param int[] $skuList

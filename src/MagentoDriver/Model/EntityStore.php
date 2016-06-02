@@ -5,15 +5,15 @@ namespace Kiboko\Component\MagentoDriver\Model;
 class EntityStore implements EntityStoreInterface
 {
     /**
-     * @param int    $id
+     * @param int    $identifier
      * @param string $typeId
      * @param string $storeId
      * @param string $incrementPrefix
      * @param string $incrementLastId
      */
-    public function __construct($id, $typeId, $storeId, $incrementPrefix, $incrementLastId)
+    public function __construct($identifier, $typeId, $storeId, $incrementPrefix, $incrementLastId)
     {
-        $this->id = $id;
+        $this->id = $identifier;
         $this->typeId = $typeId;
         $this->storeId = $storeId;
         $this->incrementPrefix = $incrementPrefix;
@@ -29,11 +29,11 @@ class EntityStore implements EntityStoreInterface
     }
 
     /**
-     * @param int $id
+     * @param int $identifier
      */
-    public function persistToId($id)
+    public function persistToId($identifier)
     {
-        $this->id = $id;
+        $this->id = $identifier;
     }
 
     /**
@@ -69,7 +69,7 @@ class EntityStore implements EntityStoreInterface
     }
 
     /**
-     * @param int    $id
+     * @param int    $identifier
      * @param string $typeId
      * @param string $storeId
      * @param string $incrementPrefix
@@ -77,9 +77,9 @@ class EntityStore implements EntityStoreInterface
      *
      * @return EntityStoreInterface
      */
-    public static function buildNewWith($id, $typeId, $storeId, $incrementPrefix, $incrementLastId)
+    public static function buildNewWith($identifier, $typeId, $storeId, $incrementPrefix, $incrementLastId)
     {
-        $object = new self($id, $typeId, $storeId, $incrementPrefix, $incrementLastId);
+        $object = new self($identifier, $typeId, $storeId, $incrementPrefix, $incrementLastId);
 
         return $object;
     }
