@@ -5,7 +5,7 @@ parameters:
   kiboko.magento_driver.repository.doctrine.entity_store.class:            Kiboko\Component\MagentoDriver\Repository\Doctrine\EntityStoreRepository
   kiboko.magento_driver.repository.doctrine.entity_type.class:             Kiboko\Component\MagentoDriver\Repository\Doctrine\EntityTypeRepository
   kiboko.magento_driver.repository.doctrine.family.class:                  Kiboko\Component\MagentoDriver\Repository\Doctrine\FamilyRepository
-  kiboko.magento_driver.repository.doctrine.product_attribute_value.class: Kiboko\Component\MagentoDriver\Repository\Doctrine\ProuctAttributeValueRepository
+  kiboko.magento_driver.repository.doctrine.product_attribute_value.class: Kiboko\Component\MagentoDriver\Repository\Doctrine\ProductAttributeValueRepository
   kiboko.magento_driver.repository.doctrine.product.class:                 Kiboko\Component\MagentoDriver\Repository\Doctrine\ProuctRepository
 
   kiboko.magento_driver.repository.cached.catalog_attribute.class: Kiboko\Component\MagentoDriver\Repository\CachedRepository\CachedProductAttributeRepository
@@ -69,10 +69,10 @@ services:
   kiboko.magento_driver.repository.cached.catalog_attribute:
     class: '%kiboko.magento_driver.repository.cached.catalog_attribute.class%'
     arguments:
-      - '@kiboko.magento_driver.repository.doctrine.catalog_attribute.class'
+      - '@kiboko.magento_driver.repository.doctrine.catalog_attribute'
 
   kiboko.magento_driver.repository.cached.family:
     class: '%kiboko.magento_driver.repository.cached.family.class%'
     arguments:
-      - '@kiboko.magento_driver.repository.doctrine.family.class'
+      - '@kiboko.magento_driver.repository.doctrine.family'
 

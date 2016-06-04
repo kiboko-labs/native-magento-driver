@@ -150,7 +150,8 @@ class EntityStoreQueryBuilder implements EntityStoreQueryBuilderInterface
 
     /**
      * @param string $alias
-     * @param array $idList
+     * @param array  $idList
+     *
      * @return QueryBuilder
      */
     public function createFindAllByIdQueryBuilder($alias, array $idList)

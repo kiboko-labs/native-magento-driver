@@ -96,11 +96,11 @@ parameters:
     - 'store_id'
     - 'value'
 
-  kiboko.magento_driver.backend.product_attribute_value.datetime.table: 'catalog_product_entity_datetime')
-  kiboko.magento_driver.backend.product_attribute_value.decimal.table: 'catalog_product_entity_decimal')
-  kiboko.magento_driver.backend.product_attribute_value.integer.table: 'catalog_product_entity_integer')
-  kiboko.magento_driver.backend.product_attribute_value.text.table: 'catalog_product_entity_text')
-  kiboko.magento_driver.backend.product_attribute_value.varchar.table: 'catalog_product_entity_varchar')
+  kiboko.magento_driver.backend.product_attribute_value.datetime.table: 'catalog_product_entity_datetime'
+  kiboko.magento_driver.backend.product_attribute_value.decimal.table: 'catalog_product_entity_decimal'
+  kiboko.magento_driver.backend.product_attribute_value.integer.table: 'catalog_product_entity_integer'
+  kiboko.magento_driver.backend.product_attribute_value.text.table: 'catalog_product_entity_text'
+  kiboko.magento_driver.backend.product_attribute_value.varchar.table: 'catalog_product_entity_varchar'
   kiboko.magento_driver.backend.product_attribute_value.variant_axis.table: 'catalog_product_super_attribute'
   kiboko.magento_driver.backend.product_attribute_value.fields:
     - 'value_id'

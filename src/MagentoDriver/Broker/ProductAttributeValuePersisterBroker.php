@@ -50,7 +50,7 @@ class ProductAttributeValuePersisterBroker implements ProductAttributeValuePersi
     public function findFor(AttributeInterface $attribute)
     {
         /**
-         * @var AttributeValueMatcherInterface $matcher
+         * @var AttributeValueMatcherInterface
          * @var AttributeValuePersisterInterface $backend
          */
         foreach ($this->walkPersisterList() as $matcher => $backend) {
