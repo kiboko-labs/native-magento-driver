@@ -49,6 +49,7 @@ class AttributeWriter
 
     /**
      * @param AttributeInterface[] $items
+     *
      * @throws UnexpectedInputException
      */
     public function write(array $items)

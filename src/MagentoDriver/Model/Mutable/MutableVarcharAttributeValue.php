@@ -46,12 +46,13 @@ class MutableVarcharAttributeValue implements MutableAttributeValueInterface, Sc
 
     /**
      * @return ImmutableVarcharAttributeValue
+     * @SuppressWarnings(PHPMD.StaticAccess)
      */
     public function switchToImmutable()
     {
         return ImmutableVarcharAttributeValue::buildNewWith(
             $this->attribute,
-            $this->id,
+            $this->identifier,
             $this->payload,
             $this->product,
             $this->storeId
@@ -62,12 +63,13 @@ class MutableVarcharAttributeValue implements MutableAttributeValueInterface, Sc
      * @param $storeId
      *
      * @return AttributeValueInterface
+     * @SuppressWarnings(PHPMD.StaticAccess)
      */
     public function copyToStoreId($storeId)
     {
         return static::buildNewWith(
             $this->attribute,
-            $this->id,
+            $this->identifier,
             $this->payload,
             $this->product,
             $storeId

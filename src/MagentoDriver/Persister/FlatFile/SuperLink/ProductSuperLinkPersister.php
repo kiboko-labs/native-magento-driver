@@ -74,10 +74,10 @@ class ProductSuperLinkPersister implements SuperLinkPersisterInterface
      */
     protected function walkQueue()
     {
-        while ($this->superLinkQueue->count() > 0 && $id = yield) {
+        while ($this->superLinkQueue->count() > 0 && $identifier = yield) {
             /** @var SuperLinkInterface $superLink */
             $superLink = $this->superLinkQueue->dequeue();
-            $superLink->persistedToId($id);
+            $superLink->persistedToId($identifier);
         }
     }
 }

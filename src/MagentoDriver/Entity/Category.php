@@ -10,18 +10,18 @@ class Category implements CategoryInterface
     /**
      * @var int
      */
-    private $id;
+    private $identifier;
 
     /**
-     * @param int $id
+     * @param int $identifier
      *
      * @return static
      */
-    public static function buildNewWith($id)
+    public static function buildNewWith($identifier)
     {
         $instance = new static();
 
-        $instance->id = $id;
+        $instance->id = $identifier;
 
         return $instance;
     }
@@ -31,7 +31,7 @@ class Category implements CategoryInterface
      */
     public function getId()
     {
-        return $this->id;
+        return $this->identifier;
     }
 
     /**

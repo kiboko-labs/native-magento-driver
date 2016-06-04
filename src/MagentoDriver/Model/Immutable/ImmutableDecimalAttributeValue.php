@@ -38,12 +38,13 @@ class ImmutableDecimalAttributeValue implements ImmutableAttributeValueInterface
 
     /**
      * @return MutableDecimalAttributeValue
+     * @SuppressWarnings(PHPMD.StaticAccess)
      */
     public function switchToMutable()
     {
         return MutableDecimalAttributeValue::buildNewWith(
             $this->attribute,
-            $this->id,
+            $this->identifier,
             $this->payload,
             $this->product,
             $this->storeId
@@ -54,12 +55,13 @@ class ImmutableDecimalAttributeValue implements ImmutableAttributeValueInterface
      * @param $storeId
      *
      * @return AttributeValueInterface
+     * @SuppressWarnings(PHPMD.StaticAccess)
      */
     public function copyToStoreId($storeId)
     {
         return static::buildNewWith(
             $this->attribute,
-            $this->id,
+            $this->identifier,
             $this->payload,
             $this->product,
             $storeId

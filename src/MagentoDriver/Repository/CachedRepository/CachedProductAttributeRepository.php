@@ -64,17 +64,17 @@ class CachedProductAttributeRepository implements ProductAttributeRepositoryInte
     }
 
     /**
-     * @param int $id
+     * @param int $identifier
      *
      * @return AttributeInterface
      */
-    public function findOneById($id)
+    public function findOneById($identifier)
     {
-        if ($this->attributeCacheByCode->containsKey($id)) {
-            return $this->attributeCacheById->get($id);
+        if ($this->attributeCacheByCode->containsKey($identifier)) {
+            return $this->attributeCacheById->get($identifier);
         }
 
-        $attribute = $this->decorated->findOneById($id);
+        $attribute = $this->decorated->findOneById($identifier);
 
         $this->attributeCacheByCode->set($attribute->getCode(), $attribute);
         $this->attributeCacheById->set($attribute->getId(), $attribute);
@@ -126,13 +126,13 @@ class CachedProductAttributeRepository implements ProductAttributeRepositoryInte
     {
         $attributeList = new ArrayCollection();
         $idSearch = [];
-        foreach ($idList as $id) {
-            if (!$this->attributeCacheByCode->containsKey($id)) {
-                $idSearch[] = $id;
+        foreach ($idList as $identifier) {
+            if (!$this->attributeCacheByCode->containsKey($identifier)) {
+                $idSearch[] = $identifier;
                 continue;
             }
 
-            $attributeList->set($id, $this->attributeCacheByCode->get($id));
+            $attributeList->set($identifier, $this->attributeCacheByCode->get($identifier));
         }
 
         if (count($idSearch) <= 0) {
@@ -141,10 +141,10 @@ class CachedProductAttributeRepository implements ProductAttributeRepositoryInte
 
         $searchedAttributeList = $this->decorated->findAllById($idSearch);
         foreach ($searchedAttributeList as $attribute) {
-            $id = $attribute->getId();
-            $attributeList->set($id, $attribute);
+            $identifier = $attribute->getId();
+            $attributeList->set($identifier, $attribute);
 
-            $this->attributeCacheById->set($id, $attribute);
+            $this->attributeCacheById->set($identifier, $attribute);
             $this->attributeCacheByCode->set($attribute->getCode(), $attribute);
         }
 

@@ -32,19 +32,19 @@ class AttributeOptionDeleter implements AttributeOptionDeleterInterface
     }
 
     /**
-     * @param int $id
+     * @param int $identifier
      *
      * @return int
      *
      * @throws \Doctrine\DBAL\DBALException
      * @throws DatabaseFetchingFailureException
      */
-    public function deleteOneById($id)
+    public function deleteOneById($identifier)
     {
         $query = $this->queryBuilder->createDeleteOneByIdQueryBuilder();
 
         $statement = $this->connection->prepare($query);
-        if (!$statement->execute([$id])) {
+        if (!$statement->execute([$identifier])) {
             throw new DatabaseFetchingFailureException();
         }
 

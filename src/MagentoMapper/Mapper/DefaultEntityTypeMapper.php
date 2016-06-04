@@ -12,6 +12,7 @@ class DefaultEntityTypeMapper implements EntityTypeMapperInterface
 
     /**
      * @param AttributeInterface $identifier
+     *
      * @return mixed|void
      */
     public function map(AttributeInterface $identifier)

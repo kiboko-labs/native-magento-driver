@@ -63,12 +63,13 @@ class MutableImageAttributeValue implements MutableAttributeValueInterface, Imag
 
     /**
      * @return ImmutableImageAttributeValue
+     * @SuppressWarnings(PHPMD.StaticAccess)
      */
     public function switchToImmutable()
     {
         return ImmutableImageAttributeValue::buildNewWith(
             $this->attribute,
-            $this->id,
+            $this->identifier,
             $this->file,
             $this->product,
             $this->metadata->toArray()

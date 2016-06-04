@@ -10,6 +10,9 @@ use Doctrine\Common\Collections\Collection;
 use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
 use Kiboko\Component\MagentoDriver\Exception\InvalidProductTypeException;
 
+/**
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ */
 class StandardProductFactory implements ProductFactoryInterface
 {
     /**

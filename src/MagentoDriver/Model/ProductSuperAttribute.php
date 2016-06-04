@@ -10,7 +10,7 @@ class ProductSuperAttribute implements SuperAttributeInterface
     /**
      * @var int
      */
-    private $id;
+    private $identifier;
 
     /**
      * @var AttributeInterface
@@ -42,7 +42,7 @@ class ProductSuperAttribute implements SuperAttributeInterface
     }
 
     /**
-     * @param int                $id
+     * @param int                $identifier
      * @param AttributeInterface $attribute
      * @param ProductInterface   $product
      * @param int                $position
@@ -50,14 +50,14 @@ class ProductSuperAttribute implements SuperAttributeInterface
      * @return static
      */
     public static function buildNewWith(
-        $id,
+        $identifier,
         AttributeInterface $attribute,
         ProductInterface $product,
         $position = null
     ) {
         $instance = new self($attribute, $product, $position);
 
-        $instance->id = $id;
+        $instance->id = $identifier;
 
         return $instance;
     }
@@ -67,7 +67,7 @@ class ProductSuperAttribute implements SuperAttributeInterface
      */
     public function getId()
     {
-        return $this->id;
+        return $this->identifier;
     }
 
     /**
@@ -115,10 +115,10 @@ class ProductSuperAttribute implements SuperAttributeInterface
     }
 
     /**
-     * @param int $id
+     * @param int $identifier
      */
-    public function persistedToId($id)
+    public function persistedToId($identifier)
     {
-        $this->id = $id;
+        $this->identifier = $identifier;
     }
 }

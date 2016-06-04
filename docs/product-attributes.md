@@ -165,7 +165,7 @@ services:
   kiboko.magento_driver.repository.cached.catalog_attribute:
     class: '%kiboko.magento_driver.repository.cached.catalog_attribute.class%'
     arguments:
-      - '@kiboko.magento_driver.repository.doctrine.catalog_attribute.class'
+      - '@kiboko.magento_driver.repository.doctrine.catalog_attribute'
 ```
 
 ## Persisting data

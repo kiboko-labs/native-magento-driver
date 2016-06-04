@@ -62,12 +62,13 @@ class MutableImageMetadataAttributeValue implements MutableAttributeValueInterfa
 
     /**
      * @return ImmutableImageMetadataAttributeValue
+     * @SuppressWarnings(PHPMD.StaticAccess)
      */
     public function switchToImmutable()
     {
         return ImmutableImageMetadataAttributeValue::buildNewWith(
             $this->attribute,
-            $this->id,
+            $this->identifier,
             $this->label,
             $this->position,
             $this->excluded,
@@ -79,12 +80,13 @@ class MutableImageMetadataAttributeValue implements MutableAttributeValueInterfa
      * @param $storeId
      *
      * @return AttributeValueInterface
+     * @SuppressWarnings(PHPMD.StaticAccess)
      */
     public function copyToStoreId($storeId)
     {
         return static::buildNewWith(
             $this->attribute,
-            $this->id,
+            $this->identifier,
             $this->label,
             $this->position,
             $this->excluded,

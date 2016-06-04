@@ -9,11 +9,11 @@ use Kiboko\Component\MagentoDriver\Model\OptionInterface;
 interface OptionRepositoryInterface
 {
     /**
-     * @param int $id
+     * @param int $identifier
      *
      * @return OptionInterface
      */
-    public function findOneById($id);
+    public function findOneById($identifier);
 
     /**
      * @param array|int[] $idList

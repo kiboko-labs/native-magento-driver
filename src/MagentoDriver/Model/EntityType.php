@@ -9,12 +9,12 @@ class EntityType implements EntityTypeInterface
      */
 
     /**
-     * @param int    $id
+     * @param int    $identifier
      * @param string $code
      */
-    public function __construct($id, $code)
+    public function __construct($identifier, $code)
     {
-        $this->id = $id;
+        $this->identifier = $identifier;
         $this->code = $code;
     }
 
@@ -23,15 +23,15 @@ class EntityType implements EntityTypeInterface
      */
     public function getId()
     {
-        return $this->id;
+        return $this->identifier;
     }
 
     /**
-     * @param int $id
+     * @param int $identifier
      */
-    public function persistToId($id)
+    public function persistToId($identifier)
     {
-        $this->id = $id;
+        $this->identifier = $identifier;
     }
 
     /**

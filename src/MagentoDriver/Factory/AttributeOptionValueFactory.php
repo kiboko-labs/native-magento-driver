@@ -5,6 +5,9 @@ namespace Kiboko\Component\MagentoDriver\Factory;
 use Kiboko\Component\MagentoDriver\Model\AttributeOptionValue;
 use Kiboko\Component\MagentoDriver\Model\AttributeOptionValueInterface;
 
+/**
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ */
 class AttributeOptionValueFactory implements AttributeOptionValueFactoryInterface
 {
     /**

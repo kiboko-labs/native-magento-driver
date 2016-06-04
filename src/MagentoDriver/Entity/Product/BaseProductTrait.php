@@ -19,12 +19,12 @@ trait BaseProductTrait
     /**
      * @var int
      */
-    private $id;
+    private $identifier;
 
     /**
      * @var string
      */
-    private $identifier;
+    private $stringIdentifier;
 
     /**
      * @var Collection|AttributeInterface[]
@@ -61,15 +61,20 @@ trait BaseProductTrait
      */
     private $modificationDate;
 
+    /**
+     * @param \DateTimeInterface|null $dateTime
+     * @return \DateTimeImmutable|\DateTimeInterface
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
     private function initializeDate(\DateTimeInterface $dateTime = null)
     {
         if ($dateTime === null) {
             return new \DateTimeImmutable();
-        } elseif ($dateTime instanceof \DateTime) {
-            return \DateTimeImmutable::createFromMutable($dateTime);
-        } else {
-            return $dateTime;
         }
+        if ($dateTime instanceof \DateTime) {
+            return \DateTimeImmutable::createFromMutable($dateTime);
+        }
+        return $dateTime;
     }
 
     /**
@@ -77,20 +82,20 @@ trait BaseProductTrait
      */
     public function getId()
     {
-        return $this->id;
+        return $this->identifier;
     }
 
     /**
-     * @param int $id
+     * @param int $identifier
      *
      * @return ProductInterface
      */
-    public function persistedToId($id)
+    public function persistedToId($identifier)
     {
-        if ($this->id !== null) {
+        if ($this->identifier !== null) {
             throw new RuntimeErrorException('Product ID is immutable once set.');
         }
-        $this->id = $id;
+        $this->identifier = $identifier;
     }
 
     /**

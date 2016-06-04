@@ -7,7 +7,7 @@ class EntityAttribute implements EntityAttributeInterface
     /**
      * @var int
      */
-    private $id;
+    private $identifier;
 
     /**
      * @var int
@@ -35,11 +35,11 @@ class EntityAttribute implements EntityAttributeInterface
     private $sortOrder;
 
     /**
-     * @param int $id
+     * @param int $identifier
      */
-    public function __construct($id)
+    public function __construct($identifier)
     {
-        $this->id = $id;
+        $this->identifier = $identifier;
     }
 
     /**
@@ -47,7 +47,7 @@ class EntityAttribute implements EntityAttributeInterface
      */
     public function getId()
     {
-        return $this->id;
+        return $this->identifier;
     }
 
     /**
@@ -121,10 +121,10 @@ class EntityAttribute implements EntityAttributeInterface
     }
 
     /**
-     * @param int $id
+     * @param int $identifier
      */
-    public function persistedToId($id)
+    public function persistedToId($identifier)
     {
-        $this->id = $id;
+        $this->identifier = $identifier;
     }
 }

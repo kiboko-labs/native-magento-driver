@@ -7,7 +7,7 @@ class Attribute implements AttributeInterface
     /**
      * @var int
      */
-    private $id;
+    private $identifier;
 
     /**
      * @var int
@@ -213,15 +213,15 @@ class Attribute implements AttributeInterface
      */
     public function getId()
     {
-        return $this->id;
+        return $this->identifier;
     }
 
     /**
-     * @param int $id
+     * @param int $identifier
      */
-    public function persistedToId($id)
+    public function persistedToId($identifier)
     {
-        $this->id = $id;
+        $this->identifier = $identifier;
     }
 
     /**

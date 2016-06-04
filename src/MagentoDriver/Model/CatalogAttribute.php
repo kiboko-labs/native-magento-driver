@@ -41,12 +41,12 @@ class CatalogAttribute implements CatalogAttributeInterface
     }
 
     /**
-     * @param int $id
+     * @param int $identifier
      */
-    public function persistedToId($id)
+    public function persistedToId($identifier)
     {
-        $this->attribute->persistedToId($id);
-        $this->extension->persistedToId($id);
+        $this->attribute->persistedToId($identifier);
+        $this->extension->persistedToId($identifier);
     }
 
     /**
@@ -186,7 +186,7 @@ class CatalogAttribute implements CatalogAttributeInterface
     }
 
     /**
-     * @return bool
+     * @return string
      */
     public function getFrontendInputRendererClassName()
     {
@@ -347,7 +347,7 @@ class CatalogAttribute implements CatalogAttributeInterface
     }
 
     /**
-     * @return bool
+     * @return int
      */
     public function getPosition()
     {
@@ -355,7 +355,7 @@ class CatalogAttribute implements CatalogAttributeInterface
     }
 
     /**
-     * @return bool
+     * @return int
      */
     public function getSearchWeight()
     {

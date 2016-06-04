@@ -165,7 +165,7 @@ class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
     }
 
     /**
-     * @param int $id
+     * @param int $identifier
      *
      * @return QueryBuilder
      */

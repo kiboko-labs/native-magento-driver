@@ -17,11 +17,11 @@ interface ProductRepositoryInterface
     public function findOneByIdentifier($code);
 
     /**
-     * @param int $id
+     * @param int $identifier
      *
      * @return ProductInterface
      */
-    public function findOneById($id);
+    public function findOneById($identifier);
 
     /**
      * @param array $identifierList

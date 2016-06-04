@@ -53,16 +53,16 @@ class EntityTypeRepository implements EntityTypeRepositoryInterface
     }
 
     /**
-     * @param int $id
+     * @param int $identifier
      *
      * @return EntityTypeInterface
      */
-    public function findOneById($id)
+    public function findOneById($identifier)
     {
         $query = $this->queryBuilder->createFindOneByIdQueryBuilder('e');
 
         $statement = $this->connection->prepare($query);
-        if (!$statement->execute([$id])) {
+        if (!$statement->execute([$identifier])) {
             throw new DatabaseFetchingFailureException();
         }
 

@@ -28,6 +28,7 @@ class AttributeProcessor
 
     /**
      * AttributeProcessor constructor.
+     *
      * @param AttributeTransformerInterface $attributeTransformer
      */
     public function __construct(

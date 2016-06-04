@@ -123,16 +123,16 @@ class CatalogAttributeRepository implements ProductAttributeRepositoryInterface
     }
 
     /**
-     * @param int $id
+     * @param int $identifier
      *
      * @return CatalogAttributeExtensionInterface
      */
-    public function findOneById($id)
+    public function findOneById($identifier)
     {
         $query = $this->queryBuilder->createFindOneByIdQueryBuilder('a', 'x');
 
         $statement = $this->connection->prepare($query);
-        if (!$statement->execute([$id])) {
+        if (!$statement->execute([$identifier])) {
             throw new DatabaseFetchingFailureException();
         }
 

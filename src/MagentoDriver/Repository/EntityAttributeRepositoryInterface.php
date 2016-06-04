@@ -7,11 +7,11 @@ use Kiboko\Component\MagentoDriver\Model\EntityAttributeInterface;
 interface EntityAttributeRepositoryInterface
 {
     /**
-     * @param int $id
+     * @param int $identifier
      *
      * @return EntityAttributeInterface
      */
-    public function findOneById($id);
+    public function findOneById($identifier);
 
     /**
      * return all statements.

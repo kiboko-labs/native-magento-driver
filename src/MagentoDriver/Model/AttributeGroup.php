@@ -7,7 +7,7 @@ class AttributeGroup implements AttributeGroupInterface
     /**
      * @var int
      */
-    private $id;
+    private $identifier;
 
     /**
      * @var int
@@ -44,7 +44,7 @@ class AttributeGroup implements AttributeGroupInterface
      */
     public function getId()
     {
-        return $this->id;
+        return $this->identifier;
     }
 
     /**
@@ -103,10 +103,10 @@ class AttributeGroup implements AttributeGroupInterface
     }
 
     /**
-     * @param int $id
+     * @param int $identifier
      */
-    public function persistedToId($id)
+    public function persistedToId($identifier)
     {
-        $this->id = $id;
+        $this->identifier = $identifier;
     }
 }

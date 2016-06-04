@@ -2,12 +2,14 @@
 
 namespace Kiboko\Component\MagentoDriver\Factory;
 
-use Closure;
 use Kiboko\Component\MagentoDriver\Exception\InvalidProductTypeException;
 use Kiboko\Component\MagentoDriver\Matcher\AttributeValueMatcherInterface;
 use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
 use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
 
+/**
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ */
 class StandardProductAttributeValueFactory implements ProductAttributeValueFactoryInterface
 {
     /**
@@ -52,7 +54,7 @@ class StandardProductAttributeValueFactory implements ProductAttributeValueFacto
     public function buildNew(AttributeInterface $attribute, array $options)
     {
         /**
-         * @var AttributeValueMatcherInterface $matcher
+         * @var AttributeValueMatcherInterface
          * @var AttributeValueFactoryInterface $builder
          */
         foreach ($this->walkBuildersList() as $matcher => $builder) {

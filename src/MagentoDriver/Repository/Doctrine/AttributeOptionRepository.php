@@ -52,16 +52,16 @@ class AttributeOptionRepository implements AttributeOptionRepositoryInterface
     }
 
     /**
-     * @param int $id
+     * @param int $identifier
      *
      * @return AttributeOptionInterface
      */
-    public function findOneById($id)
+    public function findOneById($identifier)
     {
         $query = $this->queryBuilder->createFindOneByIdQueryBuilder('eav_o');
 
         $statement = $this->connection->prepare($query);
-        if (!$statement->execute([$id])) {
+        if (!$statement->execute([$identifier])) {
             throw new DatabaseFetchingFailureException();
         }
 

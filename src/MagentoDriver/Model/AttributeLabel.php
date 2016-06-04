@@ -7,7 +7,7 @@ class AttributeLabel implements AttributeLabelInterface
     /**
      * @var int
      */
-    private $id;
+    private $identifier;
 
     /**
      * @var int
@@ -25,11 +25,11 @@ class AttributeLabel implements AttributeLabelInterface
     private $value;
 
     /**
-     * @param int $id
+     * @param int $identifier
      */
-    public function __construct($id)
+    public function __construct($identifier)
     {
-        $this->id = $id;
+        $this->identifier = $identifier;
     }
 
     /**
@@ -37,7 +37,7 @@ class AttributeLabel implements AttributeLabelInterface
      */
     public function getId()
     {
-        return $this->id;
+        return $this->identifier;
     }
 
     /**
@@ -86,10 +86,10 @@ class AttributeLabel implements AttributeLabelInterface
     }
 
     /**
-     * @param int $id
+     * @param int $identifier
      */
-    public function persistedToId($id)
+    public function persistedToId($identifier)
     {
-        $this->id = $id;
+        $this->identifier = $identifier;
     }
 }

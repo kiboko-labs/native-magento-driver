@@ -38,12 +38,13 @@ class ImmutableIntegerAttributeValue implements ImmutableAttributeValueInterface
 
     /**
      * @return MutableIntegerAttributeValue
+     * @SuppressWarnings(PHPMD.StaticAccess)
      */
     public function switchToMutable()
     {
         return MutableIntegerAttributeValue::buildNewWith(
             $this->attribute,
-            $this->id,
+            $this->identifier,
             $this->payload,
             $this->product,
             $this->storeId
@@ -54,12 +55,13 @@ class ImmutableIntegerAttributeValue implements ImmutableAttributeValueInterface
      * @param $storeId
      *
      * @return AttributeValueInterface
+     * @SuppressWarnings(PHPMD.StaticAccess)
      */
     public function copyToStoreId($storeId)
     {
         return static::buildNewWith(
             $this->attribute,
-            $this->id,
+            $this->identifier,
             $this->payload,
             $this->product,
             $storeId

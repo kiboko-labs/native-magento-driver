@@ -8,11 +8,11 @@ use Kiboko\Component\MagentoDriver\Model\EntityTypeInterface;
 interface EntityTypeRepositoryInterface
 {
     /**
-     * @param int $id
+     * @param int $identifier
      *
      * @return EntityTypeInterface
      */
-    public function findOneById($id);
+    public function findOneById($identifier);
 
     /**
      * @param string $code

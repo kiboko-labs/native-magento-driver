@@ -63,6 +63,8 @@ The driver is split into several tools, each of them having its implementation f
   * [MySQL specific, CSV direct importer](product-attributes.md#mysql-specific-csv-direct-importer)
 * [Deleting data](product-attributes.md#deleting-data)
 
+### [Product values](product-values.md)
+
 ## Initialize the `DatetimeAttributeBackend` objects
 
 This `DatetimeAttributeBackend` is used to store attribute values of type `datetime`.

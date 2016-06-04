@@ -52,16 +52,16 @@ class FamilyRepository implements FamilyRepositoryInterface
     }
 
     /**
-     * @param int $id
+     * @param int $identifier
      *
      * @return FamilyInterface
      */
-    public function findOneById($id)
+    public function findOneById($identifier)
     {
         $query = $this->queryBuilder->createFindOneByIdQueryBuilder('f');
 
         $statement = $this->connection->prepare($query);
-        if (!$statement->execute([$id])) {
+        if (!$statement->execute([$identifier])) {
             throw new DatabaseFetchingFailureException();
         }
 

@@ -7,9 +7,9 @@ use Kiboko\Component\MagentoDriver\Model\AttributeLabelInterface;
 interface AttributeLabelRepositoryInterface
 {
     /**
-     * @param int $id
+     * @param int $identifier
      *
      * @return AttributeLabelInterface
      */
-    public function findOneById($id);
+    public function findOneById($identifier);
 }
