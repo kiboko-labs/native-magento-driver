@@ -58,7 +58,7 @@ trait ImageMetadataAttributeValueTrait
     ) {
         $object = new static($attribute, $label, $position, $excluded, $storeId);
 
-        $object->id = $valueId;
+        $object->identifier = $valueId;
 
         return $object;
     }

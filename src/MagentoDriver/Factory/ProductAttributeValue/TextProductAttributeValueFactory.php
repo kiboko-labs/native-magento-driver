@@ -11,7 +11,8 @@ class TextProductAttributeValueFactory implements ProductAttributeValueFactoryIn
 {
     /**
      * @param AttributeInterface $attribute
-     * @param array $options
+     * @param array              $options
+     *
      * @return TextAttributeValueInterface
      */
     public function buildNew(AttributeInterface $attribute, array $options)

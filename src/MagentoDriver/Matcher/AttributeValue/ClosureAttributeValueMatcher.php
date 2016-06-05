@@ -1,10 +1,11 @@
 <?php
 
-namespace Kiboko\Component\MagentoDriver\Matcher;
+namespace Kiboko\Component\MagentoDriver\Matcher\AttributeValue;
 
+use Kiboko\Component\MagentoDriver\Matcher\AttributeMatcherInterface;
 use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
 
-class ClosureAttributeValueMatcher implements AttributeValueMatcherInterface
+class ClosureAttributeValueMatcher implements AttributeMatcherInterface
 {
     /**
      * @var \Closure
@@ -12,15 +13,15 @@ class ClosureAttributeValueMatcher implements AttributeValueMatcherInterface
     private $closure;
 
     /**
-     * @var AttributeValueMatcherInterface
+     * @var AttributeMatcherInterface
      */
     private $next;
 
     /**
-     * @param \Closure                            $matcher
-     * @param AttributeValueMatcherInterface|null $next
+     * @param \Closure                       $matcher
+     * @param AttributeMatcherInterface|null $next
      */
-    public function __construct(\Closure $matcher, AttributeValueMatcherInterface $next = null)
+    public function __construct(\Closure $matcher, AttributeMatcherInterface $next = null)
     {
         $this->closure = $matcher;
     }

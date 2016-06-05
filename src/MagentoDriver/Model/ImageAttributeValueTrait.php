@@ -53,7 +53,7 @@ trait ImageAttributeValueTrait
     ) {
         $object = new static($attribute, $file, $product, $metadata);
 
-        $object->id = $valueId;
+        $object->identifier = $valueId;
 
         return $object;
     }

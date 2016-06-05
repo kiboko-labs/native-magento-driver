@@ -93,7 +93,7 @@ class AttributeGroup implements AttributeGroupInterface
     ) {
         $object = new static($familyId, $label);
 
-        $object->id = $attributeGroupId;
+        $object->identifier = $attributeGroupId;
         $object->familyId = $familyId;
         $object->label = $label;
         $object->sortOrder = $sortOrder;

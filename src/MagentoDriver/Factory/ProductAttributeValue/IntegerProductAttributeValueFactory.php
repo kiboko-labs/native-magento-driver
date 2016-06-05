@@ -11,7 +11,8 @@ class IntegerProductAttributeValueFactory implements ProductAttributeValueFactor
 {
     /**
      * @param AttributeInterface $attribute
-     * @param array $options
+     * @param array              $options
+     *
      * @return IntegerAttributeValueInterface
      */
     public function buildNew(AttributeInterface $attribute, array $options)

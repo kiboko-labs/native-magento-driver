@@ -7,10 +7,9 @@ use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
 interface ProductFactoryInterface
 {
     /**
-     * @param string $type
      * @param array  $options
      *
      * @return ProductInterface
      */
-    public function buildNew($type, array $options);
+    public function buildNew(array $options);
 }

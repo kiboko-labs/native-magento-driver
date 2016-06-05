@@ -60,7 +60,7 @@ class SimpleProduct implements SimpleProductInterface
     ) {
         $instance = new self($stringIdentifier, $family, $creationDate, $modificationDate);
 
-        $instance->id = $identifier;
+        $instance->identifier = $identifier;
 
         if ($values !== null) {
             /** @var AttributeValueInterface $value */

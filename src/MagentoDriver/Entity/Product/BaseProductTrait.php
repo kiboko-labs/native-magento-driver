@@ -63,6 +63,7 @@ trait BaseProductTrait
 
     /**
      * @param \DateTimeInterface|null $dateTime
+     *
      * @return \DateTimeImmutable|\DateTimeInterface
      * @SuppressWarnings(PHPMD.StaticAccess)
      */
@@ -74,6 +75,7 @@ trait BaseProductTrait
         if ($dateTime instanceof \DateTime) {
             return \DateTimeImmutable::createFromMutable($dateTime);
         }
+
         return $dateTime;
     }
 

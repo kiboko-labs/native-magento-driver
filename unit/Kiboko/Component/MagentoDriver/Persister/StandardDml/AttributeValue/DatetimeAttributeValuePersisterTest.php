@@ -89,6 +89,8 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
         $schemaBuilder->ensureCatalogProductAttributeValueToStoreLinks('datetime');
         $schemaBuilder->ensureCatalogProductAttributeValueToCatalogProductEntityLinks('datetime');
 
+        $schemaBuilder->hydrateAttributeTable('1.9', 'ce');
+
         $comparator = new \Doctrine\DBAL\Schema\Comparator();
         $schemaDiff = $comparator->compare($currentSchema, $this->schema);
 

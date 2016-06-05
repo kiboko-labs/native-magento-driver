@@ -52,10 +52,7 @@ class ProductRepository implements ProductRepositoryInterface
      */
     protected function createNewProductInstanceFromDatabase(array $options)
     {
-        $type = isset($options['type_id']) ? $options['type_id'] : null;
-        unset($options['type_id']);
-
-        $product = $this->productFactory->buildNew($type, $options);
+        $product = $this->productFactory->buildNew($options);
 
         return $product;
     }

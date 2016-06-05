@@ -202,7 +202,7 @@ class Attribute implements AttributeInterface
             $note
         );
 
-        $object->id = $attributeId;
+        $object->identifier = $attributeId;
 
         return $object;
     }

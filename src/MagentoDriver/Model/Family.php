@@ -67,7 +67,7 @@ class Family implements FamilyInterface
     ) {
         $object = new static($label);
 
-        $object->id = $familyId;
+        $object->identifier = $familyId;
         $object->sortOrder = $sortOrder;
 
         return $object;

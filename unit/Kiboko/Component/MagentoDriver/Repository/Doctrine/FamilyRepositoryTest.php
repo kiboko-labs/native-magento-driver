@@ -109,8 +109,8 @@ class FamilyRepositoryTest extends \PHPUnit_Framework_TestCase
         $family = $this->repository->findOneById(4);
         $this->assertInstanceOf(FamilyInterface::class, $family);
 
-        $this->assertEquals($family->getId(), 4);
-        $this->assertEquals($family->getLabel(), 'Default');
+        $this->assertEquals(4, $family->getId());
+        $this->assertEquals('Default', $family->getLabel());
     }
 
     public function testFetchingOneByIdButNonExistent()
@@ -123,8 +123,8 @@ class FamilyRepositoryTest extends \PHPUnit_Framework_TestCase
         $family = $this->repository->findOneByName('Default');
         $this->assertInstanceOf(FamilyInterface::class, $family);
 
-        $this->assertEquals($family->getLabel(), 'Default');
-        $this->assertEquals($family->getId(), 4);
+        $this->assertEquals('Default', $family->getLabel());
+        $this->assertEquals(4, $family->getId());
     }
 
     public function testFetchingOneByNameButNonExistent()

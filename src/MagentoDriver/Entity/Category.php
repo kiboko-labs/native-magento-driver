@@ -21,7 +21,7 @@ class Category implements CategoryInterface
     {
         $instance = new static();
 
-        $instance->id = $identifier;
+        $instance->identifier = $identifier;
 
         return $instance;
     }

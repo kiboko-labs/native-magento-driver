@@ -25,9 +25,9 @@ class AttributeOptionValue implements AttributeOptionValueInterface
     private $value;
 
     /**
-     * @param type $identifier
-     * @param type $optionId
-     * @param type $storeId
+     * @param int $identifier
+     * @param int $optionId
+     * @param int $storeId
      */
     public function __construct($identifier, $optionId, $storeId)
     {
@@ -77,11 +77,14 @@ class AttributeOptionValue implements AttributeOptionValueInterface
      * @return AttributeOptionValueInterface
      */
     public static function buildNewWith(
-    $attributeOptionValueId, $optionId, $storeId, $value = null
+        $attributeOptionValueId,
+        $optionId,
+        $storeId,
+        $value = null
     ) {
         $object = new static($attributeOptionValueId, $optionId, $storeId);
 
-        $object->id = $attributeOptionValueId;
+        $object->identifier = $attributeOptionValueId;
         $object->optionId = $optionId;
         $object->storeId = $storeId;
         $object->value = (isset($value))

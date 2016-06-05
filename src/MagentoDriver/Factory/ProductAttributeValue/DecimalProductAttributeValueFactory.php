@@ -11,7 +11,8 @@ class DecimalProductAttributeValueFactory implements ProductAttributeValueFactor
 {
     /**
      * @param AttributeInterface $attribute
-     * @param array $options
+     * @param array              $options
+     *
      * @return DecimalAttributeValueInterface
      */
     public function buildNew(AttributeInterface $attribute, array $options)

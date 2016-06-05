@@ -46,7 +46,7 @@ trait DecimalAttributeValueTrait
     ) {
         $object = new static($attribute, $payload, $product, $storeId);
 
-        $object->id = $valueId;
+        $object->identifier = $valueId;
 
         return $object;
     }

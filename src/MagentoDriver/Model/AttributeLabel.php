@@ -77,7 +77,7 @@ class AttributeLabel implements AttributeLabelInterface
     ) {
         $object = new static($attributeLabelId);
 
-        $object->id = $attributeLabelId;
+        $object->identifier = $attributeLabelId;
         $object->attributeId = $attributeId;
         $object->storeId = $storeId;
         $object->value = $value;

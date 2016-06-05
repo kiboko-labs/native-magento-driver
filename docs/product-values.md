@@ -250,7 +250,7 @@ Due to the fact that there could be a lot of different backends, the library pro
 
 use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
 use Kiboko\Component\MagentoDriver\Broker\AttributeBackendBroker;
-use Kiboko\Component\MagentoDriver\Matcher\BackendTypeAttributeValueMatcher;
+use Kiboko\Component\MagentoDriver\Matcher\AttributeType\BackendTypeAttributeValueMatcher;
 
 $backendBroker = new AttributeBackendBroker();
 $backendBroker->addBackend($productAttributeDatetimeQueryBuilder, new BackendTypeAttributeValueMatcher('int'));

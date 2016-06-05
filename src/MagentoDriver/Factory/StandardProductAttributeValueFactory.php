@@ -3,7 +3,7 @@
 namespace Kiboko\Component\MagentoDriver\Factory;
 
 use Kiboko\Component\MagentoDriver\Exception\InvalidProductTypeException;
-use Kiboko\Component\MagentoDriver\Matcher\AttributeValueMatcherInterface;
+use Kiboko\Component\MagentoDriver\Matcher\AttributeMatcherInterface;
 use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
 use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
 
@@ -27,9 +27,9 @@ class StandardProductAttributeValueFactory implements ProductAttributeValueFacto
 
     /**
      * @param AttributeValueFactoryInterface $matcher
-     * @param AttributeValueMatcherInterface $builder
+     * @param AttributeMatcherInterface $builder
      */
-    public function addBuilder(AttributeValueFactoryInterface $matcher, AttributeValueMatcherInterface $builder)
+    public function addBuilder(AttributeValueFactoryInterface $matcher, AttributeMatcherInterface $builder)
     {
         $this->builders->attach($matcher, $builder);
     }
@@ -39,7 +39,7 @@ class StandardProductAttributeValueFactory implements ProductAttributeValueFacto
      */
     public function walkBuildersList()
     {
-        /** @var AttributeValueMatcherInterface $matcher */
+        /** @var AttributeMatcherInterface $matcher */
         foreach ($this->builders as $matcher) {
             yield $matcher => $this->builders[$matcher];
         }
@@ -54,7 +54,7 @@ class StandardProductAttributeValueFactory implements ProductAttributeValueFacto
     public function buildNew(AttributeInterface $attribute, array $options)
     {
         /**
-         * @var AttributeValueMatcherInterface
+         * @var AttributeMatcherInterface
          * @var AttributeValueFactoryInterface $builder
          */
         foreach ($this->walkBuildersList() as $matcher => $builder) {

@@ -11,7 +11,8 @@ class VarcharProductAttributeValueFactory implements ProductAttributeValueFactor
 {
     /**
      * @param AttributeInterface $attribute
-     * @param array $options
+     * @param array              $options
+     *
      * @return VarcharAttributeValueInterface
      */
     public function buildNew(AttributeInterface $attribute, array $options)

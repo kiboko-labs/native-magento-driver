@@ -38,7 +38,7 @@ trait MediaGalleryAttributeValueTrait
     ) {
         $object = new static($attribute, $imagesCollection);
 
-        $object->id = $valueId;
+        $object->identifier = $valueId;
 
         return $object;
     }
