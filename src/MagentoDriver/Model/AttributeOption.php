@@ -63,7 +63,7 @@ class AttributeOption implements AttributeOptionInterface
     ) {
         $object = new static($attributeOptionId);
 
-        $object->id = $attributeOptionId;
+        $object->identifier = $attributeOptionId;
         $object->attributeId = $attributeId;
         $object->sortOrder = $sortOrder;
 

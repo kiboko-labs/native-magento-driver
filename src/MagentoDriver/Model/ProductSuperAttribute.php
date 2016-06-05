@@ -57,7 +57,7 @@ class ProductSuperAttribute implements SuperAttributeInterface
     ) {
         $instance = new self($attribute, $product, $position);
 
-        $instance->id = $identifier;
+        $instance->identifier = $identifier;
 
         return $instance;
     }

@@ -2,7 +2,7 @@
 
 namespace Kiboko\Component\MagentoDriver\Broker;
 
-use Kiboko\Component\MagentoDriver\Matcher\AttributeValueMatcherInterface;
+use Kiboko\Component\MagentoDriver\Matcher\AttributeMatcherInterface;
 use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
 use Kiboko\Component\MagentoDriver\Repository\ProductAttributeValueRepositoryInterface;
 
@@ -23,11 +23,11 @@ class ProductAttributeValueRepositoryBroker implements ProductAttributeValueRepo
 
     /**
      * @param ProductAttributeValueRepositoryInterface $repository
-     * @param AttributeValueMatcherInterface           $matcher
+     * @param AttributeMatcherInterface           $matcher
      */
     public function addRepository(
         ProductAttributeValueRepositoryInterface $repository,
-        AttributeValueMatcherInterface $matcher
+        AttributeMatcherInterface $matcher
     ) {
         $this->repositories->attach($matcher, $repository);
     }
@@ -50,7 +50,7 @@ class ProductAttributeValueRepositoryBroker implements ProductAttributeValueRepo
     public function findFor(AttributeInterface $attribute)
     {
         /**
-         * @var AttributeValueMatcherInterface
+         * @var AttributeMatcherInterface
          * @var ProductAttributeValueRepositoryInterface $repository
          */
         foreach ($this->walkRepositoryList() as $matcher => $repository) {

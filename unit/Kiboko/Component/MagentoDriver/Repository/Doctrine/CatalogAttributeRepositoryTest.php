@@ -35,7 +35,8 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
     protected function getDataSet()
     {
         $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-                $this->getFixturesPathname('catalog_eav_attribute', '1.9', 'ce'));
+            $this->getFixturesPathname('catalog_eav_attribute', '1.9', 'ce')
+        );
 
         return $dataset;
     }
@@ -49,15 +50,15 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
         $this->getDoctrineConnection()->exec(
-                $platform->getTruncateTableSQL('eav_entity_type')
+            $platform->getTruncateTableSQL('eav_entity_type')
         );
 
         $this->getDoctrineConnection()->exec(
-                $platform->getTruncateTableSQL('eav_attribute')
+            $platform->getTruncateTableSQL('eav_attribute')
         );
 
         $this->getDoctrineConnection()->exec(
-                $platform->getTruncateTableSQL('catalog_eav_attribute')
+            $platform->getTruncateTableSQL('catalog_eav_attribute')
         );
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
     }
@@ -70,8 +71,8 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
 
         $currentSchema = $this->getDoctrineConnection()
-                ->getSchemaManager()
-                ->createSchema()
+            ->getSchemaManager()
+            ->createSchema()
         ;
 
         $this->schema = new Schema();
@@ -99,17 +100,17 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
         $schemaBuilder->hydrateCatalogAttributeExtensionsTable($magentoVersion, $magentoEdition);
 
         $this->repository = new CatalogAttributeRepository(
+            $this->getDoctrineConnection(),
+            new ProductAttributeQueryBuilder(
                 $this->getDoctrineConnection(),
-                new ProductAttributeQueryBuilder(
-                    $this->getDoctrineConnection(),
-                    ProductAttributeQueryBuilder::getDefaultTable(),
-                    ProductAttributeQueryBuilder::getDefaultExtraTable(),
-                    ProductAttributeQueryBuilder::getDefaultEntityTable(),
-                    ProductAttributeQueryBuilder::getDefaultVariantTable(),
-                    ProductAttributeQueryBuilder::getDefaultFamilyTable(),
-                    ProductAttributeQueryBuilder::getDefaultFields(),
-                    ProductAttributeQueryBuilder::getDefaultExtraFields()
-                )
+                ProductAttributeQueryBuilder::getDefaultTable(),
+                ProductAttributeQueryBuilder::getDefaultExtraTable(),
+                ProductAttributeQueryBuilder::getDefaultEntityTable(),
+                ProductAttributeQueryBuilder::getDefaultVariantTable(),
+                ProductAttributeQueryBuilder::getDefaultFamilyTable(),
+                ProductAttributeQueryBuilder::getDefaultFields(),
+                ProductAttributeQueryBuilder::getDefaultExtraFields()
+            )
         );
     }
 
@@ -203,7 +204,7 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(\Doctrine\Common\Collections\ArrayCollection::class, $attributes);
 
-        $this->assertEquals($attributes->count(), 0);
+        $this->assertCount(0, $attributes);
     }
 
     public function testFetchingAll()
@@ -213,7 +214,7 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
         foreach ($attributes as $attribute) {
             $this->assertInstanceOf(AttributeInterface::class, $attribute);
         }
-        $this->assertEquals($attributes->count(), 8);
+        $this->assertCount(8, $attributes);
 
         $expected = $this->getDataSet();
 

@@ -48,7 +48,7 @@ class ProductSuperLink implements SuperLinkInterface
     ) {
         $instance = new self($configurable, $variant);
 
-        $instance->id = $identifier;
+        $instance->identifier = $identifier;
 
         return $instance;
     }

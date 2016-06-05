@@ -4,7 +4,7 @@ namespace Kiboko\Component\MagentoDriver\Matcher;
 
 use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
 
-interface AttributeValueMatcherInterface
+interface AttributeMatcherInterface
 {
     /**
      * @param AttributeInterface $attributeValue

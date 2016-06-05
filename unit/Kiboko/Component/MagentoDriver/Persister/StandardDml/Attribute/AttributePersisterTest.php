@@ -74,6 +74,8 @@ class AttributePersisterTest extends \PHPUnit_Framework_TestCase
             $this->getDoctrineConnection()->exec($sql);
         }
 
+        $schemaBuilder->hydrateEntityAttributeTable('1.9', 'ce');
+
         $this->truncateTables();
 
         parent::setUp();

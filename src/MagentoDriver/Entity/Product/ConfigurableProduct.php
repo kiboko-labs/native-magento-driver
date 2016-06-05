@@ -78,7 +78,7 @@ class ConfigurableProduct implements ConfigurableProductInterface
     ) {
         $instance = new self($stringIdentifier, $family, $creationDate, $modificationDate);
 
-        $instance->id = $identifier;
+        $instance->identifier = $identifier;
 
         if ($values !== null) {
             /** @var AttributeValueInterface $value */

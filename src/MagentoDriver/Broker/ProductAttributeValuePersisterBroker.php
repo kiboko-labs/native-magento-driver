@@ -2,7 +2,7 @@
 
 namespace Kiboko\Component\MagentoDriver\Broker;
 
-use Kiboko\Component\MagentoDriver\Matcher\AttributeValueMatcherInterface;
+use Kiboko\Component\MagentoDriver\Matcher\AttributeMatcherInterface;
 use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
 use Kiboko\Component\MagentoDriver\Persister\AttributeValuePersisterInterface;
 
@@ -23,11 +23,11 @@ class ProductAttributeValuePersisterBroker implements ProductAttributeValuePersi
 
     /**
      * @param AttributeValuePersisterInterface $backend
-     * @param AttributeValueMatcherInterface   $matcher
+     * @param AttributeMatcherInterface        $matcher
      */
     public function addPersister(
         AttributeValuePersisterInterface $backend,
-        AttributeValueMatcherInterface $matcher
+        AttributeMatcherInterface $matcher
     ) {
         $this->backends->attach($matcher, $backend);
     }
@@ -50,7 +50,7 @@ class ProductAttributeValuePersisterBroker implements ProductAttributeValuePersi
     public function findFor(AttributeInterface $attribute)
     {
         /**
-         * @var AttributeValueMatcherInterface
+         * @var AttributeMatcherInterface $matcher
          * @var AttributeValuePersisterInterface $backend
          */
         foreach ($this->walkPersisterList() as $matcher => $backend) {

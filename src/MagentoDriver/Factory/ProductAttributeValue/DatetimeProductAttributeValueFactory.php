@@ -11,7 +11,8 @@ class DatetimeProductAttributeValueFactory implements ProductAttributeValueFacto
 {
     /**
      * @param AttributeInterface $attribute
-     * @param array $options
+     * @param array              $options
+     *
      * @return DatetimeAttributeValueInterface
      */
     public function buildNew(AttributeInterface $attribute, array $options)

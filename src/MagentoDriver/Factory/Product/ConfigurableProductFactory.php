@@ -26,12 +26,11 @@ class ConfigurableProductFactory
     }
 
     /**
-     * @param string $type
      * @param array  $options
      *
      * @return ProductInterface
      */
-    public function buildNew($type, array $options)
+    public function buildNew(array $options)
     {
         return ConfigurableProduct::buildNewWith(
             $options['entity_id'],

@@ -110,7 +110,7 @@ class EntityAttribute implements EntityAttributeInterface
     ) {
         $object = new static($entityAttributeId);
 
-        $object->id = $entityAttributeId;
+        $object->identifier = $entityAttributeId;
         $object->typeId = $entityTypeId;
         $object->attributeSetId = $attributeSetId;
         $object->attributeGroupId = $attributeGroupId;

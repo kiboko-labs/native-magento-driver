@@ -1,10 +1,11 @@
 <?php
 
-namespace Kiboko\Component\MagentoDriver\Matcher;
+namespace Kiboko\Component\MagentoDriver\Matcher\AttributeValue;
 
+use Kiboko\Component\MagentoDriver\Matcher\AttributeMatcherInterface;
 use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
 
-class BackendTypeAttributeValueMatcher implements AttributeValueMatcherInterface
+class FrontendTypeAttributeValueMatcher implements AttributeMatcherInterface
 {
     /**
      * @var string
@@ -12,15 +13,15 @@ class BackendTypeAttributeValueMatcher implements AttributeValueMatcherInterface
     private $expectedType;
 
     /**
-     * @var AttributeValueMatcherInterface
+     * @var AttributeMatcherInterface
      */
     private $next;
 
     /**
-     * @param string                              $expectedType
-     * @param AttributeValueMatcherInterface|null $next
+     * @param string                         $expectedType
+     * @param AttributeMatcherInterface|null $next
      */
-    public function __construct($expectedType, AttributeValueMatcherInterface $next = null)
+    public function __construct($expectedType, AttributeMatcherInterface $next = null)
     {
         $this->expectedType = $expectedType;
         $this->next = $next;
@@ -33,7 +34,7 @@ class BackendTypeAttributeValueMatcher implements AttributeValueMatcherInterface
      */
     public function match(AttributeInterface $attributeValue)
     {
-        if ($this->expectedType !== $attributeValue->getBackendType()) {
+        if ($this->expectedType !== $attributeValue->getFrontendType()) {
             return false;
         }
 
