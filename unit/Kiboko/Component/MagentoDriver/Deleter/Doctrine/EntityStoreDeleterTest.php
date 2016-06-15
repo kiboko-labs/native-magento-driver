@@ -128,7 +128,7 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
 
         $this->assertDataSetsEqual($this->getOriginalDataSet(), $actual);
 
-        $this->assertTableRowCount('eav_entity_store', 9);
+        $this->assertTableRowCount('eav_entity_store', $this->getOriginalDataSet()->getIterator()->getTable()->getRowCount());
     }
 
     public function testRemoveOneById()
@@ -140,6 +140,8 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
         $actual->addTable('eav_entity_store');
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
+        
+        $this->assertTableRowCount('eav_entity_store', $this->getDataSet()->getIterator()->getTable()->getRowCount());
     }
 
     public function testRemoveAllById()
@@ -151,5 +153,7 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
         $actual->addTable('eav_entity_store');
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
+        
+        $this->assertTableRowCount('eav_entity_store', $this->getDataSet()->getIterator()->getTable()->getRowCount());
     }
 }

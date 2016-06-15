@@ -12,7 +12,7 @@
 
 This object creates Doctrine DBAL `QueryBuilder` objects for product attribute data manipulation. It is mainly used by repositories and deleters.
 
-### PHP iniitalization
+### PHP initialization
 
 ```php
 <?php
@@ -98,7 +98,7 @@ services:
 
 The *Repository* objects helps you fetch data from the database. It requires a proper *QueryBuilder* to work.
 
-### PHP iniitalization
+### PHP initialization
 
 ```php
 <?php
@@ -268,7 +268,7 @@ Deleting data is made easy by the *Deleter*. It works quite similarily as the *R
 use Kiboko\Component\MagentoDriver\Deleter\Doctrine\AttributeDeleter;
 
 new AttributeDeleter(
-    $conneciton,
+    $connection,
     $queryBuilder
 );
 ```

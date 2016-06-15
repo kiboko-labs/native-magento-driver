@@ -104,11 +104,11 @@ class EntityStoreRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(EntityStoreInterface::class, $entityStore);
 
-        $this->assertEquals($entityStore->getId(), 6);
-        $this->assertEquals($entityStore->getStoreId(), 1);
-        $this->assertEquals($entityStore->getTypeId(), 4);
-        $this->assertEquals($entityStore->getIncrementPrefix(), 6);
-        $this->assertEquals($entityStore->getIncrementLastId(), '600000232');
+        $this->assertEquals(6, $entityStore->getId());
+        $this->assertEquals(1, $entityStore->getStoreId());
+        $this->assertEquals(4, $entityStore->getTypeId());
+        $this->assertEquals(6, $entityStore->getIncrementPrefix());
+        $this->assertEquals('600000232', $entityStore->getIncrementLastId());
     }
 
     public function testFetchingOneByIdButNonExistent()
@@ -121,11 +121,11 @@ class EntityStoreRepositoryTest extends \PHPUnit_Framework_TestCase
         $entityStore = $this->repository->findOneByStoreId(0);
         $this->assertInstanceOf(EntityStoreInterface::class, $entityStore);
 
-        $this->assertEquals($entityStore->getStoreId(), 0);
-        $this->assertEquals($entityStore->getTypeId(), 1);
-        $this->assertEquals($entityStore->getId(), 1);
-        $this->assertEquals($entityStore->getIncrementPrefix(), 0);
-        $this->assertEquals($entityStore->getIncrementLastId(), '000004372');
+        $this->assertEquals(0, $entityStore->getStoreId());
+        $this->assertEquals(1, $entityStore->getTypeId());
+        $this->assertEquals(1, $entityStore->getId());
+        $this->assertEquals(0, $entityStore->getIncrementPrefix());
+        $this->assertEquals('000004372', $entityStore->getIncrementLastId());
     }
 
     public function testFetchingOneByStoreIdButNonExistent()
@@ -138,11 +138,11 @@ class EntityStoreRepositoryTest extends \PHPUnit_Framework_TestCase
         $entityStore = $this->repository->findOneByTypeId(4);
         $this->assertInstanceOf(EntityStoreInterface::class, $entityStore);
 
-        $this->assertEquals($entityStore->getStoreId(), 0);
-        $this->assertEquals($entityStore->getTypeId(), 4);
-        $this->assertEquals($entityStore->getId(), 2);
-        $this->assertEquals($entityStore->getIncrementPrefix(), 5);
-        $this->assertEquals($entityStore->getIncrementLastId(), '50000047W');
+        $this->assertEquals(0, $entityStore->getStoreId());
+        $this->assertEquals(4, $entityStore->getTypeId());
+        $this->assertEquals(2, $entityStore->getId());
+        $this->assertEquals(5, $entityStore->getIncrementPrefix());
+        $this->assertEquals('50000047W', $entityStore->getIncrementLastId());
     }
 
     public function testFetchingOneByTypeIdButNonExistent()
