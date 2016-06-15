@@ -128,8 +128,8 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
         $attribute = $this->repository->findOneById(79);
         $this->assertInstanceOf(AttributeInterface::class, $attribute);
 
-        $this->assertEquals($attribute->getId(), 79);
-        $this->assertEquals($attribute->getCode(), 'cost');
+        $this->assertEquals(79, $attribute->getId());
+        $this->assertEquals('cost', $attribute->getCode());
     }
 
     public function testFetchingOneByIdButNonExistent()
@@ -142,8 +142,8 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
         $attribute = $this->repository->findOneByCode('release_date', 'catalog_product');
         $this->assertInstanceOf(AttributeInterface::class, $attribute);
 
-        $this->assertEquals($attribute->getCode(), 'release_date');
-        $this->assertEquals($attribute->getId(), 167);
+        $this->assertEquals('release_date', $attribute->getCode());
+        $this->assertEquals(167, $attribute->getId());
     }
 
     public function testFetchingOneByCodeButNonExistent()
@@ -159,10 +159,10 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
         foreach ($attributes as $attribute) {
             $this->assertInstanceOf(AttributeInterface::class, $attribute);
             if ($attribute->getCode() === 'release_date') {
-                $this->assertEquals($attribute->getId(), 167);
+                $this->assertEquals(167, $attribute->getId());
             }
             if ($attribute->getCode() === 'gift_message_available') {
-                $this->assertEquals($attribute->getId(), 122);
+                $this->assertEquals(122, $attribute->getId());
             }
         }
     }
@@ -179,7 +179,7 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(ArrayCollection::class, $attributes);
 
-        $this->assertEquals($attributes->count(), 0);
+        $this->assertCount(0, $attributes);
     }
 
     public function testFetchingAllById()
@@ -190,10 +190,10 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
             $this->assertInstanceOf(AttributeInterface::class, $attribute);
 
             if ($attribute->getId() === 167) {
-                $this->assertEquals($attribute->getCode(), 'release_date');
+                $this->assertEquals('release_date',$attribute->getCode());
             }
             if ($attribute->getId() === 167) {
-                $this->assertEquals($attribute->getCode(), 'gift_message_available');
+                $this->assertEquals('gift_message_available', $attribute->getCode());
             }
         }
     }
@@ -216,12 +216,10 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
         }
         $this->assertCount(8, $attributes);
 
-        $expected = $this->getDataSet();
-
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('catalog_eav_attribute');
 
-        $this->assertDataSetsEqual($expected, $actual);
+        $this->assertDataSetsEqual($this->getDataSet(), $actual);
     }
 
     public function testFetchingAllSimpleProductByEntity()
