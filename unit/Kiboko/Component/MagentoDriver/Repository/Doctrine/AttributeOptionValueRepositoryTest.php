@@ -126,10 +126,10 @@ class AttributeOptionValueRepositoryTest extends \PHPUnit_Framework_TestCase
         $attributeOptionValue = $this->repository->findOneById(2);
         $this->assertInstanceOf(AttributeOptionValueInterface::class, $attributeOptionValue);
 
-        $this->assertEquals($attributeOptionValue->getId(), 2);
-        $this->assertEquals($attributeOptionValue->getOptionId(), 1);
-        $this->assertEquals($attributeOptionValue->getStoreId(), 1);
-        $this->assertEquals($attributeOptionValue->getValue(), 'Rouge');
+        $this->assertEquals(2, $attributeOptionValue->getId());
+        $this->assertEquals(1, $attributeOptionValue->getOptionId());
+        $this->assertEquals(1, $attributeOptionValue->getStoreId());
+        $this->assertEquals('Rouge', $attributeOptionValue->getValue());
     }
 
     public function testFetchingOneByIdButNonExistent()

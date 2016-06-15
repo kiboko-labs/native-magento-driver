@@ -123,12 +123,12 @@ class EntityAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(EntityAttributeInterface::class, $entityAttribute);
 
-        $this->assertEquals($entityAttribute->getId(), 6);
-        $this->assertEquals($entityAttribute->getTypeId(), 4);
-        $this->assertEquals($entityAttribute->getAttributeSetId(), 4);
-        $this->assertEquals($entityAttribute->getAttributeGroupId(), 7);
-        $this->assertEquals($entityAttribute->getAttributeId(), 226);
-        $this->assertEquals($entityAttribute->getSortOrder(), 60);
+        $this->assertEquals(6, $entityAttribute->getId());
+        $this->assertEquals(4, $entityAttribute->getTypeId());
+        $this->assertEquals(4, $entityAttribute->getAttributeSetId());
+        $this->assertEquals(7, $entityAttribute->getAttributeGroupId());
+        $this->assertEquals(226, $entityAttribute->getAttributeId());
+        $this->assertEquals(60, $entityAttribute->getSortOrder());
     }
 
     public function testFetchingOneByIdButNonExistent()
@@ -152,12 +152,12 @@ class EntityAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(EntityAttributeInterface::class, $entityAttribute);
 
-        $this->assertEquals($entityAttribute->getId(), 1);
-        $this->assertEquals($entityAttribute->getTypeId(), 4);
-        $this->assertEquals($entityAttribute->getAttributeSetId(), 4);
-        $this->assertEquals($entityAttribute->getAttributeGroupId(), 7);
-        $this->assertEquals($entityAttribute->getAttributeId(), 79);
-        $this->assertEquals($entityAttribute->getSortOrder(), 10);
+        $this->assertEquals(1, $entityAttribute->getId());
+        $this->assertEquals(4, $entityAttribute->getTypeId());
+        $this->assertEquals(4, $entityAttribute->getAttributeSetId());
+        $this->assertEquals(7, $entityAttribute->getAttributeGroupId());
+        $this->assertEquals(79, $entityAttribute->getAttributeId());
+        $this->assertEquals(10, $entityAttribute->getSortOrder());
     }
 
     public function testFetchingOneByAttributeIdAndSetId()
@@ -166,11 +166,11 @@ class EntityAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(EntityAttributeInterface::class, $entityAttribute);
 
-        $this->assertEquals($entityAttribute->getId(), 3);
-        $this->assertEquals($entityAttribute->getTypeId(), 4);
-        $this->assertEquals($entityAttribute->getAttributeSetId(), 4);
-        $this->assertEquals($entityAttribute->getAttributeGroupId(), 7);
-        $this->assertEquals($entityAttribute->getAttributeId(), 131);
-        $this->assertEquals($entityAttribute->getSortOrder(), 30);
+        $this->assertEquals(3, $entityAttribute->getId());
+        $this->assertEquals(4, $entityAttribute->getTypeId());
+        $this->assertEquals(4, $entityAttribute->getAttributeSetId());
+        $this->assertEquals(7, $entityAttribute->getAttributeGroupId());
+        $this->assertEquals(131, $entityAttribute->getAttributeId());
+        $this->assertEquals(30, $entityAttribute->getSortOrder());
     }
 }

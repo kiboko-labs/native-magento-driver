@@ -112,11 +112,11 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(ProductInterface::class, $product);
 
-        $this->assertEquals($product->getId(), 3);
-        $this->assertEquals($product->getType(), 'simple');
-        $this->assertEquals($product->isConfigurable(), false);
-        $this->assertEquals($product->getIdentifier(), 'SIMPLE');
-        $this->assertEquals($product->getFamilyId(), 20);
+        $this->assertEquals(3, $product->getId());
+        $this->assertEquals('simple', $product->getType());
+        $this->assertEquals(false, $product->isConfigurable());
+        $this->assertEquals('SIMPLE', $product->getIdentifier());
+        $this->assertEquals(20, $product->getFamilyId());
         $this->assertInstanceOf(DateTimeInterface::class, $product->getCreationDate());
         $this->assertInstanceOf(DateTimeInterface::class, $product->getModificationDate());
         $this->assertInstanceOf(FamilyInterface::class, $product->getFamily());
@@ -128,11 +128,12 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(ProductInterface::class, $product);
 
-        $this->assertEquals($product->getId(), 961);
-        $this->assertEquals($product->getType(), 'configurable');
-        $this->assertEquals($product->isConfigurable(), true);
-        $this->assertEquals($product->getIdentifier(), 'CONFIGURABLE');
-        $this->assertEquals($product->getFamilyId(), 17);
+        $this->assertEquals(961, $product->getId());
+        $this->assertEquals('configurable', $product->getType());
+        $this->assertEquals(true, $product->isConfigurable());
+        $this->assertEquals('CONFIGURABLE', $product->getIdentifier());
+        $this->assertEquals(17, $product->getFamilyId());        
+        
         $this->assertInstanceOf(DateTimeInterface::class, $product->getCreationDate());
         $this->assertInstanceOf(DateTimeInterface::class, $product->getModificationDate());
         $this->assertInstanceOf(FamilyInterface::class, $product->getFamily());
@@ -149,11 +150,12 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(ProductInterface::class, $product);
 
-        $this->assertEquals($product->getIdentifier(), 'SIMPLE');
-        $this->assertEquals($product->getType(), 'simple');
-        $this->assertEquals($product->getId(), 3);
-        $this->assertEquals($product->isConfigurable(), false);
-        $this->assertEquals($product->getFamilyId(), 20);
+        $this->assertEquals('SIMPLE', $product->getIdentifier());
+        $this->assertEquals('simple', $product->getType());
+        $this->assertEquals(3, $product->getId());
+        $this->assertEquals(false, $product->isConfigurable());
+        $this->assertEquals(20, $product->getFamilyId());
+        
         $this->assertInstanceOf(DateTimeInterface::class, $product->getCreationDate());
         $this->assertInstanceOf(DateTimeInterface::class, $product->getModificationDate());
         $this->assertInstanceOf(FamilyInterface::class, $product->getFamily());
@@ -165,11 +167,12 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(ProductInterface::class, $product);
 
-        $this->assertEquals($product->getIdentifier(), 'CONFIGURABLE');
-        $this->assertEquals($product->getType(), 'configurable');
-        $this->assertEquals($product->getId(), 961);
-        $this->assertEquals($product->isConfigurable(), true);
-        $this->assertEquals($product->getFamilyId(), 17);
+        $this->assertEquals('CONFIGURABLE', $product->getIdentifier());
+        $this->assertEquals('configurable', $product->getType());
+        $this->assertEquals(961, $product->getId());
+        $this->assertEquals(true, $product->isConfigurable());       
+        $this->assertEquals(17, $product->getFamilyId());
+        
         $this->assertInstanceOf(DateTimeInterface::class, $product->getCreationDate());
         $this->assertInstanceOf(DateTimeInterface::class, $product->getModificationDate());
         $this->assertInstanceOf(FamilyInterface::class, $product->getFamily());
@@ -199,7 +202,7 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
         $ids = [3, 961];
         $products = $this->repository->findAllById($ids);
         foreach ($products as $product) {
-            $this->assertContains($product->getId(), $ids);
+            $this->assertContains($ids, $product->getId());
             $this->assertInstanceOf(DateTimeInterface::class, $product->getCreationDate());
             $this->assertInstanceOf(DateTimeInterface::class, $product->getModificationDate());
             $this->assertInstanceOf(FamilyInterface::class, $product->getFamily());
