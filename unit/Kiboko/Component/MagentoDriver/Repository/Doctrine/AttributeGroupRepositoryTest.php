@@ -110,11 +110,11 @@ class AttributeGroupRepositoryTest extends \PHPUnit_Framework_TestCase
         $family = $this->repository->findOneById(6);
         $this->assertInstanceOf(AttributeGroupInterface::class, $family);
 
-        $this->assertEquals($family->getId(), 6);
-        $this->assertEquals($family->getFamilyId(), 3);
-        $this->assertEquals($family->getLabel(), 'Custom Design');
-        $this->assertEquals($family->getSortOrder(), 30);
-        $this->assertEquals($family->getDefaultId(), 0);
+        $this->assertEquals(6, $family->getId());
+        $this->assertEquals(3, $family->getFamilyId());
+        $this->assertEquals('Custom Design', $family->getLabel());
+        $this->assertEquals(30, $family->getSortOrder());
+        $this->assertEquals(0, $family->getDefaultId());
     }
 
     public function testFetchingOneByIdButNonExistent()
@@ -127,7 +127,7 @@ class AttributeGroupRepositoryTest extends \PHPUnit_Framework_TestCase
         $family = $this->repository->findOneByName('Custom Design');
         $this->assertInstanceOf(AttributeGroupInterface::class, $family);
 
-        $this->assertEquals($family->getLabel(), 'Custom Design');
+        $this->assertEquals('Custom Design', $family->getLabel());
 
         $this->assertEquals(6, $family->getId());
         $this->assertEquals(3, $family->getFamilyId());

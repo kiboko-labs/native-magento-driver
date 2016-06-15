@@ -117,10 +117,10 @@ class AttributeLabelRepositoryTest extends \PHPUnit_Framework_TestCase
         $attributeLabel = $this->repository->findOneById(2);
         $this->assertInstanceOf(AttributeLabelInterface::class, $attributeLabel);
 
-        $this->assertEquals($attributeLabel->getId(), 2);
-        $this->assertEquals($attributeLabel->getAttributeId(), 122);
-        $this->assertEquals($attributeLabel->getStoreId(), 1);
-        $this->assertEquals($attributeLabel->getValue(), 'Laisser un message cadeau');
+        $this->assertEquals(2, $attributeLabel->getId());
+        $this->assertEquals(122, $attributeLabel->getAttributeId());
+        $this->assertEquals(1, $attributeLabel->getStoreId());
+        $this->assertEquals('Laisser un message cadeau', $attributeLabel->getValue());
     }
 
     public function testFetchingOneByIdButNonExistent()
