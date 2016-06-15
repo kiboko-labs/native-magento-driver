@@ -179,7 +179,7 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(ArrayCollection::class, $attributes);
 
-        $this->assertEquals(0, $attributes->count());
+        $this->assertCount(0, $attributes);
     }
 
     public function testFetchingAllById()
