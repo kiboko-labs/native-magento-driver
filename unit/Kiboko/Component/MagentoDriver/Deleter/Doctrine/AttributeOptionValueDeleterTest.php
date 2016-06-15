@@ -143,6 +143,8 @@ class AttributeOptionValueDeleterTest extends \PHPUnit_Framework_TestCase
         $actual->addTable('eav_attribute_option_value');
 
         $this->assertDataSetsEqual($this->getOriginalDataSet(), $actual);
+        
+        $this->assertTableRowCount('eav_attribute_option_value', $this->getOriginalDataSet()->getIterator()->getTable()->getRowCount());
     }
 
     public function testRemoveOneById()
@@ -154,6 +156,8 @@ class AttributeOptionValueDeleterTest extends \PHPUnit_Framework_TestCase
         $actual->addTable('eav_attribute_option_value');
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
+        
+        $this->assertTableRowCount('eav_attribute_option_value', $this->getDataSet()->getIterator()->getTable()->getRowCount());
     }
 
     public function testRemoveAllById()
@@ -165,5 +169,7 @@ class AttributeOptionValueDeleterTest extends \PHPUnit_Framework_TestCase
         $actual->addTable('eav_attribute_option_value');
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
+        
+        $this->assertTableRowCount('eav_attribute_option_value', $this->getDataSet()->getIterator()->getTable()->getRowCount());
     }
 }
