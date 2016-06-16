@@ -10,6 +10,7 @@ use Kiboko\Component\MagentoDriver\Factory\Product\SimpleProductFactory;
 use Kiboko\Component\MagentoDriver\Factory\StandardProductFactory;
 use Kiboko\Component\MagentoDriver\Matcher\Product\ProductTypeMatcher;
 use Kiboko\Component\MagentoDriver\Model\Family;
+use Kiboko\Component\MagentoDriver\Model\FamilyInterface;
 use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductQueryBuilder;
 use Kiboko\Component\MagentoDriver\Repository\Doctrine\ProductRepository;
 use Kiboko\Component\MagentoDriver\Repository\FamilyRepositoryInterface;
@@ -141,8 +142,8 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(false, $product->isConfigurable());
         $this->assertEquals('SIMPLE', $product->getIdentifier());
         $this->assertEquals(20, $product->getFamilyId());
-        $this->assertInstanceOf(DateTimeInterface::class, $product->getCreationDate());
-        $this->assertInstanceOf(DateTimeInterface::class, $product->getModificationDate());
+        $this->assertInstanceOf(\DateTimeInterface::class, $product->getCreationDate());
+        $this->assertInstanceOf(\DateTimeInterface::class, $product->getModificationDate());
         $this->assertInstanceOf(FamilyInterface::class, $product->getFamily());
     }
 
@@ -159,8 +160,8 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('CONFIGURABLE', $product->getIdentifier());
         $this->assertEquals(17, $product->getFamilyId());        
         
-        $this->assertInstanceOf(DateTimeInterface::class, $product->getCreationDate());
-        $this->assertInstanceOf(DateTimeInterface::class, $product->getModificationDate());
+        $this->assertInstanceOf(\DateTimeInterface::class, $product->getCreationDate());
+        $this->assertInstanceOf(\DateTimeInterface::class, $product->getModificationDate());
         $this->assertInstanceOf(FamilyInterface::class, $product->getFamily());
     }
 
@@ -182,8 +183,8 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(false, $product->isConfigurable());
         $this->assertEquals(20, $product->getFamilyId());
         
-        $this->assertInstanceOf(DateTimeInterface::class, $product->getCreationDate());
-        $this->assertInstanceOf(DateTimeInterface::class, $product->getModificationDate());
+        $this->assertInstanceOf(\DateTimeInterface::class, $product->getCreationDate());
+        $this->assertInstanceOf(\DateTimeInterface::class, $product->getModificationDate());
         $this->assertInstanceOf(FamilyInterface::class, $product->getFamily());
     }
 
@@ -200,8 +201,8 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(true, $product->isConfigurable());       
         $this->assertEquals(17, $product->getFamilyId());
         
-        $this->assertInstanceOf(DateTimeInterface::class, $product->getCreationDate());
-        $this->assertInstanceOf(DateTimeInterface::class, $product->getModificationDate());
+        $this->assertInstanceOf(\DateTimeInterface::class, $product->getCreationDate());
+        $this->assertInstanceOf(\DateTimeInterface::class, $product->getModificationDate());
         $this->assertInstanceOf(FamilyInterface::class, $product->getFamily());
     }
 
@@ -226,8 +227,8 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
         foreach ($products as $product) {
 
             $this->assertInstanceOf(ProductInterface::class, $product);
-            $this->assertInstanceOf(DateTimeInterface::class, $product->getCreationDate());
-            $this->assertInstanceOf(DateTimeInterface::class, $product->getModificationDate());
+            $this->assertInstanceOf(\DateTimeInterface::class, $product->getCreationDate());
+            $this->assertInstanceOf(\DateTimeInterface::class, $product->getModificationDate());
             $this->assertInstanceOf(FamilyInterface::class, $product->getFamily());
         }
     }
