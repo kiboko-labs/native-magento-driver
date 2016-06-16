@@ -10,6 +10,7 @@ use Kiboko\Component\MagentoDriver\Factory\Product\SimpleProductFactory;
 use Kiboko\Component\MagentoDriver\Factory\StandardProductFactory;
 use Kiboko\Component\MagentoDriver\Matcher\Product\ProductTypeMatcher;
 use Kiboko\Component\MagentoDriver\Model\Family;
+use Kiboko\Component\MagentoDriver\Model\FamilyInterface;
 use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductQueryBuilder;
 use Kiboko\Component\MagentoDriver\Repository\Doctrine\ProductRepository;
 use Kiboko\Component\MagentoDriver\Repository\FamilyRepositoryInterface;
@@ -190,6 +191,9 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(2, $products);
         foreach ($products as $product) {
             $this->assertInstanceOf(ProductInterface::class, $product);
+            $this->assertInstanceOf(\DateTimeInterface::class, $product->getCreationDate());
+            $this->assertInstanceOf(\DateTimeInterface::class, $product->getModificationDate());
+            $this->assertInstanceOf(FamilyInterface::class, $product->getFamily());
         }
     }
 
