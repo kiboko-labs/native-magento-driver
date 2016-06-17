@@ -1,0 +1,82 @@
+PHPUnit 5.4-g7735f76 by Sebastian Bergmann and contributors.
+
+.........................................SSS.......R...........  63 / 130 ( 48%)
+..............RR..FFF.R.F.F.....................SS........FF.FF 126 / 130 ( 96%)
+....                                                            130 / 130 (100%)
+
+Time: 14.03 seconds, Memory: 27.50MB
+
+There were 9 failures:
+
+1) unit\Kiboko\Component\MagentoDriver\Repository\Doctrine\CatalogAttributeRepositoryTest::testFetchingAllByEntityTypeCode
+Failed asserting that two strings are equal.
+--- Expected
++++ Actual
+@@ @@
+-'catalog_product'
++'cost'
+
+/home/nolwennig/public_html/native-magento-driver/unit/Kiboko/Component/MagentoDriver/Repository/Doctrine/CatalogAttributeRepositoryTest.php:295
+
+2) unit\Kiboko\Component\MagentoDriver\Repository\Doctrine\CatalogAttributeRepositoryTest::testFetchingAllByEntityTypeCodeButNonExistent
+Failed asserting that actual size 8 matches expected size 0.
+
+/home/nolwennig/public_html/native-magento-driver/unit/Kiboko/Component/MagentoDriver/Repository/Doctrine/CatalogAttributeRepositoryTest.php:304
+
+3) unit\Kiboko\Component\MagentoDriver\Repository\Doctrine\CatalogAttributeRepositoryTest::testFetchingAllByEntityTypeId
+Failed asserting that null matches expected 4.
+
+/home/nolwennig/public_html/native-magento-driver/unit/Kiboko/Component/MagentoDriver/Repository/Doctrine/CatalogAttributeRepositoryTest.php:316
+
+4) unit\Kiboko\Component\MagentoDriver\Repository\Doctrine\CatalogAttributeRepositoryTest::testFetchingAllByFamily
+Failed asserting that actual size 0 matches expected size 8.
+
+/home/nolwennig/public_html/native-magento-driver/unit/Kiboko/Component/MagentoDriver/Repository/Doctrine/CatalogAttributeRepositoryTest.php:368
+
+5) unit\Kiboko\Component\MagentoDriver\Repository\Doctrine\CatalogAttributeRepositoryTest::testFetchingAllMandatoryByFamily
+Failed asserting that actual size 0 matches expected size 8.
+
+/home/nolwennig/public_html/native-magento-driver/unit/Kiboko/Component/MagentoDriver/Repository/Doctrine/CatalogAttributeRepositoryTest.php:387
+
+6) unit\Kiboko\Component\MagentoDriver\Repository\Doctrine\ProductRepositoryTest::testFetchingOneSimpleById
+Failed asserting that two strings are equal.
+--- Expected
++++ Actual
+@@ @@
+-'SIMPLE'
++'3'
+
+/home/nolwennig/public_html/native-magento-driver/unit/Kiboko/Component/MagentoDriver/Repository/Doctrine/ProductRepositoryTest.php:143
+
+7) unit\Kiboko\Component\MagentoDriver\Repository\Doctrine\ProductRepositoryTest::testFetchingOneConfigurableById
+Failed asserting that two strings are equal.
+--- Expected
++++ Actual
+@@ @@
+-'CONFIGURABLE'
++'961'
+
+/home/nolwennig/public_html/native-magento-driver/unit/Kiboko/Component/MagentoDriver/Repository/Doctrine/ProductRepositoryTest.php:160
+
+8) unit\Kiboko\Component\MagentoDriver\Repository\Doctrine\ProductRepositoryTest::testFetchingOneSimpleByIdentifier
+Failed asserting that two strings are equal.
+--- Expected
++++ Actual
+@@ @@
+-'SIMPLE'
++'3'
+
+/home/nolwennig/public_html/native-magento-driver/unit/Kiboko/Component/MagentoDriver/Repository/Doctrine/ProductRepositoryTest.php:181
+
+9) unit\Kiboko\Component\MagentoDriver\Repository\Doctrine\ProductRepositoryTest::testFetchingOneConfigurableByIdentifier
+Failed asserting that two strings are equal.
+--- Expected
++++ Actual
+@@ @@
+-'CONFIGURABLE'
++'961'
+
+/home/nolwennig/public_html/native-magento-driver/unit/Kiboko/Component/MagentoDriver/Repository/Doctrine/ProductRepositoryTest.php:199
+
+FAILURES!
+Tests: 130, Assertions: 290, Failures: 9, Skipped: 5, Risky: 4.

@@ -48,6 +48,7 @@ class CatalogAttributeRepository implements ProductAttributeRepositoryInterface
      */
     protected function createNewAttributeInstanceFromDatabase(array $options)
     {
+        var_dump($options);die;
         return new CatalogAttribute(
             Attribute::buildNewWith(
                 isset($options['attribute_id'])    ? $options['attribute_id']           : null,
@@ -252,8 +253,10 @@ class CatalogAttributeRepository implements ProductAttributeRepositoryInterface
         }
 
         foreach ($statement as $options) {
+            var_dump($options);continue;
             $attributeList->set($options['attribute_code'], $this->createNewAttributeInstanceFromDatabase($options));
         }
+        die;
 
         return $attributeList;
     }

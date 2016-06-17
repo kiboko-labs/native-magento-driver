@@ -23,8 +23,8 @@ class ProductAttributeQueryBuilder implements ProductAttributeQueryBuilderInterf
      * @param Connection $connection
      * @param string     $table
      * @param string     $extraTable
-     * @param string     $variantAxisTable
      * @param string     $entityTable
+     * @param string     $variantAxisTable
      * @param string     $familyTable
      * @param array      $fields
      * @param array      $extraFields
@@ -57,6 +57,7 @@ class ProductAttributeQueryBuilder implements ProductAttributeQueryBuilderInterf
     {
         return [
             'attribute_id',
+            'entity_type_id',
             'attribute_code',
             'attribute_model',
             'backend_model',
@@ -71,6 +72,7 @@ class ProductAttributeQueryBuilder implements ProductAttributeQueryBuilderInterf
             'is_user_defined',
             'default_value',
             'is_unique',
+            'note',
         ];
     }
 
