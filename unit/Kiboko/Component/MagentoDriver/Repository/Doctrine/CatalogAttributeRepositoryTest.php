@@ -292,7 +292,6 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
 
         foreach ($attributes as $attribute) {
             $this->assertInstanceOf(AttributeInterface::class, $attribute);
-            /* @todo: $attribute->getEntityTypeId() is null ? */
             $this->assertEquals(4, $attribute->getEntityTypeId());
         }
     }

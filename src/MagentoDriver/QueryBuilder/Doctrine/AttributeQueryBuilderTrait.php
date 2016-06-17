@@ -60,6 +60,7 @@ trait AttributeQueryBuilderTrait
      */
     public function createFindQueryBuilder($alias)
     {
+        var_dump($this->fields);die;
         return (new QueryBuilder($this->connection))
             ->select($this->createFieldsList($this->fields, $alias))
             ->from($this->table, $alias)
@@ -87,6 +88,7 @@ trait AttributeQueryBuilderTrait
 //            $queryBuilder->andWhere($queryBuilder->expr()->andX(...$expr));
         }
 
+        var_dump($queryBuilder->getSQL());die;
         return $queryBuilder;
     }
 
