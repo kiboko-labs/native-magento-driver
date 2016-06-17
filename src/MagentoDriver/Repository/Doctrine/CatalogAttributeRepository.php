@@ -48,7 +48,6 @@ class CatalogAttributeRepository implements ProductAttributeRepositoryInterface
      */
     protected function createNewAttributeInstanceFromDatabase(array $options)
     {
-        var_dump($options);die;
         return new CatalogAttribute(
             Attribute::buildNewWith(
                 isset($options['attribute_id'])    ? $options['attribute_id']           : null,
@@ -240,23 +239,23 @@ class CatalogAttributeRepository implements ProductAttributeRepositoryInterface
      */
     public function findAllByEntityTypeCode($entityTypeCode)
     {
-        $query = $this->queryBuilder->createFindAllQueryBuilder('a', 'x');
-
+        $query = $this->queryBuilder->createFindAllByEntityTypeQueryBuilder('a', 'x', 'e');
+                
+        $query->where($query->expr()->eq('e.entity_type_code', '?'));
+        
         $attributeList = new ArrayCollection();
         $statement = $this->connection->prepare($query);
         if (!$statement->execute([$entityTypeCode])) {
             throw new DatabaseFetchingFailureException();
         }
-
+        
         if ($statement->rowCount() < 1) {
             return $attributeList;
         }
 
         foreach ($statement as $options) {
-            var_dump($options);continue;
             $attributeList->set($options['attribute_code'], $this->createNewAttributeInstanceFromDatabase($options));
         }
-        die;
 
         return $attributeList;
     }

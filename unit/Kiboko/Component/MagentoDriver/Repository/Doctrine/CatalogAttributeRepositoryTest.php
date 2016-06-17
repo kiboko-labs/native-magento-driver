@@ -299,8 +299,6 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
     public function testFetchingAllByEntityTypeCodeButNonExistent()
     {
         $attributes = $this->repository->findAllByEntityTypeCode('non_existent');
-
-        /* @todo: return 8 ? */
         $this->assertCount(0, $attributes);
     }
 
