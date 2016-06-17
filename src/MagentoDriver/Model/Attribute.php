@@ -230,7 +230,6 @@ class Attribute implements AttributeInterface
      */
     public function getEntityTypeId()
     {
-        var_dump($this);die;
         return $this->entityTypeId;
     }
 
