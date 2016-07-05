@@ -18,6 +18,8 @@ use Kiboko\Component\MagentoDriver\Repository\ProductRepositoryInterface;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\RepositoryLoader;
 
 class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
 {

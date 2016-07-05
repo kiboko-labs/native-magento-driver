@@ -93,11 +93,10 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->truncateTables();
 
         $magentoVersion = '1.9';
-        $magentoEdition = 'ce';
 
-        $schemaBuilder->hydrateEntityTypeTable($magentoVersion, $magentoEdition);
-        $schemaBuilder->hydrateAttributeTable($magentoVersion, $magentoEdition);
-        $schemaBuilder->hydrateCatalogAttributeExtensionsTable($magentoVersion, $magentoEdition);
+        $schemaBuilder->hydrateEntityTypeTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
+        $schemaBuilder->hydrateAttributeTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
+        $schemaBuilder->hydrateCatalogAttributeExtensionsTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
 
         $this->repository = new CatalogAttributeRepository(
             $this->getDoctrineConnection(),

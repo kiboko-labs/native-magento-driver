@@ -11,6 +11,8 @@ use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBu
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\DeleterLoader;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\LoaderInterface;
 
 class AttributeDeleterTest extends \PHPUnit_Framework_TestCase
 {
@@ -32,12 +34,16 @@ class AttributeDeleterTest extends \PHPUnit_Framework_TestCase
     private $persister;
 
     /**
+     * @var LoaderInterface
+     */
+    private $fixturesLoader;
+
+    /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
     protected function getDataSet()
     {
-        $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-                $this->getDeleterFixturesPathname('eav_attribute', '1.9', 'ce'));
+        $dataset = $this->fixturesLoader->getDataSet($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
 
         return $dataset;
     }
@@ -48,7 +54,7 @@ class AttributeDeleterTest extends \PHPUnit_Framework_TestCase
     protected function getOriginalDataSet()
     {
         $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-                $this->getFixturesPathname('eav_attribute', '1.9', 'ce'));
+            $this->getFixturesPathname('eav_attribute', '1.9', 'ce'));
 
         return $dataset;
     }
@@ -59,7 +65,7 @@ class AttributeDeleterTest extends \PHPUnit_Framework_TestCase
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
         $this->getDoctrineConnection()->exec(
-                $platform->getTruncateTableSQL('eav_attribute')
+            $platform->getTruncateTableSQL('eav_attribute')
         );
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
@@ -88,16 +94,24 @@ class AttributeDeleterTest extends \PHPUnit_Framework_TestCase
 
         parent::setUp();
 
-        $schemaBuilder->hydrateAttributeTable('1.9', 'ce');
+        $schemaBuilder->hydrateAttributeTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
 
         $this->persister = new StandardAttributePersister(
                 $this->getDoctrineConnection(), ProductAttributeQueryBuilder::getDefaultTable()
         );
 
         $this->deleter = new AttributeDeleter(
-                $this->getDoctrineConnection(), new ProductAttributeQueryBuilder(
-                $this->getDoctrineConnection(), ProductAttributeQueryBuilder::getDefaultTable(), ProductAttributeQueryBuilder::getDefaultExtraTable(), ProductAttributeQueryBuilder::getDefaultEntityTable(), ProductAttributeQueryBuilder::getDefaultVariantTable(), ProductAttributeQueryBuilder::getDefaultFamilyTable(), ProductAttributeQueryBuilder::getDefaultFields(), ProductAttributeQueryBuilder::getDefaultExtraFields()
-                )
+            $this->getDoctrineConnection(),
+            new ProductAttributeQueryBuilder(
+                $this->getDoctrineConnection(),
+                ProductAttributeQueryBuilder::getDefaultTable(),
+                ProductAttributeQueryBuilder::getDefaultExtraTable(),
+                ProductAttributeQueryBuilder::getDefaultEntityTable(),
+                ProductAttributeQueryBuilder::getDefaultVariantTable(),
+                ProductAttributeQueryBuilder::getDefaultFamilyTable(),
+                ProductAttributeQueryBuilder::getDefaultFields(),
+                ProductAttributeQueryBuilder::getDefaultExtraFields()
+            )
         );
     }
 
@@ -124,7 +138,6 @@ class AttributeDeleterTest extends \PHPUnit_Framework_TestCase
     public function testRemoveOneById()
     {
         $this->persister->initialize();
-
         $this->deleter->deleteOneById(79);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
@@ -138,7 +151,6 @@ class AttributeDeleterTest extends \PHPUnit_Framework_TestCase
     public function testRemoveAllById()
     {
         $this->persister->initialize();
-
         $this->deleter->deleteAllById([79]);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());

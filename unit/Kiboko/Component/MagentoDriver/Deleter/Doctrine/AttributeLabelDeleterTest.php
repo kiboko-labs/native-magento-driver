@@ -36,8 +36,7 @@ class AttributeLabelDeleterTest extends \PHPUnit_Framework_TestCase
      */
     protected function getDataSet()
     {
-        $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-                    $this->getDeleterFixturesPathname('eav_attribute_label', '1.9', 'ce'));
+        $dataset = $this->fixturesLoader->getDataSet($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
 
         return $dataset;
     }
@@ -48,7 +47,7 @@ class AttributeLabelDeleterTest extends \PHPUnit_Framework_TestCase
     protected function getOriginalDataSet()
     {
         $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-                $this->getFixturesPathname('eav_attribute_label', '1.9', 'ce'));
+            $this->getFixturesPathname('eav_attribute_label', $GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']));
 
         return $dataset;
     }
@@ -58,7 +57,6 @@ class AttributeLabelDeleterTest extends \PHPUnit_Framework_TestCase
         $platform = $this->getDoctrineConnection()->getDatabasePlatform();
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
-
         $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('core_store')
         );
@@ -99,9 +97,9 @@ class AttributeLabelDeleterTest extends \PHPUnit_Framework_TestCase
 
         parent::setUp();
 
-        $schemaBuilder->hydrateStoreTable('1.9', 'ce');
-        $schemaBuilder->hydrateAttributeTable('1.9', 'ce');
-        $schemaBuilder->hydrateAttributeLabelTable('1.9', 'ce');
+        $schemaBuilder->hydrateStoreTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
+        $schemaBuilder->hydrateAttributeTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
+        $schemaBuilder->hydrateAttributeLabelTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
 
         $this->persister = new AttributeLabelPersister(
             $this->getDoctrineConnection(),

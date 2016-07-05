@@ -28,17 +28,15 @@ class CatalogAttributeExtensionPersisterTest extends \PHPUnit_Framework_TestCase
 
     private $magentoVersion;
 
-    private $magentoEdition;
-
     /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
     protected function getDataSet()
     {
         $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-            $this->getFixturesPathname('eav_entity_type', $this->magentoVersion, $this->magentoEdition));
-        $dataset->addYamlFile($this->getFixturesPathname('eav_attribute', $this->magentoVersion, $this->magentoEdition));
-        $dataset->addYamlFile($this->getFixturesPathname('catalog_eav_attribute', $this->magentoVersion, $this->magentoEdition));
+            $this->getFixturesPathname('eav_entity_type', $GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']));
+        $dataset->addYamlFile($this->getFixturesPathname('eav_attribute', $GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']));
+        $dataset->addYamlFile($this->getFixturesPathname('catalog_eav_attribute', $GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']));
 
         return $dataset;
     }
@@ -90,10 +88,9 @@ class CatalogAttributeExtensionPersisterTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
 
         $this->magentoVersion = '1.9';
-        $this->magentoEdition = 'ce';
 
-        $schemaBuilder->hydrateEntityTypeTable($this->magentoVersion, $this->magentoEdition);
-        $schemaBuilder->hydrateAttributeTable($this->magentoVersion, $this->magentoEdition);
+        $schemaBuilder->hydrateEntityTypeTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
+        $schemaBuilder->hydrateAttributeTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
 
         $this->persister = new CatalogAttributeExtensionPersister(
             $this->getDoctrineConnection(),
@@ -123,7 +120,7 @@ class CatalogAttributeExtensionPersisterTest extends \PHPUnit_Framework_TestCase
 
         $this->persister->initialize();
 
-        foreach ($dataLoader->walkData($this->magentoVersion, $this->magentoEdition) as $data) {
+        foreach ($dataLoader->walkData($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']) as $data) {
             $attribute = new CatalogAttributeExtension(
                 $data['attribute_id'],
                 $data['frontend_input_renderer'],
@@ -153,7 +150,7 @@ class CatalogAttributeExtensionPersisterTest extends \PHPUnit_Framework_TestCase
         $this->assertTableRowCount('catalog_eav_attribute', 8);
 
         $expected = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-            $this->getFixturesPathname('catalog_eav_attribute', $this->magentoVersion, $this->magentoEdition));
+            $this->getFixturesPathname('catalog_eav_attribute', $GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']));
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('catalog_eav_attribute');
@@ -166,7 +163,7 @@ class CatalogAttributeExtensionPersisterTest extends \PHPUnit_Framework_TestCase
         $dataLoader = new Loader($this->getDoctrineConnection(), 'catalog_eav_attribute');
 
         $this->persister->initialize();
-        foreach ($dataLoader->walkData($this->magentoVersion, $this->magentoEdition) as $data) {
+        foreach ($dataLoader->walkData($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']) as $data) {
             $attribute = new CatalogAttributeExtension(
                 $data['attribute_id'],
                 $data['frontend_input_renderer'],
@@ -195,7 +192,7 @@ class CatalogAttributeExtensionPersisterTest extends \PHPUnit_Framework_TestCase
         $this->assertTableRowCount('catalog_eav_attribute', 8);
 
         $expected = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-            $this->getFixturesPathname('catalog_eav_attribute', $this->magentoVersion, $this->magentoEdition));
+            $this->getFixturesPathname('catalog_eav_attribute', $GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']));
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('catalog_eav_attribute');

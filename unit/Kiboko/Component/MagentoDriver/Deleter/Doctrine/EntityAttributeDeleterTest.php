@@ -99,11 +99,10 @@ class EntityAttributeDeleterTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
 
         $magentoVersion = '1.9';
-        $magentoEdition = 'ce';
 
-        $schemaBuilder->hydrateAttributeGroupTable($magentoVersion, $magentoEdition);
-        $schemaBuilder->hydrateAttributeTable($magentoVersion, $magentoEdition);
-        $schemaBuilder->hydrateEntityAttributeTable($magentoVersion, $magentoEdition);
+        $schemaBuilder->hydrateAttributeGroupTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
+        $schemaBuilder->hydrateAttributeTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
+        $schemaBuilder->hydrateEntityAttributeTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
 
         $this->persister = new StandardEntityAttributePersister(
             $this->getDoctrineConnection(),

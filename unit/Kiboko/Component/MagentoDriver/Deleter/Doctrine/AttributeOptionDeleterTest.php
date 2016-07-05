@@ -48,7 +48,7 @@ class AttributeOptionDeleterTest extends \PHPUnit_Framework_TestCase
     protected function getOriginalDataSet()
     {
         $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-                $this->getFixturesPathname('eav_attribute_option', '1.9', 'ce'));
+            $this->getFixturesPathname('eav_attribute_option', $GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']));
 
         return $dataset;
     }
@@ -94,8 +94,8 @@ class AttributeOptionDeleterTest extends \PHPUnit_Framework_TestCase
 
         parent::setUp();
 
-        $schemaBuilder->hydrateAttributeTable('1.9', 'ce');
-        $schemaBuilder->hydrateAttributeOptionTable('1.9', 'ce');
+        $schemaBuilder->hydrateAttributeTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
+        $schemaBuilder->hydrateAttributeOptionTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
 
         $this->persister = new AttributeOptionPersister(
             $this->getDoctrineConnection(),
