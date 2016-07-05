@@ -10,7 +10,9 @@
         "fabpot/php-cs-fixer": "~1.11",
         "akeneo/pim-community-dev": "~1.4",
         "lunistore/akeneo-connector-base": "~1.0",
-        "phploc/phploc": "*"
+        "phploc/phploc": "*",
+        "sebastian/phpcpd":"*",
+        "phpmd/phpmd": "*"
     },
     "license": "proprietary",
     "authors": [
@@ -24,7 +26,8 @@
         "php": ">=5.5",
         "league/flysystem": "~1.0",
         "doctrine/dbal": "~2.4",
-        "symfony/serializer": "~2.8"
+        "symfony/serializer": "~2.8",
+        "composer/semver": "^1.4"
     },
     "repositories": [
         {
