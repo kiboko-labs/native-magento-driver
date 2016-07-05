@@ -93,13 +93,10 @@ class AttributeOptionValueRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $this->truncateTables();
 
-        $magentoVersion = '1.9';
-        $magentoEdition = 'ce';
-
-        $schemaBuilder->hydrateAttributeTable($magentoVersion, $magentoEdition);
-        $schemaBuilder->hydrateAttributeOptionTable($magentoVersion, $magentoEdition);
-        $schemaBuilder->hydrateStoreTable($magentoVersion, $magentoEdition);
-        $schemaBuilder->hydrateAttributeOptionValueTable($magentoVersion, $magentoEdition);
+        $schemaBuilder->hydrateAttributeTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
+        $schemaBuilder->hydrateAttributeOptionTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
+        $schemaBuilder->hydrateStoreTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
+        $schemaBuilder->hydrateAttributeOptionValueTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
 
         $this->repository = new AttributeOptionValueRepository(
             $this->getDoctrineConnection(),

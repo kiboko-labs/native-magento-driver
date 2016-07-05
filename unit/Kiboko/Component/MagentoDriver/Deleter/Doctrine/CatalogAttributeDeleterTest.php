@@ -96,13 +96,10 @@ class CatalogAttributeDeleterTest extends \PHPUnit_Framework_TestCase
 
         parent::setUp();
 
-        $magentoVersion = '1.9';
-        $magentoEdition = 'ce';
+        $schemaBuilder->hydrateAttributeTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
+        $schemaBuilder->hydrateCatalogAttributeExtensionsTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
 
-        $schemaBuilder->hydrateAttributeTable($magentoVersion, $magentoEdition);
-        $schemaBuilder->hydrateCatalogAttributeExtensionsTable($magentoVersion, $magentoEdition);
-
-        $this->setPersister($magentoEdition);
+        $this->setPersister($GLOBALS['MAGENTO_EDITION']);
 
         $this->setDeleter();
     }
@@ -119,7 +116,7 @@ class CatalogAttributeDeleterTest extends \PHPUnit_Framework_TestCase
             ),
             new CatalogAttributeExtensionPersister(
                 $this->getDoctrineConnection(),
-                $magentoEdition
+                $GLOBALS['MAGENTO_EDITION']
             )
         );
     }

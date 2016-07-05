@@ -157,6 +157,6 @@ class EntityStoreRepositoryTest extends \PHPUnit_Framework_TestCase
         foreach ($entityStore as $singleEntityStore) {
             $this->assertInstanceOf(EntityStoreInterface::class, $singleEntityStore);
         }
-        $this->assertGreaterThanOrEqual(1, count($entityStore));
+        $this->assertNotEmpty($entityStore);
     }
 }

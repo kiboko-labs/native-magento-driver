@@ -36,8 +36,7 @@ class AttributeGroupDeleterTest extends \PHPUnit_Framework_TestCase
      */
     protected function getDataSet()
     {
-        $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-                    $this->getDeleterFixturesPathname('eav_attribute_group', '1.9', 'ce'));
+        $dataset = $this->fixturesLoader->getDataSet($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
 
         return $dataset;
     }
@@ -48,7 +47,7 @@ class AttributeGroupDeleterTest extends \PHPUnit_Framework_TestCase
     protected function getOriginalDataSet()
     {
         $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-                $this->getFixturesPathname('eav_attribute_group', '1.9', 'ce'));
+            $this->getFixturesPathname('eav_attribute_group', '1.9', 'ce'));
 
         return $dataset;
     }
@@ -59,7 +58,7 @@ class AttributeGroupDeleterTest extends \PHPUnit_Framework_TestCase
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
         $this->getDoctrineConnection()->exec(
-                $platform->getTruncateTableSQL('eav_attribute_group')
+            $platform->getTruncateTableSQL('eav_attribute_group')
         );
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
@@ -88,7 +87,7 @@ class AttributeGroupDeleterTest extends \PHPUnit_Framework_TestCase
 
         parent::setUp();
 
-        $schemaBuilder->hydrateAttributeGroupTable('1.9', 'ce');
+        $schemaBuilder->hydrateAttributeGroupTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
 
         $this->persister = new AttributeGroupPersister(
             $this->getDoctrineConnection(),
