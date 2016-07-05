@@ -2,7 +2,6 @@
 
 namespace Kiboko\Component\MagentoDriver\Repository;
 
-use Doctrine\Common\Collections\Collection;
 use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
 use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
 use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
@@ -12,14 +11,14 @@ interface ProductAttributeValueRepositoryInterface
     /**
      * @param ProductInterface $product
      *
-     * @return Collection|AttributeValueInterface[]
+     * @return \Traversable|AttributeValueInterface[]
      */
     public function findAllByProduct(ProductInterface $product);
 
     /**
      * @param ProductInterface $product
      *
-     * @return Collection|AttributeValueInterface[]
+     * @return \Traversable|AttributeValueInterface[]
      */
     public function findAllVariantAxisByProductFromDefault(ProductInterface $product);
 
@@ -27,7 +26,7 @@ interface ProductAttributeValueRepositoryInterface
      * @param ProductInterface $product
      * @param int              $storeId
      *
-     * @return Collection|AttributeValueInterface[]
+     * @return \Traversable|AttributeValueInterface[]
      */
     public function findAllVariantAxisByProductFromStoreId(ProductInterface $product, $storeId);
 
@@ -126,7 +125,7 @@ interface ProductAttributeValueRepositoryInterface
     /**
      * @param ProductInterface $product
      *
-     * @return Collection|AttributeValueInterface[]
+     * @return \Traversable|AttributeValueInterface[]
      */
     public function findAllByProductFromDefault(ProductInterface $product);
 
@@ -134,7 +133,7 @@ interface ProductAttributeValueRepositoryInterface
      * @param ProductInterface $product
      * @param int              $storeId
      *
-     * @return Collection|AttributeValueInterface[]
+     * @return \Traversable|AttributeValueInterface[]
      */
     public function findAllByProductFromStoreId(ProductInterface $product, $storeId);
 }

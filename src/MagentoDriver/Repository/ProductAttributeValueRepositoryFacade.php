@@ -2,8 +2,6 @@
 
 namespace Kiboko\Component\MagentoDriver\Repository;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Kiboko\Component\MagentoDriver\Broker\ProductAttributeValueRepositoryBrokerInterface;
 use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
 use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
@@ -28,87 +26,78 @@ class ProductAttributeValueRepositoryFacade implements ProductAttributeValueRepo
     /**
      * @param ProductInterface $product
      *
-     * @return Collection|AttributeValueInterface[]
+     * @return \Traversable|AttributeValueInterface[]
      */
     public function findAllByProduct(ProductInterface $product)
     {
-        $valuesList = [];
         foreach ($this->broker->walkRepositoryList() as $repository) {
-            $valuesList = array_merge(
-                $valuesList,
-                $repository->findAllByProduct($product)->toArray()
-            );
+            foreach ($repository->findAllByProduct($product) as $attributeValue) {
+                yield $attributeValue;
+            }
         }
-
-        return new ArrayCollection($valuesList);
     }
 
     /**
      * @param ProductInterface $product
      *
-     * @return Collection|AttributeValueInterface[]
+     * @return \Traversable|AttributeValueInterface[]
      */
     public function findAllVariantAxisByProductFromDefault(ProductInterface $product)
     {
-        $valuesList = [];
         foreach ($this->broker->walkRepositoryList() as $repository) {
-            $valuesList = array_merge(
-                $valuesList,
-                $repository->findAllVariantAxisByProductFromDefault($product)->toArray()
-            );
+            foreach ($repository->findAllVariantAxisByProductFromDefault($product) as $attributeValue) {
+                yield $attributeValue;
+            }
         }
-
-        return new ArrayCollection($valuesList);
     }
 
     /**
      * @param ProductInterface $product
      * @param int              $storeId
      *
-     * @return Collection|AttributeValueInterface[]
+     * @return \Traversable|AttributeValueInterface[]
      */
     public function findAllVariantAxisByProductFromStoreId(ProductInterface $product, $storeId)
     {
-        $valuesList = [];
         foreach ($this->broker->walkRepositoryList() as $repository) {
-            $valuesList = array_merge(
-                $valuesList,
-                $repository->findAllVariantAxisByProductFromStoreId($product, $storeId)->toArray()
-            );
+            foreach ($repository->findAllVariantAxisByProductFromStoreId($product, $storeId) as $attributeValue) {
+                yield $attributeValue;
+            }
         }
-
-        return new ArrayCollection($valuesList);
     }
 
+    /**
+     * @param ProductInterface $product
+     * @param array $attributeList
+     * @return \Traversable|AttributeValueInterface[]
+     */
     public function findAllByProductAndAttributeListFromDefault(
         ProductInterface $product,
         array $attributeList
     ) {
-        $valuesList = [];
         foreach ($this->broker->walkRepositoryList() as $repository) {
-            $valuesList = array_merge(
-                $valuesList,
-                $repository->findAllByProductAndAttributeListFromDefault($product, $attributeList)->toArray()
-            );
+            foreach ($repository->findAllByProductAndAttributeListFromDefault($product, $attributeList) as $attributeValue) {
+                yield $attributeValue;
+            }
         }
-
-        return new ArrayCollection($valuesList);
     }
 
+    /**
+     * @param ProductInterface $product
+     * @param array $attributeList
+     * @param int $storeId
+     * @return \Traversable|AttributeValueInterface[]
+     */
     public function findAllByProductAndAttributeListFromStoreId(
         ProductInterface $product,
         array $attributeList,
         $storeId
     ) {
-        $valuesList = [];
         foreach ($this->broker->walkRepositoryList() as $repository) {
-            $valuesList = array_merge(
-                $valuesList,
-                $repository->findAllByProductAndAttributeListFromStoreId($product, $attributeList, $storeId)->toArray()
-            );
+            foreach ($repository->findAllByProductAndAttributeListFromStoreId($product, $attributeList, $storeId) as $attributeValue) {
+                yield $attributeValue;
+            }
         }
-
-        return new ArrayCollection($valuesList);
     }
 
     /**
@@ -155,100 +144,96 @@ class ProductAttributeValueRepositoryFacade implements ProductAttributeValueRepo
         return;
     }
 
+    /**
+     * @param array $productList
+     * @return \Traversable|AttributeValueInterface[]
+     */
     public function findAllByProductListFromDefault(
         array $productList
     ) {
-        $valuesList = [];
         foreach ($this->broker->walkRepositoryList() as $repository) {
-            $valuesList = array_merge(
-                $valuesList,
-                $repository->findAllByProductListFromDefault($productList)->toArray()
-            );
+            foreach ($repository->findAllByProductListFromDefault($productList) as $attributeValue) {
+                yield $attributeValue;
+            }
         }
-
-        return new ArrayCollection($valuesList);
     }
 
+    /**
+     * @param array $productList
+     * @param int $storeId
+     * @return \Traversable|AttributeValueInterface[]
+     */
     public function findAllByProductListFromStoreId(
         array $productList,
         $storeId
     ) {
-        $valuesList = [];
         foreach ($this->broker->walkRepositoryList() as $repository) {
-            $valuesList = array_merge(
-                $valuesList,
-                $repository->findAllByProductListFromStoreId($productList, $storeId)->toArray()
-            );
+            foreach ($repository->findAllByProductListFromStoreId($productList, $storeId) as $attributeValue) {
+                yield $attributeValue;
+            }
         }
-
-        return new ArrayCollection($valuesList);
     }
 
+    /**
+     * @param array $productList
+     * @param array $attributeList
+     * @return \Traversable|AttributeValueInterface[]
+     */
     public function findAllByProductListAndAttributeListFromDefault(
         array $productList,
         array $attributeList
     ) {
-        $valuesList = [];
         foreach ($this->broker->walkRepositoryList() as $repository) {
-            $valuesList = array_merge(
-                $valuesList,
-                $repository->findAllByProductListAndAttributeListFromDefault($productList, $attributeList)->toArray()
-            );
+            foreach ($repository->findAllByProductListAndAttributeListFromDefault($productList, $attributeList) as $attributeValue) {
+                yield $attributeValue;
+            }
         }
-
-        return new ArrayCollection($valuesList);
     }
 
+    /**
+     * @param array $productList
+     * @param array $attributeList
+     * @param int $storeId
+     * @return \Traversable|AttributeValueInterface[]
+     */
     public function findAllByProductListAndAttributeListFromStoreId(
         array $productList,
         array $attributeList,
         $storeId
     ) {
-        $valuesList = [];
         foreach ($this->broker->walkRepositoryList() as $repository) {
-            $valuesList = array_merge(
-                $valuesList,
-                $repository->findAllByProductListAndAttributeListFromStoreId($productList, $attributeList, $storeId)->toArray()
-            );
+            foreach ($repository->findAllByProductListAndAttributeListFromStoreId($productList, $attributeList, $storeId) as $attributeValue) {
+                yield $attributeValue;
+            }
         }
-
-        return new ArrayCollection($valuesList);
     }
 
     /**
      * @param ProductInterface $product
      *
-     * @return Collection|AttributeValueInterface[]
+     * @return \Traversable|AttributeValueInterface[]
      */
     public function findAllByProductFromDefault(ProductInterface $product)
     {
-        $valuesList = [];
         foreach ($this->broker->walkRepositoryList() as $repository) {
-            $valuesList = array_merge(
-                $valuesList,
-                $repository->findAllByProductFromDefault($product)->toArray()
-            );
+            foreach ($repository->findAllByProductFromDefault($product) as $attributeValue) {
+                yield $attributeValue;
+            }
         }
-
-        return new ArrayCollection($valuesList);
     }
 
     /**
      * @param ProductInterface $product
      * @param int              $storeId
      *
-     * @return Collection|AttributeValueInterface[]
+     * @return \Traversable|AttributeValueInterface[]
      */
     public function findAllByProductFromStoreId(ProductInterface $product, $storeId)
     {
-        $valuesList = [];
         foreach ($this->broker->walkRepositoryList() as $repository) {
-            $valuesList = array_merge(
-                $valuesList,
-                $repository->findAllByProductFromStoreId($product, $storeId)->toArray()
-            );
+            foreach ($repository->findAllByProductFromStoreId($product, $storeId) as $attributeValue) {
+                yield $attributeValue;
+            }
         }
-
-        return new ArrayCollection($valuesList);
     }
 }

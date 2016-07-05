@@ -28,7 +28,7 @@ interface EntityStoreRepositoryInterface
     public function findOneByTypeId($typeId);
 
     /**
-     * @return Collection|EntityStoreInterface[]
+     * @return \Traversable|EntityStoreInterface[]
      */
     public function findAll();
 }

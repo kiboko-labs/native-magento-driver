@@ -2,7 +2,6 @@
 
 namespace Kiboko\Component\MagentoDriver\Repository;
 
-use Doctrine\Common\Collections\Collection;
 use Kiboko\Component\MagentoDriver\Entity\CategoryInterface;
 use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
 use Kiboko\Component\MagentoDriver\Model\FamilyInterface;
@@ -26,33 +25,33 @@ interface ProductRepositoryInterface
     /**
      * @param array $identifierList
      *
-     * @return Collection|ProductInterface[]
+     * @return \Traversable|ProductInterface[]
      */
     public function findAllByIdentifier(array $identifierList);
 
     /**
      * @param array|int[] $idList
      *
-     * @return Collection|ProductInterface[]
+     * @return \Traversable|ProductInterface[]
      */
     public function findAllById(array $idList);
 
     /**
      * @param FamilyInterface $family
      *
-     * @return Collection|ProductInterface[]
+     * @return \Traversable|ProductInterface[]
      */
     public function findAllByFamily(FamilyInterface $family);
 
     /**
      * @param CategoryInterface $category
      *
-     * @return Collection|ProductInterface[]
+     * @return \Traversable|ProductInterface[]
      */
     public function findAllByCategory(CategoryInterface $category);
 
     /**
-     * @return Collection|ProductInterface[]
+     * @return \Traversable|ProductInterface[]
      */
     public function findAll();
 }
