@@ -2,7 +2,6 @@
 
 namespace Kiboko\Component\MagentoDriver\Repository;
 
-use Doctrine\Common\Collections\Collection;
 use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
 
 interface AttributeRepositoryInterface
@@ -26,19 +25,19 @@ interface AttributeRepositoryInterface
      * @param string $entityTypeCode
      * @param array  $codeList
      *
-     * @return Collection|AttributeInterface[]
+     * @return \Traversable|AttributeInterface[]
      */
     public function findAllByCode($entityTypeCode, array $codeList);
 
     /**
      * @param array|int[] $idList
      *
-     * @return Collection|AttributeInterface[]
+     * @return \Traversable|AttributeInterface[]
      */
     public function findAllById(array $idList);
 
     /**
-     * @return Collection|AttributeInterface[]
+     * @return \Traversable|AttributeInterface[]
      */
     public function findAll();
 }

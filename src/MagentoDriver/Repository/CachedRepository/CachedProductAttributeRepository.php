@@ -2,8 +2,6 @@
 
 namespace Kiboko\Component\MagentoDriver\Repository\CachedRepository;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
 use Kiboko\Component\MagentoDriver\Model\FamilyInterface;
 use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
@@ -39,8 +37,8 @@ class CachedProductAttributeRepository implements ProductAttributeRepositoryInte
     ) {
         $this->decorated = $repository;
 
-        $this->attributeCacheByCode = new ArrayCollection();
-        $this->attributeCacheById = new ArrayCollection();
+        $this->attributeCacheByCode = [];
+        $this->attributeCacheById = [];
     }
 
     /**
@@ -51,14 +49,14 @@ class CachedProductAttributeRepository implements ProductAttributeRepositoryInte
      */
     public function findOneByCode($code, $entityTypeId)
     {
-        if ($this->attributeCacheByCode->containsKey($code)) {
-            return $this->attributeCacheByCode->get($code);
+        if (isset($this->attributeCacheByCode[$code])) {
+            return $this->attributeCacheByCode[$code];
         }
 
         $attribute = $this->decorated->findOneByCode($code, $entityTypeId);
 
-        $this->attributeCacheByCode->set($attribute->getCode(), $attribute);
-        $this->attributeCacheById->set($attribute->getId(), $attribute);
+        $this->attributeCacheByCode[$attribute->getCode()] = $attribute;
+        $this->attributeCacheById[$attribute->getId()] = $attribute;
 
         return $attribute;
     }
@@ -70,14 +68,14 @@ class CachedProductAttributeRepository implements ProductAttributeRepositoryInte
      */
     public function findOneById($identifier)
     {
-        if ($this->attributeCacheByCode->containsKey($identifier)) {
-            return $this->attributeCacheById->get($identifier);
+        if (isset($this->attributeCacheByCode[$identifier])) {
+            return $this->attributeCacheByCode[$identifier];
         }
 
         $attribute = $this->decorated->findOneById($identifier);
 
-        $this->attributeCacheByCode->set($attribute->getCode(), $attribute);
-        $this->attributeCacheById->set($attribute->getId(), $attribute);
+        $this->attributeCacheByCode[$attribute->getCode()] = $attribute;
+        $this->attributeCacheById[$attribute->getId()] = $attribute;
 
         return $attribute;
     }
@@ -86,73 +84,67 @@ class CachedProductAttributeRepository implements ProductAttributeRepositoryInte
      * @param string         $entityTypeCode
      * @param array|string[] $codeList
      *
-     * @return Collection|AttributeInterface[]
+     * @return \Traversable|AttributeInterface[]
      */
     public function findAllByCode($entityTypeCode, array $codeList)
     {
-        $attributeList = new ArrayCollection();
         $codeSearch = [];
         foreach ($codeList as $code) {
-            if (!$this->attributeCacheByCode->containsKey($code)) {
+            if (!isset($this->attributeCacheByCode[$code])) {
                 $codeSearch[] = $code;
                 continue;
             }
 
-            $attributeList->set($code, $this->attributeCacheByCode->get($code));
+            yield $code => $this->attributeCacheByCode[$code];
         }
 
         if (count($codeSearch) <= 0) {
-            return $attributeList;
+            return;
         }
 
-        $searchedAttributeList = $this->decorated->findAllByCode($entityTypeCode, $codeSearch);
-        foreach ($searchedAttributeList as $attribute) {
+        foreach ($this->decorated->findAllByCode($entityTypeCode, $codeSearch) as $attribute) {
             $code = $attribute->getCode();
-            $attributeList->set($code, $attribute);
 
-            $this->attributeCacheById->set($attribute->getId(), $attribute);
-            $this->attributeCacheByCode->set($code, $attribute);
+            $this->attributeCacheById[$attribute->getId()] = $attribute;
+            $this->attributeCacheByCode[$code] = $attribute;
+
+            yield $code => $attribute;
         }
-
-        return $attributeList;
     }
 
     /**
      * @param array|int[] $idList
      *
-     * @return Collection|AttributeInterface[]
+     * @return \Traversable|AttributeInterface[]
      */
     public function findAllById(array $idList)
     {
-        $attributeList = new ArrayCollection();
-        $idSearch = [];
+        $identifierSearch = [];
         foreach ($idList as $identifier) {
-            if (!$this->attributeCacheByCode->containsKey($identifier)) {
-                $idSearch[] = $identifier;
+            if (!isset($this->attributeCacheByCode[$identifier])) {
+                $identifierSearch[] = $identifier;
                 continue;
             }
 
-            $attributeList->set($identifier, $this->attributeCacheByCode->get($identifier));
+            yield $identifier => $this->attributeCacheByCode[$identifier];
         }
 
-        if (count($idSearch) <= 0) {
-            return $attributeList;
+        if (count($identifierSearch) <= 0) {
+            return;
         }
 
-        $searchedAttributeList = $this->decorated->findAllById($idSearch);
-        foreach ($searchedAttributeList as $attribute) {
+        foreach ($this->decorated->findAllById($identifierSearch) as $attribute) {
             $identifier = $attribute->getId();
-            $attributeList->set($identifier, $attribute);
 
-            $this->attributeCacheById->set($identifier, $attribute);
-            $this->attributeCacheByCode->set($attribute->getCode(), $attribute);
+            $this->attributeCacheById[$identifier] = $attribute;
+            $this->attributeCacheByCode[$attribute->getCode()] = $attribute;
+
+            yield $identifier => $attribute;
         }
-
-        return $attributeList;
     }
 
     /**
-     * @return Collection|AttributeInterface[]
+     * @return \Traversable|AttributeInterface[]
      */
     public function findAll()
     {
@@ -162,7 +154,7 @@ class CachedProductAttributeRepository implements ProductAttributeRepositoryInte
     /**
      * @param ProductInterface $product
      *
-     * @return Collection|AttributeInterface[]
+     * @return \Traversable|AttributeInterface[]
      */
     public function findAllByEntity(ProductInterface $product)
     {
@@ -172,7 +164,7 @@ class CachedProductAttributeRepository implements ProductAttributeRepositoryInte
     /**
      * @param ProductInterface $product
      *
-     * @return Collection|AttributeInterface[]
+     * @return \Traversable|AttributeInterface[]
      */
     public function findAllVariantAxisByEntity(ProductInterface $product)
     {
@@ -182,7 +174,7 @@ class CachedProductAttributeRepository implements ProductAttributeRepositoryInte
     /**
      * @param FamilyInterface $family
      *
-     * @return Collection|AttributeInterface[]
+     * @return \Traversable|AttributeInterface[]
      */
     public function findAllByFamily(FamilyInterface $family)
     {
@@ -192,7 +184,7 @@ class CachedProductAttributeRepository implements ProductAttributeRepositoryInte
     /**
      * @param FamilyInterface $family
      *
-     * @return Collection|AttributeInterface[]
+     * @return \Traversable|AttributeInterface[]
      */
     public function findAllMandatoryByFamily(FamilyInterface $family)
     {

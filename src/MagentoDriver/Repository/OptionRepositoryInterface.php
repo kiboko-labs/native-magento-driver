@@ -2,7 +2,6 @@
 
 namespace Kiboko\Component\MagentoDriver\Repository;
 
-use Doctrine\Common\Collections\Collection;
 use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
 use Kiboko\Component\MagentoDriver\Model\OptionInterface;
 
@@ -18,14 +17,14 @@ interface OptionRepositoryInterface
     /**
      * @param array|int[] $idList
      *
-     * @return Collection|OptionInterface[]
+     * @return \Traversable|OptionInterface[]
      */
     public function findAllById(array $idList);
 
     /**
      * @param AttributeInterface $attribute
      *
-     * @return Collection|OptionInterface[]
+     * @return \Traversable|OptionInterface[]
      */
     public function findAllByAttribute(AttributeInterface $attribute);
 }

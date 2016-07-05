@@ -14,7 +14,7 @@ interface EntityAttributeRepositoryInterface
     public function findOneById($identifier);
 
     /**
-     * return all statements.
+     * return \Traversable|EntityAttributeInterface[]
      */
     public function findAll();
 
@@ -25,8 +25,8 @@ interface EntityAttributeRepositoryInterface
     public function findOneByAttributeIdAndGroupId($attributeId, $attributeGroupId);
 
     /**
-     * @param type $attributeId
-     * @param type $attributeSetId
+     * @param int $attributeId
+     * @param int $attributeSetId
      */
     public function findOneByAttributeIdAndSetId($attributeId, $attributeSetId);
 }

@@ -2,7 +2,6 @@
 
 namespace Kiboko\Component\MagentoDriver\Repository;
 
-use Doctrine\Common\Collections\Collection;
 use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
 
 interface ProductAttributeValueRepositoryBackendInterface extends ProductAttributeValueRepositoryInterface
@@ -17,7 +16,7 @@ interface ProductAttributeValueRepositoryBackendInterface extends ProductAttribu
     /**
      * @param array|int[] $idList
      *
-     * @return Collection|AttributeValueInterface[]
+     * @return \Traversable|AttributeValueInterface[]
      */
     public function findAllById(array $idList);
 }

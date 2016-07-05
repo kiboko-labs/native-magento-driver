@@ -2,7 +2,6 @@
 
 namespace Kiboko\Component\MagentoDriver\Repository;
 
-use Doctrine\Common\Collections\Collection;
 use Kiboko\Component\MagentoDriver\Model\EntityTypeInterface;
 
 interface EntityTypeRepositoryInterface
@@ -24,12 +23,12 @@ interface EntityTypeRepositoryInterface
     /**
      * @param array|string[] $codeList
      *
-     * @return Collection|EntityTypeInterface[]
+     * @return \Traversable|EntityTypeInterface[]
      */
     public function findAllByCode(array $codeList);
 
     /**
-     * @return Collection|EntityTypeInterface[]
+     * @return \Traversable|EntityTypeInterface[]
      */
     public function findAll();
 }
