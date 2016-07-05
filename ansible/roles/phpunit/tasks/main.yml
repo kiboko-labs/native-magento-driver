@@ -1,0 +1,12 @@
+---
+- name:    Download PHPUnit
+  become:     no
+  command: wget https://phar.phpunit.de/phpunit.phar
+
+- name:    Add executable permissions to PHPUnit
+  become:     no
+  command: chmod +x phpunit.phar
+
+- name:    Move PHPunit to /usr/local/bin
+  become:     yes
+  command: mv phpunit.phar /usr/local/bin/phpunit

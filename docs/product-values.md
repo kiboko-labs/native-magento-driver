@@ -262,5 +262,3 @@ $backendBroker->addBackend($productAttributeVarcharQueryBuilder, new BackendType
 $backendBroker->addBackend($productAttributeDecimalQueryBuilder, new BackendTypeAttributeValueMatcher('static'));
 
 ```
-
-

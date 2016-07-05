@@ -1,0 +1,16 @@
+---
+- name:     Test if Akeneo is already installed
+  stat:
+    path: /var/www/pim/composer.json
+  register: composer_exists
+
+- name:     Download Akeneo
+  shell:    composer create-project --prefer-dist akeneo/pim-community-standard /var/www/pim "1.5.*@stable"
+  when:     composer_exists == 0
+
+- name:     Update Akeneo
+  shell:    composer install --prefer-dist --working-dir=/var/www
+  when:     composer_exists == 1
+
+- name:     Linking project files
+  shell:    ln -sf /vagrant/src/* /var/www/pim/src/
