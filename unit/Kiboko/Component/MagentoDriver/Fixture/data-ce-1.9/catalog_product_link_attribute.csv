@@ -1,6 +1,0 @@
-product_link_attribute_id,link_type_id,"product_link_attribute_code","data_type"
-1,1,"position","int"
-2,3,"position","int"
-3,3,"qty","decimal"
-4,4,"position","int"
-5,5,"position","int"

@@ -1,6 +1,0 @@
-type_id,"code","label",is_system,"theme",store_id
-1,"checkout_onepage_register","checkout_onepage_register",1,"",0
-2,"checkout_onepage_register_guest","checkout_onepage_register_guest",1,"",0
-3,"checkout_onepage_billing_address","checkout_onepage_billing_address",1,"",0
-4,"checkout_onepage_shipping_address","checkout_onepage_shipping_address",1,"",0
-5,"checkout_multishipping_register","checkout_multishipping_register",1,"",0
