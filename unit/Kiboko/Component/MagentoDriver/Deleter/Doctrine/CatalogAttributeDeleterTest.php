@@ -78,6 +78,14 @@ class CatalogAttributeDeleterTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->getDoctrineConnection()->exec(
+            $platform->getTruncateTableSQL('eav_entity_type')
+        );
+
+        $this->getDoctrineConnection()->exec(
+            $platform->getTruncateTableSQL('eav_attribute_set')
+        );
+
+        $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('catalog_eav_attribute')
         );
 
@@ -96,6 +104,8 @@ class CatalogAttributeDeleterTest extends \PHPUnit_Framework_TestCase
         $schemaBuilder = new DoctrineSchemaBuilder($this->getDoctrineConnection(), $this->schema);
 
         $schemaBuilder->ensureAttributeTable();
+        $schemaBuilder->ensureFamilyTable();
+        $schemaBuilder->ensureEntityTypeTable();
         $schemaBuilder->ensureCatalogAttributeExtensionsTable();
 
         $comparator = new \Doctrine\DBAL\Schema\Comparator();
@@ -111,6 +121,20 @@ class CatalogAttributeDeleterTest extends \PHPUnit_Framework_TestCase
 
         $this->fixturesLoader = new Loader(
             new FallbackResolver($schemaBuilder->getFixturesPath(), 'eav_entity_store'),
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateEntityTypeTable(
+            'catalog_eav_attribute',
+            DoctrineSchemaBuilder::CONTEXT_DELETER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateFamilyTable(
+            'catalog_eav_attribute',
+            DoctrineSchemaBuilder::CONTEXT_DELETER,
             $GLOBALS['MAGENTO_VERSION'],
             $GLOBALS['MAGENTO_EDITION']
         );
@@ -171,6 +195,7 @@ class CatalogAttributeDeleterTest extends \PHPUnit_Framework_TestCase
         $actual->addTable('catalog_eav_attribute');
         $actual->addTable('eav_entity_type');
         $actual->addTable('eav_attribute_set');
+        $actual->addTable('eav_attribute');
 
         $this->assertDataSetsEqual($this->getInitialDataSet(), $actual);
     }
@@ -185,6 +210,7 @@ class CatalogAttributeDeleterTest extends \PHPUnit_Framework_TestCase
         $actual->addTable('catalog_eav_attribute');
         $actual->addTable('eav_entity_type');
         $actual->addTable('eav_attribute_set');
+        $actual->addTable('eav_attribute');
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
     }
@@ -199,6 +225,7 @@ class CatalogAttributeDeleterTest extends \PHPUnit_Framework_TestCase
         $actual->addTable('catalog_eav_attribute');
         $actual->addTable('eav_entity_type');
         $actual->addTable('eav_attribute_set');
+        $actual->addTable('eav_attribute');
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
     }
