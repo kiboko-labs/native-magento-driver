@@ -2,7 +2,6 @@
 
 namespace Kiboko\Component\MagentoDriver\Model;
 
-use Doctrine\Common\Collections\Collection;
 use League\Flysystem\File;
 use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
 
@@ -16,7 +15,7 @@ trait ImageAttributeValueTrait
     private $file;
 
     /**
-     * @var Collection
+     * @var \Traversable
      */
     private $metadata;
 
@@ -75,7 +74,7 @@ trait ImageAttributeValueTrait
     }
 
     /**
-     * @return Collection|ImageMetadataAttributeValueInterface[]
+     * @return \Traversable|ImageMetadataAttributeValueInterface[]
      */
     public function getMetadata()
     {

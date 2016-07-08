@@ -2,7 +2,6 @@
 
 namespace Kiboko\Component\MagentoDriver\Model;
 
-use Doctrine\Common\Collections\Collection;
 use League\Flysystem\File;
 
 interface ImageAttributeValueInterface extends AttributeValueInterface
@@ -13,7 +12,7 @@ interface ImageAttributeValueInterface extends AttributeValueInterface
     public function getFile();
 
     /**
-     * @return Collection|ImageMetadataAttributeValueInterface[]
+     * @return \Traversable|ImageMetadataAttributeValueInterface[]
      */
     public function getMetadata();
 

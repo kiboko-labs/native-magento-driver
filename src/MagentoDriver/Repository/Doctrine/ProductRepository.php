@@ -58,16 +58,16 @@ class ProductRepository implements ProductRepositoryInterface
     }
 
     /**
-     * @param string $code
+     * @param string $identifier
      *
      * @return ProductInterface
      */
-    public function findOneByIdentifier($code)
+    public function findOneById($identifier)
     {
         $query = $this->queryBuilder->createFindOneByIdentifierQueryBuilder('p');
 
         $statement = $this->connection->prepare($query);
-        $statement->bindValue(1, $code);
+        $statement->bindValue(1, $identifier);
 
         if (!$statement->execute()) {
             throw new DatabaseFetchingFailureException();
@@ -83,17 +83,17 @@ class ProductRepository implements ProductRepositoryInterface
     }
 
     /**
-     * @param int $identifier
+     * @param int $code
      *
      * @return ProductInterface
      */
-    public function findOneById($identifier)
+    public function findOneByIdentifier($code)
     {
         $query = $this->queryBuilder->createFindOneByIdQueryBuilder('p');
 
         $statement = $this->connection->prepare($query);
 
-        if (!$statement->execute([$identifier])) {
+        if (!$statement->execute([$code])) {
             throw new DatabaseFetchingFailureException();
         }
 
@@ -109,9 +109,9 @@ class ProductRepository implements ProductRepositoryInterface
     /**
      * @param array $identifierList
      *
-     * @return Collection|ProductInterface[]
+     * @return \Traversable|ProductInterface[]
      */
-    public function findAllByIdentifier(array $identifierList)
+    public function findAllById(array $identifierList)
     {
         $query = $this->queryBuilder->createFindAllByIdentifierQueryBuilder('p', $identifierList);
 
@@ -120,48 +120,42 @@ class ProductRepository implements ProductRepositoryInterface
             throw new DatabaseFetchingFailureException();
         }
 
-        $productList = new ArrayCollection();
         if ($statement->rowCount() < 1) {
-            return $productList;
+            return;
         }
 
         foreach ($statement as $options) {
-            $productList->set($options['entity_id'], $this->createNewProductInstanceFromDatabase($options));
+            yield $options['entity_id'] => $this->createNewProductInstanceFromDatabase($options);
         }
-
-        return $productList;
     }
 
     /**
-     * @param array|int[] $idList
+     * @param array|int[] $codeList
      *
-     * @return Collection|ProductInterface[]
+     * @return \Traversable|ProductInterface[]
      */
-    public function findAllById(array $idList)
+    public function findAllByIdentifier(array $codeList)
     {
-        $query = $this->queryBuilder->createFindAllByIdQueryBuilder('p', $idList);
+        $query = $this->queryBuilder->createFindAllByIdQueryBuilder('p', $codeList);
 
         $statement = $this->connection->prepare($query);
-        if (!$statement->execute($idList)) {
+        if (!$statement->execute($codeList)) {
             throw new DatabaseFetchingFailureException();
         }
 
-        $productList = new ArrayCollection();
         if ($statement->rowCount() < 1) {
-            return $productList;
+            return;
         }
 
         foreach ($statement as $options) {
-            $productList->set($options['entity_id'], $this->createNewProductInstanceFromDatabase($options));
+            yield $options['entity_id'] => $this->createNewProductInstanceFromDatabase($options);
         }
-
-        return $productList;
     }
 
     /**
      * @param FamilyInterface $family
      *
-     * @return Collection|ProductInterface[]
+     * @return \Traversable|ProductInterface[]
      */
     public function findAllByFamily(FamilyInterface $family)
     {
@@ -172,22 +166,19 @@ class ProductRepository implements ProductRepositoryInterface
             throw new DatabaseFetchingFailureException();
         }
 
-        $productList = new ArrayCollection();
         if ($statement->rowCount() < 1) {
-            return $productList;
+            return;
         }
 
         foreach ($statement as $options) {
-            $productList->set($options['entity_id'], $this->createNewProductInstanceFromDatabase($options));
+            yield $options['entity_id'] => $this->createNewProductInstanceFromDatabase($options);
         }
-
-        return $productList;
     }
 
     /**
      * @param CategoryInterface $category
      *
-     * @return Collection|ProductInterface[]
+     * @return \Traversable|ProductInterface[]
      */
     public function findAllByCategory(CategoryInterface $category)
     {
@@ -198,22 +189,19 @@ class ProductRepository implements ProductRepositoryInterface
             throw new DatabaseFetchingFailureException();
         }
 
-        $productList = new ArrayCollection();
         if ($statement->rowCount() < 1) {
-            return $productList;
+            return;
         }
 
         foreach ($statement as $options) {
-            $productList->set($options['entity_id'], $this->createNewProductInstanceFromDatabase($options));
+            yield $options['entity_id'] => $this->createNewProductInstanceFromDatabase($options);
         }
-
-        return $productList;
     }
 
     /**
      * @param string $productType
      *
-     * @return Collection|ProductInterface[]
+     * @return \Traversable|ProductInterface[]
      */
     public function findAllByType($productType)
     {
@@ -225,20 +213,17 @@ class ProductRepository implements ProductRepositoryInterface
             throw new DatabaseFetchingFailureException();
         }
 
-        $productList = new ArrayCollection();
         if ($statement->rowCount() < 1) {
-            return $productList;
+            return;
         }
 
         foreach ($statement as $options) {
-            $productList->set($options['entity_id'], $this->createNewProductInstanceFromDatabase($options));
+            yield $options['entity_id'] => $this->createNewProductInstanceFromDatabase($options);
         }
-
-        return $productList;
     }
 
     /**
-     * @return Collection|ProductInterface[]
+     * @return \Traversable|ProductInterface[]
      */
     public function findAll()
     {
@@ -249,15 +234,12 @@ class ProductRepository implements ProductRepositoryInterface
             throw new DatabaseFetchingFailureException();
         }
 
-        $productList = new ArrayCollection();
         if ($statement->rowCount() < 1) {
-            return $productList;
+            return;
         }
 
         foreach ($statement as $options) {
-            $productList->set($options['entity_id'], $this->createNewProductInstanceFromDatabase($options));
+            yield $options['entity_id'] => $this->createNewProductInstanceFromDatabase($options);
         }
-
-        return $productList;
     }
 }

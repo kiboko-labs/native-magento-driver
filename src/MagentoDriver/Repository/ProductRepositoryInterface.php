@@ -9,32 +9,32 @@ use Kiboko\Component\MagentoDriver\Model\FamilyInterface;
 interface ProductRepositoryInterface
 {
     /**
-     * @param string $code
-     *
-     * @return ProductInterface
-     */
-    public function findOneByIdentifier($code);
-
-    /**
-     * @param int $identifier
+     * @param string $identifier
      *
      * @return ProductInterface
      */
     public function findOneById($identifier);
 
     /**
+     * @param int $code
+     *
+     * @return ProductInterface
+     */
+    public function findOneByIdentifier($code);
+
+    /**
      * @param array $identifierList
      *
      * @return \Traversable|ProductInterface[]
      */
-    public function findAllByIdentifier(array $identifierList);
+    public function findAllById(array $identifierList);
 
     /**
-     * @param array|int[] $idList
+     * @param array|int[] $codeList
      *
      * @return \Traversable|ProductInterface[]
      */
-    public function findAllById(array $idList);
+    public function findAllByIdentifier(array $codeList);
 
     /**
      * @param FamilyInterface $family

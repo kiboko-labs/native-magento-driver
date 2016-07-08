@@ -2,7 +2,6 @@
 
 namespace Kiboko\Component\MagentoDriver\Entity\Product;
 
-use Doctrine\Common\Collections\Collection;
 use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
 use Kiboko\Component\MagentoDriver\Model\SuperLinkInterface;
 
@@ -14,9 +13,9 @@ interface ConfigurableProductInterface extends ProductInterface
     public function addAxisAttribute(AttributeInterface $superAttribute);
 
     /**
-     * @param Collection|AttributeInterface[] $superAttributeList
+     * @param \Traversable|AttributeInterface[] $superAttributeList
      */
-    public function addAxisAttributeList(Collection $superAttributeList);
+    public function addAxisAttributeList(\Traversable $superAttributeList);
 
     /**
      * @param AttributeInterface $attribute
@@ -31,7 +30,7 @@ interface ConfigurableProductInterface extends ProductInterface
     public function hasAxisAttributes();
 
     /**
-     * @return Collection|AttributeInterface[]
+     * @return \Traversable|AttributeInterface[]
      */
     public function getAxisAttributes();
 
@@ -41,9 +40,9 @@ interface ConfigurableProductInterface extends ProductInterface
     public function addVariant(SimpleProductInterface $variant);
 
     /**
-     * @param Collection|SimpleProductInterface[] $variants
+     * @param \Traversable|SimpleProductInterface[] $variants
      */
-    public function addVariantList(Collection $variants);
+    public function addVariantList(\Traversable $variants);
 
     /**
      * @param SimpleProductInterface $variant
@@ -58,7 +57,7 @@ interface ConfigurableProductInterface extends ProductInterface
     public function hasVariants();
 
     /**
-     * @return Collection|SimpleProductInterface[]
+     * @return \Traversable|SimpleProductInterface[]
      */
     public function getVariants();
 
@@ -68,9 +67,9 @@ interface ConfigurableProductInterface extends ProductInterface
     public function addSuperLink(SuperLinkInterface $superLink);
 
     /**
-     * @param Collection|SuperLinkInterface[] $superLinks
+     * @param \Traversable|SuperLinkInterface[] $superLinks
      */
-    public function addSuperLinkList(Collection $superLinks);
+    public function addSuperLinkList(\Traversable $superLinks);
 
     /**
      * @param SuperLinkInterface $superLink
@@ -85,7 +84,7 @@ interface ConfigurableProductInterface extends ProductInterface
     public function hasSuperLinks();
 
     /**
-     * @return Collection|SuperLinkInterface[]
+     * @return \Traversable|SuperLinkInterface[]
      */
     public function getSuperLinks();
 }

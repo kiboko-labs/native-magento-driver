@@ -98,7 +98,7 @@ class EntityAttribute implements EntityAttributeInterface
      * @param int $attributeId
      * @param int $sortOrder
      *
-     * @return AttributeLabelInterface
+     * @return EntityAttributeInterface
      */
     public static function buildNewWith(
         $entityAttributeId,

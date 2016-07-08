@@ -21,11 +21,11 @@ class StandardProductAttributeValuesPersister implements ProductPersisterInterfa
 
     /**
      * @param AttributeValuePersisterInterface $persister
-     * @param Collection                       $attributeList
+     * @param \Traversable                       $attributeList
      */
     public function __construct(
         AttributeValuePersisterInterface $persister,
-        Collection $attributeList
+        \Traversable $attributeList
     ) {
         $this->attributeValuesPersister = $persister;
 
@@ -64,6 +64,9 @@ class StandardProductAttributeValuesPersister implements ProductPersisterInterfa
         $this->persist($product);
     }
 
+    /**
+     * @return void
+     */
     public function flush()
     {
         $this->attributeValuesPersister->flush();

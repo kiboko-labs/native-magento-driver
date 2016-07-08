@@ -103,7 +103,7 @@ class ProductAttributeValueRepository implements ProductAttributeValueRepository
     /**
      * @param array|int[] $idList
      *
-     * @return Collection|AttributeValueInterface[]
+     * @return \Traversable|AttributeValueInterface[]
      */
     public function findAllById(array $idList)
     {
@@ -129,7 +129,7 @@ class ProductAttributeValueRepository implements ProductAttributeValueRepository
     /**
      * @param ProductInterface $product
      *
-     * @return Collection|AttributeValueInterface[]
+     * @return \Traversable|AttributeValueInterface[]
      */
     public function findAllByProduct(ProductInterface $product)
     {
@@ -155,7 +155,7 @@ class ProductAttributeValueRepository implements ProductAttributeValueRepository
     /**
      * @param ProductInterface $product
      *
-     * @return Collection|AttributeValueInterface[]
+     * @return \Traversable|AttributeValueInterface[]
      */
     public function findAllVariantAxisByProductFromDefault(ProductInterface $product)
     {
@@ -166,7 +166,7 @@ class ProductAttributeValueRepository implements ProductAttributeValueRepository
      * @param ProductInterface $product
      * @param int              $storeId
      *
-     * @return Collection|AttributeValueInterface[]
+     * @return \Traversable|AttributeValueInterface[]
      */
     public function findAllVariantAxisByProductFromStoreId(ProductInterface $product, $storeId)
     {
@@ -242,7 +242,7 @@ class ProductAttributeValueRepository implements ProductAttributeValueRepository
      * @param ProductInterface $product
      * @param array            $attributeList
      *
-     * @return Collection|AttributeValueInterface[]
+     * @return \Traversable|AttributeValueInterface[]
      */
     public function findAllByProductAndAttributeListFromDefault(
         ProductInterface $product,
@@ -256,7 +256,7 @@ class ProductAttributeValueRepository implements ProductAttributeValueRepository
      * @param array            $attributeList
      * @param int              $storeId
      *
-     * @return Collection|AttributeValueInterface[]
+     * @return \Traversable|AttributeValueInterface[]
      */
     public function findAllByProductAndAttributeListFromStoreId(
         ProductInterface $product,
@@ -296,7 +296,7 @@ class ProductAttributeValueRepository implements ProductAttributeValueRepository
     /**
      * @param array $productList
      *
-     * @return Collection|AttributeValueInterface[]
+     * @return \Traversable|AttributeValueInterface[]
      */
     public function findAllByProductListFromDefault(
         array $productList
@@ -308,7 +308,7 @@ class ProductAttributeValueRepository implements ProductAttributeValueRepository
      * @param array $productList
      * @param int   $storeId
      *
-     * @return Collection|AttributeValueInterface[]
+     * @return \Traversable|AttributeValueInterface[]
      */
     public function findAllByProductListFromStoreId(
         array $productList,
@@ -348,7 +348,7 @@ class ProductAttributeValueRepository implements ProductAttributeValueRepository
      * @param array $productList
      * @param array $attributeList
      *
-     * @return Collection|AttributeValueInterface[]
+     * @return \Traversable|AttributeValueInterface[]
      */
     public function findAllByProductListAndAttributeListFromDefault(
         array $productList,
@@ -362,7 +362,7 @@ class ProductAttributeValueRepository implements ProductAttributeValueRepository
      * @param array $attributeList
      * @param int   $storeId
      *
-     * @return Collection|AttributeValueInterface[]
+     * @return \Traversable|AttributeValueInterface[]
      */
     public function findAllByProductListAndAttributeListFromStoreId(
         array $productList,
@@ -409,7 +409,7 @@ class ProductAttributeValueRepository implements ProductAttributeValueRepository
     /**
      * @param ProductInterface $product
      *
-     * @return Collection|AttributeValueInterface[]
+     * @return \Traversable|AttributeValueInterface[]
      */
     public function findAllByProductFromDefault(ProductInterface $product)
     {
@@ -420,7 +420,7 @@ class ProductAttributeValueRepository implements ProductAttributeValueRepository
      * @param ProductInterface $product
      * @param int              $storeId
      *
-     * @return Collection|AttributeValueInterface[]
+     * @return \Traversable|AttributeValueInterface[]
      */
     public function findAllByProductFromStoreId(ProductInterface $product, $storeId)
     {

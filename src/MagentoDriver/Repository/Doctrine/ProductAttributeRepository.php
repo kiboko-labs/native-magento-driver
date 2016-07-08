@@ -15,7 +15,7 @@ use Kiboko\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
 use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilderInterface;
 use Kiboko\Component\MagentoDriver\Repository\ProductAttributeRepositoryInterface;
 
-class CatalogAttributeRepository implements ProductAttributeRepositoryInterface
+class ProductAttributeRepository implements ProductAttributeRepositoryInterface
 {
     /**
      * @var ProductAttributeQueryBuilderInterface
@@ -149,7 +149,7 @@ class CatalogAttributeRepository implements ProductAttributeRepositoryInterface
      * @param string         $entityTypeCode
      * @param array|string[] $codeList
      *
-     * @return Collection|CatalogAttributeExtensionInterface[]
+     * @return \Traversable|CatalogAttributeExtensionInterface[]
      */
     public function findAllByCode($entityTypeCode, array $codeList)
     {
@@ -160,22 +160,19 @@ class CatalogAttributeRepository implements ProductAttributeRepositoryInterface
             throw new DatabaseFetchingFailureException();
         }
 
-        $attributeList = new ArrayCollection();
         if ($statement->rowCount() < 1) {
-            return $attributeList;
+            return;
         }
 
         foreach ($statement as $options) {
-            $attributeList->set($options['attribute_code'], $this->createNewAttributeInstanceFromDatabase($options));
+            yield $options['attribute_code'] => $this->createNewAttributeInstanceFromDatabase($options);
         }
-
-        return $attributeList;
     }
 
     /**
      * @param array|int[] $idList
      *
-     * @return Collection|CatalogAttributeExtensionInterface[]
+     * @return \Traversable|CatalogAttributeExtensionInterface[]
      */
     public function findAllById(array $idList)
     {
@@ -186,20 +183,17 @@ class CatalogAttributeRepository implements ProductAttributeRepositoryInterface
             throw new DatabaseFetchingFailureException();
         }
 
-        $attributeList = new ArrayCollection();
         if ($statement->rowCount() < 1) {
-            return $attributeList;
+            return;
         }
 
         foreach ($statement as $options) {
-            $attributeList->set($options['attribute_id'], $this->createNewAttributeInstanceFromDatabase($options));
+            yield $options['attribute_id'] => $this->createNewAttributeInstanceFromDatabase($options);
         }
-
-        return $attributeList;
     }
 
     /**
-     * @return Collection|CatalogAttributeExtensionInterface[]
+     * @return \Traversable|CatalogAttributeExtensionInterface[]
      */
     public function findAll()
     {
@@ -210,22 +204,19 @@ class CatalogAttributeRepository implements ProductAttributeRepositoryInterface
             throw new DatabaseFetchingFailureException();
         }
 
-        $attributeList = new ArrayCollection();
         if ($statement->rowCount() < 1) {
-            return $attributeList;
+            return;
         }
 
         foreach ($statement as $options) {
-            $attributeList->set($options['attribute_code'], $this->createNewAttributeInstanceFromDatabase($options));
+            yield $options['attribute_code'] => $this->createNewAttributeInstanceFromDatabase($options);
         }
-
-        return $attributeList;
     }
 
     /**
      * @param ProductInterface $product
      *
-     * @return Collection|CatalogAttributeExtensionInterface[]
+     * @return \Traversable|CatalogAttributeExtensionInterface[]
      */
     public function findAllByEntity(ProductInterface $product)
     {
@@ -235,35 +226,32 @@ class CatalogAttributeRepository implements ProductAttributeRepositoryInterface
     /**
      * @param string $entityTypeCode
      *
-     * @return Collection|CatalogAttributeExtensionInterface[]
+     * @return \Traversable|CatalogAttributeExtensionInterface[]
      */
     public function findAllByEntityTypeCode($entityTypeCode)
     {
         $query = $this->queryBuilder->createFindAllByEntityTypeQueryBuilder('a', 'x', 'e');
                 
         $query->where($query->expr()->eq('e.entity_type_code', '?'));
-        
-        $attributeList = new ArrayCollection();
+
         $statement = $this->connection->prepare($query);
         if (!$statement->execute([$entityTypeCode])) {
             throw new DatabaseFetchingFailureException();
         }
         
         if ($statement->rowCount() < 1) {
-            return $attributeList;
+            return;
         }
 
         foreach ($statement as $options) {
-            $attributeList->set($options['attribute_code'], $this->createNewAttributeInstanceFromDatabase($options));
+            yield $options['attribute_code'] => $this->createNewAttributeInstanceFromDatabase($options);
         }
-
-        return $attributeList;
     }
 
     /**
      * @param int $entityTypeId
      *
-     * @return Collection|CatalogAttributeExtensionInterface[]
+     * @return \Traversable|CatalogAttributeExtensionInterface[]
      */
     public function findAllByEntityTypeId($entityTypeId)
     {
@@ -271,102 +259,90 @@ class CatalogAttributeRepository implements ProductAttributeRepositoryInterface
 
         $query->where($query->expr()->eq('a.entity_type_id', '?'));
 
-        $attributeList = new ArrayCollection();
         $statement = $this->connection->prepare($query);
         if (!$statement->execute([$entityTypeId])) {
             throw new DatabaseFetchingFailureException();
         }
 
         if ($statement->rowCount() < 1) {
-            return $attributeList;
+            return;
         }
 
         foreach ($statement as $options) {
-            $attributeList->set($options['attribute_code'], $this->createNewAttributeInstanceFromDatabase($options));
+            yield $options['attribute_code'] => $this->createNewAttributeInstanceFromDatabase($options);
         }
-
-        return $attributeList;
     }
 
     /**
      * @param ProductInterface $product
      *
-     * @return Collection|CatalogAttributeExtensionInterface[]
+     * @return \Traversable|CatalogAttributeExtensionInterface[]
      */
     public function findAllVariantAxisByEntity(ProductInterface $product)
     {
-        $attributeList = new ArrayCollection();
         if (!$product->isConfigurable()) {
-            return $attributeList;
+            return;
         }
 
         $query = $this->queryBuilder->createFindAllVariantAxisByEntityQueryBuilder('a', 'x', 'e', 'va');
 
         $statement = $this->connection->prepare($query);
-        if (!$statement->execute([$product->getId()])) {
+        if (!$statement->execute([$product->getIdentifier()])) {
             throw new DatabaseFetchingFailureException();
         }
 
         if ($statement->rowCount() < 1) {
-            return $attributeList;
+            return;
         }
 
         foreach ($statement as $options) {
-            $attributeList->set($options['attribute_code'], $this->createNewAttributeInstanceFromDatabase($options));
+            yield $options['attribute_code'] => $this->createNewAttributeInstanceFromDatabase($options);
         }
-
-        return $attributeList;
     }
 
     /**
      * @param FamilyInterface $family
      *
-     * @return Collection|CatalogAttributeExtensionInterface[]
+     * @return \Traversable|CatalogAttributeExtensionInterface[]
      */
     public function findAllByFamily(FamilyInterface $family)
     {
         $query = $this->queryBuilder->createFindAllByFamilyQueryBuilder('a', 'x', 'e', 'f');
 
-        $attributeList = new ArrayCollection();
         $statement = $this->connection->prepare($query);
         if (!$statement->execute([$family->getId()])) {
             throw new DatabaseFetchingFailureException();
         }
 
         if ($statement->rowCount() < 1) {
-            return $attributeList;
+            return;
         }
 
         foreach ($statement as $options) {
-            $attributeList->set($options['attribute_code'], $this->createNewAttributeInstanceFromDatabase($options));
+            yield $options['attribute_code'] => $this->createNewAttributeInstanceFromDatabase($options);
         }
-
-        return $attributeList;
     }
 
     /**
      * @param FamilyInterface $family
      *
-     * @return Collection|CatalogAttributeExtensionInterface[]
+     * @return \Traversable|CatalogAttributeExtensionInterface[]
      */
     public function findAllMandatoryByFamily(FamilyInterface $family)
     {
         $query = $this->queryBuilder->createFindAllMandatoryByFamilyQueryBuilder('a', 'x', 'e', 'f');
 
-        $attributeList = new ArrayCollection();
         $statement = $this->connection->prepare($query);
         if (!$statement->execute([$family->getId()])) {
             throw new DatabaseFetchingFailureException();
         }
 
         if ($statement->rowCount() < 1) {
-            return $attributeList;
+            return;
         }
 
         foreach ($statement as $options) {
-            $attributeList->set($options['attribute_code'], $this->createNewAttributeInstanceFromDatabase($options));
+            yield $options['attribute_code'] => $this->createNewAttributeInstanceFromDatabase($options);
         }
-
-        return $attributeList;
     }
 }
