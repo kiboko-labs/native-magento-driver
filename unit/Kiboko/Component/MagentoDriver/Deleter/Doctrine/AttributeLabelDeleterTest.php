@@ -197,7 +197,5 @@ class AttributeLabelDeleterTest extends \PHPUnit_Framework_TestCase
         $actual->addTable('eav_attribute');
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
-        
-        $this->assertTableRowCount('eav_attribute_label', $this->getDataSet()->getIterator()->getTable()->getRowCount());
     }
 }

@@ -158,8 +158,6 @@ class AttributeGroupDeleterTest extends \PHPUnit_Framework_TestCase
         $actual->addTable('eav_attribute_group');
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
-        
-        $this->assertTableRowCount('eav_attribute_group', $this->getDataSet()->getIterator()->getTable()->getRowCount());
     }
 
     public function testRemoveAllById()
@@ -171,7 +169,5 @@ class AttributeGroupDeleterTest extends \PHPUnit_Framework_TestCase
         $actual->addTable('eav_attribute_group');
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
-        
-        $this->assertTableRowCount('eav_attribute_group', $this->getDataSet()->getIterator()->getTable()->getRowCount());
     }
 }
