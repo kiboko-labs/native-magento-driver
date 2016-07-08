@@ -64,7 +64,7 @@ class ProductRepository implements ProductRepositoryInterface
      */
     public function findOneById($identifier)
     {
-        $query = $this->queryBuilder->createFindOneByIdentifierQueryBuilder('p');
+        $query = $this->queryBuilder->createFindOneByIdQueryBuilder('p');
 
         $statement = $this->connection->prepare($query);
         $statement->bindValue(1, $identifier);
@@ -89,7 +89,7 @@ class ProductRepository implements ProductRepositoryInterface
      */
     public function findOneByIdentifier($code)
     {
-        $query = $this->queryBuilder->createFindOneByIdQueryBuilder('p');
+        $query = $this->queryBuilder->createFindOneByIdentifierQueryBuilder('p');
 
         $statement = $this->connection->prepare($query);
 
@@ -113,7 +113,7 @@ class ProductRepository implements ProductRepositoryInterface
      */
     public function findAllById(array $identifierList)
     {
-        $query = $this->queryBuilder->createFindAllByIdentifierQueryBuilder('p', $identifierList);
+        $query = $this->queryBuilder->createFindAllByIdQueryBuilder('p', $identifierList);
 
         $statement = $this->connection->prepare($query);
         if (!$statement->execute($identifierList)) {
@@ -136,7 +136,7 @@ class ProductRepository implements ProductRepositoryInterface
      */
     public function findAllByIdentifier(array $codeList)
     {
-        $query = $this->queryBuilder->createFindAllByIdQueryBuilder('p', $codeList);
+        $query = $this->queryBuilder->createFindAllByIdentifierQueryBuilder('p', $codeList);
 
         $statement = $this->connection->prepare($query);
         if (!$statement->execute($codeList)) {
