@@ -3,10 +3,6 @@
 namespace unit\Kiboko\Component\MagentoDriver\Deleter\Doctrine\Attribute;
 
 use Doctrine\DBAL\Schema\Schema;
-use Kiboko\Component\MagentoDriver\Persister\CatalogAttributePersisterInterface;
-use Kiboko\Component\MagentoDriver\Persister\CatalogAttributePersister;
-use Kiboko\Component\MagentoDriver\Persister\StandardDml\Attribute\CatalogAttributeExtensionPersister;
-use Kiboko\Component\MagentoDriver\Persister\StandardDml\Attribute\StandardAttributePersister;
 use Kiboko\Component\MagentoDriver\Deleter\CatalogAttributeDeleterInterface;
 use Kiboko\Component\MagentoDriver\Deleter\Doctrine\CatalogAttributeDeleter;
 use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilder;
@@ -30,11 +26,6 @@ class CatalogAttributeDeleterTest extends \PHPUnit_Framework_TestCase
      * @var CatalogAttributeDeleterInterface
      */
     private $deleter;
-
-    /**
-     * @var CatalogAttributePersisterInterface
-     */
-    private $persister;
 
     /**
      * @var LoaderInterface
@@ -102,7 +93,6 @@ class CatalogAttributeDeleterTest extends \PHPUnit_Framework_TestCase
         $this->schema = new Schema();
 
         $schemaBuilder = new DoctrineSchemaBuilder($this->getDoctrineConnection(), $this->schema);
-
         $schemaBuilder->ensureAttributeTable();
         $schemaBuilder->ensureFamilyTable();
         $schemaBuilder->ensureEntityTypeTable();
@@ -153,17 +143,6 @@ class CatalogAttributeDeleterTest extends \PHPUnit_Framework_TestCase
             $GLOBALS['MAGENTO_EDITION']
         );
 
-        $this->persister = new CatalogAttributePersister(
-            new StandardAttributePersister(
-                $this->getDoctrineConnection(),
-                ProductAttributeQueryBuilder::getDefaultTable()
-            ),
-            new CatalogAttributeExtensionPersister(
-                $this->getDoctrineConnection(),
-                ProductAttributeQueryBuilder::getDefaultExtraTable()
-            )
-        );
-
         $this->deleter = new CatalogAttributeDeleter(
             $this->getDoctrineConnection(),
             new ProductAttributeQueryBuilder(
@@ -184,13 +163,11 @@ class CatalogAttributeDeleterTest extends \PHPUnit_Framework_TestCase
         $this->truncateTables();
         parent::tearDown();
 
-        $this->persister = $this->deleter = null;
+        $this->deleter = null;
     }
 
     public function testRemoveNone()
     {
-        $this->persister->initialize();
-
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('catalog_eav_attribute');
         $actual->addTable('eav_entity_type');
@@ -202,8 +179,6 @@ class CatalogAttributeDeleterTest extends \PHPUnit_Framework_TestCase
 
     public function testRemoveOneById()
     {
-        $this->persister->initialize();
-
         $this->deleter->deleteOneById(122);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
@@ -217,8 +192,6 @@ class CatalogAttributeDeleterTest extends \PHPUnit_Framework_TestCase
 
     public function testRemoveAllById()
     {
-        $this->persister->initialize();
-
         $this->deleter->deleteAllById([122]);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());

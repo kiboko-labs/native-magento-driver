@@ -3,9 +3,7 @@
 namespace unit\Kiboko\Component\MagentoDriver\Deleter\Doctrine\EntityAttribute;
 
 use Doctrine\DBAL\Schema\Schema;
-use Kiboko\Component\MagentoDriver\Persister\EntityAttributePersisterInterface;
 use Kiboko\Component\MagentoDriver\Deleter\EntityAttributeDeleterInterface;
-use Kiboko\Component\MagentoDriver\Persister\StandardDml\Attribute\StandardEntityAttributePersister;
 use Kiboko\Component\MagentoDriver\Deleter\Doctrine\EntityAttributeDeleter;
 use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\EntityAttributeQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
@@ -28,11 +26,6 @@ class EntityAttributeDeleterTest extends \PHPUnit_Framework_TestCase
      * @var EntityAttributeDeleterInterface
      */
     private $deleter;
-
-    /**
-     * @var EntityAttributePersisterInterface
-     */
-    private $persister;
 
     /**
      * @var LoaderInterface
@@ -72,15 +65,15 @@ class EntityAttributeDeleterTest extends \PHPUnit_Framework_TestCase
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
 
         $this->getDoctrineConnection()->exec(
-                $platform->getTruncateTableSQL('eav_attribute_group')
+            $platform->getTruncateTableSQL('eav_attribute_group')
         );
 
         $this->getDoctrineConnection()->exec(
-                $platform->getTruncateTableSQL('eav_attribute')
+            $platform->getTruncateTableSQL('eav_attribute')
         );
 
         $this->getDoctrineConnection()->exec(
-                $platform->getTruncateTableSQL('eav_entity_attribute')
+            $platform->getTruncateTableSQL('eav_entity_attribute')
         );
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
@@ -112,7 +105,7 @@ class EntityAttributeDeleterTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
 
         $this->fixturesLoader = new Loader(
-            new FallbackResolver($schemaBuilder->getFixturesPath(), 'eav_entity_store'),
+            new FallbackResolver($schemaBuilder->getFixturesPath(), 'eav_entity_attribute'),
             $GLOBALS['MAGENTO_VERSION'],
             $GLOBALS['MAGENTO_EDITION']
         );
@@ -138,11 +131,6 @@ class EntityAttributeDeleterTest extends \PHPUnit_Framework_TestCase
             $GLOBALS['MAGENTO_EDITION']
         );
 
-        $this->persister = new StandardEntityAttributePersister(
-            $this->getDoctrineConnection(),
-            EntityAttributeQueryBuilder::getDefaultTable()
-        );
-
         $this->deleter = new EntityAttributeDeleter(
             $this->getDoctrineConnection(),
             new EntityAttributeQueryBuilder(
@@ -158,13 +146,11 @@ class EntityAttributeDeleterTest extends \PHPUnit_Framework_TestCase
         $this->truncateTables();
         parent::tearDown();
 
-        $this->persister = $this->deleter = null;
+        $this->deleter = null;
     }
 
     public function testRemoveNone()
     {
-        $this->persister->initialize();
-
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_entity_attribute');
         $actual->addTable('eav_attribute');
@@ -177,7 +163,6 @@ class EntityAttributeDeleterTest extends \PHPUnit_Framework_TestCase
 
     public function testRemoveOneById()
     {
-        $this->persister->initialize();
         $this->deleter->deleteOneById(2);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
@@ -190,7 +175,6 @@ class EntityAttributeDeleterTest extends \PHPUnit_Framework_TestCase
 
     public function testRemoveAllById()
     {
-        $this->persister->initialize();
         $this->deleter->deleteAllById([2]);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());

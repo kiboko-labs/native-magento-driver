@@ -3,9 +3,7 @@
 namespace unit\Kiboko\Component\MagentoDriver\Deleter\Doctrine\EntityStore;
 
 use Doctrine\DBAL\Schema\Schema;
-use Kiboko\Component\MagentoDriver\Persister\EntityStorePersisterInterface;
 use Kiboko\Component\MagentoDriver\Deleter\EntityStoreDeleterInterface;
-use Kiboko\Component\MagentoDriver\Persister\StandardDml\Entity\StandardEntityStorePersister;
 use Kiboko\Component\MagentoDriver\Deleter\Doctrine\EntityStoreDeleter;
 use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\EntityStoreQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
@@ -28,11 +26,6 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
      * @var EntityStoreDeleterInterface
      */
     private $deleter;
-
-    /**
-     * @var EntityStorePersisterInterface
-     */
-    private $persister;
 
     /**
      * @var LoaderInterface
@@ -126,11 +119,6 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
             $GLOBALS['MAGENTO_EDITION']
         );
 
-        $this->persister = new StandardEntityStorePersister(
-            $this->getDoctrineConnection(),
-            EntityStoreQueryBuilder::getDefaultTable()
-        );
-
         $this->deleter = new EntityStoreDeleter(
             $this->getDoctrineConnection(),
             new EntityStoreQueryBuilder(
@@ -146,13 +134,11 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
         $this->truncateTables();
         parent::tearDown();
 
-        $this->persister = $this->deleter = null;
+        $this->deleter = null;
     }
 
     public function testRemoveNone()
     {
-        $this->persister->initialize();
-
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_entity_store');
         $actual->addTable('eav_entity_type');
@@ -164,7 +150,6 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
 
     public function testRemoveOneById()
     {
-        $this->persister->initialize();
         $this->deleter->deleteOneById(2);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
@@ -176,7 +161,6 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
 
     public function testRemoveAllById()
     {
-        $this->persister->initialize();
         $this->deleter->deleteAllById([2]);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
