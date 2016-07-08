@@ -11,6 +11,9 @@ use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeLabelQueryBuil
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\FallbackResolver;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\LoaderInterface;
 
 class AttributeLabelDeleterTest extends \PHPUnit_Framework_TestCase
 {
@@ -32,11 +35,19 @@ class AttributeLabelDeleterTest extends \PHPUnit_Framework_TestCase
     private $persister;
 
     /**
+     * @var LoaderInterface
+     */
+    private $fixturesLoader;
+
+    /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
     protected function getDataSet()
     {
-        $dataset = $this->fixturesLoader->getDataSet($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
+        $dataset = $this->fixturesLoader->expectedDataSet(
+            'eav_attribute_label',
+            DoctrineSchemaBuilder::CONTEXT_DELETER
+        );
 
         return $dataset;
     }
@@ -44,10 +55,12 @@ class AttributeLabelDeleterTest extends \PHPUnit_Framework_TestCase
     /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
-    protected function getOriginalDataSet()
+    protected function getInitialDataSet()
     {
-        $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-            $this->getFixturesPathname('eav_attribute_label', $GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']));
+        $dataset = $this->fixturesLoader->initialDataSet(
+            'eav_attribute_label',
+            DoctrineSchemaBuilder::CONTEXT_DELETER
+        );
 
         return $dataset;
     }
@@ -57,6 +70,7 @@ class AttributeLabelDeleterTest extends \PHPUnit_Framework_TestCase
         $platform = $this->getDoctrineConnection()->getDatabasePlatform();
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
+
         $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('core_store')
         );
@@ -97,9 +111,32 @@ class AttributeLabelDeleterTest extends \PHPUnit_Framework_TestCase
 
         parent::setUp();
 
-        $schemaBuilder->hydrateStoreTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
-        $schemaBuilder->hydrateAttributeTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
-        $schemaBuilder->hydrateAttributeLabelTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
+        $this->fixturesLoader = new Loader(
+            new FallbackResolver($schemaBuilder->getFixturesPath(), 'eav_attribute_label'),
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateStoreTable(
+            'eav_attribute_label',
+            DoctrineSchemaBuilder::CONTEXT_DELETER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateAttributeTable(
+            'eav_attribute_label',
+            DoctrineSchemaBuilder::CONTEXT_DELETER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateAttributeLabelTable(
+            'eav_attribute_label',
+            DoctrineSchemaBuilder::CONTEXT_DELETER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
 
         $this->persister = new AttributeLabelPersister(
             $this->getDoctrineConnection(),
@@ -130,10 +167,10 @@ class AttributeLabelDeleterTest extends \PHPUnit_Framework_TestCase
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_label');
+        $actual->addTable('core_store');
+        $actual->addTable('eav_attribute');
 
-        $this->assertDataSetsEqual($this->getOriginalDataSet(), $actual);
-        
-        $this->assertTableRowCount('eav_attribute_label', $this->getOriginalDataSet()->getIterator()->getTable()->getRowCount());
+        $this->assertDataSetsEqual($this->getInitialDataSet(), $actual);
     }
 
     public function testRemoveOneById()
@@ -143,10 +180,10 @@ class AttributeLabelDeleterTest extends \PHPUnit_Framework_TestCase
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_label');
+        $actual->addTable('core_store');
+        $actual->addTable('eav_attribute');
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
-        
-        $this->assertTableRowCount('eav_attribute_label', $this->getDataSet()->getIterator()->getTable()->getRowCount());
     }
 
     public function testRemoveAllById()
@@ -156,6 +193,8 @@ class AttributeLabelDeleterTest extends \PHPUnit_Framework_TestCase
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_label');
+        $actual->addTable('core_store');
+        $actual->addTable('eav_attribute');
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
         

@@ -11,7 +11,8 @@ use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBu
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
-use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\DeleterLoader;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\FallbackResolver;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\LoaderInterface;
 
 class AttributeDeleterTest extends \PHPUnit_Framework_TestCase
@@ -43,7 +44,10 @@ class AttributeDeleterTest extends \PHPUnit_Framework_TestCase
      */
     protected function getDataSet()
     {
-        $dataset = $this->fixturesLoader->getDataSet($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
+        $dataset = $this->fixturesLoader->expectedDataSet(
+            'eav_attribute',
+            DoctrineSchemaBuilder::CONTEXT_DELETER
+        );
 
         return $dataset;
     }
@@ -51,10 +55,12 @@ class AttributeDeleterTest extends \PHPUnit_Framework_TestCase
     /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
-    protected function getOriginalDataSet()
+    protected function getInitialDataSet()
     {
-        $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-            $this->getFixturesPathname('eav_attribute', '1.9', 'ce'));
+        $dataset = $this->fixturesLoader->initialDataSet(
+            'eav_attribute',
+            DoctrineSchemaBuilder::CONTEXT_DELETER
+        );
 
         return $dataset;
     }
@@ -64,6 +70,7 @@ class AttributeDeleterTest extends \PHPUnit_Framework_TestCase
         $platform = $this->getDoctrineConnection()->getDatabasePlatform();
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
+
         $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('eav_attribute')
         );
@@ -94,7 +101,18 @@ class AttributeDeleterTest extends \PHPUnit_Framework_TestCase
 
         parent::setUp();
 
-        $schemaBuilder->hydrateAttributeTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
+        $this->fixturesLoader = new Loader(
+            new FallbackResolver($schemaBuilder->getFixturesPath(), 'eav_attribute'),
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateAttributeTable(
+            'eav_attribute',
+            DoctrineSchemaBuilder::CONTEXT_DELETER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
 
         $this->persister = new StandardAttributePersister(
                 $this->getDoctrineConnection(), ProductAttributeQueryBuilder::getDefaultTable()
@@ -130,9 +148,9 @@ class AttributeDeleterTest extends \PHPUnit_Framework_TestCase
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute');
 
-        $this->assertDataSetsEqual($this->getOriginalDataSet(), $actual);
+        $this->assertDataSetsEqual($this->getInitialDataSet(), $actual);
         
-        $this->assertTableRowCount('eav_attribute', $this->getOriginalDataSet()->getIterator()->getTable()->getRowCount());
+        $this->assertTableRowCount('eav_attribute', $this->getInitialDataSet()->getIterator()->getTable()->getRowCount());
     }
 
     public function testRemoveOneById()

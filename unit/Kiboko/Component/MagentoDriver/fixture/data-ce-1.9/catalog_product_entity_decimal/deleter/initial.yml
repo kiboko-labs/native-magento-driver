@@ -1,24 +1,20 @@
-eav_attribute_label:
+core_store:
     -
-        attribute_label_id: '1'
-        attribute_id: '79'
-        store_id: '1'
-        value: 'Cout'
+        store_id: 0
+        code: admin
+        website_id: 0
+        group_id: 0
+        name: Admin
+        sort_order: '1'
+        is_active: '1'
     -
-        attribute_label_id: '2'
-        attribute_id: '122'
         store_id: '1'
-        value: 'Laisser un message cadeau'
-    -
-        attribute_label_id: '3'
-        attribute_id: '131'
-        store_id: '1'
-        value: 
-    -
-        attribute_label_id: '4'
-        attribute_id: '210'
-        store_id: '1'
-        value: 'Description'
+        code: default
+        website_id: '1'
+        group_id: '1'
+        name: Default
+        sort_order: '1'
+        is_active: '1'
 eav_attribute:
     -
         attribute_id: '79'
@@ -164,20 +160,53 @@ eav_attribute:
         default_value: null
         is_unique: 0
         note: null
-core_store:
+catalog_product_entity:
     -
+        entity_id: '3'
+        entity_type_id: '4'
+        attribute_set_id: '20'
+        type_id: simple
+        sku: SIMPLE
+        has_options: null
+        required_options: null
+        created_at: '2015-12-01 15:13:05'
+        updated_at: '2016-01-11 08:24:22'
+    -
+        entity_id: '961'
+        entity_type_id: '4'
+        attribute_set_id: '17'
+        type_id: configurable
+        sku: CONFIGURABLE
+        has_options: null
+        required_options: null
+        created_at: '2015-12-02 09:49:08'
+        updated_at: '2016-03-02 09:37:48'
+catalog_product_entity_decimal:
+    -
+        value_id: '1'
+        entity_type_id: '4'
+        attribute_id: '79'
         store_id: 0
-        code: admin
-        website_id: 0
-        group_id: 0
-        name: Admin
-        sort_order: '1'
-        is_active: '1'
+        entity_id: '3'
+        value: '99.1700'
     -
+        value_id: '2'
+        entity_type_id: '4'
+        attribute_id: '79'
         store_id: '1'
-        code: default
-        website_id: '1'
-        group_id: '1'
-        name: Default
-        sort_order: '1'
-        is_active: '1'
+        entity_id: '961'
+        value: '99.1700'
+    -
+        value_id: '3'
+        entity_type_id: '4'
+        attribute_id: '79'
+        store_id: '1'
+        entity_id: '3'
+        value: 0
+    -
+        value_id: '4'
+        entity_type_id: '4'
+        attribute_id: '79'
+        store_id: 0
+        entity_id: '961'
+        value: 0

@@ -11,6 +11,9 @@ use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\EntityStoreQueryBuilder
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\FallbackResolver;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\LoaderInterface;
 
 class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
 {
@@ -32,12 +35,19 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
     private $persister;
 
     /**
+     * @var LoaderInterface
+     */
+    private $fixturesLoader;
+
+    /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
     protected function getDataSet()
     {
-        $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-                $this->getDeleterFixturesPathname('eav_entity_store', '1.9', 'ce'));
+        $dataset = $this->fixturesLoader->expectedDataSet(
+            'eav_entity_store',
+            DoctrineSchemaBuilder::CONTEXT_DELETER
+        );
 
         return $dataset;
     }
@@ -45,10 +55,12 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
     /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
-    protected function getOriginalDataSet()
+    protected function getInitialDataSet()
     {
-        $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-                $this->getFixturesPathname('eav_entity_store', '1.9', 'ce'));
+        $dataset = $this->fixturesLoader->initialDataSet(
+            'eav_entity_store',
+            DoctrineSchemaBuilder::CONTEXT_DELETER
+        );
 
         return $dataset;
     }
@@ -58,6 +70,7 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
         $platform = $this->getDoctrineConnection()->getDatabasePlatform();
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
+
         $this->getDoctrineConnection()->exec(
                 $platform->getTruncateTableSQL('eav_entity_type')
         );
@@ -93,8 +106,25 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
 
         parent::setUp();
 
-        $schemaBuilder->hydrateEntityTypeTable('1.9', 'ce');
-        $schemaBuilder->hydrateEntityStoreTable('1.9', 'ce');
+        $this->fixturesLoader = new Loader(
+            new FallbackResolver($schemaBuilder->getFixturesPath(), 'eav_entity_store'),
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateEntityTypeTable(
+            'eav_entity_store',
+            DoctrineSchemaBuilder::CONTEXT_DELETER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateEntityTypeTable(
+            'eav_entity_store',
+            DoctrineSchemaBuilder::CONTEXT_DELETER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
 
         $this->persister = new StandardEntityStorePersister(
             $this->getDoctrineConnection(),
@@ -126,9 +156,9 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_entity_store');
 
-        $this->assertDataSetsEqual($this->getOriginalDataSet(), $actual);
+        $this->assertDataSetsEqual($this->getInitialDataSet(), $actual);
 
-        $this->assertTableRowCount('eav_entity_store', $this->getOriginalDataSet()->getIterator()->getTable()->getRowCount());
+        $this->assertTableRowCount('eav_entity_store', $this->getInitialDataSet()->getIterator()->getTable()->getRowCount());
     }
 
     public function testRemoveOneById()
