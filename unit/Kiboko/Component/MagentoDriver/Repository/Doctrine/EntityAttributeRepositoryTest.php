@@ -90,18 +90,35 @@ class EntityAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $this->truncateTables();
 
-        $schemaBuilder->hydrateAttributeGroupTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
-        $schemaBuilder->hydrateAttributeTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
-        $schemaBuilder->hydrateEntityAttributeTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
+        $schemaBuilder->hydrateAttributeGroupTable(
+            'eav_entity_attribute',
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateAttributeTable(
+            'eav_entity_attribute',
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateEntityAttributeTable(
+            'eav_entity_attribute',
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
 
         $this->repository = new EntityAttributeRepository(
+            $this->getDoctrineConnection(),
+            new EntityAttributeQueryBuilder(
                 $this->getDoctrineConnection(),
-                new EntityAttributeQueryBuilder(
-                    $this->getDoctrineConnection(),
-                    EntityAttributeQueryBuilder::getDefaultTable(),
-                    EntityAttributeQueryBuilder::getDefaultFields()
-                ),
-                new EntityAttributeFactory()
+                EntityAttributeQueryBuilder::getDefaultTable(),
+                EntityAttributeQueryBuilder::getDefaultFields()
+            ),
+            new EntityAttributeFactory()
         );
     }
 

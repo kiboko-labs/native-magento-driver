@@ -81,8 +81,20 @@ class FamilyRepositoryTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->truncateTables();
-        $schemaBuilder->hydrateEntityTypeTable('1.9', 'ce');
-        $schemaBuilder->hydrateFamilyTable('1.9', 'ce');
+
+        $schemaBuilder->hydrateEntityTypeTable(
+            'eav_attribute_set',
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateFamilyTable(
+            'eav_attribute_set',
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
 
         $this->repository = new FamilyRepository(
             $this->getDoctrineConnection(),

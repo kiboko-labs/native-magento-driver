@@ -102,10 +102,10 @@ class AttributeGroupPersisterTest extends \PHPUnit_Framework_TestCase
 
     public function testInsertOne()
     {
-        $dataLoader = new Loader($this->getDoctrineConnection(), 'eav_attribute_group');
+        $dataLoader = new Loader($this->getDoctrineConnection(), '1.9', 'ce');
 
         $this->persister->initialize();
-        foreach ($dataLoader->walkData('1.9', 'ce') as $data) {
+        foreach ($dataLoader->walkData('eav_attribute_group') as $data) {
             $attribute = AttributeGroup::buildNewWith(
                 $data['attribute_group_id'],
                 $data['attribute_set_id'],
@@ -128,10 +128,10 @@ class AttributeGroupPersisterTest extends \PHPUnit_Framework_TestCase
 
     public function testUpdateOneExisting()
     {
-        $dataLoader = new Loader($this->getDoctrineConnection(), 'eav_attribute_group');
+        $dataLoader = new Loader($this->getDoctrineConnection(), '1.9', 'ce');
 
         $this->persister->initialize();
-        foreach ($dataLoader->walkData('1.9', 'ce') as $data) {
+        foreach ($dataLoader->walkData('eav_attribute_group') as $data) {
             $attribute = AttributeGroup::buildNewWith(
                 $data['attribute_group_id'],
                 $data['attribute_set_id'],

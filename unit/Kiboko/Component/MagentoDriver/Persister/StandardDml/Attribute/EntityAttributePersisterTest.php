@@ -107,10 +107,10 @@ class EntityAttributePersisterTest extends \PHPUnit_Framework_TestCase
 
     public function testInsertOne()
     {
-        $dataLoader = new Loader($this->getDoctrineConnection(), 'eav_entity_attribute');
+        $dataLoader = new Loader($this->getDoctrineConnection(), '1.9', 'ce');
 
         $this->persister->initialize();
-        foreach ($dataLoader->walkData('1.9', 'ce') as $data) {
+        foreach ($dataLoader->walkData('eav_entity_attribute') as $data) {
             $attribute = EntityAttribute::buildNewWith(
                 $data['entity_attribute_id'],
                 $data['entity_type_id'],
@@ -137,10 +137,10 @@ class EntityAttributePersisterTest extends \PHPUnit_Framework_TestCase
 
     public function testUpdateOneExisting()
     {
-        $dataLoader = new Loader($this->getDoctrineConnection(), 'eav_entity_attribute');
+        $dataLoader = new Loader($this->getDoctrineConnection(), '1.9', 'ce');
 
         $this->persister->initialize();
-        foreach ($dataLoader->walkData('1.9', 'ce') as $data) {
+        foreach ($dataLoader->walkData('eav_entity_attribute') as $data) {
             $attribute = EntityAttribute::buildNewWith(
                 $data['entity_attribute_id'],
                 $data['entity_type_id'],

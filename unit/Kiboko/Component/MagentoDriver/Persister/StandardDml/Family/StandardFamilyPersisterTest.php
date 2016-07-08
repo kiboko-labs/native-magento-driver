@@ -96,10 +96,10 @@ class StandardFamilyPersisterTest extends \PHPUnit_Framework_TestCase
 
     public function testInsertOne()
     {
-        $dataLoader = new Loader($this->getDoctrineConnection(), 'eav_attribute_set');
+        $dataLoader = new Loader($this->getDoctrineConnection(), '1.9', 'ce');
 
         $this->persister->initialize();
-        foreach ($dataLoader->walkData('1.9', 'ce') as $data) {
+        foreach ($dataLoader->walkData('eav_attribute_set') as $data) {
             $attribute = Family::buildNewWith(
                 $data['attribute_set_id'],
                 $data['attribute_set_name'],
@@ -120,10 +120,10 @@ class StandardFamilyPersisterTest extends \PHPUnit_Framework_TestCase
 
     public function testUpdateOneExisting()
     {
-        $dataLoader = new Loader($this->getDoctrineConnection(), 'eav_attribute_set');
+        $dataLoader = new Loader($this->getDoctrineConnection(), '1.9', 'ce');
 
         $this->persister->initialize();
-        foreach ($dataLoader->walkData('1.9', 'ce') as $data) {
+        foreach ($dataLoader->walkData('eav_attribute_set') as $data) {
             $attribute = Family::buildNewWith(
                 $data['attribute_set_id'],
                 $data['attribute_set_name'],

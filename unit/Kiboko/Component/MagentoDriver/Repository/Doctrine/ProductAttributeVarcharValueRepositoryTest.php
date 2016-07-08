@@ -102,10 +102,35 @@ class ProductAttributeVarcharValueRepositoryTest extends \PHPUnit_Framework_Test
         }
 
         $this->truncateTables();
-        $schemaBuilder->hydrateStoreTable('1.9', 'ce');
-        $schemaBuilder->hydrateAttributeTable('1.9', 'ce');
-        $schemaBuilder->hydrateCatalogProductEntityTable('1.9', 'ce');
-        $schemaBuilder->hydrateCatalogProductAttributeValueTable('varchar', '1.9', 'ce');
+
+        $schemaBuilder->hydrateStoreTable(
+            'catalog_product_entity_varchar',
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateAttributeTable(
+            'catalog_product_entity_varchar',
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateCatalogProductEntityTable(
+            'catalog_product_entity_varchar',
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateCatalogProductAttributeValueTable(
+            'varchar',
+            'catalog_product_entity_varchar',
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
 
         $this->repository = new ProductAttributeValueRepository(
             $this->getDoctrineConnection(),

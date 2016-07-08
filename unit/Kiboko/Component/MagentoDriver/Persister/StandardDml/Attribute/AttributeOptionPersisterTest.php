@@ -102,10 +102,10 @@ class AttributeOptionPersisterTest extends \PHPUnit_Framework_TestCase
 
     public function testInsertOne()
     {
-        $dataLoader = new Loader($this->getDoctrineConnection(), 'eav_attribute_option');
+        $dataLoader = new Loader($this->getDoctrineConnection(), '1.9', 'ce');
 
         $this->persister->initialize();
-        foreach ($dataLoader->walkData('1.9', 'ce') as $data) {
+        foreach ($dataLoader->walkData('eav_attribute_option') as $data) {
             $attribute = AttributeOption::buildNewWith(
                 $data['option_id'],
                 $data['attribute_id'],
@@ -126,10 +126,10 @@ class AttributeOptionPersisterTest extends \PHPUnit_Framework_TestCase
 
     public function testUpdateOneExisting()
     {
-        $dataLoader = new Loader($this->getDoctrineConnection(), 'eav_attribute_option');
+        $dataLoader = new Loader($this->getDoctrineConnection(), '1.9', 'ce');
 
         $this->persister->initialize();
-        foreach ($dataLoader->walkData('1.9', 'ce') as $data) {
+        foreach ($dataLoader->walkData('eav_attribute_option') as $data) {
             $attribute = AttributeOption::buildNewWith(
                 $data['option_id'],
                 $data['attribute_id'],

@@ -87,7 +87,12 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->truncateTables();
-        $schemaBuilder->hydrateCatalogProductEntityTable('1.9', 'ce');
+        $schemaBuilder->hydrateCatalogProductEntityTable(
+            'catalog_product_entity',
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
 
         /** @var FamilyRepositoryInterface|\PHPUnit_Framework_MockObject_MockObject $familyRepository */
         $familyRepository = $this->createMock(
@@ -132,32 +137,9 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->repository = null;
     }
 
-    public function testFetchingOneSimpleById()
-    {
-        $product = $this->repository->findOneById(3);
-
-        $this->assertInstanceOf(ProductInterface::class, $product);
-        $this->assertEquals('simple', $product->getType());
-        $this->assertNotNull($product->getId());
-    }
-
-    public function testFetchingOneConfigurableById()
-    {
-        $product = $this->repository->findOneById(961);
-
-        $this->assertInstanceOf(ProductInterface::class, $product);
-        $this->assertEquals('configurable', $product->getType());
-        $this->assertNotNull($product->getId());
-    }
-
-    public function testFetchingOneByIdButNonExistent()
-    {
-        $this->assertNull($this->repository->findOneById(123));
-    }
-
     public function testFetchingOneSimpleByIdentifier()
     {
-        $product = $this->repository->findOneByIdentifier('SIMPLE');
+        $product = $this->repository->findOneByIdentifier(3);
 
         $this->assertInstanceOf(ProductInterface::class, $product);
         $this->assertEquals('simple', $product->getType());
@@ -166,7 +148,7 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testFetchingOneConfigurableByIdentifier()
     {
-        $product = $this->repository->findOneByIdentifier('CONFIGURABLE');
+        $product = $this->repository->findOneByIdentifier(961);
 
         $this->assertInstanceOf(ProductInterface::class, $product);
         $this->assertEquals('configurable', $product->getType());
@@ -175,35 +157,74 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testFetchingOneByIdentifierButNonExistent()
     {
+        $this->assertNull($this->repository->findOneByIdentifier(123));
+    }
+
+    public function testFetchingOneSimpleByCode()
+    {
+        $product = $this->repository->findOneByIdentifier('SIMPLE');
+
+        $this->assertInstanceOf(ProductInterface::class, $product);
+        $this->assertEquals('simple', $product->getType());
+        $this->assertNotNull($product->getId());
+    }
+
+    public function testFetchingOneConfigurableByCode()
+    {
+        $product = $this->repository->findOneByIdentifier('CONFIGURABLE');
+
+        $this->assertInstanceOf(ProductInterface::class, $product);
+        $this->assertEquals('configurable', $product->getType());
+        $this->assertNotNull($product->getId());
+    }
+
+    public function testFetchingOneByCodeButNonExistent()
+    {
         $this->assertNull($this->repository->findOneByIdentifier('UNKNOWN'));
+    }
+
+    public function testFetchingAllByCode()
+    {
+        $products = $this->repository->findAllByIdentifier(['SIMPLE', 'CONFIGURABLE']);
+
+        $count = 0;
+        foreach ($products as $product) {
+            ++$count;
+
+            $this->assertInstanceOf(ProductInterface::class, $product);
+        }
+
+        $this->assertEquals(2, $count);
     }
 
     public function testFetchingAllByIdentifier()
     {
-        $products = $this->repository->findAllByIdentifier(['SIMPLE', 'CONFIGURABLE']);
-        $this->assertCount(2, $products);
-        foreach ($products as $product) {
-            $this->assertInstanceOf(ProductInterface::class, $product);
-        }
-    }
+        $products = $this->repository->findAllByIdentifier([3, 961]);
 
-    public function testFetchingAllById()
-    {
-        $products = $this->repository->findAllById([3, 961]);
-        $this->assertCount(2, $products);
+        $count = 0;
         foreach ($products as $product) {
+            ++$count;
+
             $this->assertInstanceOf(ProductInterface::class, $product);
             $this->assertInstanceOf(\DateTimeInterface::class, $product->getCreationDate());
             $this->assertInstanceOf(\DateTimeInterface::class, $product->getModificationDate());
             $this->assertInstanceOf(FamilyInterface::class, $product->getFamily());
         }
+
+        $this->assertEquals(2, $count);
     }
 
     public function testFetchingAll()
     {
         $products = $this->repository->findAll();
+
+        $count = 0;
         foreach ($products as $product) {
+            ++$count;
+
             $this->assertInstanceOf(ProductInterface::class, $product);
         }
+
+        $this->assertEquals(2, $count);
     }
 }

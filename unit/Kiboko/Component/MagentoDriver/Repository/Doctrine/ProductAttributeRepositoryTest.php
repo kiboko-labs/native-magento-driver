@@ -3,19 +3,18 @@
 namespace unit\Kiboko\Component\MagentoDriver\Repository\Doctrine;
 
 use Doctrine\DBAL\Schema\Schema;
-use Doctrine\Common\Collections\ArrayCollection;
 use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
 use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilder;
-use Kiboko\Component\MagentoDriver\Repository\AttributeRepositoryInterface;
-use Kiboko\Component\MagentoDriver\Repository\Doctrine\CatalogAttributeRepository;
+use Kiboko\Component\MagentoDriver\Repository\Doctrine\ProductAttributeRepository;
 use Kiboko\Component\MagentoDriver\Entity\Product\SimpleProduct;
 use Kiboko\Component\MagentoDriver\Entity\Product\ConfigurableProduct;
 use Kiboko\Component\MagentoDriver\Model\Family;
+use Kiboko\Component\MagentoDriver\Repository\ProductAttributeRepositoryInterface;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
 
-class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
+class ProductAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
 {
     use DatabaseConnectionAwareTrait;
 
@@ -25,7 +24,7 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
     private $schema;
 
     /**
-     * @var AttributeRepositoryInterface
+     * @var ProductAttributeRepositoryInterface
      */
     private $repository;
 
@@ -34,11 +33,9 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     protected function getDataSet()
     {
-        $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-            $this->getFixturesPathname('catalog_eav_attribute', '1.9', 'ce')
-        );
+        $dataSet = new \PHPUnit_Extensions_Database_DataSet_CsvDataSet();
 
-        return $dataset;
+        return $dataSet;
     }
 
     /**
@@ -59,6 +56,10 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('catalog_eav_attribute')
+        );
+
+        $this->getDoctrineConnection()->exec(
+            $platform->getTruncateTableSQL('catalog_product_super_attribute')
         );
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
     }
@@ -82,6 +83,7 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
         $schemaBuilder->ensureEntityTypeTable();
         $schemaBuilder->ensureAttributeTable();
         $schemaBuilder->ensureCatalogAttributeExtensionsTable();
+        $schemaBuilder->ensureCatalogProductSuperAttributeTable();
 
         $comparator = new \Doctrine\DBAL\Schema\Comparator();
         $schemaDiff = $comparator->compare($currentSchema, $this->schema);
@@ -92,13 +94,28 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $this->truncateTables();
 
-        $magentoVersion = '1.9';
+        $schemaBuilder->hydrateEntityTypeTable(
+            'catalog_eav_attribute',
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
 
-        $schemaBuilder->hydrateEntityTypeTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
-        $schemaBuilder->hydrateAttributeTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
-        $schemaBuilder->hydrateCatalogAttributeExtensionsTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
+        $schemaBuilder->hydrateAttributeTable(
+            'catalog_eav_attribute',
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
 
-        $this->repository = new CatalogAttributeRepository(
+        $schemaBuilder->hydrateCatalogAttributeExtensionsTable(
+            'catalog_eav_attribute',
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $this->repository = new ProductAttributeRepository(
             $this->getDoctrineConnection(),
             new ProductAttributeQueryBuilder(
                 $this->getDoctrineConnection(),
@@ -152,10 +169,18 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testFetchingAllByCode()
     {
-        $attributes = $this->repository->findAllByCode('catalog_product', [
-            'release_date', 'gift_message_available', ]);
+        $attributes = $this->repository->findAllByCode('catalog_product',
+            [
+                'release_date',
+                'gift_message_available'
+            ]
+        );
 
+        $this->assertInstanceOf(\Traversable::class, $attributes);
+
+        $items = 0;
         foreach ($attributes as $attribute) {
+            ++$items;
             $this->assertInstanceOf(AttributeInterface::class, $attribute);
             if ($attribute->getCode() === 'release_date') {
                 $this->assertEquals(167, $attribute->getId());
@@ -164,6 +189,8 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
                 $this->assertEquals(122, $attribute->getId());
             }
         }
+
+        $this->assertEquals(2, $items);
     }
 
     public function testFetchingAllByCodeButNonExistent()
@@ -176,16 +203,24 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
             ]
         );
 
-        $this->assertInstanceOf(ArrayCollection::class, $attributes);
+        $this->assertInstanceOf(\Traversable::class, $attributes);
 
-        $this->assertCount(0, $attributes);
+        $items = 0;
+        foreach ($attributes as $attribute) {
+            ++$items;
+        }
+
+        $this->assertEquals(0, $items);
     }
 
     public function testFetchingAllById()
     {
         $attributes = $this->repository->findAllById([167, 122]);
 
+        $items = 0;
         foreach ($attributes as $attribute) {
+            ++$items;
+
             $this->assertInstanceOf(AttributeInterface::class, $attribute);
 
             if ($attribute->getId() === 167) {
@@ -195,33 +230,41 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
                 $this->assertEquals('gift_message_available', $attribute->getCode());
             }
         }
+
+        $this->assertEquals(2, $items);
     }
 
     public function testFetchingAllByIdButNonExistent()
     {
         $attributes = $this->repository->findAllById([1337, 8695]);
 
-        $this->assertInstanceOf(\Doctrine\Common\Collections\ArrayCollection::class, $attributes);
+        $this->assertInstanceOf(\Traversable::class, $attributes);
 
-        $this->assertCount(0, $attributes);
+        $items = 0;
+        foreach ($attributes as $attribute) {
+            ++$items;
+        }
+
+        $this->assertEquals(0, $items);
     }
 
     public function testFetchingAll()
     {
         $attributes = $this->repository->findAll();
 
+        $this->assertInstanceOf(\Traversable::class, $attributes);
+
+        $items = 0;
         foreach ($attributes as $attribute) {
+            ++$items;
+
             $this->assertInstanceOf(AttributeInterface::class, $attribute);
         }
-        $this->assertCount(8, $attributes);
 
-        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable('catalog_eav_attribute');
-
-        $this->assertDataSetsEqual($this->getDataSet(), $actual);
+        $this->assertEquals(8, $items);
     }
 
-    public function testFetchingAllSimpleProductByEntity()
+    public function testFetchingAllFromSimpleProductByEntity()
     {
         $simpleProduct = new SimpleProduct(
             'SIMPLE_PRODUCT',
@@ -230,12 +273,18 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
             new \DateTime('now')
         );
 
-        $simples = $this->repository->findAllByEntity($simpleProduct);
+        $attributes = $this->repository->findAllByEntity($simpleProduct);
 
-        /** @todo $simples is null ? */
-        foreach ($simples as $attribute) {
+        $this->assertInstanceOf(\Traversable::class, $attributes);
+
+        $items = 0;
+        foreach ($attributes as $attribute) {
+            ++$items;
+
             $this->assertInstanceOf(AttributeInterface::class, $attribute);
         }
+
+        $this->assertEquals(0, $items);
     }
 
     public function testFetchingAllConfigurableProductByEntity()
@@ -247,12 +296,18 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
             new \DateTime('now')
         );
 
-        $configurables = $this->repository->findAllByEntity($configurableProduct);
+        $attributes = $this->repository->findAllByEntity($configurableProduct);
 
-        /** @todo $configurables is null ? */
-        foreach ($configurables as $attribute) {
+        $this->assertInstanceOf(\Traversable::class, $attributes);
+
+        $items = 0;
+        foreach ($attributes as $attribute) {
+            ++$items;
+
             $this->assertInstanceOf(AttributeInterface::class, $attribute);
         }
+
+        $this->assertEquals(0, $items);
     }
 
     public function testFetchingAllSimpleProductByEntityButNonExistent()
@@ -264,9 +319,16 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
             new \DateTime('now')
         );
 
-        $simples = $this->repository->findAllByEntity($simpleProduct);
+        $attributes = $this->repository->findAllByEntity($simpleProduct);
 
-        $this->assertCount(0, $simples);
+        $this->assertInstanceOf(\Traversable::class, $attributes);
+
+        $items = 0;
+        foreach ($attributes as $attribute) {
+            $this->assertInstanceOf(AttributeInterface::class, $attribute);
+        }
+
+        $this->assertEquals(0, $items);
     }
 
     public function testFetchingAllConfigurableProductByEntityButNonExistent()
@@ -278,47 +340,18 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
             new \DateTime('now')
         );
 
-        $configurables = $this->repository->findAllByEntity($configurableProduct);
+        $attributes = $this->repository->findAllByEntity($configurableProduct);
 
-        $this->assertCount(0, $configurables);
-    }
+        $this->assertInstanceOf(\Traversable::class, $attributes);
 
-    public function testFetchingAllByEntityTypeCode()
-    {
-        $attributes = $this->repository->findAllByEntityTypeCode('catalog_product');
-
-        $this->assertCount(8, $attributes);
-
+        $items = 0;
         foreach ($attributes as $attribute) {
+            ++$items;
+
             $this->assertInstanceOf(AttributeInterface::class, $attribute);
-            $this->assertEquals(4, $attribute->getEntityTypeId());
         }
-    }
 
-    public function testFetchingAllByEntityTypeCodeButNonExistent()
-    {
-        $attributes = $this->repository->findAllByEntityTypeCode('non_existent');
-        $this->assertCount(0, $attributes);
-    }
-
-    public function testFetchingAllByEntityTypeId()
-    {
-        $attributes = $this->repository->findAllByEntityTypeId(4);
-
-        $this->assertCount(8, $attributes);
-
-        foreach ($attributes as $attribute) {
-            $this->assertInstanceOf(AttributeInterface::class, $attribute);
-            /* @todo $attribute->getEntityTypeId() is null ? */
-            $this->assertEquals(4, $attribute->getEntityTypeId());
-        }
-    }
-
-    public function testFetchingAllByEntityTypeIdButNonExistent()
-    {
-        $attributes = $this->repository->findAllByEntityTypeId(1337);
-
-        $this->assertCount(0, $attributes);
+        $this->assertEquals(0, $items);
     }
 
     /**
@@ -326,26 +359,32 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testFetchingAllVariantAxisByEntity()
     {
-        //        $product = new ConfigurableProduct(
-//            'CONFIGURABLE_PRODUCT',
-//            Family::buildNewWith(4, 'Default', 1),
-//            new \DateTime('now'),
-//            new \DateTime('now')
-//        );
-//
-//        $attributes = $this->repository->findAllVariantAxisByEntity($product);
-//
-//        $this->assertCount(8, $attributes);
-//
-//        foreach ($attributes as $attribute){
-//            $this->assertInstanceOf(AttributeInterface::class, $attribute);
-//            $this->assertEquals(4, $attribute->getEntityTypeId());
-//        }
+        $product = new ConfigurableProduct(
+            'CONFIGURABLE_PRODUCT',
+            Family::buildNewWith(4, 'Default', 1),
+            new \DateTime('now'),
+            new \DateTime('now')
+        );
+
+        $attributes = $this->repository->findAllVariantAxisByEntity($product);
+
+        $this->assertInstanceOf(\Traversable::class, $attributes);
+
+        $items = 0;
+        foreach ($attributes as $attribute){
+            ++$items;
+
+            $this->assertInstanceOf(AttributeInterface::class, $attribute);
+            $this->assertEquals(4, $attribute->getEntityTypeId());
+        }
+
+        $this->assertEquals(0, $items);
     }
 
     public function testFetchingAllVariantAxisByEntityButNonExistent()
     {
-        $product = new SimpleProduct(
+        $product = SimpleProduct::buildNewWith(
+            1234,
             'SIMPLE_PRODUCT',
             Family::buildNewWith(8695, 'non_existent', 1),
             new \DateTime('now'),
@@ -354,45 +393,53 @@ class CatalogAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $attributes = $this->repository->findAllVariantAxisByEntity($product);
 
-        $this->assertCount(0, $attributes);
+        $this->assertInstanceOf(\Traversable::class, $attributes);
     }
 
     public function testFetchingAllByFamily()
     {
         $attributes = $this->repository->findAllByFamily(Family::buildNewWith(4, 'Default', 1));
 
-        /* @todo: return 0 ? */
-        $this->assertCount(8, $attributes);
+        $this->assertInstanceOf(\Traversable::class, $attributes);
 
+        $items = 0;
         foreach ($attributes as $attribute) {
+            ++$items;
+
             $this->assertInstanceOf(AttributeInterface::class, $attribute);
             $this->assertEquals(4, $attribute->getEntityTypeId());
         }
+
+        $this->assertEquals(0, $items);
     }
     public function testFetchingAllByFamilyButNonExistent()
     {
         $attributes = $this->repository->findAllByFamily(Family::buildNewWith(8695, 'non_existent', 1));
 
-        $this->assertCount(0, $attributes);
+        $this->assertInstanceOf(\Traversable::class, $attributes);
     }
 
     public function testFetchingAllMandatoryByFamily()
     {
         $attributes = $this->repository->findAllMandatoryByFamily(Family::buildNewWith(4, 'Default', 1));
 
-        /* @todo: return 0 ? */
-        $this->assertCount(8, $attributes);
+        $this->assertInstanceOf(\Traversable::class, $attributes);
 
+        $items = 0;
         foreach ($attributes as $attribute) {
+            ++$items;
+
             $this->assertInstanceOf(AttributeInterface::class, $attribute);
             $this->assertEquals(4, $attribute->getEntityTypeId());
         }
+
+        $this->assertEquals(0, $items);
     }
 
     public function testFetchingAllMandatoryByFamilyButNonExistent()
     {
         $attributes = $this->repository->findAllMandatoryByFamily(Family::buildNewWith(8695, 'non_existent', 1));
 
-        $this->assertCount(0, $attributes);
+        $this->assertInstanceOf(\Traversable::class, $attributes);
     }
 }

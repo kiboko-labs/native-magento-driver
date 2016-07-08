@@ -88,9 +88,26 @@ class AttributeLabelRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $this->truncateTables();
 
-        $schemaBuilder->hydrateStoreTable('1.9', 'ce');
-        $schemaBuilder->hydrateAttributeTable('1.9', 'ce');
-        $schemaBuilder->hydrateAttributeLabelTable('1.9', 'ce');
+        $schemaBuilder->hydrateStoreTable(
+            'eav_attribute_label',
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateAttributeTable(
+            'eav_attribute_label',
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateAttributeLabelTable(
+            'eav_attribute_label',
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
 
         $this->repository = new AttributeLabelRepository(
             $this->getDoctrineConnection(),

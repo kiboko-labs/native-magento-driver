@@ -1,0 +1,212 @@
+core_store:
+    -
+        store_id: 0
+        code: admin
+        website_id: 0
+        group_id: 0
+        name: Admin
+        sort_order: '1'
+        is_active: '1'
+    -
+        store_id: '1'
+        code: default
+        website_id: '1'
+        group_id: '1'
+        name: Default
+        sort_order: '1'
+        is_active: '1'
+eav_attribute:
+    -
+        attribute_id: '79'
+        entity_type_id: '4'
+        attribute_code: cost
+        attribute_model: null
+        backend_model: catalog/product_attribute_backend_price
+        backend_type: decimal
+        backend_table: null
+        frontend_model: null
+        frontend_input: price
+        frontend_label: Cout
+        frontend_class: null
+        source_model: null
+        is_required: 0
+        is_user_defined: '1'
+        default_value: null
+        is_unique: 0
+        note: null
+    -
+        attribute_id: '122'
+        entity_type_id: '4'
+        attribute_code: gift_message_available
+        attribute_model: null
+        backend_model: catalog/product_attribute_backend_boolean
+        backend_type: varchar
+        backend_table: null
+        frontend_model: null
+        frontend_input: select
+        frontend_label: 'Allow Gift Message'
+        frontend_class: null
+        source_model: eav/entity_attribute_source_boolean
+        is_required: 0
+        is_user_defined: 0
+        default_value: null
+        is_unique: 0
+        note: null
+    -
+        attribute_id: '131'
+        entity_type_id: '4'
+        attribute_code: links_exist
+        attribute_model: null
+        backend_model: null
+        backend_type: int
+        backend_table: null
+        frontend_model: null
+        frontend_input: null
+        frontend_label: null
+        frontend_class: null
+        source_model: null
+        is_required: 0
+        is_user_defined: 0
+        default_value: null
+        is_unique: 0
+        note: null
+    -
+        attribute_id: '167'
+        entity_type_id: '4'
+        attribute_code: release_date
+        attribute_model: null
+        backend_model: eav/entity_attribute_backend_datetime
+        backend_type: datetime
+        backend_table: null
+        frontend_model: eav/entity_attribute_frontend_datetime
+        frontend_input: date
+        frontend_label: 'Date de sortie'
+        frontend_class: null
+        source_model: null
+        is_required: 0
+        is_user_defined: '1'
+        default_value: null
+        is_unique: 0
+        note: null
+    -
+        attribute_id: '210'
+        entity_type_id: '4'
+        attribute_code: description
+        attribute_model: null
+        backend_model: null
+        backend_type: text
+        backend_table: null
+        frontend_model: null
+        frontend_input: text
+        frontend_label: Description
+        frontend_class: null
+        source_model: null
+        is_required: 0
+        is_user_defined: '1'
+        default_value: null
+        is_unique: 0
+        note: null
+    -
+        attribute_id: '226'
+        entity_type_id: '4'
+        attribute_code: main_color
+        attribute_model: null
+        backend_model: null
+        backend_type: int
+        backend_table: null
+        frontend_model: null
+        frontend_input: select
+        frontend_label: 'Couleur principale'
+        frontend_class: null
+        source_model: eav/entity_attribute_source_table
+        is_required: 0
+        is_user_defined: '1'
+        default_value: null
+        is_unique: 0
+        note: null
+    -
+        attribute_id: '232'
+        entity_type_id: '4'
+        attribute_code: shoelace_length
+        attribute_model: null
+        backend_model: eav/entity_attribute_backend_array
+        backend_type: varchar
+        backend_table: null
+        frontend_model: null
+        frontend_input: multiselect
+        frontend_label: 'Longueur de lacet'
+        frontend_class: null
+        source_model: null
+        is_required: 0
+        is_user_defined: '1'
+        default_value: null
+        is_unique: 0
+        note: null
+    -
+        attribute_id: '300'
+        entity_type_id: '4'
+        attribute_code: title
+        attribute_model: null
+        backend_model: null
+        backend_type: text
+        backend_table: null
+        frontend_model: null
+        frontend_input: textarea
+        frontend_label: Description
+        frontend_class: null
+        source_model: null
+        is_required: 0
+        is_user_defined: '1'
+        default_value: null
+        is_unique: 0
+        note: null
+catalog_product_entity:
+    -
+        entity_id: '3'
+        entity_type_id: '4'
+        attribute_set_id: '20'
+        type_id: simple
+        sku: SIMPLE
+        has_options: null
+        required_options: null
+        created_at: '2015-12-01 15:13:05'
+        updated_at: '2016-01-11 08:24:22'
+    -
+        entity_id: '961'
+        entity_type_id: '4'
+        attribute_set_id: '17'
+        type_id: configurable
+        sku: CONFIGURABLE
+        has_options: null
+        required_options: null
+        created_at: '2015-12-02 09:49:08'
+        updated_at: '2016-03-02 09:37:48'
+catalog_product_entity_decimal:
+    -
+        value_id: '1'
+        entity_type_id: '4'
+        attribute_id: '79'
+        store_id: 0
+        entity_id: '3'
+        value: '99.1700'
+    -
+        value_id: '2'
+        entity_type_id: '4'
+        attribute_id: '79'
+        store_id: '1'
+        entity_id: '961'
+        value: '99.1700'
+    -
+        value_id: '3'
+        entity_type_id: '4'
+        attribute_id: '79'
+        store_id: '1'
+        entity_id: '3'
+        value: 0
+    -
+        value_id: '4'
+        entity_type_id: '4'
+        attribute_id: '79'
+        store_id: 0
+        entity_id: '961'
+        value: 0

@@ -4,9 +4,14 @@ namespace unit\Kiboko\Component\MagentoDriver\SchemaBuilder;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Schema\Schema;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\FallbackResolver;
 
 class DoctrineSchemaBuilder
 {
+    const CONTEXT_PERSISTER  = 'persister';
+    const CONTEXT_DELETER    = 'deleter';
+    const CONTEXT_REPOSITORY = 'repository';
+
     /**
      * @var Schema
      */
@@ -194,6 +199,16 @@ class DoctrineSchemaBuilder
      *
      * @throws \Doctrine\DBAL\Schema\SchemaException
      */
+    public function ensureCatalogProductSuperAttributeTable()
+    {
+        return (new Table\CatalogProductSuperAttribute($this->schema))->build();
+    }
+
+    /**
+     * @return \Doctrine\DBAL\Schema\Table
+     *
+     * @throws \Doctrine\DBAL\Schema\SchemaException
+     */
     public function ensureCatalogProductLinkTypeTable()
     {
         return (new Table\CatalogProductLinkType($this->schema))->build();
@@ -282,145 +297,185 @@ class DoctrineSchemaBuilder
     }
 
     /**
+     * @param string $suite
+     * @param string $context
      * @param string $magentoVersion
      * @param string $magentoEdition
      */
-    public function hydrateStoreTable($magentoVersion, $magentoEdition)
+    public function hydrateStoreTable($suite, $context, $magentoVersion, $magentoEdition)
     {
-        (new Fixture\Loader($this->connection, 'core_store'))
-                ->hydrate($magentoVersion, $magentoEdition)
+        $resolver = new FallbackResolver(__DIR__ . '/..', 'core_store');
+        (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
+            ->hydrate('core_store', $suite, $context)
         ;
     }
 
     /**
+     * @param string $suite
+     * @param string $context
      * @param string $magentoVersion
      * @param string $magentoEdition
      */
-    public function hydrateEntityTypeTable($magentoVersion, $magentoEdition)
+    public function hydrateEntityTypeTable($suite, $context, $magentoVersion, $magentoEdition)
     {
-        (new Fixture\Loader($this->connection, 'eav_entity_type'))
-                ->hydrate($magentoVersion, $magentoEdition)
+        $resolver = new FallbackResolver(__DIR__ . '/..', 'eav_entity_type');
+        (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
+            ->hydrate('eav_entity_type', $suite, $context)
         ;
     }
 
     /**
+     * @param string $suite
+     * @param string $context
      * @param string $magentoVersion
      * @param string $magentoEdition
      */
-    public function hydrateEntityStoreTable($magentoVersion, $magentoEdition)
+    public function hydrateEntityStoreTable($suite, $context, $magentoVersion, $magentoEdition)
     {
-        (new Fixture\Loader($this->connection, 'eav_entity_store'))
-                ->hydrate($magentoVersion, $magentoEdition)
+        $resolver = new FallbackResolver(__DIR__ . '/..', 'eav_entity_store');
+        (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
+            ->hydrate('eav_entity_store', $suite, $context)
         ;
     }
 
     /**
+     * @param string $suite
+     * @param string $context
      * @param string $magentoVersion
      * @param string $magentoEdition
      */
-    public function hydrateEntityAttributeTable($magentoVersion, $magentoEdition)
+    public function hydrateEntityAttributeTable($suite, $context, $magentoVersion, $magentoEdition)
     {
-        (new Fixture\Loader($this->connection, 'eav_entity_attribute'))
-                ->hydrate($magentoVersion, $magentoEdition)
+        $resolver = new FallbackResolver(__DIR__ . '/..', 'eav_entity_attribute');
+        (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
+            ->hydrate('eav_entity_attribute', $suite, $context)
         ;
     }
 
     /**
+     * @param string $suite
+     * @param string $context
      * @param string $magentoVersion
      * @param string $magentoEdition
      */
-    public function hydrateFamilyTable($magentoVersion, $magentoEdition)
+    public function hydrateFamilyTable($suite, $context, $magentoVersion, $magentoEdition)
     {
-        (new Fixture\Loader($this->connection, 'eav_attribute_set'))
-                ->hydrate($magentoVersion, $magentoEdition)
+        $resolver = new FallbackResolver(__DIR__ . '/..', 'eav_attribute_set');
+        (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
+            ->hydrate('eav_attribute_set', $suite, $context)
         ;
     }
 
     /**
+     * @param string $suite
+     * @param string $context
      * @param string $magentoVersion
      * @param string $magentoEdition
      */
-    public function hydrateAttributeTable($magentoVersion, $magentoEdition)
+    public function hydrateAttributeTable($suite, $context, $magentoVersion, $magentoEdition)
     {
-        (new Fixture\Loader($this->connection, 'eav_attribute'))
-                ->hydrate($magentoVersion, $magentoEdition)
+        $resolver = new FallbackResolver(__DIR__ . '/..', 'eav_attribute');
+        (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
+            ->hydrate('eav_attribute', $suite, $context)
         ;
     }
 
     /**
+     * @param string $suite
+     * @param string $context
      * @param string $magentoVersion
      * @param string $magentoEdition
      */
-    public function hydrateAttributeGroupTable($magentoVersion, $magentoEdition)
+    public function hydrateAttributeGroupTable($suite, $context, $magentoVersion, $magentoEdition)
     {
-        (new Fixture\Loader($this->connection, 'eav_attribute_group'))
-                ->hydrate($magentoVersion, $magentoEdition)
+        $resolver = new FallbackResolver(__DIR__ . '/..', 'eav_attribute_group');
+        (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
+            ->hydrate('eav_attribute_group', $suite, $context)
         ;
     }
 
     /**
+     * @param string $suite
+     * @param string $context
      * @param string $magentoVersion
      * @param string $magentoEdition
      */
-    public function hydrateAttributeLabelTable($magentoVersion, $magentoEdition)
+    public function hydrateAttributeLabelTable($suite, $context, $magentoVersion, $magentoEdition)
     {
-        (new Fixture\Loader($this->connection, 'eav_attribute_label'))
-                ->hydrate($magentoVersion, $magentoEdition)
+        $resolver = new FallbackResolver(__DIR__ . '/..', 'eav_attribute_label');
+        (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
+            ->hydrate('eav_attribute_label', $suite, $context)
         ;
     }
 
     /**
+     * @param string $suite
+     * @param string $context
      * @param string $magentoVersion
      * @param string $magentoEdition
      */
-    public function hydrateAttributeOptionTable($magentoVersion, $magentoEdition)
+    public function hydrateAttributeOptionTable($suite, $context, $magentoVersion, $magentoEdition)
     {
-        (new Fixture\Loader($this->connection, 'eav_attribute_option'))
-                ->hydrate($magentoVersion, $magentoEdition)
+        $resolver = new FallbackResolver(__DIR__ . '/..', 'eav_attribute_option');
+        (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
+            ->hydrate('eav_attribute_option', $suite, $context)
         ;
     }
 
     /**
+     * @param string $suite
+     * @param string $context
      * @param string $magentoVersion
      * @param string $magentoEdition
      */
-    public function hydrateAttributeOptionValueTable($magentoVersion, $magentoEdition)
+    public function hydrateAttributeOptionValueTable($suite, $context, $magentoVersion, $magentoEdition)
     {
-        (new Fixture\Loader($this->connection, 'eav_attribute_option_value'))
-                ->hydrate($magentoVersion, $magentoEdition)
+        $resolver = new FallbackResolver(__DIR__ . '/..', 'eav_attribute_option_value');
+        (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
+            ->hydrate('eav_attribute_option_value', $suite, $context)
         ;
     }
 
     /**
+     * @param string $suite
+     * @param string $context
      * @param string $magentoVersion
      * @param string $magentoEdition
      */
-    public function hydrateCatalogAttributeExtensionsTable($magentoVersion, $magentoEdition)
+    public function hydrateCatalogAttributeExtensionsTable($suite, $context, $magentoVersion, $magentoEdition)
     {
-        (new Fixture\Loader($this->connection, 'catalog_eav_attribute'))
-                ->hydrate($magentoVersion, $magentoEdition)
+        $resolver = new FallbackResolver(__DIR__ . '/..', 'catalog_eav_attribute');
+        (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
+            ->hydrate('catalog_eav_attribute', $suite, $context)
         ;
     }
 
     /**
+     * @param string $suite
+     * @param string $context
      * @param string $magentoVersion
      * @param string $magentoEdition
      */
-    public function hydrateCatalogProductEntityTable($magentoVersion, $magentoEdition)
+    public function hydrateCatalogProductEntityTable($suite, $context, $magentoVersion, $magentoEdition)
     {
-        (new Fixture\Loader($this->connection, 'catalog_product_entity'))
-                ->hydrate($magentoVersion, $magentoEdition)
+        $resolver = new FallbackResolver(__DIR__ . '/..', 'catalog_product_entity');
+        (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
+            ->hydrate('catalog_product_entity', $suite, $context)
         ;
     }
 
     /**
+     * @param string $backendType
+     * @param string $suite
+     * @param string $context
      * @param string $magentoVersion
      * @param string $magentoEdition
      */
-    public function hydrateCatalogProductAttributeValueTable($backendType, $magentoVersion, $magentoEdition)
+    public function hydrateCatalogProductAttributeValueTable($backendType, $suite, $context, $magentoVersion, $magentoEdition)
     {
-        (new Fixture\Loader($this->connection, sprintf('catalog_product_entity_%s', $backendType)))
-                ->hydrate($magentoVersion, $magentoEdition)
+        $resolver = new FallbackResolver(__DIR__ . '/..', sprintf('catalog_product_entity_%s', $backendType));
+        (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
+            ->hydrate(sprintf('catalog_product_entity_%s', $backendType), $suite, $context)
         ;
     }
 
