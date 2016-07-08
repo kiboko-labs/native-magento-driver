@@ -6,7 +6,8 @@ use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
 use Kiboko\Component\MagentoDriver\Model\FamilyInterface;
 use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
 
-interface ProductAttributeRepositoryInterface extends AttributeRepositoryInterface
+interface ProductAttributeRepositoryInterface
+    extends AttributeRepositoryInterface
 {
     /**
      * @param ProductInterface $product

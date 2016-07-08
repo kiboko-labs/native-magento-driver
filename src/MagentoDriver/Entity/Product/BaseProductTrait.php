@@ -2,7 +2,6 @@
 
 namespace Kiboko\Component\MagentoDriver\Entity\Product;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Kiboko\Component\MagentoDriver\Exception\RuntimeErrorException;
 use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
@@ -105,7 +104,7 @@ trait BaseProductTrait
      */
     public function getIdentifier()
     {
-        return $this->identifier;
+        return $this->stringIdentifier;
     }
 
     /**
@@ -334,11 +333,10 @@ trait BaseProductTrait
     /**
      * @param AttributeInterface $attribute
      *
-     * @return Collection|AttributeValueInterface[]
+     * @return \Traversable|AttributeValueInterface[]
      */
     public function getAllValuesFor(AttributeInterface $attribute)
     {
-        $collection = new ArrayCollection();
         /** @var AttributeValueInterface $value */
         foreach ($this->values as $value) {
             if ($value->getAttributeCode() !== $attribute->getCode()) {
@@ -346,14 +344,12 @@ trait BaseProductTrait
             }
 
             if ($value instanceof ScopableAttributeValueInterface) {
-                $collection->set($value->getStoreId(), $value);
+                yield ($value->getStoreId()) => $value;
             } else {
-                $collection->add(0, $value);
+                yield 0 => $value;
                 break;
             }
         }
-
-        return $collection;
     }
 
     /**
@@ -395,11 +391,11 @@ trait BaseProductTrait
     }
 
     /**
-     * return Collection.
+     * return \Traversable
      */
     public function getRequiredOptions()
     {
-        return new ArrayCollection();
+        return new \ArrayIterator([]);
     }
 
     /**

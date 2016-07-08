@@ -1,7 +1,7 @@
 parameters:
   kiboko.magento_driver.repository.doctrine.attribute.class:               Kiboko\Component\MagentoDriver\Repository\Doctrine\AttributeRepository
   kiboko.magento_driver.repository.doctrine.attribute_group.class:         Kiboko\Component\MagentoDriver\Repository\Doctrine\AttributeGroupRepository
-  kiboko.magento_driver.repository.doctrine.catalog_attribute.class:       Kiboko\Component\MagentoDriver\Repository\Doctrine\CatalogAttributeRepository
+  kiboko.magento_driver.repository.doctrine.catalog_attribute.class:       Kiboko\Component\MagentoDriver\Repository\Doctrine\ProductAttributeRepository
   kiboko.magento_driver.repository.doctrine.entity_store.class:            Kiboko\Component\MagentoDriver\Repository\Doctrine\EntityStoreRepository
   kiboko.magento_driver.repository.doctrine.entity_type.class:             Kiboko\Component\MagentoDriver\Repository\Doctrine\EntityTypeRepository
   kiboko.magento_driver.repository.doctrine.family.class:                  Kiboko\Component\MagentoDriver\Repository\Doctrine\FamilyRepository

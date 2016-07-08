@@ -2,7 +2,6 @@
 
 namespace Kiboko\Component\MagentoDriver\Entity;
 
-use Doctrine\Common\Collections\Collection;
 use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
 use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
 
@@ -14,12 +13,12 @@ interface EntityInterface
     public function getId();
 
     /**
-     * @return AttributeInterface[]|Collection
+     * @return AttributeInterface[]|\Traversable
      */
     public function getAttributes();
 
     /**
-     * @return AttributeValueInterface[]|Collection
+     * @return AttributeValueInterface[]|\Traversable
      */
     public function getValues();
 }

@@ -56,7 +56,7 @@ class SimpleProduct implements SimpleProductInterface
         FamilyInterface $family,
         \DateTimeInterface $creationDate,
         \DateTimeInterface $modificationDate,
-        Collection $values = null
+        \Traversable $values = null
     ) {
         $instance = new self($stringIdentifier, $family, $creationDate, $modificationDate);
 

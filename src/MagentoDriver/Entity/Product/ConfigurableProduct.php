@@ -120,9 +120,9 @@ class ConfigurableProduct implements ConfigurableProductInterface
     }
 
     /**
-     * @param Collection|AttributeInterface[] $attributeList
+     * @param \Traversable|AttributeInterface[] $attributeList
      */
-    public function addAxisAttributeList(Collection $attributeList)
+    public function addAxisAttributeList(\Traversable $attributeList)
     {
         foreach ($attributeList as $attribute) {
             $this->addAxisAttribute($attribute);
@@ -130,7 +130,7 @@ class ConfigurableProduct implements ConfigurableProductInterface
     }
 
     /**
-     * @return Collection|SuperAttributeInterface[]
+     * @return \Traversable|SuperAttributeInterface[]
      */
     public function getAxisAttributes()
     {
@@ -177,9 +177,9 @@ class ConfigurableProduct implements ConfigurableProductInterface
     }
 
     /**
-     * @param Collection|SimpleProductInterface[] $variants
+     * @param \Traversable|SimpleProductInterface[] $variants
      */
-    public function addVariantList(Collection $variants)
+    public function addVariantList(\Traversable $variants)
     {
         foreach ($variants as $variant) {
             $this->addVariant($variant);
@@ -205,7 +205,7 @@ class ConfigurableProduct implements ConfigurableProductInterface
     }
 
     /**
-     * @return Collection|SimpleProductInterface[]
+     * @return \Traversable|SimpleProductInterface[]
      */
     public function getVariants()
     {
@@ -221,9 +221,9 @@ class ConfigurableProduct implements ConfigurableProductInterface
     }
 
     /**
-     * @param Collection|SuperLinkInterface[] $superLinks
+     * @param \Traversable|SuperLinkInterface[] $superLinks
      */
-    public function addSuperLinkList(Collection $superLinks)
+    public function addSuperLinkList(\Traversable $superLinks)
     {
         foreach ($superLinks as $superLink) {
             $this->addSuperLink($superLink);
@@ -249,7 +249,7 @@ class ConfigurableProduct implements ConfigurableProductInterface
     }
 
     /**
-     * @return Collection|SuperLinkInterface[]
+     * @return \Traversable|SuperLinkInterface[]
      */
     public function getSuperLinks()
     {

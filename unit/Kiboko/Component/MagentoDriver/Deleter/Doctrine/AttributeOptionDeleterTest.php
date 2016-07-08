@@ -155,6 +155,7 @@ class AttributeOptionDeleterTest extends \PHPUnit_Framework_TestCase
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_option');
+        $actual->addTable('eav_attribute');
 
         $this->assertDataSetsEqual($this->getInitialDataSet(), $actual);
         
@@ -168,6 +169,7 @@ class AttributeOptionDeleterTest extends \PHPUnit_Framework_TestCase
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_option');
+        $actual->addTable('eav_attribute');
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
         
@@ -181,6 +183,7 @@ class AttributeOptionDeleterTest extends \PHPUnit_Framework_TestCase
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_option');
+        $actual->addTable('eav_attribute');
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
         

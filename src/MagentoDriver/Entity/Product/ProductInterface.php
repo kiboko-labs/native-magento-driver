@@ -2,7 +2,6 @@
 
 namespace Kiboko\Component\MagentoDriver\Entity\Product;
 
-use Doctrine\Common\Collections\Collection;
 use Kiboko\Component\MagentoDriver\Entity\EntityInterface;
 use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
 use Kiboko\Component\MagentoDriver\Model\Immutable\ImmutableAttributeValueInterface;
@@ -152,7 +151,7 @@ interface ProductInterface extends EntityInterface
     /**
      * @param AttributeInterface $attribute
      *
-     * @return Collection|AttributeValueInterface[]
+     * @return \Traversable|AttributeValueInterface[]
      */
     public function getAllValuesFor(AttributeInterface $attribute);
 

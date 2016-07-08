@@ -16,7 +16,7 @@ interface AttributeValuePersisterInterface
     /**
      * @param AttributeValueInterface $value
      *
-     * @return mixed
+     * @return void
      */
     public function __invoke(AttributeValueInterface $value);
 

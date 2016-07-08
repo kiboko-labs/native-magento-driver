@@ -2,7 +2,6 @@
 
 namespace Kiboko\Component\MagentoDriver\Entity\Product;
 
-use Doctrine\Common\Collections\Collection;
 use Kiboko\Component\MagentoDriver\Model\SuperLinkInterface;
 
 interface SimpleProductInterface extends ProductInterface
@@ -17,7 +16,7 @@ interface SimpleProductInterface extends ProductInterface
     );
 
     /**
-     * @return Collection|ConfigurableProductInterface[]
+     * @return \Traversable|ConfigurableProductInterface[]
      */
     public function getConfigurables();
 

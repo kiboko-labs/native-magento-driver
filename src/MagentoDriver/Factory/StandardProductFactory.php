@@ -3,8 +3,6 @@
 namespace Kiboko\Component\MagentoDriver\Factory;
 
 use Kiboko\Component\MagentoDriver\Broker\ProductFactoryBrokerInterface;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
 use Kiboko\Component\MagentoDriver\Exception\InvalidProductTypeException;
 

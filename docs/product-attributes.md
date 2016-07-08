@@ -115,7 +115,7 @@ $productAttributeRepository = new ProductAttributeRepository(
 
 ```yaml
 parameters:
-  kiboko.magento_driver.repository.catalog_attribute.class:       Kiboko\Component\MagentoDriver\Repository\Doctrine\CatalogAttributeRepository
+  kiboko.magento_driver.repository.catalog_attribute.class:       Kiboko\Component\MagentoDriver\Repository\Doctrine\ProductAttributeRepository
 
 services:
   kiboko.magento_driver.repository.catalog_attribute:

@@ -169,10 +169,10 @@ class CatalogAttributeDeleterTest extends \PHPUnit_Framework_TestCase
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('catalog_eav_attribute');
+        $actual->addTable('eav_entity_type');
+        $actual->addTable('eav_attribute_set');
 
         $this->assertDataSetsEqual($this->getInitialDataSet(), $actual);
-        
-        $this->assertTableRowCount('catalog_eav_attribute', $this->getInitialDataSet()->getIterator()->getTable()->getRowCount());
     }
 
     public function testRemoveOneById()
@@ -183,10 +183,10 @@ class CatalogAttributeDeleterTest extends \PHPUnit_Framework_TestCase
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('catalog_eav_attribute');
+        $actual->addTable('eav_entity_type');
+        $actual->addTable('eav_attribute_set');
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
-        
-        $this->assertTableRowCount('catalog_eav_attribute', $this->getDataSet()->getIterator()->getTable()->getRowCount());
     }
 
     public function testRemoveAllById()
@@ -197,9 +197,9 @@ class CatalogAttributeDeleterTest extends \PHPUnit_Framework_TestCase
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('catalog_eav_attribute');
+        $actual->addTable('eav_entity_type');
+        $actual->addTable('eav_attribute_set');
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
-        
-        $this->assertTableRowCount('catalog_eav_attribute', $this->getDataSet()->getIterator()->getTable()->getRowCount());
     }
 }

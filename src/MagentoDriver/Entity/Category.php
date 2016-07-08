@@ -2,9 +2,6 @@
 
 namespace Kiboko\Component\MagentoDriver\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-
 class Category implements CategoryInterface
 {
     /**
@@ -35,18 +32,18 @@ class Category implements CategoryInterface
     }
 
     /**
-     * @return Collection
+     * @return \Traversable
      */
     public function getAttributes()
     {
-        return new ArrayCollection();
+        return new \ArrayIterator([]);
     }
 
     /**
-     * @return Collection
+     * @return \Traversable
      */
     public function getValues()
     {
-        return new ArrayCollection();
+        return new \ArrayIterator([]);
     }
 }

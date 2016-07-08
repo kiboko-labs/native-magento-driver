@@ -2,14 +2,12 @@
 
 namespace Kiboko\Component\MagentoDriver\Model;
 
-use Doctrine\Common\Collections\Collection;
-
 trait MediaGalleryAttributeValueTrait
 {
     use AttributeValueTrait;
 
     /**
-     * @var Collection|ImageAttributeValueInterface[]
+     * @var \Traversable|ImageAttributeValueInterface[]
      */
     private $imagesCollection;
 
@@ -17,24 +15,24 @@ trait MediaGalleryAttributeValueTrait
      * MediaGalleryAttributeValue constructor.
      *
      * @param AttributeInterface                        $attribute
-     * @param Collection|ImageAttributeValueInterface[] $imagesCollection
+     * @param \Traversable|ImageAttributeValueInterface[] $imagesCollection
      */
     abstract public function __construct(
         AttributeInterface $attribute,
-        Collection $imagesCollection
+        \Traversable $imagesCollection
     );
 
     /**
      * @param AttributeInterface                        $attribute
      * @param int                                       $valueId
-     * @param Collection|ImageAttributeValueInterface[] $imagesCollection
+     * @param \Traversable|ImageAttributeValueInterface[] $imagesCollection
      *
      * @return MediaGalleryAttributeValueInterface
      */
     public static function buildNewWith(
         AttributeInterface $attribute,
         $valueId,
-        Collection $imagesCollection
+        \Traversable $imagesCollection
     ) {
         $object = new static($attribute, $imagesCollection);
 
