@@ -53,8 +53,9 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
         $platform = $this->getDoctrineConnection()->getDatabasePlatform();
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
+
         $this->getDoctrineConnection()->exec(
-                $platform->getTruncateTableSQL('catalog_product_entity')
+            $platform->getTruncateTableSQL('catalog_product_entity')
         );
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
@@ -87,6 +88,7 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->truncateTables();
+
         $schemaBuilder->hydrateCatalogProductEntityTable(
             'catalog_product_entity',
             DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
@@ -137,62 +139,45 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->repository = null;
     }
 
-    public function testFetchingOneSimpleByIdentifier()
+    public function testFetchingOneSimpleById()
     {
-        $product = $this->repository->findOneByIdentifier(3);
+        $product = $this->repository->findOneById(3);
 
         $this->assertInstanceOf(ProductInterface::class, $product);
 
         $this->assertEquals('simple', $product->getType());
-        $this->assertEquals(3, $product->getIdentifier());
-        $this->assertEquals(false, $product->isConfigurable());
+        $this->assertNotNull($product->getId());
         $this->assertEquals('SIMPLE', $product->getIdentifier());
-        $this->assertEquals(20, $product->getFamilyId());
-        $this->assertInstanceOf(\DateTimeInterface::class, $product->getCreationDate());
-        $this->assertInstanceOf(\DateTimeInterface::class, $product->getModificationDate());
-        $this->assertInstanceOf(FamilyInterface::class, $product->getFamily());
     }
 
-    public function testFetchingOneConfigurableByIdentifier()
+    public function testFetchingOneConfigurableById()
     {
-        $product = $this->repository->findOneByIdentifier(961);
+        $product = $this->repository->findOneById(961);
 
         $this->assertInstanceOf(ProductInterface::class, $product);
 
         $this->assertEquals('configurable', $product->getType());
-        $this->assertEquals(961, $product->getIdentifier());
-        $this->assertEquals(true, $product->isConfigurable());
+        $this->assertNotNull($product->getId());
         $this->assertEquals('CONFIGURABLE', $product->getIdentifier());
-        $this->assertEquals(17, $product->getFamilyId());        
-        
-        $this->assertInstanceOf(\DateTimeInterface::class, $product->getCreationDate());
-        $this->assertInstanceOf(\DateTimeInterface::class, $product->getModificationDate());
-        $this->assertInstanceOf(FamilyInterface::class, $product->getFamily());
     }
 
-    public function testFetchingOneByIdentifierButNonExistent()
+    public function testFetchingOneByIdButNonExistent()
     {
-        $this->assertNull($this->repository->findOneByIdentifier(123));
+        $this->assertNull($this->repository->findOneById(123));
     }
 
-    public function testFetchingOneSimpleByCode()
+    public function testFetchingOneSimpleByIdentifier()
     {
         $product = $this->repository->findOneByIdentifier('SIMPLE');
 
         $this->assertInstanceOf(ProductInterface::class, $product);
 
         $this->assertEquals('simple', $product->getType());
+        $this->assertNotNull($product->getId());
         $this->assertEquals('SIMPLE', $product->getIdentifier());
-        $this->assertEquals(3, $product->getId());
-        $this->assertEquals(false, $product->isConfigurable());
-        $this->assertEquals(20, $product->getFamilyId());
-        
-        $this->assertInstanceOf(\DateTimeInterface::class, $product->getCreationDate());
-        $this->assertInstanceOf(\DateTimeInterface::class, $product->getModificationDate());
-        $this->assertInstanceOf(FamilyInterface::class, $product->getFamily());
     }
 
-    public function testFetchingOneConfigurableByCode()
+    public function testFetchingOneConfigurableByIdentifier()
     {
         $product = $this->repository->findOneByIdentifier('CONFIGURABLE');
 
@@ -201,23 +186,16 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('configurable', $product->getType());
         $this->assertNotNull($product->getId());
         $this->assertEquals('CONFIGURABLE', $product->getIdentifier());
-        $this->assertEquals(961, $product->getIdentifier());
-        $this->assertEquals(true, $product->isConfigurable());
-        $this->assertEquals(17, $product->getFamilyId());
-        
-        $this->assertInstanceOf(\DateTimeInterface::class, $product->getCreationDate());
-        $this->assertInstanceOf(\DateTimeInterface::class, $product->getModificationDate());
-        $this->assertInstanceOf(FamilyInterface::class, $product->getFamily());
     }
 
-    public function testFetchingOneByCodeButNonExistent()
+    public function testFetchingOneByIdentifierButNonExistent()
     {
         $this->assertNull($this->repository->findOneByIdentifier('UNKNOWN'));
     }
 
-    public function testFetchingAllByCode()
+    public function testFetchingAllByIdentifier()
     {
-        $products = $this->repository->findAllByIdentifier(['SIMPLE', 'CONFIGURABLE']);
+        $products = $this->repository->findAllByIdentifier(['SIMPLE', 'CONFIGURABLE', 'UNKNOWN']);
 
         $count = 0;
         foreach ($products as $product) {
@@ -229,18 +207,15 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(2, $count);
     }
 
-    public function testFetchingAllByIdentifier()
+    public function testFetchingAllById()
     {
-        $products = $this->repository->findAllByIdentifier([3, 961]);
+        $products = $this->repository->findAllById([3, 961, 1337]);
 
         $count = 0;
         foreach ($products as $product) {
             ++$count;
 
             $this->assertInstanceOf(ProductInterface::class, $product);
-            $this->assertInstanceOf(\DateTimeInterface::class, $product->getCreationDate());
-            $this->assertInstanceOf(\DateTimeInterface::class, $product->getModificationDate());
-            $this->assertInstanceOf(FamilyInterface::class, $product->getFamily());
         }
 
         $this->assertEquals(2, $count);
