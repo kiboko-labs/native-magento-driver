@@ -77,20 +77,35 @@ class FallbackResolver
     public function find($filename, $suite, $context, $magentoVersion, $magentoEdition)
     {
         $path = $this->fixturesFile($filename, $suite, $context, $magentoVersion, $magentoEdition);
-        if (!file_exists($path)) {
-            if (strtolower($magentoEdition) === 'ee' && isset(static::$magentoVersionMapping[$magentoVersion])) {
-                $path = $this->fixturesFile($filename, $suite, $context, $magentoVersion, 'ce');
-            }
-
-            if (!file_exists($path)) {
-                var_dump($path);
-                throw new \PHPUnit_Framework_ExpectationFailedException(sprintf(
-                    'Missing [%s:%s] fixtures for Magento %s %s',
-                    $suite, $context,
-                    $magentoVersion, strtoupper($magentoEdition)));
-            }
+        if (file_exists($path)) {
+            return $path;
         }
 
-        return $path;
+        if (strtolower($magentoEdition) !== 'ee' || !isset(static::$magentoVersionMapping[$magentoVersion])) {
+            throw new \PHPUnit_Framework_ExpectationFailedException(
+                sprintf(
+                    'Missing [%s:%s] fixtures for Magento %s %s',
+                    $suite,
+                    $context,
+                    $magentoVersion,
+                    strtoupper($magentoEdition)
+                )
+            );
+        }
+
+        $path = $this->fixturesFile($filename, $suite, $context, static::$magentoVersionMapping[$magentoVersion], 'ce');
+        if (file_exists($path)) {
+            return $path;
+        }
+
+        throw new \PHPUnit_Framework_ExpectationFailedException(
+            sprintf(
+                'Missing [%s:%s] fixtures for Magento %s %s',
+                $suite,
+                $context,
+                $magentoVersion,
+                strtoupper($magentoEdition)
+            )
+        );
     }
 }
