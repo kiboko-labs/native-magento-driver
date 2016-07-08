@@ -167,6 +167,8 @@ class EntityAttributeDeleterTest extends \PHPUnit_Framework_TestCase
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_entity_attribute');
+        $actual->addTable('eav_attribute');
+        $actual->addTable('eav_attribute_group');
 
         $this->assertDataSetsEqual($this->getInitialDataSet(), $actual);
 
@@ -180,10 +182,10 @@ class EntityAttributeDeleterTest extends \PHPUnit_Framework_TestCase
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_entity_attribute');
+        $actual->addTable('eav_attribute');
+        $actual->addTable('eav_attribute_group');
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
-
-        $this->assertTableRowCount('eav_entity_attribute', $this->getDataSet()->getIterator()->getTable()->getRowCount());
     }
 
     public function testRemoveAllById()
@@ -193,9 +195,9 @@ class EntityAttributeDeleterTest extends \PHPUnit_Framework_TestCase
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_entity_attribute');
+        $actual->addTable('eav_attribute');
+        $actual->addTable('eav_attribute_group');
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
-
-        $this->assertTableRowCount('eav_entity_attribute', $this->getDataSet()->getIterator()->getTable()->getRowCount());
     }
 }

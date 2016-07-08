@@ -162,8 +162,6 @@ class AttributeDeleterTest extends \PHPUnit_Framework_TestCase
         $actual->addTable('eav_attribute');
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
-        
-        $this->assertTableRowCount('eav_attribute', $this->getDataSet()->getIterator()->getTable()->getRowCount());
     }
 
     public function testRemoveAllById()
@@ -175,8 +173,6 @@ class AttributeDeleterTest extends \PHPUnit_Framework_TestCase
         $actual->addTable('eav_attribute');
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
-        
-        $this->assertTableRowCount('eav_attribute', $this->getDataSet()->getIterator()->getTable()->getRowCount());
     }
 
     public function testRemoveOneByCode()
@@ -189,8 +185,6 @@ class AttributeDeleterTest extends \PHPUnit_Framework_TestCase
         $actual->addTable('eav_attribute');
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
-        
-        $this->assertTableRowCount('eav_attribute', $this->getDataSet()->getIterator()->getTable()->getRowCount());
     }
 
     public function testRemoveAllByCode()
@@ -203,7 +197,5 @@ class AttributeDeleterTest extends \PHPUnit_Framework_TestCase
         $actual->addTable('eav_attribute');
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
-        
-        $this->assertTableRowCount('eav_attribute', $this->getDataSet()->getIterator()->getTable()->getRowCount());
     }
 }
