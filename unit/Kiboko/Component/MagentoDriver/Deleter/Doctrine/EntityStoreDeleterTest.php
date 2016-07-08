@@ -72,11 +72,11 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
 
         $this->getDoctrineConnection()->exec(
-                $platform->getTruncateTableSQL('eav_entity_type')
+            $platform->getTruncateTableSQL('eav_entity_type')
         );
 
         $this->getDoctrineConnection()->exec(
-                $platform->getTruncateTableSQL('eav_entity_store')
+            $platform->getTruncateTableSQL('eav_entity_store')
         );
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
@@ -119,7 +119,7 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
             $GLOBALS['MAGENTO_EDITION']
         );
 
-        $schemaBuilder->hydrateEntityTypeTable(
+        $schemaBuilder->hydrateEntityStoreTable(
             'eav_entity_store',
             DoctrineSchemaBuilder::CONTEXT_DELETER,
             $GLOBALS['MAGENTO_VERSION'],
@@ -155,6 +155,7 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_entity_store');
+        $actual->addTable('eav_entity_type');
 
         $this->assertDataSetsEqual($this->getInitialDataSet(), $actual);
 
@@ -168,6 +169,7 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_entity_store');
+        $actual->addTable('eav_entity_type');
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
         
@@ -181,6 +183,7 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_entity_store');
+        $actual->addTable('eav_entity_type');
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
         
