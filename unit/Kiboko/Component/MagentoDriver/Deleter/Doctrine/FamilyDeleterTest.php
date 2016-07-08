@@ -143,6 +143,7 @@ class FamilyDeleterTest extends \PHPUnit_Framework_TestCase
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_set');
+        $actual->addTable('eav_entity_type');
 
         $this->assertDataSetsEqual($this->getInitialDataSet(), $actual);
         
@@ -156,6 +157,7 @@ class FamilyDeleterTest extends \PHPUnit_Framework_TestCase
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_set');
+        $actual->addTable('eav_entity_type');
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
         
@@ -169,6 +171,7 @@ class FamilyDeleterTest extends \PHPUnit_Framework_TestCase
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_set');
+        $actual->addTable('eav_entity_type');
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
         
