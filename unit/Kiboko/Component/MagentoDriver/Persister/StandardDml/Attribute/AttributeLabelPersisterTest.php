@@ -107,10 +107,10 @@ class AttributeLabelPersisterTest extends \PHPUnit_Framework_TestCase
 
     public function testInsertOne()
     {
-        $dataLoader = new Loader($this->getDoctrineConnection(), 'eav_attribute_label');
+        $dataLoader = new Loader($this->getDoctrineConnection(), '1.9', 'ce');
 
         $this->persister->initialize();
-        foreach ($dataLoader->walkData('1.9', 'ce') as $data) {
+        foreach ($dataLoader->walkData('eav_attribute_label') as $data) {
             $attribute = AttributeLabel::buildNewWith(
                 $data['attribute_label_id'],
                 $data['attribute_id'],
@@ -132,10 +132,10 @@ class AttributeLabelPersisterTest extends \PHPUnit_Framework_TestCase
 
     public function testUpdateOneExisting()
     {
-        $dataLoader = new Loader($this->getDoctrineConnection(), 'eav_attribute_label');
+        $dataLoader = new Loader($this->getDoctrineConnection(), '1.9', 'ce');
 
         $this->persister->initialize();
-        foreach ($dataLoader->walkData('1.9', 'ce') as $data) {
+        foreach ($dataLoader->walkData('eav_attribute_label') as $data) {
             $attribute = AttributeLabel::buildNewWith(
                 $data['attribute_label_id'],
                 $data['attribute_id'],

@@ -116,11 +116,11 @@ class CatalogAttributeExtensionPersisterTest extends \PHPUnit_Framework_TestCase
 
     public function testInsertOne()
     {
-        $dataLoader = new Loader($this->getDoctrineConnection(), 'catalog_eav_attribute');
+        $dataLoader = new Loader($this->getDoctrineConnection(), $GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
 
         $this->persister->initialize();
 
-        foreach ($dataLoader->walkData($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']) as $data) {
+        foreach ($dataLoader->walkData('catalog_eav_attribute') as $data) {
             $attribute = new CatalogAttributeExtension(
                 $data['attribute_id'],
                 $data['frontend_input_renderer'],
@@ -160,10 +160,11 @@ class CatalogAttributeExtensionPersisterTest extends \PHPUnit_Framework_TestCase
 
     public function testUpdateOneExisting()
     {
-        $dataLoader = new Loader($this->getDoctrineConnection(), 'catalog_eav_attribute');
+        $dataLoader = new Loader($this->getDoctrineConnection(), $GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
 
         $this->persister->initialize();
-        foreach ($dataLoader->walkData($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']) as $data) {
+
+        foreach ($dataLoader->walkData('catalog_eav_attribute') as $data) {
             $attribute = new CatalogAttributeExtension(
                 $data['attribute_id'],
                 $data['frontend_input_renderer'],

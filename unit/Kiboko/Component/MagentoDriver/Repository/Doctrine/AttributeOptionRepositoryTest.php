@@ -83,8 +83,19 @@ class AttributeOptionRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $this->truncateTables();
 
-        $schemaBuilder->hydrateAttributeTable('1.9', 'ce');
-        $schemaBuilder->hydrateAttributeOptionTable('1.9', 'ce');
+        $schemaBuilder->hydrateAttributeTable(
+            'eav_attribute_option',
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateAttributeOptionTable(
+            'eav_attribute_option',
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
 
         $this->repository = new AttributeOptionRepository(
             $this->getDoctrineConnection(),

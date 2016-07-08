@@ -25,6 +25,9 @@ trait DatabaseConnectionAwareTrait
      */
     private $doctrineConnection;
 
+    /**
+     * @return \PHPUnit_Extensions_Database_DB_DefaultDatabaseConnection|\PHPUnit_Extensions_Database_DB_IDatabaseConnection
+     */
     final public function getConnection()
     {
         if ($this->connection === null) {

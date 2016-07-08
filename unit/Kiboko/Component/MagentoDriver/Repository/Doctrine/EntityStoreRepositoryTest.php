@@ -80,12 +80,22 @@ class EntityStoreRepositoryTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->truncateTables();
-        $schemaBuilder->hydrateEntityStoreTable('1.9', 'ce');
+
+        $schemaBuilder->hydrateEntityStoreTable(
+            'eav_entity_store',
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
 
         $this->repository = new EntityStoreRepository(
-                $this->getDoctrineConnection(), new EntityStoreQueryBuilder(
-                $this->getDoctrineConnection(), EntityStoreQueryBuilder::getDefaultTable(), EntityStoreQueryBuilder::getDefaultFields()
-                ), new StandardEntityStoreFactory()
+            $this->getDoctrineConnection(),
+            new EntityStoreQueryBuilder(
+                $this->getDoctrineConnection(),
+                EntityStoreQueryBuilder::getDefaultTable(),
+                EntityStoreQueryBuilder::getDefaultFields()
+            ),
+            new StandardEntityStoreFactory()
         );
     }
 

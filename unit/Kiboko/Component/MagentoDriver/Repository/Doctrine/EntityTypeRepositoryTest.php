@@ -76,7 +76,13 @@ class EntityTypeRepositoryTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->truncateTables();
-        $schemaBuilder->hydrateEntityTypeTable('1.9', 'ce');
+
+        $schemaBuilder->hydrateEntityTypeTable(
+            'eav_entity_type',
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
 
         $this->repository = new EntityTypeRepository(
             $this->getDoctrineConnection(),

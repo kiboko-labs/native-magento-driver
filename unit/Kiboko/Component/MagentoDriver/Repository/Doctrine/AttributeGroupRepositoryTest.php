@@ -82,8 +82,20 @@ class AttributeGroupRepositoryTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->truncateTables();
-        $schemaBuilder->hydrateFamilyTable('1.9', 'ce');
-        $schemaBuilder->hydrateAttributeGroupTable('1.9', 'ce');
+
+        $schemaBuilder->hydrateFamilyTable(
+            'eav_attribute_group',
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateAttributeGroupTable(
+            'eav_attribute_group',
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
 
         $this->repository = new AttributeGroupRepository(
             $this->getDoctrineConnection(),
