@@ -3,9 +3,7 @@
 namespace unit\Kiboko\Component\MagentoDriver\Deleter\Doctrine\Attribute;
 
 use Doctrine\DBAL\Schema\Schema;
-use Kiboko\Component\MagentoDriver\Persister\AttributeGroupPersisterInterface;
 use Kiboko\Component\MagentoDriver\Deleter\AttributeGroupDeleterInterface;
-use Kiboko\Component\MagentoDriver\Persister\StandardDml\Attribute\AttributeGroupPersister;
 use Kiboko\Component\MagentoDriver\Deleter\Doctrine\AttributeGroupDeleter;
 use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeGroupQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
@@ -28,11 +26,6 @@ class AttributeGroupDeleterTest extends \PHPUnit_Framework_TestCase
      * @var AttributeGroupDeleterInterface
      */
     private $deleter;
-
-    /**
-     * @var AttributeGroupPersisterInterface
-     */
-    private $persister;
 
     /**
      * @var LoaderInterface
@@ -114,11 +107,6 @@ class AttributeGroupDeleterTest extends \PHPUnit_Framework_TestCase
             $GLOBALS['MAGENTO_EDITION']
         );
 
-        $this->persister = new AttributeGroupPersister(
-            $this->getDoctrineConnection(),
-            AttributeGroupQueryBuilder::getDefaultTable()
-        );
-
         $this->deleter = new AttributeGroupDeleter(
             $this->getDoctrineConnection(),
             new AttributeGroupQueryBuilder(
@@ -134,24 +122,19 @@ class AttributeGroupDeleterTest extends \PHPUnit_Framework_TestCase
         $this->truncateTables();
         parent::tearDown();
 
-        $this->persister = $this->deleter = null;
+        $this->deleter = null;
     }
 
     public function testRemoveNone()
     {
-        $this->persister->initialize();
-
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_group');
 
         $this->assertDataSetsEqual($this->getInitialDataSet(), $actual);
-        
-        $this->assertTableRowCount('eav_attribute_group', $this->getInitialDataSet()->getIterator()->getTable()->getRowCount());
     }
 
     public function testRemoveOneById()
     {
-        $this->persister->initialize();
         $this->deleter->deleteOneById(2);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
@@ -162,7 +145,6 @@ class AttributeGroupDeleterTest extends \PHPUnit_Framework_TestCase
 
     public function testRemoveAllById()
     {
-        $this->persister->initialize();
         $this->deleter->deleteAllById([2]);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());

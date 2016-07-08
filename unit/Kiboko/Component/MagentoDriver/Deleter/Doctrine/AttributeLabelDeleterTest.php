@@ -3,9 +3,7 @@
 namespace unit\Kiboko\Component\MagentoDriver\Deleter\Doctrine\Attribute;
 
 use Doctrine\DBAL\Schema\Schema;
-use Kiboko\Component\MagentoDriver\Persister\AttributeLabelPersisterInterface;
 use Kiboko\Component\MagentoDriver\Deleter\AttributeLabelDeleterInterface;
-use Kiboko\Component\MagentoDriver\Persister\StandardDml\Attribute\AttributeLabelPersister;
 use Kiboko\Component\MagentoDriver\Deleter\Doctrine\AttributeLabelDeleter;
 use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeLabelQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
@@ -28,11 +26,6 @@ class AttributeLabelDeleterTest extends \PHPUnit_Framework_TestCase
      * @var AttributeLabelDeleterInterface
      */
     private $deleter;
-
-    /**
-     * @var AttributeLabelPersisterInterface
-     */
-    private $persister;
 
     /**
      * @var LoaderInterface
@@ -138,11 +131,6 @@ class AttributeLabelDeleterTest extends \PHPUnit_Framework_TestCase
             $GLOBALS['MAGENTO_EDITION']
         );
 
-        $this->persister = new AttributeLabelPersister(
-            $this->getDoctrineConnection(),
-            AttributeLabelQueryBuilder::getDefaultTable()
-        );
-
         $this->deleter = new AttributeLabelDeleter(
             $this->getDoctrineConnection(),
             new AttributeLabelQueryBuilder(
@@ -158,13 +146,11 @@ class AttributeLabelDeleterTest extends \PHPUnit_Framework_TestCase
         $this->truncateTables();
         parent::tearDown();
 
-        $this->persister = $this->deleter = null;
+        $this->deleter = null;
     }
 
     public function testRemoveNone()
     {
-        $this->persister->initialize();
-
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_label');
         $actual->addTable('core_store');
@@ -175,7 +161,6 @@ class AttributeLabelDeleterTest extends \PHPUnit_Framework_TestCase
 
     public function testRemoveOneById()
     {
-        $this->persister->initialize();
         $this->deleter->deleteOneById(2);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
@@ -188,7 +173,6 @@ class AttributeLabelDeleterTest extends \PHPUnit_Framework_TestCase
 
     public function testRemoveAllById()
     {
-        $this->persister->initialize();
         $this->deleter->deleteAllById([2]);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
