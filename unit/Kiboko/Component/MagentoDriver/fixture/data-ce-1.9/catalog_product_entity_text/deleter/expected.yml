@@ -1,0 +1,198 @@
+core_store:
+    -
+        store_id: 0
+        code: admin
+        website_id: 0
+        group_id: 0
+        name: Admin
+        sort_order: '1'
+        is_active: '1'
+    -
+        store_id: '1'
+        code: default
+        website_id: '1'
+        group_id: '1'
+        name: Default
+        sort_order: '1'
+        is_active: '1'
+eav_attribute:
+    -
+        attribute_id: '79'
+        entity_type_id: '4'
+        attribute_code: cost
+        attribute_model: null
+        backend_model: catalog/product_attribute_backend_price
+        backend_type: decimal
+        backend_table: null
+        frontend_model: null
+        frontend_input: price
+        frontend_label: Cout
+        frontend_class: null
+        source_model: null
+        is_required: 0
+        is_user_defined: '1'
+        default_value: null
+        is_unique: 0
+        note: null
+    -
+        attribute_id: '122'
+        entity_type_id: '4'
+        attribute_code: gift_message_available
+        attribute_model: null
+        backend_model: catalog/product_attribute_backend_boolean
+        backend_type: varchar
+        backend_table: null
+        frontend_model: null
+        frontend_input: select
+        frontend_label: 'Allow Gift Message'
+        frontend_class: null
+        source_model: eav/entity_attribute_source_boolean
+        is_required: 0
+        is_user_defined: 0
+        default_value: null
+        is_unique: 0
+        note: null
+    -
+        attribute_id: '131'
+        entity_type_id: '4'
+        attribute_code: links_exist
+        attribute_model: null
+        backend_model: null
+        backend_type: int
+        backend_table: null
+        frontend_model: null
+        frontend_input: null
+        frontend_label: null
+        frontend_class: null
+        source_model: null
+        is_required: 0
+        is_user_defined: 0
+        default_value: null
+        is_unique: 0
+        note: null
+    -
+        attribute_id: '167'
+        entity_type_id: '4'
+        attribute_code: release_date
+        attribute_model: null
+        backend_model: eav/entity_attribute_backend_datetime
+        backend_type: datetime
+        backend_table: null
+        frontend_model: eav/entity_attribute_frontend_datetime
+        frontend_input: date
+        frontend_label: 'Date de sortie'
+        frontend_class: null
+        source_model: null
+        is_required: 0
+        is_user_defined: '1'
+        default_value: null
+        is_unique: 0
+        note: null
+    -
+        attribute_id: '210'
+        entity_type_id: '4'
+        attribute_code: description
+        attribute_model: null
+        backend_model: null
+        backend_type: text
+        backend_table: null
+        frontend_model: null
+        frontend_input: text
+        frontend_label: Description
+        frontend_class: null
+        source_model: null
+        is_required: 0
+        is_user_defined: '1'
+        default_value: null
+        is_unique: 0
+        note: null
+    -
+        attribute_id: '226'
+        entity_type_id: '4'
+        attribute_code: main_color
+        attribute_model: null
+        backend_model: null
+        backend_type: int
+        backend_table: null
+        frontend_model: null
+        frontend_input: select
+        frontend_label: 'Couleur principale'
+        frontend_class: null
+        source_model: eav/entity_attribute_source_table
+        is_required: 0
+        is_user_defined: '1'
+        default_value: null
+        is_unique: 0
+        note: null
+    -
+        attribute_id: '232'
+        entity_type_id: '4'
+        attribute_code: shoelace_length
+        attribute_model: null
+        backend_model: eav/entity_attribute_backend_array
+        backend_type: varchar
+        backend_table: null
+        frontend_model: null
+        frontend_input: multiselect
+        frontend_label: 'Longueur de lacet'
+        frontend_class: null
+        source_model: null
+        is_required: 0
+        is_user_defined: '1'
+        default_value: null
+        is_unique: 0
+        note: null
+    -
+        attribute_id: '300'
+        entity_type_id: '4'
+        attribute_code: title
+        attribute_model: null
+        backend_model: null
+        backend_type: text
+        backend_table: null
+        frontend_model: null
+        frontend_input: textarea
+        frontend_label: Description
+        frontend_class: null
+        source_model: null
+        is_required: 0
+        is_user_defined: '1'
+        default_value: null
+        is_unique: 0
+        note: null
+catalog_product_entity:
+    -
+        entity_id: '3'
+        entity_type_id: '4'
+        attribute_set_id: '20'
+        type_id: simple
+        sku: SIMPLE
+        has_options: null
+        required_options: null
+        created_at: '2015-12-01 15:13:05'
+        updated_at: '2016-01-11 08:24:22'
+    -
+        entity_id: '961'
+        entity_type_id: '4'
+        attribute_set_id: '17'
+        type_id: configurable
+        sku: CONFIGURABLE
+        has_options: null
+        required_options: null
+        created_at: '2015-12-02 09:49:08'
+        updated_at: '2016-03-02 09:37:48'
+catalog_product_entity_text:
+    -
+        value_id: '1'
+        entity_type_id: '4'
+        attribute_id: '210'
+        store_id: 0
+        entity_id: '3'
+        value: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur rhoncus dictum. Nullam nec odio a libero blandit faucibus. Praesent rhoncus, urna sit amet aliquam condimentum, lorem arcu lacinia lacus, ac maximus velit turpis vel dui. Morbi at viverra augue. Proin volutpat, felis in fermentum sodales, mauris nisl rutrum augue, et consectetur neque nulla et lacus. Curabitur ultrices ut elit vel laoreet. Nulla consequat urna justo, ut mollis sapien tempus id. Maecenas fermentum turpis erat, id ullamcorper augue pharetra a.\n\nQuisque at augue non lacus imperdiet lacinia non quis lorem. Phasellus ultrices tortor non dolor varius viverra. Donec venenatis ultrices massa et iaculis. Praesent tincidunt, sem id aliquam venenatis, mauris lorem euismod nulla, ut egestas mi dolor et nulla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et eros vitae turpis varius maximus. Mauris a libero et mauris tristique laoreet. Phasellus risus arcu, ultricies et rutrum ac, elementum at orci. Proin fermentum, augue sit amet aliquam vestibulum, ipsum ante ullamcorper libero, non porta massa nibh vel ante. Sed euismod nulla sit amet mauris mollis semper. Nullam sed porttitor erat. Suspendisse ultrices volutpat odio, sed auctor dolor viverra sollicitudin.\n\nPraesent in arcu sodales nisl pharetra consequat. Proin non ullamcorper sem. Vestibulum et tempor justo. Mauris nunc ligula, porttitor et ante eu, sodales commodo ante. Cras tempus massa sit amet diam maximus, nec gravida nulla pharetra. Aenean ac massa quis diam ultrices molestie. Curabitur id tortor tempor, venenatis enim eget, pulvinar quam. Maecenas tempus odio id ex sodales, id posuere purus sodales. Aliquam interdum fringilla condimentum. Fusce sollicitudin ex non massa eleifend, a lobortis elit mollis.\n\nEtiam hendrerit, turpis sed fringilla vestibulum, ipsum enim cursus ex, nec tempus elit erat sed urna. Sed tempor convallis consequat. Vestibulum vel arcu lorem. Donec eu accumsan dolor. Aliquam aliquam mi et lectus imperdiet maximus. Integer auctor lacus nisi, sit amet blandit turpis ultrices at. Quisque venenatis urna enim, et cursus libero venenatis eu. Aliquam maximus dapibus neque, nec imperdiet lorem semper vitae. Aliquam viverra id est ut interdum. Quisque aliquam nisi vel odio auctor, non mollis quam bibendum.\n\nPraesent hendrerit sed dolor vitae venenatis. Integer varius gravida efficitur. Aliquam facilisis dui massa, a feugiat mauris pharetra id. Proin vel lorem et tellus rhoncus scelerisque. In consequat velit faucibus mollis dictum. Aliquam erat volutpat. Aenean porttitor bibendum augue, ac mattis urna porta et. Mauris vel arcu ornare, malesuada odio consectetur, egestas odio. Nam consectetur nisi augue, vitae pellentesque nunc vulputate eget."
+    -
+        value_id: '2'
+        entity_type_id: '4'
+        attribute_id: '210'
+        store_id: '1'
+        entity_id: '3'
+        value: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur consequat augue augue, non feugiat dolor bibendum ac. Suspendisse iaculis blandit vestibulum. Ut nisi justo, rutrum ut facilisis vitae, venenatis ac purus. Donec vitae elementum odio, at gravida libero. Aliquam est turpis, maximus quis ante interdum, sagittis blandit mi. Etiam facilisis sem sit amet egestas finibus. Mauris sed congue dui. Pellentesque fermentum, dolor vitae blandit aliquet, est risus consectetur ante, dapibus bibendum arcu tortor eget ipsum. Sed sed ante a mi placerat lacinia.\n\nUt et aliquet ex, at lacinia odio. Ut ipsum elit, porttitor eget bibendum id, mollis et turpis. Etiam nibh magna, ullamcorper non velit id, ornare consectetur nisi. Proin faucibus nisi non odio commodo pretium. Mauris magna ligula, dictum quis nisi in, commodo imperdiet lectus. Integer pretium porttitor velit ut condimentum. Nulla faucibus ultrices tortor ut tincidunt. Suspendisse blandit odio vel elit vehicula, consequat aliquet risus mattis. Ut sed sem nisl. Aliquam vestibulum eget lacus vel tincidunt. Maecenas et ligula vulputate, iaculis est at, accumsan ex. Ut lectus odio, tincidunt vel dui quis, sollicitudin fermentum augue. Phasellus maximus molestie urna, sed tincidunt eros consectetur a. Nam ipsum augue, ultricies a ex sed, fringilla tempus turpis. In elementum leo at velit dignissim mattis. Donec enim ante, pharetra et turpis a, placerat interdum ex.\n\nClass aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla sit amet lacus lorem. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam pellentesque elit nec lectus ultricies sagittis. Nulla vitae nisi non lectus molestie cursus. Nullam id nunc ut elit sodales posuere. Fusce posuere aliquet odio sed condimentum. Duis leo quam, molestie vitae molestie vitae, luctus vel erat. Aliquam consequat eget ligula cursus porttitor. Aliquam eget imperdiet erat, vitae faucibus sapien. Maecenas fringilla ante at mi eleifend varius.\n\nAliquam gravida elit a elit tincidunt, eget rhoncus magna suscipit. Integer a mi vel velit auctor volutpat quis non tortor. Ut auctor interdum porttitor. Donec ut lorem vel lacus suscipit fermentum sit amet id ex. Praesent a ex quis dolor efficitur finibus. Mauris eros justo, efficitur eu dui quis, dapibus ullamcorper magna. Praesent semper dolor neque, vel laoreet metus rutrum mollis. Duis porttitor dignissim lectus, eu eleifend felis ullamcorper a. Praesent imperdiet porttitor quam, ut faucibus enim eleifend vitae. Ut nibh elit, ornare nec ultricies nec, posuere et dolor. Integer porttitor tincidunt ex ac lobortis.\n\nDonec quis tincidunt nulla. Suspendisse potenti. Quisque risus diam, blandit eu lobortis varius, commodo eu nunc. Integer non felis eros. Cras pellentesque dolor a dolor dapibus auctor. Nunc bibendum urna vitae convallis semper. Curabitur commodo tellus at felis molestie, a varius turpis vestibulum. Duis nec lobortis nulla. Etiam ultricies bibendum tellus eget sagittis. Aenean hendrerit consequat ipsum a ultricies. Fusce luctus condimentum blandit. Nullam magna purus, imperdiet eget placerat malesuada, ullamcorper nec nisl. Proin turpis lacus, placerat ut risus sed, ullamcorper consequat ligula. Duis efficitur a tellus ut imperdiet. Nam non accumsan arcu, id commodo felis."

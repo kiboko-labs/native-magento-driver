@@ -11,6 +11,9 @@ use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeOptionValueQue
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\FallbackResolver;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\LoaderInterface;
 
 class AttributeOptionValueDeleterTest extends \PHPUnit_Framework_TestCase
 {
@@ -32,12 +35,19 @@ class AttributeOptionValueDeleterTest extends \PHPUnit_Framework_TestCase
     private $persister;
 
     /**
+     * @var LoaderInterface
+     */
+    private $fixturesLoader;
+
+    /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
     protected function getDataSet()
     {
-        $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-                    $this->getDeleterFixturesPathname('eav_attribute_option_value', '1.9', 'ce'));
+        $dataset = $this->fixturesLoader->expectedDataSet(
+            'eav_attribute_option_value',
+            DoctrineSchemaBuilder::CONTEXT_DELETER
+        );
 
         return $dataset;
     }
@@ -45,10 +55,12 @@ class AttributeOptionValueDeleterTest extends \PHPUnit_Framework_TestCase
     /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
-    protected function getOriginalDataSet()
+    protected function getInitialDataSet()
     {
-        $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-                $this->getFixturesPathname('eav_attribute_option_value', '1.9', 'ce'));
+        $dataset = $this->fixturesLoader->initialDataSet(
+            'eav_attribute_option_value',
+            DoctrineSchemaBuilder::CONTEXT_DELETER
+        );
 
         return $dataset;
     }
@@ -104,12 +116,39 @@ class AttributeOptionValueDeleterTest extends \PHPUnit_Framework_TestCase
 
         parent::setUp();
 
-        $GLOBALS['MAGENTO_VERSION'] = '1.9';
+        $this->fixturesLoader = new Loader(
+            new FallbackResolver($schemaBuilder->getFixturesPath(), 'eav_attribute_option_value'),
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
 
-        $schemaBuilder->hydrateAttributeTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
-        $schemaBuilder->hydrateAttributeOptionTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
-        $schemaBuilder->hydrateStoreTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
-        $schemaBuilder->hydrateAttributeOptionValueTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
+        $schemaBuilder->hydrateAttributeTable(
+            'eav_attribute_option_value',
+            DoctrineSchemaBuilder::CONTEXT_DELETER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateAttributeOptionTable(
+            'eav_attribute_option_value',
+            DoctrineSchemaBuilder::CONTEXT_DELETER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateStoreTable(
+            'eav_attribute_option_value',
+            DoctrineSchemaBuilder::CONTEXT_DELETER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateAttributeOptionValueTable(
+            'eav_attribute_option_value',
+            DoctrineSchemaBuilder::CONTEXT_DELETER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
 
         $this->persister = new AttributeOptionValuePersister(
             $this->getDoctrineConnection(),
@@ -141,9 +180,9 @@ class AttributeOptionValueDeleterTest extends \PHPUnit_Framework_TestCase
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_option_value');
 
-        $this->assertDataSetsEqual($this->getOriginalDataSet(), $actual);
+        $this->assertDataSetsEqual($this->getInitialDataSet(), $actual);
         
-        $this->assertTableRowCount('eav_attribute_option_value', $this->getOriginalDataSet()->getIterator()->getTable()->getRowCount());
+        $this->assertTableRowCount('eav_attribute_option_value', $this->getInitialDataSet()->getIterator()->getTable()->getRowCount());
     }
 
     public function testRemoveOneById()

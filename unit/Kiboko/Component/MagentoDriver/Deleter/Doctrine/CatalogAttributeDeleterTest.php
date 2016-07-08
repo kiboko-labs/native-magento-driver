@@ -13,6 +13,9 @@ use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBu
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\FallbackResolver;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\LoaderInterface;
 
 class CatalogAttributeDeleterTest extends \PHPUnit_Framework_TestCase
 {
@@ -34,12 +37,19 @@ class CatalogAttributeDeleterTest extends \PHPUnit_Framework_TestCase
     private $persister;
 
     /**
+     * @var LoaderInterface
+     */
+    private $fixturesLoader;
+
+    /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
     protected function getDataSet()
     {
-        $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-                $this->getDeleterFixturesPathname('catalog_eav_attribute', '1.9', 'ce'));
+        $dataset = $this->fixturesLoader->expectedDataSet(
+            'catalog_eav_attribute',
+            DoctrineSchemaBuilder::CONTEXT_DELETER
+        );
 
         return $dataset;
     }
@@ -47,10 +57,12 @@ class CatalogAttributeDeleterTest extends \PHPUnit_Framework_TestCase
     /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
-    protected function getOriginalDataSet()
+    protected function getInitialDataSet()
     {
-        $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-                $this->getFixturesPathname('catalog_eav_attribute', '1.9', 'ce'));
+        $dataset = $this->fixturesLoader->initialDataSet(
+            'catalog_eav_attribute',
+            DoctrineSchemaBuilder::CONTEXT_DELETER
+        );
 
         return $dataset;
     }
@@ -60,12 +72,13 @@ class CatalogAttributeDeleterTest extends \PHPUnit_Framework_TestCase
         $platform = $this->getDoctrineConnection()->getDatabasePlatform();
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
+
         $this->getDoctrineConnection()->exec(
-                $platform->getTruncateTableSQL('eav_attribute')
+            $platform->getTruncateTableSQL('eav_attribute')
         );
 
         $this->getDoctrineConnection()->exec(
-                $platform->getTruncateTableSQL('catalog_eav_attribute')
+            $platform->getTruncateTableSQL('catalog_eav_attribute')
         );
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
@@ -96,19 +109,26 @@ class CatalogAttributeDeleterTest extends \PHPUnit_Framework_TestCase
 
         parent::setUp();
 
-        $schemaBuilder->hydrateAttributeTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
-        $schemaBuilder->hydrateCatalogAttributeExtensionsTable($GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
+        $this->fixturesLoader = new Loader(
+            new FallbackResolver($schemaBuilder->getFixturesPath(), 'eav_entity_store'),
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
 
-        $this->setPersister($GLOBALS['MAGENTO_EDITION']);
+        $schemaBuilder->hydrateAttributeTable(
+            'catalog_eav_attribute',
+            DoctrineSchemaBuilder::CONTEXT_DELETER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
 
-        $this->setDeleter();
-    }
+        $schemaBuilder->hydrateCatalogAttributeExtensionsTable(
+            'catalog_eav_attribute',
+            DoctrineSchemaBuilder::CONTEXT_DELETER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
 
-    /**
-     * @param string $magentoEdition
-     */
-    private function setPersister($magentoEdition)
-    {
         $this->persister = new CatalogAttributePersister(
             new StandardAttributePersister(
                 $this->getDoctrineConnection(),
@@ -116,13 +136,10 @@ class CatalogAttributeDeleterTest extends \PHPUnit_Framework_TestCase
             ),
             new CatalogAttributeExtensionPersister(
                 $this->getDoctrineConnection(),
-                $GLOBALS['MAGENTO_EDITION']
+                ProductAttributeQueryBuilder::getDefaultExtraTable()
             )
         );
-    }
 
-    private function setDeleter()
-    {
         $this->deleter = new CatalogAttributeDeleter(
             $this->getDoctrineConnection(),
             new ProductAttributeQueryBuilder(
@@ -153,9 +170,9 @@ class CatalogAttributeDeleterTest extends \PHPUnit_Framework_TestCase
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('catalog_eav_attribute');
 
-        $this->assertDataSetsEqual($this->getOriginalDataSet(), $actual);
+        $this->assertDataSetsEqual($this->getInitialDataSet(), $actual);
         
-        $this->assertTableRowCount('catalog_eav_attribute', $this->getOriginalDataSet()->getIterator()->getTable()->getRowCount());
+        $this->assertTableRowCount('catalog_eav_attribute', $this->getInitialDataSet()->getIterator()->getTable()->getRowCount());
     }
 
     public function testRemoveOneById()

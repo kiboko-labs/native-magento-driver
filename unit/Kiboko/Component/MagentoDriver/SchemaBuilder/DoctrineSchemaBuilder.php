@@ -34,6 +34,11 @@ class DoctrineSchemaBuilder
         $this->schema = $schema;
     }
 
+    public function getFixturesPath()
+    {
+        return __DIR__ . '/..';
+    }
+
     /**
      * @return \Doctrine\DBAL\Schema\Table
      *
@@ -304,7 +309,7 @@ class DoctrineSchemaBuilder
      */
     public function hydrateStoreTable($suite, $context, $magentoVersion, $magentoEdition)
     {
-        $resolver = new FallbackResolver(__DIR__ . '/..', 'core_store');
+        $resolver = new FallbackResolver($this->getFixturesPath(), 'core_store');
         (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
             ->hydrate('core_store', $suite, $context)
         ;
@@ -318,7 +323,7 @@ class DoctrineSchemaBuilder
      */
     public function hydrateEntityTypeTable($suite, $context, $magentoVersion, $magentoEdition)
     {
-        $resolver = new FallbackResolver(__DIR__ . '/..', 'eav_entity_type');
+        $resolver = new FallbackResolver($this->getFixturesPath(), 'eav_entity_type');
         (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
             ->hydrate('eav_entity_type', $suite, $context)
         ;
@@ -332,7 +337,7 @@ class DoctrineSchemaBuilder
      */
     public function hydrateEntityStoreTable($suite, $context, $magentoVersion, $magentoEdition)
     {
-        $resolver = new FallbackResolver(__DIR__ . '/..', 'eav_entity_store');
+        $resolver = new FallbackResolver($this->getFixturesPath(), 'eav_entity_store');
         (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
             ->hydrate('eav_entity_store', $suite, $context)
         ;
@@ -346,7 +351,7 @@ class DoctrineSchemaBuilder
      */
     public function hydrateEntityAttributeTable($suite, $context, $magentoVersion, $magentoEdition)
     {
-        $resolver = new FallbackResolver(__DIR__ . '/..', 'eav_entity_attribute');
+        $resolver = new FallbackResolver($this->getFixturesPath(), 'eav_entity_attribute');
         (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
             ->hydrate('eav_entity_attribute', $suite, $context)
         ;
@@ -360,7 +365,7 @@ class DoctrineSchemaBuilder
      */
     public function hydrateFamilyTable($suite, $context, $magentoVersion, $magentoEdition)
     {
-        $resolver = new FallbackResolver(__DIR__ . '/..', 'eav_attribute_set');
+        $resolver = new FallbackResolver($this->getFixturesPath(), 'eav_attribute_set');
         (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
             ->hydrate('eav_attribute_set', $suite, $context)
         ;
@@ -374,7 +379,7 @@ class DoctrineSchemaBuilder
      */
     public function hydrateAttributeTable($suite, $context, $magentoVersion, $magentoEdition)
     {
-        $resolver = new FallbackResolver(__DIR__ . '/..', 'eav_attribute');
+        $resolver = new FallbackResolver($this->getFixturesPath(), 'eav_attribute');
         (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
             ->hydrate('eav_attribute', $suite, $context)
         ;
@@ -388,7 +393,7 @@ class DoctrineSchemaBuilder
      */
     public function hydrateAttributeGroupTable($suite, $context, $magentoVersion, $magentoEdition)
     {
-        $resolver = new FallbackResolver(__DIR__ . '/..', 'eav_attribute_group');
+        $resolver = new FallbackResolver($this->getFixturesPath(), 'eav_attribute_group');
         (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
             ->hydrate('eav_attribute_group', $suite, $context)
         ;
@@ -402,7 +407,7 @@ class DoctrineSchemaBuilder
      */
     public function hydrateAttributeLabelTable($suite, $context, $magentoVersion, $magentoEdition)
     {
-        $resolver = new FallbackResolver(__DIR__ . '/..', 'eav_attribute_label');
+        $resolver = new FallbackResolver($this->getFixturesPath(), 'eav_attribute_label');
         (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
             ->hydrate('eav_attribute_label', $suite, $context)
         ;
@@ -416,7 +421,7 @@ class DoctrineSchemaBuilder
      */
     public function hydrateAttributeOptionTable($suite, $context, $magentoVersion, $magentoEdition)
     {
-        $resolver = new FallbackResolver(__DIR__ . '/..', 'eav_attribute_option');
+        $resolver = new FallbackResolver($this->getFixturesPath(), 'eav_attribute_option');
         (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
             ->hydrate('eav_attribute_option', $suite, $context)
         ;
@@ -430,7 +435,7 @@ class DoctrineSchemaBuilder
      */
     public function hydrateAttributeOptionValueTable($suite, $context, $magentoVersion, $magentoEdition)
     {
-        $resolver = new FallbackResolver(__DIR__ . '/..', 'eav_attribute_option_value');
+        $resolver = new FallbackResolver($this->getFixturesPath(), 'eav_attribute_option_value');
         (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
             ->hydrate('eav_attribute_option_value', $suite, $context)
         ;
@@ -444,7 +449,7 @@ class DoctrineSchemaBuilder
      */
     public function hydrateCatalogAttributeExtensionsTable($suite, $context, $magentoVersion, $magentoEdition)
     {
-        $resolver = new FallbackResolver(__DIR__ . '/..', 'catalog_eav_attribute');
+        $resolver = new FallbackResolver($this->getFixturesPath(), 'catalog_eav_attribute');
         (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
             ->hydrate('catalog_eav_attribute', $suite, $context)
         ;
@@ -458,7 +463,7 @@ class DoctrineSchemaBuilder
      */
     public function hydrateCatalogProductEntityTable($suite, $context, $magentoVersion, $magentoEdition)
     {
-        $resolver = new FallbackResolver(__DIR__ . '/..', 'catalog_product_entity');
+        $resolver = new FallbackResolver($this->getFixturesPath(), 'catalog_product_entity');
         (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
             ->hydrate('catalog_product_entity', $suite, $context)
         ;
@@ -473,7 +478,7 @@ class DoctrineSchemaBuilder
      */
     public function hydrateCatalogProductAttributeValueTable($backendType, $suite, $context, $magentoVersion, $magentoEdition)
     {
-        $resolver = new FallbackResolver(__DIR__ . '/..', sprintf('catalog_product_entity_%s', $backendType));
+        $resolver = new FallbackResolver($this->getFixturesPath(), sprintf('catalog_product_entity_%s', $backendType));
         (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
             ->hydrate(sprintf('catalog_product_entity_%s', $backendType), $suite, $context)
         ;
