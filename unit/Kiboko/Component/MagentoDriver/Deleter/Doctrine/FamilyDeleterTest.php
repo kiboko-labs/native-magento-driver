@@ -75,6 +75,10 @@ class FamilyDeleterTest extends \PHPUnit_Framework_TestCase
             $platform->getTruncateTableSQL('eav_attribute_set')
         );
 
+        $this->getDoctrineConnection()->exec(
+            $platform->getTruncateTableSQL('eav_entity_type')
+        );
+
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
     }
 
@@ -89,6 +93,7 @@ class FamilyDeleterTest extends \PHPUnit_Framework_TestCase
 
         $schemaBuilder = new DoctrineSchemaBuilder($this->getDoctrineConnection(), $this->schema);
         $schemaBuilder->ensureFamilyTable();
+        $schemaBuilder->ensureEntityTypeTable();
 
         $comparator = new \Doctrine\DBAL\Schema\Comparator();
         $schemaDiff = $comparator->compare($currentSchema, $this->schema);
@@ -108,6 +113,13 @@ class FamilyDeleterTest extends \PHPUnit_Framework_TestCase
         );
 
         $schemaBuilder->hydrateFamilyTable(
+            'eav_attribute_set',
+            DoctrineSchemaBuilder::CONTEXT_DELETER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateEntityTypeTable(
             'eav_attribute_set',
             DoctrineSchemaBuilder::CONTEXT_DELETER,
             $GLOBALS['MAGENTO_VERSION'],
