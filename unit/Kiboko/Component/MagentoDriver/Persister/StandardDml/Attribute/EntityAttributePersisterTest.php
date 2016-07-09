@@ -10,7 +10,9 @@ use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\EntityAttributeQueryBui
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\FallbackResolver;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\LoaderInterface;
 
 class EntityAttributePersisterTest extends \PHPUnit_Framework_TestCase
 {
@@ -27,14 +29,18 @@ class EntityAttributePersisterTest extends \PHPUnit_Framework_TestCase
     private $persister;
 
     /**
+     * @var LoaderInterface
+     */
+    private $fixturesLoader;
+
+    /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
     protected function getDataSet()
     {
-        $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-            $this->getFixturesPathname('eav_entity_attribute', '1.9', 'ce'));
+        $dataSet = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([]);
 
-        return $dataset;
+        return $dataSet;
     }
 
     private function truncateTables()
@@ -83,6 +89,33 @@ class EntityAttributePersisterTest extends \PHPUnit_Framework_TestCase
 
         parent::setUp();
 
+        $this->fixturesLoader = new Loader(
+            new FallbackResolver($schemaBuilder->getFixturesPath(), 'eav_entity_attribute'),
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateAttributeGroupTable(
+            'eav_entity_attribute',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateAttributeTable(
+            'eav_entity_attribute',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateEntityAttributeTable(
+            'eav_entity_attribute',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
         $this->persister = new StandardEntityAttributePersister(
             $this->getDoctrineConnection(),
             EntityAttributeQueryBuilder::getDefaultTable()
@@ -102,62 +135,68 @@ class EntityAttributePersisterTest extends \PHPUnit_Framework_TestCase
         $this->persister->initialize();
         $this->persister->flush();
 
-        $this->assertTableRowCount('eav_entity_attribute', 0);
+        $this->assertTableRowCount('eav_entity_attribute', 1);
     }
 
     public function testInsertOne()
     {
-        $dataLoader = new Loader($this->getDoctrineConnection(), '1.9', 'ce');
-
         $this->persister->initialize();
-        foreach ($dataLoader->walkData('eav_entity_attribute') as $data) {
-            $attribute = EntityAttribute::buildNewWith(
-                $data['entity_attribute_id'],
-                $data['entity_type_id'],
-                $data['attribute_set_id'],
-                $data['attribute_group_id'],
-                $data['attribute_id'],
-                $data['sort_order']
-            );
-            $this->persister->persist($attribute);
-        }
-        $this->persister->flush();
 
-        $expected = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-            $this->getFixturesPathname('eav_entity_attribute', '1.9', 'ce')
-        );
+        $this->persister->persist(EntityAttribute::buildNewWith(null, 4, 4, 7, 122, 20));
+
+        $this->persister->flush();
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_entity_attribute');
 
-        $this->assertDataSetsEqual($expected, $actual);
+        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
+            'eav_entity_attribute' => [
+                [
+                    'entity_attribute_id' => 1,
+                    'entity_type_id' => 4,
+                    'attribute_set_id' => 4,
+                    'attribute_group_id' => 7,
+                    'attribute_id' => 79,
+                    'sort_order' => 10,
+                ],
+                [
+                    'entity_attribute_id' => 2,
+                    'entity_type_id' => 4,
+                    'attribute_set_id' => 4,
+                    'attribute_group_id' => 7,
+                    'attribute_id' => 122,
+                    'sort_order' => 20,
+                ],
+            ]
+        ]);
 
-        $this->assertTableRowCount('eav_entity_attribute', $this->getDataSet()->getIterator()->getTable()->getRowCount());
+        $this->assertDataSetsEqual($expected, $actual);
     }
 
     public function testUpdateOneExisting()
     {
-        $dataLoader = new Loader($this->getDoctrineConnection(), '1.9', 'ce');
-
         $this->persister->initialize();
-        foreach ($dataLoader->walkData('eav_entity_attribute') as $data) {
-            $attribute = EntityAttribute::buildNewWith(
-                $data['entity_attribute_id'],
-                $data['entity_type_id'],
-                $data['attribute_set_id'],
-                $data['attribute_group_id'],
-                $data['attribute_id'],
-                $data['sort_order']
-            );
-            $this->persister->persist($attribute);
-        }
-        $this->persister->flush();
 
-        $expected = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-            $this->getFixturesPathname('eav_entity_attribute', '1.9', 'ce'));
+        $this->persister->persist(EntityAttribute::buildNewWith(1, 4, 4, 7, 79, 20));
+
+        $this->persister->flush();
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_entity_attribute');
+
+
+        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
+            'eav_entity_attribute' => [
+                [
+                    'entity_attribute_id' => 1,
+                    'entity_type_id' => 4,
+                    'attribute_set_id' => 4,
+                    'attribute_group_id' => 7,
+                    'attribute_id' => 79,
+                    'sort_order' => 20,
+                ],
+            ]
+        ]);
 
         $this->assertDataSetsEqual($expected, $actual);
     }

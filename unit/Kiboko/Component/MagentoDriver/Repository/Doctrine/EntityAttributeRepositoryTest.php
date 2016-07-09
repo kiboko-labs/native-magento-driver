@@ -33,7 +33,7 @@ class EntityAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     protected function getDataSet()
     {
-        $dataSet = new \PHPUnit_Extensions_Database_DataSet_CsvDataSet();
+        $dataSet = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([]);
 
         return $dataSet;
     }
