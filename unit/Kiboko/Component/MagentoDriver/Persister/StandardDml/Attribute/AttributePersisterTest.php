@@ -10,7 +10,9 @@ use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBu
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\FallbackResolver;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\LoaderInterface;
 
 class AttributePersisterTest extends \PHPUnit_Framework_TestCase
 {
@@ -27,14 +29,18 @@ class AttributePersisterTest extends \PHPUnit_Framework_TestCase
     private $persister;
 
     /**
+     * @var LoaderInterface
+     */
+    private $fixturesLoader;
+
+    /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
     protected function getDataSet()
     {
-        $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-            $this->getFixturesPathname('eav_entity_type', '1.9', 'ce'));
+        $dataSet = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([]);
 
-        return $dataset;
+        return $dataSet;
     }
 
     private function truncateTables()
@@ -74,11 +80,29 @@ class AttributePersisterTest extends \PHPUnit_Framework_TestCase
             $this->getDoctrineConnection()->exec($sql);
         }
 
-        $schemaBuilder->hydrateEntityAttributeTable('1.9', 'ce');
-
         $this->truncateTables();
 
         parent::setUp();
+
+        $this->fixturesLoader = new Loader(
+            new FallbackResolver($schemaBuilder->getFixturesPath()),
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateEntityTypeTable(
+            'eav_attribute',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateAttributeTable(
+            'eav_attribute',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
 
         $this->persister = new StandardAttributePersister(
             $this->getDoctrineConnection(),
@@ -99,41 +123,102 @@ class AttributePersisterTest extends \PHPUnit_Framework_TestCase
         $this->persister->initialize();
         $this->persister->flush();
 
-        $this->assertTableRowCount('eav_attribute', 0);
+        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
+            'eav_attribute' => [
+                [
+                    'attribute_id' => 79,
+                    'entity_type_id' => 4,
+                    'attribute_code' => 'cost',
+                    'attribute_model' => null,
+                    'backend_model' => 'catalog/product_attribute_backend_price',
+                    'backend_type' => 'decimal',
+                    'backend_table' => null,
+                    'frontend_model' => null,
+                    'frontend_input' => 'price',
+                    'frontend_label' => 'Cout',
+                    'frontend_class' => null,
+                    'source_model' => null,
+                    'is_required' => 0,
+                    'is_user_defined' => 1,
+                    'default_value' => null,
+                    'is_unique' => 0,
+                    'note' => null,
+                ],
+            ],
+        ]);
+
+        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
+        $actual->addTable('eav_attribute');
+
+        $this->assertDataSetsEqual($expected, $actual);
     }
 
     public function testInsertOne()
     {
-        $dataLoader = new Loader($this->getDoctrineConnection(), 'eav_attribute');
-
         $this->persister->initialize();
-        foreach ($dataLoader->walkData('1.9', 'ce') as $data) {
-            $attribute = Attribute::buildNewWith(
-                $data['attribute_id'],    // AttributeId
-                $data['entity_type_id'],  // EntityTypeId
-                $data['attribute_code'],  // Identifier
-                $data['attribute_model'], // ModelClass
-                $data['backend_type'],    // BackendType
-                $data['backend_model'],   // BackendModelClass
-                $data['backend_table'],   // BackendTable
-                $data['frontend_input'],  // FrontedType
-                $data['frontend_model'],  // FrontendModelClass
-                $data['frontend_input'],  // FrontendInput
-                $data['frontend_label'],  // FrontendLabel
-                $data['frontend_class'],  // FrontendViewClass
-                $data['source_model'],    // SourceModelClass
-                $data['is_required'],     // IsRequired
-                $data['is_user_defined'], // IsUserDefined
-                $data['is_unique'],       // IsUnique
-                $data['default_value'],   // IsDefaultValue
-                $data['note']
-            );
-            $this->persister->persist($attribute);
-        }
+        $attribute = new Attribute(
+            4,              // EntityTypeId
+            'description',  // Identifier
+            null,           // ModelClass
+            'text',         // BackendType
+            null,           // BackendModelClass
+            null,           // BackendTable
+            null,           // FrontendModelClass
+            'text',         // FrontendInput
+            'Description',  // FrontendLabel
+            null,           // FrontendViewClass
+            null,           // SourceModelClass
+            0,              // IsRequired
+            1,              // IsUserDefined
+            0,              // IsUnique
+            null,           // DefaultValue
+            null
+        );
+        $this->persister->persist($attribute);
         $this->persister->flush();
 
-        $expected = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-            $this->getFixturesPathname('eav_attribute', '1.9', 'ce'));
+        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
+            'eav_attribute' => [
+                [
+                    'attribute_id' => 79,
+                    'entity_type_id' => 4,
+                    'attribute_code' => 'cost',
+                    'attribute_model' => null,
+                    'backend_model' => 'catalog/product_attribute_backend_price',
+                    'backend_type' => 'decimal',
+                    'backend_table' => null,
+                    'frontend_model' => null,
+                    'frontend_input' => 'price',
+                    'frontend_label' => 'Cout',
+                    'frontend_class' => null,
+                    'source_model' => null,
+                    'is_required' => 0,
+                    'is_user_defined' => 1,
+                    'default_value' => null,
+                    'is_unique' => 0,
+                    'note' => null,
+                ],
+                [
+                    'attribute_id' => 80,
+                    'entity_type_id' => 4,
+                    'attribute_code' => 'description',
+                    'attribute_model' => null,
+                    'backend_model' => null,
+                    'backend_type' => 'text',
+                    'backend_table' => null,
+                    'frontend_model' => null,
+                    'frontend_input' => 'text',
+                    'frontend_label' => 'Description',
+                    'frontend_class' => null,
+                    'source_model' => null,
+                    'is_required' => 0,
+                    'is_user_defined' => 1,
+                    'default_value' => null,
+                    'is_unique' => 0,
+                    'note' => null,
+                ],
+            ],
+        ]);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute');
@@ -143,36 +228,51 @@ class AttributePersisterTest extends \PHPUnit_Framework_TestCase
 
     public function testUpdateOneExisting()
     {
-        $dataLoader = new Loader($this->getDoctrineConnection(), 'eav_attribute');
-
         $this->persister->initialize();
-        foreach ($dataLoader->walkData('1.9', 'ce') as $data) {
-            $attribute = Attribute::buildNewWith(
-                $data['attribute_id'],    // AttributeId
-                $data['entity_type_id'],  // EntityTypeId
-                $data['attribute_code'],  // Identifier
-                $data['attribute_model'], // ModelClass
-                $data['backend_type'],    // BackendType
-                $data['backend_model'],   // BackendModelClass
-                $data['backend_table'],   // BackendTable
-                $data['frontend_input'],  // FrontedType
-                $data['frontend_model'],  // FrontendModelClass
-                $data['frontend_input'],  // FrontendInput
-                $data['frontend_label'],  // FrontendLabel
-                $data['frontend_class'],  // FrontendViewClass
-                $data['source_model'],    // SourceModelClass
-                $data['is_required'],     // IsRequired
-                $data['is_user_defined'], // IsUserDefined
-                $data['is_unique'],       // IsUnique
-                $data['default_value'],   // IsDefaultValue
-                $data['note']
-            );
-            $this->persister->persist($attribute);
-        }
+        $this->persister->persist(Attribute::buildNewWith(
+            79,
+            4,              // EntityTypeId
+            'cost',         // Identifier
+            null,           // ModelClass
+            'decimal',      // BackendType
+            'catalog/product_attribute_backend_cost', // BackendModelClass
+            null,           // BackendTable
+            null,           // FrontendModelClass
+            'price',        // FrontendInput
+            'Cout',         // FrontendLabel
+            null,           // FrontendViewClass
+            null,           // SourceModelClass
+            0,              // IsRequired
+            1,              // IsUserDefined
+            0,              // IsUnique
+            null,           // DefaultValue
+            null
+        ));
         $this->persister->flush();
 
-        $expected = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-            $this->getFixturesPathname('eav_attribute', '1.9', 'ce'));
+        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
+            'eav_attribute' => [
+                [
+                    'attribute_id' => 79,
+                    'entity_type_id' => 4,
+                    'attribute_code' => 'cost',
+                    'attribute_model' => null,
+                    'backend_model' => 'catalog/product_attribute_backend_cost',
+                    'backend_type' => 'decimal',
+                    'backend_table' => null,
+                    'frontend_model' => null,
+                    'frontend_input' => 'price',
+                    'frontend_label' => 'Cout',
+                    'frontend_class' => null,
+                    'source_model' => null,
+                    'is_required' => 0,
+                    'is_user_defined' => 1,
+                    'default_value' => null,
+                    'is_unique' => 0,
+                    'note' => null,
+                ],
+            ],
+        ]);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute');
