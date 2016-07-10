@@ -25,15 +25,15 @@ class AttributeOptionValue implements AttributeOptionValueInterface
     private $value;
 
     /**
-     * @param int $identifier
      * @param int $optionId
      * @param int $storeId
+     * @param string $value
      */
-    public function __construct($identifier, $optionId, $storeId)
+    public function __construct($optionId, $storeId, $value)
     {
-        $this->identifier = $identifier;
         $this->optionId = $optionId;
         $this->storeId = $storeId;
+        $this->value = $value;
     }
 
     /**

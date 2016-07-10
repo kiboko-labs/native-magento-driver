@@ -25,11 +25,15 @@ class AttributeLabel implements AttributeLabelInterface
     private $value;
 
     /**
-     * @param int $identifier
+     * @param int $attributeId
+     * @param int $storeId
+     * @param int $value
      */
-    public function __construct($identifier)
+    public function __construct($attributeId, $storeId, $value)
     {
-        $this->identifier = $identifier;
+        $this->attributeId = $attributeId;
+        $this->storeId = $storeId;
+        $this->value = $value;
     }
 
     /**
@@ -73,14 +77,14 @@ class AttributeLabel implements AttributeLabelInterface
      * @return AttributeLabelInterface
      */
     public static function buildNewWith(
-    $attributeLabelId, $attributeId, $storeId, $value = null
+        $attributeLabelId,
+        $attributeId,
+        $storeId, 
+        $value = null
     ) {
-        $object = new static($attributeLabelId);
+        $object = new static($attributeId, $storeId, $value);
 
         $object->identifier = $attributeLabelId;
-        $object->attributeId = $attributeId;
-        $object->storeId = $storeId;
-        $object->value = $value;
 
         return $object;
     }

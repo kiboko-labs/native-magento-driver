@@ -10,7 +10,9 @@ use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeLabelQueryBuil
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\FallbackResolver;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\LoaderInterface;
 
 class AttributeLabelPersisterTest extends \PHPUnit_Framework_TestCase
 {
@@ -27,14 +29,18 @@ class AttributeLabelPersisterTest extends \PHPUnit_Framework_TestCase
     private $persister;
 
     /**
+     * @var LoaderInterface
+     */
+    private $fixturesLoader;
+
+    /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
     protected function getDataSet()
     {
-        $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-            $this->getFixturesPathname('eav_attribute_label', '1.9', 'ce'));
+        $dataSet = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([]);
 
-        return $dataset;
+        return $dataSet;
     }
 
     private function truncateTables()
@@ -83,6 +89,33 @@ class AttributeLabelPersisterTest extends \PHPUnit_Framework_TestCase
 
         parent::setUp();
 
+        $this->fixturesLoader = new Loader(
+            new FallbackResolver($schemaBuilder->getFixturesPath()),
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateStoreTable(
+            'eav_attribute_label',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateAttributeTable(
+            'eav_attribute_label',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateAttributeLabelTable(
+            'eav_attribute_label',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
         $this->persister = new AttributeLabelPersister(
             $this->getDoctrineConnection(),
             AttributeLabelQueryBuilder::getDefaultTable()
@@ -102,27 +135,83 @@ class AttributeLabelPersisterTest extends \PHPUnit_Framework_TestCase
         $this->persister->initialize();
         $this->persister->flush();
 
-        $this->assertTableRowCount('eav_attribute_label', 0);
+        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
+            'eav_attribute_label' => [
+                [
+                    'attribute_label_id' => 1,
+                    'attribute_id' => 79,
+                    'store_id' => 1,
+                    'value' => 'Cout',
+                ],
+                [
+                    'attribute_label_id' => 2,
+                    'attribute_id' => 122,
+                    'store_id' => 1,
+                    'value' => 'Laisser un message cadeau',
+                ],
+                [
+                    'attribute_label_id' => 3,
+                    'attribute_id' => 131,
+                    'store_id' => 1,
+                    'value' => null,
+                ],
+                [
+                    'attribute_label_id' => 4,
+                    'attribute_id' => 210,
+                    'store_id' => 1,
+                    'value' => 'Description',
+                ],
+            ],
+        ]);
+
+        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
+        $actual->addTable('eav_attribute_label');
+
+        $this->assertDataSetsEqual($expected, $actual);
     }
 
     public function testInsertOne()
     {
-        $dataLoader = new Loader($this->getDoctrineConnection(), '1.9', 'ce');
-
         $this->persister->initialize();
-        foreach ($dataLoader->walkData('eav_attribute_label') as $data) {
-            $attribute = AttributeLabel::buildNewWith(
-                $data['attribute_label_id'],
-                $data['attribute_id'],
-                $data['store_id'],
-                $data['value']
-            );
-            $this->persister->persist($attribute);
-        }
+        $this->persister->persist(new AttributeLabel(
+            79, 2, 'Prix d\'achat'
+        ));
         $this->persister->flush();
 
-        $expected = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-            $this->getFixturesPathname('eav_attribute_label', '1.9', 'ce'));
+        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
+            'eav_attribute_label' => [
+                [
+                    'attribute_label_id' => 1,
+                    'attribute_id' => 79,
+                    'store_id' => 1,
+                    'value' => 'Cout',
+                ],
+                [
+                    'attribute_label_id' => 2,
+                    'attribute_id' => 122,
+                    'store_id' => 1,
+                    'value' => 'Laisser un message cadeau',
+                ],
+                [
+                    'attribute_label_id' => 3,
+                    'attribute_id' => 131,
+                    'store_id' => 1,
+                    'value' => null,
+                ],
+                [
+                    'attribute_label_id' => 4,
+                    'attribute_id' => 210,
+                    'store_id' => 1,
+                    'value' => 'Description',
+                ],
+                [
+                    'attribute_label_id' => 5,
+                    'attribute_id' => 79,
+                    'store_id' => 2,
+                    'value' => 'Prix d\'achat',
+                ],
+            ],
+        ]);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_label');
@@ -132,22 +221,40 @@ class AttributeLabelPersisterTest extends \PHPUnit_Framework_TestCase
 
     public function testUpdateOneExisting()
     {
-        $dataLoader = new Loader($this->getDoctrineConnection(), '1.9', 'ce');
-
         $this->persister->initialize();
-        foreach ($dataLoader->walkData('eav_attribute_label') as $data) {
-            $attribute = AttributeLabel::buildNewWith(
-                $data['attribute_label_id'],
-                $data['attribute_id'],
-                $data['store_id'],
-                $data['value']
-            );
-            $this->persister->persist($attribute);
-        }
+        $this->persister->persist(AttributeLabel::buildNewWith(
+            1, 79, 1, 'Prix d\'achat'
+        ));
         $this->persister->flush();
 
-        $expected = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-            $this->getFixturesPathname('eav_attribute_label', '1.9', 'ce'));
+        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
+            'eav_attribute_label' => [
+                [
+                    'attribute_label_id' => 1,
+                    'attribute_id' => 79,
+                    'store_id' => 1,
+                    'value' => 'Prix d\'achat',
+                ],
+                [
+                    'attribute_label_id' => 2,
+                    'attribute_id' => 122,
+                    'store_id' => 1,
+                    'value' => 'Laisser un message cadeau',
+                ],
+                [
+                    'attribute_label_id' => 3,
+                    'attribute_id' => 131,
+                    'store_id' => 1,
+                    'value' => null,
+                ],
+                [
+                    'attribute_label_id' => 4,
+                    'attribute_id' => 210,
+                    'store_id' => 1,
+                    'value' => 'Description',
+                ],
+            ],
+        ]);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_label');

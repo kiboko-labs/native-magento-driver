@@ -10,7 +10,9 @@ use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeOptionValueQue
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\FallbackResolver;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\LoaderInterface;
 
 class AttributeOptionValuePersisterTest extends \PHPUnit_Framework_TestCase
 {
@@ -27,14 +29,18 @@ class AttributeOptionValuePersisterTest extends \PHPUnit_Framework_TestCase
     private $persister;
 
     /**
+     * @var LoaderInterface
+     */
+    private $fixturesLoader;
+
+    /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
     protected function getDataSet()
     {
-        $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-            $this->getFixturesPathname('eav_attribute_option_value', '1.9', 'ce'));
+        $dataSet = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([]);
 
-        return $dataset;
+        return $dataSet;
     }
 
     private function truncateTables()
@@ -88,6 +94,40 @@ class AttributeOptionValuePersisterTest extends \PHPUnit_Framework_TestCase
 
         parent::setUp();
 
+        $this->fixturesLoader = new Loader(
+            new FallbackResolver($schemaBuilder->getFixturesPath()),
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateAttributeTable(
+            'eav_attribute_option_value',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateAttributeOptionTable(
+            'eav_attribute_option_value',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateStoreTable(
+            'eav_attribute_option_value',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateAttributeOptionValueTable(
+            'eav_attribute_option_value',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
         $this->persister = new AttributeOptionValuePersister(
             $this->getDoctrineConnection(),
             AttributeOptionValueQueryBuilder::getDefaultTable()
@@ -107,27 +147,155 @@ class AttributeOptionValuePersisterTest extends \PHPUnit_Framework_TestCase
         $this->persister->initialize();
         $this->persister->flush();
 
-        $this->assertTableRowCount('eav_attribute_option_value', 0);
+        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
+            'eav_attribute_option_value' => [
+                [
+                    'value_id' => 1,
+                    'option_id' => 1,
+                    'store_id' => 0,
+                    'value' => 'red',
+                ],
+                [
+                    'value_id' => 2,
+                    'option_id' => 1,
+                    'store_id' => 1,
+                    'value' => 'Rouge',
+                ],
+                [
+                    'value_id' => 3,
+                    'option_id' => 2,
+                    'store_id' => 0,
+                    'value' => 'green',
+                ],
+                [
+                    'value_id' => 4,
+                    'option_id' => 2,
+                    'store_id' => 1,
+                    'value' => 'Vert',
+                ],
+                [
+                    'value_id' => 5,
+                    'option_id' => 3,
+                    'store_id' => 0,
+                    'value' => 'blue',
+                ],
+                [
+                    'value_id' => 6,
+                    'option_id' => 3,
+                    'store_id' => 1,
+                    'value' => 'Bleu',
+                ],
+                [
+                    'value_id' => 7,
+                    'option_id' => 4,
+                    'store_id' => 0,
+                    'value' => 'black',
+                ],
+                [
+                    'value_id' => 8,
+                    'option_id' => 4,
+                    'store_id' => 1,
+                    'value' => 'Noir',
+                ],
+                [
+                    'value_id' => 9,
+                    'option_id' => 5,
+                    'store_id' => 0,
+                    'value' => 'white',
+                ],
+                [
+                    'value_id' => 10,
+                    'option_id' => 5,
+                    'store_id' => 1,
+                    'value' => 'Blanc',
+                ],
+            ],
+        ]);
+
+        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
+        $actual->addTable('eav_attribute_option_value');
+
+        $this->assertDataSetsEqual($expected, $actual);
     }
 
     public function testInsertOne()
     {
-        $dataLoader = new Loader($this->getDoctrineConnection(), 'eav_attribute_option_value');
-
         $this->persister->initialize();
-        foreach ($dataLoader->walkData('1.9', 'ce') as $data) {
-            $attribute = AttributeOptionValue::buildNewWith(
-                $data['value_id'],
-                $data['option_id'],
-                $data['store_id'],
-                $data['value']
-            );
-            $this->persister->persist($attribute);
-        }
+        $this->persister->persist(new AttributeOptionValue(
+            1, 2, 'Red'
+        ));
         $this->persister->flush();
 
-        $expected = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-            $this->getFixturesPathname('eav_attribute_option_value', '1.9', 'ce'));
+        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
+            'eav_attribute_option_value' => [
+                [
+                    'value_id' => 1,
+                    'option_id' => 1,
+                    'store_id' => 0,
+                    'value' => 'red',
+                ],
+                [
+                    'value_id' => 2,
+                    'option_id' => 1,
+                    'store_id' => 1,
+                    'value' => 'Rouge',
+                ],
+                [
+                    'value_id' => 3,
+                    'option_id' => 2,
+                    'store_id' => 0,
+                    'value' => 'green',
+                ],
+                [
+                    'value_id' => 4,
+                    'option_id' => 2,
+                    'store_id' => 1,
+                    'value' => 'Vert',
+                ],
+                [
+                    'value_id' => 5,
+                    'option_id' => 3,
+                    'store_id' => 0,
+                    'value' => 'blue',
+                ],
+                [
+                    'value_id' => 6,
+                    'option_id' => 3,
+                    'store_id' => 1,
+                    'value' => 'Bleu',
+                ],
+                [
+                    'value_id' => 7,
+                    'option_id' => 4,
+                    'store_id' => 0,
+                    'value' => 'black',
+                ],
+                [
+                    'value_id' => 8,
+                    'option_id' => 4,
+                    'store_id' => 1,
+                    'value' => 'Noir',
+                ],
+                [
+                    'value_id' => 9,
+                    'option_id' => 5,
+                    'store_id' => 0,
+                    'value' => 'white',
+                ],
+                [
+                    'value_id' => 10,
+                    'option_id' => 5,
+                    'store_id' => 1,
+                    'value' => 'Blanc',
+                ],
+                [
+                    'value_id' => 11,
+                    'option_id' => 1,
+                    'store_id' => 2,
+                    'value' => 'Red',
+                ],
+            ],
+        ]);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_option_value');
@@ -137,22 +305,76 @@ class AttributeOptionValuePersisterTest extends \PHPUnit_Framework_TestCase
 
     public function testUpdateOneExisting()
     {
-        $dataLoader = new Loader($this->getDoctrineConnection(), 'eav_attribute_option_value');
-
         $this->persister->initialize();
-        foreach ($dataLoader->walkData('1.9', 'ce') as $data) {
-            $attribute = AttributeOptionValue::buildNewWith(
-                $data['value_id'],
-                $data['option_id'],
-                $data['store_id'],
-                $data['value']
-            );
-            $this->persister->persist($attribute);
-        }
+        $this->persister->persist(AttributeOptionValue::buildNewWith(
+            1, 1, 0, 'rot'
+        ));
         $this->persister->flush();
 
-        $expected = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-            $this->getFixturesPathname('eav_attribute_option_value', '1.9', 'ce'));
+        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
+            'eav_attribute_option_value' => [
+                [
+                    'value_id' => 1,
+                    'option_id' => 1,
+                    'store_id' => 0,
+                    'value' => 'rot',
+                ],
+                [
+                    'value_id' => 2,
+                    'option_id' => 1,
+                    'store_id' => 1,
+                    'value' => 'Rouge',
+                ],
+                [
+                    'value_id' => 3,
+                    'option_id' => 2,
+                    'store_id' => 0,
+                    'value' => 'green',
+                ],
+                [
+                    'value_id' => 4,
+                    'option_id' => 2,
+                    'store_id' => 1,
+                    'value' => 'Vert',
+                ],
+                [
+                    'value_id' => 5,
+                    'option_id' => 3,
+                    'store_id' => 0,
+                    'value' => 'blue',
+                ],
+                [
+                    'value_id' => 6,
+                    'option_id' => 3,
+                    'store_id' => 1,
+                    'value' => 'Bleu',
+                ],
+                [
+                    'value_id' => 7,
+                    'option_id' => 4,
+                    'store_id' => 0,
+                    'value' => 'black',
+                ],
+                [
+                    'value_id' => 8,
+                    'option_id' => 4,
+                    'store_id' => 1,
+                    'value' => 'Noir',
+                ],
+                [
+                    'value_id' => 9,
+                    'option_id' => 5,
+                    'store_id' => 0,
+                    'value' => 'white',
+                ],
+                [
+                    'value_id' => 10,
+                    'option_id' => 5,
+                    'store_id' => 1,
+                    'value' => 'Blanc',
+                ],
+            ],
+        ]);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_option_value');

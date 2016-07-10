@@ -10,7 +10,9 @@ use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeOptionQueryBui
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\FallbackResolver;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\LoaderInterface;
 
 class AttributeOptionPersisterTest extends \PHPUnit_Framework_TestCase
 {
@@ -27,14 +29,18 @@ class AttributeOptionPersisterTest extends \PHPUnit_Framework_TestCase
     private $persister;
 
     /**
+     * @var LoaderInterface
+     */
+    private $fixturesLoader;
+
+    /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
     protected function getDataSet()
     {
-        $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-            $this->getFixturesPathname('eav_attribute_option', '1.9', 'ce'));
+        $dataSet = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([]);
 
-        return $dataset;
+        return $dataSet;
     }
 
     private function truncateTables()
@@ -78,6 +84,26 @@ class AttributeOptionPersisterTest extends \PHPUnit_Framework_TestCase
 
         parent::setUp();
 
+        $this->fixturesLoader = new Loader(
+            new FallbackResolver($schemaBuilder->getFixturesPath()),
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateAttributeTable(
+            'eav_attribute_option',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateAttributeOptionTable(
+            'eav_attribute_option',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
         $this->persister = new AttributeOptionPersister(
             $this->getDoctrineConnection(),
             AttributeOptionQueryBuilder::getDefaultTable()
@@ -97,26 +123,85 @@ class AttributeOptionPersisterTest extends \PHPUnit_Framework_TestCase
         $this->persister->initialize();
         $this->persister->flush();
 
-        $this->assertTableRowCount('eav_attribute_option', 0);
+        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
+            'eav_attribute_option' => [
+                [
+                    'option_id' => 1,
+                    'attribute_id' => 226,
+                    'sort_order' => 0,
+                ],
+                [
+                    'option_id' => 2,
+                    'attribute_id' => 226,
+                    'sort_order' => 10,
+                ],
+                [
+                    'option_id' => 3,
+                    'attribute_id' => 226,
+                    'sort_order' => 20,
+                ],
+                [
+                    'option_id' => 4,
+                    'attribute_id' => 226,
+                    'sort_order' => 30,
+                ],
+                [
+                    'option_id' => 5,
+                    'attribute_id' => 226,
+                    'sort_order' => 40,
+                ],
+            ],
+        ]);
+
+        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
+        $actual->addTable('eav_attribute_option');
+
+        $this->assertDataSetsEqual($expected, $actual);
     }
 
     public function testInsertOne()
     {
-        $dataLoader = new Loader($this->getDoctrineConnection(), '1.9', 'ce');
-
         $this->persister->initialize();
-        foreach ($dataLoader->walkData('eav_attribute_option') as $data) {
-            $attribute = AttributeOption::buildNewWith(
-                $data['option_id'],
-                $data['attribute_id'],
-                $data['sort_order']
-            );
-            $this->persister->persist($attribute);
-        }
+        $this->persister->persist(new AttributeOption(
+            226,
+            50
+        ));
         $this->persister->flush();
 
-        $expected = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-            $this->getFixturesPathname('eav_attribute_option', '1.9', 'ce'));
+        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
+            'eav_attribute_option' => [
+                [
+                    'option_id' => 1,
+                    'attribute_id' => 226,
+                    'sort_order' => 0,
+                ],
+                [
+                    'option_id' => 2,
+                    'attribute_id' => 226,
+                    'sort_order' => 10,
+                ],
+                [
+                    'option_id' => 3,
+                    'attribute_id' => 226,
+                    'sort_order' => 20,
+                ],
+                [
+                    'option_id' => 4,
+                    'attribute_id' => 226,
+                    'sort_order' => 30,
+                ],
+                [
+                    'option_id' => 5,
+                    'attribute_id' => 226,
+                    'sort_order' => 40,
+                ],
+                [
+                    'option_id' => 6,
+                    'attribute_id' => 226,
+                    'sort_order' => 50,
+                ],
+            ],
+        ]);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_option');
@@ -126,21 +211,43 @@ class AttributeOptionPersisterTest extends \PHPUnit_Framework_TestCase
 
     public function testUpdateOneExisting()
     {
-        $dataLoader = new Loader($this->getDoctrineConnection(), '1.9', 'ce');
-
         $this->persister->initialize();
-        foreach ($dataLoader->walkData('eav_attribute_option') as $data) {
-            $attribute = AttributeOption::buildNewWith(
-                $data['option_id'],
-                $data['attribute_id'],
-                $data['sort_order']
-            );
-            $this->persister->persist($attribute);
-        }
+        $this->persister->persist(AttributeOption::buildNewWith(
+            1,
+            226,
+            50
+        ));
         $this->persister->flush();
 
-        $expected = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-            $this->getFixturesPathname('eav_attribute_option', '1.9', 'ce'));
+        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
+            'eav_attribute_option' => [
+                [
+                    'option_id' => 1,
+                    'attribute_id' => 226,
+                    'sort_order' => 50,
+                ],
+                [
+                    'option_id' => 2,
+                    'attribute_id' => 226,
+                    'sort_order' => 10,
+                ],
+                [
+                    'option_id' => 3,
+                    'attribute_id' => 226,
+                    'sort_order' => 20,
+                ],
+                [
+                    'option_id' => 4,
+                    'attribute_id' => 226,
+                    'sort_order' => 30,
+                ],
+                [
+                    'option_id' => 5,
+                    'attribute_id' => 226,
+                    'sort_order' => 40,
+                ],
+            ],
+        ]);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_option');
