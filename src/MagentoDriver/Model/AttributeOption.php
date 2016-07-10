@@ -20,11 +20,13 @@ class AttributeOption implements AttributeOptionInterface
     private $sortOrder;
 
     /**
-     * @param int $identifier
+     * @param int $attributeId
+     * @param int $sortOrder
      */
-    public function __construct($identifier)
+    public function __construct($attributeId, $sortOrder)
     {
-        $this->identifier = $identifier;
+        $this->attributeId = $attributeId;
+        $this->sortOrder = $sortOrder;
     }
 
     /**
@@ -59,13 +61,13 @@ class AttributeOption implements AttributeOptionInterface
      * @return AttributeOptionInterface
      */
     public static function buildNewWith(
-    $attributeOptionId, $attributeId, $sortOrder
+        $attributeOptionId,
+        $attributeId, 
+        $sortOrder
     ) {
-        $object = new static($attributeOptionId);
+        $object = new static($attributeId, $sortOrder);
 
         $object->identifier = $attributeOptionId;
-        $object->attributeId = $attributeId;
-        $object->sortOrder = $sortOrder;
 
         return $object;
     }
