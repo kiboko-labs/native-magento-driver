@@ -90,7 +90,7 @@ class EntityAttributePersisterTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
 
         $this->fixturesLoader = new Loader(
-            new FallbackResolver($schemaBuilder->getFixturesPath(), 'eav_entity_attribute'),
+            new FallbackResolver($schemaBuilder->getFixturesPath()),
             $GLOBALS['MAGENTO_VERSION'],
             $GLOBALS['MAGENTO_EDITION']
         );
@@ -135,19 +135,32 @@ class EntityAttributePersisterTest extends \PHPUnit_Framework_TestCase
         $this->persister->initialize();
         $this->persister->flush();
 
-        $this->assertTableRowCount('eav_entity_attribute', 1);
+        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
+            'eav_entity_attribute' => [
+                [
+                    'entity_attribute_id' => 1,
+                    'entity_type_id' => 4,
+                    'attribute_set_id' => 4,
+                    'attribute_group_id' => 7,
+                    'attribute_id' => 79,
+                    'sort_order' => 10,
+                ],
+            ],
+        ]);
+
+        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
+        $actual->addTable('eav_entity_attribute');
+
+        $this->assertDataSetsEqual($expected, $actual);
     }
 
     public function testInsertOne()
     {
         $this->persister->initialize();
-
-        $this->persister->persist(EntityAttribute::buildNewWith(null, 4, 4, 7, 122, 20));
-
+        $this->persister->persist(new EntityAttribute(
+            4, 4, 7, 122, 20
+        ));
         $this->persister->flush();
-
-        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable('eav_entity_attribute');
 
         $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
             'eav_entity_attribute' => [
@@ -170,6 +183,9 @@ class EntityAttributePersisterTest extends \PHPUnit_Framework_TestCase
             ]
         ]);
 
+        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
+        $actual->addTable('eav_entity_attribute');
+
         $this->assertDataSetsEqual($expected, $actual);
     }
 
@@ -180,10 +196,6 @@ class EntityAttributePersisterTest extends \PHPUnit_Framework_TestCase
         $this->persister->persist(EntityAttribute::buildNewWith(1, 4, 4, 7, 79, 20));
 
         $this->persister->flush();
-
-        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable('eav_entity_attribute');
-
 
         $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
             'eav_entity_attribute' => [
@@ -197,6 +209,9 @@ class EntityAttributePersisterTest extends \PHPUnit_Framework_TestCase
                 ],
             ]
         ]);
+
+        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
+        $actual->addTable('eav_entity_attribute');
 
         $this->assertDataSetsEqual($expected, $actual);
     }

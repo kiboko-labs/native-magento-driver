@@ -12,7 +12,7 @@ class EntityAttribute implements EntityAttributeInterface
     /**
      * @var int
      */
-    private $typeId;
+    private $entityTypeId;
 
     /**
      * @var int
@@ -35,11 +35,24 @@ class EntityAttribute implements EntityAttributeInterface
     private $sortOrder;
 
     /**
-     * @param int $identifier
+     * @param int $entityTypeId
+     * @param int $attributeSetId
+     * @param int $attributeGroupId
+     * @param int $attributeId
+     * @param int $sortOrder
      */
-    public function __construct($identifier)
-    {
-        $this->identifier = $identifier;
+    public function __construct(
+        $entityTypeId,
+        $attributeSetId,
+        $attributeGroupId,
+        $attributeId,
+        $sortOrder = 1
+    ) {
+        $this->entityTypeId = $entityTypeId;
+        $this->attributeSetId = $attributeSetId;
+        $this->attributeGroupId = $attributeGroupId;
+        $this->attributeId = $attributeId;
+        $this->sortOrder = $sortOrder;
     }
 
     /**
@@ -55,7 +68,7 @@ class EntityAttribute implements EntityAttributeInterface
      */
     public function getTypeId()
     {
-        return $this->typeId;
+        return $this->entityTypeId;
     }
 
     /**
@@ -108,14 +121,9 @@ class EntityAttribute implements EntityAttributeInterface
         $attributeId,
         $sortOrder
     ) {
-        $object = new static($entityAttributeId);
+        $object = new static($entityTypeId, $attributeSetId, $attributeGroupId, $attributeId, $sortOrder);
 
         $object->identifier = $entityAttributeId;
-        $object->typeId = $entityTypeId;
-        $object->attributeSetId = $attributeSetId;
-        $object->attributeGroupId = $attributeGroupId;
-        $object->attributeId = $attributeId;
-        $object->sortOrder = $sortOrder;
 
         return $object;
     }
