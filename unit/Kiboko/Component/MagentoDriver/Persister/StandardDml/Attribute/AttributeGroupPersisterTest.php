@@ -10,7 +10,9 @@ use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeGroupQueryBuil
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\FallbackResolver;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\LoaderInterface;
 
 class AttributeGroupPersisterTest extends \PHPUnit_Framework_TestCase
 {
@@ -27,14 +29,18 @@ class AttributeGroupPersisterTest extends \PHPUnit_Framework_TestCase
     private $persister;
 
     /**
+     * @var LoaderInterface
+     */
+    private $fixturesLoader;
+
+    /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
     protected function getDataSet()
     {
-        $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-            $this->getFixturesPathname('eav_attribute_group', '1.9', 'ce'));
+        $dataSet = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([]);
 
-        return $dataset;
+        return $dataSet;
     }
 
     private function truncateTables()
@@ -78,6 +84,26 @@ class AttributeGroupPersisterTest extends \PHPUnit_Framework_TestCase
 
         parent::setUp();
 
+        $this->fixturesLoader = new Loader(
+            new FallbackResolver($schemaBuilder->getFixturesPath()),
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateAttributeGroupTable(
+            'eav_attribute_group',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateFamilyTable(
+            'eav_attribute_group',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
         $this->persister = new AttributeGroupPersister(
             $this->getDoctrineConnection(),
             AttributeGroupQueryBuilder::getDefaultTable()
@@ -97,28 +123,64 @@ class AttributeGroupPersisterTest extends \PHPUnit_Framework_TestCase
         $this->persister->initialize();
         $this->persister->flush();
 
-        $this->assertTableRowCount('eav_attribute_group', 0);
+        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
+            'eav_attribute_group' => [
+                [
+                    'attribute_group_id' => 1,
+                    'attribute_set_id' => 1,
+                    'attribute_group_name' => 'General',
+                    'sort_order' => 1,
+                    'default_id' => 1,
+                ],
+                [
+                    'attribute_group_id' => 2,
+                    'attribute_set_id' => 2,
+                    'attribute_group_name' => 'General',
+                    'sort_order' => 1,
+                    'default_id' => 1,
+                ],
+            ],
+        ]);
+
+        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
+        $actual->addTable('eav_attribute_group');
+
+        $this->assertDataSetsEqual($expected, $actual);
     }
 
     public function testInsertOne()
     {
-        $dataLoader = new Loader($this->getDoctrineConnection(), '1.9', 'ce');
-
         $this->persister->initialize();
-        foreach ($dataLoader->walkData('eav_attribute_group') as $data) {
-            $attribute = AttributeGroup::buildNewWith(
-                $data['attribute_group_id'],
-                $data['attribute_set_id'],
-                $data['attribute_group_name'],
-                $data['sort_order'],
-                $data['default_id']
-            );
-            $this->persister->persist($attribute);
-        }
+        $this->persister->persist(new AttributeGroup(
+            3, 'Prices', 1, 1
+        ));
         $this->persister->flush();
 
-        $expected = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-            $this->getFixturesPathname('eav_attribute_group', '1.9', 'ce'));
+        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
+            'eav_attribute_group' => [
+                [
+                    'attribute_group_id' => 1,
+                    'attribute_set_id' => 1,
+                    'attribute_group_name' => 'General',
+                    'sort_order' => 1,
+                    'default_id' => 1,
+                ],
+                [
+                    'attribute_group_id' => 2,
+                    'attribute_set_id' => 2,
+                    'attribute_group_name' => 'General',
+                    'sort_order' => 1,
+                    'default_id' => 1,
+                ],
+                [
+                    'attribute_group_id' => 3,
+                    'attribute_set_id' => 3,
+                    'attribute_group_name' => 'Prices',
+                    'sort_order' => 1,
+                    'default_id' => 1,
+                ],
+            ],
+        ]);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_group');
@@ -128,23 +190,30 @@ class AttributeGroupPersisterTest extends \PHPUnit_Framework_TestCase
 
     public function testUpdateOneExisting()
     {
-        $dataLoader = new Loader($this->getDoctrineConnection(), '1.9', 'ce');
-
         $this->persister->initialize();
-        foreach ($dataLoader->walkData('eav_attribute_group') as $data) {
-            $attribute = AttributeGroup::buildNewWith(
-                $data['attribute_group_id'],
-                $data['attribute_set_id'],
-                $data['attribute_group_name'],
-                $data['sort_order'],
-                $data['default_id']
-            );
-            $this->persister->persist($attribute);
-        }
+        $this->persister->persist(AttributeGroup::buildNewWith(
+            1, 1, 'Updated', 1, 1
+        ));
         $this->persister->flush();
 
-        $expected = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-            $this->getFixturesPathname('eav_attribute_group', '1.9', 'ce'));
+        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
+            'eav_attribute_group' => [
+                [
+                    'attribute_group_id' => 1,
+                    'attribute_set_id' => 1,
+                    'attribute_group_name' => 'Updated',
+                    'sort_order' => 1,
+                    'default_id' => 1,
+                ],
+                [
+                    'attribute_group_id' => 2,
+                    'attribute_set_id' => 2,
+                    'attribute_group_name' => 'General',
+                    'sort_order' => 1,
+                    'default_id' => 1,
+                ],
+            ],
+        ]);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_group');

@@ -32,11 +32,19 @@ class AttributeGroup implements AttributeGroupInterface
     /**
      * @param int    $familyId
      * @param string $label
+     * @param int    $sortOrder
+     * @param int    $defaultId
      */
-    public function __construct($familyId, $label)
-    {
+    public function __construct(
+        $familyId,
+        $label,
+        $sortOrder = 1,
+        $defaultId = 0
+    ) {
         $this->familyId = $familyId;
         $this->label = $label;
+        $this->sortOrder = $sortOrder;
+        $this->defaultId = $defaultId;
     }
 
     /**
@@ -80,8 +88,8 @@ class AttributeGroup implements AttributeGroupInterface
     }
 
     /**
-     * @param int $attributeGroupId
-     * @param int familyId
+     * @param int    $attributeGroupId
+     * @param int    $familyId
      * @param string $label
      * @param int    $sortOrder
      * @param int    $defaultId
@@ -89,15 +97,15 @@ class AttributeGroup implements AttributeGroupInterface
      * @return AttributeGroupInterface
      */
     public static function buildNewWith(
-    $attributeGroupId, $familyId, $label, $sortOrder, $defaultId = 0
+        $attributeGroupId,
+        $familyId,
+        $label,
+        $sortOrder = 1,
+        $defaultId = 0
     ) {
-        $object = new static($familyId, $label);
+        $object = new static($familyId, $label, $sortOrder, $defaultId);
 
         $object->identifier = $attributeGroupId;
-        $object->familyId = $familyId;
-        $object->label = $label;
-        $object->sortOrder = $sortOrder;
-        $object->defaultId = $defaultId;
 
         return $object;
     }
