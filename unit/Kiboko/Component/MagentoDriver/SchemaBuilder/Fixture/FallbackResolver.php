@@ -10,11 +10,6 @@ class FallbackResolver
     private $basePath;
 
     /**
-     * @var string
-     */
-    private $suite;
-
-    /**
      * Magento EE and CE version equivalents
      *
      * @var array
@@ -35,12 +30,10 @@ class FallbackResolver
      * FallbackResolver constructor.
      *
      * @param string $basePath
-     * @param string $suite
      */
-    public function __construct($basePath, $suite)
+    public function __construct($basePath)
     {
         $this->basePath = $basePath;
-        $this->suite = $suite;
     }
 
     /**
