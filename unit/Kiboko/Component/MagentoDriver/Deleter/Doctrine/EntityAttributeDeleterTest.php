@@ -105,7 +105,7 @@ class EntityAttributeDeleterTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
 
         $this->fixturesLoader = new Loader(
-            new FallbackResolver($schemaBuilder->getFixturesPath(), 'eav_entity_attribute'),
+            new FallbackResolver($schemaBuilder->getFixturesPath()),
             $GLOBALS['MAGENTO_VERSION'],
             $GLOBALS['MAGENTO_EDITION']
         );

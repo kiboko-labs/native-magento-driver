@@ -105,7 +105,7 @@ class AttributeLabelDeleterTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
 
         $this->fixturesLoader = new Loader(
-            new FallbackResolver($schemaBuilder->getFixturesPath(), 'eav_attribute_label'),
+            new FallbackResolver($schemaBuilder->getFixturesPath()),
             $GLOBALS['MAGENTO_VERSION'],
             $GLOBALS['MAGENTO_EDITION']
         );
