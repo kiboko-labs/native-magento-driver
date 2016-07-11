@@ -10,7 +10,9 @@ use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\EntityStoreQueryBuilder
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\FallbackResolver;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\LoaderInterface;
 
 class EntityStorePersisterTest extends \PHPUnit_Framework_TestCase
 {
@@ -27,14 +29,18 @@ class EntityStorePersisterTest extends \PHPUnit_Framework_TestCase
     private $persister;
 
     /**
+     * @var LoaderInterface
+     */
+    private $fixturesLoader;
+
+    /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
     protected function getDataSet()
     {
-        $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-            $this->getFixturesPathname('eav_entity_store', '1.9', 'ce'));
+        $dataSet = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([]);
 
-        return $dataset;
+        return $dataSet;
     }
 
     private function truncateTables()
@@ -77,7 +83,25 @@ class EntityStorePersisterTest extends \PHPUnit_Framework_TestCase
 
         parent::setUp();
 
-        $schemaBuilder->hydrateEntityTypeTable('1.9', 'ce');
+        $this->fixturesLoader = new Loader(
+            new FallbackResolver($schemaBuilder->getFixturesPath()),
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateEntityTypeTable(
+            'eav_entity_type',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateEntityStoreTable(
+            'eav_entity_type',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
 
         $this->persister = new StandardEntityStorePersister(
             $this->getDoctrineConnection(),
@@ -98,28 +122,69 @@ class EntityStorePersisterTest extends \PHPUnit_Framework_TestCase
         $this->persister->initialize();
         $this->persister->flush();
 
-        $this->assertTableRowCount('eav_entity_store', 0);
+        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
+            'eav_entity_store' => [
+                [
+                    'entity_store_id' => 1,
+                    'entity_type_id' => 1,
+                    'store_id' => 0,
+                    'increment_prefix' => '0',
+                    'increment_last_id' => '000004372',
+                ],
+                [
+                    'entity_store_id' => 2,
+                    'entity_type_id' => 4,
+                    'store_id' => 0,
+                    'increment_prefix' => '5',
+                    'increment_last_id' => '50000047W',
+                ],
+            ],
+        ]);
+
+        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
+        $actual->addTable('eav_entity_store');
+
+        $this->assertDataSetsEqual($expected, $actual);
     }
 
     public function testInsertOne()
     {
-        $dataLoader = new Loader($this->getDoctrineConnection(), '1.9', 'ce');
-
         $this->persister->initialize();
-        foreach ($dataLoader->walkData('eav_entity_store') as $data) {
-            $attribute = EntityStore::buildNewWith(
-                $data['entity_store_id'],   // EntityStoreId
-                $data['entity_type_id'],    // EntityTypeId
-                $data['store_id'],          // StoreId
-                $data['increment_prefix'],  // IncrementPrefix
-                $data['increment_last_id']  // IncrementLastId
-            );
-            $this->persister->persist($attribute);
-        }
+        $this->persister->persist($entityStore = new EntityStore(
+            4,          // EntityTypeId
+            1,          // StoreId
+            '1',        // IncrementPrefix
+            '100000001' // IncrementLastId
+        ));
         $this->persister->flush();
 
-        $expected = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-            $this->getFixturesPathname('eav_entity_store', '1.9', 'ce'));
+        $this->assertEquals(3, $entityStore->getId());
+
+        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
+            'eav_entity_store' => [
+                [
+                    'entity_store_id' => 1,
+                    'entity_type_id' => 1,
+                    'store_id' => 0,
+                    'increment_prefix' => '0',
+                    'increment_last_id' => '000004372',
+                ],
+                [
+                    'entity_store_id' => 2,
+                    'entity_type_id' => 4,
+                    'store_id' => 0,
+                    'increment_prefix' => '5',
+                    'increment_last_id' => '50000047W',
+                ],
+                [
+                    'entity_store_id' => 3,
+                    'entity_type_id' => 4,
+                    'store_id' => 1,
+                    'increment_prefix' => '1',
+                    'increment_last_id' => '100000001',
+                ],
+            ],
+        ]);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_entity_store');
@@ -129,23 +194,36 @@ class EntityStorePersisterTest extends \PHPUnit_Framework_TestCase
 
     public function testUpdateOneExisting()
     {
-        $dataLoader = new Loader($this->getDoctrineConnection(), '1.9', 'ce');
-
         $this->persister->initialize();
-        foreach ($dataLoader->walkData('eav_entity_store') as $data) {
-            $attribute = EntityStore::buildNewWith(
-                $data['entity_store_id'],   // EntityStoreId
-                $data['entity_type_id'],    // EntityTypeId
-                $data['store_id'],          // StoreId
-                $data['increment_prefix'],  // IncrementPrefix
-                $data['increment_last_id']  // IncrementLastId
-            );
-            $this->persister->persist($attribute);
-        }
+        $this->persister->persist($entityStore = EntityStore::buildNewWith(
+            2,          // EntityStoreId
+            4,          // EntityTypeId
+            0,          // StoreId
+            '1',        // IncrementPrefix
+            '100000001' // IncrementLastId
+        ));
         $this->persister->flush();
 
-        $expected = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-            $this->getFixturesPathname('eav_entity_store', '1.9', 'ce'));
+        $this->assertEquals(2, $entityStore->getId());
+
+        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
+            'eav_entity_store' => [
+                [
+                    'entity_store_id' => 1,
+                    'entity_type_id' => 1,
+                    'store_id' => 0,
+                    'increment_prefix' => '0',
+                    'increment_last_id' => '000004372',
+                ],
+                [
+                    'entity_store_id' => 2,
+                    'entity_type_id' => 4,
+                    'store_id' => 0,
+                    'increment_prefix' => '1',
+                    'increment_last_id' => '100000001',
+                ],
+            ],
+        ]);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_entity_store');

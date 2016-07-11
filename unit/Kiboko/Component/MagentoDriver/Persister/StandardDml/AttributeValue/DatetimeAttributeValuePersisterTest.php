@@ -10,12 +10,14 @@ use Kiboko\Component\MagentoDriver\Persister\AttributeValuePersisterInterface;
 use Kiboko\Component\MagentoDriver\Persister\StandardDml\AttributeValue\DatetimeAttributeValuePersister;
 use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeValueQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
-use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
+use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\FallbackResolver;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\LoaderInterface;
 
 class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
 {
-
     use DatabaseConnectionAwareTrait;
 
     /**
@@ -29,17 +31,18 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
     private $persister;
 
     /**
+     * @var LoaderInterface
+     */
+    private $fixturesLoader;
+
+    /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
     protected function getDataSet()
     {
-        $dataset = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
-                $this->getFixturesPathname('eav_entity_type', '1.9', 'ce'));
-        $dataset->addYamlFile($this->getFixturesPathname('eav_attribute', '1.9', 'ce'));
-        $dataset->addYamlFile($this->getFixturesPathname('core_store', '1.9', 'ce'));
-        $dataset->addYamlFile($this->getFixturesPathname('catalog_product_entity', '1.9', 'ce'));
+        $dataSet = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([]);
 
-        return $dataset;
+        return $dataSet;
     }
 
     private function truncateTables($backendType)
@@ -47,25 +50,27 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
         $platform = $this->getDoctrineConnection()->getDatabasePlatform();
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
+
         $this->getDoctrineConnection()->exec(
-                $platform->getTruncateTableSQL('eav_entity_type')
+            $platform->getTruncateTableSQL('eav_entity_type')
         );
 
         $this->getDoctrineConnection()->exec(
-                $platform->getTruncateTableSQL('eav_attribute')
+            $platform->getTruncateTableSQL('eav_attribute')
         );
 
         $this->getDoctrineConnection()->exec(
-                $platform->getTruncateTableSQL('core_store')
+            $platform->getTruncateTableSQL('core_store')
         );
 
         $this->getDoctrineConnection()->exec(
-                $platform->getTruncateTableSQL('catalog_product_entity')
+            $platform->getTruncateTableSQL('catalog_product_entity')
         );
 
         $this->getDoctrineConnection()->exec(
-                $platform->getTruncateTableSQL(sprintf('catalog_product_entity_%s', $backendType))
+            $platform->getTruncateTableSQL(sprintf('catalog_product_entity_%s', $backendType))
         );
+
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
     }
 
@@ -83,14 +88,12 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
         $schemaBuilder->ensureAttributeTable();
         $schemaBuilder->ensureStoreTable();
         $schemaBuilder->ensureCatalogProductEntityTable();
-        $schemaBuilder->ensureCatalogProductAttributeValueTable('datetime', 'datetime', []);
+        $schemaBuilder->ensureCatalogProductAttributeValueTable('datetime', 'datetime');
 
         $schemaBuilder->ensureCatalogProductAttributeValueToEntityTypeLinks('datetime');
         $schemaBuilder->ensureCatalogProductAttributeValueToAttributeLinks('datetime');
         $schemaBuilder->ensureCatalogProductAttributeValueToStoreLinks('datetime');
         $schemaBuilder->ensureCatalogProductAttributeValueToCatalogProductEntityLinks('datetime');
-
-        $schemaBuilder->hydrateAttributeTable('1.9', 'ce');
 
         $comparator = new \Doctrine\DBAL\Schema\Comparator();
         $schemaDiff = $comparator->compare($currentSchema, $this->schema);
@@ -103,8 +106,51 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
 
         parent::setUp();
 
+        $this->fixturesLoader = new Loader(
+            new FallbackResolver($schemaBuilder->getFixturesPath()),
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateEntityTypeTable(
+            'catalog_product_entity_datetime',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateAttributeTable(
+            'catalog_product_entity_datetime',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateStoreTable(
+            'catalog_product_entity_datetime',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateCatalogProductEntityTable(
+            'catalog_product_entity_datetime',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
+        $schemaBuilder->hydrateCatalogProductAttributeValueTable(
+            'datetime',
+            'catalog_product_entity_datetime',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
+        );
+
         $this->persister = new DatetimeAttributeValuePersister(
-                $this->getDoctrineConnection(), ProductAttributeValueQueryBuilder::getDefaultTable('datetime')
+            $this->getDoctrineConnection(),
+            ProductAttributeValueQueryBuilder::getDefaultTable('datetime')
         );
     }
 
@@ -145,31 +191,78 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
         $this->persister->initialize();
         $this->persister->flush();
 
-        $this->assertTableRowCount(sprintf('catalog_product_entity_%s', 'datetime'), 0);
+        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
+            'catalog_product_entity_datetime' => [
+                [
+                    'value_id' => 20,
+                    'entity_type_id' => 4,
+                    'attribute_id' => 167,
+                    'store_id' => 0,
+                    'entity_id' => 3,
+                    'value' => null,
+                ],
+                [
+                    'value_id' => 23,
+                    'entity_type_id' => 4,
+                    'attribute_id' => 167,
+                    'store_id' => 0,
+                    'entity_id' => 961,
+                    'value' => '2016-12-01 12:34:56',
+                ],
+            ],
+        ]);
+
+        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
+        $actual->addTable('catalog_product_entity_datetime');
+
+        $this->assertDataSetsEqual($expected, $actual);
     }
 
     public function testInsertOne()
     {
-        $value = new ImmutableDatetimeAttributeValue(
-                $this->getAttributeMock(167), 
-                new \DateTime('2016-07-13 12:34:56'), 
-                $this->getProductMock(3)
-        );
-
         $this->persister->initialize();
-        $this->persister->persist($value);
-        /**
-         * SQLSTATE[23000]:
-         * Integrity constraint violation: 
-         * 1452 Cannot add or update a child row: 
-         * a foreign key constraint fails (
-         *  `magento_test`.`catalog_product_entity_datetime`,
-         *  CONSTRAINT `FK_E9FF3577B6E62EFA` 
-         *      FOREIGN KEY (`attribute_id`) 
-         *      REFERENCES `eav_attribute` (`attribute_id`)
-         *  ON DELETE CASCADE ON UPDATE CASCADE)
-         */
-//        $this->persister->flush();
-    }
+        $this->persister->persist($value = new ImmutableDatetimeAttributeValue(
+            $this->getAttributeMock(167),
+            new \DateTime('2016-07-13 12:34:56'),
+            $this->getProductMock(961),
+            1
+        ));
+        $this->persister->flush();
 
+        $this->assertEquals(24, $value->getId());
+
+        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
+            'catalog_product_entity_datetime' => [
+                [
+                    'value_id' => 20,
+                    'entity_type_id' => 4,
+                    'attribute_id' => 167,
+                    'store_id' => 0,
+                    'entity_id' => 3,
+                    'value' => null,
+                ],
+                [
+                    'value_id' => 23,
+                    'entity_type_id' => 4,
+                    'attribute_id' => 167,
+                    'store_id' => 0,
+                    'entity_id' => 961,
+                    'value' => '2016-12-01 12:34:56',
+                ],
+                [
+                    'value_id' => 24,
+                    'entity_type_id' => 4,
+                    'attribute_id' => 167,
+                    'store_id' => 1,
+                    'entity_id' => 961,
+                    'value' => '2016-07-13 12:34:56',
+                ],
+            ],
+        ]);
+
+        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
+        $actual->addTable('catalog_product_entity_datetime');
+
+        $this->assertDataSetsEqual($expected, $actual);
+    }
 }

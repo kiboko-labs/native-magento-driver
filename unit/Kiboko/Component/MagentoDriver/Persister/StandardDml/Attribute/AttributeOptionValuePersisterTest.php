@@ -221,10 +221,12 @@ class AttributeOptionValuePersisterTest extends \PHPUnit_Framework_TestCase
     public function testInsertOne()
     {
         $this->persister->initialize();
-        $this->persister->persist(new AttributeOptionValue(
+        $this->persister->persist($attributeOptionValue = new AttributeOptionValue(
             1, 2, 'Red'
         ));
         $this->persister->flush();
+
+        $this->assertEquals(11, $attributeOptionValue->getId());
 
         $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
             'eav_attribute_option_value' => [

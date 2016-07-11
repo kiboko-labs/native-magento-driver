@@ -1,0 +1,25 @@
+# Inspired from magento-sample-data-1.9.1.0 <https://www.magentocommerce.com/download#download1759>
+eav_attribute_set:
+    -
+        attribute_set_id: 4
+        entity_type_id: 4
+        attribute_set_name: Default
+        sort_order: 1
+eav_entity_type:
+    -
+        entity_type_id: 4
+        entity_type_code: catalog_product
+        entity_model: catalog/product
+        attribute_model: catalog/resource_eav_attribute
+        entity_table: catalog/product
+        value_table_prefix: null
+        entity_id_field: null
+        is_data_sharing: 1
+        data_sharing_key: default
+        default_attribute_set_id: 4
+        increment_model: null
+        increment_per_store: 0
+        increment_pad_length: 8
+        increment_pad_char: 0
+        additional_attribute_table: catalog/eav_attribute
+        entity_attribute_collection: catalog/product_attribute_collection

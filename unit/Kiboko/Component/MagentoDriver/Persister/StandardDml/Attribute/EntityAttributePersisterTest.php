@@ -157,10 +157,12 @@ class EntityAttributePersisterTest extends \PHPUnit_Framework_TestCase
     public function testInsertOne()
     {
         $this->persister->initialize();
-        $this->persister->persist(new EntityAttribute(
+        $this->persister->persist($entityAttribute = new EntityAttribute(
             4, 4, 7, 122, 20
         ));
         $this->persister->flush();
+
+        $this->assertEquals(2, $entityAttribute->getId());
 
         $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
             'eav_entity_attribute' => [

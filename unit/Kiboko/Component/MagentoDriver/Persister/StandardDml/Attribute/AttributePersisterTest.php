@@ -177,6 +177,8 @@ class AttributePersisterTest extends \PHPUnit_Framework_TestCase
         $this->persister->persist($attribute);
         $this->persister->flush();
 
+        $this->assertEquals(80, $attribute->getId());
+
         $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
             'eav_attribute' => [
                 [
