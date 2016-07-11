@@ -6,9 +6,12 @@ use Doctrine\DBAL\Connection;
 use Kiboko\Component\MagentoDriver\Exception\RuntimeErrorException;
 use Kiboko\Component\MagentoDriver\Model\CatalogAttributeExtensionInterface;
 use Kiboko\Component\MagentoDriver\Persister\CatalogAttributeExtensionPersisterInterface;
+use Kiboko\Component\MagentoDriver\Persister\StandardDml\InsertUpdateAwareTrait;
 
 class CatalogAttributeExtensionPersister implements CatalogAttributeExtensionPersisterInterface
 {
+    use InsertUpdateAwareTrait;
+
     /**
      * @var Connection
      */
@@ -66,8 +69,9 @@ class CatalogAttributeExtensionPersister implements CatalogAttributeExtensionPer
                 throw new RuntimeErrorException('Attribute #id should be defined.');
             }
 
-            $count = $this->connection->update($this->tableName,
+            $this->insertOnDuplicateUpdate($this->connection, $this->tableName,
                 [
+                    'attribute_id' => $attribute->getId(),
                     'frontend_input_renderer' => $attribute->getFrontendInputRendererClassName(),
                     'is_global' => $attribute->isGlobal(),
                     'is_visible' => $attribute->isVisible(),
@@ -89,36 +93,26 @@ class CatalogAttributeExtensionPersister implements CatalogAttributeExtensionPer
                     'is_used_for_promo_rules' => $attribute->isUsedForPromoRules(),
                 ],
                 [
-                    'attribute_id' => $attribute->getId(),
+                    'frontend_input_renderer',
+                    'is_global',
+                    'is_visible',
+                    'is_searchable',
+                    'is_filterable',
+                    'is_comparable',
+                    'is_visible_on_front',
+                    'is_html_allowed_on_front',
+                    'is_used_for_price_rules',
+                    'is_filterable_in_search',
+                    'used_in_product_listing',
+                    'used_for_sort_by',
+                    'is_configurable',
+                    'apply_to',
+                    'is_visible_in_advanced_search',
+                    'position',
+                    'is_wysiwyg_enabled',
+                    'is_used_for_promo_rules',
                 ]
             );
-
-            if ($count <= 0) {
-                $this->connection->insert($this->tableName,
-                    [
-                        'attribute_id' => $attribute->getId(),
-                        'frontend_input_renderer' => $attribute->getFrontendInputRendererClassName(),
-                        'is_global' => $attribute->isGlobal(),
-                        'is_visible' => (int) $attribute->isVisible(),
-                        'is_searchable' => (int) $attribute->isSearchable(),
-                        'is_filterable' => (int) $attribute->isFilterable(),
-                        'is_comparable' => (int) $attribute->isComparable(),
-                        'is_visible_on_front' => (int) $attribute->isVisibleOnFront(),
-                        'is_html_allowed_on_front' => (int) $attribute->isHtmlAllowedOnFront(),
-                        'is_used_for_price_rules' => (int) $attribute->isUsedForPriceRules(),
-                        'is_filterable_in_search' => (int) $attribute->isFilterableInSearch(),
-                        'used_in_product_listing' => (int) $attribute->isUsedInProductListing(),
-                        'used_for_sort_by' => (int) $attribute->isUsedForSortBy(),
-                        'is_configurable' => (int) $attribute->isConfigurable(),
-                        'apply_to' => empty($attribute->getProductTypesApplyingTo()) ?
-                            null : implode(',', $attribute->getProductTypesApplyingTo()),
-                        'is_visible_in_advanced_search' => (int) $attribute->isVisibleInAdvancedSearch(),
-                        'position' => $attribute->getPosition(),
-                        'is_wysiwyg_enabled' => (int) $attribute->isWysiwygEnabled(),
-                        'is_used_for_promo_rules' => (int) $attribute->isUsedForPromoRules(),
-                    ]
-                );
-            }
         }
     }
 

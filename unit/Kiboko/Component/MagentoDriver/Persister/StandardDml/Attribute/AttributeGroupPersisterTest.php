@@ -151,10 +151,12 @@ class AttributeGroupPersisterTest extends \PHPUnit_Framework_TestCase
     public function testInsertOne()
     {
         $this->persister->initialize();
-        $this->persister->persist(new AttributeGroup(
+        $this->persister->persist($attributeGroup = new AttributeGroup(
             3, 'Prices', 1, 1
         ));
         $this->persister->flush();
+
+        $this->assertEquals(3, $attributeGroup->getId());
 
         $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
             'eav_attribute_group' => [

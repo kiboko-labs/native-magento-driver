@@ -56,7 +56,12 @@ class CatalogProductAttributeValue
         $table->addColumn('attribute_id', 'smallint', ['unsigned' => true]);
         $table->addColumn('store_id', 'smallint', ['unsigned' => true]);
         $table->addColumn('entity_id', 'integer', ['unsigned' => true]);
-        $table->addColumn('value', $this->backendType, $this->backendOptions);
+        $table->addColumn('value', $this->backendType, array_merge(
+            [
+                'notnull' => false,
+            ],
+            $this->backendOptions
+        ));
 
         $table->setPrimaryKey(['value_id']);
         $table->addUniqueIndex(['attribute_id', 'store_id', 'entity_id']);

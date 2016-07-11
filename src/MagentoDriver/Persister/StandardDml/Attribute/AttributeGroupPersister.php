@@ -5,9 +5,12 @@ namespace Kiboko\Component\MagentoDriver\Persister\StandardDml\Attribute;
 use Doctrine\DBAL\Connection;
 use Kiboko\Component\MagentoDriver\Model\AttributeGroupInterface;
 use Kiboko\Component\MagentoDriver\Persister\AttributeGroupPersisterInterface;
+use Kiboko\Component\MagentoDriver\Persister\StandardDml\InsertUpdateAwareTrait;
 
 class AttributeGroupPersister implements AttributeGroupPersisterInterface
 {
+    use InsertUpdateAwareTrait;
+
     /**
      * @var Connection
      */
@@ -60,34 +63,22 @@ class AttributeGroupPersister implements AttributeGroupPersisterInterface
     public function flush()
     {
         foreach ($this->dataQueue as $attributeGroup) {
-            $count = 0;
-            if ($attributeGroup->getId()) {
-                $count = $this->connection->update($this->tableName,
-                    [
-                        'attribute_set_id' => $attributeGroup->getFamilyId(),
-                        'attribute_group_name' => $attributeGroup->getLabel(),
-                        'sort_order' => $attributeGroup->getSortOrder(),
-                        'default_id' => $attributeGroup->getDefaultId(),
-                    ],
-                    [
-                        'attribute_group_id' => $attributeGroup->getId(),
-                    ]
-                );
-            }
-
-            if ($count <= 0) {
-                $this->connection->insert($this->tableName,
-                    [
-                        'attribute_group_id' => $attributeGroup->getId(),
-                        'attribute_set_id' => $attributeGroup->getFamilyId(),
-                        'attribute_group_name' => $attributeGroup->getLabel(),
-                        'sort_order' => $attributeGroup->getSortOrder(),
-                        'default_id' => $attributeGroup->getDefaultId(),
-                    ]
-                );
-
-                $attributeGroup->persistedToId($this->connection->lastInsertId());
-            }
+            $this->insertOnDuplicateUpdate($this->connection, $this->tableName,
+                [
+                    'attribute_group_id' => $attributeGroup->getId(),
+                    'attribute_set_id' => $attributeGroup->getFamilyId(),
+                    'attribute_group_name' => $attributeGroup->getLabel(),
+                    'sort_order' => $attributeGroup->getSortOrder(),
+                    'default_id' => $attributeGroup->getDefaultId(),
+                ],
+                [
+                    'attribute_set_id',
+                    'attribute_group_name',
+                    'sort_order',
+                    'default_id',
+                ]
+            );
+            $attributeGroup->persistedToId($this->connection->lastInsertId());
         }
     }
 

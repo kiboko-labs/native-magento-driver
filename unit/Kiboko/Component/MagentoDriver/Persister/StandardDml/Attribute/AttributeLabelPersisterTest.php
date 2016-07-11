@@ -173,10 +173,12 @@ class AttributeLabelPersisterTest extends \PHPUnit_Framework_TestCase
     public function testInsertOne()
     {
         $this->persister->initialize();
-        $this->persister->persist(new AttributeLabel(
+        $this->persister->persist($attributeLabel = new AttributeLabel(
             79, 2, 'Prix d\'achat'
         ));
         $this->persister->flush();
+
+        $this->assertEquals(5, $attributeLabel->getId());
 
         $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
             'eav_attribute_label' => [
