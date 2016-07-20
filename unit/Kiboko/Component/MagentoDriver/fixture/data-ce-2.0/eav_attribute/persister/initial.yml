@@ -9,7 +9,7 @@ eav_attribute:
         backend_table: null
         frontend_model: null
         frontend_input: "price"
-        frontend_label: "Coût"
+        frontend_label: "Cout"
         frontend_class: null
         source_model: null
         is_required: 0
