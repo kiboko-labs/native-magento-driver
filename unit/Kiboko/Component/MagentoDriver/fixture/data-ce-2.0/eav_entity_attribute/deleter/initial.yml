@@ -4,21 +4,21 @@ eav_entity_attribute:
         entity_type_id: 4
         attribute_set_id: 4
         attribute_group_id: 7
-        attribute_id: 78
+        attribute_id: 79
         sort_order: 10
     -
         entity_attribute_id: 2
         entity_type_id: 4
         attribute_set_id: 4
         attribute_group_id: 7
-        attribute_id: 130
+        attribute_id: 122
         sort_order: 20
     -
         entity_attribute_id: 3
         entity_type_id: 4
         attribute_set_id: 4
         attribute_group_id: 7
-        attribute_id: 127
+        attribute_id: 131
         sort_order: 30
     -
         entity_attribute_id: 4
@@ -57,7 +57,7 @@ eav_entity_attribute:
         sort_order: 80
 eav_attribute:
     -
-        attribute_id: 78
+        attribute_id: 79
         entity_type_id: 4
         attribute_code: "cost"
         attribute_model: null
@@ -75,7 +75,7 @@ eav_attribute:
         is_unique: 0
         note: null
     -
-        attribute_id: 130
+        attribute_id: 122
         entity_type_id: 4
         attribute_code: "gift_message_available"
         attribute_model: null
@@ -93,7 +93,7 @@ eav_attribute:
         is_unique: 0
         note: null
     -
-        attribute_id: 127
+        attribute_id: 131
         entity_type_id: 4
         attribute_code: "links_exist"
         attribute_model: null
