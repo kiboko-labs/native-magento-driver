@@ -1,0 +1,175 @@
+eav_attribute_group:
+    -
+      attribute_group_id: 1
+      attribute_set_id: 1
+      attribute_group_name: "General"
+      sort_order: 1
+      default_id: 1
+      attribute_group_code: "general"
+    -
+      attribute_group_id: 2
+      attribute_set_id: 2
+      attribute_group_name: "General"
+      sort_order: 1
+      default_id: 1
+      attribute_group_code: "general"
+    -
+      attribute_group_id: 3
+      attribute_set_id: 3
+      attribute_group_name: "General"
+      sort_order: 10
+      default_id: 1
+      attribute_group_code: "general"
+    -
+      attribute_group_id: 4
+      attribute_set_id: 3
+      attribute_group_name: "General Information"
+      sort_order: 2
+      default_id: 0
+      attribute_group_code: "general-information"
+    -
+      attribute_group_id: 5
+      attribute_set_id: 3
+      attribute_group_name: "Display Settings"
+      sort_order: 20
+      default_id: 0
+      attribute_group_code: "display-settings"
+    -
+      attribute_group_id: 6
+      attribute_set_id: 3
+      attribute_group_name: "Custom Design"
+      sort_order: 30
+      default_id: 0
+      attribute_group_code: "custom-design"
+    -
+      attribute_group_id: 7
+      attribute_set_id: 4
+      attribute_group_name: "Product Details"
+      sort_order: 10
+      default_id: 1
+      attribute_group_code: "product-details"
+      tab_group_code: "basic"
+    -
+      attribute_group_id: 8
+      attribute_set_id: 4
+      attribute_group_name: "Advanced Pricing"
+      sort_order: 40
+      default_id: 0
+      attribute_group_code: "advanced-pricing"
+      tab_group_code: "advanced"
+    -
+      attribute_group_id: 9
+      attribute_set_id: 4
+      attribute_group_name: "Search Engine Optimization"
+      sort_order: 30
+      default_id: 0
+      attribute_group_code: "search-engine-optimization"
+      tab_group_code: "basic"
+    -
+      attribute_group_id: 10
+      attribute_set_id: 4
+      attribute_group_name: "Images and Videos"
+      sort_order: 20
+      default_id: 0
+      attribute_group_code: "image-management"
+      tab_group_code: "basic"
+    -
+      attribute_group_id: 11
+      attribute_set_id: 4
+      attribute_group_name: "Design"
+      sort_order: 50
+      default_id: 0
+      attribute_group_code: "design"
+      tab_group_code: "advanced"
+    -
+      attribute_group_id: 12
+      attribute_set_id: 4
+      attribute_group_name: "Autosettings"
+      sort_order: 60
+      default_id: 0
+      attribute_group_code: "autosettings"
+      tab_group_code: "advanced"
+    -
+      attribute_group_id: 13
+      attribute_set_id: 5
+      attribute_group_name: "General"
+      sort_order: 1
+      default_id: 1
+      attribute_group_code: "general"
+    -
+      attribute_group_id: 14
+      attribute_set_id: 6
+      attribute_group_name: "General"
+      sort_order: 1
+      default_id: 1
+      attribute_group_code: "general"
+    -
+      attribute_group_id: 15
+      attribute_set_id: 7
+      attribute_group_name: "General"
+      sort_order: 1
+      default_id: 1
+      attribute_group_code: "general"
+    -
+      attribute_group_id: 16
+      attribute_set_id: 8
+      attribute_group_name: "General"
+      sort_order: 1
+      default_id: 1
+      attribute_group_code: "general"
+eav_attribute_set:
+    -
+        attribute_set_id: 1
+        entity_type_id: 4
+        attribute_set_name: "Caps"
+        sort_order: 2
+    -
+        attribute_set_id: 2
+        entity_type_id: 4
+        attribute_set_name: "Shoes"
+        sort_order: 2
+    -
+        attribute_set_id: 3
+        entity_type_id: 4
+        attribute_set_name: "Jewelry"
+        sort_order: 1
+    -
+        attribute_set_id: 4
+        entity_type_id: 4
+        attribute_set_name: "Default"
+        sort_order: 1
+    -
+        attribute_set_id: 5
+        entity_type_id: 4
+        attribute_set_name: "Home"
+        sort_order: 1
+    -
+        attribute_set_id: 6
+        entity_type_id: 4
+        attribute_set_name: "Eyewear"
+        sort_order: 1
+    -
+        attribute_set_id: 7
+        entity_type_id: 4
+        attribute_set_name: "Electronics"
+        sort_order: 1
+    -
+        attribute_set_id: 8
+        entity_type_id: 4
+        attribute_set_name: "Clothing"
+        sort_order: 1
+    -
+        attribute_set_id: 10
+        entity_type_id: 4
+        attribute_set_name: "Books"
+        sort_order: 0
+    -
+        attribute_set_id: 11
+        entity_type_id: 4
+        attribute_set_name: "Accessories"
+        sort_order: 0
+    -
+        attribute_set_id: 12
+        entity_type_id: 4
+        attribute_set_name: "Bed"
+        sort_order: 0

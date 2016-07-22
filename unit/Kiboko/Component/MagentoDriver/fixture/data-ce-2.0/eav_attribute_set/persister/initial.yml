@@ -1,0 +1,24 @@
+eav_attribute_set:
+    -
+        attribute_set_id: 4
+        entity_type_id: 4
+        attribute_set_name: "Default"
+        sort_order: 1
+eav_entity_type:
+    -
+        entity_type_id: 4
+        entity_type_code: "catalog_product"
+        entity_model: "Magento\Catalog\Model\ResourceModel\Product"
+        attribute_model: "Magento\Catalog\Model\ResourceModel\Eav\Attribute"
+        entity_table: "catalog_product_entity"
+        value_table_prefix: ~
+        entity_id_field: ~
+        is_data_sharing: 1
+        data_sharing_key: "default"
+        default_attribute_set_id: 4
+        increment_model: ~
+        increment_per_store: 0
+        increment_pad_length: 8
+        increment_pad_char: 0
+        additional_attribute_table: "catalog_eav_attribute"
+        entity_attribute_collection: "Magento\Catalog\Model\ResourceModel\Product\Attribute\Collection"

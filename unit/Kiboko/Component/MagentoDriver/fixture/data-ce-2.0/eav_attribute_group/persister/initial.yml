@@ -1,0 +1,71 @@
+eav_attribute_group:
+    -
+      attribute_group_id: 1
+      attribute_set_id: 1
+      attribute_group_name: "General"
+      sort_order: 1
+      default_id: 1
+      attribute_group_code: "general"
+    -
+      attribute_group_id: 2
+      attribute_set_id: 2
+      attribute_group_name: "General"
+      sort_order: 1
+      default_id: 1
+      attribute_group_code: "general"
+eav_attribute_set:
+    -
+        attribute_set_id: 1
+        entity_type_id: 4
+        attribute_set_name: "Caps"
+        sort_order: 2
+    -
+        attribute_set_id: 2
+        entity_type_id: 4
+        attribute_set_name: "Shoes"
+        sort_order: 2
+    -
+        attribute_set_id: 3
+        entity_type_id: 4
+        attribute_set_name: "Jewelry"
+        sort_order: 1
+    -
+        attribute_set_id: 4
+        entity_type_id: 4
+        attribute_set_name: "Default"
+        sort_order: 1
+    -
+        attribute_set_id: 5
+        entity_type_id: 4
+        attribute_set_name: "Home"
+        sort_order: 1
+    -
+        attribute_set_id: 6
+        entity_type_id: 4
+        attribute_set_name: "Eyewear"
+        sort_order: 1
+    -
+        attribute_set_id: 7
+        entity_type_id: 4
+        attribute_set_name: "Electronics"
+        sort_order: 1
+    -
+        attribute_set_id: 8
+        entity_type_id: 4
+        attribute_set_name: "Clothing"
+        sort_order: 1
+    -
+        attribute_set_id: 10
+        entity_type_id: 4
+        attribute_set_name: "Books"
+        sort_order: 0
+    -
+        attribute_set_id: 11
+        entity_type_id: 4
+        attribute_set_name: "Accessories"
+        sort_order: 0
+    -
+        attribute_set_id: 12
+        entity_type_id: 4
+        attribute_set_name: "Bed"
+        sort_order: 0
