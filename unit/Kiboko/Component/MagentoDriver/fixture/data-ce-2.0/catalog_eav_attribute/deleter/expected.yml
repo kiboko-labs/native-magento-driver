@@ -1,7 +1,7 @@
 catalog_eav_attribute:
     -
         attribute_id: '79'
-        frontend_input_renderer: null
+        frontend_input_renderer: ~
         is_global: '1'
         is_visible: '1'
         is_searchable: 0
@@ -14,7 +14,7 @@ catalog_eav_attribute:
         used_in_product_listing: 0
         used_for_sort_by: 0
         is_configurable: 0
-        apply_to: null
+        apply_to: ~
         is_visible_in_advanced_search: 0
         position: 0
         is_wysiwyg_enabled: 0
@@ -34,14 +34,14 @@ catalog_eav_attribute:
 #        used_in_product_listing: 0
 #        used_for_sort_by: 0
 #        is_configurable: 0
-#        apply_to: null
+#        apply_to: ~
 #        is_visible_in_advanced_search: 0
 #        position: 0
 #        is_wysiwyg_enabled: 0
 #        is_used_for_promo_rules: 0
     -
         attribute_id: '131'
-        frontend_input_renderer: null
+        frontend_input_renderer: ~
         is_global: '1'
         is_visible: 0
         is_searchable: 0
@@ -61,7 +61,7 @@ catalog_eav_attribute:
         is_used_for_promo_rules: 0
     -
         attribute_id: '167'
-        frontend_input_renderer: null
+        frontend_input_renderer: ~
         is_global: '2'
         is_visible: '1'
         is_searchable: 0
@@ -81,7 +81,7 @@ catalog_eav_attribute:
         is_used_for_promo_rules: 0
     -
         attribute_id: '210'
-        frontend_input_renderer: null
+        frontend_input_renderer: ~
         is_global: '1'
         is_visible: '1'
         is_searchable: 0
@@ -94,14 +94,14 @@ catalog_eav_attribute:
         used_in_product_listing: 0
         used_for_sort_by: 0
         is_configurable: 0
-        apply_to: null
+        apply_to: ~
         is_visible_in_advanced_search: 0
         position: 0
         is_wysiwyg_enabled: 0
         is_used_for_promo_rules: 0
     -
         attribute_id: '226'
-        frontend_input_renderer: null
+        frontend_input_renderer: ~
         is_global: '1'
         is_visible: '1'
         is_searchable: 0
@@ -114,14 +114,14 @@ catalog_eav_attribute:
         used_in_product_listing: '1'
         used_for_sort_by: '1'
         is_configurable: 0
-        apply_to: null
+        apply_to: ~
         is_visible_in_advanced_search: 0
         position: 0
         is_wysiwyg_enabled: 0
         is_used_for_promo_rules: 0
     -
         attribute_id: '232'
-        frontend_input_renderer: null
+        frontend_input_renderer: ~
         is_global: '1'
         is_visible: '1'
         is_searchable: 0
@@ -134,14 +134,14 @@ catalog_eav_attribute:
         used_in_product_listing: 0
         used_for_sort_by: 0
         is_configurable: 0
-        apply_to: null
+        apply_to: ~
         is_visible_in_advanced_search: 0
         position: 0
         is_wysiwyg_enabled: 0
         is_used_for_promo_rules: 0
     -
         attribute_id: '300'
-        frontend_input_renderer: null
+        frontend_input_renderer: ~
         is_global: '1'
         is_visible: '1'
         is_searchable: 0
@@ -154,7 +154,7 @@ catalog_eav_attribute:
         used_in_product_listing: 0
         used_for_sort_by: 0
         is_configurable: 0
-        apply_to: null
+        apply_to: ~
         is_visible_in_advanced_search: 0
         position: 0
         is_wysiwyg_enabled: 0
