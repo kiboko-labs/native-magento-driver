@@ -194,53 +194,13 @@ class AttributePersisterTest extends \PHPUnit_Framework_TestCase
     public function testUpdateOneExisting()
     {
         $this->persister->initialize();
-        $this->persister->persist(Attribute::buildNewWith(
-            79,
-            4,              // EntityTypeId
-            'cost',         // Identifier
-            null,           // ModelClass
-            'decimal',      // BackendType
-            'catalog/product_attribute_backend_cost', // BackendModelClass
-            null,           // BackendTable
-            null,           // FrontendModelClass
-            'price',        // FrontendInput
-            'Cout',         // FrontendLabel
-            null,           // FrontendViewClass
-            null,           // SourceModelClass
-            0,              // IsRequired
-            1,              // IsUserDefined
-            0,              // IsUnique
-            null,           // DefaultValue
-            null
-        ));
         $this->persister->flush();
 
-        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
-            'eav_attribute' => [
-                [
-                    'attribute_id' => 79,
-                    'entity_type_id' => 4,
-                    'attribute_code' => 'cost',
-                    'attribute_model' => null,
-                    'backend_model' => 'catalog/product_attribute_backend_cost',
-                    'backend_type' => 'decimal',
-                    'backend_table' => null,
-                    'frontend_model' => null,
-                    'frontend_input' => 'price',
-                    'frontend_label' => 'Cout',
-                    'frontend_class' => null,
-                    'source_model' => null,
-                    'is_required' => 0,
-                    'is_user_defined' => 1,
-                    'default_value' => null,
-                    'is_unique' => 0,
-                    'note' => null,
-                ],
-            ],
-        ]);
+        $expected = $this->getDataSet();
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute');
+        $actual->addTable('eav_entity_type');
 
         $this->assertDataSetsEqual($expected, $actual);
     }
