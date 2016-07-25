@@ -38,9 +38,12 @@ class AttributeGroupPersisterTest extends \PHPUnit_Framework_TestCase
      */
     protected function getDataSet()
     {
-        $dataSet = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([]);
+        $dataset = $this->fixturesLoader->initialDataSet(
+            'eav_attribute_group',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER
+        );
 
-        return $dataSet;
+        return $dataset;
     }
 
     private function truncateTables()
@@ -123,27 +126,11 @@ class AttributeGroupPersisterTest extends \PHPUnit_Framework_TestCase
         $this->persister->initialize();
         $this->persister->flush();
 
-        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
-            'eav_attribute_group' => [
-                [
-                    'attribute_group_id' => 1,
-                    'attribute_set_id' => 1,
-                    'attribute_group_name' => 'General',
-                    'sort_order' => 1,
-                    'default_id' => 1,
-                ],
-                [
-                    'attribute_group_id' => 2,
-                    'attribute_set_id' => 2,
-                    'attribute_group_name' => 'General',
-                    'sort_order' => 1,
-                    'default_id' => 1,
-                ],
-            ],
-        ]);
+        $expected = $this->getDataSet();
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_group');
+        $actual->addTable('eav_attribute_set');
 
         $this->assertDataSetsEqual($expected, $actual);
     }
@@ -151,41 +138,48 @@ class AttributeGroupPersisterTest extends \PHPUnit_Framework_TestCase
     public function testInsertOne()
     {
         $this->persister->initialize();
-        $this->persister->persist($attributeGroup = new AttributeGroup(
-            3, 'Prices', 1, 1
-        ));
+        
+        $attributeGroup = array(
+            'ce' => array(
+                '1.9' => new AttributeGroup(3, 'Prices', 1, 1),
+                '2.0' => new AttributeGroup(3, 'Prices', 1, 1, 'price')
+            )
+        );
+
+        $attributeGroup[$GLOBALS['MAGENTO_EDITION']][$GLOBALS['MAGENTO_VERSION']];
+
+        $this->persister->persist($attributeGroup[$GLOBALS['MAGENTO_EDITION']][$GLOBALS['MAGENTO_VERSION']]);
         $this->persister->flush();
 
-        $this->assertEquals(3, $attributeGroup->getId());
+        $this->assertEquals(3, $attributeGroup[$GLOBALS['MAGENTO_EDITION']][$GLOBALS['MAGENTO_VERSION']]->getId());
 
-        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
-            'eav_attribute_group' => [
-                [
-                    'attribute_group_id' => 1,
-                    'attribute_set_id' => 1,
-                    'attribute_group_name' => 'General',
-                    'sort_order' => 1,
-                    'default_id' => 1,
-                ],
-                [
-                    'attribute_group_id' => 2,
-                    'attribute_set_id' => 2,
-                    'attribute_group_name' => 'General',
-                    'sort_order' => 1,
-                    'default_id' => 1,
-                ],
-                [
+        $newAttributeGroup = array(
+            'ce' => array(
+                '1.9' => array(
                     'attribute_group_id' => 3,
                     'attribute_set_id' => 3,
                     'attribute_group_name' => 'Prices',
                     'sort_order' => 1,
                     'default_id' => 1,
-                ],
-            ],
-        ]);
+                ),
+                '2.0' => array(
+                    'attribute_group_id' => 3,
+                    'attribute_set_id' => 3,
+                    'attribute_group_name' => 'Prices',
+                    'sort_order' => 1,
+                    'default_id' => 1,
+                    'attribute_group_code' => 'price',
+                    'tab_group_code' => null,
+                )
+            )
+        );
+        
+        $expected = $this->getDataSet();
+        $expected->getTable('eav_attribute_group')->addRow($newAttributeGroup[$GLOBALS['MAGENTO_EDITION']][$GLOBALS['MAGENTO_VERSION']]);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_group');
+        $actual->addTable('eav_attribute_set');
 
         $this->assertDataSetsEqual($expected, $actual);
     }
@@ -193,29 +187,63 @@ class AttributeGroupPersisterTest extends \PHPUnit_Framework_TestCase
     public function testUpdateOneExisting()
     {
         $this->persister->initialize();
-        $this->persister->persist(AttributeGroup::buildNewWith(
-            1, 1, 'Updated', 1, 1
-        ));
-        $this->persister->flush();
+        
+        $attributeGroup = array(
+            'ce' => array(
+                '1.9' => AttributeGroup::buildNewWith(
+                        1, 1, 'Updated', 1, 1
+                ),
+                '2.0' => AttributeGroup::buildNewWith(
+                        1, 1, 'Updated', 1, 1, 'updated', null
+                )
+            )
+        );
 
-        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
-            'eav_attribute_group' => [
-                [
-                    'attribute_group_id' => 1,
-                    'attribute_set_id' => 1,
-                    'attribute_group_name' => 'Updated',
-                    'sort_order' => 1,
-                    'default_id' => 1,
-                ],
-                [
-                    'attribute_group_id' => 2,
-                    'attribute_set_id' => 2,
-                    'attribute_group_name' => 'General',
-                    'sort_order' => 1,
-                    'default_id' => 1,
-                ],
-            ],
-        ]);
+        $this->persister->persist($attributeGroup[$GLOBALS['MAGENTO_EDITION']][$GLOBALS['MAGENTO_VERSION']]);
+        $this->persister->flush();
+        
+        $attributeGroupUpdated = array(
+            'ce' => array(
+                '1.9' => array(
+                    array(
+                        'attribute_group_id' => 1,
+                        'attribute_set_id' => 1,
+                        'attribute_group_name' => 'Updated',
+                        'sort_order' => 1,
+                        'default_id' => 1,
+                    ),
+                    array(
+                        'attribute_group_id' => 2,
+                        'attribute_set_id' => 2,
+                        'attribute_group_name' => 'General',
+                        'sort_order' => 1,
+                        'default_id' => 1,
+                    ),
+                ),
+                '2.0' => array(
+                    array(
+                        'attribute_group_id' => 1,
+                        'attribute_set_id' => 1,
+                        'attribute_group_name' => 'Updated',
+                        'sort_order' => 1,
+                        'default_id' => 1,
+                        'attribute_group_code' => 'updated',
+                        'tab_group_code' => null
+                    ),
+                    array(
+                        'attribute_group_id' => 2,
+                        'attribute_set_id' => 2,
+                        'attribute_group_name' => 'General',
+                        'sort_order' => 1,
+                        'default_id' => 1,
+                        'attribute_group_code' => 'general',
+                        'tab_group_code' => null
+                    ),
+                )
+            )
+        );
+
+        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet(array('eav_attribute_group' => $attributeGroupUpdated[$GLOBALS['MAGENTO_EDITION']][$GLOBALS['MAGENTO_VERSION']]));
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_group');
