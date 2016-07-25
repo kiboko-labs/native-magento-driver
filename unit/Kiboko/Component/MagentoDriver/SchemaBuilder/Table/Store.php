@@ -28,7 +28,7 @@ class Store
      */
     public function build($magentoVersion = null)
     {
-        $table = $this->schema->createTable('core_store');
+        $table = $this->schema->createTable($this->getTableName($magentoVersion));
 
         $table->addColumn('store_id', 'smallint', ['unsigned' => true, 'autoincrement' => true]);
         $table->addColumn('code', 'string', ['length' => 32]);
@@ -45,5 +45,19 @@ class Store
         $table->addIndex(['group_id']);
 
         return $table;
+    }
+    
+    /**
+     * @param string $magentoVersion
+     * @return string
+     */
+     
+    private function getTableName($magentoVersion)
+    {
+        $tableName = array(
+            '1.9' => 'core_store',
+            '2.0' => 'store'
+        );
+        return $tableName[$magentoVersion];
     }
 }
