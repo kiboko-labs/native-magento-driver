@@ -35,6 +35,11 @@ class AttributeGroup
         $table->addColumn('attribute_group_name', 'string', ['length' => 255, 'notnull' => false]);
         $table->addColumn('sort_order', 'smallint', ['default' => 0]);
         $table->addColumn('default_id', 'smallint', ['unsigned' => true, 'notnull' => false, 'default' => 0]);
+        
+        if($magentoVersion === '2.0'){
+            $table->addColumn('attribute_group_code', 'string', ['length' => 255]);
+            $table->addColumn('tab_group_code', 'string', ['length' => 255, 'notnull' => false]);
+        }
 
         $table->setPrimaryKey(['attribute_group_id']);
         $table->addUniqueIndex(['attribute_set_id', 'attribute_group_name']);
