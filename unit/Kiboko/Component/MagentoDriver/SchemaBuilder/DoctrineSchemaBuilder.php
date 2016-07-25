@@ -106,7 +106,7 @@ class DoctrineSchemaBuilder
      */
     public function ensureAttributeGroupTable()
     {
-        return (new Table\AttributeGroup($this->schema))->build();
+        return (new Table\AttributeGroup($this->schema))->build($GLOBALS['MAGENTO_VERSION']);
     }
 
     /**

@@ -208,6 +208,7 @@ eav_attribute_group:
       sort_order: 1
       default_id: 1
       attribute_group_code: "general"
+      tab_group_code: ~
     -
       attribute_group_id: 2
       attribute_set_id: 2
@@ -215,6 +216,7 @@ eav_attribute_group:
       sort_order: 1
       default_id: 1
       attribute_group_code: "general"
+      tab_group_code: ~
     -
       attribute_group_id: 3
       attribute_set_id: 3
@@ -222,6 +224,7 @@ eav_attribute_group:
       sort_order: 10
       default_id: 1
       attribute_group_code: "general"
+      tab_group_code: ~
     -
       attribute_group_id: 4
       attribute_set_id: 3
@@ -229,6 +232,7 @@ eav_attribute_group:
       sort_order: 2
       default_id: 0
       attribute_group_code: "general-information"
+      tab_group_code: ~
     -
       attribute_group_id: 5
       attribute_set_id: 3
@@ -236,6 +240,7 @@ eav_attribute_group:
       sort_order: 20
       default_id: 0
       attribute_group_code: "display-settings"
+      tab_group_code: ~
     -
       attribute_group_id: 6
       attribute_set_id: 3
@@ -243,6 +248,7 @@ eav_attribute_group:
       sort_order: 30
       default_id: 0
       attribute_group_code: "custom-design"
+      tab_group_code: ~
     -
       attribute_group_id: 7
       attribute_set_id: 4
@@ -298,6 +304,7 @@ eav_attribute_group:
       sort_order: 1
       default_id: 1
       attribute_group_code: "general"
+      tab_group_code: ~
     -
       attribute_group_id: 14
       attribute_set_id: 6
@@ -305,6 +312,7 @@ eav_attribute_group:
       sort_order: 1
       default_id: 1
       attribute_group_code: "general"
+      tab_group_code: ~
     -
       attribute_group_id: 15
       attribute_set_id: 7
@@ -312,6 +320,7 @@ eav_attribute_group:
       sort_order: 1
       default_id: 1
       attribute_group_code: "general"
+      tab_group_code: ~
     -
       attribute_group_id: 16
       attribute_set_id: 8
@@ -319,3 +328,4 @@ eav_attribute_group:
       sort_order: 1
       default_id: 1
       attribute_group_code: "general"
+      tab_group_code: ~
