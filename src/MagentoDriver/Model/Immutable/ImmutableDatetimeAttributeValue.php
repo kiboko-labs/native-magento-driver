@@ -25,7 +25,7 @@ class ImmutableDatetimeAttributeValue implements ImmutableAttributeValueInterfac
      */
     public function __construct(
         AttributeInterface $attribute,
-        \DateTimeInterface $payload,
+        $payload = null,
         ProductInterface $product = null,
         $storeId = null
     ) {
