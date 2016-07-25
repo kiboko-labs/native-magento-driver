@@ -28,4 +28,14 @@ interface AttributeGroupInterface
      * @return int
      */
     public function getDefaultId();
+    
+    /**
+     * @return string
+     */
+    public function getAttributeGroupCode();
+    
+    /**
+     * @return string
+     */
+    public function getTabGroupCode();
 }
