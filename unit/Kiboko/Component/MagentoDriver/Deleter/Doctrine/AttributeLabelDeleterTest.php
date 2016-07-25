@@ -12,6 +12,7 @@ use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTra
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\FallbackResolver;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\LoaderInterface;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Table\Store as TableStore;
 
 class AttributeLabelDeleterTest extends \PHPUnit_Framework_TestCase
 {
@@ -65,7 +66,7 @@ class AttributeLabelDeleterTest extends \PHPUnit_Framework_TestCase
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
 
         $this->getDoctrineConnection()->exec(
-            $platform->getTruncateTableSQL('core_store')
+            $platform->getTruncateTableSQL(TableStore::getTableName($GLOBALS['MAGENTO_VERSION']))
         );
 
         $this->getDoctrineConnection()->exec(
@@ -153,7 +154,7 @@ class AttributeLabelDeleterTest extends \PHPUnit_Framework_TestCase
     {
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_label');
-        $actual->addTable('core_store');
+        $actual->addTable(TableStore::getTableName($GLOBALS['MAGENTO_VERSION']));
         $actual->addTable('eav_attribute');
 
         $this->assertDataSetsEqual($this->getInitialDataSet(), $actual);
@@ -165,7 +166,7 @@ class AttributeLabelDeleterTest extends \PHPUnit_Framework_TestCase
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_label');
-        $actual->addTable('core_store');
+        $actual->addTable(TableStore::getTableName($GLOBALS['MAGENTO_VERSION']));
         $actual->addTable('eav_attribute');
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
@@ -177,7 +178,7 @@ class AttributeLabelDeleterTest extends \PHPUnit_Framework_TestCase
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_label');
-        $actual->addTable('core_store');
+        $actual->addTable(TableStore::getTableName($GLOBALS['MAGENTO_VERSION']));
         $actual->addTable('eav_attribute');
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);

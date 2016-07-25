@@ -12,6 +12,7 @@ use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTra
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\FallbackResolver;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\LoaderInterface;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Table\Store as TableStore;
 
 class AttributeOptionValueDeleterTest extends \PHPUnit_Framework_TestCase
 {
@@ -73,7 +74,7 @@ class AttributeOptionValueDeleterTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->getDoctrineConnection()->exec(
-            $platform->getTruncateTableSQL('core_store')
+            $platform->getTruncateTableSQL(TableStore::getTableName($GLOBALS['MAGENTO_VERSION']))
         );
 
         $this->getDoctrineConnection()->exec(
@@ -167,7 +168,7 @@ class AttributeOptionValueDeleterTest extends \PHPUnit_Framework_TestCase
         $actual->addTable('eav_attribute_option_value');
         $actual->addTable('eav_attribute_option');
         $actual->addTable('eav_attribute');
-        $actual->addTable('core_store');
+        $actual->addTable(TableStore::getTableName($GLOBALS['MAGENTO_VERSION']));
 
         $this->assertDataSetsEqual($this->getInitialDataSet(), $actual);
     }
@@ -180,7 +181,7 @@ class AttributeOptionValueDeleterTest extends \PHPUnit_Framework_TestCase
         $actual->addTable('eav_attribute_option_value');
         $actual->addTable('eav_attribute_option');
         $actual->addTable('eav_attribute');
-        $actual->addTable('core_store');
+        $actual->addTable(TableStore::getTableName($GLOBALS['MAGENTO_VERSION']));
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
     }
@@ -193,7 +194,7 @@ class AttributeOptionValueDeleterTest extends \PHPUnit_Framework_TestCase
         $actual->addTable('eav_attribute_option_value');
         $actual->addTable('eav_attribute_option');
         $actual->addTable('eav_attribute');
-        $actual->addTable('core_store');
+        $actual->addTable(TableStore::getTableName($GLOBALS['MAGENTO_VERSION']));
 
         $this->assertDataSetsEqual($this->getDataSet(), $actual);
     }

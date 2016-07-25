@@ -11,6 +11,7 @@ use Kiboko\Component\MagentoDriver\Repository\AttributeOptionValueRepositoryInte
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Table\Store as TableStore;
 
 class AttributeOptionValueRepositoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -54,7 +55,7 @@ class AttributeOptionValueRepositoryTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->getDoctrineConnection()->exec(
-            $platform->getTruncateTableSQL('core_store')
+            $platform->getTruncateTableSQL(TableStore::getTableName($GLOBALS['MAGENTO_VERSION']))
         );
 
         $this->getDoctrineConnection()->exec(
