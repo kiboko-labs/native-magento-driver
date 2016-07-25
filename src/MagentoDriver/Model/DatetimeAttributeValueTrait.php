@@ -23,7 +23,7 @@ trait DatetimeAttributeValueTrait
      */
     abstract public function __construct(
         AttributeInterface $attribute,
-        \DateTimeInterface $payload,
+        $payload = null,
         ProductInterface $product = null,
         $storeId = null
     );
@@ -40,11 +40,16 @@ trait DatetimeAttributeValueTrait
     public static function buildNewWith(
         AttributeInterface $attribute,
         $valueId,
-        \DateTimeInterface $payload,
+        $payload,
         ProductInterface $product = null,
         $storeId = null
     ) {
-        $object = new static($attribute, $payload, $product, $storeId);
+        $object = new static(
+                $attribute, 
+                ($payload instanceof \DateTimeImmutable) ? $payload : null, 
+                $product, 
+                $storeId
+                );
 
         $object->identifier = $valueId;
 
