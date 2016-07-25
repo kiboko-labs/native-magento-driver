@@ -161,27 +161,8 @@ class AttributePersisterTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(80, $attribute->getId());
 
-        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
-            'eav_attribute' => [
-                [
-                    'attribute_id' => 79,
-                    'entity_type_id' => 4,
-                    'attribute_code' => 'cost',
-                    'attribute_model' => null,
-                    'backend_model' => 'catalog/product_attribute_backend_price',
-                    'backend_type' => 'decimal',
-                    'backend_table' => null,
-                    'frontend_model' => null,
-                    'frontend_input' => 'price',
-                    'frontend_label' => 'Cout',
-                    'frontend_class' => null,
-                    'source_model' => null,
-                    'is_required' => 0,
-                    'is_user_defined' => 1,
-                    'default_value' => null,
-                    'is_unique' => 0,
-                    'note' => null,
-                ],
+        $expected = $this->getDataSet();
+        $expected->getTable('eav_attribute')->addRow(
                 [
                     'attribute_id' => 80,
                     'entity_type_id' => 4,
@@ -200,12 +181,12 @@ class AttributePersisterTest extends \PHPUnit_Framework_TestCase
                     'default_value' => null,
                     'is_unique' => 0,
                     'note' => null,
-                ],
-            ],
-        ]);
-        
+                ]
+        );
+
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute');
+        $actual->addTable('eav_entity_type');
 
         $this->assertDataSetsEqual($expected, $actual);
     }
