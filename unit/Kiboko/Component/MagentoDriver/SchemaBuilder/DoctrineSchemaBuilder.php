@@ -46,7 +46,7 @@ class DoctrineSchemaBuilder
      */
     public function ensureStoreTable()
     {
-        return (new Table\Store($this->schema))->build();
+        return (new Table\Store($this->schema))->build($GLOBALS['MAGENTO_VERSION']);
     }
 
     /**
@@ -311,7 +311,7 @@ class DoctrineSchemaBuilder
     {
         $resolver = new FallbackResolver($this->getFixturesPath());
         (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
-            ->hydrate('core_store', $suite, $context)
+            ->hydrate(Table\Store::getTableName($magentoVersion), $suite, $context)
         ;
     }
 

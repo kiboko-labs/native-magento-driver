@@ -51,8 +51,7 @@ class Store
      * @param string $magentoVersion
      * @return string
      */
-     
-    private function getTableName($magentoVersion)
+    public static function getTableName($magentoVersion)
     {
         $tableName = array(
             '1.9' => 'core_store',
