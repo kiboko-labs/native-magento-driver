@@ -43,12 +43,23 @@ class CatalogAttributeExtension
         $table->addColumn('is_filterable_in_search', 'smallint', ['unsigned' => true]);
         $table->addColumn('used_in_product_listing', 'smallint', ['unsigned' => true]);
         $table->addColumn('used_for_sort_by', 'smallint', ['unsigned' => true]);
-        $table->addColumn('is_configurable', 'smallint', ['unsigned' => true]);
+        if($magentoVersion !== '2.0'){
+            $table->addColumn('is_configurable', 'smallint', ['unsigned' => true]);
+        }
         $table->addColumn('apply_to', 'string', ['length' => 255, 'notnull' => false]);
         $table->addColumn('is_visible_in_advanced_search', 'smallint', ['unsigned' => true]);
         $table->addColumn('position', 'integer', ['unsigned' => true]);
         $table->addColumn('is_wysiwyg_enabled', 'smallint', ['unsigned' => true]);
         $table->addColumn('is_used_for_promo_rules', 'smallint', ['unsigned' => true]);
+        
+        if($magentoVersion === '2.0'){
+            $table->addColumn('is_required_in_admin_store', 'smallint', ['unsigned' => true]);
+            $table->addColumn('is_used_in_grid', 'smallint', ['unsigned' => true]);
+            $table->addColumn('is_visible_in_grid', 'smallint', ['unsigned' => true]);
+            $table->addColumn('is_filterable_in_grid', 'smallint', ['unsigned' => true]);
+            $table->addColumn('search_weight', 'float', ['default' => 1]);
+            $table->addColumn('additional_data', 'text', ['notnull' => false]);
+        }
 
         $table->setPrimaryKey(['attribute_id']);
         $table->addIndex(['used_for_sort_by']);

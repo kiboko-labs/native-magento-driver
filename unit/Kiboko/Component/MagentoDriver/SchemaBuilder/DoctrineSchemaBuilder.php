@@ -146,7 +146,7 @@ class DoctrineSchemaBuilder
      */
     public function ensureCatalogAttributeExtensionsTable()
     {
-        return (new Table\CatalogAttributeExtension($this->schema))->build();
+        return (new Table\CatalogAttributeExtension($this->schema))->build($GLOBALS['MAGENTO_VERSION']);
     }
 
     /**
