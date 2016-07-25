@@ -59,17 +59,33 @@ class ProductQueryBuilder implements ProductQueryBuilderInterface
      */
     public static function getDefaultFields()
     {
-        return [
-            'entity_id',
-            'entity_type_id',
-            'attribute_set_id',
-            'type_id',
-            'sku',
-            'has_options',
-            'required_options',
-            'created_at',
-            'updated_at',
-        ];
+        $defaultFields = array(
+            'ce' => array(
+                '1.9' => array(
+                    'entity_id',
+                    'entity_type_id',
+                    'attribute_set_id',
+                    'type_id',
+                    'sku',
+                    'has_options',
+                    'required_options',
+                    'created_at',
+                    'updated_at'
+                ),
+                '2.0' => array(
+                    'entity_id',
+                    'attribute_set_id',
+                    'type_id',
+                    'sku',
+                    'has_options',
+                    'required_options',
+                    'created_at',
+                    'updated_at'
+                )
+            )
+        );
+        
+        return $defaultFields[$GLOBALS['MAGENTO_EDITION']][$GLOBALS['MAGENTO_VERSION']];
     }
 
     /**
@@ -150,9 +166,12 @@ class ProductQueryBuilder implements ProductQueryBuilderInterface
      */
     public function createFindAllQueryBuilder($alias)
     {
-        $queryBuilder = $this->createFindQueryBuilder($alias)
-            ->where(sprintf('%s.entity_type_id=4', $alias))
-        ;
+        $queryBuilder = ($GLOBALS['MAGENTO_VERSION'] === '1.9' &&
+                $GLOBALS['MAGENTO_EDITION'] === 'ce')
+                ?
+                $this->createFindQueryBuilder($alias)->where(sprintf('%s.entity_type_id=4', $alias))
+                :
+                $this->createFindQueryBuilder($alias);
 
         return $queryBuilder;
     }
