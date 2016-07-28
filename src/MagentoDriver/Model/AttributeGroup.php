@@ -55,37 +55,10 @@ class AttributeGroup implements AttributeGroupInterface
         $attributeGroupCode = null,
         $tabGroupCode = null    
     ) {
-        switch($GLOBALS['MAGENTO_VERSION']){
-            case '2.0':
-                $this->magento2x__construct($familyId, $label, $sortOrder, $defaultId, $attributeGroupCode, $tabGroupCode);
-                break;
-            default:
-                $this->magento19x__construct($familyId, $label, $sortOrder, $defaultId);
-                break;
-        }
-    }
-    
-    private function magento19x__construct(
-        $familyId, 
-        $label, 
-        $sortOrder = 1, 
-        $defaultId = 0
-    ) {
         $this->familyId = $familyId;
         $this->label = $label;
         $this->sortOrder = $sortOrder;
         $this->defaultId = $defaultId;
-    }
-
-    private function magento2x__construct(
-        $familyId,
-        $label,
-        $sortOrder = 1,
-        $defaultId = 0,
-        $attributeGroupCode,
-        $tabGroupCode = null 
-    ){
-        $this->magento19x__construct($familyId, $label, $sortOrder,$defaultId);
         $this->attributeGroupCode = $attributeGroupCode;
         $this->tabGroupCode = $tabGroupCode;
     }
@@ -154,6 +127,7 @@ class AttributeGroup implements AttributeGroupInterface
      * @param int    $defaultId
      * @param string $attributeGroupCode
      * @param string $tabGroupCode
+     * @return self
      */
     public static function buildNewWith(
         $attributeGroupId,
@@ -164,44 +138,6 @@ class AttributeGroup implements AttributeGroupInterface
         $attributeGroupCode = null,
         $tabGroupCode = null 
     ) {
-        
-        switch($GLOBALS['MAGENTO_VERSION']){
-            case '2.0':
-                return self::magento2xBuildNewWith($attributeGroupId, $familyId, $label, $sortOrder, $defaultId, $attributeGroupCode, $tabGroupCode);
-            default:
-                return self::magento19xBuildNewWith($attributeGroupId, $familyId, $label, $sortOrder, $defaultId);
-        }
-    }
-    
-    /**
-     * @param int    $attributeGroupId
-     * @param int    $familyId
-     * @param string $label
-     * @param int    $sortOrder
-     * @param int    $defaultId
-     *
-     * @return AttributeGroupInterface
-     */
-    private static function magento19xBuildNewWith($attributeGroupId, $familyId, $label, $sortOrder, $defaultId){
-        $object = new static($familyId, $label, $sortOrder, $defaultId);
-
-        $object->identifier = $attributeGroupId;
-
-        return $object;
-    }
-    
-    /**
-     * @param int    $attributeGroupId
-     * @param int    $familyId
-     * @param string $label
-     * @param int    $sortOrder
-     * @param int    $defaultId
-     * @param string $attributeGroupCode
-     * @param string $tabGroupCode
-     *
-     * @return AttributeGroupInterface
-     */
-    private static function magento2xBuildNewWith($attributeGroupId, $familyId, $label, $sortOrder, $defaultId, $attributeGroupCode, $tabGroupCode){
         $object = new static($familyId, $label, $sortOrder, $defaultId, $attributeGroupCode, $tabGroupCode);
 
         $object->identifier = $attributeGroupId;
