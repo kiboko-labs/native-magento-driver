@@ -46,7 +46,7 @@ class SimpleProduct implements SimpleProductInterface
      * @param FamilyInterface                      $family
      * @param \DateTimeInterface                   $creationDate
      * @param \DateTimeInterface                   $modificationDate
-     * @param Collection|AttributeValueInterface[] $values
+     * @param \Traversable|AttributeValueInterface[] $values
      *
      * @return static
      */
@@ -117,5 +117,11 @@ class SimpleProduct implements SimpleProductInterface
     public function hasConfigurables()
     {
         return $this->configurables->count() > 0;
+    }
+
+    public function getName()
+    {
+        //TODO: Fetch attribute's value
+        return '';
     }
 }
