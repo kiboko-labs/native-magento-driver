@@ -2,6 +2,7 @@
 
 namespace Kiboko\Component\MagentoDriver\Entity\Product;
 
+use Doctrine\Common\Collections\Collection;
 use Kiboko\Component\MagentoDriver\Entity\EntityInterface;
 use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
 use Kiboko\Component\MagentoDriver\Model\Immutable\ImmutableAttributeValueInterface;
@@ -133,12 +134,28 @@ interface ProductInterface extends EntityInterface
     public function getValueFor(AttributeInterface $attribute, $storeId);
 
     /**
+     * @param string $attributeCode
+     * @param int    $storeId
+     *
+     * @return ImmutableAttributeValueInterface
+     */
+    public function getValueByAttributeCode($attributeCode, $storeId = null);
+
+    /**
      * @param AttributeInterface $attribute
      * @param int                $storeId
      *
      * @return ImmutableAttributeValueInterface
      */
     public function getImmutableValueFor(AttributeInterface $attribute, $storeId);
+
+    /**
+     * @param string $attributeCode
+     * @param int    $storeId
+     *
+     * @return ImmutableAttributeValueInterface
+     */
+    public function getImmutableValueByAttributeCode($attributeCode, $storeId);
 
     /**
      * @param AttributeInterface $attribute
@@ -149,11 +166,26 @@ interface ProductInterface extends EntityInterface
     public function getMutableValueFor(AttributeInterface $attribute, $storeId);
 
     /**
+     * @param string $attributeCode
+     * @param int    $storeId
+     *
+     * @return MutableAttributeValueInterface
+     */
+    public function getMutableValueByAttributeCode($attributeCode, $storeId);
+
+    /**
      * @param AttributeInterface $attribute
      *
-     * @return \Traversable|AttributeValueInterface[]
+     * @return Collection|AttributeValueInterface[]
      */
     public function getAllValuesFor(AttributeInterface $attribute);
+
+    /**
+     * @param string $attributeCode
+     *
+     * @return Collection|AttributeValueInterface[]
+     */
+    public function getAllValuesByAttributeCode($attributeCode);
 
     /**
      * @param AttributeValueInterface $value

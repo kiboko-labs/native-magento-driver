@@ -13,6 +13,11 @@ interface EntityInterface
     public function getId();
 
     /**
+     * @return string
+     */
+    public function getName();
+
+    /**
      * @return AttributeInterface[]|\Traversable
      */
     public function getAttributes();

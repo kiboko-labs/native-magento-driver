@@ -2,6 +2,8 @@
 
 namespace Kiboko\Component\MagentoDriver\Entity;
 
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
+
 class Category implements CategoryInterface
 {
     /**
@@ -29,6 +31,14 @@ class Category implements CategoryInterface
     public function getId()
     {
         return $this->identifier;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return '';
     }
 
     /**
