@@ -2,6 +2,7 @@
 
 namespace Kiboko\Component\MagentoDriver\Entity\Product;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Kiboko\Component\MagentoDriver\Exception\RuntimeErrorException;
 use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
@@ -62,7 +63,6 @@ trait BaseProductTrait
 
     /**
      * @param \DateTimeInterface|null $dateTime
-     *
      * @return \DateTimeImmutable|\DateTimeInterface
      * @SuppressWarnings(PHPMD.StaticAccess)
      */
@@ -74,7 +74,6 @@ trait BaseProductTrait
         if ($dateTime instanceof \DateTime) {
             return \DateTimeImmutable::createFromMutable($dateTime);
         }
-
         return $dateTime;
     }
 
@@ -104,7 +103,7 @@ trait BaseProductTrait
      */
     public function getIdentifier()
     {
-        return $this->stringIdentifier;
+        return $this->identifier;
     }
 
     /**
@@ -266,11 +265,22 @@ trait BaseProductTrait
      */
     public function getValueFor(AttributeInterface $attribute, $storeId = null)
     {
+        return $this->getValueByAttributeCode($attribute->getCode(), $storeId);
+    }
+
+    /**
+     * @param string $attributeCode
+     * @param int    $storeId
+     *
+     * @return ImmutableAttributeValueInterface
+     */
+    public function getValueByAttributeCode($attributeCode, $storeId = null)
+    {
         $defaultValue = null;
 
         /** @var AttributeValueInterface $value */
         foreach ($this->values as $value) {
-            if ($value->getAttributeCode() !== $attribute->getCode()) {
+            if ($value->getAttributeCode() !== $attributeCode) {
                 continue;
             }
 
@@ -296,7 +306,18 @@ trait BaseProductTrait
      */
     public function getImmutableValueFor(AttributeInterface $attribute, $storeId)
     {
-        $attributeValue = $this->getValueFor($attribute, $storeId);
+        $this->getImmutableValueByAttributeCode($attribute->getCode(), $storeId);
+    }
+
+    /**
+     * @param string $attributeCode
+     * @param int    $storeId
+     *
+     * @return ImmutableAttributeValueInterface
+     */
+    public function getImmutableValueByAttributeCode($attributeCode, $storeId)
+    {
+        $attributeValue = $this->getValueByAttributeCode($attributeCode, $storeId);
 
         if ($attributeValue instanceof ImmutableAttributeValueInterface) {
             return $attributeValue;
@@ -315,7 +336,18 @@ trait BaseProductTrait
      */
     public function getMutableValueFor(AttributeInterface $attribute, $storeId)
     {
-        $attributeValue = $this->getValueFor($attribute, $storeId);
+        return $this->getMutableValueByAttributeCode($attribute->getCode(), $storeId);
+    }
+
+    /**
+     * @param string $attributeCode
+     * @param int    $storeId
+     *
+     * @return MutableAttributeValueInterface
+     */
+    public function getMutableValueByAttributeCode($attributeCode, $storeId)
+    {
+        $attributeValue = $this->getValueByAttributeCode($attributeCode, $storeId);
 
         if ($attributeValue === null) {
             return;
@@ -333,23 +365,36 @@ trait BaseProductTrait
     /**
      * @param AttributeInterface $attribute
      *
-     * @return \Traversable|AttributeValueInterface[]
+     * @return Collection|AttributeValueInterface[]
      */
     public function getAllValuesFor(AttributeInterface $attribute)
     {
+        return $this->getAllValuesByAttributeCode($attribute->getCode());
+    }
+
+    /**
+     * @param string $attributeCode
+     *
+     * @return Collection|AttributeValueInterface[]
+     */
+    public function getAllValuesByAttributeCode($attributeCode)
+    {
+        $collection = new ArrayCollection();
         /** @var AttributeValueInterface $value */
         foreach ($this->values as $value) {
-            if ($value->getAttributeCode() !== $attribute->getCode()) {
+            if ($value->getAttributeCode() !== $attributeCode) {
                 continue;
             }
 
             if ($value instanceof ScopableAttributeValueInterface) {
-                yield ($value->getStoreId()) => $value;
+                $collection->set($value->getStoreId(), $value);
             } else {
-                yield 0 => $value;
+                $collection->add(0, $value);
                 break;
             }
         }
+
+        return $collection;
     }
 
     /**
@@ -391,11 +436,11 @@ trait BaseProductTrait
     }
 
     /**
-     * return \Traversable
+     * return Collection.
      */
     public function getRequiredOptions()
     {
-        return new \ArrayIterator([]);
+        return new ArrayCollection();
     }
 
     /**
