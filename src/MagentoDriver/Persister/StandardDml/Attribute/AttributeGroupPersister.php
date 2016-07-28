@@ -63,52 +63,22 @@ class AttributeGroupPersister implements AttributeGroupPersisterInterface
     public function flush()
     {
         foreach ($this->dataQueue as $attributeGroup) {
-            
-            $attributeGroupDatas = array(
-                'ce' => array(
-                    '1.9' => array(
-                        'attribute_group_id' => $attributeGroup->getId(),
-                        'attribute_set_id' => $attributeGroup->getFamilyId(),
-                        'attribute_group_name' => $attributeGroup->getLabel(),
-                        'sort_order' => $attributeGroup->getSortOrder(),
-                        'default_id' => $attributeGroup->getDefaultId(),
-                    ),
-                    '2.0' => array(
-                        'attribute_group_id' => $attributeGroup->getId(),
-                        'attribute_set_id' => $attributeGroup->getFamilyId(),
-                        'attribute_group_name' => $attributeGroup->getLabel(),
-                        'sort_order' => $attributeGroup->getSortOrder(),
-                        'default_id' => $attributeGroup->getDefaultId(),
-                        'attribute_group_code' => $attributeGroup->getAttributeGroupCode(),
-                        'tab_group_code' => $attributeGroup->getTabGroupCode(),
-                    )
-                )
-            );
-            
-            $attributeGroupColumns = array(
-                'ce' =>array(
-                    '1.9' => array(
-                        'attribute_set_id',
-                        'attribute_group_name',
-                        'sort_order',
-                        'default_id',
-                    ),
-                    '2.0' => array(
-                        'attribute_set_id',
-                        'attribute_group_name',
-                        'sort_order',
-                        'default_id',
-                        'attribute_group_code',
-                        'tab_group_code',
-                    )
-                )
-            );
-            
             $this->insertOnDuplicateUpdate(
-                    $this->connection, 
-                    $this->tableName,
-                    $attributeGroupDatas[$GLOBALS['MAGENTO_EDITION']][$GLOBALS['MAGENTO_VERSION']],
-                    $attributeGroupColumns[$GLOBALS['MAGENTO_EDITION']][$GLOBALS['MAGENTO_VERSION']]
+                $this->connection,
+                $this->tableName,
+                [
+                    'attribute_group_id' => $attributeGroup->getId(),
+                    'attribute_set_id' => $attributeGroup->getFamilyId(),
+                    'attribute_group_name' => $attributeGroup->getLabel(),
+                    'sort_order' => $attributeGroup->getSortOrder(),
+                    'default_id' => $attributeGroup->getDefaultId(),
+                ],
+                [
+                    'attribute_set_id',
+                    'attribute_group_name',
+                    'sort_order',
+                    'default_id',
+                ]
             );
             $attributeGroup->persistedToId($this->connection->lastInsertId());
         }

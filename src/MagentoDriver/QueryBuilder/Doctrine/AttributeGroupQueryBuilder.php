@@ -40,28 +40,13 @@ class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
      */
     public static function getDefaultFields()
     {
-        $defaultFields = array(
-            'ce' => array(
-                '1.9' => array(
-                    'attribute_group_id',
-                    'attribute_set_id',
-                    'attribute_group_name',
-                    'sort_order',
-                    'default_id'
-                ),
-                '2.0' => array(
-                    'attribute_group_id',
-                    'attribute_set_id',
-                    'attribute_group_name',
-                    'sort_order',
-                    'default_id',
-                    'attribute_group_code',
-                    'tab_group_code'
-                )
-            )
-        );
-
-        return $defaultFields[$GLOBALS['MAGENTO_EDITION']][$GLOBALS['MAGENTO_VERSION']];
+        return [
+            'attribute_group_id',
+            'attribute_set_id',
+            'attribute_group_name',
+            'sort_order',
+            'default_id',
+        ];
     }
 
     /**
