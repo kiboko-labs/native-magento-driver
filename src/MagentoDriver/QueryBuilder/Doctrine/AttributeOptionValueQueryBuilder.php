@@ -28,7 +28,9 @@ class AttributeOptionValueQueryBuilder implements AttributeOptionValueQueryBuild
      * @param array      $fields
      */
     public function __construct(
-    Connection $connection, $table, array $fields
+        Connection $connection,
+        $table,
+        array $fields
     ) {
         $this->connection = $connection;
         $this->table = $table;
@@ -80,8 +82,8 @@ class AttributeOptionValueQueryBuilder implements AttributeOptionValueQueryBuild
     public function createFindQueryBuilder($alias)
     {
         return (new QueryBuilder($this->connection))
-                        ->select($this->createFieldsList($this->fields, $alias))
-                        ->from($this->table, $alias)
+            ->select($this->createFieldsList($this->fields, $alias))
+            ->from($this->table, $alias)
         ;
     }
 
@@ -95,9 +97,9 @@ class AttributeOptionValueQueryBuilder implements AttributeOptionValueQueryBuild
         $queryBuilder = $this->createFindQueryBuilder($alias);
 
         $queryBuilder
-                ->andWhere($queryBuilder->expr()->eq(sprintf('%s.value_id', $alias), '?'))
-                ->setFirstResult(0)
-                ->setMaxResults(1)
+            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.value_id', $alias), '?'))
+            ->setFirstResult(0)
+            ->setMaxResults(1)
         ;
 
         return $queryBuilder;
@@ -107,7 +109,7 @@ class AttributeOptionValueQueryBuilder implements AttributeOptionValueQueryBuild
      * @param string $alias
      * @param int[]  $idList
      *
-     * @return type
+     * @return QueryBuilder
      */
     public function createFindAllByIdQueryBuilder($alias, array $idList)
     {
@@ -125,13 +127,11 @@ class AttributeOptionValueQueryBuilder implements AttributeOptionValueQueryBuild
     public function createDeleteQueryBuilder()
     {
         return (new QueryBuilder($this->connection))
-                        ->delete($this->table)
+            ->delete($this->table)
         ;
     }
 
     /**
-     * @param int $identifier
-     *
      * @return QueryBuilder
      */
     public function createDeleteOneByIdQueryBuilder()
@@ -139,9 +139,9 @@ class AttributeOptionValueQueryBuilder implements AttributeOptionValueQueryBuild
         $queryBuilder = $this->createDeleteQueryBuilder();
 
         $queryBuilder
-                ->andWhere($queryBuilder->expr()->eq('value_id', '?'))
-                ->setFirstResult(0)
-                ->setMaxResults(1)
+            ->andWhere($queryBuilder->expr()->eq('value_id', '?'))
+            ->setFirstResult(0)
+            ->setMaxResults(1)
         ;
 
         return $queryBuilder;

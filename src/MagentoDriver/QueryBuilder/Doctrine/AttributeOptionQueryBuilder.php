@@ -28,7 +28,9 @@ class AttributeOptionQueryBuilder implements AttributeOptionQueryBuilderInterfac
      * @param array      $fields
      */
     public function __construct(
-    Connection $connection, $table, array $fields
+        Connection $connection,
+        $table,
+        array $fields
     ) {
         $this->connection = $connection;
         $this->table = $table;
@@ -79,8 +81,8 @@ class AttributeOptionQueryBuilder implements AttributeOptionQueryBuilderInterfac
     public function createFindQueryBuilder($alias)
     {
         return (new QueryBuilder($this->connection))
-                        ->select($this->createFieldsList($this->fields, $alias))
-                        ->from($this->table, $alias)
+            ->select($this->createFieldsList($this->fields, $alias))
+            ->from($this->table, $alias)
         ;
     }
 
@@ -94,9 +96,9 @@ class AttributeOptionQueryBuilder implements AttributeOptionQueryBuilderInterfac
         $queryBuilder = $this->createFindQueryBuilder($alias);
 
         $queryBuilder
-                ->andWhere($queryBuilder->expr()->eq(sprintf('%s.option_id', $alias), '?'))
-                ->setFirstResult(0)
-                ->setMaxResults(1)
+            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.option_id', $alias), '?'))
+            ->setFirstResult(0)
+            ->setMaxResults(1)
         ;
 
         return $queryBuilder;
@@ -106,7 +108,7 @@ class AttributeOptionQueryBuilder implements AttributeOptionQueryBuilderInterfac
      * @param string $alias
      * @param int[]  $idList
      *
-     * @return type
+     * @return QueryBuilder
      */
     public function createFindAllByIdQueryBuilder($alias, array $idList)
     {
@@ -129,8 +131,6 @@ class AttributeOptionQueryBuilder implements AttributeOptionQueryBuilderInterfac
     }
 
     /**
-     * @param int $identifier
-     *
      * @return QueryBuilder
      */
     public function createDeleteOneByIdQueryBuilder()
