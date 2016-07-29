@@ -3,7 +3,6 @@
 namespace Kiboko\Component\MagentoDriver\Repository\Doctrine;
 
 use Doctrine\DBAL\Connection;
-use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
 use Kiboko\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
 use Kiboko\Component\MagentoDriver\Factory\ProductUrlRewriteFactoryInterface;
 use Kiboko\Component\MagentoDriver\Model\ProductUrlRewriteInterface;
