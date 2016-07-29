@@ -8,8 +8,17 @@ use Kiboko\Component\MagentoDriver\Model\ProductUrlRewriteInterface;
 interface ProductUrlRewriteRepositoryInterface
 {
     /**
-     * @param ProductInterface $product
+     * @param string $identifier
+     * @param int $storeId
+     *
      * @return ProductUrlRewriteInterface
      */
-    public function findOneByProduct(ProductInterface $product);
+    public function findOneByProductId($identifier, $storeId);
+
+    /**
+     * @param ProductInterface $product
+     * @param int $storeId
+     * @return ProductUrlRewriteInterface
+     */
+    public function findOneByProduct(ProductInterface $product, $storeId);
 }
