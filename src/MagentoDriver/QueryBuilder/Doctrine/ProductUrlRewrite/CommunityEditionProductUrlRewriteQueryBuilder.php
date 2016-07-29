@@ -5,7 +5,7 @@ namespace Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
 
-class CommunityEditionProductUrlRewriteQueryBuilder implements ProductUrlRewriteQueryBuilderInterface
+class CommunityEditionProductUrlRewriteQueryBuilder implements CommunityEditionProductUrlRewriteQueryBuilderInterface
 {
     /**
      * @var Connection
@@ -102,11 +102,10 @@ class CommunityEditionProductUrlRewriteQueryBuilder implements ProductUrlRewrite
 
     /**
      * @param string $alias
-     * @param string $productLinkAlias
      *
      * @return QueryBuilder
      */
-    public function createFindOneByProductIdQueryBuilder($alias, $productLinkAlias)
+    public function createFindOneByProductIdQueryBuilder($alias)
     {
         $queryBuilder = $this->createFindQueryBuilder($alias);
 

@@ -5,7 +5,7 @@ namespace Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
 
-class EnterpriseEditionProductUrlRewriteQueryBuilder implements ProductUrlRewriteQueryBuilderInterface
+class EnterpriseEditionProductUrlRewriteQueryBuilder implements EnterpriseEditionProductUrlRewriteQueryBuilderInterface
 {
     /**
      * @var Connection

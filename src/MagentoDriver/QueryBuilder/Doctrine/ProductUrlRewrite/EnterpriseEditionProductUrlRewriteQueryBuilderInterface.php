@@ -4,7 +4,7 @@ namespace Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine;
 
 use Doctrine\DBAL\Query\QueryBuilder;
 
-interface ProductUrlRewriteQueryBuilderInterface
+interface EnterpriseEditionProductUrlRewriteQueryBuilderInterface
 {
     /**
      * @param string $alias
