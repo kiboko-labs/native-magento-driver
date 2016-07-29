@@ -88,7 +88,6 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->truncateTables();
-
         $schemaBuilder->hydrateCatalogProductEntityTable(
             'catalog_product_entity',
             DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
@@ -144,7 +143,6 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
         $product = $this->repository->findOneById(3);
 
         $this->assertInstanceOf(ProductInterface::class, $product);
-
         $this->assertEquals('simple', $product->getType());
         $this->assertNotNull($product->getId());
         $this->assertEquals('SIMPLE', $product->getIdentifier());
@@ -155,7 +153,6 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
         $product = $this->repository->findOneById(961);
 
         $this->assertInstanceOf(ProductInterface::class, $product);
-
         $this->assertEquals('configurable', $product->getType());
         $this->assertNotNull($product->getId());
         $this->assertEquals('CONFIGURABLE', $product->getIdentifier());
@@ -171,7 +168,6 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
         $product = $this->repository->findOneByIdentifier('SIMPLE');
 
         $this->assertInstanceOf(ProductInterface::class, $product);
-
         $this->assertEquals('simple', $product->getType());
         $this->assertNotNull($product->getId());
         $this->assertEquals('SIMPLE', $product->getIdentifier());
@@ -182,7 +178,6 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
         $product = $this->repository->findOneByIdentifier('CONFIGURABLE');
 
         $this->assertInstanceOf(ProductInterface::class, $product);
-
         $this->assertEquals('configurable', $product->getType());
         $this->assertNotNull($product->getId());
         $this->assertEquals('CONFIGURABLE', $product->getIdentifier());

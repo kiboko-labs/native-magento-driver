@@ -55,24 +55,14 @@ class ProductQueryBuilder implements ProductQueryBuilderInterface
     }
 
     /**
+     * @param string|null $version
      * @return array
      */
-    public static function getDefaultFields()
+    public static function getDefaultFields($version = null)
     {
-        $defaultFields = array(
-            'ce' => array(
-                '1.9' => array(
-                    'entity_id',
-                    'entity_type_id',
-                    'attribute_set_id',
-                    'type_id',
-                    'sku',
-                    'has_options',
-                    'required_options',
-                    'created_at',
-                    'updated_at'
-                ),
-                '2.0' => array(
+        if ($version !== null) {
+            if (version_compare($version, '2.0', '>=')) {
+                return [
                     'entity_id',
                     'attribute_set_id',
                     'type_id',
@@ -80,12 +70,21 @@ class ProductQueryBuilder implements ProductQueryBuilderInterface
                     'has_options',
                     'required_options',
                     'created_at',
-                    'updated_at'
-                )
-            )
-        );
-        
-        return $defaultFields[$GLOBALS['MAGENTO_EDITION']][$GLOBALS['MAGENTO_VERSION']];
+                    'updated_at',
+                ];
+            }
+        }
+        return [
+            'entity_id',
+            'entity_type_id',
+            'attribute_set_id',
+            'type_id',
+            'sku',
+            'has_options',
+            'required_options',
+            'created_at',
+            'updated_at',
+        ];
     }
 
     /**
@@ -166,12 +165,8 @@ class ProductQueryBuilder implements ProductQueryBuilderInterface
      */
     public function createFindAllQueryBuilder($alias)
     {
-        $queryBuilder = ($GLOBALS['MAGENTO_VERSION'] === '1.9' &&
-                $GLOBALS['MAGENTO_EDITION'] === 'ce')
-                ?
-                $this->createFindQueryBuilder($alias)->where(sprintf('%s.entity_type_id=4', $alias))
-                :
-                $this->createFindQueryBuilder($alias);
+        $queryBuilder = $this->createFindQueryBuilder($alias);
+        $queryBuilder->where(sprintf('%s.entity_type_id=4', $alias));
 
         return $queryBuilder;
     }

@@ -255,4 +255,10 @@ class ConfigurableProduct implements ConfigurableProductInterface
     {
         return clone $this->superLinks;
     }
+
+    public function getName()
+    {
+        //TODO: Fetch attribute's value
+        return '';
+    }
 }
