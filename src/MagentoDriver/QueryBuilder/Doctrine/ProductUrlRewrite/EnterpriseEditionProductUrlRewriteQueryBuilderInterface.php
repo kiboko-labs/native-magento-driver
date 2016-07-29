@@ -1,6 +1,6 @@
 <?php
 
-namespace Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine;
+namespace Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductUrlRewrite;
 
 use Doctrine\DBAL\Query\QueryBuilder;
 
