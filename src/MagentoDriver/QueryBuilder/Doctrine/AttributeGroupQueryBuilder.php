@@ -46,6 +46,8 @@ class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
             'attribute_group_name',
             'sort_order',
             'default_id',
+            'attribute_group_code',
+            'tab_group_code',
         ];
     }
 
@@ -69,7 +71,7 @@ class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
         foreach ($fields as $field) {
             $outputFields[] = sprintf('%s.%s', $alias, $field);
         }
-
+        
         return $outputFields;
     }
 
@@ -81,7 +83,7 @@ class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
     public function createFindQueryBuilder($alias)
     {
         return (new QueryBuilder($this->connection))
-                        ->select($this->createFieldsList($this->fields, $alias))
+                        ->select($this->createFieldsList(['*'], $alias))
                         ->from($this->table, $alias)
         ;
     }

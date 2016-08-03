@@ -6,6 +6,7 @@ use Doctrine\DBAL\Connection;
 use Kiboko\Component\MagentoDriver\Model\AttributeGroupInterface;
 use Kiboko\Component\MagentoDriver\Persister\AttributeGroupPersisterInterface;
 use Kiboko\Component\MagentoDriver\Persister\StandardDml\InsertUpdateAwareTrait;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeGroupQueryBuilder;
 
 class AttributeGroupPersister implements AttributeGroupPersisterInterface
 {
@@ -66,19 +67,16 @@ class AttributeGroupPersister implements AttributeGroupPersisterInterface
             $this->insertOnDuplicateUpdate(
                 $this->connection,
                 $this->tableName,
-                [
+                array_filter([
                     'attribute_group_id' => $attributeGroup->getId(),
                     'attribute_set_id' => $attributeGroup->getFamilyId(),
                     'attribute_group_name' => $attributeGroup->getLabel(),
                     'sort_order' => $attributeGroup->getSortOrder(),
                     'default_id' => $attributeGroup->getDefaultId(),
-                ],
-                [
-                    'attribute_set_id',
-                    'attribute_group_name',
-                    'sort_order',
-                    'default_id',
-                ]
+                    'attribute_group_code' => $attributeGroup->getAttributeGroupCode(),
+                    'tab_group_code' => $attributeGroup->getTabGroupCode(),
+                ]),
+                AttributeGroupQueryBuilder::getDefaultFields()
             );
             $attributeGroup->persistedToId($this->connection->lastInsertId());
         }
