@@ -6,7 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Kiboko\Component\MagentoMapper\Transformer\AttributeTransformerInterface;
 use Kiboko\Component\MagentoMapper\Mapper\AttributeMapperInterface;
-use Pim\Component\Catalog\Model\AttributeInterface;
+use Pim\Bundle\CatalogBundle\Model\AttributeInterface;
 
 class AttributeTransformer
     implements AttributeTransformerInterface

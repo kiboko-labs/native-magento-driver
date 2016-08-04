@@ -7,7 +7,7 @@ use Kiboko\Component\MagentoDriver\Model\Attribute;
 use Kiboko\Component\MagentoDriver\Model\AttributeInterface as KibokoAttributeInterface;
 use Kiboko\Component\MagentoMapper\Mapper\EntityTypeMapperInterface;
 use Kiboko\Component\MagentoMapper\Transformer\AttributeTransformerInterface;
-use Pim\Component\Catalog\Model\AttributeInterface as PimAttributeInterface;
+use Pim\Bundle\CatalogBundle\Model\AttributeInterface as PimAttributeInterface;
 
 class WeightAttributeTransformer
     implements AttributeTransformerInterface

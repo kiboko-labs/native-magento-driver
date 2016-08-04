@@ -3,7 +3,7 @@
 namespace Kiboko\Component\MagentoMapper\Transformer;
 
 use Kiboko\Component\MagentoDriver\Model\AttributeInterface as KibokoAttributeInterface;
-use Pim\Component\Catalog\Model\AttributeInterface as PimAttributeInterface;
+use Pim\Bundle\CatalogBundle\Model\AttributeInterface as PimAttributeInterface;
 
 interface AttributeTransformerInterface
 {
