@@ -7,7 +7,7 @@ use Pim\Component\Catalog\Model\AttributeInterface;
 class DefaultEntityTypeMapper implements EntityTypeMapperInterface
 {
     private $mapping = [
-        \Pim\Bundle\CatalogBundle\Model\Product::class => 4,
+        \Pim\Component\Catalog\Model\Product::class => 4,
     ];
 
     /**
