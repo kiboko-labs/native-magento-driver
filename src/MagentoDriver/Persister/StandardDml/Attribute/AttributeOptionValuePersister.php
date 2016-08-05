@@ -5,9 +5,12 @@ namespace Kiboko\Component\MagentoDriver\Persister\StandardDml\Attribute;
 use Doctrine\DBAL\Connection;
 use Kiboko\Component\MagentoDriver\Model\AttributeOptionValueInterface;
 use Kiboko\Component\MagentoDriver\Persister\AttributeOptionValuePersisterInterface;
+use Kiboko\Component\MagentoDriver\Persister\StandardDml\InsertUpdateAwareTrait;
 
 class AttributeOptionValuePersister implements AttributeOptionValuePersisterInterface
 {
+    use InsertUpdateAwareTrait;
+
     /**
      * @var Connection
      */
@@ -60,32 +63,21 @@ class AttributeOptionValuePersister implements AttributeOptionValuePersisterInte
     public function flush()
     {
         foreach ($this->dataQueue as $attributeOptionValue) {
-            $count = 0;
-            if ($attributeOptionValue->getId()) {
-                $count = $this->connection->update($this->tableName,
-                    [
-                        'option_id' => $attributeOptionValue->getOptionId(),
-                        'store_id' => $attributeOptionValue->getStoreId(),
-                        'value' => $attributeOptionValue->getValue(),
-                    ],
-                    [
-                        'value_id' => $attributeOptionValue->getId(),
-                    ]
-                );
-            }
+            $this->insertOnDuplicateUpdate($this->connection, $this->tableName,
+                [
+                    'value_id' => $attributeOptionValue->getId(),
+                    'option_id' => $attributeOptionValue->getOptionId(),
+                    'store_id' => $attributeOptionValue->getStoreId(),
+                    'value' => $attributeOptionValue->getValue(),
+                ],
+                [
+                    'option_id',
+                    'store_id',
+                    'value',
+                ]
+            );
 
-            if ($count <= 0) {
-                $this->connection->insert($this->tableName,
-                    [
-                        'value_id' => $attributeOptionValue->getId(),
-                        'option_id' => $attributeOptionValue->getOptionId(),
-                        'store_id' => $attributeOptionValue->getStoreId(),
-                        'value' => $attributeOptionValue->getValue(),
-                    ]
-                );
-
-                $attributeOptionValue->persistedToId($this->connection->lastInsertId());
-            }
+            $attributeOptionValue->persistedToId($this->connection->lastInsertId());
         }
     }
 

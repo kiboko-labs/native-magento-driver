@@ -10,6 +10,11 @@ interface EntityAttributeInterface
     public function getId();
 
     /**
+     * @param int $id
+     */
+    public function persistedToId($id);
+
+    /**
      * @return int
      */
     public function getTypeId();
