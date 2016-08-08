@@ -19,7 +19,7 @@ class AttributeTransformer
     private $mapper;
 
     /**
-     * @var Collection|AttributeTransformerInterface[]
+     * @var \Traversable|AttributeTransformerInterface[]
      */
     private $attributeTransformers;
 
