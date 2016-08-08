@@ -29,29 +29,31 @@ class StringAttributeTransformer
      * @param PimAttributeInterface $attribute
      * @param int|null              $mappedId
      *
-     * @return KibokoAttributeInterface
+     * @return KibokoAttributeInterface[]
      */
     public function transform(PimAttributeInterface $attribute, $mappedId = null)
     {
-        return Attribute::buildNewWith(
-            $mappedId,                                  // attribute_id
-            $this->entityTypeMapper->map($attribute),   // entity_type_id
-            $attribute->getCode(),                      // attribute_code
-            null,                                       // attribute_model
-            'varchar',                                  // backend_type
-            null,                                       // backend_model
-            null,                                       // backend_table
-            null,                                       // frontend_model
-            'text',                                     // frontend_input
-            $attribute->getLabel(),                     // frontend_label
-            null,                                       // frontend_class
-            null,                                       // source_model
-            $attribute->isRequired(),                   // is_required
-            true,                                       // is_user_defined
-            $attribute->isUnique(),                     // is_unique
-            null,                                       // default_value
-            null                                        // note
-        );
+        return [
+            Attribute::buildNewWith(
+                $mappedId,                                  // attribute_id
+                $this->entityTypeMapper->map($attribute),   // entity_type_id
+                $attribute->getCode(),                      // attribute_code
+                null,                                       // attribute_model
+                'varchar',                                  // backend_type
+                null,                                       // backend_model
+                null,                                       // backend_table
+                null,                                       // frontend_model
+                'text',                                     // frontend_input
+                $attribute->getLabel(),                     // frontend_label
+                null,                                       // frontend_class
+                null,                                       // source_model
+                $attribute->isRequired(),                   // is_required
+                true,                                       // is_user_defined
+                $attribute->isUnique(),                     // is_unique
+                null,                                       // default_value
+                null                                        // note
+            )
+        ];
     }
 
     /**

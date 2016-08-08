@@ -10,7 +10,7 @@ interface AttributeTransformerInterface
     /**
      * @param PimAttributeInterface $attribute
      *
-     * @return KibokoAttributeInterface
+     * @return KibokoAttributeInterface[]
      */
     public function transform(PimAttributeInterface $attribute);
 
