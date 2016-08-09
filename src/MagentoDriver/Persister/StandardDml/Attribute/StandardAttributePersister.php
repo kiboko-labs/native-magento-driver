@@ -5,8 +5,8 @@ namespace Kiboko\Component\MagentoDriver\Persister\StandardDml\Attribute;
 use Doctrine\DBAL\Connection;
 use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
 use Kiboko\Component\MagentoDriver\Persister\AttributePersisterInterface;
-use Kiboko\Component\MagentoDriver\Persister\StandardDml\InsertUpdateAwareTrait;
 use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilder;
+use Kiboko\Component\MagentoDriver\Persister\StandardDml\InsertUpdateAwareTrait;
 
 class StandardAttributePersister implements AttributePersisterInterface
 {

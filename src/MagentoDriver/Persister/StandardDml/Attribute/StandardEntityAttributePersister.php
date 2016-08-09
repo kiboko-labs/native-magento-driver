@@ -5,9 +5,12 @@ namespace Kiboko\Component\MagentoDriver\Persister\StandardDml\Attribute;
 use Doctrine\DBAL\Connection;
 use Kiboko\Component\MagentoDriver\Model\EntityAttributeInterface;
 use Kiboko\Component\MagentoDriver\Persister\EntityAttributePersisterInterface;
+use Kiboko\Component\MagentoDriver\Persister\StandardDml\InsertUpdateAwareTrait;
 
 class StandardEntityAttributePersister implements EntityAttributePersisterInterface
 {
+    use InsertUpdateAwareTrait;
+
     /**
      * @var Connection
      */
@@ -61,36 +64,25 @@ class StandardEntityAttributePersister implements EntityAttributePersisterInterf
     {
         /** @var EntityAttributeInterface $entityAttribute */
         foreach ($this->dataQueue as $entityAttribute) {
-            $count = 0;
-            if ($entityAttribute->getId()) {
-                $count = $this->connection->update($this->tableName,
-                    [
-                        'entity_type_id' => $entityAttribute->getTypeId(),
-                        'attribute_set_id' => $entityAttribute->getAttributeSetId(),
-                        'attribute_group_id' => $entityAttribute->getAttributeGroupId(),
-                        'attribute_id' => $entityAttribute->getAttributeId(),
-                        'sort_order' => $entityAttribute->getSortOrder(),
-                    ],
-                    [
-                        'entity_attribute_id' => $entityAttribute->getId(),
-                    ]
-                );
-            }
+            $this->insertOnDuplicateUpdate($this->connection, $this->tableName,
+                [
+                    'entity_attribute_id' => $entityAttribute->getId(),
+                    'entity_type_id' => $entityAttribute->getTypeId(),
+                    'attribute_set_id' => $entityAttribute->getAttributeSetId(),
+                    'attribute_group_id' => $entityAttribute->getAttributeGroupId(),
+                    'attribute_id' => $entityAttribute->getAttributeId(),
+                    'sort_order' => $entityAttribute->getSortOrder(),
+                ],
+                [
+                    'entity_type_id',
+                    'attribute_set_id',
+                    'attribute_group_id',
+                    'attribute_id',
+                    'sort_order',
+                ]
+            );
 
-            if ($count <= 0) {
-                $this->connection->insert($this->tableName,
-                    [
-                        'entity_attribute_id' => $entityAttribute->getId(),
-                        'entity_type_id' => $entityAttribute->getTypeId(),
-                        'attribute_set_id' => $entityAttribute->getAttributeSetId(),
-                        'attribute_group_id' => $entityAttribute->getAttributeGroupId(),
-                        'attribute_id' => $entityAttribute->getAttributeId(),
-                        'sort_order' => $entityAttribute->getSortOrder(),
-                    ]
-                );
-
-                $entityAttribute->persistedToId($this->connection->lastInsertId());
-            }
+            $entityAttribute->persistedToId($this->connection->lastInsertId());
         }
     }
 

@@ -8,7 +8,7 @@ use Kiboko\Component\MagentoMapper\Mapper\EntityTypeMapperInterface;
 use Kiboko\Component\MagentoMapper\Transformer\AttributeTransformerInterface;
 use Pim\Component\Catalog\Model\AttributeInterface as PimAttributeInterface;
 
-class PriceAttributeTransformer
+class AssetAttributeTransformer
     implements AttributeTransformerInterface
 {
     /**
@@ -39,16 +39,16 @@ class PriceAttributeTransformer
                 $this->entityTypeMapper->map($attribute),       // entity_type_id
                 $attribute->getCode(),                          // attribute_code
                 null,                                           // attribute_model
-                'decimal',                                      // backend_type
-                'catalog/product_attribute_backend_price',      // backend_model
+                'varchar',                                      // backend_type
+                null,                                           // backend_model
                 null,                                           // backend_table
-                null,                                           // frontend_model
-                'price',                                        // frontend_input
+                'catalog/product_attribute_frontend_image',     // frontend_model
+                'media_image',                                  // frontend_input
                 $attribute->getLabel(),                         // frontend_label
                 null,                                           // frontend_class
                 null,                                           // source_model
                 $attribute->isRequired(),                       // is_required
-                true,                                           // is_user_defined
+                false,                                          // is_user_defined
                 $attribute->isUnique(),                         // is_unique
                 null,                                           // default_value
                 null                                            // note
@@ -63,6 +63,6 @@ class PriceAttributeTransformer
      */
     public function supportsTransformation(PimAttributeInterface $attribute)
     {
-        return $attribute->getAttributeType() === 'pim_catalog_pricecollection';
+        return $attribute->getAttributeType() === 'pim_catalog_image';
     }
 }

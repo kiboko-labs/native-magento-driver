@@ -61,7 +61,7 @@ class VarcharAttributeValuePersister implements AttributeValuePersisterInterface
                 'Invalid attribute value type for "%s", expected "%s", got "%s".',
                 $value->getAttributeCode(),
                 VarcharAttributeValueInterface::class,
-                get_class($value)
+                is_object($value) ? get_class($value) : gettype($value)
             ));
         }
 

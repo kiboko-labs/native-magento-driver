@@ -61,7 +61,7 @@ class DecimalAttributeValuePersister implements AttributeValuePersisterInterface
                 'Invalid attribute value type for "%s", expected "%s", got "%s".',
                 $value->getAttributeCode(),
                 DecimalAttributeValueInterface::class,
-                get_class($value)
+                is_object($value) ? get_class($value) : gettype($value)
             ));
         }
 

@@ -2,7 +2,7 @@
 
 namespace Kiboko\Component\MagentoMapper\Mapper;
 
-use Pim\Bundle\CatalogBundle\Model\AttributeInterface;
+use Pim\Component\Catalog\Model\AttributeInterface;
 
 interface EntityTypeMapperInterface
 {

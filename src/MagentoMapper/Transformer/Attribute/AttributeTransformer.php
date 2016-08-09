@@ -4,9 +4,11 @@ namespace Kiboko\Component\MagentoMapper\Transformer\Attribute;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Kiboko\Component\MagentoMapper\Transformer\AttributeTransformerInterface;
 use Kiboko\Component\MagentoMapper\Mapper\AttributeMapperInterface;
-use Pim\Bundle\CatalogBundle\Model\AttributeInterface;
+use Kiboko\Component\MagentoMapper\Transformer\AttributeTransformerInterface;
+
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface as KibokoAttributeInterface;
+use Pim\Component\Catalog\Model\AttributeInterface as PimAttributeInterface;
 
 class AttributeTransformer
     implements AttributeTransformerInterface
@@ -17,7 +19,7 @@ class AttributeTransformer
     private $mapper;
 
     /**
-     * @var Collection|AttributeTransformerInterface[]
+     * @var \Traversable|AttributeTransformerInterface[]
      */
     private $attributeTransformers;
 
@@ -37,7 +39,7 @@ class AttributeTransformer
     }
 
     /**
-     * @param Collection|AttributeTransformerInterface[] $attributeTransformers
+     * @param \Traversable|AttributeTransformerInterface[] $attributeTransformers
      */
     public function setAttributeTransformers(array $attributeTransformers)
     {
@@ -60,11 +62,11 @@ class AttributeTransformer
     }
 
     /**
-     * @param AttributeInterface $attribute
+     * @param PimAttributeInterface $attribute
      *
-     * @return \Kiboko\Component\MagentoDriver\Model\AttributeInterface|null
+     * @return \Traversable|KibokoAttributeInterface[]
      */
-    public function transform(AttributeInterface $attribute)
+    public function transform(PimAttributeInterface $attribute)
     {
         /** @var AttributeTransformerInterface $transformer */
         foreach ($this->attributeTransformers as $transformer) {
@@ -72,24 +74,26 @@ class AttributeTransformer
                 continue;
             }
 
-            $attribute = $transformer->transform($attribute);
-            if (($attributeId = $this->mapper->map($attribute->getCode())) !== null) {
-                $attribute->persistedToId($attributeId);
+            $attributes = $transformer->transform($attribute);
+            foreach ($attributes as $attribute) {
+                if (($attributeId = $this->mapper->map($attribute->getCode())) !== null) {
+                    $attribute->persistedToId($attributeId);
+                }
             }
 
-            return $attribute;
+            return $attributes;
         }
 
         return;
     }
 
     /**
-     * @param AttributeInterface $attribute
+     * @param PimAttributeInterface $attribute
      *
      * @return bool
      */
-    public function supportsTransformation(AttributeInterface $attribute)
+    public function supportsTransformation(PimAttributeInterface $attribute)
     {
-        return $attribute instanceof AttributeInterface;
+        return $attribute instanceof PimAttributeInterface;
     }
 }

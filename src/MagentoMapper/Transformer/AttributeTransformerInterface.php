@@ -3,14 +3,14 @@
 namespace Kiboko\Component\MagentoMapper\Transformer;
 
 use Kiboko\Component\MagentoDriver\Model\AttributeInterface as KibokoAttributeInterface;
-use Pim\Bundle\CatalogBundle\Model\AttributeInterface as PimAttributeInterface;
+use Pim\Component\Catalog\Model\AttributeInterface as PimAttributeInterface;
 
 interface AttributeTransformerInterface
 {
     /**
      * @param PimAttributeInterface $attribute
      *
-     * @return KibokoAttributeInterface
+     * @return KibokoAttributeInterface[]
      */
     public function transform(PimAttributeInterface $attribute);
 

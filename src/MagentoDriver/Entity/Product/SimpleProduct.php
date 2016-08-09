@@ -69,7 +69,7 @@ class SimpleProduct implements SimpleProductInterface
                     throw new RuntimeErrorException(sprintf(
                         'Value shoud be an instqnce of %s, %s given.',
                         AttributeValueInterface::class,
-                        get_class($value)
+                        is_object($value) ? get_class($value) : gettype($value)
                     ));
                 }
                 $instance->values->add($value->attachToProduct($instance));
