@@ -52,7 +52,9 @@ class CatalogProductAttributeValue
         $table = $this->schema->createTable(sprintf('catalog_product_entity_%s', $this->backendName));
 
         $table->addColumn('value_id', 'integer', ['unsigned' => true, 'autoincrement' => true]);
-        $table->addColumn('entity_type_id', 'smallint', ['unsigned' => true]);
+        if($magentoVersion !== '2.0'){
+            $table->addColumn('entity_type_id', 'smallint', ['unsigned' => true]);
+        }
         $table->addColumn('attribute_id', 'smallint', ['unsigned' => true]);
         $table->addColumn('store_id', 'smallint', ['unsigned' => true]);
         $table->addColumn('entity_id', 'integer', ['unsigned' => true]);

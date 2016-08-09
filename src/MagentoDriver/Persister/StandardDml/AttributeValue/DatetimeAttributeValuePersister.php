@@ -7,9 +7,12 @@ use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
 use Kiboko\Component\MagentoDriver\Model\DatetimeAttributeValueInterface;
 use Kiboko\Component\MagentoDriver\Persister\AttributeValuePersisterInterface;
 use Kiboko\Component\MagentoDriver\Exception\InvalidAttributePersisterTypeException;
+use Kiboko\Component\MagentoDriver\Persister\StandardDml\InsertUpdateAwareTrait;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeValueQueryBuilder;
 
 class DatetimeAttributeValuePersister implements AttributeValuePersisterInterface
 {
+    use InsertUpdateAwareTrait;
     /**
      * @var Connection
      */
@@ -72,36 +75,19 @@ class DatetimeAttributeValuePersister implements AttributeValuePersisterInterfac
     {
         /** @var DatetimeAttributeValueInterface $value */
         foreach ($this->dataQueue as $value) {
-            $count = 0;
-            if ($value->getId()) {
-                $count = $this->connection->update($this->tableName,
-                    [
-                        'entity_type_id' => 4,
+            $this->insertOnDuplicateUpdate(
+                    $this->connection, 
+                    $this->tableName,
+                    array_filter([
+                        'entity_type_id' => $value->getEntityTypeId(),
                         'attribute_id' => $value->getAttributeId(),
                         'store_id' => $value->getStoreId(),
                         'entity_id' => $value->getProductId(),
                         'value' => $value->getValue()->format('Y-m-d H:i:s'),
-                    ],
-                    [
-                        'value_id' => $value->getId(),
-                    ]
-                );
-            }
-
-            if ($count <= 0) {
-                $this->connection->insert($this->tableName,
-                    [
-                        'value_id' => $value->getId(),
-                        'entity_type_id' => 4,
-                        'attribute_id' => $value->getAttributeId(),
-                        'store_id' => $value->getStoreId(),
-                        'entity_id' => $value->getProductId(),
-                        'value' => $value->getValue()->format('Y-m-d H:i:s'),
-                    ]
-                );
-
-                $value->persistedToId($this->connection->lastInsertId());
-            }
+                    ]),
+                    ProductAttributeValueQueryBuilder::getDefaultFields()
+                    );
+            $value->persistedToId($this->connection->lastInsertId());
         }
     }
 

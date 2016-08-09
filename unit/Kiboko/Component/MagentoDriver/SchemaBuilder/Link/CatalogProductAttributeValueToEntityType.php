@@ -44,19 +44,21 @@ class CatalogProductAttributeValueToEntityType
 
         $entityTable = $this->schema->getTable($tableName);
         $storeTable = $this->schema->getTable('eav_entity_type');
-
-        $entityTable->addForeignKeyConstraint(
-            $storeTable,
-            [
-                'entity_type_id',
-            ],
-            [
-                'entity_type_id',
-            ],
-            [
-                'onUpdate' => 'CASCADE',
-                'onDelete' => 'CASCADE',
-            ]
-        );
+        
+        if($magentoVersion !== '2.0'){
+            $entityTable->addForeignKeyConstraint(
+                $storeTable,
+                [
+                    'entity_type_id',
+                ],
+                [
+                    'entity_type_id',
+                ],
+                [
+                    'onUpdate' => 'CASCADE',
+                    'onDelete' => 'CASCADE',
+                ]
+            );
+        }
     }
 }

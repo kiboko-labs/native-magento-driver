@@ -73,4 +73,9 @@ interface AttributeValueInterface
      * @return array
      */
     public function getAttributeOptions();
+    
+    /**
+     * @return int
+     */
+    public function getEntityTypeId();
 }
