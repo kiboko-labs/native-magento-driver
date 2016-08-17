@@ -138,4 +138,12 @@ trait AttributeValueTrait
     {
         return $this->attribute->getOptions();
     }
+    
+    /**
+     * @return int
+     */
+    public function getEntityTypeId()
+    {
+        return $this->attribute->getEntityTypeId();
+    }
 }

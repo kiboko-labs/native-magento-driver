@@ -103,7 +103,7 @@ trait BaseProductTrait
      */
     public function getIdentifier()
     {
-        return $this->identifier;
+        return $this->stringIdentifier;
     }
 
     /**

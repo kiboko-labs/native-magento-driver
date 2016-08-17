@@ -40,28 +40,15 @@ class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
      */
     public static function getDefaultFields()
     {
-        $defaultFields = array(
-            'ce' => array(
-                '1.9' => array(
-                    'attribute_group_id',
-                    'attribute_set_id',
-                    'attribute_group_name',
-                    'sort_order',
-                    'default_id'
-                ),
-                '2.0' => array(
-                    'attribute_group_id',
-                    'attribute_set_id',
-                    'attribute_group_name',
-                    'sort_order',
-                    'default_id',
-                    'attribute_group_code',
-                    'tab_group_code'
-                )
-            )
-        );
-
-        return $defaultFields[$GLOBALS['MAGENTO_EDITION']][$GLOBALS['MAGENTO_VERSION']];
+        return [
+            'attribute_group_id',
+            'attribute_set_id',
+            'attribute_group_name',
+            'sort_order',
+            'default_id',
+            'attribute_group_code',
+            'tab_group_code',
+        ];
     }
 
     /**
@@ -84,7 +71,7 @@ class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
         foreach ($fields as $field) {
             $outputFields[] = sprintf('%s.%s', $alias, $field);
         }
-
+        
         return $outputFields;
     }
 
@@ -96,7 +83,7 @@ class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
     public function createFindQueryBuilder($alias)
     {
         return (new QueryBuilder($this->connection))
-                        ->select($this->createFieldsList($this->fields, $alias))
+                        ->select($this->createFieldsList(['*'], $alias))
                         ->from($this->table, $alias)
         ;
     }

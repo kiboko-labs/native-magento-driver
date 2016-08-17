@@ -193,13 +193,13 @@ catalog_product_entity_datetime:
         attribute_id: 167
         store_id: 1
         entity_id: 961
-        value: 0
+        value: ~
     -
         value_id: 22
         attribute_id: 167
         store_id: 1
         entity_id: 3
-        value: "2016-12-34 12:34:56"
+        value: "2016-12-31 12:34:56"
     -
         value_id: 23
         attribute_id: 167

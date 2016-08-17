@@ -7,6 +7,7 @@ use Kiboko\Component\MagentoDriver\Exception\RuntimeErrorException;
 use Kiboko\Component\MagentoDriver\Model\CatalogAttributeExtensionInterface;
 use Kiboko\Component\MagentoDriver\Persister\CatalogAttributeExtensionPersisterInterface;
 use Kiboko\Component\MagentoDriver\Persister\StandardDml\InsertUpdateAwareTrait;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilder;
 
 class CatalogAttributeExtensionPersister implements CatalogAttributeExtensionPersisterInterface
 {
@@ -72,7 +73,7 @@ class CatalogAttributeExtensionPersister implements CatalogAttributeExtensionPer
             $this->insertOnDuplicateUpdate(
                 $this->connection,
                 $this->tableName,
-                [
+                array_filter([
                     'attribute_id' => $attribute->getId(),
                     'frontend_input_renderer' => $attribute->getFrontendInputRendererClassName(),
                     'is_global' => $attribute->isGlobal(),
@@ -86,34 +87,21 @@ class CatalogAttributeExtensionPersister implements CatalogAttributeExtensionPer
                     'is_filterable_in_search' => (int) $attribute->isFilterableInSearch(),
                     'used_in_product_listing' => (int) $attribute->isUsedInProductListing(),
                     'used_for_sort_by' => (int) $attribute->isUsedForSortBy(),
-                    'is_configurable' => (int) $attribute->isConfigurable(),
+                    'is_configurable' => $attribute->isConfigurable(),
                     'apply_to' => empty($attribute->getProductTypesApplyingTo()) ?
                         null : implode(',', $attribute->getProductTypesApplyingTo()),
                     'is_visible_in_advanced_search' => (int) $attribute->isVisibleInAdvancedSearch(),
                     'position' => $attribute->getPosition(),
                     'is_wysiwyg_enabled' => (int) $attribute->isWysiwygEnabled(),
                     'is_used_for_promo_rules' => (int) $attribute->isUsedForPromoRules(),
-                ],
-                [
-                    'frontend_input_renderer',
-                    'is_global',
-                    'is_visible',
-                    'is_searchable',
-                    'is_filterable',
-                    'is_comparable',
-                    'is_visible_on_front',
-                    'is_html_allowed_on_front',
-                    'is_used_for_price_rules',
-                    'is_filterable_in_search',
-                    'used_in_product_listing',
-                    'used_for_sort_by',
-                    'is_configurable',
-                    'apply_to',
-                    'is_visible_in_advanced_search',
-                    'position',
-                    'is_wysiwyg_enabled',
-                    'is_used_for_promo_rules',
-                ]
+                    'is_required_in_admin_store' => $attribute->isRequiredInAdminStore(),
+                    'is_used_in_grid' => $attribute->isUsedInGrid(),
+                    'is_visible_in_grid' => $attribute->isVisibleInGrid(),
+                    'is_filterable_in_grid' => $attribute->isFilterableInGrid(),
+                    'search_weight' => $attribute->getSearchWeight(),
+                    'additional_data' => $attribute->getAdditionalData(),
+                ], function($_){ return $_ !== null;}),
+                ProductAttributeQueryBuilder::getDefaultExtraFields()
             );
         }
     }

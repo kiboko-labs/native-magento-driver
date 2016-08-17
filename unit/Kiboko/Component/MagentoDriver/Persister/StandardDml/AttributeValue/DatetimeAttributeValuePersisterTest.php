@@ -41,9 +41,12 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
      */
     protected function getDataSet()
     {
-        $dataSet = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([]);
+        $dataset = $this->fixturesLoader->initialDataSet(
+            'catalog_product_entity_datetime',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER
+        );
 
-        return $dataSet;
+        return $dataset;
     }
 
     private function truncateTables($backendType)
@@ -166,11 +169,12 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|AttributeInterface
      */
-    private function getAttributeMock($attributeId)
+    private function getAttributeMock($attributeId, $entityTypeId = null)
     {
         $mock = $this->createMock(AttributeInterface::class);
 
         $mock->method('getId')->willReturn($attributeId);
+        $mock->method('getEntityTypeId')->willReturn($entityTypeId);
 
         return $mock;
     }
@@ -191,29 +195,14 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
     {
         $this->persister->initialize();
         $this->persister->flush();
-
-        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
-            'catalog_product_entity_datetime' => [
-                [
-                    'value_id' => 20,
-                    'entity_type_id' => 4,
-                    'attribute_id' => 167,
-                    'store_id' => 0,
-                    'entity_id' => 3,
-                    'value' => null,
-                ],
-                [
-                    'value_id' => 23,
-                    'entity_type_id' => 4,
-                    'attribute_id' => 167,
-                    'store_id' => 0,
-                    'entity_id' => 961,
-                    'value' => '2016-12-01 12:34:56',
-                ],
-            ],
-        ]);
+        
+        $expected = $this->getDataSet();
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
+        $actual->addTable(TableStore::getTableName($GLOBALS['MAGENTO_VERSION']));
+        $actual->addTable('eav_entity_type');
+        $actual->addTable('eav_attribute');
+        $actual->addTable('catalog_product_entity');
         $actual->addTable('catalog_product_entity_datetime');
 
         $this->assertDataSetsEqual($expected, $actual);
@@ -222,46 +211,57 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
     public function testInsertOne()
     {
         $this->persister->initialize();
-        $this->persister->persist($value = new ImmutableDatetimeAttributeValue(
-            $this->getAttributeMock(167),
-            new \DateTime('2016-07-13 12:34:56'),
-            $this->getProductMock(961),
-            1
-        ));
+        
+        $datetimeAttribute = array(
+            'ce' => array(
+                '1.9' => new ImmutableDatetimeAttributeValue(
+                            $this->getAttributeMock(167, 4),
+                            new \DateTime('2016-07-13 12:34:56'),
+                            $this->getProductMock(961),
+                            1
+                    ),
+                '2.0' => new ImmutableDatetimeAttributeValue(
+                            $this->getAttributeMock(167),
+                            new \DateTime('2016-07-13 12:34:56'),
+                            $this->getProductMock(961),
+                            1
+                    ),
+            ),
+        );
+        
+        $this->persister->persist($value = $datetimeAttribute[$GLOBALS['MAGENTO_EDITION']][$GLOBALS['MAGENTO_VERSION']]);
         $this->persister->flush();
 
         $this->assertEquals(24, $value->getId());
-
-        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
-            'catalog_product_entity_datetime' => [
-                [
-                    'value_id' => 20,
-                    'entity_type_id' => 4,
-                    'attribute_id' => 167,
-                    'store_id' => 0,
-                    'entity_id' => 3,
-                    'value' => null,
-                ],
-                [
-                    'value_id' => 23,
-                    'entity_type_id' => 4,
-                    'attribute_id' => 167,
-                    'store_id' => 0,
-                    'entity_id' => 961,
-                    'value' => '2016-12-01 12:34:56',
-                ],
-                [
+        
+        $newCatalogProductEntityDatetime = array(
+            'ce' => array(
+                '1.9' => array(
                     'value_id' => 24,
                     'entity_type_id' => 4,
                     'attribute_id' => 167,
                     'store_id' => 1,
                     'entity_id' => 961,
                     'value' => '2016-07-13 12:34:56',
-                ],
-            ],
-        ]);
-
+                ),
+                '2.0' => array(
+                    'value_id' => 24,
+                    'attribute_id' => 167,
+                    'store_id' => 1,
+                    'entity_id' => 961,
+                    'value' => '2016-07-13 12:34:56',
+                ),
+            ),
+        );
+        
+        $expected = $this->getDataSet();
+        $expected->getTable('catalog_product_entity_datetime')->addRow($newCatalogProductEntityDatetime[$GLOBALS['MAGENTO_EDITION']][$GLOBALS['MAGENTO_VERSION']]);
+        
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
+        $actual->addTable(TableStore::getTableName($GLOBALS['MAGENTO_VERSION']));
+        $actual->addTable('eav_entity_type');
+        $actual->addTable('eav_attribute');
+        $actual->addTable('catalog_product_entity');
         $actual->addTable('catalog_product_entity_datetime');
 
         $this->assertDataSetsEqual($expected, $actual);
