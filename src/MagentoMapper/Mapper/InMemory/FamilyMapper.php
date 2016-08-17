@@ -1,10 +1,14 @@
 <?php
 
-namespace Kiboko\Component\MagentoMapper\Mapper;
+namespace Kiboko\Component\MagentoMapper\Mapper\InMemory;
 
-class DefaultFamilyMapper implements FamilyMapperInterface
+use Pim\Component\Catalog\Model\FamilyMapperInterface;
+
+class FamilyMapper implements FamilyMapperInterface
 {
-    private $mapping = [
+    use InMemoryMapperTrait;
+
+    protected $mapping = [
         'bag' => 47,
         'bandeau_bra' => 41,
         'bath_robe' => 31,
@@ -71,12 +75,14 @@ class DefaultFamilyMapper implements FamilyMapperInterface
         'wallet' => 82,
     ];
 
-    public function map($identifier)
-    {
-        if (!isset($this->mapping[$identifier])) {
-            return;
+    /**
+     * @param array|null $mapping
+     */
+    public function __construct(
+        array $mapping = null
+    ) {
+        if ($mapping !== null) {
+            $this->mapping = $mapping;
         }
-
-        return $this->mapping[$identifier];
     }
 }

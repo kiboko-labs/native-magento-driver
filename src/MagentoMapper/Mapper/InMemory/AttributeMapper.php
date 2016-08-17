@@ -1,10 +1,14 @@
 <?php
 
-namespace Kiboko\Component\MagentoMapper\Mapper;
+namespace Kiboko\Component\MagentoMapper\Mapper\InMemory;
 
-class DefaultAttributeMapper implements AttributeMapperInterface
+use Kiboko\Component\MagentoMapper\Mapper\AttributeMapperInterface;
+
+class AttributeMapper implements AttributeMapperInterface
 {
-    private $mapping = [
+    use InMemoryMapperTrait;
+
+    protected $mapping = [
         'additional_colors' => 169,
         'additional_materials' => 215,
         'ankle_size_metric' => 207,
@@ -133,12 +137,12 @@ class DefaultAttributeMapper implements AttributeMapperInterface
         'width_metric' => 210,
     ];
 
-    public function map($identifier)
-    {
-        if (!isset($this->mapping[$identifier])) {
-            return;
-        }
-
-        return $this->mapping[$identifier];
+    /**
+     * @param array $mapping
+     */
+    public function __construct(
+        array $mapping
+    ) {
+        $this->mapping = $mapping;
     }
 }

@@ -2,6 +2,6 @@
 
 namespace Kiboko\Component\MagentoMapper\Mapper;
 
-interface OptionMapperInterface extends MapperInterface
+interface ProductMapperInterface extends MapperInterface
 {
 }

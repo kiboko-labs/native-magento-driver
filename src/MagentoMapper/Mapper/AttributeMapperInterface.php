@@ -2,12 +2,6 @@
 
 namespace Kiboko\Component\MagentoMapper\Mapper;
 
-interface AttributeMapperInterface
+interface AttributeMapperInterface extends MapperInterface
 {
-    /**
-     * @param string $identifier
-     *
-     * @return int
-     */
-    public function map($identifier);
 }

@@ -57,10 +57,10 @@ class AttributeQueryBuilder implements AttributeQueryBuilderInterface
     public static function getDefaultTable($prefix = null)
     {
         if ($prefix !== null) {
-            return sprintf('%sluni_pim_mapping_attribute', $prefix);
+            return sprintf('%skiboko_pim_mapping_attribute', $prefix);
         }
 
-        return 'luni_pim_mapping_attribute';
+        return 'kiboko_pim_mapping_attribute';
     }
 
     /**
