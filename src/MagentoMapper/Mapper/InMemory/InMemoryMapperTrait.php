@@ -17,7 +17,7 @@ trait InMemoryMapperTrait
      */
     public function map($code)
     {
-        if (is_string($code)) {
+        if (!is_string($code)) {
             throw new InvalidArgumentException(
                 sprintf(
                     'Expecting string type for argument #1, found %s.',
