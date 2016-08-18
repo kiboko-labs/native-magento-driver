@@ -16,6 +16,10 @@ trait InMemoryMapperTrait
      */
     public function map($identifier)
     {
+        if (!isset($this->mapping)) {
+            $this->mapping = [];
+        }
+
         if (!isset($this->mapping[$identifier])) {
             return;
         }
@@ -29,6 +33,10 @@ trait InMemoryMapperTrait
      */
     public function persist($code, $identifier)
     {
+        if (!isset($this->mapping)) {
+            $this->mapping = [];
+        }
+
         $this->mapping[$code] = $identifier;
     }
 }
