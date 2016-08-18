@@ -138,11 +138,13 @@ class AttributeMapper implements AttributeMapperInterface
     ];
 
     /**
-     * @param array $mapping
+     * @param array|null $mapping
      */
     public function __construct(
-        array $mapping
+        array $mapping = null
     ) {
-        $this->mapping = $mapping;
+        if ($mapping !== null) {
+            $this->mapping = $mapping;
+        }
     }
 }
