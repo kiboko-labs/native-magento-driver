@@ -2,10 +2,14 @@
 
 namespace Kiboko\Component\MagentoMapper\Mapper\InMemory;
 
+/**
+ * Class InMemoryMapperTrait
+ * @package Kiboko\Component\MagentoMapper\Mapper\InMemory
+ *
+ * @attribute array $mapping
+ */
 trait InMemoryMapperTrait
 {
-    protected $mapping = [];
-
     /**
      * @param string $identifier
      * @return int
