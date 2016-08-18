@@ -2,7 +2,7 @@
 
 namespace Kiboko\Component\MagentoMapper\Mapper\InMemory;
 
-use Pim\Component\Catalog\Model\FamilyMapperInterface;
+use Kiboko\Component\MagentoMapper\Mapper\FamilyMapperInterface;
 
 class FamilyMapper implements FamilyMapperInterface
 {
