@@ -35,23 +35,23 @@ class SimpleSelectAttributeTransformer
     {
         return [
             Attribute::buildNewWith(
-                $mappedId,                                      // attribute_id
-                $this->entityTypeMapper->map($attribute),       // entity_type_id
-                $attribute->getCode(),                          // attribute_code
-                null,                                           // attribute_model
-                'int',                                          // backend_type
-                null,                                           // backend_model
-                null,                                           // backend_table
-                null,                                           // frontend_model
-                'select',                                       // frontend_input
-                $attribute->getLabel(),                         // frontend_label
-                null,                                           // frontend_class
-                'eav/entity_attribute_source_table',            // source_model
-                $attribute->isRequired(),                       // is_required
-                true,                                           // is_user_defined
-                $attribute->isUnique(),                         // is_unique
-                null,                                           // default_value
-                null                                            // note
+                $mappedId,                                           // attribute_id
+                $this->entityTypeMapper->map($attribute->getCode()), // entity_type_id
+                $attribute->getCode(),                               // attribute_code
+                null,                                                // attribute_model
+                'int',                                               // backend_type
+                null,                                                // backend_model
+                null,                                                // backend_table
+                null,                                                // frontend_model
+                'select',                                            // frontend_input
+                $attribute->getLabel(),                              // frontend_label
+                null,                                                // frontend_class
+                'eav/entity_attribute_source_table',                 // source_model
+                $attribute->isRequired(),                            // is_required
+                true,                                                // is_user_defined
+                $attribute->isUnique(),                              // is_unique
+                null,                                                // default_value
+                null                                                 // note
             )
         ];
     }
