@@ -2,7 +2,7 @@
 
 namespace Kiboko\Component\MagentoMapper\Mapper\InMemory;
 
-use Pim\Component\Catalog\Model\EntityTypeMapperInterface;
+use Kiboko\Component\MagentoMapper\Mapper\EntityTypeMapperInterface;
 
 class EntityTypeMapper implements EntityTypeMapperInterface
 {
