@@ -74,18 +74,32 @@ class OptionMappingSchemaManager implements MappingSchemaManagerInterface
             'unsigned' => true,
         ]);
 
+        $table->addColumn('instance_identifier', 'string', [
+            'length' => 64
+        ]);
+
         $table->addColumn('option_code', 'string', [
             'length' => 255,
         ]);
 
-        $table->addUniqueIndex(['option_id']);
+        $table->addColumn('mapping_class', 'string', [
+            'length' => 255,
+        ]);
+
+        $table->addColumn('mapping_options', 'string', [
+            'length' => 65536,
+        ]);
+
+        $table->addIndex(['option_id']);
 
         $table->addIndex(['attribute_id']);
 
         $table->addIndex(['option_code']);
 
+        $table->addUniqueIndex(['instance_identifier', 'option_id', 'attribute_id']);
+
         $table->addForeignKeyConstraint(
-            $this->optionsTableName,
+            new Table($this->optionsTableName),
             [
                 'option_id',
             ],
@@ -99,7 +113,7 @@ class OptionMappingSchemaManager implements MappingSchemaManagerInterface
         );
 
         $table->addForeignKeyConstraint(
-            $this->attributesTableName,
+            new Table($this->attributesTableName),
             [
                 'attribute_id',
             ],

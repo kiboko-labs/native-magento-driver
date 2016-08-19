@@ -62,16 +62,30 @@ class AttributeMappingSchemaManager implements MappingSchemaManagerInterface
             'unsigned' => true,
         ]);
 
+        $table->addColumn('instance_identifier', 'string', [
+            'length' => 64
+        ]);
+
         $table->addColumn('attribute_code', 'string', [
             'length' => 255,
+        ]);
+
+        $table->addColumn('mapping_class', 'string', [
+            'length' => 255,
+        ]);
+
+        $table->addColumn('mapping_options', 'string', [
+            'length' => 65536,
         ]);
 
         $table->addIndex(['attribute_id']);
 
         $table->addIndex(['attribute_code']);
 
+        $table->addUniqueIndex(['instance_identifier', 'attribute_id']);
+
         $table->addForeignKeyConstraint(
-            $this->attributesTableName,
+            new Table($this->attributesTableName),
             [
                 'attribute_id',
             ],

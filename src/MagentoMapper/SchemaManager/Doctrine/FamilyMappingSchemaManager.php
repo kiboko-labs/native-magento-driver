@@ -62,16 +62,30 @@ class FamilyMappingSchemaManager implements MappingSchemaManagerInterface
             'unsigned' => true,
         ]);
 
+        $table->addColumn('instance_identifier', 'string', [
+            'length' => 64
+        ]);
+
         $table->addColumn('family_code', 'string', [
             'length' => 255,
+        ]);
+
+        $table->addColumn('mapping_class', 'string', [
+            'length' => 255,
+        ]);
+
+        $table->addColumn('mapping_options', 'string', [
+            'length' => 65536,
         ]);
 
         $table->addIndex(['attribute_set_id']);
 
         $table->addIndex(['family_code']);
 
+        $table->addUniqueIndex(['instance_identifier', 'attribute_set_id']);
+
         $table->addForeignKeyConstraint(
-            $this->attributeSetsTableName,
+            new Table($this->attributeSetsTableName),
             [
                 'attribute_set_id',
             ],
