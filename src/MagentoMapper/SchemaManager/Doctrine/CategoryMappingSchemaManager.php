@@ -132,7 +132,7 @@ class CategoryMappingSchemaManager implements MappingSchemaManagerInterface
             ->where($queryBuilder->expr()->eq('pim.import', '?'))
         ;
 
-        $this->connection->executeQuery(
+        return $this->connection->executeUpdate(
             "INSERT INTO {$this->connection->quoteIdentifier($this->tableName)} "
                 .$queryBuilder->getSQL(),
             [

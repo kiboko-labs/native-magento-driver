@@ -4,21 +4,13 @@ namespace Kiboko\Component\MagentoMapper\SchemaManager\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
+use Doctrine\DBAL\Schema\Schema;
+use Doctrine\DBAL\Schema\SchemaDiff;
 use Doctrine\DBAL\Schema\Table;
-use Kiboko\Component\MagentoMapper\SchemaManager\MappingSchemaManagerInterface;
+use Doctrine\DBAL\Schema\Comparator as SchemaComparator;
 
-class AttributeMappingSchemaManager implements MappingSchemaManagerInterface
+class AttributeMappingSchemaManager extends AbstractMappingSchemaManager
 {
-    /**
-     * @var Connection
-     */
-    private $connection;
-
-    /**
-     * @var string
-     */
-    private $tableName;
-
     /**
      * @var string
      */
@@ -27,34 +19,51 @@ class AttributeMappingSchemaManager implements MappingSchemaManagerInterface
     /**
      * OptionMappingSchemaManager constructor.
      *
-     * @param Connection $connection
-     * @param string     $tableName
-     * @param string     $attributesTableName
+     * @param Connection       $connection
+     * @param SchemaComparator $schemaComparator
+     * @param string           $tableName
+     * @param string           $attributesTableName
      */
     public function __construct(
         Connection $connection,
+        SchemaComparator $schemaComparator,
         $tableName,
         $attributesTableName
     ) {
-        $this->connection = $connection;
-        $this->tableName = $tableName;
+        parent::__construct($connection, $schemaComparator, $tableName);
         $this->attributesTableName = $attributesTableName;
     }
 
     /**
-     * @return bool
+     * @param Schema $currentSchema
+     * @param SchemaDiff $schemaDiff
+     * @return SchemaDiff
+     * @throws \Doctrine\DBAL\Schema\SchemaException
      */
-    public function assertTableExists()
+    public function schemaDiff(Schema $currentSchema, SchemaDiff $schemaDiff)
     {
-        $manager = $this->connection->getSchemaManager();
+        $table = $this->declareTable();
 
-        return $manager->tablesExist([$this->tableName]);
+        if (!$currentSchema->hasTable($this->tableName)) {
+            $schemaDiff->newTables[$table->getName()] = $table;
+        } else {
+            $tableDifferences = $this->schemaComparator->diffTable(
+                $currentSchema->getTable($this->tableName),
+                $table
+            );
+
+            if ($tableDifferences !== false) {
+                $schemaDiff->changedTables[$this->tableName] = $tableDifferences;
+            }
+        }
+
+        return $schemaDiff;
     }
 
     /**
      * @return Table
      */
-    private function declareTableSchema()
+    protected function declareTable()
     {
         $table = new Table($this->tableName);
 
@@ -85,7 +94,7 @@ class AttributeMappingSchemaManager implements MappingSchemaManagerInterface
         $table->addUniqueIndex(['instance_identifier', 'attribute_id']);
 
         $table->addForeignKeyConstraint(
-            new Table($this->attributesTableName),
+            $this->attributesTableName,
             [
                 'attribute_id',
             ],
@@ -101,19 +110,14 @@ class AttributeMappingSchemaManager implements MappingSchemaManagerInterface
         return $table;
     }
 
-    public function createTable()
-    {
-        $manager = $this->connection->getSchemaManager();
-
-        $manager->createTable($this->declareTableSchema());
-    }
-
     /**
      * @param string $pimgentoTableName
+     * @param string $linkCode
+     * @return int
      *
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function initializeFromPimgento($pimgentoTableName)
+    public function initializeFromPimgento($pimgentoTableName, $linkCode)
     {
         $manager = $this->connection->getSchemaManager();
 
@@ -125,14 +129,17 @@ class AttributeMappingSchemaManager implements MappingSchemaManagerInterface
 
         $queryBuilder
             ->select([
-                'attribute_id' => 'pim.entity_id',
-                'attribute_code' => 'pim.code',
+                'attribute_id'        => 'pim.entity_id',
+                'instance_identifier' => $queryBuilder->expr()->literal($linkCode),
+                'attribute_code'      => 'pim.code',
+                'mapping_class'       => 'NULL',
+                'mapping_options'     => $queryBuilder->expr()->literal(json_encode([], JSON_OBJECT_AS_ARRAY)),
             ])
             ->from($pimgentoTableName, 'pim')
             ->where($queryBuilder->expr()->eq('pim.import', '?'))
         ;
 
-        $this->connection->executeQuery(
+        return $this->connection->executeUpdate(
             "INSERT INTO {$this->connection->quoteIdentifier($this->tableName)} "
                 .$queryBuilder->getSQL(),
             [

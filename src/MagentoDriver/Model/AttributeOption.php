@@ -20,13 +20,25 @@ class AttributeOption implements AttributeOptionInterface
     private $sortOrder;
 
     /**
+     * @var int
+     */
+    private $values;
+
+    /**
      * @param int $attributeId
      * @param int $sortOrder
+     * @param array $values
      */
-    public function __construct($attributeId, $sortOrder)
+    public function __construct($attributeId, $sortOrder, array $values = null)
     {
         $this->attributeId = $attributeId;
         $this->sortOrder = $sortOrder;
+
+        if ($values !== null) {
+            $this->setValues($values);
+        } else {
+            $this->values = [];
+        }
     }
 
     /**
@@ -78,5 +90,29 @@ class AttributeOption implements AttributeOptionInterface
     public function persistedToId($identifier)
     {
         $this->identifier = $identifier;
+    }
+
+    /**
+     * @param AttributeOptionValueInterface $optionValue
+     */
+    public function addValue(AttributeOptionValueInterface $optionValue)
+    {
+        $this->values[] = $optionValue;
+    }
+
+    /**
+     * @param AttributeOptionValueInterface[] $optionValues
+     */
+    public function setValues(array $optionValues)
+    {
+        $this->values = $optionValues;
+    }
+
+    /**
+     * @return AttributeOptionValueInterface[]
+     */
+    public function getValues()
+    {
+        return $this->values;
     }
 }
