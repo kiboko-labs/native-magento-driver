@@ -2,8 +2,6 @@
 
 namespace Kiboko\Component\MagentoMapper\Transformer\Attribute;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Kiboko\Component\MagentoMapper\Mapper\AttributeMapperInterface;
 use Kiboko\Component\MagentoMapper\Transformer\AttributeTransformerInterface;
 
@@ -43,13 +41,13 @@ class AttributeTransformer
      */
     public function setAttributeTransformers(array $attributeTransformers)
     {
-        $this->attributeTransformers = new ArrayCollection();
+        $this->attributeTransformers = [];
         foreach ($attributeTransformers as $transformer) {
             if (!$transformer instanceof AttributeTransformerInterface) {
                 continue;
             }
 
-            $this->attributeTransformers->add($transformer);
+            $this->attributeTransformers[] = $transformer;
         }
     }
 
@@ -58,7 +56,7 @@ class AttributeTransformer
      */
     public function addAttributeTransformer(AttributeTransformerInterface $attributeTransformer)
     {
-        $this->attributeTransformers->add($attributeTransformer);
+        $this->attributeTransformers[] = $attributeTransformer;
     }
 
     /**
@@ -94,6 +92,12 @@ class AttributeTransformer
      */
     public function supportsTransformation(PimAttributeInterface $attribute)
     {
-        return $attribute instanceof PimAttributeInterface;
+        foreach ($this->attributeTransformers as $transformer) {
+            if ($transformer->supportsTransformation($attribute)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
