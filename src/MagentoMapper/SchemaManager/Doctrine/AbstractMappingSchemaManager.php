@@ -74,4 +74,12 @@ abstract class AbstractMappingSchemaManager implements MappingSchemaManagerInter
      * @return Table
      */
     abstract protected function declareTable();
+
+    /**
+     * @return string
+     */
+    public function getTableName()
+    {
+        return $this->tableName;
+    }
 }

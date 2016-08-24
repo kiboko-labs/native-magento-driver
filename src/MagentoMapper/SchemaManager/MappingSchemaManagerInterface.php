@@ -22,4 +22,9 @@ interface MappingSchemaManagerInterface
      * @throws \Doctrine\DBAL\DBALException
      */
     public function initializeFromPimgento($pimgentoTableName, $linkCode);
+
+    /**
+     * @return string
+     */
+    public function getTableName();
 }
