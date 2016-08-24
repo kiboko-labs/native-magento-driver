@@ -137,7 +137,7 @@ class AttributeOptionMappingSchemaManager extends AbstractMappingSchemaManager
             ])
             ->from($pimgentoTableName, 'pim')
             ->innerJoin('pim', 'eav_attribute_option', 'ao', $queryBuilder->expr()->eq('ao.option_id', 'pim.entity_id'))
-            ->innerJoin('pim', '$pimgentoTableName', 'pim2', $queryBuilder->expr()->andX([
+            ->innerJoin('pim', $pimgentoTableName, 'pim2', $queryBuilder->expr()->andX([
                 $queryBuilder->expr()->eq('ao.attribute_id', 'pim2.entity_id'),
                 $queryBuilder->expr()->eq('pim2.import', $queryBuilder->expr()->literal('attribute')),
             ]))
