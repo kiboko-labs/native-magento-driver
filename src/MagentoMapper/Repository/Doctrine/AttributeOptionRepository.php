@@ -4,10 +4,10 @@ namespace Kiboko\Component\MagentoMapper\Repository\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Kiboko\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
-use Kiboko\Component\MagentoMapper\QueryBuilder\AttributeQueryBuilderInterface;
-use Kiboko\Component\MagentoMapper\Repository\AttributeRepositoryInterface;
+use Kiboko\Component\MagentoMapper\QueryBuilder\AttributeOptionQueryBuilderInterface;
+use Kiboko\Component\MagentoMapper\Repository\AttributeOptionRepositoryInterface;
 
-class AttributeRepository implements AttributeRepositoryInterface
+class AttributeOptionRepository implements AttributeOptionRepositoryInterface
 {
     /**
      * @var Connection
@@ -15,19 +15,19 @@ class AttributeRepository implements AttributeRepositoryInterface
     private $connection;
 
     /**
-     * @var AttributeQueryBuilderInterface
+     * @var AttributeOptionQueryBuilderInterface
      */
     private $queryBuilder;
 
     /**
      * AttributeRepository constructor.
      *
-     * @param Connection                     $connection
-     * @param AttributeQueryBuilderInterface $queryBuilder
+     * @param Connection                           $connection
+     * @param AttributeOptionQueryBuilderInterface $queryBuilder
      */
     public function __construct(
         Connection $connection,
-        AttributeQueryBuilderInterface $queryBuilder
+        AttributeOptionQueryBuilderInterface $queryBuilder
     ) {
         $this->connection = $connection;
         $this->queryBuilder = $queryBuilder;
@@ -83,7 +83,7 @@ class AttributeRepository implements AttributeRepositoryInterface
 
         $attributeList = [];
         foreach ($statement as $options) {
-            $attributeList[$options['attribute_code']] = $options['attribute_id'];
+            $attributeList[$options['option_code']] = $options['option_id'];
         }
 
         return $attributeList;
