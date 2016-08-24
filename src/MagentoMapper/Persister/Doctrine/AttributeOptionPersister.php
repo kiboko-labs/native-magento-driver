@@ -3,9 +3,9 @@
 namespace Kiboko\Component\MagentoMapper\Persister\Doctrine;
 
 use Doctrine\DBAL\Connection;
-use Kiboko\Component\MagentoMapper\Persister\AttributePersisterInterface;
+use Kiboko\Component\MagentoMapper\Persister\AttributeOptionPersisterInterface;
 
-class AttributeOptionPersister implements AttributePersisterInterface
+class AttributeOptionPersister implements AttributeOptionPersisterInterface
 {
     /**
      * @var Connection
