@@ -5,8 +5,8 @@ namespace Kiboko\Component\MagentoMapper\Persister;
 interface AttributePersisterInterface
 {
     /**
-     * @param int $code
-     * @param string $identifier
+     * @param string $code
+     * @param int $identifier
      */
     public function persist($code, $identifier);
 }

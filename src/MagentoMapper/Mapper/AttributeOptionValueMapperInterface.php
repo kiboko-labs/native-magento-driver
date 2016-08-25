@@ -2,7 +2,7 @@
 
 namespace Kiboko\Component\MagentoMapper\Mapper;
 
-interface MapperInterface
+interface AttributeOptionValueMapperInterface
 {
     /**
      * @param string $code
@@ -12,8 +12,9 @@ interface MapperInterface
     public function map($code);
 
     /**
-     * @param string $code
+     * @param string $optionCode
+     * @param string $locale
      * @param int $identifier
      */
-    public function persist($code, $identifier);
+    public function persist($optionCode, $locale, $identifier);
 }

@@ -3,9 +3,9 @@
 namespace Kiboko\Component\MagentoMapper\Persister\Doctrine;
 
 use Doctrine\DBAL\Connection;
-use Kiboko\Component\MagentoMapper\Persister\AttributeOptionPersisterInterface;
+use Kiboko\Component\MagentoMapper\Persister\AttributeOptionValuePersisterInterface;
 
-class AttributeOptionPersister implements AttributeOptionPersisterInterface
+class AttributeOptionValuePersister implements AttributeOptionValuePersisterInterface
 {
     /**
      * @var Connection
@@ -23,15 +23,17 @@ class AttributeOptionPersister implements AttributeOptionPersisterInterface
     }
 
     /**
-     * @param string $code
+     * @param string $optionsCode
+     * @param string $locale
      * @param int $identifier
      */
-    public function persist($code, $identifier)
+    public function persist($optionsCode, $locale, $identifier)
     {
         $this->connection->insert($this->tableName,
             [
-                'option_id'   => $identifier,
-                'option_code' => $code,
+                'value_id'    => $identifier,
+                'option_code' => $optionsCode,
+                'locale'      => $locale,
             ]
         );
     }

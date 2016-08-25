@@ -23,14 +23,14 @@ class AttributePersister implements AttributePersisterInterface
     }
 
     /**
-     * @param int $code
-     * @param string $identifier
+     * @param string $code
+     * @param int $identifier
      */
     public function persist($code, $identifier)
     {
         $this->connection->insert($this->tableName,
             [
-                'attribute_id' => $identifier,
+                'attribute_id'   => $identifier,
                 'attribute_code' => $code,
             ]
         );
