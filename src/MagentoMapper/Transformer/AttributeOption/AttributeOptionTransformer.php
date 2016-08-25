@@ -93,8 +93,8 @@ class AttributeOptionTransformer implements AttributeOptionTransformerInterface
 
             $option->addValue(
                 AttributeOptionValue::buildNewWith(
-                    $this->attributeOptionValueMapper->map(sprintf('%s:%d',
-                        $attributeOption->getCode(), $value->getLocale())),
+                    $this->attributeOptionValueMapper->map(
+                        $attributeOption->getCode(), $value->getLocale()),
                     $option->getId(),
                     0, // Admin store Id
                     $value->getLabel()
@@ -117,8 +117,8 @@ class AttributeOptionTransformer implements AttributeOptionTransformerInterface
 
                 $option->addValue(
                     AttributeOptionValue::buildNewWith(
-                        $this->attributeOptionValueMapper->map(sprintf('%s:%d',
-                            $attributeOption->getCode(), $value->getLocale())),
+                        $this->attributeOptionValueMapper->map(
+                            $attributeOption->getCode(), $value->getLocale()),
                         $option->getId(),
                         $store->getId(),
                         $value->getLabel()
