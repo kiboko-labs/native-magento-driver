@@ -5,6 +5,7 @@ namespace Kiboko\Component\MagentoDriver\Repository\Doctrine;
 use Doctrine\DBAL\Connection;
 use Kiboko\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
 use Kiboko\Component\MagentoDriver\Factory\StoreFactoryInterface;
+use Kiboko\Component\MagentoDriver\Model\Store;
 use Kiboko\Component\MagentoDriver\Model\StoreInterface;
 use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\StoreQueryBuilderInterface;
 use Kiboko\Component\MagentoDriver\Repository\StoreRepositoryInterface;
@@ -40,7 +41,7 @@ class StoreRepository implements StoreRepositoryInterface
      */
     protected function createNewStoreInstanceFromDatabase(array $options)
     {
-        return new Store;
+        return new Store($options['store_id'], $options['code']);
     }
 
     /**
