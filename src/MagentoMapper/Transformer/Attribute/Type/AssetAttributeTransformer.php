@@ -34,7 +34,7 @@ class AssetAttributeTransformer
     public function transform(PimAttributeInterface $attribute, $mappedId = null)
     {
         return [
-            Attribute::buildNewWith(
+            $attribute->getCode() => Attribute::buildNewWith(
                 $mappedId,                                                 // attribute_id
                 $this->entityTypeMapper->map($attribute->getEntityType()), // entity_type_id
                 $attribute->getCode(),                                     // attribute_code
