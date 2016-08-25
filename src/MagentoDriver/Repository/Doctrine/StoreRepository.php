@@ -22,23 +22,15 @@ class StoreRepository implements StoreRepositoryInterface
     private $connection;
 
     /**
-     * @var StoreFactoryInterface
-     */
-    private $storeFactory;
-
-    /**
      * @param Connection                 $connection
      * @param StoreQueryBuilderInterface $queryBuilder
-     * @param StoreFactoryInterface     $storeFactory
      */
     public function __construct(
         Connection $connection,
-        StoreQueryBuilderInterface $queryBuilder,
-        StoreFactoryInterface $storeFactory
+        StoreQueryBuilderInterface $queryBuilder
     ) {
         $this->connection = $connection;
         $this->queryBuilder = $queryBuilder;
-        $this->storeFactory = $storeFactory;
     }
 
     /**
@@ -48,7 +40,7 @@ class StoreRepository implements StoreRepositoryInterface
      */
     protected function createNewStoreInstanceFromDatabase(array $options)
     {
-        return $this->storeFactory->buildNew($options);
+        return new Store;
     }
 
     /**
@@ -106,7 +98,7 @@ class StoreRepository implements StoreRepositoryInterface
         $query = $this->queryBuilder->createFindOneByCodeQueryBuilder('f');
 
         $statement = $this->connection->prepare($query);
-        if (!$statement->execute([$code])) {
+        if (!$statement->execute()) {
             throw new DatabaseFetchingFailureException();
         }
 
