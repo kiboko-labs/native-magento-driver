@@ -24,7 +24,7 @@ class AttributeOptionTransformer implements AttributeOptionTransformerInterface
         );
 
         return [
-            $option
+            $attributeOption->getCode() => $option
         ];
     }
 
