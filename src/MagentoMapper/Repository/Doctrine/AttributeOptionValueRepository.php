@@ -4,7 +4,7 @@ namespace Kiboko\Component\MagentoMapper\Repository\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Kiboko\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
-use Kiboko\Component\MagentoMapper\QueryBuilder\AttributeOptionQueryBuilderInterface;
+use Kiboko\Component\MagentoMapper\QueryBuilder\AttributeOptionValueQueryBuilderInterface;
 use Kiboko\Component\MagentoMapper\Repository\AttributeOptionValueRepositoryInterface;
 
 class AttributeOptionValueRepository implements AttributeOptionValueRepositoryInterface
@@ -15,19 +15,19 @@ class AttributeOptionValueRepository implements AttributeOptionValueRepositoryIn
     private $connection;
 
     /**
-     * @var AttributeOptionQueryBuilderInterface
+     * @var AttributeOptionValueQueryBuilderInterface
      */
     private $queryBuilder;
 
     /**
      * AttributeRepository constructor.
      *
-     * @param Connection                           $connection
-     * @param AttributeOptionQueryBuilderInterface $queryBuilder
+     * @param Connection                                $connection
+     * @param AttributeOptionValueQueryBuilderInterface $queryBuilder
      */
     public function __construct(
         Connection $connection,
-        AttributeOptionQueryBuilderInterface $queryBuilder
+        AttributeOptionValueQueryBuilderInterface $queryBuilder
     ) {
         $this->connection = $connection;
         $this->queryBuilder = $queryBuilder;
@@ -43,7 +43,7 @@ class AttributeOptionValueRepository implements AttributeOptionValueRepositoryIn
      */
     public function findOneByCodeAndLocale($code, $locale)
     {
-        $query = $this->queryBuilder->createFindOneByCodeQueryBuilder('p');
+        $query = $this->queryBuilder->createFindOneByCodeAndLocaleQueryBuilder('p');
 
         $statement = $this->connection->prepare($query);
         $statement->bindValue(1, $code);

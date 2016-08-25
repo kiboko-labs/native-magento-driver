@@ -6,10 +6,11 @@ interface AttributeOptionValueMapperInterface
 {
     /**
      * @param string $code
+     * @param string $locale
      *
      * @return int
      */
-    public function map($code);
+    public function map($code, $locale);
 
     /**
      * @param string $optionCode

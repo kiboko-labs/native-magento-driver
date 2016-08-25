@@ -40,17 +40,18 @@ class AttributeOptionValueMapper implements AttributeOptionValueMapperInterface
 
     /**
      * @param string $code
+     * @param string $locale
      * @return int
      */
-    public function map($code)
+    public function map($code, $locale)
     {
         if (null !== $this->secondLevelMapper &&
-            null !== ($mapped = $this->secondLevelMapper->map($code))
+            null !== ($mapped = $this->secondLevelMapper->map($code, $locale))
         ) {
             return $mapped;
         }
 
-        return $this->repository->findOneByCode($code);
+        return $this->repository->findOneByCodeAndLocale($code, $locale);
     }
 
     /**
