@@ -17,21 +17,29 @@ class AttributeOptionValueMappingSchemaManager extends AbstractMappingSchemaMana
     private $attributeOptionValuesTableName;
 
     /**
+     * @var string
+     */
+    private $attributeOptionTableName;
+
+    /**
      * OptionMappingSchemaManager constructor.
      *
      * @param Connection       $connection
      * @param SchemaComparator $schemaComparator
      * @param string           $tableName
      * @param string           $attributeOptionValuesTableName
+     * @param string           $attributeOptionTableName
      */
     public function __construct(
         Connection $connection,
         SchemaComparator $schemaComparator,
         $tableName,
-        $attributeOptionValuesTableName
+        $attributeOptionValuesTableName,
+        $attributeOptionTableName
     ) {
         parent::__construct($connection, $schemaComparator, $tableName);
         $this->attributeOptionValuesTableName = $attributeOptionValuesTableName;
+        $this->attributeOptionTableName = $attributeOptionTableName;
     }
 
     /**
@@ -67,12 +75,16 @@ class AttributeOptionValueMappingSchemaManager extends AbstractMappingSchemaMana
     {
         $table = new Table($this->tableName);
 
-        $table->addColumn('option_id', 'smallint', [
+        $table->addColumn('value_id', 'integer', [
             'unsigned' => true,
         ]);
 
         $table->addColumn('instance_identifier', 'string', [
             'length' => 64
+        ]);
+
+        $table->addColumn('option_id', 'integer', [
+            'unsigned' => true,
         ]);
 
         $table->addColumn('option_code', 'string', [
@@ -99,10 +111,24 @@ class AttributeOptionValueMappingSchemaManager extends AbstractMappingSchemaMana
 
         $table->addUniqueIndex(['option_code', 'locale']);
 
-        $table->addUniqueIndex(['instance_identifier', 'option_id']);
+        $table->addUniqueIndex(['instance_identifier', 'value_id']);
 
         $table->addForeignKeyConstraint(
             $this->attributeOptionValuesTableName,
+            [
+                'option_id',
+            ],
+            [
+                'option_id',
+            ],
+            [
+                'onUpdate' => 'CASCADE',
+                'onDelete' => 'CASCADE',
+            ]
+        );
+
+        $table->addForeignKeyConstraint(
+            $this->attributeOptionTableName,
             [
                 'option_id',
             ],
