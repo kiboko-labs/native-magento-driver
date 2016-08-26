@@ -70,7 +70,7 @@ class AttributeOptionPersister implements AttributeOptionPersisterInterface
                     'sort_order' => $attributeOption->getSortOrder(),
                 ],
                 [
-                    'attribute_id',
+                    'option_id',
                     'sort_order',
                 ]
             );
