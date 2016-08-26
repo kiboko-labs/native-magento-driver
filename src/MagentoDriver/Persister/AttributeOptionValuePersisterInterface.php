@@ -18,5 +18,8 @@ interface AttributeOptionValuePersisterInterface
      */
     public function __invoke(AttributeOptionValueInterface $attributeOptionValue);
 
+    /**
+     * @return \Traversable
+     */
     public function flush();
 }

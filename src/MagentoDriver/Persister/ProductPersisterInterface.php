@@ -18,5 +18,8 @@ interface ProductPersisterInterface
      */
     public function __invoke(ProductInterface $product);
 
+    /**
+     * @return \Traversable
+     */
     public function flush();
 }

@@ -18,5 +18,8 @@ interface EntityAttributePersisterInterface
      */
     public function __invoke(EntityAttributeInterface $entityAttribute);
 
+    /**
+     * @return \Traversable
+     */
     public function flush();
 }

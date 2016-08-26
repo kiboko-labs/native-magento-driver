@@ -18,5 +18,8 @@ interface EntityStorePersisterInterface
      */
     public function __invoke(EntityStoreInterface $entityStore);
 
+    /**
+     * @return \Traversable
+     */
     public function flush();
 }

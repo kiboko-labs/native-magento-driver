@@ -18,5 +18,8 @@ interface CatalogAttributeExtensionPersisterInterface
      */
     public function __invoke(CatalogAttributeExtensionInterface $attribute);
 
+    /**
+     * @return \Traversable
+     */
     public function flush();
 }

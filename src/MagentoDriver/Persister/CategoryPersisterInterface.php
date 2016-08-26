@@ -18,5 +18,8 @@ interface CategoryPersisterInterface
      */
     public function __invoke(CategoryInterface $category);
 
+    /**
+     * @return \Traversable
+     */
     public function flush();
 }

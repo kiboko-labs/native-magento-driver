@@ -43,6 +43,9 @@ class CatalogAttributePersister implements CatalogAttributePersisterInterface
         $this->catalogAttributeExtensionPersister->persist($attribute);
     }
 
+    /**
+     * @return \Traversable
+     */
     public function flush()
     {
         $this->standardAttributePersister->flush();

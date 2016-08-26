@@ -18,5 +18,8 @@ interface FamilyPersisterInterface
      */
     public function __invoke(FamilyInterface $family);
 
+    /**
+     * @return \Traversable
+     */
     public function flush();
 }

@@ -60,6 +60,9 @@ class AttributeLabelPersister implements AttributeLabelPersisterInterface
         $this->dataQueue->push($attributeLabel);
     }
 
+    /**
+     * @return \Traversable
+     */
     public function flush()
     {
         foreach ($this->dataQueue as $attributeLabel) {
@@ -77,7 +80,10 @@ class AttributeLabelPersister implements AttributeLabelPersisterInterface
                 ]
             );
 
-            $attributeLabel->persistedToId($this->connection->lastInsertId());
+            if ($attributeLabel->getId() === null) {
+                $attributeLabel->persistedToId($this->connection->lastInsertId());
+                yield $attributeLabel;
+            }
         }
     }
 

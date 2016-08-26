@@ -14,7 +14,7 @@ class AttributeOptionValueMappingSchemaManager extends AbstractMappingSchemaMana
     /**
      * @var string
      */
-    private $attributeOptionValuesTableName;
+    private $attributeOptionValueTableName;
 
     /**
      * @var string
@@ -27,18 +27,18 @@ class AttributeOptionValueMappingSchemaManager extends AbstractMappingSchemaMana
      * @param Connection       $connection
      * @param SchemaComparator $schemaComparator
      * @param string           $tableName
-     * @param string           $attributeOptionValuesTableName
+     * @param string           $attributeOptionValueTableName
      * @param string           $attributeOptionTableName
      */
     public function __construct(
         Connection $connection,
         SchemaComparator $schemaComparator,
         $tableName,
-        $attributeOptionValuesTableName,
+        $attributeOptionValueTableName,
         $attributeOptionTableName
     ) {
         parent::__construct($connection, $schemaComparator, $tableName);
-        $this->attributeOptionValuesTableName = $attributeOptionValuesTableName;
+        $this->attributeOptionValueTableName = $attributeOptionValueTableName;
         $this->attributeOptionTableName = $attributeOptionTableName;
     }
 
@@ -114,7 +114,7 @@ class AttributeOptionValueMappingSchemaManager extends AbstractMappingSchemaMana
         $table->addUniqueIndex(['instance_identifier', 'value_id']);
 
         $table->addForeignKeyConstraint(
-            $this->attributeOptionValuesTableName,
+            $this->attributeOptionValueTableName,
             [
                 'option_id',
             ],

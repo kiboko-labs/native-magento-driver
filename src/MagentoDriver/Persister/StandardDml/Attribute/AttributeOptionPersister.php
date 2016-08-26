@@ -60,6 +60,9 @@ class AttributeOptionPersister implements AttributeOptionPersisterInterface
         $this->dataQueue->push($attributeOption);
     }
 
+    /**
+     * @return \Traversable
+     */
     public function flush()
     {
         foreach ($this->dataQueue as $attributeOption) {
@@ -75,7 +78,10 @@ class AttributeOptionPersister implements AttributeOptionPersisterInterface
                 ]
             );
 
-            $attributeOption->persistedToId($this->connection->lastInsertId());
+            if ($attributeOption->getId() === null) {
+                $attributeOption->persistedToId($this->connection->lastInsertId());
+                yield $attributeOption;
+            }
         }
     }
 

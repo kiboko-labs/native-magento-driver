@@ -7,9 +7,12 @@ use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
 use Kiboko\Component\MagentoDriver\Model\VarcharAttributeValueInterface;
 use Kiboko\Component\MagentoDriver\Persister\AttributeValuePersisterInterface;
 use Kiboko\Component\MagentoDriver\Exception\InvalidAttributePersisterTypeException;
+use Kiboko\Component\MagentoDriver\Persister\StandardDml\InsertUpdateAwareTrait;
 
 class VarcharAttributeValuePersister implements AttributeValuePersisterInterface
 {
+    use InsertUpdateAwareTrait;
+
     /**
      * @var Connection
      */
@@ -21,7 +24,7 @@ class VarcharAttributeValuePersister implements AttributeValuePersisterInterface
     private $tableName;
 
     /**
-     * @var \SplQueue|AttributeValueInterface
+     * @var \SplQueue
      */
     private $dataQueue;
 
@@ -68,39 +71,34 @@ class VarcharAttributeValuePersister implements AttributeValuePersisterInterface
         $this->dataQueue->push($value);
     }
 
+    /**
+     * @return \Traversable
+     */
     public function flush()
     {
         /** @var VarcharAttributeValueInterface $value */
         foreach ($this->dataQueue as $value) {
-            $count = 0;
-            if ($value->getId()) {
-                $count = $this->connection->update($this->tableName,
-                    [
-                        'entity_type_id' => 4,
-                        'attribute_id' => $value->getAttributeId(),
-                        'store_id' => $value->getStoreId(),
-                        'entity_id' => $value->getProductId(),
-                        'value' => $value->getValue(),
-                    ],
-                    [
-                        'value_id' => $value->getId(),
-                    ]
-                );
-            }
+            $this->insertOnDuplicateUpdate($this->connection, $this->tableName,
+                [
+                    'value_id' => $value->getId(),
+                    'entity_type_id' => $value->getEntityTypeId(),
+                    'attribute_id' => $value->getAttributeId(),
+                    'store_id' => $value->getStoreId(),
+                    'entity_id' => $value->getProductId(),
+                    'value' => (string) $value->getValue(),
+                ],
+                [
+                    'entity_type_id',
+                    'attribute_id',
+                    'store_id',
+                    'entity_id',
+                    'value',
+                ]
+            );
 
-            if ($count <= 0) {
-                $this->connection->insert($this->tableName,
-                    [
-                        'value_id' => $value->getId(),
-                        'entity_type_id' => 4,
-                        'attribute_id' => $value->getAttributeId(),
-                        'store_id' => $value->getStoreId(),
-                        'entity_id' => $value->getProductId(),
-                        'value' => $value->getValue(),
-                    ]
-                );
-
+            if ($value->getId() === null) {
                 $value->persistedToId($this->connection->lastInsertId());
+                yield $value;
             }
         }
     }

@@ -18,5 +18,8 @@ interface SuperAttributePersisterInterface
      */
     public function __invoke(SuperAttributeInterface $superAttribute);
 
+    /**
+     * @return \Traversable
+     */
     public function flush();
 }

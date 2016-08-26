@@ -18,5 +18,8 @@ interface SuperLinkPersisterInterface
      */
     public function __invoke(SuperLinkInterface $superLink);
 
+    /**
+     * @return \Traversable
+     */
     public function flush();
 }

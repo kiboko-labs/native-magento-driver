@@ -7,7 +7,6 @@ use Kiboko\Component\MagentoDriver\Exception\RuntimeErrorException;
 use Kiboko\Component\MagentoDriver\Model\CatalogAttributeExtensionInterface;
 use Kiboko\Component\MagentoDriver\Persister\CatalogAttributeExtensionPersisterInterface;
 use Kiboko\Component\MagentoDriver\Persister\StandardDml\InsertUpdateAwareTrait;
-use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilder;
 
 class CatalogAttributeExtensionPersister implements CatalogAttributeExtensionPersisterInterface
 {
@@ -62,6 +61,9 @@ class CatalogAttributeExtensionPersister implements CatalogAttributeExtensionPer
         $this->dataQueue->push($attribute);
     }
 
+    /**
+     * @return \Traversable
+     */
     public function flush()
     {
         /** @var CatalogAttributeExtensionInterface $attribute */
@@ -70,10 +72,8 @@ class CatalogAttributeExtensionPersister implements CatalogAttributeExtensionPer
                 throw new RuntimeErrorException('Attribute #id should be defined.');
             }
             
-            $this->insertOnDuplicateUpdate(
-                $this->connection,
-                $this->tableName,
-                array_filter([
+            $this->insertOnDuplicateUpdate($this->connection, $this->tableName,
+                [
                     'attribute_id' => $attribute->getId(),
                     'frontend_input_renderer' => $attribute->getFrontendInputRendererClassName(),
                     'is_global' => $attribute->isGlobal(),
@@ -100,8 +100,34 @@ class CatalogAttributeExtensionPersister implements CatalogAttributeExtensionPer
                     'is_filterable_in_grid' => $attribute->isFilterableInGrid(),
                     'search_weight' => $attribute->getSearchWeight(),
                     'additional_data' => $attribute->getAdditionalData(),
-                ], function($_){ return $_ !== null;}),
-                ProductAttributeQueryBuilder::getDefaultExtraFields()
+                ],
+                [
+                    'attribute_id',
+                    'frontend_input_renderer',
+                    'is_global',
+                    'is_visible',
+                    'is_searchable',
+                    'is_filterable',
+                    'is_comparable',
+                    'is_visible_on_front',
+                    'is_html_allowed_on_front',
+                    'is_used_for_price_rules',
+                    'is_filterable_in_search',
+                    'used_in_product_listing',
+                    'used_for_sort_by',
+                    'is_configurable',
+                    'apply_to',
+                    'is_visible_in_advanced_search',
+                    'position',
+                    'is_wysiwyg_enabled',
+                    'is_used_for_promo_rules',
+                    'is_required_in_admin_store',
+                    'is_used_in_grid',
+                    'is_visible_in_grid',
+                    'is_filterable_in_grid',
+                    'search_weight',
+                    'additional_data',
+                ]
             );
         }
     }

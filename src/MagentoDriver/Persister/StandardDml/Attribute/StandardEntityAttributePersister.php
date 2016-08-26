@@ -60,6 +60,9 @@ class StandardEntityAttributePersister implements EntityAttributePersisterInterf
         $this->dataQueue->push($entityAttribute);
     }
 
+    /**
+     * @return \Traversable
+     */
     public function flush()
     {
         /** @var EntityAttributeInterface $entityAttribute */
@@ -82,7 +85,10 @@ class StandardEntityAttributePersister implements EntityAttributePersisterInterf
                 ]
             );
 
-            $entityAttribute->persistedToId($this->connection->lastInsertId());
+            if ($entityAttribute->getId() === null) {
+                $entityAttribute->persistedToId($this->connection->lastInsertId());
+                yield $entityAttribute;
+            }
         }
     }
 

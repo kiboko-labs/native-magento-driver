@@ -61,36 +61,57 @@ class StandardAttributePersister implements AttributePersisterInterface
         $this->dataQueue->push($attribute);
     }
 
+    /**
+     * @return \Traversable
+     */
     public function flush()
     {
         /** @var AttributeInterface $attribute */
         foreach ($this->dataQueue as $attribute) {
-            $this->insertOnDuplicateUpdate(
-                    $this->connection, 
-                    $this->tableName, 
-                    [
-                        'attribute_id' => $attribute->getId(),
-                        'entity_type_id' => $attribute->getEntityTypeId(),
-                        'attribute_code' => $attribute->getCode(),
-                        'attribute_model' => $attribute->getModelClass(),
-                        'backend_type' => $attribute->getBackendType(),
-                        'backend_model' => $attribute->getBackendModelClass(),
-                        'backend_table' => $attribute->getBackendTable(),
-                        'frontend_model' => $attribute->getFrontendModelClass(),
-                        'frontend_input' => $attribute->getFrontendInput(),
-                        'frontend_label' => $attribute->getFrontendLabel(),
-                        'frontend_class' => $attribute->getFrontendViewClass(),
-                        'source_model' => $attribute->getSourceModelClass(),
-                        'is_required' => (int) $attribute->isRequired(),
-                        'is_user_defined' => $attribute->isUserDefined(),
-                        'is_unique' => (int) $attribute->isUnique(),
-                        'default_value' => $attribute->getDefaultValue(),
-                        'note' => $attribute->getNote(),
-                    ],
-                    ProductAttributeQueryBuilder::getDefaultFields()
+            $this->insertOnDuplicateUpdate($this->connection, $this->tableName,
+                [
+                    'attribute_id' => $attribute->getId(),
+                    'entity_type_id' => $attribute->getEntityTypeId(),
+                    'attribute_code' => $attribute->getCode(),
+                    'attribute_model' => $attribute->getModelClass(),
+                    'backend_type' => $attribute->getBackendType(),
+                    'backend_model' => $attribute->getBackendModelClass(),
+                    'backend_table' => $attribute->getBackendTable(),
+                    'frontend_model' => $attribute->getFrontendModelClass(),
+                    'frontend_input' => $attribute->getFrontendInput(),
+                    'frontend_label' => $attribute->getFrontendLabel(),
+                    'frontend_class' => $attribute->getFrontendViewClass(),
+                    'source_model' => $attribute->getSourceModelClass(),
+                    'is_required' => (int) $attribute->isRequired(),
+                    'is_user_defined' => $attribute->isUserDefined(),
+                    'is_unique' => (int) $attribute->isUnique(),
+                    'default_value' => $attribute->getDefaultValue(),
+                    'note' => $attribute->getNote(),
+                ],
+                [
+                    'entity_type_id',
+                    'attribute_code',
+                    'attribute_model',
+                    'backend_type',
+                    'backend_model',
+                    'backend_table',
+                    'frontend_model',
+                    'frontend_input',
+                    'frontend_label',
+                    'frontend_class',
+                    'source_model',
+                    'is_required',
+                    'is_user_defined',
+                    'is_unique',
+                    'default_value',
+                    'note',
+                ]
             );
 
-            $attribute->persistedToId($this->connection->lastInsertId());
+            if ($attribute->getId() === null) {
+                $attribute->persistedToId($this->connection->lastInsertId());
+                yield $attribute;
+            }
         }
     }
 
