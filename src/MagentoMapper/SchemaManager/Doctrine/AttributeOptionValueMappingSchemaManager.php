@@ -9,7 +9,7 @@ use Doctrine\DBAL\Schema\SchemaDiff;
 use Doctrine\DBAL\Schema\Table;
 use Doctrine\DBAL\Schema\Comparator as SchemaComparator;
 
-class AttributeOptionMappingSchemaManager extends AbstractMappingSchemaManager
+class AttributeOptionValueMappingSchemaManager extends AbstractMappingSchemaManager
 {
     /**
      * @var string
@@ -79,6 +79,10 @@ class AttributeOptionMappingSchemaManager extends AbstractMappingSchemaManager
             'length' => 255,
         ]);
 
+        $table->addColumn('locale', 'string', [
+            'length' => 12
+        ]);
+
         $table->addColumn('mapping_class', 'string', [
             'length' => 255,
         ]);
@@ -90,6 +94,10 @@ class AttributeOptionMappingSchemaManager extends AbstractMappingSchemaManager
         $table->addIndex(['option_id']);
 
         $table->addIndex(['option_code']);
+
+        $table->addIndex(['locale']);
+
+        $table->addUniqueIndex(['option_code', 'locale']);
 
         $table->addUniqueIndex(['instance_identifier', 'option_id']);
 
