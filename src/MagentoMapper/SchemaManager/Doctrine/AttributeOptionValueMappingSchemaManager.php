@@ -147,40 +147,12 @@ class AttributeOptionValueMappingSchemaManager extends AbstractMappingSchemaMana
     /**
      * @param string $pimgentoTableName
      * @param string $linkCode
-     * @return int
+     * @return int|null
      *
      * @throws \Doctrine\DBAL\DBALException
      */
     public function initializeFromPimgento($pimgentoTableName, $linkCode)
     {
-        $manager = $this->connection->getSchemaManager();
-
-        if (!$manager->tablesExist([$pimgentoTableName])) {
-            return;
-        }
-
-        $queryBuilder = new QueryBuilder($this->connection);
-
-        $queryBuilder
-            ->select([
-                'option_id'           => 'pim.entity_id',
-                'instance_identifier' => $queryBuilder->expr()->literal($linkCode),
-                'option_code'         => 'INSERT(pim.code, LOCATE(CONCAT(pim2.code, "_"), pim.code), LENGTH(CONCAT(pim2.code, "_")), "")',
-                'mapping_class'       => 'NULL',
-                'mapping_options'     => $queryBuilder->expr()->literal(json_encode([], JSON_OBJECT_AS_ARRAY)),
-            ])
-            ->from($pimgentoTableName, 'pim')
-            ->innerJoin('pim', 'eav_attribute_option', 'ao', $queryBuilder->expr()->eq('ao.option_id', 'pim.entity_id'))
-            ->innerJoin('pim', $pimgentoTableName, 'pim2', $queryBuilder->expr()->andX(
-                $queryBuilder->expr()->eq('ao.attribute_id', 'pim2.entity_id'),
-                $queryBuilder->expr()->eq('pim2.import', $queryBuilder->expr()->literal('attribute'))
-            ))
-            ->where($queryBuilder->expr()->eq('pim.import', $queryBuilder->expr()->literal('option')))
-        ;
-
-        return $this->connection->executeUpdate(
-            "INSERT INTO {$this->connection->quoteIdentifier($this->tableName)} "
-                . $queryBuilder->getSQL()
-        );
+        return null;
     }
 }

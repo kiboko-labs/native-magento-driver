@@ -14,7 +14,7 @@ class AttributeOptionMappingSchemaManager extends AbstractMappingSchemaManager
     /**
      * @var string
      */
-    private $attributeOptionValuesTableName;
+    private $attributeOptionTableName;
 
     /**
      * OptionMappingSchemaManager constructor.
@@ -22,16 +22,16 @@ class AttributeOptionMappingSchemaManager extends AbstractMappingSchemaManager
      * @param Connection       $connection
      * @param SchemaComparator $schemaComparator
      * @param string           $tableName
-     * @param string           $attributeOptionValuesTableName
+     * @param string           $attributeOptionTableName
      */
     public function __construct(
         Connection $connection,
         SchemaComparator $schemaComparator,
         $tableName,
-        $attributeOptionValuesTableName
+        $attributeOptionTableName
     ) {
         parent::__construct($connection, $schemaComparator, $tableName);
-        $this->attributeOptionValuesTableName = $attributeOptionValuesTableName;
+        $this->attributeOptionTableName = $attributeOptionTableName;
     }
 
     /**
@@ -67,7 +67,7 @@ class AttributeOptionMappingSchemaManager extends AbstractMappingSchemaManager
     {
         $table = new Table($this->tableName);
 
-        $table->addColumn('option_id', 'smallint', [
+        $table->addColumn('option_id', 'integer', [
             'unsigned' => true,
         ]);
 
@@ -94,7 +94,7 @@ class AttributeOptionMappingSchemaManager extends AbstractMappingSchemaManager
         $table->addUniqueIndex(['instance_identifier', 'option_id']);
 
         $table->addForeignKeyConstraint(
-            $this->attributeOptionValuesTableName,
+            $this->attributeOptionTableName,
             [
                 'option_id',
             ],
@@ -113,7 +113,7 @@ class AttributeOptionMappingSchemaManager extends AbstractMappingSchemaManager
     /**
      * @param string $pimgentoTableName
      * @param string $linkCode
-     * @return int
+     * @return int|null
      *
      * @throws \Doctrine\DBAL\DBALException
      */

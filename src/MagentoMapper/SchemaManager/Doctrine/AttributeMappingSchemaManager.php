@@ -113,7 +113,7 @@ class AttributeMappingSchemaManager extends AbstractMappingSchemaManager
     /**
      * @param string $pimgentoTableName
      * @param string $linkCode
-     * @return int
+     * @return int|null
      *
      * @throws \Doctrine\DBAL\DBALException
      */
