@@ -73,10 +73,12 @@ class AttributeTransformer
             }
 
             $attributes = $transformer->transform($attribute);
-            foreach ($attributes as $attribute) {
+            foreach ($attributes as $transformedAttribute) {
                 if (($attributeId = $this->mapper->map($attribute->getCode())) !== null) {
-                    $attribute->persistedToId($attributeId);
+                    $transformedAttribute->persistedToId($attributeId);
                 }
+
+                $transformedAttribute->setMappingCode($attribute->getCode());
             }
 
             return $attributes;

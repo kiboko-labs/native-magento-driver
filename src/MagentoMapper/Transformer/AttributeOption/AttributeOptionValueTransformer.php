@@ -83,12 +83,17 @@ class AttributeOptionValueTransformer implements AttributeOptionValueTransformer
                     $this->attributeOptionValueMapper->map($attributeOption->getCode(), $value->getLocale());
             }
 
-            yield AttributeOptionValue::buildNewWith(
+            $transformedAttributeOption = AttributeOptionValue::buildNewWith(
                 $optionValuesCache[$value->getLocale()],
                 $optionId,
                 0, // Admin store Id
                 $value->getLabel()
             );
+
+            $transformedAttributeOption->setMappingCode($attributeOption->getCode());
+            $transformedAttributeOption->setMappingLocale($attributeOption->getLocale());
+
+            yield $transformedAttributeOption;
         }
 
         /** @var AttributeOptionValueInterface $value */
@@ -109,12 +114,17 @@ class AttributeOptionValueTransformer implements AttributeOptionValueTransformer
                         $this->attributeOptionValueMapper->map($attributeOption->getCode(), $value->getLocale());
                 }
 
-                yield AttributeOptionValue::buildNewWith(
+                $transformedOptionValue = AttributeOptionValue::buildNewWith(
                     $optionValuesCache[$value->getLocale()],
                     $this->attributeOptionMapper->map($attributeOption->getCode()),
                     $store->getId(),
                     $value->getLabel()
                 );
+
+                $transformedAttributeOption->setMappingCode($attributeOption->getCode());
+                $transformedAttributeOption->setMappingLocale($attributeOption->getLocale());
+
+                yield $transformedOptionValue;
             }
         }
     }

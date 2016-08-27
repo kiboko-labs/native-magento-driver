@@ -4,7 +4,7 @@ namespace Kiboko\Component\MagentoDriver\Model;
 
 class AttributeOptionValue implements AttributeOptionValueInterface
 {
-    use MappableTrait;
+    use LocalizedMappableTrait;
 
     /**
      * @var int

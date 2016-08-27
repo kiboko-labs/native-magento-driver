@@ -46,12 +46,16 @@ class AttributeOptionTransformer implements AttributeOptionTransformerInterface
      */
     public function transform(PimAttributeOptionInterface $attributeOption)
     {
+        $option = AttributeOption::buildNewWith(
+            $this->attributeOptionMapper->map($attributeOption->getCode()),
+            $this->attributeMapper->map($attributeOption->getAttribute()->getCode()),
+            $attributeOption->getSortOrder()
+        );
+
+        $option->setMappingCode($attributeOption->getCode());
+
         return [
-            $attributeOption->getCode() => AttributeOption::buildNewWith(
-                $this->attributeOptionMapper->map($attributeOption->getCode()),
-                $this->attributeMapper->map($attributeOption->getAttribute()->getCode()),
-                $attributeOption->getSortOrder()
-            )
+            $attributeOption->getCode() => $option,
         ];
     }
 
