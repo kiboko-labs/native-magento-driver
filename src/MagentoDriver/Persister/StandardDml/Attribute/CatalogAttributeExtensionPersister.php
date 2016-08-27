@@ -127,7 +127,8 @@ class CatalogAttributeExtensionPersister implements CatalogAttributeExtensionPer
                     'is_filterable_in_grid',
                     'search_weight',
                     'additional_data',
-                ]
+                ],
+                'attribute_id'
             );
         }
     }

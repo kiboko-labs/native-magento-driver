@@ -93,7 +93,8 @@ class VarcharAttributeValuePersister implements AttributeValuePersisterInterface
                     'store_id',
                     'entity_id',
                     'value',
-                ]
+                ],
+                'value_id'
             );
 
             if ($value->getId() === null) {

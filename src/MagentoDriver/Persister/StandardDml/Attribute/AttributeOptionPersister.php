@@ -73,9 +73,10 @@ class AttributeOptionPersister implements AttributeOptionPersisterInterface
                     'sort_order' => $attributeOption->getSortOrder(),
                 ],
                 [
-                    'option_id',
+                    'attribute_id',
                     'sort_order',
-                ]
+                ],
+                'option_id'
             );
 
             if ($attributeOption->getId() === null) {

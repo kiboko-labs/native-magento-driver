@@ -105,7 +105,8 @@ class StandardAttributePersister implements AttributePersisterInterface
                     'is_unique',
                     'default_value',
                     'note',
-                ]
+                ],
+                'attribute_id'
             );
 
             if ($attribute->getId() === null) {

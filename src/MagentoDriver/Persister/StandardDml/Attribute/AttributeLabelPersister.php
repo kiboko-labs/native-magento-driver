@@ -77,7 +77,8 @@ class AttributeLabelPersister implements AttributeLabelPersisterInterface
                     'attribute_id',
                     'store_id',
                     'value',
-                ]
+                ],
+                'attribute_label_id'
             );
 
             if ($attributeLabel->getId() === null) {

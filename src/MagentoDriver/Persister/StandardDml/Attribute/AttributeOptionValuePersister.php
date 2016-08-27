@@ -77,7 +77,8 @@ class AttributeOptionValuePersister implements AttributeOptionValuePersisterInte
                     'option_id',
                     'store_id',
                     'value',
-                ]
+                ],
+                'value_id'
             );
 
             if ($attributeOptionValue->getId() === null) {

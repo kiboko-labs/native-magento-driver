@@ -84,7 +84,8 @@ class AttributeGroupPersister implements AttributeGroupPersisterInterface
                     'default_id',
                     'attribute_group_code',
                     'tab_group_code',
-                ]
+                ],
+                'attribute_group_id'
             );
 
             if ($attributeGroup->getId() === null) {

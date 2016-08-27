@@ -82,7 +82,8 @@ class StandardEntityAttributePersister implements EntityAttributePersisterInterf
                     'attribute_group_id',
                     'attribute_id',
                     'sort_order',
-                ]
+                ],
+                'entity_attribute_id'
             );
 
             if ($entityAttribute->getId() === null) {
