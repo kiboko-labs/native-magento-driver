@@ -33,7 +33,7 @@ trait InsertUpdateAwareTrait
         }
 
         $set = [
-            sprintf('1$s=LAST_INSERT_ID(%1$s)', $identifierColumn)
+            sprintf('%1$s=LAST_INSERT_ID(%1$s)', $identifierColumn)
         ];
         $values = array_values($data);
         foreach ($columns as $columnName) {
@@ -52,19 +52,6 @@ trait InsertUpdateAwareTrait
             $values,
             is_int(key($types)) ? $types : $this->extractTypeValues($data, $types)
         );
-    }
-
-    /**
-     * @param Connection $connection
-     * @return bool|string
-     * @throws \Doctrine\DBAL\DBALException
-     */
-    public function lastInsertId(
-        Connection $connection
-    ) {
-        $statement = $connection->executeQuery('SELECT LAST_INSERT_ID()');
-        $statement->execute();
-        return $statement->fetchColumn();
     }
 
     /**
