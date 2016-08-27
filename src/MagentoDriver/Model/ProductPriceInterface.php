@@ -2,12 +2,17 @@
 
 namespace Kiboko\Component\MagentoDriver\Model;
 
-interface ProductPriceInterface
+interface ProductPriceInterface extends MappableInterface
 {
     /**
      * @return float
      */
-    public function getFinalAmount();
+    public function getFinalAmountInclTax();
+
+    /**
+     * @return float
+     */
+    public function getFinalAmountExclTax();
 
     /**
      * @return string

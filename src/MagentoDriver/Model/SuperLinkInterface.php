@@ -5,7 +5,7 @@ namespace Kiboko\Component\MagentoDriver\Model;
 use Kiboko\Component\MagentoDriver\Entity\Product\ConfigurableProductInterface;
 use Kiboko\Component\MagentoDriver\Entity\Product\SimpleProductInterface;
 
-interface SuperLinkInterface
+interface SuperLinkInterface extends MappableInterface
 {
     /**
      * @return int

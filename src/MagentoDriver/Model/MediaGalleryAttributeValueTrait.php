@@ -5,6 +5,7 @@ namespace Kiboko\Component\MagentoDriver\Model;
 trait MediaGalleryAttributeValueTrait
 {
     use AttributeValueTrait;
+    use MappableTrait;
 
     /**
      * @var \Traversable|ImageAttributeValueInterface[]

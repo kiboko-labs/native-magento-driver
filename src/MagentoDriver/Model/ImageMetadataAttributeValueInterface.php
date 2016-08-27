@@ -2,7 +2,7 @@
 
 namespace Kiboko\Component\MagentoDriver\Model;
 
-interface ImageMetadataAttributeValueInterface extends AttributeValueInterface
+interface ImageMetadataAttributeValueInterface extends AttributeValueInterface, MappableInterface
 {
     /**
      * @return string

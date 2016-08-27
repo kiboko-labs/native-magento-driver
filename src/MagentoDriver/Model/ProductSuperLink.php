@@ -7,6 +7,8 @@ use Kiboko\Component\MagentoDriver\Entity\Product\SimpleProductInterface;
 
 class ProductSuperLink implements SuperLinkInterface
 {
+    use MappableTrait;
+
     /**
      * @var int
      */

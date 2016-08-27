@@ -4,6 +4,8 @@ namespace Kiboko\Component\MagentoDriver\Model;
 
 class EntityStore implements EntityStoreInterface
 {
+    use MappableTrait;
+
     /**
      * @var
      */

@@ -2,7 +2,7 @@
 
 namespace Kiboko\Component\MagentoDriver\Model;
 
-interface OptionLocaleInterface
+interface OptionLocaleInterface extends MappableInterface
 {
     /**
      * @return string

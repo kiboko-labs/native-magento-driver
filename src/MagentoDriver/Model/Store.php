@@ -4,6 +4,8 @@ namespace Kiboko\Component\MagentoDriver\Model;
 
 class Store
 {
+    use MappableTrait;
+
     /**
      * @var int
      */

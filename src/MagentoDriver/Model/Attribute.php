@@ -4,6 +4,8 @@ namespace Kiboko\Component\MagentoDriver\Model;
 
 class Attribute implements AttributeInterface
 {
+    use MappableTrait;
+
     /**
      * @var int
      */

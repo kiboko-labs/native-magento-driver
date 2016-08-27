@@ -8,6 +8,7 @@ use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
 trait ImageAttributeValueTrait
 {
     use AttributeValueTrait;
+    use MappableTrait;
 
     /**
      * @var File

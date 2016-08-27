@@ -4,7 +4,7 @@ namespace Kiboko\Component\MagentoDriver\Model;
 
 use Kiboko\Component\MagentoDriver\Entity\Product\ConfigurableProductInterface;
 
-interface SuperAttributeInterface
+interface SuperAttributeInterface extends MappableInterface
 {
     /**
      * @return int

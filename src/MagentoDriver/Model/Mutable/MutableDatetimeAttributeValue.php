@@ -25,7 +25,7 @@ class MutableDatetimeAttributeValue implements MutableAttributeValueInterface, S
      */
     public function __construct(
         AttributeInterface $attribute,
-        \DateTimeInterface $payload,
+        $payload = null,
         ProductInterface $product = null,
         $storeId = null
     ) {

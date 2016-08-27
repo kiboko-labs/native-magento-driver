@@ -4,6 +4,8 @@ namespace Kiboko\Component\MagentoDriver\Model;
 
 class AttributeGroup implements AttributeGroupInterface
 {
+    use MappableTrait;
+
     /**
      * @var int
      */

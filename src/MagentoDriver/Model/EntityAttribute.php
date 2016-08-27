@@ -4,6 +4,8 @@ namespace Kiboko\Component\MagentoDriver\Model;
 
 class EntityAttribute implements EntityAttributeInterface
 {
+    use MappableTrait;
+
     /**
      * @var int
      */

@@ -4,6 +4,8 @@ namespace Kiboko\Component\MagentoDriver\Model;
 
 class Family implements FamilyInterface
 {
+    use MappableTrait;
+
     /**
      * @var int
      */

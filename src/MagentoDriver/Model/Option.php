@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\Collection;
 
 class Option implements OptionInterface
 {
+    use MappableTrait;
+
     /**
      * @var int
      */

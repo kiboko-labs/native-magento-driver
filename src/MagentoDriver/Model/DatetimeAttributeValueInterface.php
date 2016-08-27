@@ -2,7 +2,7 @@
 
 namespace Kiboko\Component\MagentoDriver\Model;
 
-interface DatetimeAttributeValueInterface extends ScopableAttributeValueInterface
+interface DatetimeAttributeValueInterface extends ScopableAttributeValueInterface, MappableInterface
 {
     /**
      * @return \DateTimeInterface

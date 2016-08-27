@@ -7,6 +7,8 @@ use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
 
 class ProductSuperAttribute implements SuperAttributeInterface
 {
+    use MappableTrait;
+
     /**
      * @var int
      */

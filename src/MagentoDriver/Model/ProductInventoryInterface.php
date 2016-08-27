@@ -2,7 +2,7 @@
 
 namespace Kiboko\Component\MagentoDriver\Model;
 
-interface ProductInventoryInterface
+interface ProductInventoryInterface extends MappableInterface
 {
     /**
      * @return bool

@@ -2,7 +2,7 @@
 
 namespace Kiboko\Component\MagentoDriver\Model;
 
-interface EntityStoreInterface
+interface EntityStoreInterface extends MappableInterface
 {
     /**
      * @return int

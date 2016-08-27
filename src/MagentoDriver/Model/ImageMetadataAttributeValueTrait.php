@@ -5,6 +5,7 @@ namespace Kiboko\Component\MagentoDriver\Model;
 trait ImageMetadataAttributeValueTrait
 {
     use AttributeValueTrait;
+    use MappableTrait;
 
     /**
      * @var string
