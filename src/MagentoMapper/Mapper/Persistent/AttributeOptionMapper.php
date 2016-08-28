@@ -50,7 +50,7 @@ class AttributeOptionMapper implements AttributeOptionMapperInterface
             return $mapped;
         }
 
-        return (int) $this->repository->findOneByCode($code);
+        return $this->repository->findOneByCode($code);
     }
 
     /**

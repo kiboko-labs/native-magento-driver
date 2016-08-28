@@ -50,7 +50,7 @@ class AttributeMapper implements AttributeMapperInterface
             return $mapped;
         }
 
-        return (int) $this->repository->findOneByCode($code);
+        return $this->repository->findOneByCode($code);
     }
 
     /**
