@@ -6,6 +6,7 @@ trait MediaGalleryAttributeValueTrait
 {
     use AttributeValueTrait;
     use MappableTrait;
+    use IdentifiableTrait;
 
     /**
      * @var \Traversable|ImageAttributeValueInterface[]

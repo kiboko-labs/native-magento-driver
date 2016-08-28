@@ -8,9 +8,10 @@ trait IntegerAttributeValueTrait
 {
     use AttributeValueTrait;
     use MappableTrait;
+    use IdentifiableTrait;
 
     /**
-     * @var string
+     * @var int
      */
     private $payload;
 

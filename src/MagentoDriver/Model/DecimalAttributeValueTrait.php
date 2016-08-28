@@ -8,6 +8,7 @@ trait DecimalAttributeValueTrait
 {
     use AttributeValueTrait;
     use MappableTrait;
+    use IdentifiableTrait;
 
     /**
      * @var string

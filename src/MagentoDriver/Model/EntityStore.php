@@ -5,6 +5,7 @@ namespace Kiboko\Component\MagentoDriver\Model;
 class EntityStore implements EntityStoreInterface
 {
     use MappableTrait;
+    use IdentifiableTrait;
 
     /**
      * @var
@@ -43,22 +44,6 @@ class EntityStore implements EntityStoreInterface
         $this->storeId = $storeId;
         $this->incrementPrefix = $incrementPrefix;
         $this->incrementLastId = $incrementLastId;
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->identifier;
-    }
-
-    /**
-     * @param int $identifier
-     */
-    public function persistToId($identifier)
-    {
-        $this->identifier = $identifier;
     }
 
     /**

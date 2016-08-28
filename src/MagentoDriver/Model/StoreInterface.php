@@ -2,15 +2,15 @@
 
 namespace Kiboko\Component\MagentoDriver\Model;
 
-interface StoreInterface extends MappableInterface
+interface StoreInterface extends MappableInterface, IdentifiableInterface
 {
-    /**
-     * @return int
-     */
-    public function getId();
-
     /**
      * @return string
      */
     public function getCode();
+    
+    /**
+     * @return string
+     */
+    public function getName();
 }

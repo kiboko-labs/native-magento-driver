@@ -2,18 +2,8 @@
 
 namespace Kiboko\Component\MagentoDriver\Model;
 
-interface EntityStoreInterface extends MappableInterface
+interface EntityStoreInterface extends MappableInterface, IdentifiableInterface
 {
-    /**
-     * @return int
-     */
-    public function getId();
-
-    /**
-     * @param int $identifier
-     */
-    public function persistToId($identifier);
-
     /**
      * @return string
      */

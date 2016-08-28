@@ -8,11 +8,7 @@ use Kiboko\Component\MagentoDriver\Entity\Product\SimpleProductInterface;
 class ProductSuperLink implements SuperLinkInterface
 {
     use MappableTrait;
-
-    /**
-     * @var int
-     */
-    private $identifier;
+    use IdentifiableTrait;
 
     /**
      * @var ConfigurableProductInterface
@@ -50,17 +46,9 @@ class ProductSuperLink implements SuperLinkInterface
     ) {
         $instance = new self($configurable, $variant);
 
-        $instance->identifier = $identifier;
+        $instance->persistedToId($identifier);
 
         return $instance;
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->identifier;
     }
 
     /**
@@ -97,13 +85,5 @@ class ProductSuperLink implements SuperLinkInterface
     public function isVariant(SimpleProductInterface $variant)
     {
         return $this->variant === $variant;
-    }
-
-    /**
-     * @param int $identifier
-     */
-    public function persistedToId($identifier)
-    {
-        $this->identifier = $identifier;
     }
 }

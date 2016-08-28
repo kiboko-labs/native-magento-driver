@@ -2,13 +2,8 @@
 
 namespace Kiboko\Component\MagentoDriver\Model;
 
-interface AttributeOptionValueInterface extends LocalizedMappableInterface
+interface AttributeOptionValueInterface extends LocalizedMappableInterface, IdentifiableInterface
 {
-    /**
-     * @return int
-     */
-    public function getId();
-
     /**
      * @return int
      */

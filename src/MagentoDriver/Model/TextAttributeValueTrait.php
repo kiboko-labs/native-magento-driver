@@ -8,6 +8,7 @@ trait TextAttributeValueTrait
 {
     use AttributeValueTrait;
     use MappableTrait;
+    use IdentifiableTrait;
 
     /**
      * @var string

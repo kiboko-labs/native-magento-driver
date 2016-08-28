@@ -4,18 +4,8 @@ namespace Kiboko\Component\MagentoDriver\Model;
 
 use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
 
-interface AttributeValueInterface extends MappableInterface
+interface AttributeValueInterface extends MappableInterface, IdentifiableInterface
 {
-    /**
-     * @return int
-     */
-    public function getId();
-
-    /**
-     * @param int $identifier
-     */
-    public function persistedToId($identifier);
-
     /**
      * @return int
      */

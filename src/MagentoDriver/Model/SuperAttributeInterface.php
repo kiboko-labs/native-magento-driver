@@ -4,18 +4,8 @@ namespace Kiboko\Component\MagentoDriver\Model;
 
 use Kiboko\Component\MagentoDriver\Entity\Product\ConfigurableProductInterface;
 
-interface SuperAttributeInterface extends MappableInterface
+interface SuperAttributeInterface extends MappableInterface, IdentifiableInterface
 {
-    /**
-     * @return int
-     */
-    public function getId();
-
-    /**
-     * @return int
-     */
-    public function getAttributeId();
-
     /**
      * @return int
      */
@@ -39,9 +29,4 @@ interface SuperAttributeInterface extends MappableInterface
      * @return bool
      */
     public function isAttribute(AttributeInterface $attribute);
-
-    /**
-     * @param int $identifier
-     */
-    public function persistedToId($identifier);
 }

@@ -5,11 +5,7 @@ namespace Kiboko\Component\MagentoDriver\Model;
 class AttributeOption implements AttributeOptionInterface
 {
     use MappableTrait;
-
-    /**
-     * @var int
-     */
-    private $identifier;
+    use IdentifiableTrait;
 
     /**
      * @var int
@@ -46,14 +42,6 @@ class AttributeOption implements AttributeOptionInterface
     /**
      * @return int
      */
-    public function getId()
-    {
-        return $this->identifier;
-    }
-
-    /**
-     * @return int
-     */
     public function getAttributeId()
     {
         return $this->attributeId;
@@ -65,33 +53,6 @@ class AttributeOption implements AttributeOptionInterface
     public function getSortOrder()
     {
         return $this->sortOrder;
-    }
-
-    /**
-     * @param int $attributeOptionId
-     * @param int $attributeId
-     * @param int $sortOrder
-     *
-     * @return AttributeOptionInterface
-     */
-    public static function buildNewWith(
-        $attributeOptionId,
-        $attributeId, 
-        $sortOrder
-    ) {
-        $object = new static($attributeId, $sortOrder);
-
-        $object->identifier = $attributeOptionId;
-
-        return $object;
-    }
-
-    /**
-     * @param int $identifier
-     */
-    public function persistedToId($identifier)
-    {
-        $this->identifier = $identifier;
     }
 
     /**
@@ -116,5 +77,24 @@ class AttributeOption implements AttributeOptionInterface
     public function getValues()
     {
         return $this->values;
+    }
+
+    /**
+     * @param int $attributeOptionId
+     * @param int $attributeId
+     * @param int $sortOrder
+     *
+     * @return AttributeOptionInterface
+     */
+    public static function buildNewWith(
+        $attributeOptionId,
+        $attributeId,
+        $sortOrder
+    ) {
+        $object = new static($attributeId, $sortOrder);
+
+        $object->persistedToId($attributeOptionId);
+
+        return $object;
     }
 }

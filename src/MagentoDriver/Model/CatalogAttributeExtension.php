@@ -176,23 +176,6 @@ class CatalogAttributeExtension implements CatalogAttributeExtensionInterface
     }
 
     /**
-     * @return int
-     * @MagentoODM\Field('attribute_id', version='*')
-     */
-    public function getId()
-    {
-        return $this->identifier;
-    }
-
-    /**
-     * @param int $identifier
-     */
-    public function persistedToId($identifier)
-    {
-        $this->identifier = $identifier;
-    }
-
-    /**
      * @return string
      * @MagentoODM\Field('frontend_input_renderer', version='*')
      */

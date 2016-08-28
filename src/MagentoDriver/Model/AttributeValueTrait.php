@@ -7,11 +7,6 @@ use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
 trait AttributeValueTrait
 {
     /**
-     * @var int
-     */
-    private $identifier;
-
-    /**
      * @var ProductInterface
      */
     private $product;
@@ -39,22 +34,6 @@ trait AttributeValueTrait
     public function isAttribute(AttributeInterface $friend)
     {
         return $this->attribute->getCode() === $friend->getCode();
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->isScopable() ? $this->identifier : null;
-    }
-
-    /**
-     * @param int $identifier
-     */
-    public function persistedToId($identifier)
-    {
-        $this->identifier = $identifier;
     }
 
     /**

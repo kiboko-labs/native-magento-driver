@@ -6,6 +6,7 @@ trait ImageMetadataAttributeValueTrait
 {
     use AttributeValueTrait;
     use MappableTrait;
+    use IdentifiableTrait;
 
     /**
      * @var string

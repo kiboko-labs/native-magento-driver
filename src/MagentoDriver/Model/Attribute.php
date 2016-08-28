@@ -146,6 +146,142 @@ class Attribute implements AttributeInterface
     }
 
     /**
+     * @return int
+     */
+    public function getEntityTypeId()
+    {
+        return $this->entityTypeId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @return string
+     */
+    public function getModelClass()
+    {
+        return $this->modelClass;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBackendType()
+    {
+        return $this->backendType;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBackendModelClass()
+    {
+        return $this->backendModelClass;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBackendTable()
+    {
+        return $this->backendTable;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFrontendModelClass()
+    {
+        return $this->frontendModelClass;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFrontendInput()
+    {
+        return $this->frontendInput;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFrontendLabel()
+    {
+        return $this->frontendLabel;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFrontendViewClass()
+    {
+        return $this->frontendViewClass;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSourceModelClass()
+    {
+        return $this->sourceModelClass;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isRequired()
+    {
+        return (bool) $this->required;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isUserDefined()
+    {
+        return (bool) $this->userDefined;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSystem()
+    {
+        return (bool) !$this->userDefined;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isUnique()
+    {
+        return (bool) $this->unique;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDefaultValue()
+    {
+        return $this->defaultValue;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNote()
+    {
+        return $this->note;
+    }
+
+    /**
      * @param int    $attributeId
      * @param int    $entityTypeId
      * @param string $code
@@ -204,177 +340,8 @@ class Attribute implements AttributeInterface
             $note
         );
 
-        $object->identifier = $attributeId;
+        $object->persistedToId($attributeId);
 
         return $object;
-    }
-
-    /**
-     * @return int
-     * @MagentoODM\Field('attribute_id', version='*')
-     */
-    public function getId()
-    {
-        return $this->identifier;
-    }
-
-    /**
-     * @param int $identifier
-     */
-    public function persistedToId($identifier)
-    {
-        $this->identifier = $identifier;
-    }
-
-    /**
-     * @return int
-     * @MagentoODM\Field('entity_type_id', version='*')
-     */
-    public function getEntityTypeId()
-    {
-        return $this->entityTypeId;
-    }
-
-    /**
-     * @return string
-     * @MagentoODM\Field('attribute_code', version='*')
-     */
-    public function getCode()
-    {
-        return $this->code;
-    }
-
-    /**
-     * @return string
-     * @MagentoODM\Field('attribute_model', version='*')
-     */
-    public function getModelClass()
-    {
-        return $this->modelClass;
-    }
-
-    /**
-     * @return string
-     * @MagentoODM\Field('backend_type', version='*')
-     */
-    public function getBackendType()
-    {
-        return $this->backendType;
-    }
-
-    /**
-     * @return string
-     * @MagentoODM\Field('backend_model', version='*')
-     */
-    public function getBackendModelClass()
-    {
-        return $this->backendModelClass;
-    }
-
-    /**
-     * @return string
-     * @MagentoODM\Field('backend_table', version='*')
-     */
-    public function getBackendTable()
-    {
-        return $this->backendTable;
-    }
-
-    /**
-     * @return string
-     * @MagentoODM\Field('frontend_model', version='*')
-     */
-    public function getFrontendModelClass()
-    {
-        return $this->frontendModelClass;
-    }
-
-    /**
-     * @return string
-     * @MagentoODM\Field('frontend_input', version='*')
-     */
-    public function getFrontendInput()
-    {
-        return $this->frontendInput;
-    }
-
-    /**
-     * @return string
-     * @MagentoODM\Field('frontend_label', version='*')
-     */
-    public function getFrontendLabel()
-    {
-        return $this->frontendLabel;
-    }
-
-    /**
-     * @return string
-     * @MagentoODM\Field('frontend_class', version='*')
-     */
-    public function getFrontendViewClass()
-    {
-        return $this->frontendViewClass;
-    }
-
-    /**
-     * @return string
-     * @MagentoODM\Field('source_model', version='*')
-     */
-    public function getSourceModelClass()
-    {
-        return $this->sourceModelClass;
-    }
-
-    /**
-     * @return bool
-     * @MagentoODM\Field('is_required', version='*')
-     */
-    public function isRequired()
-    {
-        return (bool) $this->required;
-    }
-
-    /**
-     * @return bool
-     * @MagentoODM\Field('is_user_defined', version='*')
-     */
-    public function isUserDefined()
-    {
-        return (bool) $this->userDefined;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isSystem()
-    {
-        return (bool) !$this->userDefined;
-    }
-
-    /**
-     * @return bool
-     * @MagentoODM\Field('is_unique', version='*')
-     */
-    public function isUnique()
-    {
-        return (bool) $this->unique;
-    }
-
-    /**
-     * @return string
-     * @MagentoODM\Field('default_value', version='*')
-     */
-    public function getDefaultValue()
-    {
-        return $this->defaultValue;
-    }
-
-    /**
-     * @return string
-     * @MagentoODM\Field('note', version='*')
-     */
-    public function getNote()
-    {
-        return $this->note;
     }
 }

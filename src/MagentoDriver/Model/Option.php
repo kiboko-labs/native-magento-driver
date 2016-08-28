@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 class Option implements OptionInterface
 {
     use MappableTrait;
+    use IdentifiableTrait;
 
     /**
      * @var int
@@ -136,5 +137,25 @@ class Option implements OptionInterface
     public function getAllLocales()
     {
         return $this->locales;
+    }
+
+    /**
+     * @param int $identifier
+     * @param string $value
+     * @param OptionLocaleInterface $default
+     * @param Collection $locales
+     * @return static
+     */
+    public static function buildNewWith(
+        $identifier,
+        $value,
+        OptionLocaleInterface $default,
+        Collection $locales
+    ) {
+        $object = new static($value, $default, $locales);
+
+        $object->persistedToId($identifier);
+
+        return $object;
     }
 }

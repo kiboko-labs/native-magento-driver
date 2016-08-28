@@ -5,13 +5,8 @@ namespace Kiboko\Component\MagentoDriver\Model;
 use Kiboko\Component\MagentoDriver\Entity\Product\ConfigurableProductInterface;
 use Kiboko\Component\MagentoDriver\Entity\Product\SimpleProductInterface;
 
-interface SuperLinkInterface extends MappableInterface
+interface SuperLinkInterface extends MappableInterface, IdentifiableInterface
 {
-    /**
-     * @return int
-     */
-    public function getId();
-
     /**
      * @return int
      */
@@ -35,9 +30,4 @@ interface SuperLinkInterface extends MappableInterface
      * @return bool
      */
     public function isVariant(SimpleProductInterface $variant);
-
-    /**
-     * @param int $identifier
-     */
-    public function persistedToId($identifier);
 }

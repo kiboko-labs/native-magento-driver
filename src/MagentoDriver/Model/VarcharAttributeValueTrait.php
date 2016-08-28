@@ -8,6 +8,7 @@ trait VarcharAttributeValueTrait
 {
     use AttributeValueTrait;
     use MappableTrait;
+    use IdentifiableTrait;
 
     /**
      * @var string

@@ -5,11 +5,7 @@ namespace Kiboko\Component\MagentoDriver\Model;
 class AttributeLabel implements AttributeLabelInterface
 {
     use MappableTrait;
-
-    /**
-     * @var int
-     */
-    private $identifier;
+    use IdentifiableTrait;
 
     /**
      * @var int
@@ -36,14 +32,6 @@ class AttributeLabel implements AttributeLabelInterface
         $this->attributeId = $attributeId;
         $this->storeId = $storeId;
         $this->value = $value;
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->identifier;
     }
 
     /**
@@ -89,13 +77,5 @@ class AttributeLabel implements AttributeLabelInterface
         $object->identifier = $attributeLabelId;
 
         return $object;
-    }
-
-    /**
-     * @param int $identifier
-     */
-    public function persistedToId($identifier)
-    {
-        $this->identifier = $identifier;
     }
 }

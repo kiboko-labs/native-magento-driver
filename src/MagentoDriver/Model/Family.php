@@ -5,11 +5,7 @@ namespace Kiboko\Component\MagentoDriver\Model;
 class Family implements FamilyInterface
 {
     use MappableTrait;
-
-    /**
-     * @var int
-     */
-    private $identifier;
+    use IdentifiableTrait;
 
     /**
      * @var string
@@ -29,14 +25,6 @@ class Family implements FamilyInterface
     {
         $this->label = $label;
         $this->sortOrder = $sortOrder;
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->identifier;
     }
 
     /**
@@ -67,19 +55,10 @@ class Family implements FamilyInterface
         $label,
         $sortOrder = 1
     ) {
-        $object = new static($label);
+        $object = new static($label, $sortOrder);
 
-        $object->identifier = $familyId;
-        $object->sortOrder = $sortOrder;
+        $object->persistedToId($familyId);
 
         return $object;
-    }
-
-    /**
-     * @param int $identifier
-     */
-    public function persistedToId($identifier)
-    {
-        $this->identifier = $identifier;
     }
 }
