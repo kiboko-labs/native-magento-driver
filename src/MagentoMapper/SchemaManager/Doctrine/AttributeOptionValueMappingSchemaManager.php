@@ -99,13 +99,9 @@ class AttributeOptionValueMappingSchemaManager extends AbstractMappingSchemaMana
 
         $table->addIndex(['value_id']);
 
-        $table->addIndex(['option_id']);
-
         $table->addIndex(['option_code']);
 
         $table->addIndex(['locale']);
-
-        $table->addUniqueIndex(['option_code', 'locale']);
 
         $table->addUniqueIndex(['instance_identifier', 'value_id']);
 
