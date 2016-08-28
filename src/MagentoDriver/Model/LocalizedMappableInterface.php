@@ -7,7 +7,7 @@ interface LocalizedMappableInterface extends MappableInterface
     /**
      * @param string $locale
      */
-    public function setMappingLocale($code, $locale);
+    public function setMappingLocale($locale);
 
     /**
      * @return string
