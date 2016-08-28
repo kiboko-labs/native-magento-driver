@@ -36,7 +36,7 @@ trait InMemoryMapperTrait
             return;
         }
 
-        return $this->mapping[$code];
+        return (int) $this->mapping[$code];
     }
 
     /**
