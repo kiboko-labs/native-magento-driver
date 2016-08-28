@@ -51,7 +51,7 @@ class AttributeOptionValueMapper implements AttributeOptionValueMapperInterface
             return $mapped;
         }
 
-        return $this->repository->findOneByCodeAndLocale($code, $locale);
+        return (int) $this->repository->findOneByCodeAndLocale($code, $locale);
     }
 
     /**
