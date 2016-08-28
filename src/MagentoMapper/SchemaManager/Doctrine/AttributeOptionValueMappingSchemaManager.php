@@ -103,6 +103,8 @@ class AttributeOptionValueMappingSchemaManager extends AbstractMappingSchemaMana
             'length' => 65536,
         ]);
 
+        $table->addIndex(['value_id']);
+
         $table->addIndex(['option_id']);
 
         $table->addIndex(['option_code']);

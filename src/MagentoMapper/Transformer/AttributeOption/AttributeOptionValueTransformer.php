@@ -90,7 +90,7 @@ class AttributeOptionValueTransformer implements AttributeOptionTransformerInter
             );
 
             $transformedAttributeOption->setMappingCode($attributeOption->getCode());
-            $transformedAttributeOption->setMappingLocale($attributeOption->getLocale());
+            $transformedAttributeOption->setMappingLocale($value->getLocale());
 
             yield $transformedAttributeOption;
         }
@@ -121,7 +121,7 @@ class AttributeOptionValueTransformer implements AttributeOptionTransformerInter
                 );
 
                 $transformedOptionValue->setMappingCode($attributeOption->getCode());
-                $transformedOptionValue->setMappingLocale($attributeOption->getLocale());
+                $transformedOptionValue->setMappingLocale($value->getLocale());
 
                 yield $transformedOptionValue;
             }
