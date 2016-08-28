@@ -74,9 +74,7 @@ class FamilyMappingSchemaManager implements MappingSchemaManagerInterface
             'length' => 255,
         ]);
 
-        $table->addColumn('mapping_options', 'string', [
-            'length' => 65536,
-        ]);
+        $table->addColumn('mapping_options', 'text');
 
         $table->addIndex(['attribute_set_id']);
 

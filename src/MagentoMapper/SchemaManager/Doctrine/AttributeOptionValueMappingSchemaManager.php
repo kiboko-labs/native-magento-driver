@@ -83,10 +83,6 @@ class AttributeOptionValueMappingSchemaManager extends AbstractMappingSchemaMana
             'length' => 64
         ]);
 
-        $table->addColumn('option_id', 'integer', [
-            'unsigned' => true,
-        ]);
-
         $table->addColumn('option_code', 'string', [
             'length' => 255,
         ]);
@@ -99,9 +95,7 @@ class AttributeOptionValueMappingSchemaManager extends AbstractMappingSchemaMana
             'length' => 255,
         ]);
 
-        $table->addColumn('mapping_options', 'string', [
-            'length' => 65536,
-        ]);
+        $table->addColumn('mapping_options', 'text');
 
         $table->addIndex(['value_id']);
 
@@ -122,20 +116,6 @@ class AttributeOptionValueMappingSchemaManager extends AbstractMappingSchemaMana
             ],
             [
                 'value_id',
-            ],
-            [
-                'onUpdate' => 'CASCADE',
-                'onDelete' => 'CASCADE',
-            ]
-        );
-
-        $table->addForeignKeyConstraint(
-            $this->attributeOptionTableName,
-            [
-                'option_id',
-            ],
-            [
-                'option_id',
             ],
             [
                 'onUpdate' => 'CASCADE',

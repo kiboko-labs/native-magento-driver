@@ -86,9 +86,7 @@ class OptionMappingSchemaManager implements MappingSchemaManagerInterface
             'length' => 255,
         ]);
 
-        $table->addColumn('mapping_options', 'string', [
-            'length' => 65536,
-        ]);
+        $table->addColumn('mapping_options', 'text');
 
         $table->addIndex(['option_id']);
 
