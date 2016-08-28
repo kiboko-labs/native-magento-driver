@@ -16,4 +16,9 @@ interface AttributeOptionMapperInterface
      * @param int $identifier
      */
     public function persist($code, $identifier);
+
+    /**
+     * @return void
+     */
+    public function flush();
 }

@@ -14,12 +14,15 @@ class AttributeOptionPersister implements AttributeOptionPersisterInterface
 
     private $tableName;
 
+    private $unitOfWork;
+
     public function __construct(
         Connection $connection,
         $tableName
     ) {
         $this->connection = $connection;
         $this->tableName = $tableName;
+        $this->unitOfWork = [];
     }
 
     /**
@@ -28,11 +31,19 @@ class AttributeOptionPersister implements AttributeOptionPersisterInterface
      */
     public function persist($code, $identifier)
     {
-        $this->connection->insert($this->tableName,
-            [
-                'option_id'   => $identifier,
-                'option_code' => $code,
-            ]
-        );
+        $this->unitOfWork[] = [
+            'option_id'   => $identifier,
+            'option_code' => $code,
+        ];
+    }
+
+    /**
+     * @return void
+     */
+    public function flush()
+    {
+        foreach ($this->unitOfWork as $item) {
+            $this->connection->insert($this->tableName, $item);
+        }
     }
 }

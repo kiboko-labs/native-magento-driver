@@ -14,12 +14,15 @@ class AttributeOptionValuePersister implements AttributeOptionValuePersisterInte
 
     private $tableName;
 
+    private $unitOfWork;
+
     public function __construct(
         Connection $connection,
         $tableName
     ) {
         $this->connection = $connection;
         $this->tableName = $tableName;
+        $this->unitOfWork = [];
     }
 
     /**
@@ -29,12 +32,20 @@ class AttributeOptionValuePersister implements AttributeOptionValuePersisterInte
      */
     public function persist($optionsCode, $locale, $identifier)
     {
-        $this->connection->insert($this->tableName,
-            [
-                'value_id'    => $identifier,
-                'option_code' => $optionsCode,
-                'locale'      => $locale,
-            ]
-        );
+        $this->unitOfWork[] = [
+            'value_id'    => $identifier,
+            'option_code' => $optionsCode,
+            'locale'      => $locale,
+        ];
+    }
+
+    /**
+     * @return void
+     */
+    public function flush()
+    {
+        foreach ($this->unitOfWork as $item) {
+            $this->connection->insert($this->tableName, $item);
+        }
     }
 }

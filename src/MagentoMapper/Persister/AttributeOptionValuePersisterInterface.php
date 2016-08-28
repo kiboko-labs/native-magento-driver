@@ -10,4 +10,9 @@ interface AttributeOptionValuePersisterInterface
      * @param int $identifier
      */
     public function persist($optionsCode, $locale, $identifier);
+
+    /**
+     * @return void
+     */
+    public function flush();
 }

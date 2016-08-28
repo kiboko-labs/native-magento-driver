@@ -11,6 +11,8 @@ use Kiboko\Component\MagentoMapper\Exception\InvalidArgumentException;
  */
 trait InMemoryMapperTrait
 {
+    private $unitOfWork = [];
+
     /**
      * @param string $code
      * @return int
@@ -43,10 +45,16 @@ trait InMemoryMapperTrait
      */
     public function persist($code, $identifier)
     {
-        if (!isset($this->mapping)) {
-            $this->mapping = [];
-        }
+        $this->unitOfWork[$code] = $identifier;
+    }
 
-        $this->mapping[$code] = $identifier;
+    public function flush()
+    {
+        $this->mapping = array_merge(
+            $this->mapping,
+            $this->unitOfWork
+        );
+
+        $this->unitOfWork = [];
     }
 }

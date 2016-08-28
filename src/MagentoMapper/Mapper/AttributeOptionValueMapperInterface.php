@@ -18,4 +18,9 @@ interface AttributeOptionValueMapperInterface
      * @param int $identifier
      */
     public function persist($optionCode, $locale, $identifier);
+
+    /**
+     * @return void
+     */
+    public function flush();
 }

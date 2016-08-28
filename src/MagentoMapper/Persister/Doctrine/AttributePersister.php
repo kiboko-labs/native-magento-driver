@@ -14,12 +14,15 @@ class AttributePersister implements AttributePersisterInterface
 
     private $tableName;
 
+    private $unitOfWork;
+
     public function __construct(
         Connection $connection,
         $tableName
     ) {
         $this->connection = $connection;
         $this->tableName = $tableName;
+        $this->unitOfWork = [];
     }
 
     /**
@@ -28,11 +31,19 @@ class AttributePersister implements AttributePersisterInterface
      */
     public function persist($code, $identifier)
     {
-        $this->connection->insert($this->tableName,
-            [
-                'attribute_id'   => $identifier,
-                'attribute_code' => $code,
-            ]
-        );
+        $this->unitOfWork[] = [
+            'attribute_id'   => $identifier,
+            'attribute_code' => $code,
+        ];
+    }
+
+    /**
+     * @return void
+     */
+    public function flush()
+    {
+        foreach ($this->unitOfWork as $item) {
+            $this->connection->insert($this->tableName, $item);
+        }
     }
 }

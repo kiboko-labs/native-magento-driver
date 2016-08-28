@@ -62,4 +62,10 @@ class AttributeOptionMapper implements AttributeOptionMapperInterface
         $this->secondLevelMapper->persist($code, $identifier);
         $this->persister->persist($code, $identifier);
     }
+    
+    public function flush()
+    {
+        $this->secondLevelMapper->flush();
+        $this->persister->flush();
+    }
 }

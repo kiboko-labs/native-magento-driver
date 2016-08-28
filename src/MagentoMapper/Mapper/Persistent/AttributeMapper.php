@@ -62,4 +62,13 @@ class AttributeMapper implements AttributeMapperInterface
         $this->secondLevelMapper->persist($code, $identifier);
         $this->persister->persist($code, $identifier);
     }
+
+    /**
+     * @return void
+     */
+    public function flush()
+    {
+        $this->secondLevelMapper->flush();
+        $this->persister->flush();
+    }
 }

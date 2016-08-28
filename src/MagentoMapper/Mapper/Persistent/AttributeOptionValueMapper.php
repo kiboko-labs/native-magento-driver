@@ -64,4 +64,13 @@ class AttributeOptionValueMapper implements AttributeOptionValueMapperInterface
         $this->secondLevelMapper->persist($optionCode, $locale, $identifier);
         $this->persister->persist($optionCode, $locale, $identifier);
     }
+
+    /**
+     * @return void
+     */
+    public function flush()
+    {
+        $this->secondLevelMapper->flush();
+        $this->persister->flush();
+    }
 }
