@@ -63,6 +63,6 @@ class PriceAttributeTransformer
      */
     public function supportsTransformation(PimAttributeInterface $attribute)
     {
-        return $attribute->getAttributeType() === 'pim_catalog_pricecollection';
+        return $attribute->getAttributeType() === 'pim_catalog_price_collection';
     }
 }

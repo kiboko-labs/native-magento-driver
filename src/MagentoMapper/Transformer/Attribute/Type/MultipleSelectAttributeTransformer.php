@@ -8,7 +8,7 @@ use Kiboko\Component\MagentoMapper\Mapper\EntityTypeMapperInterface;
 use Kiboko\Component\MagentoMapper\Transformer\AttributeTransformerInterface;
 use Pim\Component\Catalog\Model\AttributeInterface as PimAttributeInterface;
 
-class IntegerAttributeTransformer
+class MultipleSelectAttributeTransformer
     implements AttributeTransformerInterface
 {
     /**
@@ -39,14 +39,14 @@ class IntegerAttributeTransformer
                 $this->entityTypeMapper->map($attribute->getEntityType()), // entity_type_id
                 $attribute->getCode(),                                     // attribute_code
                 null,                                                      // attribute_model
-                'int',                                                     // backend_type
+                'varchar',                                                 // backend_type
                 null,                                                      // backend_model
                 null,                                                      // backend_table
                 null,                                                      // frontend_model
-                'text',                                                    // frontend_input
+                'multiselect',                                             // frontend_input
                 $attribute->getLabel(),                                    // frontend_label
                 null,                                                      // frontend_class
-                null,                                                      // source_model
+                'eav/entity_attribute_source_table',                       // source_model
                 $attribute->isRequired(),                                  // is_required
                 true,                                                      // is_user_defined
                 $attribute->isUnique(),                                    // is_unique
@@ -63,11 +63,6 @@ class IntegerAttributeTransformer
      */
     public function supportsTransformation(PimAttributeInterface $attribute)
     {
-        return in_array($attribute->getAttributeType(),
-            [
-                'pim_catalog_number',
-                'pim_catalog_integer',
-            ]
-        );
+        return $attribute->getAttributeType() === 'pim_catalog_multiselect';
     }
 }
