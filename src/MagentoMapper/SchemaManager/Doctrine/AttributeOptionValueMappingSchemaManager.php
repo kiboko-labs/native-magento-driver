@@ -118,10 +118,10 @@ class AttributeOptionValueMappingSchemaManager extends AbstractMappingSchemaMana
         $table->addForeignKeyConstraint(
             $this->attributeOptionValueTableName,
             [
-                'option_id',
+                'value_id',
             ],
             [
-                'option_id',
+                'value_id',
             ],
             [
                 'onUpdate' => 'CASCADE',
