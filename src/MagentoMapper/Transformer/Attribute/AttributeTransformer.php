@@ -72,19 +72,16 @@ class AttributeTransformer
                 continue;
             }
 
-            $attributes = $transformer->transform($attribute);
-            foreach ($attributes as $transformedAttribute) {
+            foreach ($transformer->transform($attribute) as $transformedAttribute) {
                 if (($attributeId = $this->mapper->map($attribute->getCode())) !== null) {
                     $transformedAttribute->persistedToId($attributeId);
                 }
 
                 $transformedAttribute->setMappingCode($attribute->getCode());
+
+                yield $transformedAttribute;
             }
-
-            return $attributes;
         }
-
-        return;
     }
 
     /**

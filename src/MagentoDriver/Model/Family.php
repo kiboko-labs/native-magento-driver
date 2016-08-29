@@ -18,6 +18,11 @@ class Family implements FamilyInterface
     private $sortOrder;
 
     /**
+     * @var AttributeGroupInterface[]
+     */
+    private $groups;
+
+    /**
      * @param string $label
      * @param int    $sortOrder
      */
@@ -25,6 +30,7 @@ class Family implements FamilyInterface
     {
         $this->label = $label;
         $this->sortOrder = $sortOrder;
+        $this->groups = [];
     }
 
     /**
@@ -41,6 +47,42 @@ class Family implements FamilyInterface
     public function getSortOrder()
     {
         return $this->sortOrder;
+    }
+
+    /**
+     * @return AttributeGroupInterface[]|\Traversable
+     */
+    public function getGroups()
+    {
+        foreach ($this->groups as $group) {
+            yield $group;
+        }
+    }
+
+    /**
+     * @param AttributeGroupInterface[] $groups
+     *
+     * @return $this
+     */
+    public function setGroups(array $groups)
+    {
+        foreach ($groups as $group) {
+            if (!$group instanceof AttributeGroupInterface) {
+                continue;
+            }
+
+            $this->groups[] = $group;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param AttributeGroupInterface $group
+     */
+    public function addGroup(AttributeGroupInterface $group)
+    {
+        $this->groups[] = $group;
     }
 
     /**

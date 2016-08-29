@@ -5,14 +5,10 @@ namespace Kiboko\Component\MagentoMapper\Transformer\AttributeOption;
 
 use Kiboko\Component\MagentoDriver\Model\AttributeOption;
 use Kiboko\Component\MagentoDriver\Model\AttributeOptionInterface as KibokoAttributeOptionInterface;
-use Kiboko\Component\MagentoDriver\Model\AttributeOptionValue;
-use Kiboko\Component\MagentoDriver\Repository\StoreRepositoryInterface;
 use Kiboko\Component\MagentoMapper\Mapper\AttributeMapperInterface;
 use Kiboko\Component\MagentoMapper\Mapper\AttributeOptionMapperInterface;
-use Kiboko\Component\MagentoMapper\Mapper\AttributeOptionValueMapperInterface;
 use Kiboko\Component\MagentoMapper\Transformer\AttributeOptionTransformerInterface;
 use Pim\Component\Catalog\Model\AttributeOptionInterface as PimAttributeOptionInterface;
-use Pim\Component\Catalog\Model\AttributeOptionValueInterface;
 
 class AttributeOptionTransformer implements AttributeOptionTransformerInterface
 {
@@ -54,9 +50,7 @@ class AttributeOptionTransformer implements AttributeOptionTransformerInterface
 
         $option->setMappingCode($attributeOption->getCode());
 
-        return [
-            $attributeOption->getCode() => $option,
-        ];
+        yield $option;
     }
 
     /**

@@ -28,33 +28,29 @@ class WeightAttributeTransformer
 
     /**
      * @param PimAttributeInterface $attribute
-     * @param int|null              $mappedId
      *
      * @return KibokoAttributeInterface[]
      */
-    public function transform(PimAttributeInterface $attribute, $mappedId = null)
+    public function transform(PimAttributeInterface $attribute)
     {
-        return [
-            $attribute->getCode() => Attribute::buildNewWith(
-                $mappedId,                                                 // attribute_id
-                $this->entityTypeMapper->map($attribute->getEntityType()), // entity_type_id
-                $attribute->getCode(),                                     // attribute_code
-                null,                                                      // attribute_model
-                'decimal',                                                 // backend_type
-                null,                                                      // backend_model
-                null,                                                      // backend_table
-                null,                                                      // frontend_model
-                'weight',                                                  // frontend_input
-                $attribute->getLabel(),                                    // frontend_label
-                null,                                                      // frontend_class
-                null,                                                      // source_model
-                $attribute->isRequired(),                                  // is_required
-                true,                                                      // is_user_defined
-                $attribute->isUnique(),                                    // is_unique
-                null,                                                      // default_value
-                null                                                       // note
-            )
-        ];
+        yield new Attribute(
+            $this->entityTypeMapper->map($attribute->getEntityType()), // entity_type_id
+            $attribute->getCode(),                                     // attribute_code
+            null,                                                      // attribute_model
+            'decimal',                                                 // backend_type
+            null,                                                      // backend_model
+            null,                                                      // backend_table
+            null,                                                      // frontend_model
+            'weight',                                                  // frontend_input
+            $attribute->getLabel(),                                    // frontend_label
+            null,                                                      // frontend_class
+            null,                                                      // source_model
+            $attribute->isRequired(),                                  // is_required
+            true,                                                      // is_user_defined
+            $attribute->isUnique(),                                    // is_unique
+            null,                                                      // default_value
+            null                                                       // note
+        );
     }
 
     /**
