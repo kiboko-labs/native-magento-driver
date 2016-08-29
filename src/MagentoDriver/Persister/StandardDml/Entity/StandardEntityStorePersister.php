@@ -5,9 +5,12 @@ namespace Kiboko\Component\MagentoDriver\Persister\StandardDml\Entity;
 use Doctrine\DBAL\Connection;
 use Kiboko\Component\MagentoDriver\Model\EntityStoreInterface;
 use Kiboko\Component\MagentoDriver\Persister\EntityStorePersisterInterface;
+use Kiboko\Component\MagentoDriver\Persister\StandardDml\InsertUpdateAwareTrait;
 
 class StandardEntityStorePersister implements EntityStorePersisterInterface
 {
+    use InsertUpdateAwareTrait;
+
     /**
      * @var Connection
      */
@@ -57,38 +60,30 @@ class StandardEntityStorePersister implements EntityStorePersisterInterface
         $this->dataQueue->push($entityStore);
     }
 
+    /**
+     * @return \Traversable
+     */
     public function flush()
     {
         foreach ($this->dataQueue as $entityStore) {
-            $count = 0;
-            if ($entityStore->getId()) {
-                $count = $this->connection->update($this->tableName,
-                    [
-                        'entity_type_id' => $entityStore->getTypeId(),
-                        'store_id' => $entityStore->getStoreId(),
-                        'increment_prefix' => $entityStore->getIncrementPrefix(),
-                        'increment_last_id' => $entityStore->getIncrementLastId(),
-                    ],
-                    [
-                        'entity_store_id' => $entityStore->getId(),
-                    ]
-                );
-            }
+            $this->insertOnDuplicateUpdate($this->connection, $this->tableName,
+                [
+                    'entity_type_id' => $entityStore->getTypeId(),
+                    'store_id' => $entityStore->getStoreId(),
+                    'increment_prefix' => $entityStore->getIncrementPrefix(),
+                    'increment_last_id' => $entityStore->getIncrementLastId(),
+                ],
+                [
+                    'store_id',
+                    'increment_prefix',
+                    'increment_last_id',
+                ],
+                'entity_type_id'
+            );
 
-            if ($count <= 0) {
-                $this->connection->insert($this->tableName,
-                    [
-                        'entity_type_id' => $entityStore->getTypeId(),
-                        'store_id' => $entityStore->getStoreId(),
-                        'increment_prefix' => $entityStore->getIncrementPrefix(),
-                        'increment_last_id' => $entityStore->getIncrementLastId(),
-                    ],
-                    [
-                        'entity_store_id' => $entityStore->getId(),
-                    ]
-                );
-
-                $entityStore->persistToId($this->connection->lastInsertId());
+            if ($entityStore->getId() === null) {
+                $entityStore->persistedToId($this->connection->lastInsertId());
+                yield $entityStore;
             }
         }
     }
