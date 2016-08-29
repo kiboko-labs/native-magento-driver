@@ -1,6 +1,6 @@
 <?php
 
-namespace Kiboko\Component\MagentoAdvancedMapper\Transformer\Family;
+namespace Kiboko\Component\MagentoMapper\Transformer\Family;
 
 use Kiboko\Component\MagentoDriver\Model\FamilyInterface as KibokoFamilyInterface;
 use Kiboko\Component\MagentoDriver\Model\Family;
