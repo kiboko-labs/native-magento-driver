@@ -43,32 +43,6 @@ class AttributeOptionValueMappingSchemaManager extends AbstractMappingSchemaMana
     }
 
     /**
-     * @param Schema $currentSchema
-     * @param SchemaDiff $schemaDiff
-     * @return SchemaDiff
-     * @throws \Doctrine\DBAL\Schema\SchemaException
-     */
-    public function schemaDiff(Schema $currentSchema, SchemaDiff $schemaDiff)
-    {
-        $table = $this->declareTable();
-
-        if (!$currentSchema->hasTable($this->tableName)) {
-            $schemaDiff->newTables[$table->getName()] = $table;
-        } else {
-            $tableDifferences = $this->schemaComparator->diffTable(
-                $currentSchema->getTable($this->tableName),
-                $table
-            );
-
-            if ($tableDifferences !== false) {
-                $schemaDiff->changedTables[$this->tableName] = $tableDifferences;
-            }
-        }
-
-        return $schemaDiff;
-    }
-
-    /**
      * @return Table
      */
     protected function declareTable()

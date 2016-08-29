@@ -4,21 +4,13 @@ namespace Kiboko\Component\MagentoMapper\SchemaManager\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
+use Doctrine\DBAL\Schema\Schema;
+use Doctrine\DBAL\Schema\SchemaDiff;
 use Doctrine\DBAL\Schema\Table;
-use Kiboko\Component\MagentoMapper\SchemaManager\MappingSchemaManagerInterface;
+use Doctrine\DBAL\Schema\Comparator as SchemaComparator;
 
-class FamilyMappingSchemaManager implements MappingSchemaManagerInterface
+class FamilyMappingSchemaManager extends AbstractMappingSchemaManager
 {
-    /**
-     * @var Connection
-     */
-    private $connection;
-
-    /**
-     * @var string
-     */
-    private $tableName;
-
     /**
      * @var string
      */
@@ -27,34 +19,25 @@ class FamilyMappingSchemaManager implements MappingSchemaManagerInterface
     /**
      * OptionMappingSchemaManager constructor.
      *
-     * @param Connection $connection
-     * @param string     $tableName
+     * @param Connection       $connection
+     * @param SchemaComparator $schemaComparator
+     * @param string           $tableName
      * @param string     $attributeSetsTableName
      */
     public function __construct(
         Connection $connection,
+        SchemaComparator $schemaComparator,
         $tableName,
         $attributeSetsTableName
     ) {
-        $this->connection = $connection;
-        $this->tableName = $tableName;
+        parent::__construct($connection, $schemaComparator, $tableName);
         $this->attributeSetsTableName = $attributeSetsTableName;
-    }
-
-    /**
-     * @return bool
-     */
-    public function assertTableExists()
-    {
-        $manager = $this->connection->getSchemaManager();
-
-        return $manager->tablesExist([$this->tableName]);
     }
 
     /**
      * @return Table
      */
-    private function declareTableSchema()
+    protected function declareTable()
     {
         $table = new Table($this->tableName);
 
@@ -99,19 +82,14 @@ class FamilyMappingSchemaManager implements MappingSchemaManagerInterface
         return $table;
     }
 
-    public function createTable()
-    {
-        $manager = $this->connection->getSchemaManager();
-
-        $manager->createTable($this->declareTableSchema());
-    }
-
     /**
      * @param string $pimgentoTableName
+     * @param string $linkCode
+     * @return int|null
      *
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function initializeFromPimgento($pimgentoTableName)
+    public function initializeFromPimgento($pimgentoTableName, $linkCode)
     {
         $manager = $this->connection->getSchemaManager();
 
