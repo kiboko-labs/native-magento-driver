@@ -6,7 +6,6 @@ use Doctrine\DBAL\Connection;
 use Kiboko\Component\MagentoDriver\Model\AttributeGroupInterface;
 use Kiboko\Component\MagentoDriver\Persister\AttributeGroupPersisterInterface;
 use Kiboko\Component\MagentoDriver\Persister\StandardDml\InsertUpdateAwareTrait;
-use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeGroupQueryBuilder;
 
 class AttributeGroupPersister implements AttributeGroupPersisterInterface
 {
