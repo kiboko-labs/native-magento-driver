@@ -108,15 +108,12 @@ class AttributeMappingSchemaManager extends AbstractMappingSchemaManager
                 'mapping_options'     => $queryBuilder->expr()->literal(json_encode([], JSON_OBJECT_AS_ARRAY)),
             ])
             ->from($pimgentoTableName, 'pim')
-            ->where($queryBuilder->expr()->eq('pim.import', '?'))
+            ->where($queryBuilder->expr()->eq('pim.import', $queryBuilder->expr()->literal('attribute')))
         ;
 
         return $this->connection->executeUpdate(
             "INSERT INTO {$this->connection->quoteIdentifier($this->tableName)} "
-                .$queryBuilder->getSQL(),
-            [
-                'attribute',
-            ]
+                .$queryBuilder->getSQL()
         );
     }
 }

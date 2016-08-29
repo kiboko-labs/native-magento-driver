@@ -66,7 +66,7 @@ class FamilyMappingSchemaManager extends AbstractMappingSchemaManager
         $table->addUniqueIndex(['instance_identifier', 'attribute_set_id']);
 
         $table->addForeignKeyConstraint(
-            new Table($this->attributeSetsTableName),
+            $this->attributeSetsTableName,
             [
                 'attribute_set_id',
             ],
@@ -105,15 +105,12 @@ class FamilyMappingSchemaManager extends AbstractMappingSchemaManager
                 'family_code' => 'pim.code',
             ])
             ->from($pimgentoTableName, 'pim')
-            ->where($queryBuilder->expr()->eq('pim.import', '?'))
+            ->where($queryBuilder->expr()->eq('pim.import', $queryBuilder->expr()->literal('family')))
         ;
 
         return $this->connection->executeUpdate(
             "INSERT INTO {$this->connection->quoteIdentifier($this->tableName)} "
-                .$queryBuilder->getSQL(),
-            [
-                'family',
-            ]
+                .$queryBuilder->getSQL()
         );
     }
 }
