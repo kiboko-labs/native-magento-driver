@@ -5,9 +5,12 @@ namespace Kiboko\Component\MagentoDriver\Persister\StandardDml\Family;
 use Doctrine\DBAL\Connection;
 use Kiboko\Component\MagentoDriver\Model\FamilyInterface;
 use Kiboko\Component\MagentoDriver\Persister\FamilyPersisterInterface;
+use Kiboko\Component\MagentoDriver\Persister\StandardDml\InsertUpdateAwareTrait;
 
 class StandardFamilyPersister implements FamilyPersisterInterface
 {
+    use InsertUpdateAwareTrait;
+
     /**
      * @var Connection
      */
@@ -57,34 +60,30 @@ class StandardFamilyPersister implements FamilyPersisterInterface
         $this->dataQueue->push($family);
     }
 
+    /**
+     * @return \Traversable
+     */
     public function flush()
     {
         foreach ($this->dataQueue as $family) {
-            $count = 0;
-            if ($family->getId()) {
-                $count = $this->connection->update($this->tableName,
-                    [
-                        'entity_type_id' => 4,
-                        'attribute_set_name' => $family->getLabel(),
-                        'sort_order' => $family->getSortOrder(),
-                    ],
-                    [
-                        'attribute_set_id' => $family->getId(),
-                    ]
-                );
-            }
+            $this->insertOnDuplicateUpdate($this->connection, $this->tableName,
+                [
+                    'attribute_set_id' => $family->getId(),
+                    'entity_type_id' => 4,
+                    'attribute_set_name' => $family->getLabel(),
+                    'sort_order' => $family->getSortOrder(),
+                ],
+                [
+                    'entity_type_id',
+                    'attribute_set_name',
+                    'sort_order',
+                ],
+                'attribute_set_id'
+            );
 
-            if ($count <= 0) {
-                $this->connection->insert($this->tableName,
-                    [
-                        'attribute_set_id' => $family->getId(),
-                        'entity_type_id' => 4,
-                        'attribute_set_name' => $family->getLabel(),
-                        'sort_order' => $family->getSortOrder(),
-                    ]
-                );
-
+            if ($family->getId() === null) {
                 $family->persistedToId($this->connection->lastInsertId());
+                yield $family;
             }
         }
     }
