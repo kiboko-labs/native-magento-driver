@@ -72,7 +72,7 @@ class AttributeOptionValue implements AttributeOptionValueInterface
         $storeId,
         $value = null
     ) {
-        $object = new static($attributeOptionValueId, $optionId, $storeId, $value);
+        $object = new static($optionId, $storeId, $value);
 
         $object->persistedToId($attributeOptionValueId);
 
