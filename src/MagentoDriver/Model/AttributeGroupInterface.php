@@ -2,7 +2,7 @@
 
 namespace Kiboko\Component\MagentoDriver\Model;
 
-interface AttributeGroupInterface extends MappableInterface, IdentifiableInterface
+interface AttributeGroupInterface extends ParentMappableInterface, IdentifiableInterface
 {
     /**
      * @return int
@@ -23,14 +23,4 @@ interface AttributeGroupInterface extends MappableInterface, IdentifiableInterfa
      * @return int
      */
     public function getDefaultId();
-    
-    /**
-     * @return string
-     */
-    public function getAttributeGroupCode();
-    
-    /**
-     * @return string
-     */
-    public function getTabGroupCode();
 }

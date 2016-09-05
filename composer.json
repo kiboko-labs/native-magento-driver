@@ -11,6 +11,11 @@
         "akeneo/pim-community-dev": "~1.5"
     },
     "license": "proprietary",
+    "replace": {
+        "kiboko/magento-driver": "self.version",
+        "kiboko/akeneo-magento-mapper": "self.version",
+        "kiboko/magento-serializer": "self.version"
+    },
     "authors": [
         {
             "name": "Grégory Planchat",
