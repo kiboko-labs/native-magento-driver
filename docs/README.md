@@ -44,7 +44,7 @@ The driver is split into several tools, each of them having its implementation f
 ### [Entity types](entity-types.md)
 
 * [Initializing the Query Builder](entity-types.md#initializing-the-query-builder)
-* [Initializing the Repository](#initializing-the-repository)
+* [Initializing the Repository](entity-types.md#initializing-the-repository)
 
 ### [Families](families.md)
 
