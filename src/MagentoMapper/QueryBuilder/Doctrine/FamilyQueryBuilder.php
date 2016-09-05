@@ -57,10 +57,10 @@ class FamilyQueryBuilder implements FamilyQueryBuilderInterface
     public static function getDefaultTable($prefix = null)
     {
         if ($prefix !== null) {
-            return sprintf('%sluni_pim_mapping_family', $prefix);
+            return sprintf('%skiboko_pim_mapping_family', $prefix);
         }
 
-        return 'luni_pim_mapping_family';
+        return 'kiboko_pim_mapping_family';
     }
 
     /**

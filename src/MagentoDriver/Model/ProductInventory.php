@@ -4,6 +4,8 @@ namespace Kiboko\Component\MagentoDriver\Model;
 
 class ProductInventory implements ProductInventoryInterface
 {
+    use MappableTrait;
+
     /**
      * @return bool
      */

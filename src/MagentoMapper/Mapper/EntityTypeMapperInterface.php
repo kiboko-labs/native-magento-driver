@@ -2,14 +2,23 @@
 
 namespace Kiboko\Component\MagentoMapper\Mapper;
 
-use Pim\Bundle\CatalogBundle\Model\AttributeInterface;
-
 interface EntityTypeMapperInterface
 {
     /**
-     * @param AttributeInterface $identifier
+     * @param string $code
      *
      * @return int
      */
-    public function map(AttributeInterface $identifier);
+    public function map($code);
+
+    /**
+     * @param string $code
+     * @param int $identifier
+     */
+    public function persist($code, $identifier);
+
+    /**
+     * @return void
+     */
+    public function flush();
 }

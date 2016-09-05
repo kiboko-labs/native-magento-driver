@@ -5,9 +5,12 @@ namespace Kiboko\Component\MagentoDriver\Persister\StandardDml\Attribute;
 use Doctrine\DBAL\Connection;
 use Kiboko\Component\MagentoDriver\Model\AttributeOptionInterface;
 use Kiboko\Component\MagentoDriver\Persister\AttributeOptionPersisterInterface;
+use Kiboko\Component\MagentoDriver\Persister\StandardDml\InsertUpdateAwareTrait;
 
 class AttributeOptionPersister implements AttributeOptionPersisterInterface
 {
+    use InsertUpdateAwareTrait;
+
     /**
      * @var Connection
      */
@@ -57,32 +60,28 @@ class AttributeOptionPersister implements AttributeOptionPersisterInterface
         $this->dataQueue->push($attributeOption);
     }
 
+    /**
+     * @return \Traversable
+     */
     public function flush()
     {
         foreach ($this->dataQueue as $attributeOption) {
-            $count = 0;
-            if ($attributeOption->getId()) {
-                $count = $this->connection->update($this->tableName,
-                    [
-                        'attribute_id' => $attributeOption->getAttributeId(),
-                        'sort_order' => $attributeOption->getSortOrder(),
-                    ],
-                    [
-                        'option_id' => $attributeOption->getId(),
-                    ]
-                );
-            }
+            $this->insertOnDuplicateUpdate($this->connection, $this->tableName,
+                [
+                    'option_id' => $attributeOption->getId(),
+                    'attribute_id' => $attributeOption->getAttributeId(),
+                    'sort_order' => $attributeOption->getSortOrder(),
+                ],
+                [
+                    'attribute_id',
+                    'sort_order',
+                ],
+                'option_id'
+            );
 
-            if ($count <= 0) {
-                $this->connection->insert($this->tableName,
-                    [
-                        'option_id' => $attributeOption->getId(),
-                        'attribute_id' => $attributeOption->getAttributeId(),
-                        'sort_order' => $attributeOption->getSortOrder(),
-                    ]
-                );
-
+            if ($attributeOption->getId() === null) {
                 $attributeOption->persistedToId($this->connection->lastInsertId());
+                yield $attributeOption;
             }
         }
     }

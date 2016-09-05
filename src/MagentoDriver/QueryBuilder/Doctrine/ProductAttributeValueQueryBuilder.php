@@ -125,7 +125,6 @@ class ProductAttributeValueQueryBuilder implements ProductAttributeValueQueryBui
         return (new QueryBuilder($this->connection))
             ->select($fieldList, $alias)
             ->from($this->table, $alias)
-            ->where(sprintf('%s.entity_type_id=4', $alias))
         ;
     }
 
@@ -136,7 +135,7 @@ class ProductAttributeValueQueryBuilder implements ProductAttributeValueQueryBui
      */
     private function createBaseQueryBuilderWithStoreFilter($alias)
     {
-        $queryBuilder = $this->createBaseQueryBuilder($alias, $this->createFieldsList($this->fields, $alias));
+        $queryBuilder = $this->createBaseQueryBuilder($alias, $this->createFieldsList(['*'], $alias));
 
         $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.store_id', $alias), '?'));
 

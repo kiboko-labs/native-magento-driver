@@ -4,10 +4,8 @@ namespace Kiboko\Component\MagentoDriver\Model;
 
 class AttributeGroup implements AttributeGroupInterface
 {
-    /**
-     * @var int
-     */
-    private $identifier;
+    use MappableTrait;
+    use IdentifiableTrait;
 
     /**
      * @var int
@@ -61,14 +59,6 @@ class AttributeGroup implements AttributeGroupInterface
         $this->defaultId = $defaultId;
         $this->attributeGroupCode = $attributeGroupCode;
         $this->tabGroupCode = $tabGroupCode;
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->identifier;
     }
 
     /**
@@ -140,16 +130,8 @@ class AttributeGroup implements AttributeGroupInterface
     ) {
         $object = new static($familyId, $label, $sortOrder, $defaultId, $attributeGroupCode, $tabGroupCode);
 
-        $object->identifier = $attributeGroupId;
+        $object->persistedToId($attributeGroupId);
 
         return $object;
-    }
-
-    /**
-     * @param int $identifier
-     */
-    public function persistedToId($identifier)
-    {
-        $this->identifier = $identifier;
     }
 }

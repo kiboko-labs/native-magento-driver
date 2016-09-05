@@ -156,7 +156,7 @@ class DoctrineSchemaBuilder
      */
     public function ensureCatalogProductEntityTable()
     {
-        return (new Table\CatalogProductEntity($this->schema))->build();
+        return (new Table\CatalogProductEntity($this->schema))->build($GLOBALS['MAGENTO_VERSION']);
     }
 
     /**
@@ -254,7 +254,7 @@ class DoctrineSchemaBuilder
      */
     public function ensureCatalogProductAttributeValueTable($backendName, $backendType, array $backendOptions = [])
     {
-        return (new Table\CatalogProductAttributeValue($this->schema, $backendType, $backendName, $backendOptions))->build();
+        return (new Table\CatalogProductAttributeValue($this->schema, $backendType, $backendName, $backendOptions))->build($GLOBALS['MAGENTO_VERSION']);
     }
 
     /**
@@ -523,7 +523,7 @@ class DoctrineSchemaBuilder
      */
     public function ensureCatalogProductAttributeValueToEntityTypeLinks($backendType)
     {
-        (new Link\CatalogProductAttributeValueToEntityType($this->schema, $backendType))->build();
+        (new Link\CatalogProductAttributeValueToEntityType($this->schema, $backendType))->build($GLOBALS['MAGENTO_VERSION']);
     }
 
     /**

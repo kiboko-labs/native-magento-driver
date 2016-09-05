@@ -7,10 +7,8 @@ use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
 
 class ProductSuperAttribute implements SuperAttributeInterface
 {
-    /**
-     * @var int
-     */
-    private $identifier;
+    use MappableTrait;
+    use IdentifiableTrait;
 
     /**
      * @var AttributeInterface
@@ -39,35 +37,6 @@ class ProductSuperAttribute implements SuperAttributeInterface
     ) {
         $this->attribute = $attribute;
         $this->product = $product;
-    }
-
-    /**
-     * @param int                $identifier
-     * @param AttributeInterface $attribute
-     * @param ProductInterface   $product
-     * @param int                $position
-     *
-     * @return static
-     */
-    public static function buildNewWith(
-        $identifier,
-        AttributeInterface $attribute,
-        ProductInterface $product,
-        $position = null
-    ) {
-        $instance = new self($attribute, $product, $position);
-
-        $instance->identifier = $identifier;
-
-        return $instance;
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->identifier;
     }
 
     /**
@@ -115,10 +84,23 @@ class ProductSuperAttribute implements SuperAttributeInterface
     }
 
     /**
-     * @param int $identifier
+     * @param int                $identifier
+     * @param AttributeInterface $attribute
+     * @param ProductInterface   $product
+     * @param int                $position
+     *
+     * @return static
      */
-    public function persistedToId($identifier)
-    {
-        $this->identifier = $identifier;
+    public static function buildNewWith(
+        $identifier,
+        AttributeInterface $attribute,
+        ProductInterface $product,
+        $position = null
+    ) {
+        $instance = new self($attribute, $product, $position);
+
+        $instance->persistedToId($identifier);
+
+        return $instance;
     }
 }

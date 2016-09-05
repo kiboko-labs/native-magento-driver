@@ -69,7 +69,7 @@ class ProductAttributeValueHydrator implements ProductAttributeValueHydratorInte
         foreach ($productList as $product) {
             if (!$product instanceof ProductInterface) {
                 throw new InvalidArgumentException(sprintf('Passed array elements should be %s instances, %s found.',
-                    ProductInterface::class, get_class($product)));
+                    ProductInterface::class, is_object($product) ? get_class($product) : gettype($product)));
             }
 
             $productCollection->set($product->getId(), $product);

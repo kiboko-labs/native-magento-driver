@@ -31,7 +31,9 @@ class CatalogProductEntity
         $table = $this->schema->createTable('catalog_product_entity');
 
         $table->addColumn('entity_id', 'integer', ['unsigned' => true, 'autoincrement' => true, 'notnull' => false]);
-        $table->addColumn('entity_type_id', 'smallint', ['unsigned' => true, 'notnull' => false]);
+        if($magentoVersion !== '2.0'){
+            $table->addColumn('entity_type_id', 'smallint', ['unsigned' => true, 'notnull' => false]);
+        }
         $table->addColumn('attribute_set_id', 'smallint', ['unsigned' => true, 'notnull' => false]);
         $table->addColumn('type_id', 'string', ['length' => 32, 'default' => 'simple', 'notnull' => false]);
         $table->addColumn('sku', 'string', ['length' => 64, 'notnull' => false]);

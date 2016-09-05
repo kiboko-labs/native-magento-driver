@@ -18,5 +18,8 @@ interface AttributeLabelPersisterInterface
      */
     public function __invoke(AttributeLabelInterface $attributeLabel);
 
+    /**
+     * @return \Traversable
+     */
     public function flush();
 }

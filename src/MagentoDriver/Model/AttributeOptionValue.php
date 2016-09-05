@@ -4,10 +4,8 @@ namespace Kiboko\Component\MagentoDriver\Model;
 
 class AttributeOptionValue implements AttributeOptionValueInterface
 {
-    /**
-     * @var int
-     */
-    private $identifier;
+    use LocalizedMappableTrait;
+    use IdentifiableTrait;
 
     /**
      * @var int
@@ -34,14 +32,6 @@ class AttributeOptionValue implements AttributeOptionValueInterface
         $this->optionId = $optionId;
         $this->storeId = $storeId;
         $this->value = $value;
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->identifier;
     }
 
     /**
@@ -82,23 +72,10 @@ class AttributeOptionValue implements AttributeOptionValueInterface
         $storeId,
         $value = null
     ) {
-        $object = new static($attributeOptionValueId, $optionId, $storeId);
+        $object = new static($optionId, $storeId, $value);
 
-        $object->identifier = $attributeOptionValueId;
-        $object->optionId = $optionId;
-        $object->storeId = $storeId;
-        $object->value = (isset($value))
-                ? $value
-                : null;
+        $object->persistedToId($attributeOptionValueId);
 
         return $object;
-    }
-
-    /**
-     * @param int $identifier
-     */
-    public function persistedToId($identifier)
-    {
-        $this->identifier = $identifier;
     }
 }

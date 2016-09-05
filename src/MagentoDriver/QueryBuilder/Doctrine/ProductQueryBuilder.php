@@ -153,7 +153,7 @@ class ProductQueryBuilder implements ProductQueryBuilderInterface
     public function createFindQueryBuilder($alias)
     {
         return (new QueryBuilder($this->connection))
-            ->select($this->createFieldsList($this->fields, $alias))
+            ->select($this->createFieldsList(['*'], $alias))
             ->from($this->table, $alias)
         ;
     }
@@ -166,7 +166,6 @@ class ProductQueryBuilder implements ProductQueryBuilderInterface
     public function createFindAllQueryBuilder($alias)
     {
         $queryBuilder = $this->createFindQueryBuilder($alias);
-        $queryBuilder->where(sprintf('%s.entity_type_id=4', $alias));
 
         return $queryBuilder;
     }
@@ -259,8 +258,7 @@ class ProductQueryBuilder implements ProductQueryBuilderInterface
 
         $queryBuilder->innerJoin($alias, $this->familyTable, $familyAlias,
             $queryBuilder->expr()->andX(
-                $queryBuilder->expr()->eq(sprintf('%s.attribute_set_id', $alias), sprintf('%s.attribute_set_id', $familyAlias)),
-                $queryBuilder->expr()->eq(sprintf('%s.entity_type_id', $alias), sprintf('%s.entity_type_id', $familyAlias))
+                $queryBuilder->expr()->eq(sprintf('%s.attribute_set_id', $alias), sprintf('%s.attribute_set_id', $familyAlias))
             )
         );
 

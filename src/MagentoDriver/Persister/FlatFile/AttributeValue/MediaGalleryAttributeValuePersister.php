@@ -151,7 +151,7 @@ class MediaGalleryAttributeValuePersister implements AttributeValuePersisterInte
                 'Invalid attribute value type for "%s", expected "%s", got "%s".',
                 $value->getAttributeCode(),
                 MediaGalleryAttributeValueInterface::class,
-                get_class($value)
+                is_object($value) ? get_class($value) : gettype($value)
             ));
         }
 

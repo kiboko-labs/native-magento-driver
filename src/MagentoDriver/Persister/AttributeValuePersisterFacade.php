@@ -43,6 +43,9 @@ class AttributeValuePersisterFacade implements AttributeValuePersisterInterface
         $this->persist($value);
     }
 
+    /**
+     * @return \Traversable
+     */
     public function flush()
     {
         foreach ($this->broker->walkPersisterList() as $backend) {

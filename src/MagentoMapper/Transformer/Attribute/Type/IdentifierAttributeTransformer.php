@@ -6,7 +6,7 @@ use Kiboko\Component\MagentoDriver\Model\Attribute;
 use Kiboko\Component\MagentoDriver\Model\AttributeInterface as KibokoAttributeInterface;
 use Kiboko\Component\MagentoMapper\Mapper\EntityTypeMapperInterface;
 use Kiboko\Component\MagentoMapper\Transformer\AttributeTransformerInterface;
-use Pim\Bundle\CatalogBundle\Model\AttributeInterface as PimAttributeInterface;
+use Pim\Component\Catalog\Model\AttributeInterface as PimAttributeInterface;
 
 class IdentifierAttributeTransformer
     implements AttributeTransformerInterface
@@ -27,30 +27,28 @@ class IdentifierAttributeTransformer
 
     /**
      * @param PimAttributeInterface $attribute
-     * @param int|null              $mappedId
      *
-     * @return KibokoAttributeInterface
+     * @return KibokoAttributeInterface[]
      */
-    public function transform(PimAttributeInterface $attribute, $mappedId = null)
+    public function transform(PimAttributeInterface $attribute)
     {
-        return Attribute::buildNewWith(
-            $mappedId,                                      // attribute_id
-            $this->entityTypeMapper->map($attribute),       // entity_type_id
-            $attribute->getCode(),                          // attribute_code
-            null,                                           // attribute_model
-            'int',                                          // backend_type
-            'catalog/product_attribute_backend_boolean',    // backend_model
-            null,                                           // backend_table
-            null,                                           // frontend_model
-            'select',                                       // frontend_input
-            $attribute->getLabel(),                         // frontend_label
-            null,                                           // frontend_class
-            'eav/entity_attribute_source_boolean',          // source_model
-            $attribute->isRequired(),                       // is_required
-            true,                                           // is_user_defined
-            $attribute->isUnique(),                         // is_unique
-            null,                                           // default_value
-            null                                            // note
+        yield new Attribute(
+            $this->entityTypeMapper->map($attribute->getEntityType()), // entity_type_id
+            $attribute->getCode(),                                     // attribute_code
+            null,                                                      // attribute_model
+            'static',                                                  // backend_type
+            'catalog/product_attribute_backend_sku',                   // backend_model
+            null,                                                      // backend_table
+            null,                                                      // frontend_model
+            'text',                                                    // frontend_input
+            $attribute->getLabel(),                                    // frontend_label
+            null,                                                      // frontend_class
+            null,                                                      // source_model
+            $attribute->isRequired(),                                  // is_required
+            true,                                                      // is_user_defined
+            $attribute->isUnique(),                                    // is_unique
+            null,                                                      // default_value
+            null                                                       // note
         );
     }
 

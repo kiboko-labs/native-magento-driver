@@ -4,7 +4,7 @@ namespace Kiboko\Component\MagentoDriver\Model;
 
 use League\Flysystem\File;
 
-interface ImageAttributeValueInterface extends AttributeValueInterface
+interface ImageAttributeValueInterface extends AttributeValueInterface, MappableInterface
 {
     /**
      * @return File

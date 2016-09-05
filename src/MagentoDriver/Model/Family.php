@@ -4,10 +4,8 @@ namespace Kiboko\Component\MagentoDriver\Model;
 
 class Family implements FamilyInterface
 {
-    /**
-     * @var int
-     */
-    private $identifier;
+    use MappableTrait;
+    use IdentifiableTrait;
 
     /**
      * @var string
@@ -20,6 +18,11 @@ class Family implements FamilyInterface
     private $sortOrder;
 
     /**
+     * @var AttributeGroupInterface[]
+     */
+    private $groups;
+
+    /**
      * @param string $label
      * @param int    $sortOrder
      */
@@ -27,14 +30,7 @@ class Family implements FamilyInterface
     {
         $this->label = $label;
         $this->sortOrder = $sortOrder;
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->identifier;
+        $this->groups = [];
     }
 
     /**
@@ -54,6 +50,42 @@ class Family implements FamilyInterface
     }
 
     /**
+     * @return AttributeGroupInterface[]|\Traversable
+     */
+    public function getGroups()
+    {
+        foreach ($this->groups as $group) {
+            yield $group;
+        }
+    }
+
+    /**
+     * @param AttributeGroupInterface[] $groups
+     *
+     * @return $this
+     */
+    public function setGroups(array $groups)
+    {
+        foreach ($groups as $group) {
+            if (!$group instanceof AttributeGroupInterface) {
+                continue;
+            }
+
+            $this->groups[] = $group;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param AttributeGroupInterface $group
+     */
+    public function addGroup(AttributeGroupInterface $group)
+    {
+        $this->groups[] = $group;
+    }
+
+    /**
      * @param int    $familyId
      * @param string $label
      * @param int    $sortOrder
@@ -65,19 +97,10 @@ class Family implements FamilyInterface
         $label,
         $sortOrder = 1
     ) {
-        $object = new static($label);
+        $object = new static($label, $sortOrder);
 
-        $object->identifier = $familyId;
-        $object->sortOrder = $sortOrder;
+        $object->persistedToId($familyId);
 
         return $object;
-    }
-
-    /**
-     * @param int $identifier
-     */
-    public function persistedToId($identifier)
-    {
-        $this->identifier = $identifier;
     }
 }

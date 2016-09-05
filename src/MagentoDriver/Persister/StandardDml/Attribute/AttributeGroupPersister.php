@@ -60,27 +60,37 @@ class AttributeGroupPersister implements AttributeGroupPersisterInterface
         $this->dataQueue->push($attributeGroup);
     }
 
+    /**
+     * @return \Traversable
+     */
     public function flush()
     {
         foreach ($this->dataQueue as $attributeGroup) {
-            $this->insertOnDuplicateUpdate(
-                $this->connection,
-                $this->tableName,
+            $this->insertOnDuplicateUpdate($this->connection, $this->tableName,
                 [
                     'attribute_group_id' => $attributeGroup->getId(),
                     'attribute_set_id' => $attributeGroup->getFamilyId(),
                     'attribute_group_name' => $attributeGroup->getLabel(),
                     'sort_order' => $attributeGroup->getSortOrder(),
                     'default_id' => $attributeGroup->getDefaultId(),
+                    'attribute_group_code' => $attributeGroup->getAttributeGroupCode(),
+                    'tab_group_code' => $attributeGroup->getTabGroupCode(),
                 ],
                 [
                     'attribute_set_id',
                     'attribute_group_name',
                     'sort_order',
                     'default_id',
-                ]
+                    'attribute_group_code',
+                    'tab_group_code',
+                ],
+                'attribute_group_id'
             );
-            $attributeGroup->persistedToId($this->connection->lastInsertId());
+
+            if ($attributeGroup->getId() === null) {
+                $attributeGroup->persistedToId($this->connection->lastInsertId());
+                yield $attributeGroup;
+            }
         }
     }
 

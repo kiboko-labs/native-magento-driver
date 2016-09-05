@@ -1,0 +1,24 @@
+{
+    "name": "kiboko/magento-driver",
+    "description": "A Magento driver built as an ORM and ODM",
+    "type": "library",
+    "require": {
+        "php": ">=5.6",
+        "doctrine/dbal": "2.4.*",
+        "league/flysystem": "~1.0",
+    },
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Grégory Planchat",
+            "email": "gregory@luni.fr"
+        }
+    ],
+    "minimum-stability": "alpha",
+    "repositories": [],
+    "autoload": {
+        "psr-4": {
+            "Kiboko\\Component\\MagentoDriver\\": ""
+        }
+    }
+}

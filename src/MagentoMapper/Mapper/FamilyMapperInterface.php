@@ -5,9 +5,20 @@ namespace Kiboko\Component\MagentoMapper\Mapper;
 interface FamilyMapperInterface
 {
     /**
-     * @param string $identifier
+     * @param string $code
      *
      * @return int
      */
-    public function map($identifier);
+    public function map($code);
+
+    /**
+     * @param string $code
+     * @param int $identifier
+     */
+    public function persist($code, $identifier);
+
+    /**
+     * @return void
+     */
+    public function flush();
 }

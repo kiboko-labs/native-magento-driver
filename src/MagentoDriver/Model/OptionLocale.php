@@ -4,6 +4,8 @@ namespace Kiboko\Component\MagentoDriver\Model;
 
 class OptionLocale implements OptionLocaleInterface
 {
+    use MappableTrait;
+
     /**
      * @var string
      */

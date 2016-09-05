@@ -2,7 +2,7 @@
 
 namespace Kiboko\Component\MagentoDriver\Model;
 
-interface ProductUrlRewriteInterface
+interface ProductUrlRewriteInterface extends MappableInterface
 {
     /**
      * @return string

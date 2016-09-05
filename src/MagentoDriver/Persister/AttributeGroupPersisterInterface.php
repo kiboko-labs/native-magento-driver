@@ -18,5 +18,8 @@ interface AttributeGroupPersisterInterface
      */
     public function __invoke(AttributeGroupInterface $attributeGroup);
 
+    /**
+     * @return \Traversable
+     */
     public function flush();
 }

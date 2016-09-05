@@ -5,9 +5,12 @@ namespace Kiboko\Component\MagentoDriver\Persister\StandardDml\Attribute;
 use Doctrine\DBAL\Connection;
 use Kiboko\Component\MagentoDriver\Model\AttributeLabelInterface;
 use Kiboko\Component\MagentoDriver\Persister\AttributeLabelPersisterInterface;
+use Kiboko\Component\MagentoDriver\Persister\StandardDml\InsertUpdateAwareTrait;
 
 class AttributeLabelPersister implements AttributeLabelPersisterInterface
 {
+    use InsertUpdateAwareTrait;
+    
     /**
      * @var Connection
      */
@@ -57,34 +60,30 @@ class AttributeLabelPersister implements AttributeLabelPersisterInterface
         $this->dataQueue->push($attributeLabel);
     }
 
+    /**
+     * @return \Traversable
+     */
     public function flush()
     {
         foreach ($this->dataQueue as $attributeLabel) {
-            $count = 0;
-            if ($attributeLabel->getId()) {
-                $count = $this->connection->update($this->tableName,
-                    [
-                        'attribute_id' => $attributeLabel->getAttributeId(),
-                        'store_id' => $attributeLabel->getStoreId(),
-                        'value' => $attributeLabel->getValue(),
-                    ],
-                    [
-                        'attribute_label_id' => $attributeLabel->getId(),
-                    ]
-                );
-            }
+            $this->insertOnDuplicateUpdate($this->connection, $this->tableName,
+                [
+                    'attribute_label_id' => $attributeLabel->getId(),
+                    'attribute_id' => $attributeLabel->getAttributeId(),
+                    'store_id' => $attributeLabel->getStoreId(),
+                    'value' => $attributeLabel->getValue(),
+                ],
+                [
+                    'attribute_id',
+                    'store_id',
+                    'value',
+                ],
+                'attribute_label_id'
+            );
 
-            if ($count <= 0) {
-                $this->connection->insert($this->tableName,
-                    [
-                        'attribute_label_id' => $attributeLabel->getId(),
-                        'attribute_id' => $attributeLabel->getAttributeId(),
-                        'store_id' => $attributeLabel->getStoreId(),
-                        'value' => $attributeLabel->getValue(),
-                    ]
-                );
-
+            if ($attributeLabel->getId() === null) {
                 $attributeLabel->persistedToId($this->connection->lastInsertId());
+                yield $attributeLabel;
             }
         }
     }

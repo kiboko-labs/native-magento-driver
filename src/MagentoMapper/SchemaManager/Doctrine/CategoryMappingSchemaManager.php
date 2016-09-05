@@ -62,16 +62,28 @@ class CategoryMappingSchemaManager implements MappingSchemaManagerInterface
             'unsigned' => true,
         ]);
 
+        $table->addColumn('instance_identifier', 'string', [
+            'length' => 64
+        ]);
+
         $table->addColumn('category_code', 'string', [
             'length' => 255,
         ]);
+
+        $table->addColumn('mapping_class', 'string', [
+            'length' => 255,
+        ]);
+
+        $table->addColumn('mapping_options', 'text');
 
         $table->addIndex(['category_id']);
 
         $table->addIndex(['category_code']);
 
+        $table->addUniqueIndex(['instance_identifier', 'category_id']);
+
         $table->addForeignKeyConstraint(
-            $this->categoriesTableName,
+            new Table($this->categoriesTableName),
             [
                 'category_id',
             ],
@@ -118,7 +130,7 @@ class CategoryMappingSchemaManager implements MappingSchemaManagerInterface
             ->where($queryBuilder->expr()->eq('pim.import', '?'))
         ;
 
-        $this->connection->executeQuery(
+        return $this->connection->executeUpdate(
             "INSERT INTO {$this->connection->quoteIdentifier($this->tableName)} "
                 .$queryBuilder->getSQL(),
             [

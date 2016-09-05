@@ -13,6 +13,7 @@ trait InsertUpdateAwareTrait
      * @param string $tableName  The name of the table to insert data into.
      * @param array  $data       An associative array containing column-value pairs.
      * @param array  $columns    The update criteria. An associative array containing columns.
+     * @param string $identifierColumn
      * @param array  $types      Types of the inserted data.
      *
      * @return integer The number of affected rows.
@@ -22,6 +23,7 @@ trait InsertUpdateAwareTrait
         $tableName,
         array $data,
         array $columns,
+        $identifierColumn,
         array $types = array()
     ) {
         $connection->connect();
@@ -30,7 +32,9 @@ trait InsertUpdateAwareTrait
             return $connection->executeUpdate('INSERT INTO ' . $tableName . ' ()' . ' VALUES ()');
         }
 
-        $set = [];
+        $set = [
+            sprintf('%1$s=LAST_INSERT_ID(%1$s)', $identifierColumn)
+        ];
         $values = array_values($data);
         foreach ($columns as $columnName) {
             if (!isset($data[$columnName])) {

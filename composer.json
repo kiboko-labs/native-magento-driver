@@ -2,33 +2,27 @@
     "name": "kiboko/native-magento-driver",
     "description": "A Magento driver for Akeneo PIM",
     "type": "library",
-    "require-dev": {
-        "phpspec/phpspec": "~2.0",
-        "fzaninotto/faker": "dev-master",
-        "phpunit/phpunit": "~5.2",
-        "phpunit/dbunit": "dev-master",
-        "fabpot/php-cs-fixer": "~1.11",
-        "akeneo/pim-community-dev": "~1.4",
-        "lunistore/akeneo-connector-base": "~1.0",
-        "phploc/phploc": "*",
-        "sebastian/phpcpd":"*",
-        "phpmd/phpmd": "*"
+    "require": {
+        "php": ">=5.6",
+        "kiboko/akeneo-connector-base": "~1.1",
+        "doctrine/dbal": "2.4.*",
+        "league/flysystem": "~1.0",
+        "symfony/serializer": "~2.7",
+        "akeneo/pim-community-dev": "~1.5"
     },
     "license": "proprietary",
+    "replace": {
+        "kiboko/magento-driver": "self.version",
+        "kiboko/akeneo-magento-mapper": "self.version",
+        "kiboko/magento-serializer": "self.version"
+    },
     "authors": [
         {
             "name": "Grégory Planchat",
             "email": "gregory@luni.fr"
         }
     ],
-    "minimum-stability": "dev",
-    "require": {
-        "php": ">=5.5",
-        "league/flysystem": "~1.0",
-        "doctrine/dbal": "~2.4",
-        "symfony/serializer": "~2.8",
-        "composer/semver": "^1.4"
-    },
+    "minimum-stability": "alpha",
     "repositories": [
         {
             "type": "vcs",
@@ -52,7 +46,6 @@
     ],
     "autoload": {
         "psr-4": {
-            "Kiboko\\Bundle\\MagentoDriverBundle\\": "src/MagentoDriverBundle/",
             "Kiboko\\Component\\MagentoDriver\\": "src/MagentoDriver/",
             "Kiboko\\Component\\MagentoMapper\\": "src/MagentoMapper/",
             "Kiboko\\Component\\MagentoSerializer\\": "src/MagentoSerializer/"

@@ -4,36 +4,55 @@ namespace Kiboko\Component\MagentoDriver\Model;
 
 class EntityType implements EntityTypeInterface
 {
+    use MappableTrait;
+
+    /**
+     * @var string
+     */
+    private $code;
+
     /**
      * @todo finish to implement
      */
 
     /**
-     * @param int    $identifier
-     * @param string $code
+     * EntityType constructor.
+     * @param $code
+     * @param $modelClass
+     * @param $attributeModel
+     * @param $entityTable
+     * @param $valueTablePrefix
+     * @param $entityIdField
+     * @param $isDataSharing
+     * @param $dataSharingKey
+     * @param $defaultAttributeSetId
+     * @param $incrementModel
+     * @param $incrementPerStore
+     * @param $incrementPadLength
+     * @param $incrementPadChar
+     * @param $additionalAttributeTable
+     * @param $entityAttributeCollection
      */
-    public function __construct($identifier, $code)
-    {
-        $this->identifier = $identifier;
+    public function __construct(
+        $code,
+        $modelClass,
+        $attributeModel,
+        $entityTable,
+        $valueTablePrefix,
+        $entityIdField,
+        $isDataSharing,
+        $dataSharingKey,
+        $defaultAttributeSetId,
+        $incrementModel,
+        $incrementPerStore,
+        $incrementPadLength,
+        $incrementPadChar,
+        $additionalAttributeTable,
+        $entityAttributeCollection
+    ) {
         $this->code = $code;
     }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->identifier;
-    }
-
-    /**
-     * @param int $identifier
-     */
-    public function persistToId($identifier)
-    {
-        $this->identifier = $identifier;
-    }
-
+    
     /**
      * @return string
      */

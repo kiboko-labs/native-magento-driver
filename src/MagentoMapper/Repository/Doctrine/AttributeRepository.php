@@ -4,7 +4,7 @@ namespace Kiboko\Component\MagentoMapper\Repository\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Kiboko\Component\MagentoDriver\Exception\DatabaseFetchingFailureException;
-use Kiboko\Component\MagentoMapper\QueryBuilder\Doctrine\AttributeQueryBuilder;
+use Kiboko\Component\MagentoMapper\QueryBuilder\AttributeQueryBuilderInterface;
 use Kiboko\Component\MagentoMapper\Repository\AttributeRepositoryInterface;
 
 class AttributeRepository implements AttributeRepositoryInterface
@@ -15,19 +15,19 @@ class AttributeRepository implements AttributeRepositoryInterface
     private $connection;
 
     /**
-     * @var AttributeQueryBuilder
+     * @var AttributeQueryBuilderInterface
      */
     private $queryBuilder;
 
     /**
      * AttributeRepository constructor.
      *
-     * @param Connection            $connection
-     * @param AttributeQueryBuilder $queryBuilder
+     * @param Connection                     $connection
+     * @param AttributeQueryBuilderInterface $queryBuilder
      */
     public function __construct(
         Connection $connection,
-        AttributeQueryBuilder $queryBuilder
+        AttributeQueryBuilderInterface $queryBuilder
     ) {
         $this->connection = $connection;
         $this->queryBuilder = $queryBuilder;

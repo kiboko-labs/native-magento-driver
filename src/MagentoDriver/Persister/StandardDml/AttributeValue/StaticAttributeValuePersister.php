@@ -19,14 +19,18 @@ class StaticAttributeValuePersister implements AttributeValuePersisterInterface
     }
 
     /**
+     * @return \Traversable
+     */
+    public function flush()
+    {
+        return new \ArrayIterator([]);
+    }
+
+    /**
      * @param AttributeValueInterface $value
      */
     public function __invoke(AttributeValueInterface $value)
     {
         $this->persist($value);
-    }
-
-    public function flush()
-    {
     }
 }

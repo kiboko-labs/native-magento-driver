@@ -70,7 +70,7 @@ class CatalogAttributeExtension implements CatalogAttributeExtensionInterface
     private $usedForSortBy;
 
     /**
-     * @var bool
+     * @var int
      */
     private $configurable;
 
@@ -90,22 +90,22 @@ class CatalogAttributeExtension implements CatalogAttributeExtensionInterface
     private $usedForPromoRules;
 
     /**
-     * @var bool
+     * @var int
      */
     private $requiredInAdminStore;
 
     /**
-     * @var bool
+     * @var int
      */
     private $usedInGrid;
 
     /**
-     * @var bool
+     * @var int
      */
     private $visibleInGrid;
 
     /**
-     * @var bool
+     * @var int
      */
     private $filterableInGrid;
 
@@ -133,107 +133,46 @@ class CatalogAttributeExtension implements CatalogAttributeExtensionInterface
      * @var string
      */
     private $note;
-
+    
     /**
-     * @param int    $attributeId
-     * @param bool   $frontendInputRendererClassName
-     * @param int    $global
-     * @param bool   $visible
-     * @param bool   $searchable
-     * @param bool   $filterable
-     * @param bool   $comparable
-     * @param bool   $visibleOnFront
-     * @param bool   $htmlAllowedOnFront
-     * @param bool   $usedForPriceRules
-     * @param bool   $filterableInSearch
-     * @param bool   $usedInProductListing
-     * @param bool   $usedForSortBy
-     * @param bool   $configurable
-     * @param string $productTypesApplyingTo
-     * @param bool   $visibleInAdvancedSearch
-     * @param int    $position
-     * @param bool   $wysiwygEnabled
-     * @param bool   $usedForPromoRules
-     * @param bool   $requiredInAdminStore
-     * @param bool   $usedInGrid
-     * @param bool   $visibleInGrid
-     * @param bool   $filterableInGrid
-     * @param int    $searchWeight
-     * @param array  $additionalData
-     * @param string $note
-     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+     * @param int $attributeId
+     * @param bool $frontendInputRendererClassName
+     * @param array $variableFields An associative array containing column-value pairs.
      */
     public function __construct(
-        $attributeId,
-        $frontendInputRendererClassName,
-        $global = 1,
-        $visible = false,
-        $searchable = false,
-        $filterable = false,
-        $comparable = false,
-        $visibleOnFront = false,
-        $htmlAllowedOnFront = false,
-        $usedForPriceRules = false,
-        $filterableInSearch = false,
-        $usedInProductListing = false,
-        $usedForSortBy = false,
-        $configurable = false,
-        $productTypesApplyingTo = null,
-        $visibleInAdvancedSearch = false,
-        $position = 0,
-        $wysiwygEnabled = false,
-        $usedForPromoRules = false,
-        $requiredInAdminStore = false,
-        $usedInGrid = false,
-        $visibleInGrid = false,
-        $filterableInGrid = false,
-        $searchWeight = 0,
-        array $additionalData = [],
-        $note = null
-    ) {
+        $attributeId, 
+        $frontendInputRendererClassName, 
+        $variableFields
+    )
+    {
         $this->identifier = $attributeId;
         $this->frontendInputRendererClassName = $frontendInputRendererClassName;
-        $this->global = $global;
-        $this->visible = (bool) $visible;
-        $this->searchable = (bool) $searchable;
-        $this->filterable = (bool) $filterable;
-        $this->comparable = (bool) $comparable;
-        $this->visibleOnFront = (bool) $visibleOnFront;
-        $this->htmlAllowedOnFront = (bool) $htmlAllowedOnFront;
-        $this->usedForPriceRules = (bool) $usedForPriceRules;
-        $this->filterableInSearch = (bool) $filterableInSearch;
-        $this->usedInProductListing = (bool) $usedInProductListing;
-        $this->usedForSortBy = (bool) $usedForSortBy;
-        $this->configurable = (bool) $configurable;
-        $this->productTypesApplyingTo = (array) $productTypesApplyingTo;
-        $this->visibleInAdvancedSearch = (bool) $visibleInAdvancedSearch;
-        $this->position = $position;
-        $this->wysiwygEnabled = (bool) $wysiwygEnabled;
-        $this->usedForPromoRules = (bool) $usedForPromoRules;
-        $this->requiredInAdminStore = (bool) $requiredInAdminStore;
-        $this->usedInGrid = (bool) $usedInGrid;
-        $this->visibleInGrid = (bool) $visibleInGrid;
-        $this->filterableInGrid = (bool) $filterableInGrid;
-        $this->searchWeight = $searchWeight;
-        $this->additionalData = $additionalData;
-        $this->note = $note;
-    }
-
-    /**
-     * @return int
-     * @MagentoODM\Field('attribute_id', version='*')
-     */
-    public function getId()
-    {
-        return $this->identifier;
-    }
-
-    /**
-     * @param int $identifier
-     */
-    public function persistedToId($identifier)
-    {
-        $this->identifier = $identifier;
+        $this->global = (int) @$variableFields['is_global']?: 1;
+        $this->visible = (bool) @$variableFields['is_visible']?: true;
+        $this->searchable = (bool) @$variableFields['is_searchable']?: false;
+        $this->filterable = (bool) @$variableFields['is_filterable']?: false;
+        $this->comparable = (bool) @$variableFields['is_comparable']?: false;
+        $this->visibleOnFront = (bool) @$variableFields['is_visible_on_front']?: false;
+        $this->htmlAllowedOnFront = (bool) @$variableFields['is_html_allowed_on_front']?: false;
+        $this->usedForPriceRules = (bool) @$variableFields['is_used_for_price_rules']?: false;
+        $this->filterableInSearch = (bool) @$variableFields['is_filterable_in_search']?: false;
+        $this->usedInProductListing = (bool) @$variableFields['used_in_product_listing']?: false;
+        $this->usedForSortBy = (bool) @$variableFields['used_for_sort_by']?: false;
+        $this->configurable = (isset($variableFields['is_configurable'])) ? (int) $variableFields['is_configurable'] : null; // M1
+        $this->productTypesApplyingTo = (array) @$variableFields['apply_to']?: null;
+        $this->visibleInAdvancedSearch = (bool) @$variableFields['is_visible_in_advanced_search']?: false;
+        $this->position = (int) @$variableFields['position']?: 0;
+        $this->wysiwygEnabled = (bool) @$variableFields['is_wysiwyg_enabled']?: false;
+        $this->usedForPromoRules = (bool) @$variableFields['is_used_for_promo_rules']?: false;
+        // M2 fields
+        $this->requiredInAdminStore = (bool) @$variableFields['is_required_in_admin_store']?: null;
+        $this->usedInGrid = (bool) @$variableFields['is_used_in_grid']?: null;
+        $this->visibleInGrid = (bool) @$variableFields['is_visible_in_grid']?: null;
+        $this->filterableInGrid = (bool) @$variableFields['is_filterable_in_grid']?: null;
+        $this->searchWeight =(isset($variableFields['search_weight'])) ? (int) $variableFields['search_weight'] : null;
+        $this->additionalData = (array) @$variableFields['additional_data']?: null;
+        $this->note = (string) @$variableFields['note']?: null;
+        
     }
 
     /**
@@ -345,12 +284,12 @@ class CatalogAttributeExtension implements CatalogAttributeExtensionInterface
     }
 
     /**
-     * @return bool
+     * @return int
      * @MagentoODM\Field('is_configurable', version='1.*')
      */
     public function isConfigurable()
     {
-        return (bool) $this->configurable;
+        return $this->configurable;
     }
 
     /**
@@ -381,39 +320,39 @@ class CatalogAttributeExtension implements CatalogAttributeExtensionInterface
     }
 
     /**
-     * @return bool
+     * @return int
      * @MagentoODM\Field('is_required_in_admin_store', version='2.*')
      */
     public function isRequiredInAdminStore()
     {
-        return (bool) $this->requiredInAdminStore;
+        return $this->requiredInAdminStore;
     }
 
     /**
-     * @return bool
+     * @return int
      * @MagentoODM\Field('is_used_in_grid', version='2.*')
      */
     public function isUsedInGrid()
     {
-        return (bool) $this->usedInGrid;
+        return $this->usedInGrid;
     }
 
     /**
-     * @return bool
+     * @return int
      * @MagentoODM\Field('is_visible_in_grid', version='2.*')
      */
     public function isVisibleInGrid()
     {
-        return (bool) $this->visibleInGrid;
+        return $this->visibleInGrid;
     }
 
     /**
-     * @return bool
+     * @return int
      * @MagentoODM\Field('is_filterable_in_grid', version='2.*')
      */
     public function isFilterableInGrid()
     {
-        return (bool) $this->filterableInGrid;
+        return $this->filterableInGrid;
     }
 
     /**

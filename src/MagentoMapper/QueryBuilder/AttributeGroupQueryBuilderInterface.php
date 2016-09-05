@@ -1,0 +1,22 @@
+<?php
+
+namespace Kiboko\Component\MagentoMapper\QueryBuilder;
+
+use Doctrine\DBAL\Query\QueryBuilder;
+
+interface AttributeGroupQueryBuilderInterface
+{
+    /**
+     * @param string $alias
+     *
+     * @return QueryBuilder
+     */
+    public function createFindOneByCodeQueryBuilder($alias);
+
+    /**
+     * @param string $alias
+     *
+     * @return QueryBuilder
+     */
+    public function createFindAllQueryBuilder($alias);
+}

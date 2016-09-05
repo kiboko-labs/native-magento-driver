@@ -6,6 +6,8 @@ use Kiboko\Component\MagentoDriver\Exception\RuntimeErrorException;
 
 class CatalogAttribute implements CatalogAttributeInterface
 {
+    use MappableTrait;
+
     /**
      * @var AttributeInterface
      */

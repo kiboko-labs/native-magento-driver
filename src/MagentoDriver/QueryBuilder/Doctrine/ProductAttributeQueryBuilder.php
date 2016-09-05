@@ -94,12 +94,18 @@ class ProductAttributeQueryBuilder implements ProductAttributeQueryBuilderInterf
             'is_filterable_in_search',
             'used_in_product_listing',
             'used_for_sort_by',
-            'is_configurable',
+            'is_configurable', // exclusively M1
             'apply_to',
             'is_visible_in_advanced_search',
             'position',
             'is_wysiwyg_enabled',
             'is_used_for_promo_rules',
+            'is_required_in_admin_store', // new since M2
+            'is_used_in_grid', // new since M2
+            'is_visible_in_grid', // new since M2
+            'is_filterable_in_grid', // new since M2
+            'search_weight', // new since M2
+            'additional_data', // new since M2
         ];
     }
 

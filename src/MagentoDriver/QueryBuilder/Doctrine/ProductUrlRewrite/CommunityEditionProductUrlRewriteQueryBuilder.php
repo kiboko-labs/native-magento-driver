@@ -1,11 +1,12 @@
 <?php
 
-namespace Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine;
+namespace Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductUrlRewrite;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
 
-class CommunityEditionProductUrlRewriteQueryBuilder implements CommunityEditionProductUrlRewriteQueryBuilderInterface
+class CommunityEditionProductUrlRewriteQueryBuilder
+    implements CommunityEditionProductUrlRewriteQueryBuilderInterface
 {
     /**
      * @var Connection

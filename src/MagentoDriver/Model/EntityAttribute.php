@@ -4,10 +4,8 @@ namespace Kiboko\Component\MagentoDriver\Model;
 
 class EntityAttribute implements EntityAttributeInterface
 {
-    /**
-     * @var int
-     */
-    private $identifier;
+    use MappableTrait;
+    use IdentifiableTrait;
 
     /**
      * @var int
@@ -53,14 +51,6 @@ class EntityAttribute implements EntityAttributeInterface
         $this->attributeGroupId = $attributeGroupId;
         $this->attributeId = $attributeId;
         $this->sortOrder = $sortOrder;
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->identifier;
     }
 
     /**
@@ -123,16 +113,8 @@ class EntityAttribute implements EntityAttributeInterface
     ) {
         $object = new static($entityTypeId, $attributeSetId, $attributeGroupId, $attributeId, $sortOrder);
 
-        $object->identifier = $entityAttributeId;
+        $object->persistedToId($entityAttributeId);
 
         return $object;
-    }
-
-    /**
-     * @param int $identifier
-     */
-    public function persistedToId($identifier)
-    {
-        $this->identifier = $identifier;
     }
 }

@@ -65,7 +65,7 @@ class StandardProductAttributeValuesPersister implements ProductPersisterInterfa
     }
 
     /**
-     * @return void
+     * @return \Traversable
      */
     public function flush()
     {

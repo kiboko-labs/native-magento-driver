@@ -7,6 +7,8 @@ use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;
 trait DatetimeAttributeValueTrait
 {
     use AttributeValueTrait;
+    use MappableTrait;
+    use IdentifiableTrait;
 
     /**
      * @var \Datetime

@@ -1,0 +1,49 @@
+<?php
+
+namespace Kiboko\Component\MagentoMapper\Persister\Doctrine;
+
+use Doctrine\DBAL\Connection;
+use Kiboko\Component\MagentoMapper\Persister\AttributeOptionPersisterInterface;
+
+class AttributeOptionPersister implements AttributeOptionPersisterInterface
+{
+    /**
+     * @var Connection
+     */
+    private $connection;
+
+    private $tableName;
+
+    private $unitOfWork;
+
+    public function __construct(
+        Connection $connection,
+        $tableName
+    ) {
+        $this->connection = $connection;
+        $this->tableName = $tableName;
+        $this->unitOfWork = [];
+    }
+
+    /**
+     * @param string $code
+     * @param int $identifier
+     */
+    public function persist($code, $identifier)
+    {
+        $this->unitOfWork[] = [
+            'option_id'   => $identifier,
+            'option_code' => $code,
+        ];
+    }
+
+    /**
+     * @return void
+     */
+    public function flush()
+    {
+        foreach ($this->unitOfWork as $item) {
+            $this->connection->insert($this->tableName, $item);
+        }
+    }
+}

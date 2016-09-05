@@ -2,7 +2,7 @@
 
 namespace Kiboko\Component\MagentoDriver\Model;
 
-interface DecimalAttributeValueInterface extends ScopableAttributeValueInterface
+interface DecimalAttributeValueInterface extends ScopableAttributeValueInterface, MappableInterface
 {
     /**
      * @return float

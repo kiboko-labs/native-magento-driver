@@ -61,6 +61,9 @@ class CatalogAttributeExtensionPersister implements CatalogAttributeExtensionPer
         $this->dataQueue->push($attribute);
     }
 
+    /**
+     * @return \Traversable
+     */
     public function flush()
     {
         /** @var CatalogAttributeExtensionInterface $attribute */
@@ -69,9 +72,7 @@ class CatalogAttributeExtensionPersister implements CatalogAttributeExtensionPer
                 throw new RuntimeErrorException('Attribute #id should be defined.');
             }
             
-            $this->insertOnDuplicateUpdate(
-                $this->connection,
-                $this->tableName,
+            $this->insertOnDuplicateUpdate($this->connection, $this->tableName,
                 [
                     'attribute_id' => $attribute->getId(),
                     'frontend_input_renderer' => $attribute->getFrontendInputRendererClassName(),
@@ -86,15 +87,22 @@ class CatalogAttributeExtensionPersister implements CatalogAttributeExtensionPer
                     'is_filterable_in_search' => (int) $attribute->isFilterableInSearch(),
                     'used_in_product_listing' => (int) $attribute->isUsedInProductListing(),
                     'used_for_sort_by' => (int) $attribute->isUsedForSortBy(),
-                    'is_configurable' => (int) $attribute->isConfigurable(),
+                    'is_configurable' => $attribute->isConfigurable(),
                     'apply_to' => empty($attribute->getProductTypesApplyingTo()) ?
                         null : implode(',', $attribute->getProductTypesApplyingTo()),
                     'is_visible_in_advanced_search' => (int) $attribute->isVisibleInAdvancedSearch(),
                     'position' => $attribute->getPosition(),
                     'is_wysiwyg_enabled' => (int) $attribute->isWysiwygEnabled(),
                     'is_used_for_promo_rules' => (int) $attribute->isUsedForPromoRules(),
+                    'is_required_in_admin_store' => $attribute->isRequiredInAdminStore(),
+                    'is_used_in_grid' => $attribute->isUsedInGrid(),
+                    'is_visible_in_grid' => $attribute->isVisibleInGrid(),
+                    'is_filterable_in_grid' => $attribute->isFilterableInGrid(),
+                    'search_weight' => $attribute->getSearchWeight(),
+                    'additional_data' => $attribute->getAdditionalData(),
                 ],
                 [
+                    'attribute_id',
                     'frontend_input_renderer',
                     'is_global',
                     'is_visible',
@@ -113,7 +121,14 @@ class CatalogAttributeExtensionPersister implements CatalogAttributeExtensionPer
                     'position',
                     'is_wysiwyg_enabled',
                     'is_used_for_promo_rules',
-                ]
+                    'is_required_in_admin_store',
+                    'is_used_in_grid',
+                    'is_visible_in_grid',
+                    'is_filterable_in_grid',
+                    'search_weight',
+                    'additional_data',
+                ],
+                'attribute_id'
             );
         }
     }
