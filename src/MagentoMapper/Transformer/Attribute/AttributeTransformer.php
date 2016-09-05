@@ -17,6 +17,11 @@ class AttributeTransformer
     private $mapper;
 
     /**
+     * @var string
+     */
+    private $adminLocaleCode;
+
+    /**
      * @var \Traversable|AttributeTransformerInterface[]
      */
     private $attributeTransformers;
@@ -24,14 +29,17 @@ class AttributeTransformer
     /**
      * AttributeModelMapper constructor.
      *
-     * @param AttributeMapperInterface $mapper
-     * @param array                    $attributeTransformers
+     * @param AttributeMapperInterface        $mapper
+     * @param string                          $adminLocaleCode
+     * @param AttributeTransformerInterface[] $attributeTransformers
      */
     public function __construct(
         AttributeMapperInterface $mapper,
+        $adminLocaleCode,
         array $attributeTransformers = []
     ) {
         $this->mapper = $mapper;
+        $this->adminLocaleCode = $adminLocaleCode;
 
         $this->setAttributeTransformers($attributeTransformers);
     }
@@ -71,6 +79,8 @@ class AttributeTransformer
             if (!$transformer->supportsTransformation($attribute)) {
                 continue;
             }
+
+            $attribute->setLocale($this->adminLocaleCode);
 
             foreach ($transformer->transform($attribute) as $transformedAttribute) {
                 if (($attributeId = $this->mapper->map($attribute->getCode())) !== null) {
