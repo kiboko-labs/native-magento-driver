@@ -72,11 +72,6 @@ abstract class AbstractCatalogAttributeExtension implements CatalogAttributeExte
     private $usedForSortBy;
 
     /**
-     * @var int
-     */
-    private $configurable;
-
-    /**
      * @var bool
      */
     private $visibleInAdvancedSearch;
@@ -109,6 +104,7 @@ abstract class AbstractCatalogAttributeExtension implements CatalogAttributeExte
     /**
      * AbstractCatalogAttributeExtension constructor.
      *
+     * @param int $attributeId
      * @param string $frontendInputRendererClassName
      * @param bool $global
      * @param bool $visible
@@ -129,6 +125,7 @@ abstract class AbstractCatalogAttributeExtension implements CatalogAttributeExte
      * @param array $productTypesApplyingTo
      */
     public function __construct(
+        $attributeId,
         $frontendInputRendererClassName,
         $global = true,
         $visible = true,
@@ -148,6 +145,7 @@ abstract class AbstractCatalogAttributeExtension implements CatalogAttributeExte
         $note = null,
         $position = null
     ) {
+        $this->identifier = $attributeId;
         $this->frontendInputRendererClassName = $frontendInputRendererClassName;
         $this->global = $global;
         $this->visible = $visible;

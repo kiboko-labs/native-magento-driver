@@ -9,8 +9,8 @@ namespace Kiboko\Component\MagentoDriver\Model;
 
 class AttributeGroup implements AttributeGroupInterface
 {
-    use MappableTrait;
     use IdentifiableTrait;
+    use ParentMappableTrait;
 
     /**
      * @var int

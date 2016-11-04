@@ -44,6 +44,7 @@ class CatalogAttributeExtension extends AbstractCatalogAttributeExtension implem
     /**
      * CatalogAttributeExtension constructor.
      *
+     * @param int $attributeId
      * @param string $frontendInputRendererClassName
      * @param bool $global
      * @param bool $visible
@@ -70,6 +71,7 @@ class CatalogAttributeExtension extends AbstractCatalogAttributeExtension implem
      * @param array $productTypesApplyingTo
      */
     public function __construct(
+        $attributeId,
         $frontendInputRendererClassName,
         $global = true,
         $visible = true,
@@ -96,6 +98,7 @@ class CatalogAttributeExtension extends AbstractCatalogAttributeExtension implem
         $position = null
     ) {
         parent::__construct(
+            $attributeId,
             $frontendInputRendererClassName,
             $global,
             $visible,
