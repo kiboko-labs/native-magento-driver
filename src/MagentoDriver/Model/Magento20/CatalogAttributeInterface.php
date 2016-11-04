@@ -5,7 +5,9 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace Kiboko\Component\MagentoDriver\Model;
+namespace Kiboko\Component\MagentoDriver\Model\Magento20;
+
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
 
 interface CatalogAttributeInterface extends AttributeInterface, CatalogAttributeExtensionInterface
 {

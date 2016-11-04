@@ -5,14 +5,12 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace Kiboko\Component\MagentoDriver\Repository\Doctrine;
+namespace Kiboko\Component\MagentoDriver\Repository\Doctrine\Magento19;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Connection;
 use Kiboko\Component\MagentoDriver\Model\Attribute;
-use Kiboko\Component\MagentoDriver\Model\CatalogAttribute;
-use Kiboko\Component\MagentoDriver\Model\CatalogAttributeExtension;
+use Kiboko\Component\MagentoDriver\Model\Magento19\CatalogAttribute;
+use Kiboko\Component\MagentoDriver\Model\Magento19\CatalogAttributeExtension;
 use Kiboko\Component\MagentoDriver\Model\CatalogAttributeExtensionInterface;
 use Kiboko\Component\MagentoDriver\Model\FamilyInterface;
 use Kiboko\Component\MagentoDriver\Entity\Product\ProductInterface;

@@ -9,6 +9,18 @@ namespace Kiboko\Component\MagentoDriver\Model\Magento19;
 
 use Kiboko\Component\MagentoDriver\Model\AbstractCatalogAttributeExtension;
 
-class CatalogAttributeExtension extends AbstractCatalogAttributeExtension
+class CatalogAttributeExtension extends AbstractCatalogAttributeExtension implements CatalogAttributeExtensionInterface
 {
+    /**
+     * @var bool
+     */
+    private $configurable;
+
+    /**
+     * @return bool
+     */
+    public function isConfigurable()
+    {
+        return $this->configurable;
+    }
 }

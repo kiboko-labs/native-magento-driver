@@ -10,6 +10,7 @@ namespace Kiboko\Component\MagentoDriver\Model;
 class EntityType implements EntityTypeInterface
 {
     use MappableTrait;
+    use IdentifiableTrait;
 
     /**
      * @var string

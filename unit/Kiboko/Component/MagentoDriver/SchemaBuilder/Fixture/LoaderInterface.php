@@ -17,4 +17,12 @@ interface LoaderInterface
      * @return \PHPUnit_Extensions_Database_DataSet_IDataSet
      */
     public function initialDataSet($suite, $context);
+
+    /**
+     * @param string $name
+     * @param string $suite
+     * @param string $context
+     * @return \PHPUnit_Extensions_Database_DataSet_IDataSet
+     */
+    public function namedDataSet($name, $suite, $context);
 }
