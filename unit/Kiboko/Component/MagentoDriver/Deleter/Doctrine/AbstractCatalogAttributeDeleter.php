@@ -1,11 +1,11 @@
 <?php
 
-namespace unit\Kiboko\Component\MagentoDriver\Deleter\Doctrine\Attribute;
+namespace unit\Kiboko\Component\MagentoDriver\Deleter\Doctrine;
 
 use Doctrine\DBAL\Schema\Schema;
-use Kiboko\Component\MagentoDriver\Deleter\AttributeOptionDeleterInterface;
-use Kiboko\Component\MagentoDriver\Deleter\Doctrine\AttributeOptionDeleter;
-use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeOptionQueryBuilder;
+use Kiboko\Component\MagentoDriver\Deleter\CatalogAttributeDeleterInterface;
+use Kiboko\Component\MagentoDriver\Deleter\Doctrine\CatalogAttributeDeleter;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
@@ -13,7 +13,7 @@ use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\FallbackResolver;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\LoaderInterface;
 
-class AttributeOptionDeleterTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractCatalogAttributeDeleter extends \PHPUnit_Framework_TestCase
 {
     use DatabaseConnectionAwareTrait;
 
@@ -23,9 +23,9 @@ class AttributeOptionDeleterTest extends \PHPUnit_Framework_TestCase
     private $schema;
 
     /**
-     * @var AttributeOptionDeleterInterface
+     * @var CatalogAttributeDeleterInterface
      */
-    private $deleter;
+    protected $deleter;
 
     /**
      * @var LoaderInterface
@@ -33,12 +33,22 @@ class AttributeOptionDeleterTest extends \PHPUnit_Framework_TestCase
     private $fixturesLoader;
 
     /**
+     * @return string
+     */
+    abstract protected function getVersion();
+
+    /**
+     * @return string
+     */
+    abstract protected function getEdition();
+
+    /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
     protected function getDataSet()
     {
         $dataset = $this->fixturesLoader->expectedDataSet(
-            'eav_attribute_option',
+            'catalog_eav_attribute',
             DoctrineSchemaBuilder::CONTEXT_DELETER
         );
 
@@ -51,7 +61,7 @@ class AttributeOptionDeleterTest extends \PHPUnit_Framework_TestCase
     protected function getInitialDataSet()
     {
         $dataset = $this->fixturesLoader->initialDataSet(
-            'eav_attribute_option',
+            'catalog_eav_attribute',
             DoctrineSchemaBuilder::CONTEXT_DELETER
         );
 
@@ -69,7 +79,15 @@ class AttributeOptionDeleterTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->getDoctrineConnection()->exec(
-            $platform->getTruncateTableSQL('eav_attribute_option')
+            $platform->getTruncateTableSQL('eav_entity_type')
+        );
+
+        $this->getDoctrineConnection()->exec(
+            $platform->getTruncateTableSQL('eav_attribute_set')
+        );
+
+        $this->getDoctrineConnection()->exec(
+            $platform->getTruncateTableSQL('catalog_eav_attribute')
         );
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
@@ -84,9 +102,12 @@ class AttributeOptionDeleterTest extends \PHPUnit_Framework_TestCase
 
         $this->schema = new Schema();
 
-        $schemaBuilder = new DoctrineSchemaBuilder($this->getDoctrineConnection(), $this->schema);
+        $schemaBuilder = new DoctrineSchemaBuilder(
+            $this->getDoctrineConnection(), $this->schema, $this->getVersion(), $this->getEdition());
         $schemaBuilder->ensureAttributeTable();
-        $schemaBuilder->ensureAttributeOptionTable();
+        $schemaBuilder->ensureFamilyTable();
+        $schemaBuilder->ensureEntityTypeTable();
+        $schemaBuilder->ensureCatalogAttributeExtensionsTable();
 
         $comparator = new \Doctrine\DBAL\Schema\Comparator();
         $schemaDiff = $comparator->compare($currentSchema, $this->schema);
@@ -101,30 +122,41 @@ class AttributeOptionDeleterTest extends \PHPUnit_Framework_TestCase
 
         $this->fixturesLoader = new Loader(
             new FallbackResolver($schemaBuilder->getFixturesPath()),
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            $this->getVersion(),
+            $this->getEdition()
+        );
+
+        $schemaBuilder->hydrateEntityTypeTable(
+            'catalog_eav_attribute',
+            DoctrineSchemaBuilder::CONTEXT_DELETER
+        );
+
+        $schemaBuilder->hydrateFamilyTable(
+            'catalog_eav_attribute',
+            DoctrineSchemaBuilder::CONTEXT_DELETER
         );
 
         $schemaBuilder->hydrateAttributeTable(
-            'eav_attribute_option',
-            DoctrineSchemaBuilder::CONTEXT_DELETER,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            'catalog_eav_attribute',
+            DoctrineSchemaBuilder::CONTEXT_DELETER
         );
 
-        $schemaBuilder->hydrateAttributeOptionTable(
-            'eav_attribute_option',
-            DoctrineSchemaBuilder::CONTEXT_DELETER,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+        $schemaBuilder->hydrateCatalogAttributeExtensionsTable(
+            'catalog_eav_attribute',
+            DoctrineSchemaBuilder::CONTEXT_DELETER
         );
 
-        $this->deleter = new AttributeOptionDeleter(
+        $this->deleter = new CatalogAttributeDeleter(
             $this->getDoctrineConnection(),
-            new AttributeOptionQueryBuilder(
+            new ProductAttributeQueryBuilder(
                 $this->getDoctrineConnection(),
-                AttributeOptionQueryBuilder::getDefaultTable(),
-                AttributeOptionQueryBuilder::getDefaultFields()
+                ProductAttributeQueryBuilder::getDefaultExtraTable(),
+                ProductAttributeQueryBuilder::getDefaultTable(),
+                ProductAttributeQueryBuilder::getDefaultEntityTable(),
+                ProductAttributeQueryBuilder::getDefaultVariantTable(),
+                ProductAttributeQueryBuilder::getDefaultFamilyTable(),
+                ProductAttributeQueryBuilder::getDefaultExtraFields(),
+                ProductAttributeQueryBuilder::getDefaultFields()
             )
         );
     }
@@ -135,36 +167,5 @@ class AttributeOptionDeleterTest extends \PHPUnit_Framework_TestCase
         parent::tearDown();
 
         $this->deleter = null;
-    }
-
-    public function testRemoveNone()
-    {
-        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable('eav_attribute_option');
-        $actual->addTable('eav_attribute');
-
-        $this->assertDataSetsEqual($this->getInitialDataSet(), $actual);
-    }
-
-    public function testRemoveOneById()
-    {
-        $this->deleter->deleteOneById(2);
-
-        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable('eav_attribute_option');
-        $actual->addTable('eav_attribute');
-
-        $this->assertDataSetsEqual($this->getDataSet(), $actual);
-    }
-
-    public function testRemoveAllById()
-    {
-        $this->deleter->deleteAllById([2]);
-
-        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable('eav_attribute_option');
-        $actual->addTable('eav_attribute');
-
-        $this->assertDataSetsEqual($this->getDataSet(), $actual);
     }
 }

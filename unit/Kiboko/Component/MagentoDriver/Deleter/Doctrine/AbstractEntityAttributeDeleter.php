@@ -1,6 +1,6 @@
 <?php
 
-namespace unit\Kiboko\Component\MagentoDriver\Deleter\Doctrine\EntityAttribute;
+namespace unit\Kiboko\Component\MagentoDriver\Deleter\Doctrine;
 
 use Doctrine\DBAL\Schema\Schema;
 use Kiboko\Component\MagentoDriver\Deleter\EntityAttributeDeleterInterface;
@@ -13,7 +13,7 @@ use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\FallbackResolver;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\LoaderInterface;
 
-class EntityAttributeDeleterTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractEntityAttributeDeleter extends \PHPUnit_Framework_TestCase
 {
     use DatabaseConnectionAwareTrait;
 
@@ -25,12 +25,22 @@ class EntityAttributeDeleterTest extends \PHPUnit_Framework_TestCase
     /**
      * @var EntityAttributeDeleterInterface
      */
-    private $deleter;
+    protected $deleter;
 
     /**
      * @var LoaderInterface
      */
     private $fixturesLoader;
+
+    /**
+     * @return string
+     */
+    abstract protected function getVersion();
+
+    /**
+     * @return string
+     */
+    abstract protected function getEdition();
 
     /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
@@ -88,7 +98,8 @@ class EntityAttributeDeleterTest extends \PHPUnit_Framework_TestCase
 
         $this->schema = new Schema();
 
-        $schemaBuilder = new DoctrineSchemaBuilder($this->getDoctrineConnection(), $this->schema);
+        $schemaBuilder = new DoctrineSchemaBuilder(
+            $this->getDoctrineConnection(), $this->schema, $this->getVersion(), $this->getEdition());
         $schemaBuilder->ensureAttributeGroupTable();
         $schemaBuilder->ensureAttributeTable();
         $schemaBuilder->ensureEntityAttributeTable();
@@ -106,29 +117,23 @@ class EntityAttributeDeleterTest extends \PHPUnit_Framework_TestCase
 
         $this->fixturesLoader = new Loader(
             new FallbackResolver($schemaBuilder->getFixturesPath()),
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            $this->getVersion(),
+            $this->getEdition()
         );
 
         $schemaBuilder->hydrateAttributeGroupTable(
             'eav_entity_attribute',
-            DoctrineSchemaBuilder::CONTEXT_DELETER,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_DELETER
         );
 
         $schemaBuilder->hydrateAttributeTable(
             'eav_entity_attribute',
-            DoctrineSchemaBuilder::CONTEXT_DELETER,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_DELETER
         );
 
         $schemaBuilder->hydrateEntityAttributeTable(
             'eav_entity_attribute',
-            DoctrineSchemaBuilder::CONTEXT_DELETER,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_DELETER
         );
 
         $this->deleter = new EntityAttributeDeleter(
@@ -147,41 +152,5 @@ class EntityAttributeDeleterTest extends \PHPUnit_Framework_TestCase
         parent::tearDown();
 
         $this->deleter = null;
-    }
-
-    public function testRemoveNone()
-    {
-        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable('eav_entity_attribute');
-        $actual->addTable('eav_attribute');
-        $actual->addTable('eav_attribute_group');
-
-        $this->assertDataSetsEqual($this->getInitialDataSet(), $actual);
-
-        $this->assertTableRowCount('eav_entity_attribute', $this->getInitialDataSet()->getIterator()->getTable()->getRowCount());
-    }
-
-    public function testRemoveOneById()
-    {
-        $this->deleter->deleteOneById(2);
-
-        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable('eav_entity_attribute');
-        $actual->addTable('eav_attribute');
-        $actual->addTable('eav_attribute_group');
-
-        $this->assertDataSetsEqual($this->getDataSet(), $actual);
-    }
-
-    public function testRemoveAllById()
-    {
-        $this->deleter->deleteAllById([2]);
-
-        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable('eav_entity_attribute');
-        $actual->addTable('eav_attribute');
-        $actual->addTable('eav_attribute_group');
-
-        $this->assertDataSetsEqual($this->getDataSet(), $actual);
     }
 }

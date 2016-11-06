@@ -1,9 +1,14 @@
 <?php
+/**
+ * Copyright (c) 2016 Kiboko SAS
+ *
+ * @author Grégory Planchat <gregory@kiboko.fr>
+ */
 
-namespace unit\Kiboko\Component\MagentoDriver\Persister\StandardDml\Attribute;
+namespace unit\Kiboko\Component\MagentoDriver\Persister\Magento20\StandardDml\Attribute;
 
 use Doctrine\DBAL\Schema\Schema;
-use Kiboko\Component\MagentoDriver\Model\AttributeGroup;
+use Kiboko\Component\MagentoDriver\Model\Magento20\AttributeGroup;
 use Kiboko\Component\MagentoDriver\Persister\AttributeGroupPersisterInterface;
 use Kiboko\Component\MagentoDriver\Persister\StandardDml\Attribute\AttributeGroupPersister;
 use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeGroupQueryBuilder;
@@ -72,7 +77,8 @@ class AttributeGroupPersisterTest extends \PHPUnit_Framework_TestCase
 
         $this->schema = new Schema();
 
-        $schemaBuilder = new DoctrineSchemaBuilder($this->getDoctrineConnection(), $this->schema);
+        $schemaBuilder = new DoctrineSchemaBuilder(
+            $this->getDoctrineConnection(), $this->schema);
         $schemaBuilder->ensureFamilyTable();
         $schemaBuilder->ensureAttributeGroupTable();
 
@@ -89,22 +95,17 @@ class AttributeGroupPersisterTest extends \PHPUnit_Framework_TestCase
 
         $this->fixturesLoader = new Loader(
             new FallbackResolver($schemaBuilder->getFixturesPath()),
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            '2.0', 'ce'
         );
 
         $schemaBuilder->hydrateAttributeGroupTable(
             'eav_attribute_group',
-            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER
         );
 
         $schemaBuilder->hydrateFamilyTable(
             'eav_attribute_group',
-            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER
         );
 
         $this->persister = new AttributeGroupPersister(
@@ -139,12 +140,7 @@ class AttributeGroupPersisterTest extends \PHPUnit_Framework_TestCase
     {
         $this->persister->initialize();
         
-        $attributeGroup = array(
-            'ce' => array(
-                '1.9' => new AttributeGroup(3, 'Prices', 1, 1),
-                '2.0' => new AttributeGroup(3, 'Prices', 1, 1, 'price')
-            )
-        );
+        $attributeGroup = new AttributeGroup(3, 'Prices', 1, 1);
 
         $attributeGroup[$GLOBALS['MAGENTO_EDITION']][$GLOBALS['MAGENTO_VERSION']];
 

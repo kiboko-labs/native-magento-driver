@@ -1,6 +1,6 @@
 <?php
 
-namespace unit\Kiboko\Component\MagentoDriver\Deleter\Doctrine\Attribute;
+namespace unit\Kiboko\Component\MagentoDriver\Deleter\Doctrine;
 
 use Doctrine\DBAL\Schema\Schema;
 use Kiboko\Component\MagentoDriver\Deleter\AttributeOptionValueDeleterInterface;
@@ -12,9 +12,9 @@ use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTra
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\FallbackResolver;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\LoaderInterface;
-use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Table\Store as TableStore;
+use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Table\Store as StoreTableSchemaBuilder;
 
-class AttributeOptionValueDeleterTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractAttributeOptionValueDeleter extends \PHPUnit_Framework_TestCase
 {
     use DatabaseConnectionAwareTrait;
 
@@ -26,12 +26,22 @@ class AttributeOptionValueDeleterTest extends \PHPUnit_Framework_TestCase
     /**
      * @var AttributeOptionValueDeleterInterface
      */
-    private $deleter;
+    protected $deleter;
 
     /**
      * @var LoaderInterface
      */
     private $fixturesLoader;
+
+    /**
+     * @return string
+     */
+    abstract protected function getVersion();
+
+    /**
+     * @return string
+     */
+    abstract protected function getEdition();
 
     /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
@@ -74,7 +84,7 @@ class AttributeOptionValueDeleterTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->getDoctrineConnection()->exec(
-            $platform->getTruncateTableSQL(TableStore::getTableName($GLOBALS['MAGENTO_VERSION']))
+            $platform->getTruncateTableSQL(StoreTableSchemaBuilder::getTableName($this->getVersion()))
         );
 
         $this->getDoctrineConnection()->exec(
@@ -93,10 +103,11 @@ class AttributeOptionValueDeleterTest extends \PHPUnit_Framework_TestCase
 
         $this->schema = new Schema();
 
-        $schemaBuilder = new DoctrineSchemaBuilder($this->getDoctrineConnection(), $this->schema);
+        $schemaBuilder = new DoctrineSchemaBuilder(
+            $this->getDoctrineConnection(), $this->schema, $this->getVersion(), $this->getEdition());
         $schemaBuilder->ensureAttributeTable();
         $schemaBuilder->ensureAttributeOptionTable();
-        $schemaBuilder->ensureStoreTable();
+        $schemaBuilder->ensureStoreTable($this->getVersion());
         $schemaBuilder->ensureAttributeOptionValueTable();
 
         $comparator = new \Doctrine\DBAL\Schema\Comparator();
@@ -112,36 +123,28 @@ class AttributeOptionValueDeleterTest extends \PHPUnit_Framework_TestCase
 
         $this->fixturesLoader = new Loader(
             new FallbackResolver($schemaBuilder->getFixturesPath()),
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            $this->getVersion(),
+            $this->getEdition()
         );
 
         $schemaBuilder->hydrateAttributeTable(
             'eav_attribute_option_value',
-            DoctrineSchemaBuilder::CONTEXT_DELETER,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_DELETER
         );
 
         $schemaBuilder->hydrateAttributeOptionTable(
             'eav_attribute_option_value',
-            DoctrineSchemaBuilder::CONTEXT_DELETER,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_DELETER
         );
 
         $schemaBuilder->hydrateStoreTable(
             'eav_attribute_option_value',
-            DoctrineSchemaBuilder::CONTEXT_DELETER,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_DELETER
         );
 
         $schemaBuilder->hydrateAttributeOptionValueTable(
             'eav_attribute_option_value',
-            DoctrineSchemaBuilder::CONTEXT_DELETER,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_DELETER
         );
 
         $this->deleter = new AttributeOptionValueDeleter(
@@ -160,42 +163,5 @@ class AttributeOptionValueDeleterTest extends \PHPUnit_Framework_TestCase
         parent::tearDown();
 
         $this->deleter = null;
-    }
-
-    public function testRemoveNone()
-    {
-        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable('eav_attribute_option_value');
-        $actual->addTable('eav_attribute_option');
-        $actual->addTable('eav_attribute');
-        $actual->addTable(TableStore::getTableName($GLOBALS['MAGENTO_VERSION']));
-
-        $this->assertDataSetsEqual($this->getInitialDataSet(), $actual);
-    }
-
-    public function testRemoveOneById()
-    {
-        $this->deleter->deleteOneById(2);
-
-        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable('eav_attribute_option_value');
-        $actual->addTable('eav_attribute_option');
-        $actual->addTable('eav_attribute');
-        $actual->addTable(TableStore::getTableName($GLOBALS['MAGENTO_VERSION']));
-
-        $this->assertDataSetsEqual($this->getDataSet(), $actual);
-    }
-
-    public function testRemoveAllById()
-    {
-        $this->deleter->deleteAllById([2]);
-
-        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable('eav_attribute_option_value');
-        $actual->addTable('eav_attribute_option');
-        $actual->addTable('eav_attribute');
-        $actual->addTable(TableStore::getTableName($GLOBALS['MAGENTO_VERSION']));
-
-        $this->assertDataSetsEqual($this->getDataSet(), $actual);
     }
 }

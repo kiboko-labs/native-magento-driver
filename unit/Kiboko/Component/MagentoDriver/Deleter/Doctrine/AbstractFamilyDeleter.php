@@ -1,11 +1,11 @@
 <?php
 
-namespace unit\Kiboko\Component\MagentoDriver\Deleter\Doctrine\Attribute;
+namespace unit\Kiboko\Component\MagentoDriver\Deleter\Doctrine;
 
 use Doctrine\DBAL\Schema\Schema;
-use Kiboko\Component\MagentoDriver\Deleter\AttributeGroupDeleterInterface;
-use Kiboko\Component\MagentoDriver\Deleter\Doctrine\AttributeGroupDeleter;
-use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeGroupQueryBuilder;
+use Kiboko\Component\MagentoDriver\Deleter\FamilyDeleterInterface;
+use Kiboko\Component\MagentoDriver\Deleter\Doctrine\FamilyDeleter;
+use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\FamilyQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
@@ -13,7 +13,7 @@ use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\FallbackResolver;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\LoaderInterface;
 
-class AttributeGroupDeleterTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractFamilyDeleter extends \PHPUnit_Framework_TestCase
 {
     use DatabaseConnectionAwareTrait;
 
@@ -23,9 +23,9 @@ class AttributeGroupDeleterTest extends \PHPUnit_Framework_TestCase
     private $schema;
 
     /**
-     * @var AttributeGroupDeleterInterface
+     * @var FamilyDeleterInterface
      */
-    private $deleter;
+    protected $deleter;
 
     /**
      * @var LoaderInterface
@@ -33,12 +33,22 @@ class AttributeGroupDeleterTest extends \PHPUnit_Framework_TestCase
     private $fixturesLoader;
 
     /**
+     * @return string
+     */
+    abstract protected function getVersion();
+
+    /**
+     * @return string
+     */
+    abstract protected function getEdition();
+
+    /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
     protected function getDataSet()
     {
         $dataset = $this->fixturesLoader->expectedDataSet(
-            'eav_attribute_group',
+            'eav_attribute_set',
             DoctrineSchemaBuilder::CONTEXT_DELETER
         );
 
@@ -51,7 +61,7 @@ class AttributeGroupDeleterTest extends \PHPUnit_Framework_TestCase
     protected function getInitialDataSet()
     {
         $dataset = $this->fixturesLoader->initialDataSet(
-            'eav_attribute_group',
+            'eav_attribute_set',
             DoctrineSchemaBuilder::CONTEXT_DELETER
         );
 
@@ -65,7 +75,11 @@ class AttributeGroupDeleterTest extends \PHPUnit_Framework_TestCase
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
 
         $this->getDoctrineConnection()->exec(
-            $platform->getTruncateTableSQL('eav_attribute_group')
+            $platform->getTruncateTableSQL('eav_attribute_set')
+        );
+
+        $this->getDoctrineConnection()->exec(
+            $platform->getTruncateTableSQL('eav_entity_type')
         );
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
@@ -80,8 +94,10 @@ class AttributeGroupDeleterTest extends \PHPUnit_Framework_TestCase
 
         $this->schema = new Schema();
 
-        $schemaBuilder = new DoctrineSchemaBuilder($this->getDoctrineConnection(), $this->schema);
-        $schemaBuilder->ensureAttributeGroupTable();
+        $schemaBuilder = new DoctrineSchemaBuilder(
+            $this->getDoctrineConnection(), $this->schema, $this->getVersion(), $this->getEdition());
+        $schemaBuilder->ensureFamilyTable();
+        $schemaBuilder->ensureEntityTypeTable();
 
         $comparator = new \Doctrine\DBAL\Schema\Comparator();
         $schemaDiff = $comparator->compare($currentSchema, $this->schema);
@@ -96,23 +112,26 @@ class AttributeGroupDeleterTest extends \PHPUnit_Framework_TestCase
 
         $this->fixturesLoader = new Loader(
             new FallbackResolver($schemaBuilder->getFixturesPath()),
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            $this->getVersion(),
+            $this->getEdition()
         );
 
-        $schemaBuilder->hydrateAttributeGroupTable(
-            'eav_attribute_group',
-            DoctrineSchemaBuilder::CONTEXT_DELETER,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+        $schemaBuilder->hydrateFamilyTable(
+            'eav_attribute_set',
+            DoctrineSchemaBuilder::CONTEXT_DELETER
         );
 
-        $this->deleter = new AttributeGroupDeleter(
+        $schemaBuilder->hydrateEntityTypeTable(
+            'eav_attribute_set',
+            DoctrineSchemaBuilder::CONTEXT_DELETER
+        );
+
+        $this->deleter = new FamilyDeleter(
             $this->getDoctrineConnection(),
-            new AttributeGroupQueryBuilder(
+            new FamilyQueryBuilder(
                 $this->getDoctrineConnection(),
-                AttributeGroupQueryBuilder::getDefaultTable(),
-                AttributeGroupQueryBuilder::getDefaultFields()
+                FamilyQueryBuilder::getDefaultTable(),
+                FamilyQueryBuilder::getDefaultFields()
             )
         );
     }
@@ -123,33 +142,5 @@ class AttributeGroupDeleterTest extends \PHPUnit_Framework_TestCase
         parent::tearDown();
 
         $this->deleter = null;
-    }
-
-    public function testRemoveNone()
-    {
-        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable('eav_attribute_group');
-
-        $this->assertDataSetsEqual($this->getInitialDataSet(), $actual);
-    }
-
-    public function testRemoveOneById()
-    {
-        $this->deleter->deleteOneById(2);
-
-        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable('eav_attribute_group');
-
-        $this->assertDataSetsEqual($this->getDataSet(), $actual);
-    }
-
-    public function testRemoveAllById()
-    {
-        $this->deleter->deleteAllById([2]);
-
-        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable('eav_attribute_group');
-
-        $this->assertDataSetsEqual($this->getDataSet(), $actual);
     }
 }

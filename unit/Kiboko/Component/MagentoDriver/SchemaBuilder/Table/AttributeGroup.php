@@ -26,7 +26,7 @@ class AttributeGroup
      *
      * @return \Doctrine\DBAL\Schema\Table
      */
-    public function build($magentoVersion = null)
+    public function build($magentoVersion)
     {
         $table = $this->schema->createTable('eav_attribute_group');
 
@@ -35,8 +35,8 @@ class AttributeGroup
         $table->addColumn('attribute_group_name', 'string', ['length' => 255, 'notnull' => false]);
         $table->addColumn('sort_order', 'smallint', ['default' => 0]);
         $table->addColumn('default_id', 'smallint', ['unsigned' => true, 'notnull' => false, 'default' => 0]);
-        
-        if($magentoVersion === '2.0'){
+
+        if (version_compare($magentoVersion, '2.0', '>=')) {
             $table->addColumn('attribute_group_code', 'string', ['length' => 255]);
             $table->addColumn('tab_group_code', 'string', ['length' => 255, 'notnull' => false]);
         }

@@ -75,7 +75,8 @@ class EntityAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $this->schema = new Schema();
 
-        $schemaBuilder = new DoctrineSchemaBuilder($this->getDoctrineConnection(), $this->schema);
+        $schemaBuilder = new DoctrineSchemaBuilder(
+            $this->getDoctrineConnection(), $this->schema, $GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
 
         $schemaBuilder->ensureAttributeGroupTable();
         $schemaBuilder->ensureAttributeTable();
@@ -92,23 +93,17 @@ class EntityAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $schemaBuilder->hydrateAttributeGroupTable(
             'eav_entity_attribute',
-            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY
         );
 
         $schemaBuilder->hydrateAttributeTable(
             'eav_entity_attribute',
-            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY
         );
 
         $schemaBuilder->hydrateEntityAttributeTable(
             'eav_entity_attribute',
-            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY
         );
 
         $this->repository = new EntityAttributeRepository(

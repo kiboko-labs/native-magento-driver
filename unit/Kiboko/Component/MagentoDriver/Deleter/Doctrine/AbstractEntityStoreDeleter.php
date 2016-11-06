@@ -1,6 +1,6 @@
 <?php
 
-namespace unit\Kiboko\Component\MagentoDriver\Deleter\Doctrine\EntityStore;
+namespace unit\Kiboko\Component\MagentoDriver\Deleter\Doctrine;
 
 use Doctrine\DBAL\Schema\Schema;
 use Kiboko\Component\MagentoDriver\Deleter\EntityStoreDeleterInterface;
@@ -13,7 +13,7 @@ use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\FallbackResolver;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\LoaderInterface;
 
-class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractEntityStoreDeleter extends \PHPUnit_Framework_TestCase
 {
     use DatabaseConnectionAwareTrait;
 
@@ -25,12 +25,22 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
     /**
      * @var EntityStoreDeleterInterface
      */
-    private $deleter;
+    protected $deleter;
 
     /**
      * @var LoaderInterface
      */
     private $fixturesLoader;
+
+    /**
+     * @return string
+     */
+    abstract protected function getVersion();
+
+    /**
+     * @return string
+     */
+    abstract protected function getEdition();
 
     /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
@@ -84,7 +94,8 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
 
         $this->schema = new Schema();
 
-        $schemaBuilder = new DoctrineSchemaBuilder($this->getDoctrineConnection(), $this->schema);
+        $schemaBuilder = new DoctrineSchemaBuilder(
+            $this->getDoctrineConnection(), $this->schema, $this->getVersion(), $this->getEdition());
         $schemaBuilder->ensureEntityTypeTable();
         $schemaBuilder->ensureEntityStoreTable();
 
@@ -101,22 +112,18 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
 
         $this->fixturesLoader = new Loader(
             new FallbackResolver($schemaBuilder->getFixturesPath()),
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            $this->getVersion(),
+            $this->getEdition()
         );
 
         $schemaBuilder->hydrateEntityTypeTable(
             'eav_entity_store',
-            DoctrineSchemaBuilder::CONTEXT_DELETER,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_DELETER
         );
 
         $schemaBuilder->hydrateEntityStoreTable(
             'eav_entity_store',
-            DoctrineSchemaBuilder::CONTEXT_DELETER,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_DELETER
         );
 
         $this->deleter = new EntityStoreDeleter(
@@ -135,38 +142,5 @@ class EntityStoreDeleterTest extends \PHPUnit_Framework_TestCase
         parent::tearDown();
 
         $this->deleter = null;
-    }
-
-    public function testRemoveNone()
-    {
-        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable('eav_entity_store');
-        $actual->addTable('eav_entity_type');
-
-        $this->assertDataSetsEqual($this->getInitialDataSet(), $actual);
-
-        $this->assertTableRowCount('eav_entity_store', $this->getInitialDataSet()->getIterator()->getTable()->getRowCount());
-    }
-
-    public function testRemoveOneById()
-    {
-        $this->deleter->deleteOneById(2);
-
-        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable('eav_entity_store');
-        $actual->addTable('eav_entity_type');
-
-        $this->assertDataSetsEqual($this->getDataSet(), $actual);
-    }
-
-    public function testRemoveAllById()
-    {
-        $this->deleter->deleteAllById([2]);
-
-        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable('eav_entity_store');
-        $actual->addTable('eav_entity_type');
-
-        $this->assertDataSetsEqual($this->getDataSet(), $actual);
     }
 }

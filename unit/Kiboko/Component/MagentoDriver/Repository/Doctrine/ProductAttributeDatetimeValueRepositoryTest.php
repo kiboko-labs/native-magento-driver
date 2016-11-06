@@ -87,7 +87,8 @@ class ProductAttributeDatetimeValueRepositoryTest extends \PHPUnit_Framework_Tes
 
         $this->schema = new Schema();
 
-        $schemaBuilder = new DoctrineSchemaBuilder($this->getDoctrineConnection(), $this->schema);
+        $schemaBuilder = new DoctrineSchemaBuilder(
+            $this->getDoctrineConnection(), $this->schema, $GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
         $schemaBuilder->ensureStoreTable();
         $schemaBuilder->ensureAttributeTable();
         $schemaBuilder->ensureCatalogProductEntityTable();
@@ -107,31 +108,23 @@ class ProductAttributeDatetimeValueRepositoryTest extends \PHPUnit_Framework_Tes
 
         $schemaBuilder->hydrateStoreTable(
             'catalog_product_entity_datetime',
-            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY
         );
 
         $schemaBuilder->hydrateAttributeTable(
             'catalog_product_entity_datetime',
-            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY
         );
 
         $schemaBuilder->hydrateCatalogProductEntityTable(
             'catalog_product_entity_datetime',
-            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY
         );
 
         $schemaBuilder->hydrateCatalogProductAttributeValueTable(
             'datetime',
             'catalog_product_entity_datetime',
-            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY
         );
 
         $this->repository = new ProductAttributeValueRepository(

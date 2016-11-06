@@ -87,7 +87,8 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
 
         $this->schema = new Schema();
 
-        $schemaBuilder = new DoctrineSchemaBuilder($this->getDoctrineConnection(), $this->schema);
+        $schemaBuilder = new DoctrineSchemaBuilder(
+            $this->getDoctrineConnection(), $this->schema, $GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
         $schemaBuilder->ensureEntityTypeTable();
         $schemaBuilder->ensureAttributeTable();
         $schemaBuilder->ensureStoreTable();
@@ -118,38 +119,28 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
 
         $schemaBuilder->hydrateEntityTypeTable(
             'catalog_product_entity_datetime',
-            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER
         );
 
         $schemaBuilder->hydrateAttributeTable(
             'catalog_product_entity_datetime',
-            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER
         );
 
         $schemaBuilder->hydrateStoreTable(
             'catalog_product_entity_datetime',
-            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER
         );
 
         $schemaBuilder->hydrateCatalogProductEntityTable(
             'catalog_product_entity_datetime',
-            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER
         );
 
         $schemaBuilder->hydrateCatalogProductAttributeValueTable(
             'datetime',
             'catalog_product_entity_datetime',
-            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER
         );
 
         $this->persister = new DatetimeAttributeValuePersister(

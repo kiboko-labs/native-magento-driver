@@ -26,7 +26,7 @@ class CatalogAttributeExtension
      *
      * @return \Doctrine\DBAL\Schema\Table
      */
-    public function build($magentoVersion = null)
+    public function build($magentoVersion)
     {
         $table = $this->schema->createTable('catalog_eav_attribute');
 
@@ -43,16 +43,18 @@ class CatalogAttributeExtension
         $table->addColumn('is_filterable_in_search', 'smallint', ['unsigned' => true, 'default' => 0]);
         $table->addColumn('used_in_product_listing', 'smallint', ['unsigned' => true, 'default' => 0]);
         $table->addColumn('used_for_sort_by', 'smallint', ['unsigned' => true, 'default' => 0]);
-        if($magentoVersion !== '2.0'){
+
+        if (version_compare($magentoVersion, '2.0', '<')) {
             $table->addColumn('is_configurable', 'smallint', ['unsigned' => true, 'default' => 1]);
         }
+
         $table->addColumn('apply_to', 'string', ['length' => 255, 'notnull' => false]);
         $table->addColumn('is_visible_in_advanced_search', 'smallint', ['unsigned' => true, 'default' => 0]);
         $table->addColumn('position', 'integer', ['unsigned' => true, 'default' => 0]);
         $table->addColumn('is_wysiwyg_enabled', 'smallint', ['unsigned' => true, 'default' => 0]);
         $table->addColumn('is_used_for_promo_rules', 'smallint', ['unsigned' => true, 'default' => 0]);
         
-        if($magentoVersion === '2.0'){
+        if (version_compare($magentoVersion, '2.0', '>=')) {
             $table->addColumn('is_required_in_admin_store', 'smallint', ['unsigned' => true, 'default' => 0]);
             $table->addColumn('is_used_in_grid', 'smallint', ['unsigned' => true, 'default' => 0]);
             $table->addColumn('is_visible_in_grid', 'smallint', ['unsigned' => true, 'default' => 0]);

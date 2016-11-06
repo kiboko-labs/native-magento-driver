@@ -68,7 +68,8 @@ class EntityStorePersisterTest extends \PHPUnit_Framework_TestCase
 
         $this->schema = new Schema();
 
-        $schemaBuilder = new DoctrineSchemaBuilder($this->getDoctrineConnection(), $this->schema);
+        $schemaBuilder = new DoctrineSchemaBuilder(
+            $this->getDoctrineConnection(), $this->schema, $GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
         $schemaBuilder->ensureEntityTypeTable();
         $schemaBuilder->ensureEntityStoreTable();
 
@@ -91,16 +92,12 @@ class EntityStorePersisterTest extends \PHPUnit_Framework_TestCase
 
         $schemaBuilder->hydrateEntityTypeTable(
             'eav_entity_type',
-            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER
         );
 
         $schemaBuilder->hydrateEntityStoreTable(
             'eav_entity_type',
-            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER
         );
 
         $this->persister = new StandardEntityStorePersister(

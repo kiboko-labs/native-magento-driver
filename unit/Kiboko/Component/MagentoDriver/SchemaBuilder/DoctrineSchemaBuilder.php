@@ -23,17 +23,34 @@ class DoctrineSchemaBuilder
     private $connection;
 
     /**
+     * @var string
+     */
+    private $magentoVersion;
+
+    /**
+     * @var string
+     */
+    private $magentoEdition;
+
+    /**
      * SchemaBuilder constructor.
      *
      * @param Connection $connection
      * @param Schema     $schema
+     * @param string     $magentoVersion
+     * @param string     $magentoEdition
      */
-    public function __construct(Connection $connection, Schema $schema)
+    public function __construct(Connection $connection, Schema $schema, $magentoVersion, $magentoEdition = 'ce')
     {
         $this->connection = $connection;
         $this->schema = $schema;
+        $this->magentoVersion = $magentoVersion;
+        $this->magentoEdition = $magentoEdition;
     }
 
+    /**
+     * @return string
+     */
     public function getFixturesPath()
     {
         return __DIR__ . '/..';
@@ -46,7 +63,7 @@ class DoctrineSchemaBuilder
      */
     public function ensureStoreTable()
     {
-        return (new Table\Store($this->schema))->build($GLOBALS['MAGENTO_VERSION']);
+        return (new Table\Store($this->schema))->build($this->magentoVersion);
     }
 
     /**
@@ -56,7 +73,7 @@ class DoctrineSchemaBuilder
      */
     public function ensureEntityTypeTable()
     {
-        return (new Table\EntityType($this->schema))->build();
+        return (new Table\EntityType($this->schema))->build($this->magentoVersion);
     }
 
     /**
@@ -66,7 +83,7 @@ class DoctrineSchemaBuilder
      */
     public function ensureEntityStoreTable()
     {
-        return (new Table\EntityStore($this->schema))->build();
+        return (new Table\EntityStore($this->schema))->build($this->magentoVersion);
     }
 
     /**
@@ -76,7 +93,7 @@ class DoctrineSchemaBuilder
      */
     public function ensureFamilyTable()
     {
-        return (new Table\Family($this->schema))->build();
+        return (new Table\Family($this->schema))->build($this->magentoVersion);
     }
 
     /**
@@ -86,7 +103,7 @@ class DoctrineSchemaBuilder
      */
     public function ensureAttributeTable()
     {
-        return (new Table\Attribute($this->schema))->build();
+        return (new Table\Attribute($this->schema))->build($this->magentoVersion);
     }
 
     /**
@@ -96,7 +113,7 @@ class DoctrineSchemaBuilder
      */
     public function ensureEntityAttributeTable()
     {
-        return (new Table\EntityAttribute($this->schema))->build();
+        return (new Table\EntityAttribute($this->schema))->build($this->magentoVersion);
     }
 
     /**
@@ -106,7 +123,7 @@ class DoctrineSchemaBuilder
      */
     public function ensureAttributeGroupTable()
     {
-        return (new Table\AttributeGroup($this->schema))->build($GLOBALS['MAGENTO_VERSION']);
+        return (new Table\AttributeGroup($this->schema))->build($this->magentoVersion);
     }
 
     /**
@@ -116,7 +133,7 @@ class DoctrineSchemaBuilder
      */
     public function ensureAttributeLabelTable()
     {
-        return (new Table\AttributeLabel($this->schema))->build();
+        return (new Table\AttributeLabel($this->schema))->build($this->magentoVersion);
     }
 
     /**
@@ -126,7 +143,7 @@ class DoctrineSchemaBuilder
      */
     public function ensureAttributeOptionTable()
     {
-        return (new Table\AttributeOption($this->schema))->build();
+        return (new Table\AttributeOption($this->schema))->build($this->magentoVersion);
     }
 
     /**
@@ -136,7 +153,7 @@ class DoctrineSchemaBuilder
      */
     public function ensureAttributeOptionValueTable()
     {
-        return (new Table\AttributeOptionValue($this->schema))->build();
+        return (new Table\AttributeOptionValue($this->schema))->build($this->magentoVersion);
     }
 
     /**
@@ -146,7 +163,7 @@ class DoctrineSchemaBuilder
      */
     public function ensureCatalogAttributeExtensionsTable()
     {
-        return (new Table\CatalogAttributeExtension($this->schema))->build($GLOBALS['MAGENTO_VERSION']);
+        return (new Table\CatalogAttributeExtension($this->schema))->build($this->magentoVersion);
     }
 
     /**
@@ -156,7 +173,7 @@ class DoctrineSchemaBuilder
      */
     public function ensureCatalogProductEntityTable()
     {
-        return (new Table\CatalogProductEntity($this->schema))->build($GLOBALS['MAGENTO_VERSION']);
+        return (new Table\CatalogProductEntity($this->schema))->build($this->magentoVersion);
     }
 
     /**
@@ -166,7 +183,7 @@ class DoctrineSchemaBuilder
      */
     public function ensureCatalogCategoryEntityTable()
     {
-        return (new Table\CatalogCategoryEntity($this->schema))->build();
+        return (new Table\CatalogCategoryEntity($this->schema))->build($this->magentoVersion);
     }
 
     /**
@@ -176,7 +193,7 @@ class DoctrineSchemaBuilder
      */
     public function ensureCatalogCategoryProductIndexTable()
     {
-        return (new Table\CatalogCategoryProductIndex($this->schema))->build();
+        return (new Table\CatalogCategoryProductIndex($this->schema))->build($this->magentoVersion);
     }
 
     /**
@@ -186,7 +203,7 @@ class DoctrineSchemaBuilder
      */
     public function ensureCatalogCategoryProductTable()
     {
-        return (new Table\CatalogCategoryProduct($this->schema))->build();
+        return (new Table\CatalogCategoryProduct($this->schema))->build($this->magentoVersion);
     }
 
     /**
@@ -196,7 +213,7 @@ class DoctrineSchemaBuilder
      */
     public function ensureCatalogProductLinkTable()
     {
-        return (new Table\CatalogProductLink($this->schema))->build();
+        return (new Table\CatalogProductLink($this->schema))->build($this->magentoVersion);
     }
 
     /**
@@ -206,7 +223,7 @@ class DoctrineSchemaBuilder
      */
     public function ensureCatalogProductSuperAttributeTable()
     {
-        return (new Table\CatalogProductSuperAttribute($this->schema))->build();
+        return (new Table\CatalogProductSuperAttribute($this->schema))->build($this->magentoVersion);
     }
 
     /**
@@ -216,7 +233,7 @@ class DoctrineSchemaBuilder
      */
     public function ensureCatalogProductLinkTypeTable()
     {
-        return (new Table\CatalogProductLinkType($this->schema))->build();
+        return (new Table\CatalogProductLinkType($this->schema))->build($this->magentoVersion);
     }
 
     /**
@@ -226,7 +243,7 @@ class DoctrineSchemaBuilder
      */
     public function ensureCatalogProductLinkAttributeTable()
     {
-        return (new Table\CatalogProductLinkAttribute($this->schema))->build();
+        return (new Table\CatalogProductLinkAttribute($this->schema))->build($this->magentoVersion);
     }
 
     /**
@@ -240,7 +257,8 @@ class DoctrineSchemaBuilder
      */
     public function ensureCatalogProductLinkAttributeValueTable($backendName, $backendType, array $backendOptions = [])
     {
-        return (new Table\CatalogProductLinkAttributeValue($this->schema, $backendType, $backendName, $backendOptions))->build();
+        return (new Table\CatalogProductLinkAttributeValue($this->schema, $backendType, $backendName, $backendOptions))
+            ->build($this->magentoVersion);
     }
 
     /**
@@ -254,7 +272,8 @@ class DoctrineSchemaBuilder
      */
     public function ensureCatalogProductAttributeValueTable($backendName, $backendType, array $backendOptions = [])
     {
-        return (new Table\CatalogProductAttributeValue($this->schema, $backendType, $backendName, $backendOptions))->build($GLOBALS['MAGENTO_VERSION']);
+        return (new Table\CatalogProductAttributeValue($this->schema, $backendType, $backendName, $backendOptions))
+            ->build($this->magentoVersion);
     }
 
     /**
@@ -268,7 +287,8 @@ class DoctrineSchemaBuilder
      */
     public function ensureCatalogCategoryAttributeValueTable($backendName, $backendType, array $backendOptions = [])
     {
-        return (new Table\CatalogCategoryAttributeValue($this->schema, $backendType, $backendName, $backendOptions))->build();
+        return (new Table\CatalogCategoryAttributeValue($this->schema, $backendType, $backendName, $backendOptions))
+            ->build($this->magentoVersion);
     }
 
     /**
@@ -278,7 +298,7 @@ class DoctrineSchemaBuilder
      */
     public function ensureCatalogProductGalleryTable()
     {
-        return (new Table\CatalogProductGallery($this->schema))->build();
+        return (new Table\CatalogProductGallery($this->schema))->build($this->magentoVersion);
     }
 
     /**
@@ -288,7 +308,7 @@ class DoctrineSchemaBuilder
      */
     public function ensureCatalogProductMediaGalleryTable()
     {
-        return (new Table\CatalogProductMediaGallery($this->schema))->build();
+        return (new Table\CatalogProductMediaGallery($this->schema))->build($this->magentoVersion);
     }
 
     /**
@@ -298,33 +318,29 @@ class DoctrineSchemaBuilder
      */
     public function ensureCatalogProductMediaGalleryAttributeValueTable()
     {
-        return (new Table\CatalogProductMediaGalleryAttributeValue($this->schema))->build();
+        return (new Table\CatalogProductMediaGalleryAttributeValue($this->schema))->build($this->magentoVersion);
     }
 
     /**
      * @param string $suite
      * @param string $context
-     * @param string $magentoVersion
-     * @param string $magentoEdition
      */
-    public function hydrateStoreTable($suite, $context, $magentoVersion, $magentoEdition)
+    public function hydrateStoreTable($suite, $context)
     {
         $resolver = new FallbackResolver($this->getFixturesPath());
-        (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
-            ->hydrate(Table\Store::getTableName($magentoVersion), $suite, $context)
+        (new Fixture\Hydrator($this->connection, $resolver, $this->magentoVersion, $this->magentoEdition))
+            ->hydrate(Table\Store::getTableName($this->magentoVersion), $suite, $context)
         ;
     }
 
     /**
      * @param string $suite
      * @param string $context
-     * @param string $magentoVersion
-     * @param string $magentoEdition
      */
-    public function hydrateEntityTypeTable($suite, $context, $magentoVersion, $magentoEdition)
+    public function hydrateEntityTypeTable($suite, $context)
     {
         $resolver = new FallbackResolver($this->getFixturesPath());
-        (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
+        (new Fixture\Hydrator($this->connection, $resolver, $this->magentoVersion, $this->magentoEdition))
             ->hydrate('eav_entity_type', $suite, $context)
         ;
     }
@@ -332,13 +348,11 @@ class DoctrineSchemaBuilder
     /**
      * @param string $suite
      * @param string $context
-     * @param string $magentoVersion
-     * @param string $magentoEdition
      */
-    public function hydrateEntityStoreTable($suite, $context, $magentoVersion, $magentoEdition)
+    public function hydrateEntityStoreTable($suite, $context)
     {
         $resolver = new FallbackResolver($this->getFixturesPath());
-        (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
+        (new Fixture\Hydrator($this->connection, $resolver, $this->magentoVersion, $this->magentoEdition))
             ->hydrate('eav_entity_store', $suite, $context)
         ;
     }
@@ -346,13 +360,11 @@ class DoctrineSchemaBuilder
     /**
      * @param string $suite
      * @param string $context
-     * @param string $magentoVersion
-     * @param string $magentoEdition
      */
-    public function hydrateEntityAttributeTable($suite, $context, $magentoVersion, $magentoEdition)
+    public function hydrateEntityAttributeTable($suite, $context)
     {
         $resolver = new FallbackResolver($this->getFixturesPath());
-        (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
+        (new Fixture\Hydrator($this->connection, $resolver, $this->magentoVersion, $this->magentoEdition))
             ->hydrate('eav_entity_attribute', $suite, $context)
         ;
     }
@@ -360,13 +372,11 @@ class DoctrineSchemaBuilder
     /**
      * @param string $suite
      * @param string $context
-     * @param string $magentoVersion
-     * @param string $magentoEdition
      */
-    public function hydrateFamilyTable($suite, $context, $magentoVersion, $magentoEdition)
+    public function hydrateFamilyTable($suite, $context)
     {
         $resolver = new FallbackResolver($this->getFixturesPath());
-        (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
+        (new Fixture\Hydrator($this->connection, $resolver, $this->magentoVersion, $this->magentoEdition))
             ->hydrate('eav_attribute_set', $suite, $context)
         ;
     }
@@ -374,13 +384,11 @@ class DoctrineSchemaBuilder
     /**
      * @param string $suite
      * @param string $context
-     * @param string $magentoVersion
-     * @param string $magentoEdition
      */
-    public function hydrateAttributeTable($suite, $context, $magentoVersion, $magentoEdition)
+    public function hydrateAttributeTable($suite, $context)
     {
         $resolver = new FallbackResolver($this->getFixturesPath());
-        (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
+        (new Fixture\Hydrator($this->connection, $resolver, $this->magentoVersion, $this->magentoEdition))
             ->hydrate('eav_attribute', $suite, $context)
         ;
     }
@@ -388,13 +396,11 @@ class DoctrineSchemaBuilder
     /**
      * @param string $suite
      * @param string $context
-     * @param string $magentoVersion
-     * @param string $magentoEdition
      */
-    public function hydrateAttributeGroupTable($suite, $context, $magentoVersion, $magentoEdition)
+    public function hydrateAttributeGroupTable($suite, $context)
     {
         $resolver = new FallbackResolver($this->getFixturesPath());
-        (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
+        (new Fixture\Hydrator($this->connection, $resolver, $this->magentoVersion, $this->magentoEdition))
             ->hydrate('eav_attribute_group', $suite, $context)
         ;
     }
@@ -402,13 +408,11 @@ class DoctrineSchemaBuilder
     /**
      * @param string $suite
      * @param string $context
-     * @param string $magentoVersion
-     * @param string $magentoEdition
      */
-    public function hydrateAttributeLabelTable($suite, $context, $magentoVersion, $magentoEdition)
+    public function hydrateAttributeLabelTable($suite, $context)
     {
         $resolver = new FallbackResolver($this->getFixturesPath());
-        (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
+        (new Fixture\Hydrator($this->connection, $resolver, $this->magentoVersion, $this->magentoEdition))
             ->hydrate('eav_attribute_label', $suite, $context)
         ;
     }
@@ -416,13 +420,11 @@ class DoctrineSchemaBuilder
     /**
      * @param string $suite
      * @param string $context
-     * @param string $magentoVersion
-     * @param string $magentoEdition
      */
-    public function hydrateAttributeOptionTable($suite, $context, $magentoVersion, $magentoEdition)
+    public function hydrateAttributeOptionTable($suite, $context)
     {
         $resolver = new FallbackResolver($this->getFixturesPath());
-        (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
+        (new Fixture\Hydrator($this->connection, $resolver, $this->magentoVersion, $this->magentoEdition))
             ->hydrate('eav_attribute_option', $suite, $context)
         ;
     }
@@ -430,13 +432,11 @@ class DoctrineSchemaBuilder
     /**
      * @param string $suite
      * @param string $context
-     * @param string $magentoVersion
-     * @param string $magentoEdition
      */
-    public function hydrateAttributeOptionValueTable($suite, $context, $magentoVersion, $magentoEdition)
+    public function hydrateAttributeOptionValueTable($suite, $context)
     {
         $resolver = new FallbackResolver($this->getFixturesPath());
-        (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
+        (new Fixture\Hydrator($this->connection, $resolver, $this->magentoVersion, $this->magentoEdition))
             ->hydrate('eav_attribute_option_value', $suite, $context)
         ;
     }
@@ -444,13 +444,11 @@ class DoctrineSchemaBuilder
     /**
      * @param string $suite
      * @param string $context
-     * @param string $magentoVersion
-     * @param string $magentoEdition
      */
-    public function hydrateCatalogAttributeExtensionsTable($suite, $context, $magentoVersion, $magentoEdition)
+    public function hydrateCatalogAttributeExtensionsTable($suite, $context)
     {
         $resolver = new FallbackResolver($this->getFixturesPath());
-        (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
+        (new Fixture\Hydrator($this->connection, $resolver, $this->magentoVersion, $this->magentoEdition))
             ->hydrate('catalog_eav_attribute', $suite, $context)
         ;
     }
@@ -458,13 +456,11 @@ class DoctrineSchemaBuilder
     /**
      * @param string $suite
      * @param string $context
-     * @param string $magentoVersion
-     * @param string $magentoEdition
      */
-    public function hydrateCatalogProductEntityTable($suite, $context, $magentoVersion, $magentoEdition)
+    public function hydrateCatalogProductEntityTable($suite, $context)
     {
         $resolver = new FallbackResolver($this->getFixturesPath());
-        (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
+        (new Fixture\Hydrator($this->connection, $resolver, $this->magentoVersion, $this->magentoEdition))
             ->hydrate('catalog_product_entity', $suite, $context)
         ;
     }
@@ -473,13 +469,11 @@ class DoctrineSchemaBuilder
      * @param string $backendType
      * @param string $suite
      * @param string $context
-     * @param string $magentoVersion
-     * @param string $magentoEdition
      */
-    public function hydrateCatalogProductAttributeValueTable($backendType, $suite, $context, $magentoVersion, $magentoEdition)
+    public function hydrateCatalogProductAttributeValueTable($backendType, $suite, $context)
     {
         $resolver = new FallbackResolver($this->getFixturesPath());
-        (new Fixture\Hydrator($this->connection, $resolver, $magentoVersion, $magentoEdition))
+        (new Fixture\Hydrator($this->connection, $resolver, $this->magentoVersion, $this->magentoEdition))
             ->hydrate(sprintf('catalog_product_entity_%s', $backendType), $suite, $context)
         ;
     }

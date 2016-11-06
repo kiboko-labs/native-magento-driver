@@ -57,9 +57,9 @@ eav_entity_attribute:
         sort_order: 80
 eav_attribute:
     -
-        attribute_id: 79
-        entity_type_id: 4
-        attribute_code: "cost"
+        attribute_id: '79'
+        entity_type_id: '4'
+        attribute_code: cost
         attribute_model: ~
         backend_model: "Magento\Catalog\Model\Product\Attribute\Backend\Price"
         backend_type: "decimal"

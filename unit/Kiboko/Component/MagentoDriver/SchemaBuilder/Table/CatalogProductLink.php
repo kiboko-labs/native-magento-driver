@@ -26,7 +26,7 @@ class CatalogProductLink
      *
      * @return \Doctrine\DBAL\Schema\Table
      */
-    public function build($magentoVersion = null)
+    public function build($magentoVersion)
     {
         $table = $this->schema->createTable('catalog_product_link');
 

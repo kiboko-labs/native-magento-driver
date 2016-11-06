@@ -3,20 +3,20 @@ eav_attribute:
         attribute_id: 79
         entity_type_id: 4
         attribute_code: cost
-        attribute_model: null
+        attribute_model: ~
         backend_model: catalog/product_attribute_backend_price
         backend_type: decimal
-        backend_table: null
-        frontend_model: null
+        backend_table: ~
+        frontend_model: ~
         frontend_input: price
         frontend_label: Cout
-        frontend_class: null
-        source_model: null
+        frontend_class: ~
+        source_model: ~
         is_required: 0
         is_user_defined: 1
-        default_value: null
+        default_value: ~
         is_unique: 0
-        note: null
+        note: ~
 eav_entity_type:
     -
         entity_type_id: '1'
@@ -24,8 +24,8 @@ eav_entity_type:
         entity_model: customer/customer
         attribute_model: customer/attribute
         entity_table: customer/entity
-        value_table_prefix: null
-        entity_id_field: null
+        value_table_prefix: ~
+        entity_id_field: ~
         is_data_sharing: '1'
         data_sharing_key: default
         default_attribute_set_id: '1'
@@ -41,12 +41,12 @@ eav_entity_type:
         entity_model: customer/address
         attribute_model: customer/attribute
         entity_table: customer/address_entity
-        value_table_prefix: null
-        entity_id_field: null
+        value_table_prefix: ~
+        entity_id_field: ~
         is_data_sharing: '1'
         data_sharing_key: default
         default_attribute_set_id: '2'
-        increment_model: null
+        increment_model: ~
         increment_per_store: 0
         increment_pad_length: 8
         increment_pad_char: '0'
@@ -58,12 +58,12 @@ eav_entity_type:
         entity_model: catalog/category
         attribute_model: catalog/resource_eav_attribute
         entity_table: catalog/category
-        value_table_prefix: null
-        entity_id_field: null
+        value_table_prefix: ~
+        entity_id_field: ~
         is_data_sharing: '1'
         data_sharing_key: default
         default_attribute_set_id: '3'
-        increment_model: null
+        increment_model: ~
         increment_per_store: 0
         increment_pad_length: 8
         increment_pad_char: '0'
@@ -75,12 +75,12 @@ eav_entity_type:
         entity_model: catalog/product
         attribute_model: catalog/resource_eav_attribute
         entity_table: catalog/product
-        value_table_prefix: null
-        entity_id_field: null
+        value_table_prefix: ~
+        entity_id_field: ~
         is_data_sharing: '1'
         data_sharing_key: default
         default_attribute_set_id: '4'
-        increment_model: null
+        increment_model: ~
         increment_per_store: 0
         increment_pad_length: 8
         increment_pad_char: '0'
@@ -90,10 +90,10 @@ eav_entity_type:
         entity_type_id: '5'
         entity_type_code: order
         entity_model: sales/order
-        attribute_model: null
+        attribute_model: ~
         entity_table: sales/order
-        value_table_prefix: null
-        entity_id_field: null
+        value_table_prefix: ~
+        entity_id_field: ~
         is_data_sharing: '1'
         data_sharing_key: default
         default_attribute_set_id: 0
@@ -101,16 +101,16 @@ eav_entity_type:
         increment_per_store: '1'
         increment_pad_length: 8
         increment_pad_char: '0'
-        additional_attribute_table: null
-        entity_attribute_collection: null
+        additional_attribute_table: ~
+        entity_attribute_collection: ~
     -
         entity_type_id: '6'
         entity_type_code: invoice
         entity_model: sales/order_invoice
-        attribute_model: null
+        attribute_model: ~
         entity_table: sales/invoice
-        value_table_prefix: null
-        entity_id_field: null
+        value_table_prefix: ~
+        entity_id_field: ~
         is_data_sharing: '1'
         data_sharing_key: default
         default_attribute_set_id: 0
@@ -118,16 +118,16 @@ eav_entity_type:
         increment_per_store: '1'
         increment_pad_length: 8
         increment_pad_char: '0'
-        additional_attribute_table: null
-        entity_attribute_collection: null
+        additional_attribute_table: ~
+        entity_attribute_collection: ~
     -
         entity_type_id: '7'
         entity_type_code: creditmemo
         entity_model: sales/order_creditmemo
-        attribute_model: null
+        attribute_model: ~
         entity_table: sales/creditmemo
-        value_table_prefix: null
-        entity_id_field: null
+        value_table_prefix: ~
+        entity_id_field: ~
         is_data_sharing: '1'
         data_sharing_key: default
         default_attribute_set_id: 0
@@ -135,16 +135,16 @@ eav_entity_type:
         increment_per_store: '1'
         increment_pad_length: 8
         increment_pad_char: '0'
-        additional_attribute_table: null
-        entity_attribute_collection: null
+        additional_attribute_table: ~
+        entity_attribute_collection: ~
     -
         entity_type_id: '8'
         entity_type_code: shipment
         entity_model: sales/order_shipment
-        attribute_model: null
+        attribute_model: ~
         entity_table: sales/shipment
-        value_table_prefix: null
-        entity_id_field: null
+        value_table_prefix: ~
+        entity_id_field: ~
         is_data_sharing: '1'
         data_sharing_key: default
         default_attribute_set_id: 0
@@ -152,5 +152,5 @@ eav_entity_type:
         increment_per_store: '1'
         increment_pad_length: 8
         increment_pad_char: '0'
-        additional_attribute_table: null
-        entity_attribute_collection: null
+        additional_attribute_table: ~
+        entity_attribute_collection: ~

@@ -86,7 +86,8 @@ class ProductAttributeTextValueRepositoryTest extends \PHPUnit_Framework_TestCas
 
         $this->schema = new Schema();
 
-        $schemaBuilder = new DoctrineSchemaBuilder($this->getDoctrineConnection(), $this->schema);
+        $schemaBuilder = new DoctrineSchemaBuilder(
+            $this->getDoctrineConnection(), $this->schema, $GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
         $schemaBuilder->ensureStoreTable();
         $schemaBuilder->ensureAttributeTable();
         $schemaBuilder->ensureCatalogProductEntityTable();
@@ -106,31 +107,23 @@ class ProductAttributeTextValueRepositoryTest extends \PHPUnit_Framework_TestCas
 
         $schemaBuilder->hydrateStoreTable(
             'catalog_product_entity_text',
-            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY
         );
 
         $schemaBuilder->hydrateAttributeTable(
             'catalog_product_entity_text',
-            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY
         );
 
         $schemaBuilder->hydrateCatalogProductEntityTable(
             'catalog_product_entity_text',
-            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY
         );
 
         $schemaBuilder->hydrateCatalogProductAttributeValueTable(
             'text',
             'catalog_product_entity_text',
-            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY
         );
 
         $this->repository = new ProductAttributeValueRepository(

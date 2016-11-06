@@ -26,7 +26,7 @@ class CatalogProductGallery
      *
      * @return \Doctrine\DBAL\Schema\Table
      */
-    public function build($magentoVersion = null)
+    public function build($magentoVersion)
     {
         $table = $this->schema->createTable('catalog_product_entity_gallery');
 

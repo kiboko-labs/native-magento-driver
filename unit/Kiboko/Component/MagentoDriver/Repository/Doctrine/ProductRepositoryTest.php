@@ -75,7 +75,8 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $this->schema = new Schema();
 
-        $schemaBuilder = new DoctrineSchemaBuilder($this->getDoctrineConnection(), $this->schema);
+        $schemaBuilder = new DoctrineSchemaBuilder(
+            $this->getDoctrineConnection(), $this->schema, $GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
         $schemaBuilder->ensureEntityTypeTable();
         $schemaBuilder->ensureFamilyTable();
         $schemaBuilder->ensureCatalogProductEntityTable();
@@ -90,9 +91,7 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->truncateTables();
         $schemaBuilder->hydrateCatalogProductEntityTable(
             'catalog_product_entity',
-            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY
         );
 
         /** @var FamilyRepositoryInterface|\PHPUnit_Framework_MockObject_MockObject $familyRepository */

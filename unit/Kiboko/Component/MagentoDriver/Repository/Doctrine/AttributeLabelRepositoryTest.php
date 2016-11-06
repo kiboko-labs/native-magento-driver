@@ -75,8 +75,9 @@ class AttributeLabelRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $this->schema = new Schema();
 
-        $schemaBuilder = new DoctrineSchemaBuilder($this->getDoctrineConnection(), $this->schema);
-        $schemaBuilder->ensureStoreTable();
+        $schemaBuilder = new DoctrineSchemaBuilder(
+            $this->getDoctrineConnection(), $this->schema, $GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
+        $schemaBuilder->ensureStoreTable($GLOBALS['MAGENTO_VERSION']);
         $schemaBuilder->ensureAttributeTable();
         $schemaBuilder->ensureAttributeLabelTable();
 
@@ -91,23 +92,17 @@ class AttributeLabelRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $schemaBuilder->hydrateStoreTable(
             'eav_attribute_label',
-            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY
         );
 
         $schemaBuilder->hydrateAttributeTable(
             'eav_attribute_label',
-            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY
         );
 
         $schemaBuilder->hydrateAttributeLabelTable(
             'eav_attribute_label',
-            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY
         );
 
         $this->repository = new AttributeLabelRepository(

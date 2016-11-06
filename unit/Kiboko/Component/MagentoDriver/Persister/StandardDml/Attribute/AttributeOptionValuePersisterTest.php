@@ -78,7 +78,8 @@ class AttributeOptionValuePersisterTest extends \PHPUnit_Framework_TestCase
 
         $this->schema = new Schema();
 
-        $schemaBuilder = new DoctrineSchemaBuilder($this->getDoctrineConnection(), $this->schema);
+        $schemaBuilder = new DoctrineSchemaBuilder(
+            $this->getDoctrineConnection(), $this->schema, $GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
         $schemaBuilder->ensureAttributeTable();
         $schemaBuilder->ensureAttributeOptionTable();
         $schemaBuilder->ensureStoreTable();
@@ -103,30 +104,22 @@ class AttributeOptionValuePersisterTest extends \PHPUnit_Framework_TestCase
 
         $schemaBuilder->hydrateAttributeTable(
             'eav_attribute_option_value',
-            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER
         );
 
         $schemaBuilder->hydrateAttributeOptionTable(
             'eav_attribute_option_value',
-            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER
         );
 
         $schemaBuilder->hydrateStoreTable(
             'eav_attribute_option_value',
-            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER
         );
 
         $schemaBuilder->hydrateAttributeOptionValueTable(
             'eav_attribute_option_value',
-            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER
         );
 
         $this->persister = new AttributeOptionValuePersister(

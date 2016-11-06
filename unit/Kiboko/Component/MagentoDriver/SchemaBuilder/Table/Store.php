@@ -26,7 +26,7 @@ class Store
      *
      * @return \Doctrine\DBAL\Schema\Table
      */
-    public function build($magentoVersion = null)
+    public function build($magentoVersion)
     {
         $table = $this->schema->createTable($this->getTableName($magentoVersion));
 
@@ -53,10 +53,10 @@ class Store
      */
     public static function getTableName($magentoVersion)
     {
-        $tableName = array(
-            '1.9' => 'core_store',
-            '2.0' => 'store'
-        );
-        return $tableName[$magentoVersion];
+        if (version_compare($magentoVersion, '2.0', '<')) {
+            return 'core_store';
+        }
+
+        return 'store';
     }
 }

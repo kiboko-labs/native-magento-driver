@@ -60,17 +60,17 @@ eav_attribute:
         attribute_id: 122
         entity_type_id: 4
         attribute_code: gift_message_available
-        attribute_model: null
+        attribute_model: ~
         backend_model: catalog/product_attribute_backend_boolean
         backend_type: varchar
-        backend_table: null
-        frontend_model: null
+        backend_table: ~
+        frontend_model: ~
         frontend_input: select
         frontend_label: 'Allow Gift Message'
-        frontend_class: null
+        frontend_class: ~
         source_model: eav/entity_attribute_source_boolean
         is_required: 0
         is_user_defined: 0
-        default_value: null
+        default_value: ~
         is_unique: 0
-        note: null
+        note: ~

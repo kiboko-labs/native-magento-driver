@@ -26,7 +26,7 @@ class EntityAttribute
      *
      * @return \Doctrine\DBAL\Schema\Table
      */
-    public function build($magentoVersion = null)
+    public function build($magentoVersion)
     {
         $table = $this->schema->createTable('eav_entity_attribute');
 

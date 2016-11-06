@@ -26,7 +26,7 @@ class AttributeLabel
      *
      * @return \Doctrine\DBAL\Schema\Table
      */
-    public function build($magentoVersion = null)
+    public function build($magentoVersion)
     {
         $table = $this->schema->createTable('eav_attribute_label');
 

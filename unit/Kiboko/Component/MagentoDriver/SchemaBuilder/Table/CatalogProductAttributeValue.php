@@ -47,14 +47,16 @@ class CatalogProductAttributeValue
      *
      * @return \Doctrine\DBAL\Schema\Table
      */
-    public function build($magentoVersion = null)
+    public function build($magentoVersion)
     {
         $table = $this->schema->createTable(sprintf('catalog_product_entity_%s', $this->backendName));
 
         $table->addColumn('value_id', 'integer', ['unsigned' => true, 'autoincrement' => true]);
-        if($magentoVersion !== '2.0'){
+
+        if (version_compare($magentoVersion, '2.0', '<=')) {
             $table->addColumn('entity_type_id', 'smallint', ['unsigned' => true]);
         }
+
         $table->addColumn('attribute_id', 'smallint', ['unsigned' => true]);
         $table->addColumn('store_id', 'smallint', ['unsigned' => true]);
         $table->addColumn('entity_id', 'integer', ['unsigned' => true]);

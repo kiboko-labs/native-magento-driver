@@ -71,7 +71,8 @@ class AttributePersisterTest extends \PHPUnit_Framework_TestCase
 
         $this->schema = new Schema();
 
-        $schemaBuilder = new DoctrineSchemaBuilder($this->getDoctrineConnection(), $this->schema);
+        $schemaBuilder = new DoctrineSchemaBuilder(
+            $this->getDoctrineConnection(), $this->schema, $GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
         $schemaBuilder->ensureEntityTypeTable();
         $schemaBuilder->ensureAttributeTable();
         $schemaBuilder->ensureAttributeToEntityTypeLinks();
@@ -95,16 +96,12 @@ class AttributePersisterTest extends \PHPUnit_Framework_TestCase
 
         $schemaBuilder->hydrateEntityTypeTable(
             'eav_attribute',
-            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER
         );
 
         $schemaBuilder->hydrateAttributeTable(
             'eav_attribute',
-            DoctrineSchemaBuilder::CONTEXT_PERSISTER,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER
         );
 
         $this->persister = new StandardAttributePersister(

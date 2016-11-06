@@ -66,8 +66,8 @@ class EntityStoreRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $this->schema = new Schema();
 
-        $schemaBuilder = new DoctrineSchemaBuilder($this->getDoctrineConnection(), $this->schema);
-
+        $schemaBuilder = new DoctrineSchemaBuilder(
+            $this->getDoctrineConnection(), $this->schema, $GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
         $schemaBuilder->ensureFamilyTable();
         $schemaBuilder->ensureEntityTypeTable();
         $schemaBuilder->ensureEntityStoreTable();
@@ -83,9 +83,7 @@ class EntityStoreRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $schemaBuilder->hydrateEntityStoreTable(
             'eav_entity_store',
-            DoctrineSchemaBuilder::CONTEXT_REPOSITORY,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            DoctrineSchemaBuilder::CONTEXT_REPOSITORY
         );
 
         $this->repository = new EntityStoreRepository(
