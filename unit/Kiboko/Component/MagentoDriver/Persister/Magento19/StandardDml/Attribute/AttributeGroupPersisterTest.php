@@ -151,7 +151,6 @@ class AttributeGroupPersisterTest extends \PHPUnit_Framework_TestCase
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_group');
-        $actual->addTable('eav_attribute_set');
 
         $this->assertDataSetsEqual($expected, $actual);
     }

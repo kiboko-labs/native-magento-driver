@@ -1,0 +1,54 @@
+eav_entity_store:
+    -
+        entity_store_id: 5
+        entity_type_id: 4
+        store_id: 0
+        increment_prefix: '5'
+        increment_last_id: '500000370'
+    -
+        entity_store_id: 6
+        entity_type_id: 4
+        store_id: 1
+        increment_prefix: '6'
+        increment_last_id: '600000232'
+    -
+        entity_store_id: 9
+        entity_type_id: 6
+        store_id: 1
+        increment_prefix: '1'
+        increment_last_id: '100000002'
+eav_entity_type:
+    -
+        entity_type_id: 5
+        entity_type_code: order
+        entity_model: sales/order
+        attribute_model: ~
+        entity_table: sales/order
+        value_table_prefix: ~
+        entity_id_field: ~
+        is_data_sharing: 1
+        data_sharing_key: default
+        default_attribute_set_id: 0
+        increment_model: eav/entity_increment_numeric
+        increment_per_store: 1
+        increment_pad_length: 8
+        increment_pad_char: '0'
+        additional_attribute_table: ~
+        entity_attribute_collection: ~
+    -
+        entity_type_id: 6
+        entity_type_code: invoice
+        entity_model: sales/order_invoice
+        attribute_model: ~
+        entity_table: sales/invoice
+        value_table_prefix: ~
+        entity_id_field: ~
+        is_data_sharing: 1
+        data_sharing_key: default
+        default_attribute_set_id: 0
+        increment_model: eav/entity_increment_numeric
+        increment_per_store: 1
+        increment_pad_length: 8
+        increment_pad_char: '0'
+        additional_attribute_table: ~
+        entity_attribute_collection: ~

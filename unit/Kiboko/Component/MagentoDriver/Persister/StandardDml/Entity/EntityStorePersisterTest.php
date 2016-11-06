@@ -34,13 +34,32 @@ class EntityStorePersisterTest extends \PHPUnit_Framework_TestCase
     private $fixturesLoader;
 
     /**
+     * @return string
+     */
+    private function getVersion()
+    {
+        return '1.9';
+    }
+
+    /**
+     * @return string
+     */
+    private function getEdition()
+    {
+        return 'ce';
+    }
+
+    /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
     protected function getDataSet()
     {
-        $dataSet = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([]);
+        $dataset = $this->fixturesLoader->initialDataSet(
+            'eav_entity_store',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER
+        );
 
-        return $dataSet;
+        return $dataset;
     }
 
     private function truncateTables()
@@ -69,7 +88,7 @@ class EntityStorePersisterTest extends \PHPUnit_Framework_TestCase
         $this->schema = new Schema();
 
         $schemaBuilder = new DoctrineSchemaBuilder(
-            $this->getDoctrineConnection(), $this->schema, $GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
+            $this->getDoctrineConnection(), $this->schema, $this->getVersion(), $this->getEdition());
         $schemaBuilder->ensureEntityTypeTable();
         $schemaBuilder->ensureEntityStoreTable();
 
@@ -86,17 +105,16 @@ class EntityStorePersisterTest extends \PHPUnit_Framework_TestCase
 
         $this->fixturesLoader = new Loader(
             new FallbackResolver($schemaBuilder->getFixturesPath()),
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            $this->getVersion(), $this->getEdition()
         );
 
         $schemaBuilder->hydrateEntityTypeTable(
-            'eav_entity_type',
+            'eav_entity_store',
             DoctrineSchemaBuilder::CONTEXT_PERSISTER
         );
 
         $schemaBuilder->hydrateEntityStoreTable(
-            'eav_entity_type',
+            'eav_entity_store',
             DoctrineSchemaBuilder::CONTEXT_PERSISTER
         );
 
@@ -119,24 +137,11 @@ class EntityStorePersisterTest extends \PHPUnit_Framework_TestCase
         $this->persister->initialize();
         foreach ($this->persister->flush() as $item);
 
-        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
-            'eav_entity_store' => [
-                [
-                    'entity_store_id' => 1,
-                    'entity_type_id' => 1,
-                    'store_id' => 0,
-                    'increment_prefix' => '0',
-                    'increment_last_id' => '000004372',
-                ],
-                [
-                    'entity_store_id' => 2,
-                    'entity_type_id' => 4,
-                    'store_id' => 0,
-                    'increment_prefix' => '5',
-                    'increment_last_id' => '50000047W',
-                ],
-            ],
-        ]);
+        $expected = $this->fixturesLoader->namedDataSet(
+            'do-nothing',
+            'eav_entity_store',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER
+        );
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_entity_store');
@@ -146,42 +151,22 @@ class EntityStorePersisterTest extends \PHPUnit_Framework_TestCase
 
     public function testInsertOne()
     {
+        $entityStore = new EntityStore(
+            5,          // EntityTypeId
+            2,          // StoreId
+            '2',        // IncrementPrefix
+            '200000001' // IncrementLastId
+        );
+
         $this->persister->initialize();
-        $this->persister->persist($entityStore = new EntityStore(
-            4,          // EntityTypeId
-            1,          // StoreId
-            '1',        // IncrementPrefix
-            '100000001' // IncrementLastId
-        ));
+        $this->persister->persist($entityStore);
         foreach ($this->persister->flush() as $item);
 
-        $this->assertEquals(3, $entityStore->getId());
-
-        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
-            'eav_entity_store' => [
-                [
-                    'entity_store_id' => 1,
-                    'entity_type_id' => 1,
-                    'store_id' => 0,
-                    'increment_prefix' => '0',
-                    'increment_last_id' => '000004372',
-                ],
-                [
-                    'entity_store_id' => 2,
-                    'entity_type_id' => 4,
-                    'store_id' => 0,
-                    'increment_prefix' => '5',
-                    'increment_last_id' => '50000047W',
-                ],
-                [
-                    'entity_store_id' => 3,
-                    'entity_type_id' => 4,
-                    'store_id' => 1,
-                    'increment_prefix' => '1',
-                    'increment_last_id' => '100000001',
-                ],
-            ],
-        ]);
+        $expected = $this->fixturesLoader->namedDataSet(
+            'insert-one',
+            'eav_entity_store',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER
+        );
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_entity_store');
@@ -191,36 +176,23 @@ class EntityStorePersisterTest extends \PHPUnit_Framework_TestCase
 
     public function testUpdateOneExisting()
     {
-        $this->persister->initialize();
-        $this->persister->persist($entityStore = EntityStore::buildNewWith(
-            2,          // EntityStoreId
-            4,          // EntityTypeId
-            0,          // StoreId
+        $entityStore = EntityStore::buildNewWith(
+            9,          // EntityStoreId
+            6,          // EntityTypeId
+            1,          // StoreId
             '1',        // IncrementPrefix
-            '100000001' // IncrementLastId
-        ));
+            '100001234' // IncrementLastId
+        );
+
+        $this->persister->initialize();
+        $this->persister->persist($entityStore);
         foreach ($this->persister->flush() as $item);
 
-        $this->assertEquals(2, $entityStore->getId());
-
-        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
-            'eav_entity_store' => [
-                [
-                    'entity_store_id' => 1,
-                    'entity_type_id' => 1,
-                    'store_id' => 0,
-                    'increment_prefix' => '0',
-                    'increment_last_id' => '000004372',
-                ],
-                [
-                    'entity_store_id' => 2,
-                    'entity_type_id' => 4,
-                    'store_id' => 0,
-                    'increment_prefix' => '1',
-                    'increment_last_id' => '100000001',
-                ],
-            ],
-        ]);
+        $expected = $this->fixturesLoader->namedDataSet(
+            'update-one',
+            'eav_entity_store',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER
+        );
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_entity_store');

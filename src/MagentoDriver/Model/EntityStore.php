@@ -13,11 +13,6 @@ class EntityStore implements EntityStoreInterface
     use IdentifiableTrait;
 
     /**
-     * @var
-     */
-    private $identifier;
-
-    /**
      * @var int
      */
     private $typeId;
@@ -96,7 +91,7 @@ class EntityStore implements EntityStoreInterface
     {
         $object = new self($typeId, $storeId, $incrementPrefix, $incrementLastId);
 
-        $object->identifier = $identifier;
+        $object->persistedToId($identifier);
 
         return $object;
     }

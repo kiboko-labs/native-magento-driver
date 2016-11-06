@@ -73,17 +73,19 @@ class StandardEntityStorePersister implements EntityStorePersisterInterface
         foreach ($this->dataQueue as $entityStore) {
             $this->insertOnDuplicateUpdate($this->connection, $this->tableName,
                 [
+                    'entity_store_id' => $entityStore->getId(),
                     'entity_type_id' => $entityStore->getTypeId(),
                     'store_id' => $entityStore->getStoreId(),
                     'increment_prefix' => $entityStore->getIncrementPrefix(),
                     'increment_last_id' => $entityStore->getIncrementLastId(),
                 ],
                 [
+                    'entity_type_id',
                     'store_id',
                     'increment_prefix',
                     'increment_last_id',
                 ],
-                'entity_type_id'
+                'entity_store_id'
             );
 
             if ($entityStore->getId() === null) {
