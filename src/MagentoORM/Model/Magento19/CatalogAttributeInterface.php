@@ -9,6 +9,6 @@ namespace Kiboko\Component\MagentoORM\Model\Magento19;
 
 use Kiboko\Component\MagentoORM\Model\AttributeInterface;
 
-interface CatalogAttributeInterface extends AttributeInterface , CatalogAttributeExtensionInterface
+interface CatalogAttributeInterface extends AttributeInterface, CatalogAttributeExtensionInterface
 {
 }

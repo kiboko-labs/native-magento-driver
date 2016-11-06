@@ -206,8 +206,8 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
     {
         $this->persister->initialize();
 
-        $datetimeAttribute = array(
-            'ce' => array(
+        $datetimeAttribute = [
+            'ce' => [
                 '1.9' => new ImmutableDatetimeAttributeValue(
                             $this->getAttributeMock(167, 4),
                             new \DateTime('2016-07-13 12:34:56'),
@@ -220,33 +220,33 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
                             $this->getProductMock(961),
                             1
                     ),
-            ),
-        );
+            ],
+        ];
 
         $this->persister->persist($value = $datetimeAttribute[$GLOBALS['MAGENTO_EDITION']][$GLOBALS['MAGENTO_VERSION']]);
         foreach ($this->persister->flush() as $item);
 
         $this->assertEquals(24, $value->getId());
 
-        $newCatalogProductEntityDatetime = array(
-            'ce' => array(
-                '1.9' => array(
+        $newCatalogProductEntityDatetime = [
+            'ce' => [
+                '1.9' => [
                     'value_id' => 24,
                     'entity_type_id' => 4,
                     'attribute_id' => 167,
                     'store_id' => 1,
                     'entity_id' => 961,
                     'value' => '2016-07-13 12:34:56',
-                ),
-                '2.0' => array(
+                ],
+                '2.0' => [
                     'value_id' => 24,
                     'attribute_id' => 167,
                     'store_id' => 1,
                     'entity_id' => 961,
                     'value' => '2016-07-13 12:34:56',
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
 
         $expected = $this->getDataSet();
         $expected->getTable('catalog_product_entity_datetime')->addRow($newCatalogProductEntityDatetime[$GLOBALS['MAGENTO_EDITION']][$GLOBALS['MAGENTO_VERSION']]);

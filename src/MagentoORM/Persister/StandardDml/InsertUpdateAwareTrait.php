@@ -29,7 +29,7 @@ trait InsertUpdateAwareTrait
         array $data,
         array $columns,
         $identifierColumn,
-        array $types = array()
+        array $types = []
     ) {
         $connection->connect();
 
@@ -69,7 +69,7 @@ trait InsertUpdateAwareTrait
      */
     private function extractTypeValues(array $data, array $types)
     {
-        $typeValues = array();
+        $typeValues = [];
 
         foreach ($data as $k => $_) {
             $typeValues[] = isset($types[$k])

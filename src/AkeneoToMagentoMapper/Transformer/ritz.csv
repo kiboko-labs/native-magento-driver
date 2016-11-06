@@ -1,0 +1,55 @@
+GROUP_CONCAT(attribute_code)	entity_type_id	attribute_model	backend_model	backend_type	backend_table	frontend_model	frontend_input	frontend_class	source_model	is_required	is_user_defined	default_value	is_unique	frontend_input_renderer	apply_to	is_wysiwyg_enabled
+ritz_alcohol	4	~	~	int	NULL	NULL	boolean	NULL	eav/entity_attribute_source_boolean	1	1	0	0	NULL	0
+background_color	4	~	~	int	NULL	NULL	select	NULL	eav/entity_attribute_source_table	0	1	0	NULL	0
+ritz_category_filter	4	~	~	int	NULL	NULL	select	NULL	eav/entity_attribute_source_table	0	1	1	NULL	0
+ritz_size_bedlinen	4	~	~	int	NULL	NULL	select	NULL	eav/entity_attribute_source_table	1	1	0	NULL	0
+ritz_size_clothes_children	4	~	~	int	NULL	NULL	select	NULL	eav/entity_attribute_source_table	1	1	0	NULL	simple,configurable	0
+ritz_size_bedlinen2	4	~	~	int	NULL	NULL	select	NULL	eav/entity_attribute_source_table	1	1	1	NULL	0
+ritz_brand	NULL	NULL	int	NULL	NULL	select	NULL	eav/entity_attribute_source_table	1	1	57	0	NULL	0
+ritz_description	NULL	NULL	text	NULL	NULL	textarea	NULL	NULL	0	1	0	NULL	1
+country_of_manufacture	NULL	NULL	varchar	NULL	NULL	select	NULL	catalog/product_attribute_source_countryofmanufacture	0	0	NULL	0	NULL	simple,configurable,bundle,grouped	0
+minimal_price	NULL	NULL	decimal	price	0	0	0	simple,configurable,virtual,bundle,downloadable	0
+weight	NULL	NULL	decimal	weight	0	0	0	simple,bundle	0
+old_id	NULL	NULL	int	0	0	0	0
+links_exist	NULL	NULL	int	0	0	0	0	downloadable	0
+price_type,shipment_type,sku_type,weight_type	NULL	NULL	int	1	0	0	bundle	0
+links_purchased_separately	NULL	NULL	int	1	0	0	downloadable	0
+manufacturer	NULL	NULL	int	select	0	1	0	0
+price_view	NULL	NULL	int	select	bundle/product_attribute_source_price_view	1	0	0	bundle	0
+status	NULL	NULL	int	select	catalog/product_status	1	0	0	0
+visibility	NULL	NULL	int	select	catalog/product_visibility	1	0	4	0	0
+is_recurring	NULL	NULL	int	select	eav/entity_attribute_source_boolean	0	0	0	simple,virtual	0
+tax_class_id	NULL	NULL	int	select	tax/class_source_product	1	0	0	simple,configurable,virtual,bundle,downloadable	0
+has_options,required_options	NULL	NULL	static	text	0	0	0	0
+meta_keyword	NULL	NULL	text	textarea	0	0	0	0
+description,short_description	NULL	NULL	text	textarea	0	0	0	1
+url_path	NULL	NULL	varchar	0	0	0	0
+links_title,samples_title	NULL	NULL	varchar	1	0	0	downloadable	0
+gallery	NULL	NULL	varchar	gallery	0	0	0	0
+options_container	NULL	NULL	varchar	select	catalog/entity_product_attribute_design_options_container	0	0	container2	0	0
+page_layout	NULL	NULL	varchar	select	catalog/product_attribute_source_layout	0	0	0	0
+custom_design	NULL	NULL	varchar	select	core/design_source_design	0	0	0	0
+image_label,meta_title,small_image_label,thumbnail_label	NULL	NULL	varchar	text	0	0	0	0
+name	NULL	NULL	varchar	text	1	0	0	0
+meta_description	NULL	NULL	varchar	textarea	validate-length	maximum-length-255	0	0	0	0
+image,small_image,thumbnail	NULL	NULL	varchar	catalog/product_attribute_frontend_image	media_image	0	0	0	0
+custom_layout_update	NULL	catalog/attribute_backend_customlayoutupdate	text	textarea	0	0	0	0
+msrp_display_actual_price_type	NULL	catalog/product_attribute_backend_boolean	varchar	NULL	NULL	select	NULL	catalog/product_attribute_source_msrp_type_price	0	0	4	0	adminhtml/catalog_product_helper_form_msrp_price	simple,bundle,configurable,virtual,downloadable	0
+gift_message_available	NULL	catalog/product_attribute_backend_boolean	varchar	select	eav/entity_attribute_source_boolean	0	0	0	giftmessage/adminhtml_product_helper_form_config	0
+group_price	NULL	catalog/product_attribute_backend_groupprice	decimal	NULL	NULL	text	NULL	NULL	0	0	NULL	0	NULL	simple,configurable,virtual,bundle,downloadable	0
+media_gallery	NULL	catalog/product_attribute_backend_media	varchar	gallery	0	0	0	0
+msrp_enabled	NULL	catalog/product_attribute_backend_msrp	varchar	NULL	NULL	select	NULL	catalog/product_attribute_source_msrp_type_enabled	0	0	2	0	adminhtml/catalog_product_helper_form_msrp_enabled	simple,bundle,configurable,virtual,downloadable	0
+msrp	NULL	catalog/product_attribute_backend_price	decimal	NULL	NULL	price	NULL	NULL	0	0	NULL	0	NULL	simple,bundle,configurable,virtual,downloadable	0
+special_price	NULL	catalog/product_attribute_backend_price	decimal	price	0	0	0	simple,configurable,virtual,bundle,downloadable	0
+cost	NULL	catalog/product_attribute_backend_price	decimal	price	0	1	0	simple,virtual,downloadable	0
+price	NULL	catalog/product_attribute_backend_price	decimal	price	1	0	0	simple,configurable,virtual,bundle,downloadable	0
+recurring_profile	NULL	catalog/product_attribute_backend_recurring	text	text	0	0	0	simple,virtual	0
+sku	NULL	catalog/product_attribute_backend_sku	static	text	1	0	1	0
+custom_design_from,news_from_date	NULL	catalog/product_attribute_backend_startdate	datetime	date	0	0	0	0
+special_from_date	NULL	catalog/product_attribute_backend_startdate_specialprice	datetime	date	0	0	0	simple,configurable,virtual,bundle,downloadable	0
+tier_price	NULL	catalog/product_attribute_backend_tierprice	decimal	text	0	0	0	simple,configurable,virtual,bundle,downloadable	0
+url_key	NULL	catalog/product_attribute_backend_urlkey	varchar	text	0	0	0	0
+custom_design_to,news_to_date	NULL	eav/entity_attribute_backend_datetime	datetime	date	0	0	0	0
+special_to_date	NULL	eav/entity_attribute_backend_datetime	datetime	date	0	0	0	simple,configurable,virtual,bundle,downloadable	0
+created_at	NULL	eav/entity_attribute_backend_time_created	static	text	1	0	0	0
+updated_at	NULL	eav/entity_attribute_backend_time_updated	static	text	1	0	0	0
