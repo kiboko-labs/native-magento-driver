@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -27,7 +27,7 @@ interface CategoryRepositoryInterface
 
     /**
      * @param CategoryInterface $parent
-     * @param int $depth
+     * @param int               $depth
      *
      * @return \Traversable
      */

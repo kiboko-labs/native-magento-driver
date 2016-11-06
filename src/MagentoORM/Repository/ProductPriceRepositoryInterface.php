@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -14,6 +14,7 @@ interface ProductPriceRepositoryInterface
 {
     /**
      * @param ProductInterface $product
+     *
      * @return ProductPriceInterface
      */
     public function findOneByProduct(ProductInterface $product);

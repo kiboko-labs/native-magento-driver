@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -19,26 +19,26 @@ class CatalogAttributeExtension extends AbstractCatalogAttributeExtension implem
     /**
      * AbstractCatalogAttributeExtension constructor.
      *
-     * @param int $attributeId
+     * @param int    $attributeId
      * @param string $frontendInputRendererClassName
-     * @param bool $global
-     * @param bool $visible
-     * @param bool $searchable
-     * @param bool $filterable
-     * @param bool $comparable
-     * @param bool $visibleOnFront
-     * @param bool $htmlAllowedOnFront
-     * @param bool $usedForPriceRules
-     * @param bool $filterableInSearch
-     * @param bool $usedInProductListing
-     * @param bool $usedForSortBy
-     * @param bool $visibleInAdvancedSearch
-     * @param bool $wysiwygEnabled
-     * @param bool $isConfigurable
-     * @param bool $usedForPromoRules
+     * @param bool   $global
+     * @param bool   $visible
+     * @param bool   $searchable
+     * @param bool   $filterable
+     * @param bool   $comparable
+     * @param bool   $visibleOnFront
+     * @param bool   $htmlAllowedOnFront
+     * @param bool   $usedForPriceRules
+     * @param bool   $filterableInSearch
+     * @param bool   $usedInProductListing
+     * @param bool   $usedForSortBy
+     * @param bool   $visibleInAdvancedSearch
+     * @param bool   $wysiwygEnabled
+     * @param bool   $isConfigurable
+     * @param bool   $usedForPromoRules
      * @param string $note
-     * @param int $position
-     * @param array $productTypesApplyingTo
+     * @param int    $position
+     * @param array  $productTypesApplyingTo
      */
     public function __construct(
         $attributeId,

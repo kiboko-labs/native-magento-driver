@@ -7,7 +7,7 @@ use PhpSpec\ObjectBehavior;
 
 class AttributeSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->beConstructedWith(3, 'test', null, null, null, null, null, null, null, null, null, null, null, null, null);
         $this->shouldHaveType(Attribute::class);

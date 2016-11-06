@@ -7,11 +7,10 @@ use Kiboko\Component\MagentoORM\Factory\AttributeValueFactoryInterface;
 use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\ProductAttributeValueQueryBuilderInterface;
 use Kiboko\Component\MagentoORM\Repository\AttributeRepositoryInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class ProductAttributeValueRepositorySpec extends ObjectBehavior
 {
-    function it_is_initializable(
+    public function it_is_initializable(
         Connection $connection,
         ProductAttributeValueQueryBuilderInterface $queryBuilder,
         AttributeRepositoryInterface $attributeRepository,

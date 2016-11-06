@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -19,6 +19,7 @@ class CatalogAttributeExtensionPersister implements CatalogAttributeExtensionPer
 
     /**
      * @param BaseCatalogAttributeExtensionInterface $attributeExtension
+     *
      * @return array
      */
     protected function getInsertData(BaseCatalogAttributeExtensionInterface $attributeExtension)

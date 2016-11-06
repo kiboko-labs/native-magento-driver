@@ -6,11 +6,10 @@ use Doctrine\DBAL\Connection;
 use Kiboko\Component\MagentoORM\Factory\FamilyFactoryInterface;
 use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\FamilyQueryBuilderInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class FamilyRepositorySpec extends ObjectBehavior
 {
-    function it_is_initializable(
+    public function it_is_initializable(
         Connection $connection,
         FamilyQueryBuilderInterface $queryBuilder,
         FamilyFactoryInterface $familyFactory

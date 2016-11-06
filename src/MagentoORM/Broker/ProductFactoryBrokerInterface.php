@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -13,7 +13,7 @@ use Kiboko\Component\MagentoORM\Matcher\ProductDataMatcherInterface;
 interface ProductFactoryBrokerInterface
 {
     /**
-     * @param ProductFactoryInterface  $backend
+     * @param ProductFactoryInterface     $backend
      * @param ProductDataMatcherInterface $matcher
      */
     public function addFactory(

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -15,7 +15,7 @@ interface ProductAttributeValuePersisterBrokerInterface
 {
     /**
      * @param AttributeValuePersisterInterface $backend
-     * @param AttributeMatcherInterface   $matcher
+     * @param AttributeMatcherInterface        $matcher
      */
     public function addPersister(AttributeValuePersisterInterface $backend, AttributeMatcherInterface $matcher);
 

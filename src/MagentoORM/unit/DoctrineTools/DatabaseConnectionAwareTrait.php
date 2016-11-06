@@ -2,7 +2,6 @@
 
 namespace unit\Kiboko\Component\MagentoORM\DoctrineTools;
 
-use Doctrine\DBAL\Configuration;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use unit\Kiboko\Component\MagentoORM\SchemaBuilder\Fixture\Loader;
@@ -45,9 +44,9 @@ trait DatabaseConnectionAwareTrait
     {
         if ($this->pdo === null) {
             $dsn = sprintf('mysql:dbname=%s;hostname=%s;port=%s',
-                isset($GLOBALS['DB_NAME'])     ? $GLOBALS['DB_NAME']     : 'magento',
+                isset($GLOBALS['DB_NAME']) ? $GLOBALS['DB_NAME'] : 'magento',
                 isset($GLOBALS['DB_HOSTNAME']) ? $GLOBALS['DB_HOSTNAME'] : '127.0.0.1',
-                isset($GLOBALS['DB_PORT'])     ? $GLOBALS['DB_PORT']     : 3306
+                isset($GLOBALS['DB_PORT']) ? $GLOBALS['DB_PORT'] : 3306
             );
 
             $this->pdo = new \PDO($dsn, $GLOBALS['DB_USERNAME'], $GLOBALS['DB_PASSWORD']);

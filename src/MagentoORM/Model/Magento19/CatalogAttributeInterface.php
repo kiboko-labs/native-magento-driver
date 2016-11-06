@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -9,6 +9,6 @@ namespace Kiboko\Component\MagentoORM\Model\Magento19;
 
 use Kiboko\Component\MagentoORM\Model\AttributeInterface;
 
-interface CatalogAttributeInterface extends AttributeInterface , CatalogAttributeExtensionInterface
+interface CatalogAttributeInterface extends AttributeInterface, CatalogAttributeExtensionInterface
 {
 }

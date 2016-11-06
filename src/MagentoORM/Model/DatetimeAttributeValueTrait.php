@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -52,9 +52,9 @@ trait DatetimeAttributeValueTrait
         $storeId = null
     ) {
         $object = new static(
-                $attribute, 
-                ($payload instanceof \DateTimeImmutable) ? $payload : null, 
-                $product, 
+                $attribute,
+                ($payload instanceof \DateTimeImmutable) ? $payload : null,
+                $product,
                 $storeId
                 );
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 
 class ProductAttributeRepositorySpec extends ObjectBehavior
 {
-    function it_is_initializable(
+    public function it_is_initializable(
         Connection $connection,
         ProductAttributeQueryBuilderInterface $queryBuilder,
         ProductAttributeValueFactoryInterface $productAttributeValueFactory

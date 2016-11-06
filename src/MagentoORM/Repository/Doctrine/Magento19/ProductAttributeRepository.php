@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -53,44 +53,44 @@ class ProductAttributeRepository implements ProductAttributeRepositoryInterface
     {
         return new CatalogAttribute(
             Attribute::buildNewWith(
-                isset($options['attribute_id'])    ? $options['attribute_id']           : null,
-                isset($options['entity_type_id'])  ? $options['entity_type_id']         : null,
-                isset($options['attribute_code'])  ? $options['attribute_code']         : null,
-                isset($options['attribute_model']) ? $options['attribute_model']        : null,
-                isset($options['backend_type'])    ? $options['backend_type']           : null,
-                isset($options['backend_model'])   ? $options['backend_model']          : null,
-                isset($options['backend_table'])   ? $options['backend_table']          : null,
-                isset($options['frontend_model'])  ? $options['frontend_model']         : null,
-                isset($options['frontend_input'])  ? $options['frontend_input']         : null,
-                isset($options['frontend_label'])  ? $options['frontend_label']         : null,
-                isset($options['frontend_class'])  ? $options['frontend_class']         : null,
-                isset($options['source_model'])    ? $options['source_model']           : null,
-                isset($options['is_required'])     ? (bool) $options['is_required']     : false,
+                isset($options['attribute_id']) ? $options['attribute_id'] : null,
+                isset($options['entity_type_id']) ? $options['entity_type_id'] : null,
+                isset($options['attribute_code']) ? $options['attribute_code'] : null,
+                isset($options['attribute_model']) ? $options['attribute_model'] : null,
+                isset($options['backend_type']) ? $options['backend_type'] : null,
+                isset($options['backend_model']) ? $options['backend_model'] : null,
+                isset($options['backend_table']) ? $options['backend_table'] : null,
+                isset($options['frontend_model']) ? $options['frontend_model'] : null,
+                isset($options['frontend_input']) ? $options['frontend_input'] : null,
+                isset($options['frontend_label']) ? $options['frontend_label'] : null,
+                isset($options['frontend_class']) ? $options['frontend_class'] : null,
+                isset($options['source_model']) ? $options['source_model'] : null,
+                isset($options['is_required']) ? (bool) $options['is_required'] : false,
                 isset($options['is_user_defined']) ? (bool) $options['is_user_defined'] : false,
-                isset($options['is_unique'])       ? (bool) $options['is_unique']       : false,
-                isset($options['default_value'])   ? $options['default_value']          : null
+                isset($options['is_unique']) ? (bool) $options['is_unique'] : false,
+                isset($options['default_value']) ? $options['default_value'] : null
             ),
             new CatalogAttributeExtension(
-                isset($options['attribute_id'])                  ? $options['attribute_id']                         : null,
-                isset($options['frontend_input_renderer'])       ? $options['frontend_input_renderer']              : null,
-                isset($options['is_global'])                     ? (bool) $options['is_global']                     : 1,
-                isset($options['is_visible'])                    ? (bool) $options['is_visible']                    : false,
-                isset($options['is_searchable'])                 ? (bool) $options['is_searchable']                 : false,
-                isset($options['is_filterable'])                 ? (bool) $options['is_filterable']                 : false,
-                isset($options['is_comparable'])                 ? (bool) $options['is_comparable']                 : false,
-                isset($options['is_visible_on_front'])           ? (bool) $options['is_visible_on_front']           : false,
-                isset($options['is_html_allowed_on_front'])      ? (bool) $options['is_html_allowed_on_front']      : false,
-                isset($options['is_used_for_price_rules'])       ? (bool) $options['is_used_for_price_rules']       : false,
-                isset($options['is_filterable_in_search'])       ? (bool) $options['is_filterable_in_search']       : false,
-                isset($options['used_in_product_listing'])       ? (bool) $options['used_in_product_listing']       : false,
-                isset($options['used_for_sort_by'])              ? (bool) $options['used_for_sort_by']              : false,
-                isset($options['is_configurable'])               ? (bool) $options['is_configurable']               : false,
+                isset($options['attribute_id']) ? $options['attribute_id'] : null,
+                isset($options['frontend_input_renderer']) ? $options['frontend_input_renderer'] : null,
+                isset($options['is_global']) ? (bool) $options['is_global'] : 1,
+                isset($options['is_visible']) ? (bool) $options['is_visible'] : false,
+                isset($options['is_searchable']) ? (bool) $options['is_searchable'] : false,
+                isset($options['is_filterable']) ? (bool) $options['is_filterable'] : false,
+                isset($options['is_comparable']) ? (bool) $options['is_comparable'] : false,
+                isset($options['is_visible_on_front']) ? (bool) $options['is_visible_on_front'] : false,
+                isset($options['is_html_allowed_on_front']) ? (bool) $options['is_html_allowed_on_front'] : false,
+                isset($options['is_used_for_price_rules']) ? (bool) $options['is_used_for_price_rules'] : false,
+                isset($options['is_filterable_in_search']) ? (bool) $options['is_filterable_in_search'] : false,
+                isset($options['used_in_product_listing']) ? (bool) $options['used_in_product_listing'] : false,
+                isset($options['used_for_sort_by']) ? (bool) $options['used_for_sort_by'] : false,
+                isset($options['is_configurable']) ? (bool) $options['is_configurable'] : false,
                 isset($options['is_visible_in_advanced_search']) ? (bool) $options['is_visible_in_advanced_search'] : false,
-                isset($options['is_wysiwyg_enabled'])            ? (bool) $options['is_wysiwyg_enabled']            : false,
-                isset($options['is_used_for_promo_rules'])       ? (bool) $options['is_used_for_promo_rules']       : false,
-                isset($options['apply_to'])                      ? explode(',', $options['apply_to'])               : [],
-                isset($options['position'])                      ? (bool) $options['position']                      : 1,
-                isset($options['note'])                          ? (string) $options['note']                        : null
+                isset($options['is_wysiwyg_enabled']) ? (bool) $options['is_wysiwyg_enabled'] : false,
+                isset($options['is_used_for_promo_rules']) ? (bool) $options['is_used_for_promo_rules'] : false,
+                isset($options['apply_to']) ? explode(',', $options['apply_to']) : [],
+                isset($options['position']) ? (bool) $options['position'] : 1,
+                isset($options['note']) ? (string) $options['note'] : null
             )
         );
     }
@@ -228,14 +228,14 @@ class ProductAttributeRepository implements ProductAttributeRepositoryInterface
     public function findAllByEntityTypeCode($entityTypeCode)
     {
         $query = $this->queryBuilder->createFindAllByEntityTypeQueryBuilder('a', 'x', 'e');
-                
+
         $query->where($query->expr()->eq('e.entity_type_code', '?'));
 
         $statement = $this->connection->prepare($query);
         if (!$statement->execute([$entityTypeCode])) {
             throw new DatabaseFetchingFailureException();
         }
-        
+
         if ($statement->rowCount() < 1) {
             return;
         }

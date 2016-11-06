@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -10,8 +10,7 @@ namespace Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\ProductUrlRewrite;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
 
-class EnterpriseEditionProductUrlRewriteQueryBuilder
-    implements EnterpriseEditionProductUrlRewriteQueryBuilderInterface
+class EnterpriseEditionProductUrlRewriteQueryBuilder implements EnterpriseEditionProductUrlRewriteQueryBuilderInterface
 {
     /**
      * @var Connection

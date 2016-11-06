@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -61,6 +61,7 @@ class ProductQueryBuilder implements ProductQueryBuilderInterface
 
     /**
      * @param string|null $version
+     *
      * @return array
      */
     public static function getDefaultFields($version = null)
@@ -79,6 +80,7 @@ class ProductQueryBuilder implements ProductQueryBuilderInterface
                 ];
             }
         }
+
         return [
             'entity_id',
             'entity_type_id',

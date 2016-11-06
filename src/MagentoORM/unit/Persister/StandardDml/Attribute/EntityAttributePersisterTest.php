@@ -180,7 +180,7 @@ class EntityAttributePersisterTest extends \PHPUnit_Framework_TestCase
                     'attribute_id' => 122,
                     'sort_order' => 20,
                 ],
-            ]
+            ],
         ]);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
@@ -207,7 +207,7 @@ class EntityAttributePersisterTest extends \PHPUnit_Framework_TestCase
                     'attribute_id' => 79,
                     'sort_order' => 20,
                 ],
-            ]
+            ],
         ]);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());

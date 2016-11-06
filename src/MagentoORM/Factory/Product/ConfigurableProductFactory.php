@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -12,8 +12,7 @@ use Kiboko\Component\MagentoORM\Entity\Product\ProductInterface;
 use Kiboko\Component\MagentoORM\Factory\ProductFactoryInterface;
 use Kiboko\Component\MagentoORM\Repository\FamilyRepositoryInterface;
 
-class ConfigurableProductFactory
-    implements ProductFactoryInterface
+class ConfigurableProductFactory implements ProductFactoryInterface
 {
     /**
      * @var FamilyRepositoryInterface
@@ -31,7 +30,7 @@ class ConfigurableProductFactory
     }
 
     /**
-     * @param array  $options
+     * @param array $options
      *
      * @return ProductInterface
      */

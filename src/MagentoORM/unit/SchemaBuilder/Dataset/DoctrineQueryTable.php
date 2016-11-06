@@ -30,9 +30,9 @@ class DoctrineQueryTable extends \PHPUnit_Extensions_Database_DataSet_AbstractTa
      */
     public function __construct($tableName, $query, Connection $databaseConnection)
     {
-        $this->query              = $query;
+        $this->query = $query;
         $this->databaseConnection = $databaseConnection;
-        $this->tableName          = $tableName;
+        $this->tableName = $tableName;
     }
 
     /**
@@ -48,13 +48,13 @@ class DoctrineQueryTable extends \PHPUnit_Extensions_Database_DataSet_AbstractTa
     }
 
     /**
-     * Checks if a given row is in the table
+     * Checks if a given row is in the table.
      *
      * @param array $row
      *
      * @return bool
      */
-    public function assertContainsRow(Array $row)
+    public function assertContainsRow(array $row)
     {
         $this->loadData();
 
@@ -78,6 +78,7 @@ class DoctrineQueryTable extends \PHPUnit_Extensions_Database_DataSet_AbstractTa
      *
      * @param int $row
      * @param int $column
+     *
      * @return null|string
      */
     public function getValue($row, $column)
@@ -90,7 +91,8 @@ class DoctrineQueryTable extends \PHPUnit_Extensions_Database_DataSet_AbstractTa
     /**
      * Returns the an associative array keyed by columns for the given row.
      *
-     * @param  int   $row
+     * @param int $row
+     *
      * @return array
      */
     public function getRow($row)
@@ -104,6 +106,7 @@ class DoctrineQueryTable extends \PHPUnit_Extensions_Database_DataSet_AbstractTa
      * Asserts that the given table matches this table.
      *
      * @param \PHPUnit_Extensions_Database_DataSet_ITable $other
+     *
      * @return bool
      */
     public function matches(\PHPUnit_Extensions_Database_DataSet_ITable $other)
@@ -115,7 +118,7 @@ class DoctrineQueryTable extends \PHPUnit_Extensions_Database_DataSet_AbstractTa
 
     protected function loadData()
     {
-        if ($this->data === NULL) {
+        if ($this->data === null) {
             $statement = $this->databaseConnection->query($this->query);
             $this->data = $statement->fetchAll(\PDO::FETCH_ASSOC);
         }
@@ -123,7 +126,7 @@ class DoctrineQueryTable extends \PHPUnit_Extensions_Database_DataSet_AbstractTa
 
     protected function createTableMetaData()
     {
-        if ($this->tableMetaData === NULL) {
+        if ($this->tableMetaData === null) {
             $this->loadData();
 
             // if some rows are in the table
@@ -136,8 +139,8 @@ class DoctrineQueryTable extends \PHPUnit_Extensions_Database_DataSet_AbstractTa
                 $statement = $this->databaseConnection
                     ->prepare('SELECT column_name FROM information_schema.COLUMNS WHERE table_schema=:schema AND table_name=:table');
                 $statement->execute([
-                    'table'  => $this->tableName,
-                    'schema' => $this->databaseConnection->getSchema()
+                    'table' => $this->tableName,
+                    'schema' => $this->databaseConnection->getSchema(),
                 ]);
 
                 $columns = $statement->fetchAll(\PDO::FETCH_COLUMN, 0);

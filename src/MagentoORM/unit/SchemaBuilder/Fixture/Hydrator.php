@@ -28,10 +28,10 @@ class Hydrator implements HydratorInterface
     private $fallbackResolver;
 
     /**
-     * @param Connection $connection
+     * @param Connection       $connection
      * @param FallbackResolver $resolver
-     * @param string $magentoVersion
-     * @param string $magentoEdition
+     * @param string           $magentoVersion
+     * @param string           $magentoEdition
      */
     public function __construct(
         Connection $connection,
@@ -48,6 +48,7 @@ class Hydrator implements HydratorInterface
     /**
      * @param string $suite
      * @param string $context
+     *
      * @return string
      */
     protected function getPathname($suite, $context)

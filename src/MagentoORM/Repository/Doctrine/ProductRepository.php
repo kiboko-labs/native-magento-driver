@@ -1,14 +1,12 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
 namespace Kiboko\Component\MagentoORM\Repository\Doctrine;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Connection;
 use Kiboko\Component\MagentoORM\Entity\CategoryInterface;
 use Kiboko\Component\MagentoORM\Entity\Product\ProductInterface;

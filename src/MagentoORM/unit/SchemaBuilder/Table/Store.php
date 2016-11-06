@@ -46,9 +46,10 @@ class Store
 
         return $table;
     }
-    
+
     /**
      * @param string $magentoVersion
+     *
      * @return string
      */
     public static function getTableName($magentoVersion)

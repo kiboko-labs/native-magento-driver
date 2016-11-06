@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -10,13 +10,12 @@ namespace Kiboko\Component\MagentoORM\Persister\StandardDml\Attribute;
 use Doctrine\DBAL\Connection;
 use Kiboko\Component\MagentoORM\Model\AttributeInterface;
 use Kiboko\Component\MagentoORM\Persister\AttributePersisterInterface;
-use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\ProductAttributeQueryBuilder;
 use Kiboko\Component\MagentoORM\Persister\StandardDml\InsertUpdateAwareTrait;
 
 class StandardAttributePersister implements AttributePersisterInterface
 {
     use InsertUpdateAwareTrait;
-    
+
     /**
      * @var Connection
      */

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -66,6 +66,7 @@ trait AttributeGroupPersisterTrait
 
     /**
      * @param AttributeGroupInterface $attributeGroup
+     *
      * @return array
      */
     abstract protected function getInsertData(AttributeGroupInterface $attributeGroup);

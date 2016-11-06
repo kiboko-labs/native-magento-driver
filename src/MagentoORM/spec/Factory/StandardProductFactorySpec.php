@@ -8,7 +8,7 @@ use PhpSpec\ObjectBehavior;
 
 class StandardProductFactorySpec extends ObjectBehavior
 {
-    function it_is_initializable(
+    public function it_is_initializable(
         ProductFactoryBrokerInterface $broker
     ) {
         $this->beConstructedWith($broker);

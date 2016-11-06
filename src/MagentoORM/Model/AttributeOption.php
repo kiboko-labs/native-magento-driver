@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -28,8 +28,8 @@ class AttributeOption implements AttributeOptionInterface
     private $values;
 
     /**
-     * @param int $attributeId
-     * @param int $sortOrder
+     * @param int   $attributeId
+     * @param int   $sortOrder
      * @param array $values
      */
     public function __construct($attributeId, $sortOrder, array $values = null)

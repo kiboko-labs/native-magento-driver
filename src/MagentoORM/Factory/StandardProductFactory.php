@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -20,6 +20,7 @@ class StandardProductFactory implements ProductFactoryInterface
 
     /**
      * StandardProductFactory constructor.
+     *
      * @param ProductFactoryBrokerInterface $broker
      */
     public function __construct(
@@ -29,7 +30,7 @@ class StandardProductFactory implements ProductFactoryInterface
     }
 
     /**
-     * @param array  $options
+     * @param array $options
      *
      * @return ProductInterface
      */

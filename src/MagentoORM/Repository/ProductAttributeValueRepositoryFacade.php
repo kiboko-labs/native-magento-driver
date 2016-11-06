@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -73,7 +73,8 @@ class ProductAttributeValueRepositoryFacade implements ProductAttributeValueRepo
 
     /**
      * @param ProductInterface $product
-     * @param array $attributeList
+     * @param array            $attributeList
+     *
      * @return \Traversable|AttributeValueInterface[]
      */
     public function findAllByProductAndAttributeListFromDefault(
@@ -89,8 +90,9 @@ class ProductAttributeValueRepositoryFacade implements ProductAttributeValueRepo
 
     /**
      * @param ProductInterface $product
-     * @param array $attributeList
-     * @param int $storeId
+     * @param array            $attributeList
+     * @param int              $storeId
+     *
      * @return \Traversable|AttributeValueInterface[]
      */
     public function findAllByProductAndAttributeListFromStoreId(
@@ -151,6 +153,7 @@ class ProductAttributeValueRepositoryFacade implements ProductAttributeValueRepo
 
     /**
      * @param array $productList
+     *
      * @return \Traversable|AttributeValueInterface[]
      */
     public function findAllByProductListFromDefault(
@@ -165,7 +168,8 @@ class ProductAttributeValueRepositoryFacade implements ProductAttributeValueRepo
 
     /**
      * @param array $productList
-     * @param int $storeId
+     * @param int   $storeId
+     *
      * @return \Traversable|AttributeValueInterface[]
      */
     public function findAllByProductListFromStoreId(
@@ -182,6 +186,7 @@ class ProductAttributeValueRepositoryFacade implements ProductAttributeValueRepo
     /**
      * @param array $productList
      * @param array $attributeList
+     *
      * @return \Traversable|AttributeValueInterface[]
      */
     public function findAllByProductListAndAttributeListFromDefault(
@@ -198,7 +203,8 @@ class ProductAttributeValueRepositoryFacade implements ProductAttributeValueRepo
     /**
      * @param array $productList
      * @param array $attributeList
-     * @param int $storeId
+     * @param int   $storeId
+     *
      * @return \Traversable|AttributeValueInterface[]
      */
     public function findAllByProductListAndAttributeListFromStoreId(

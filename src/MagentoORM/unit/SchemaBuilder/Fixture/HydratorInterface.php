@@ -2,7 +2,6 @@
 
 namespace unit\Kiboko\Component\MagentoORM\SchemaBuilder\Fixture;
 
-
 interface HydratorInterface
 {
     /**

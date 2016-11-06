@@ -8,13 +8,13 @@ use Prophecy\Argument;
 
 class StandardTemporaryWriterSpec extends ObjectBehavior
 {
-    function it_is_initializable(File $file)
+    public function it_is_initializable(File $file)
     {
         $this->beConstructedWith($file, ';', '"', '"');
         $this->shouldHaveType('Kiboko\Component\MagentoORM\Writer\Temporary\StandardTemporaryWriter');
     }
 
-    function it_writes_to_file(File $file)
+    public function it_writes_to_file(File $file)
     {
         $this->beConstructedWith($file, ';', '"', '"');
 

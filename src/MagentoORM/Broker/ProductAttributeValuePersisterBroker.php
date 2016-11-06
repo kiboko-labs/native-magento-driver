@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -55,7 +55,7 @@ class ProductAttributeValuePersisterBroker implements ProductAttributeValuePersi
     public function findFor(AttributeInterface $attribute)
     {
         /**
-         * @var AttributeMatcherInterface $matcher
+         * @var AttributeMatcherInterface
          * @var AttributeValuePersisterInterface $backend
          */
         foreach ($this->walkPersisterList() as $matcher => $backend) {

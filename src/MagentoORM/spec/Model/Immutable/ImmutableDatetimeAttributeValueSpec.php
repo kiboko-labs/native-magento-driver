@@ -4,26 +4,25 @@ namespace spec\Kiboko\Component\MagentoORM\Model\Immutable;
 
 use Kiboko\Component\MagentoORM\Model\AttributeInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class ImmutableDatetimeAttributeValueSpec extends ObjectBehavior
 {
     public function getMatchers()
     {
         return [
-            'beTimestamp' => function(\DateTimeInterface $subject, $timestamp) {
+            'beTimestamp' => function (\DateTimeInterface $subject, $timestamp) {
                 return $subject->getTimestamp() === $timestamp;
             },
         ];
     }
 
-    function it_is_an_ImmutableAttributeValueInterface(AttributeInterface $attribute, \DateTimeImmutable $datetime)
+    public function it_is_an_ImmutableAttributeValueInterface(AttributeInterface $attribute, \DateTimeImmutable $datetime)
     {
         $this->beConstructedWith($attribute, $datetime);
         $this->shouldImplement('Kiboko\Component\MagentoORM\Model\Immutable\ImmutableAttributeValueInterface');
     }
 
-    function it_should_contain_immutable_datetime_value(AttributeInterface $attribute, \DateTimeImmutable $datetime)
+    public function it_should_contain_immutable_datetime_value(AttributeInterface $attribute, \DateTimeImmutable $datetime)
     {
         $this->beConstructedWith($attribute, $datetime);
 

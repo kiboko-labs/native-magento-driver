@@ -10,15 +10,15 @@ class FallbackResolver
     private $basePath;
 
     /**
-     * Magento EE and CE version equivalents
+     * Magento EE and CE version equivalents.
      *
      * @var array
      */
     private static $magentoVersionMapping = [
-        '1.6'  => '1.4',
-        '1.7'  => '1.4',
-        '1.8'  => '1.4',
-        '1.9'  => '1.5',
+        '1.6' => '1.4',
+        '1.7' => '1.4',
+        '1.8' => '1.4',
+        '1.9' => '1.5',
         '1.10' => '1.5',
         '1.11' => '1.6',
         '1.12' => '1.7',
@@ -42,6 +42,7 @@ class FallbackResolver
      * @param string $context
      * @param string $magentoVersion
      * @param string $magentoEdition
+     *
      * @return string
      */
     private function fixturesFile($filename, $suite, $context, $magentoVersion, $magentoEdition)
@@ -50,11 +51,11 @@ class FallbackResolver
             '%basePath%/fixture/data-%edition%-%version%/%suite%/%context%/%file%.yml',
             [
                 '%basePath%' => $this->basePath,
-                '%edition%'  => strtolower($magentoEdition),
-                '%version%'  => $magentoVersion,
-                '%suite%'    => $suite,
-                '%context%'  => $context,
-                '%file%'     => $filename,
+                '%edition%' => strtolower($magentoEdition),
+                '%version%' => $magentoVersion,
+                '%suite%' => $suite,
+                '%context%' => $context,
+                '%file%' => $filename,
             ]
         );
     }
@@ -65,6 +66,7 @@ class FallbackResolver
      * @param string $context
      * @param string $magentoVersion
      * @param string $magentoEdition
+     *
      * @return string
      */
     public function find($filename, $suite, $context, $magentoVersion, $magentoEdition)

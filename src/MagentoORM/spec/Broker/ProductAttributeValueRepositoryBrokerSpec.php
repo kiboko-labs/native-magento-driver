@@ -10,12 +10,12 @@ use PhpSpec\ObjectBehavior;
 
 class ProductAttributeValueRepositoryBrokerSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Kiboko\\Component\\MagentoORM\\Broker\\ProductAttributeValueRepositoryBroker');
     }
 
-    function it_should_accept_persisters(
+    public function it_should_accept_persisters(
         ProductAttributeValueRepositoryInterface $attributeValueRepository,
         AttributeMatcherInterface $attributeValueMatcher
     ) {
@@ -26,11 +26,11 @@ class ProductAttributeValueRepositoryBrokerSpec extends ObjectBehavior
         ;
     }
 
-    function it_should_find_persisters(
+    public function it_should_find_persisters(
         ProductAttributeValueRepositoryInterface $attributeValueRepository,
         AttributeInterface $attribute
     ) {
-        $attributeValueMatcher = new ClosureAttributeValueMatcher(function(AttributeInterface $attribute) {
+        $attributeValueMatcher = new ClosureAttributeValueMatcher(function (AttributeInterface $attribute) {
             return true;
         });
 
@@ -41,11 +41,11 @@ class ProductAttributeValueRepositoryBrokerSpec extends ObjectBehavior
         ;
     }
 
-    function it_may_not_find_persisters(
+    public function it_may_not_find_persisters(
         ProductAttributeValueRepositoryInterface $attributeValueRepository,
         AttributeInterface $attribute
     ) {
-        $attributeValueMatcher = new ClosureAttributeValueMatcher(function(AttributeInterface $attribute) {
+        $attributeValueMatcher = new ClosureAttributeValueMatcher(function (AttributeInterface $attribute) {
             return false;
         });
 

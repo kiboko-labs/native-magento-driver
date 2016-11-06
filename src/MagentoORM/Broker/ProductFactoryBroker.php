@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -27,7 +27,7 @@ class ProductFactoryBroker implements ProductFactoryBrokerInterface
     }
 
     /**
-     * @param ProductFactoryInterface  $backend
+     * @param ProductFactoryInterface     $backend
      * @param ProductDataMatcherInterface $matcher
      */
     public function addFactory(
@@ -55,8 +55,8 @@ class ProductFactoryBroker implements ProductFactoryBrokerInterface
     public function findFor(array $productData)
     {
         /**
-         * @var ProductDataMatcherInterface $matcher
-         * @var ProductRepositoryInterface $factory
+         * @var ProductDataMatcherInterface
+         * @var ProductRepositoryInterface  $factory
          */
         foreach ($this->walkFactoryList() as $matcher => $factory) {
             if ($matcher->match($productData) !== true) {

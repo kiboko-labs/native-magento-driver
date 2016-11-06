@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -13,7 +13,7 @@ interface StoreInterface extends MappableInterface, IdentifiableInterface
      * @return string
      */
     public function getCode();
-    
+
     /**
      * @return string
      */

@@ -6,11 +6,10 @@ use Doctrine\DBAL\Connection;
 use Kiboko\Component\MagentoORM\Factory\ProductFactoryInterface;
 use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\ProductQueryBuilderInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class ProductRepositorySpec extends ObjectBehavior
 {
-    function it_is_initializable(
+    public function it_is_initializable(
         Connection $connection,
         ProductQueryBuilderInterface $queryBuilder,
         ProductFactoryInterface $productFactory
