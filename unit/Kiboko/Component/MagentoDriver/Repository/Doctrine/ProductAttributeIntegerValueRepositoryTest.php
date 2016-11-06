@@ -146,6 +146,9 @@ class ProductAttributeIntegerValueRepositoryTest extends \PHPUnit_Framework_Test
         parent::tearDown();
 
         $this->repository = null;
+        $this->doctrineConnection = null;
+        $this->connection = null;
+        $this->pdo = null;
     }
 
     /**

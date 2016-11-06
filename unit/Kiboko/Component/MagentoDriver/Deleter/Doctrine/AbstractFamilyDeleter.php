@@ -142,5 +142,8 @@ abstract class AbstractFamilyDeleter extends \PHPUnit_Framework_TestCase
         parent::tearDown();
 
         $this->deleter = null;
+        $this->doctrineConnection = null;
+        $this->connection = null;
+        $this->pdo = null;
     }
 }

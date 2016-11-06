@@ -147,6 +147,9 @@ class ProductAttributeDatetimeValueRepositoryTest extends \PHPUnit_Framework_Tes
         parent::tearDown();
 
         $this->repository = null;
+        $this->doctrineConnection = null;
+        $this->connection = null;
+        $this->pdo = null;
     }
 
     /**

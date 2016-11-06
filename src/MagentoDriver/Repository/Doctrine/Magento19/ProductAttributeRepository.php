@@ -84,19 +84,13 @@ class ProductAttributeRepository implements ProductAttributeRepositoryInterface
                 isset($options['is_filterable_in_search'])       ? (bool) $options['is_filterable_in_search']       : false,
                 isset($options['used_in_product_listing'])       ? (bool) $options['used_in_product_listing']       : false,
                 isset($options['used_for_sort_by'])              ? (bool) $options['used_for_sort_by']              : false,
-                isset($options['is_configurable'])               ? (bool) $options['is_configurable']               : false, // Magento 1
+                isset($options['is_configurable'])               ? (bool) $options['is_configurable']               : false,
                 isset($options['is_visible_in_advanced_search']) ? (bool) $options['is_visible_in_advanced_search'] : false,
                 isset($options['is_wysiwyg_enabled'])            ? (bool) $options['is_wysiwyg_enabled']            : false,
                 isset($options['is_used_for_promo_rules'])       ? (bool) $options['is_used_for_promo_rules']       : false,
-                $requiredInAdminStore = false,                          // Magento 2
-                $usedInGrid = false,                                    // Magento 2
-                $visibleInGrid = false,                                 // Magento 2
-                $filterableInGrid = false,                              // Magento 2
+                isset($options['apply_to'])                      ? explode(',', $options['apply_to'])               : [],
                 isset($options['position'])                      ? (bool) $options['position']                      : 1,
-                $searchWeight = false,                                  // Magento 2
-                $applyTo = [],                                          // Magento 2
-                $additionalData = [],                                   // Magento 2
-                isset($options['note']) ? $options['note'] : null
+                isset($options['note'])                          ? (string) $options['note']                        : null
             )
         );
     }

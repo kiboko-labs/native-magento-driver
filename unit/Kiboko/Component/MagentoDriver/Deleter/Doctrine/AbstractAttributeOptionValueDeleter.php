@@ -163,5 +163,8 @@ abstract class AbstractAttributeOptionValueDeleter extends \PHPUnit_Framework_Te
         parent::tearDown();
 
         $this->deleter = null;
+        $this->doctrineConnection = null;
+        $this->connection = null;
+        $this->pdo = null;
     }
 }

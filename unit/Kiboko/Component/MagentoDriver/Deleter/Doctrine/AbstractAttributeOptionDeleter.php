@@ -142,5 +142,8 @@ abstract class AbstractAttributeOptionDeleter extends \PHPUnit_Framework_TestCas
         parent::tearDown();
 
         $this->deleter = null;
+        $this->doctrineConnection = null;
+        $this->connection = null;
+        $this->pdo = null;
     }
 }

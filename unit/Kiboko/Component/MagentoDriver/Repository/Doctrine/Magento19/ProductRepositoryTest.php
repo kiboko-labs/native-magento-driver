@@ -1,4 +1,9 @@
 <?php
+/**
+ * Copyright (c) 2016 Kiboko SAS
+ *
+ * @author Grégory Planchat <gregory@kiboko.fr>
+ */
 
 namespace unit\Kiboko\Component\MagentoDriver\Repository\Doctrine;
 
@@ -10,7 +15,6 @@ use Kiboko\Component\MagentoDriver\Factory\Product\SimpleProductFactory;
 use Kiboko\Component\MagentoDriver\Factory\StandardProductFactory;
 use Kiboko\Component\MagentoDriver\Matcher\Product\ProductTypeMatcher;
 use Kiboko\Component\MagentoDriver\Model\Family;
-use Kiboko\Component\MagentoDriver\Model\FamilyInterface;
 use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductQueryBuilder;
 use Kiboko\Component\MagentoDriver\Repository\Doctrine\ProductRepository;
 use Kiboko\Component\MagentoDriver\Repository\FamilyRepositoryInterface;
@@ -18,8 +22,6 @@ use Kiboko\Component\MagentoDriver\Repository\ProductRepositoryInterface;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Kiboko\Component\MagentoDriver\DoctrineTools\DatabaseConnectionAwareTrait;
-use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
-use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\RepositoryLoader;
 
 class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -34,6 +36,22 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
      * @var ProductRepositoryInterface
      */
     private $repository;
+
+    /**
+     * @return string
+     */
+    private function getVersion()
+    {
+        return '1.9';
+    }
+
+    /**
+     * @return string
+     */
+    private function getEdition()
+    {
+        return 'ce';
+    }
 
     /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
@@ -76,7 +94,7 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->schema = new Schema();
 
         $schemaBuilder = new DoctrineSchemaBuilder(
-            $this->getDoctrineConnection(), $this->schema, $GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
+            $this->getDoctrineConnection(), $this->schema, $this->getVersion(), $this->getEdition());
         $schemaBuilder->ensureEntityTypeTable();
         $schemaBuilder->ensureFamilyTable();
         $schemaBuilder->ensureCatalogProductEntityTable();
@@ -89,6 +107,7 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->truncateTables();
+
         $schemaBuilder->hydrateCatalogProductEntityTable(
             'catalog_product_entity',
             DoctrineSchemaBuilder::CONTEXT_REPOSITORY
@@ -135,6 +154,9 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
         parent::tearDown();
 
         $this->repository = null;
+        $this->doctrineConnection = null;
+        $this->connection = null;
+        $this->pdo = null;
     }
 
     public function testFetchingOneSimpleById()

@@ -101,6 +101,9 @@ class EntityTypeRepositoryTest extends \PHPUnit_Framework_TestCase
         parent::tearDown();
 
         $this->repository = null;
+        $this->doctrineConnection = null;
+        $this->connection = null;
+        $this->pdo = null;
     }
 
     public function testFetchingOneById()

@@ -167,5 +167,8 @@ abstract class AbstractCatalogAttributeDeleter extends \PHPUnit_Framework_TestCa
         parent::tearDown();
 
         $this->deleter = null;
+        $this->doctrineConnection = null;
+        $this->connection = null;
+        $this->pdo = null;
     }
 }

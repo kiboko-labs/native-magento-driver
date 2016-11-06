@@ -146,6 +146,9 @@ class ProductAttributeTextValueRepositoryTest extends \PHPUnit_Framework_TestCas
         parent::tearDown();
 
         $this->repository = null;
+        $this->doctrineConnection = null;
+        $this->connection = null;
+        $this->pdo = null;
     }
 
     /**

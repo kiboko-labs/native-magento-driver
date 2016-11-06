@@ -155,6 +155,9 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
         parent::tearDown();
 
         $this->persister = null;
+        $this->doctrineConnection = null;
+        $this->connection = null;
+        $this->pdo = null;
     }
 
     /**
