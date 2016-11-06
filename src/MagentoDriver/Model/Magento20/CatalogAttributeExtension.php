@@ -60,10 +60,10 @@ class CatalogAttributeExtension extends AbstractCatalogAttributeExtension implem
      * @param bool $visibleInAdvancedSearch
      * @param bool $wysiwygEnabled
      * @param bool $usedForPromoRules
-     * @param int $requiredInAdminStore
-     * @param int $usedInGrid
-     * @param int $visibleInGrid
-     * @param int $filterableInGrid
+     * @param bool $requiredInAdminStore
+     * @param bool $usedInGrid
+     * @param bool $visibleInGrid
+     * @param bool $filterableInGrid
      * @param int $searchWeight
      * @param array $additionalData
      * @param string $note
@@ -87,15 +87,15 @@ class CatalogAttributeExtension extends AbstractCatalogAttributeExtension implem
         $visibleInAdvancedSearch = false,
         $wysiwygEnabled = false,
         $usedForPromoRules = false,
-        $requiredInAdminStore,
-        $usedInGrid,
-        $visibleInGrid,
-        $filterableInGrid,
-        $searchWeight,
+        $requiredInAdminStore = false,
+        $usedInGrid = false,
+        $visibleInGrid = false,
+        $filterableInGrid = false,
+        $searchWeight = 0,
         array $additionalData = [],
         array $productTypesApplyingTo = [],
         $note = null,
-        $position = null
+        $position = 1000
     ) {
         parent::__construct(
             $attributeId,

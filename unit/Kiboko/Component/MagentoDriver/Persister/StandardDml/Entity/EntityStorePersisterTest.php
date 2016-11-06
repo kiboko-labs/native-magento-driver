@@ -117,7 +117,7 @@ class EntityStorePersisterTest extends \PHPUnit_Framework_TestCase
     public function testInsertNone()
     {
         $this->persister->initialize();
-        $this->persister->flush();
+        foreach ($this->persister->flush() as $item);
 
         $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
             'eav_entity_store' => [
@@ -153,7 +153,7 @@ class EntityStorePersisterTest extends \PHPUnit_Framework_TestCase
             '1',        // IncrementPrefix
             '100000001' // IncrementLastId
         ));
-        $this->persister->flush();
+        foreach ($this->persister->flush() as $item);
 
         $this->assertEquals(3, $entityStore->getId());
 
@@ -199,7 +199,7 @@ class EntityStorePersisterTest extends \PHPUnit_Framework_TestCase
             '1',        // IncrementPrefix
             '100000001' // IncrementLastId
         ));
-        $this->persister->flush();
+        foreach ($this->persister->flush() as $item);
 
         $this->assertEquals(2, $entityStore->getId());
 

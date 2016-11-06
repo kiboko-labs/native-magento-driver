@@ -121,7 +121,7 @@ class AttributePersisterTest extends \PHPUnit_Framework_TestCase
     public function testInsertNone()
     {
         $this->persister->initialize();
-        $this->persister->flush();
+        foreach ($this->persister->flush() as $item);
 
         $expected = $this->getDataSet();
 
@@ -154,7 +154,7 @@ class AttributePersisterTest extends \PHPUnit_Framework_TestCase
             null
         );
         $this->persister->persist($attribute);
-        $this->persister->flush();
+        foreach ($this->persister->flush() as $item);
 
         $this->assertEquals(80, $attribute->getId());
 
@@ -191,7 +191,7 @@ class AttributePersisterTest extends \PHPUnit_Framework_TestCase
     public function testUpdateOneExisting()
     {
         $this->persister->initialize();
-        $this->persister->flush();
+        foreach ($this->persister->flush() as $item);
 
         $expected = $this->getDataSet();
 

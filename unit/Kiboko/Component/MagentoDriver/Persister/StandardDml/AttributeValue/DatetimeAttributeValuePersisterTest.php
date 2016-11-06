@@ -185,7 +185,7 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
     public function testInsertNone()
     {
         $this->persister->initialize();
-        $this->persister->flush();
+        foreach ($this->persister->flush() as $item);
         
         $expected = $this->getDataSet();
 
@@ -221,7 +221,7 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
         );
         
         $this->persister->persist($value = $datetimeAttribute[$GLOBALS['MAGENTO_EDITION']][$GLOBALS['MAGENTO_VERSION']]);
-        $this->persister->flush();
+        foreach ($this->persister->flush() as $item);
 
         $this->assertEquals(24, $value->getId());
         

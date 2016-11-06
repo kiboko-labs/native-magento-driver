@@ -17,6 +17,10 @@ class AttributeGroupPersister implements AttributeGroupPersisterInterface
 {
     use AttributeGroupPersisterTrait;
 
+    /**
+     * @param BaseAttributeGroupInterface $attributeGroup
+     * @return array
+     */
     protected function getInsertData(BaseAttributeGroupInterface $attributeGroup)
     {
         if (!$attributeGroup instanceof AttributeGroupInterface) {
@@ -38,6 +42,9 @@ class AttributeGroupPersister implements AttributeGroupPersisterInterface
         ];
     }
 
+    /**
+     * @return array
+     */
     protected function getUpdatedFields()
     {
         return [
@@ -50,6 +57,9 @@ class AttributeGroupPersister implements AttributeGroupPersisterInterface
         ];
     }
 
+    /**
+     * @return string
+     */
     protected function getIdentifierField()
     {
         return 'attribute_group_id';

@@ -129,7 +129,7 @@ class AttributeLabelPersisterTest extends \PHPUnit_Framework_TestCase
     public function testInsertNone()
     {
         $this->persister->initialize();
-        $this->persister->flush();
+        foreach ($this->persister->flush() as $item);
 
         $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
             'eav_attribute_label' => [
@@ -172,7 +172,7 @@ class AttributeLabelPersisterTest extends \PHPUnit_Framework_TestCase
         $this->persister->persist($attributeLabel = new AttributeLabel(
             79, 2, 'Prix d\'achat'
         ));
-        $this->persister->flush();
+        foreach ($this->persister->flush() as $item);
 
         $this->assertEquals(5, $attributeLabel->getId());
 
@@ -223,7 +223,7 @@ class AttributeLabelPersisterTest extends \PHPUnit_Framework_TestCase
         $this->persister->persist(AttributeLabel::buildNewWith(
             1, 79, 1, 'Prix d\'achat'
         ));
-        $this->persister->flush();
+        foreach ($this->persister->flush() as $item);
 
         $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
             'eav_attribute_label' => [

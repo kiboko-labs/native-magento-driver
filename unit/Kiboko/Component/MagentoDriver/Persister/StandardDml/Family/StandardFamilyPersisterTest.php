@@ -113,7 +113,7 @@ class StandardFamilyPersisterTest extends \PHPUnit_Framework_TestCase
     public function testInsertNone()
     {
         $this->persister->initialize();
-        $this->persister->flush();
+        foreach ($this->persister->flush() as $item);
 
         $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
             'eav_attribute_set' => [
@@ -136,7 +136,7 @@ class StandardFamilyPersisterTest extends \PHPUnit_Framework_TestCase
     {
         $this->persister->initialize();
         $this->persister->persist($family = new Family('Shoes', 4));
-        $this->persister->flush();
+        foreach ($this->persister->flush() as $item);
 
         $this->assertEquals(5, $family->getId());
 
@@ -167,7 +167,7 @@ class StandardFamilyPersisterTest extends \PHPUnit_Framework_TestCase
     {
         $this->persister->initialize();
         $this->persister->persist($family = Family::buildNewWith(4, 'Shoes', 4));
-        $this->persister->flush();
+        foreach ($this->persister->flush() as $item);
 
         $this->assertEquals(4, $family->getId());
 

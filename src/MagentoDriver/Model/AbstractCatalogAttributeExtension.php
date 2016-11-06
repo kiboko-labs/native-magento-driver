@@ -143,7 +143,7 @@ abstract class AbstractCatalogAttributeExtension implements CatalogAttributeExte
         $usedForPromoRules = false,
         array $productTypesApplyingTo = [],
         $note = null,
-        $position = null
+        $position = 1000
     ) {
         $this->identifier = $attributeId;
         $this->frontendInputRendererClassName = $frontendInputRendererClassName;

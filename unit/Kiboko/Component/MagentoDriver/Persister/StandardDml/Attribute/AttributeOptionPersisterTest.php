@@ -118,7 +118,7 @@ class AttributeOptionPersisterTest extends \PHPUnit_Framework_TestCase
     public function testInsertNone()
     {
         $this->persister->initialize();
-        $this->persister->flush();
+        foreach ($this->persister->flush() as $item);
 
         $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
             'eav_attribute_option' => [
@@ -163,7 +163,7 @@ class AttributeOptionPersisterTest extends \PHPUnit_Framework_TestCase
             226,
             50
         ));
-        $this->persister->flush();
+        foreach ($this->persister->flush() as $item);
 
         $this->assertEquals(6, $attributeOption->getId());
 
@@ -216,7 +216,7 @@ class AttributeOptionPersisterTest extends \PHPUnit_Framework_TestCase
             226,
             50
         ));
-        $this->persister->flush();
+        foreach ($this->persister->flush() as $item);
 
         $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
             'eav_attribute_option' => [

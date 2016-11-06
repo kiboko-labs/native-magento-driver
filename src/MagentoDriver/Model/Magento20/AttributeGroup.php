@@ -34,8 +34,8 @@ class AttributeGroup implements AttributeGroupInterface
     public function __construct(
         $familyId,
         $label,
-        $attributeGroupCode = null,
-        $tabGroupCode = null,
+        $attributeGroupCode,
+        $tabGroupCode,
         $sortOrder = 1,
         $defaultId = 0
     ) {
@@ -77,8 +77,8 @@ class AttributeGroup implements AttributeGroupInterface
         $identifier,
         $familyId,
         $label,
-        $attributeGroupCode = null,
-        $tabGroupCode = null,
+        $attributeGroupCode,
+        $tabGroupCode,
         $sortOrder = 1,
         $defaultId = 0
     ) {

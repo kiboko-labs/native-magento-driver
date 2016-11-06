@@ -18,18 +18,84 @@ class EntityType implements EntityTypeInterface
     private $code;
 
     /**
-     * @todo finish to implement
+     * @var string
      */
+    private $entityModelClass;
+
+    /**
+     * @var string
+     */
+    private $attributeModelClass;
+
+    /**
+     * @var string
+     */
+    private $entityTable;
+
+    /**
+     * @var string
+     */
+    private $valueTablePrefix;
+
+    /**
+     * @var string
+     */
+    private $entityIdField;
+
+    /**
+     * @var bool
+     */
+    private $dataSharing;
+
+    /**
+     * @var string
+     */
+    private $dataSharingKey;
+
+    /**
+     * @var string
+     */
+    private $defaultAttributeSetId;
+
+    /**
+     * @var string
+     */
+    private $incrementModel;
+
+    /**
+     * @var string
+     */
+    private $incrementPerStore;
+
+    /**
+     * @var string
+     */
+    private $incrementPadLength;
+
+    /**
+     * @var string
+     */
+    private $incrementPadChar;
+
+    /**
+     * @var string
+     */
+    private $additionalAttributeTable;
+
+    /**
+     * @var string
+     */
+    private $attributeCollectionClass;
 
     /**
      * EntityType constructor.
      * @param $code
-     * @param $modelClass
-     * @param $attributeModel
+     * @param $entityModelClass
+     * @param $attributeModelClass
      * @param $entityTable
      * @param $valueTablePrefix
      * @param $entityIdField
-     * @param $isDataSharing
+     * @param $dataSharing
      * @param $dataSharingKey
      * @param $defaultAttributeSetId
      * @param $incrementModel
@@ -37,16 +103,16 @@ class EntityType implements EntityTypeInterface
      * @param $incrementPadLength
      * @param $incrementPadChar
      * @param $additionalAttributeTable
-     * @param $entityAttributeCollection
+     * @param $attributeCollectionClass
      */
     public function __construct(
         $code,
-        $modelClass,
-        $attributeModel,
+        $entityModelClass,
+        $attributeModelClass,
         $entityTable,
         $valueTablePrefix,
         $entityIdField,
-        $isDataSharing,
+        $dataSharing,
         $dataSharingKey,
         $defaultAttributeSetId,
         $incrementModel,
@@ -54,9 +120,23 @@ class EntityType implements EntityTypeInterface
         $incrementPadLength,
         $incrementPadChar,
         $additionalAttributeTable,
-        $entityAttributeCollection
+        $attributeCollectionClass
     ) {
         $this->code = $code;
+        $this->entityModelClass = $entityModelClass;
+        $this->attributeModelClass = $attributeModelClass;
+        $this->entityTable = $entityTable;
+        $this->valueTablePrefix = $valueTablePrefix;
+        $this->entityIdField = $entityIdField;
+        $this->dataSharing = $dataSharing;
+        $this->dataSharingKey = $dataSharingKey;
+        $this->defaultAttributeSetId = $defaultAttributeSetId;
+        $this->incrementModel = $incrementModel;
+        $this->incrementPerStore = $incrementPerStore;
+        $this->incrementPadLength = $incrementPadLength;
+        $this->incrementPadChar = $incrementPadChar;
+        $this->additionalAttributeTable = $additionalAttributeTable;
+        $this->attributeCollectionClass = $attributeCollectionClass;
     }
     
     /**
@@ -72,6 +152,7 @@ class EntityType implements EntityTypeInterface
      */
     public function getEntityModelClass()
     {
+        return $this->entityModelClass;
     }
 
     /**
@@ -79,6 +160,7 @@ class EntityType implements EntityTypeInterface
      */
     public function getAttributeModelClass()
     {
+        return $this->attributeModelClass;
     }
 
     /**
@@ -86,6 +168,7 @@ class EntityType implements EntityTypeInterface
      */
     public function getEntityTable()
     {
+        return $this->entityTable;
     }
 
     /**
@@ -93,6 +176,7 @@ class EntityType implements EntityTypeInterface
      */
     public function getValueTablePrefix()
     {
+        return $this->valueTablePrefix;
     }
 
     /**
@@ -100,6 +184,7 @@ class EntityType implements EntityTypeInterface
      */
     public function getEntityIdField()
     {
+        return $this->entityIdField;
     }
 
     /**
@@ -107,6 +192,7 @@ class EntityType implements EntityTypeInterface
      */
     public function isDataSharing()
     {
+        return $this->dataSharing;
     }
 
     /**
@@ -114,6 +200,7 @@ class EntityType implements EntityTypeInterface
      */
     public function getDataSharingKey()
     {
+        return $this->dataSharingKey;
     }
 
     /**
@@ -121,6 +208,7 @@ class EntityType implements EntityTypeInterface
      */
     public function getDefaultFamily()
     {
+        return $this->defaultFamily;
     }
 
     /**
@@ -128,6 +216,7 @@ class EntityType implements EntityTypeInterface
      */
     public function getIncrementModel()
     {
+        return $this->incrementModel;
     }
 
     /**
@@ -135,13 +224,15 @@ class EntityType implements EntityTypeInterface
      */
     public function isIncrementedByStore()
     {
+        return $this->incrementPerStore;
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getIncrementPadChar()
     {
+        return $this->incrementPadChar;
     }
 
     /**
@@ -149,6 +240,7 @@ class EntityType implements EntityTypeInterface
      */
     public function getIncrementPadLength()
     {
+        return $this->incrementPadChar;
     }
 
     /**
@@ -156,6 +248,7 @@ class EntityType implements EntityTypeInterface
      */
     public function getExtendedAttributeTable()
     {
+        return $this->extendedAttributeTable;
     }
 
     /**
@@ -163,37 +256,38 @@ class EntityType implements EntityTypeInterface
      */
     public function getAttributeCollectionClass()
     {
+        return $this->attributeCollectionClass;
     }
 
     /**
      * @param int    $entityTypeId
      * @param string $code
-     * @param string $modelClass
-     * @param string $attributeModel
+     * @param string $entityModelClass
+     * @param string $attributeModelClass
      * @param string $entityTable
      * @param string $valueTablePrefix
      * @param string $entityIdField
-     * @param type   $isDataSharing
+     * @param bool   $dataSharing
      * @param string $dataSharingKey
-     * @param type   $defaultAttributeSetId
+     * @param int    $defaultAttributeSetId
      * @param string $incrementModel
-     * @param type   $incrementPerStore
-     * @param type   $incrementPadLength
+     * @param bool   $incrementPerStore
+     * @param int    $incrementPadLength
      * @param string $incrementPadChar
      * @param string $additionalAttributeTable
-     * @param string $entityAttributeCollection
+     * @param string $attributeCollectionClass
      *
      * @return EntityTypeInterface
      */
     public static function buildNewWith(
         $entityTypeId,
         $code,
-        $modelClass,
-        $attributeModel,
+        $entityModelClass,
+        $attributeModelClass,
         $entityTable,
         $valueTablePrefix,
         $entityIdField,
-        $isDataSharing,
+        $dataSharing,
         $dataSharingKey,
         $defaultAttributeSetId,
         $incrementModel,
@@ -201,17 +295,16 @@ class EntityType implements EntityTypeInterface
         $incrementPadLength,
         $incrementPadChar,
         $additionalAttributeTable,
-        $entityAttributeCollection
+        $attributeCollectionClass
     ) {
         $object = new self(
-            $entityTypeId,
             $code,
-            $modelClass,
-            $attributeModel,
+            $entityModelClass,
+            $attributeModelClass,
             $entityTable,
             $valueTablePrefix,
             $entityIdField,
-            $isDataSharing,
+            $dataSharing,
             $dataSharingKey,
             $defaultAttributeSetId,
             $incrementModel,
@@ -219,8 +312,10 @@ class EntityType implements EntityTypeInterface
             $incrementPadLength,
             $incrementPadChar,
             $additionalAttributeTable,
-            $entityAttributeCollection
+            $attributeCollectionClass
         );
+
+        $object->persistedToId($entityTypeId);
 
         return $object;
     }

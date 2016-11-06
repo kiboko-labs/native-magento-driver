@@ -8,10 +8,11 @@
 namespace Kiboko\Component\MagentoDriver\Persister\StandardDml\Attribute;
 
 use Doctrine\DBAL\Connection;
-use Kiboko\Component\MagentoDriver\Model\AttributeGroupInterface;
+use Kiboko\Component\MagentoDriver\Exception\RuntimeErrorException;
+use Kiboko\Component\MagentoDriver\Model\CatalogAttributeExtensionInterface;
 use Kiboko\Component\MagentoDriver\Persister\StandardDml\InsertUpdateAwareTrait;
 
-trait AttributeGroupPersisterTrait
+trait CatalogAttributeExtensionPersisterTrait
 {
     use InsertUpdateAwareTrait;
 
@@ -57,18 +58,18 @@ trait AttributeGroupPersisterTrait
     }
 
     /**
-     * @param AttributeGroupInterface $attributeGroup
+     * @param CatalogAttributeExtensionInterface $attribute
      */
-    public function persist(AttributeGroupInterface $attributeGroup)
+    public function persist(CatalogAttributeExtensionInterface $attribute)
     {
-        $this->dataQueue->push($attributeGroup);
+        $this->dataQueue->push($attribute);
     }
 
     /**
-     * @param AttributeGroupInterface $attributeGroup
+     * @param CatalogAttributeExtensionInterface $attributeExtension
      * @return array
      */
-    abstract protected function getInsertData(AttributeGroupInterface $attributeGroup);
+    abstract protected function getInsertData(CatalogAttributeExtensionInterface $attributeExtension);
 
     /**
      * @return array
@@ -85,27 +86,29 @@ trait AttributeGroupPersisterTrait
      */
     public function flush()
     {
-        foreach ($this->dataQueue as $attributeGroup) {
+        /** @var CatalogAttributeExtensionInterface $attribute */
+        foreach ($this->dataQueue as $attribute) {
+            if (!$attribute->getId()) {
+                throw new RuntimeErrorException('Attribute id should be defined.');
+            }
+
             $this->insertOnDuplicateUpdate(
                 $this->connection,
                 $this->tableName,
-                $this->getInsertData($attributeGroup),
+                $this->getInsertData($attribute),
                 $this->getUpdatedFields(),
                 $this->getIdentifierField()
             );
 
-            if ($attributeGroup->getId() === null) {
-                $attributeGroup->persistedToId($this->connection->lastInsertId());
-                yield $attributeGroup;
-            }
+            yield $attribute;
         }
     }
 
     /**
-     * @param AttributeGroupInterface $attributeGroup
+     * @param CatalogAttributeExtensionInterface $attribute
      */
-    public function __invoke(AttributeGroupInterface $attributeGroup)
+    public function __invoke(CatalogAttributeExtensionInterface $attribute)
     {
-        $this->persist($attributeGroup);
+        $this->persist($attribute);
     }
 }

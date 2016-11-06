@@ -10,7 +10,7 @@ namespace unit\Kiboko\Component\MagentoDriver\Persister\Magento19\StandardDml\At
 use Doctrine\DBAL\Schema\Schema;
 use Kiboko\Component\MagentoDriver\Model\Magento19\AttributeGroup;
 use Kiboko\Component\MagentoDriver\Persister\AttributeGroupPersisterInterface;
-use Kiboko\Component\MagentoDriver\Persister\StandardDml\Attribute\AttributeGroupPersister;
+use Kiboko\Component\MagentoDriver\Persister\StandardDml\Magento19\Attribute\AttributeGroupPersister;
 use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeGroupQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
@@ -37,6 +37,22 @@ class AttributeGroupPersisterTest extends \PHPUnit_Framework_TestCase
      * @var LoaderInterface
      */
     private $fixturesLoader;
+
+    /**
+     * @return string
+     */
+    private function getVersion()
+    {
+        return '1.9';
+    }
+
+    /**
+     * @return string
+     */
+    private function getEdition()
+    {
+        return 'ce';
+    }
 
     /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
@@ -78,7 +94,7 @@ class AttributeGroupPersisterTest extends \PHPUnit_Framework_TestCase
         $this->schema = new Schema();
 
         $schemaBuilder = new DoctrineSchemaBuilder(
-            $this->getDoctrineConnection(), $this->schema, $GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
+            $this->getDoctrineConnection(), $this->schema, $this->getVersion(), $this->getEdition());
         $schemaBuilder->ensureFamilyTable();
         $schemaBuilder->ensureAttributeGroupTable();
 
@@ -95,7 +111,7 @@ class AttributeGroupPersisterTest extends \PHPUnit_Framework_TestCase
 
         $this->fixturesLoader = new Loader(
             new FallbackResolver($schemaBuilder->getFixturesPath()),
-            '1.9', 'ce'
+            $this->getVersion(), $this->getEdition()
         );
 
         $schemaBuilder->hydrateAttributeGroupTable(
@@ -125,9 +141,13 @@ class AttributeGroupPersisterTest extends \PHPUnit_Framework_TestCase
     public function testInsertNone()
     {
         $this->persister->initialize();
-        $this->persister->flush();
+        foreach ($this->persister->flush() as $item);
 
-        $expected = $this->getDataSet();
+        $expected = $this->fixturesLoader->namedDataSet(
+            'do-nothing',
+            'eav_attribute_group',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER
+        );
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_group');
@@ -138,14 +158,13 @@ class AttributeGroupPersisterTest extends \PHPUnit_Framework_TestCase
 
     public function testInsertOne()
     {
-        $this->persister->initialize();
-        
         $attributeGroup = new AttributeGroup(3, 'Prices', 1, 1);
 
+        $this->persister->initialize();
         $this->persister->persist($attributeGroup);
-        $this->persister->flush();
+        foreach ($this->persister->flush() as $item);
 
-        $this->assertEquals(3, $attributeGroup->getId());
+        $this->assertNotNull($attributeGroup->getId());
 
         $expected = $this->fixturesLoader->namedDataSet(
             'insert-one',
@@ -155,7 +174,6 @@ class AttributeGroupPersisterTest extends \PHPUnit_Framework_TestCase
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_group');
-        $actual->addTable('eav_attribute_set');
 
         $this->assertDataSetsEqual($expected, $actual);
     }
@@ -167,7 +185,7 @@ class AttributeGroupPersisterTest extends \PHPUnit_Framework_TestCase
         $attributeGroup = AttributeGroup::buildNewWith(1, 1, 'Updated', 1, 1);
 
         $this->persister->persist($attributeGroup);
-        $this->persister->flush();
+        foreach ($this->persister->flush() as $item);
 
         $this->assertEquals(1, $attributeGroup->getId());
 
@@ -179,7 +197,6 @@ class AttributeGroupPersisterTest extends \PHPUnit_Framework_TestCase
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_group');
-        $actual->addTable('eav_attribute_set');
 
         $this->assertDataSetsEqual($expected, $actual);
     }

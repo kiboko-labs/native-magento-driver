@@ -53,7 +53,7 @@ class CatalogAttributeExtension
         $table->addColumn('position', 'integer', ['unsigned' => true, 'default' => 0]);
         $table->addColumn('is_wysiwyg_enabled', 'smallint', ['unsigned' => true, 'default' => 0]);
         $table->addColumn('is_used_for_promo_rules', 'smallint', ['unsigned' => true, 'default' => 0]);
-        
+
         if (version_compare($magentoVersion, '2.0', '>=')) {
             $table->addColumn('is_required_in_admin_store', 'smallint', ['unsigned' => true, 'default' => 0]);
             $table->addColumn('is_used_in_grid', 'smallint', ['unsigned' => true, 'default' => 0]);

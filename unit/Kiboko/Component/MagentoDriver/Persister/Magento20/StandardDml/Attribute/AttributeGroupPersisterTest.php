@@ -10,7 +10,7 @@ namespace unit\Kiboko\Component\MagentoDriver\Persister\Magento20\StandardDml\At
 use Doctrine\DBAL\Schema\Schema;
 use Kiboko\Component\MagentoDriver\Model\Magento20\AttributeGroup;
 use Kiboko\Component\MagentoDriver\Persister\AttributeGroupPersisterInterface;
-use Kiboko\Component\MagentoDriver\Persister\StandardDml\Attribute\AttributeGroupPersister;
+use Kiboko\Component\MagentoDriver\Persister\StandardDml\Magento20\Attribute\AttributeGroupPersister;
 use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeGroupQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\DoctrineSchemaBuilder;
@@ -37,6 +37,22 @@ class AttributeGroupPersisterTest extends \PHPUnit_Framework_TestCase
      * @var LoaderInterface
      */
     private $fixturesLoader;
+
+    /**
+     * @return string
+     */
+    private function getVersion()
+    {
+        return '2.0';
+    }
+
+    /**
+     * @return string
+     */
+    private function getEdition()
+    {
+        return 'ce';
+    }
 
     /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
@@ -78,7 +94,7 @@ class AttributeGroupPersisterTest extends \PHPUnit_Framework_TestCase
         $this->schema = new Schema();
 
         $schemaBuilder = new DoctrineSchemaBuilder(
-            $this->getDoctrineConnection(), $this->schema);
+            $this->getDoctrineConnection(), $this->schema, $this->getVersion(), $this->getEdition());
         $schemaBuilder->ensureFamilyTable();
         $schemaBuilder->ensureAttributeGroupTable();
 
@@ -95,7 +111,7 @@ class AttributeGroupPersisterTest extends \PHPUnit_Framework_TestCase
 
         $this->fixturesLoader = new Loader(
             new FallbackResolver($schemaBuilder->getFixturesPath()),
-            '2.0', 'ce'
+            $this->getVersion(), $this->getEdition()
         );
 
         $schemaBuilder->hydrateAttributeGroupTable(
@@ -125,57 +141,38 @@ class AttributeGroupPersisterTest extends \PHPUnit_Framework_TestCase
     public function testInsertNone()
     {
         $this->persister->initialize();
-        $this->persister->flush();
+        foreach ($this->persister->flush() as $item);
 
-        $expected = $this->getDataSet();
+        $expected = $this->fixturesLoader->namedDataSet(
+            'do-nothing',
+            'eav_attribute_group',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER
+        );
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_group');
-        $actual->addTable('eav_attribute_set');
 
         $this->assertDataSetsEqual($expected, $actual);
     }
 
     public function testInsertOne()
     {
+        $attributeGroup = new AttributeGroup(3, 'Prices', 'general', null, 1, 1);
+
         $this->persister->initialize();
-        
-        $attributeGroup = new AttributeGroup(3, 'Prices', 1, 1);
+        $this->persister->persist($attributeGroup);
+        foreach ($this->persister->flush() as $item);
 
-        $attributeGroup[$GLOBALS['MAGENTO_EDITION']][$GLOBALS['MAGENTO_VERSION']];
+        $this->assertNotNull($attributeGroup->getId());
 
-        $this->persister->persist($attributeGroup[$GLOBALS['MAGENTO_EDITION']][$GLOBALS['MAGENTO_VERSION']]);
-        $this->persister->flush();
-
-        $this->assertEquals(3, $attributeGroup[$GLOBALS['MAGENTO_EDITION']][$GLOBALS['MAGENTO_VERSION']]->getId());
-
-        $newAttributeGroup = array(
-            'ce' => array(
-                '1.9' => array(
-                    'attribute_group_id' => 3,
-                    'attribute_set_id' => 3,
-                    'attribute_group_name' => 'Prices',
-                    'sort_order' => 1,
-                    'default_id' => 1,
-                ),
-                '2.0' => array(
-                    'attribute_group_id' => 3,
-                    'attribute_set_id' => 3,
-                    'attribute_group_name' => 'Prices',
-                    'sort_order' => 1,
-                    'default_id' => 1,
-                    'attribute_group_code' => 'price',
-                    'tab_group_code' => null,
-                )
-            )
+        $expected = $this->fixturesLoader->namedDataSet(
+            'insert-one',
+            'eav_attribute_group',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER
         );
-        
-        $expected = $this->getDataSet();
-        $expected->getTable('eav_attribute_group')->addRow($newAttributeGroup[$GLOBALS['MAGENTO_EDITION']][$GLOBALS['MAGENTO_VERSION']]);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_group');
-        $actual->addTable('eav_attribute_set');
 
         $this->assertDataSetsEqual($expected, $actual);
     }
@@ -183,63 +180,19 @@ class AttributeGroupPersisterTest extends \PHPUnit_Framework_TestCase
     public function testUpdateOneExisting()
     {
         $this->persister->initialize();
-        
-        $attributeGroup = array(
-            'ce' => array(
-                '1.9' => AttributeGroup::buildNewWith(
-                        1, 1, 'Updated', 1, 1
-                ),
-                '2.0' => AttributeGroup::buildNewWith(
-                        1, 1, 'Updated', 1, 1, 'updated', null
-                )
-            )
-        );
 
-        $this->persister->persist($attributeGroup[$GLOBALS['MAGENTO_EDITION']][$GLOBALS['MAGENTO_VERSION']]);
-        $this->persister->flush();
-        
-        $attributeGroupUpdated = array(
-            'ce' => array(
-                '1.9' => array(
-                    array(
-                        'attribute_group_id' => 1,
-                        'attribute_set_id' => 1,
-                        'attribute_group_name' => 'Updated',
-                        'sort_order' => 1,
-                        'default_id' => 1,
-                    ),
-                    array(
-                        'attribute_group_id' => 2,
-                        'attribute_set_id' => 2,
-                        'attribute_group_name' => 'General',
-                        'sort_order' => 1,
-                        'default_id' => 1,
-                    ),
-                ),
-                '2.0' => array(
-                    array(
-                        'attribute_group_id' => 1,
-                        'attribute_set_id' => 1,
-                        'attribute_group_name' => 'Updated',
-                        'sort_order' => 1,
-                        'default_id' => 1,
-                        'attribute_group_code' => 'updated',
-                        'tab_group_code' => null
-                    ),
-                    array(
-                        'attribute_group_id' => 2,
-                        'attribute_set_id' => 2,
-                        'attribute_group_name' => 'General',
-                        'sort_order' => 1,
-                        'default_id' => 1,
-                        'attribute_group_code' => 'general',
-                        'tab_group_code' => null
-                    ),
-                )
-            )
-        );
+        $attributeGroup = AttributeGroup::buildNewWith(1, 1, 'Updated', 'general', null, 1, 1);
 
-        $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet(array('eav_attribute_group' => $attributeGroupUpdated[$GLOBALS['MAGENTO_EDITION']][$GLOBALS['MAGENTO_VERSION']]));
+        $this->persister->persist($attributeGroup);
+        foreach ($this->persister->flush() as $item);
+
+        $this->assertEquals(1, $attributeGroup->getId());
+
+        $expected = $this->fixturesLoader->namedDataSet(
+            'update-one',
+            'eav_attribute_group',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER
+        );
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('eav_attribute_group');
