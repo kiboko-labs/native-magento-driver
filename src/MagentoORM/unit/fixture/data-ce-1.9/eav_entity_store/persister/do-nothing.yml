@@ -1,0 +1,19 @@
+eav_entity_store:
+    -
+        entity_store_id: 5
+        entity_type_id: 4
+        store_id: 0
+        increment_prefix: '5'
+        increment_last_id: '500000370'
+    -
+        entity_store_id: 6
+        entity_type_id: 4
+        store_id: 1
+        increment_prefix: '6'
+        increment_last_id: '600000232'
+    -
+        entity_store_id: 9
+        entity_type_id: 6
+        store_id: 1
+        increment_prefix: '1'
+        increment_last_id: '100000002'

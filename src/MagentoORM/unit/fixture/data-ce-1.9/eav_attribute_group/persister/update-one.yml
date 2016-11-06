@@ -1,0 +1,14 @@
+# Inspired from magento-sample-data-1.9.1.0.eav_attribute_group
+eav_attribute_group:
+  -
+    attribute_group_id: 1
+    attribute_set_id: 1
+    attribute_group_name: "Updated"
+    sort_order: 1
+    default_id: 1
+  -
+    attribute_group_id: 2
+    attribute_set_id: 2
+    attribute_group_name: "General"
+    sort_order: 1
+    default_id: 1

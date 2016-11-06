@@ -1,0 +1,331 @@
+eav_entity_attribute:
+    -
+        entity_attribute_id: 1
+        entity_type_id: 4
+        attribute_set_id: 4
+        attribute_group_id: 7
+        attribute_id: 79
+        sort_order: 10
+#    -
+#        entity_attribute_id: 2
+#        entity_type_id: 4
+#        attribute_set_id: 4
+#        attribute_group_id: 7
+#        attribute_id: 122
+#        sort_order: 20
+    -
+        entity_attribute_id: 3
+        entity_type_id: 4
+        attribute_set_id: 4
+        attribute_group_id: 7
+        attribute_id: 131
+        sort_order: 30
+    -
+        entity_attribute_id: 4
+        entity_type_id: 4
+        attribute_set_id: 4
+        attribute_group_id: 7
+        attribute_id: 167
+        sort_order: 40
+    -
+        entity_attribute_id: 5
+        entity_type_id: 4
+        attribute_set_id: 4
+        attribute_group_id: 7
+        attribute_id: 210
+        sort_order: 50
+    -
+        entity_attribute_id: 6
+        entity_type_id: 4
+        attribute_set_id: 4
+        attribute_group_id: 7
+        attribute_id: 226
+        sort_order: 60
+    -
+        entity_attribute_id: 7
+        entity_type_id: 4
+        attribute_set_id: 4
+        attribute_group_id: 7
+        attribute_id: 232
+        sort_order: 70
+    -
+        entity_attribute_id: 8
+        entity_type_id: 4
+        attribute_set_id: 4
+        attribute_group_id: 7
+        attribute_id: 300
+        sort_order: 80
+eav_attribute:
+    -
+        attribute_id: '79'
+        entity_type_id: '4'
+        attribute_code: cost
+        attribute_model: ~
+        backend_model: "Magento\Catalog\Model\Product\Attribute\Backend\Price"
+        backend_type: "decimal"
+        backend_table: ~
+        frontend_model: ~
+        frontend_input: "price"
+        frontend_label: "Cout"
+        frontend_class: ~
+        source_model: ~
+        is_required: 0
+        is_user_defined: 1
+        default_value: ~
+        is_unique: 0
+        note: ~
+    -
+        attribute_id: 122
+        entity_type_id: 4
+        attribute_code: "gift_message_available"
+        attribute_model: ~
+        backend_model: "Magento\Catalog\Model\Product\Attribute\Backend\Boolean"
+        backend_type: "varchar"
+        backend_table: ~
+        frontend_model: ~
+        frontend_input: select
+        frontend_label: "Allow Gift Message"
+        frontend_class: ~
+        source_model: "Magento\Eav\Model\Entity\Attribute\Source\Boolean"
+        is_required: 0
+        is_user_defined: 0
+        default_value: ~
+        is_unique: 0
+        note: ~
+    -
+        attribute_id: 131
+        entity_type_id: 4
+        attribute_code: "links_exist"
+        attribute_model: ~
+        backend_model: ~
+        backend_type: "int"
+        backend_table: ~
+        frontend_model: ~
+        frontend_input: ~
+        frontend_label: ~
+        frontend_class: ~
+        source_model: ~
+        is_required: 0
+        is_user_defined: 0
+        default_value: ~
+        is_unique: 0
+        note: ~
+    -
+        attribute_id: 167
+        entity_type_id: 4
+        attribute_code: "release_date"
+        attribute_model: ~
+        backend_model: "Magento\Eav\Model\Entity\Attribute\Backend\Datetime"
+        backend_type: "datetime"
+        backend_table: ~
+        frontend_model: "Magento\Eav\Model\Entity\Attribute\Frontend\Datetime"
+        frontend_input: "date"
+        frontend_label: "Date de sortie"
+        frontend_class: ~
+        source_model: ~
+        is_required: 0
+        is_user_defined: 1
+        default_value: ~
+        is_unique: 0
+        note: ~
+    -
+        attribute_id: 210
+        entity_type_id: 4
+        attribute_code: "description"
+        attribute_model: ~
+        backend_model: ~
+        backend_type: "text"
+        backend_table: ~
+        frontend_model: ~
+        frontend_input: "textarea"
+        frontend_label: "Description"
+        frontend_class: ~
+        source_model: ~
+        is_required: 0
+        is_user_defined: 1
+        default_value: ~
+        is_unique: 0
+        note: ~
+    -
+        attribute_id: 226
+        entity_type_id: 4
+        attribute_code: "main_color"
+        attribute_model: ~
+        backend_model: ~
+        backend_type: "int"
+        backend_table: ~
+        frontend_model: ~
+        frontend_input: "select"
+        frontend_label: "Couleur principale"
+        frontend_class: ~
+        source_model: "Magento\Eav\Model\Entity\Attribute\Source\Table"
+        is_required: 0
+        is_user_defined: 1
+        default_value: ~
+        is_unique: 0
+        note: ~
+    -
+        attribute_id: 232
+        entity_type_id: 4
+        attribute_code: "shoelace_length"
+        attribute_model: ~
+        backend_model: "Magento\Eav\Model\Entity\Attribute\Backend\ArrayBackend" 
+        backend_type: "varchar"
+        backend_table: ~
+        frontend_model: ~
+        frontend_input: "multiselect"
+        frontend_label: "Longueur de lacet"
+        frontend_class: ~
+        source_model: ~
+        is_required: 0
+        is_user_defined: 1
+        default_value: ~
+        is_unique: 0
+        note: ~
+    -
+        attribute_id: 300
+        entity_type_id: 4
+        attribute_code: "title"
+        attribute_model: ~
+        backend_model: ~
+        backend_type: "text"
+        backend_table: ~
+        frontend_model: ~
+        frontend_input: "textarea"
+        frontend_label: "Description"
+        frontend_class: ~
+        source_model: ~
+        is_required: 0
+        is_user_defined: 1
+        default_value: ~
+        is_unique: 0
+        note: ~
+eav_attribute_group:
+    -
+      attribute_group_id: 1
+      attribute_set_id: 1
+      attribute_group_name: "General"
+      sort_order: 1
+      default_id: 1
+      attribute_group_code: "general"
+      tab_group_code: ~
+    -
+      attribute_group_id: 2
+      attribute_set_id: 2
+      attribute_group_name: "General"
+      sort_order: 1
+      default_id: 1
+      attribute_group_code: "general"
+      tab_group_code: ~
+    -
+      attribute_group_id: 3
+      attribute_set_id: 3
+      attribute_group_name: "General"
+      sort_order: 10
+      default_id: 1
+      attribute_group_code: "general"
+      tab_group_code: ~
+    -
+      attribute_group_id: 4
+      attribute_set_id: 3
+      attribute_group_name: "General Information"
+      sort_order: 2
+      default_id: 0
+      attribute_group_code: "general-information"
+      tab_group_code: ~
+    -
+      attribute_group_id: 5
+      attribute_set_id: 3
+      attribute_group_name: "Display Settings"
+      sort_order: 20
+      default_id: 0
+      attribute_group_code: "display-settings"
+      tab_group_code: ~
+    -
+      attribute_group_id: 6
+      attribute_set_id: 3
+      attribute_group_name: "Custom Design"
+      sort_order: 30
+      default_id: 0
+      attribute_group_code: "custom-design"
+      tab_group_code: ~
+    -
+      attribute_group_id: 7
+      attribute_set_id: 4
+      attribute_group_name: "Product Details"
+      sort_order: 10
+      default_id: 1
+      attribute_group_code: "product-details"
+      tab_group_code: "basic"
+    -
+      attribute_group_id: 8
+      attribute_set_id: 4
+      attribute_group_name: "Advanced Pricing"
+      sort_order: 40
+      default_id: 0
+      attribute_group_code: "advanced-pricing"
+      tab_group_code: "advanced"
+    -
+      attribute_group_id: 9
+      attribute_set_id: 4
+      attribute_group_name: "Search Engine Optimization"
+      sort_order: 30
+      default_id: 0
+      attribute_group_code: "search-engine-optimization"
+      tab_group_code: "basic"
+    -
+      attribute_group_id: 10
+      attribute_set_id: 4
+      attribute_group_name: "Images and Videos"
+      sort_order: 20
+      default_id: 0
+      attribute_group_code: "image-management"
+      tab_group_code: "basic"
+    -
+      attribute_group_id: 11
+      attribute_set_id: 4
+      attribute_group_name: "Design"
+      sort_order: 50
+      default_id: 0
+      attribute_group_code: "design"
+      tab_group_code: "advanced"
+    -
+      attribute_group_id: 12
+      attribute_set_id: 4
+      attribute_group_name: "Autosettings"
+      sort_order: 60
+      default_id: 0
+      attribute_group_code: "autosettings"
+      tab_group_code: "advanced"
+    -
+      attribute_group_id: 13
+      attribute_set_id: 5
+      attribute_group_name: "General"
+      sort_order: 1
+      default_id: 1
+      attribute_group_code: "general"
+      tab_group_code: ~
+    -
+      attribute_group_id: 14
+      attribute_set_id: 6
+      attribute_group_name: "General"
+      sort_order: 1
+      default_id: 1
+      attribute_group_code: "general"
+      tab_group_code: ~
+    -
+      attribute_group_id: 15
+      attribute_set_id: 7
+      attribute_group_name: "General"
+      sort_order: 1
+      default_id: 1
+      attribute_group_code: "general"
+      tab_group_code: ~
+    -
+      attribute_group_id: 16
+      attribute_set_id: 8
+      attribute_group_name: "General"
+      sort_order: 1
+      default_id: 1
+      attribute_group_code: "general"
+      tab_group_code: ~
