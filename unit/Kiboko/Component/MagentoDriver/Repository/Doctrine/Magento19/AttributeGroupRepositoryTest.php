@@ -1,9 +1,14 @@
 <?php
+/**
+ * Copyright (c) 2016 Kiboko SAS
+ *
+ * @author Grégory Planchat <gregory@kiboko.fr>
+ */
 
-namespace unit\Kiboko\Component\MagentoDriver\Repository\Doctrine;
+namespace unit\Kiboko\Component\MagentoDriver\Repository\Doctrine\Magento19;
 
 use Doctrine\DBAL\Schema\Schema;
-use Kiboko\Component\MagentoDriver\Factory\AttributeGroupFactory;
+use Kiboko\Component\MagentoDriver\Factory\Magento19\AttributeGroupFactory;
 use Kiboko\Component\MagentoDriver\Model\AttributeGroupInterface;
 use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\AttributeGroupQueryBuilder;
 use Kiboko\Component\MagentoDriver\Repository\Doctrine\AttributeGroupRepository;
@@ -25,6 +30,22 @@ class AttributeGroupRepositoryTest extends \PHPUnit_Framework_TestCase
      * @var AttributeGroupRepositoryInterface
      */
     private $repository;
+
+    /**
+     * @return string
+     */
+    private function getVersion()
+    {
+        return '1.9';
+    }
+
+    /**
+     * @return string
+     */
+    private function getEdition()
+    {
+        return 'ce';
+    }
 
     /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
@@ -71,7 +92,7 @@ class AttributeGroupRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->schema = new Schema();
 
         $schemaBuilder = new DoctrineSchemaBuilder(
-            $this->getDoctrineConnection(), $this->schema, $GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
+            $this->getDoctrineConnection(), $this->schema, $this->getVersion(), $this->getEdition());
         $schemaBuilder->ensureFamilyTable();
         $schemaBuilder->ensureAttributeGroupTable();
 
