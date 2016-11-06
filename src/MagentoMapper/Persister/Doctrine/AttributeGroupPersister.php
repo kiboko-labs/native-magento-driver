@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -31,7 +31,7 @@ class AttributeGroupPersister implements AttributeGroupPersisterInterface
      * AttributeGroupPersister constructor.
      *
      * @param Connection $connection
-     * @param string $tableName
+     * @param string     $tableName
      */
     public function __construct(
         Connection $connection,
@@ -45,20 +45,17 @@ class AttributeGroupPersister implements AttributeGroupPersisterInterface
     /**
      * @param string $groupCode
      * @param string $familyCode
-     * @param int $identifier
+     * @param int    $identifier
      */
     public function persist($groupCode, $familyCode, $identifier)
     {
         $this->unitOfWork[] = [
-            'attribute_group_id'   => $identifier,
+            'attribute_group_id' => $identifier,
             'attribute_group_code' => $groupCode,
-            'family_code'          => $familyCode,
+            'family_code' => $familyCode,
         ];
     }
 
-    /**
-     * @return void
-     */
     public function flush()
     {
         foreach ($this->unitOfWork as $item) {

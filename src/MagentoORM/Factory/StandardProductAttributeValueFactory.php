@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -32,7 +32,7 @@ class StandardProductAttributeValueFactory implements ProductAttributeValueFacto
 
     /**
      * @param AttributeValueFactoryInterface $matcher
-     * @param AttributeMatcherInterface $builder
+     * @param AttributeMatcherInterface      $builder
      */
     public function addBuilder(AttributeValueFactoryInterface $matcher, AttributeMatcherInterface $builder)
     {

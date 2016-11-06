@@ -5,32 +5,30 @@ namespace spec\Kiboko\Component\MagentoORM\Model\Mutable;
 use League\Flysystem\Adapter\NullAdapter;
 use League\Flysystem\File;
 use League\Flysystem\Filesystem;
-use League\Flysystem\FilesystemInterface;
 use Kiboko\Component\MagentoORM\Model\AttributeInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class MutableImageAttributeValueSpec extends ObjectBehavior
 {
     public function getMatchers()
     {
         return [
-            'bePath' => function(File $subject, $path) {
+            'bePath' => function (File $subject, $path) {
                 return $subject->getPath() === $path;
             },
-            'beFilesystem' => function(File $subject, Filesystem $filesystem) {
+            'beFilesystem' => function (File $subject, Filesystem $filesystem) {
                 return $subject->getFilesystem() === $filesystem;
             },
         ];
     }
 
-    function it_is_an_MutableAttributeValueInterface(AttributeInterface $attribute, File $file)
+    public function it_is_an_MutableAttributeValueInterface(AttributeInterface $attribute, File $file)
     {
         $this->beConstructedWith($attribute, $file);
         $this->shouldImplement('Kiboko\Component\MagentoORM\Model\Mutable\MutableAttributeValueInterface');
     }
 
-    function it_should_contain_flysystem_file_value(AttributeInterface $attribute,  File $file)
+    public function it_should_contain_flysystem_file_value(AttributeInterface $attribute,  File $file)
     {
         $this->beConstructedWith($attribute, $file);
 
@@ -39,7 +37,7 @@ class MutableImageAttributeValueSpec extends ObjectBehavior
         ;
     }
 
-    function it_should_be_mutable(AttributeInterface $attribute, File $file)
+    public function it_should_be_mutable(AttributeInterface $attribute, File $file)
     {
         $filesystem = new Filesystem(new NullAdapter());
 

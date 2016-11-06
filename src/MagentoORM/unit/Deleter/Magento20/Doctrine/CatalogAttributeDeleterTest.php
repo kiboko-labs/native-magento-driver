@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -9,7 +9,7 @@ namespace unit\Kiboko\Component\MagentoORM\Deleter\Magento20\Doctrine;
 
 use unit\Kiboko\Component\MagentoORM\Deleter\Doctrine\AbstractCatalogAttributeDeleter;
 
-class CatalogAttributeDeleter extends AbstractCatalogAttributeDeleter
+class CatalogAttributeDeleterTest extends AbstractCatalogAttributeDeleter
 {
     /**
      * @return string

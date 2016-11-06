@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -9,8 +9,6 @@ namespace Kiboko\Component\MagentoMapper\SchemaManager\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
-use Doctrine\DBAL\Schema\Schema;
-use Doctrine\DBAL\Schema\SchemaDiff;
 use Doctrine\DBAL\Schema\Table;
 use Doctrine\DBAL\Schema\Comparator as SchemaComparator;
 
@@ -27,7 +25,7 @@ class AttributeGroupMappingSchemaManager extends AbstractMappingSchemaManager
      * @param Connection       $connection
      * @param SchemaComparator $schemaComparator
      * @param string           $tableName
-     * @param string     $attributeGroupsTableName
+     * @param string           $attributeGroupsTableName
      */
     public function __construct(
         Connection $connection,
@@ -51,7 +49,7 @@ class AttributeGroupMappingSchemaManager extends AbstractMappingSchemaManager
         ]);
 
         $table->addColumn('instance_identifier', 'string', [
-            'length' => 64
+            'length' => 64,
         ]);
 
         $table->addColumn('attribute_group_code', 'string', [
@@ -96,6 +94,7 @@ class AttributeGroupMappingSchemaManager extends AbstractMappingSchemaManager
     /**
      * @param string $pimgentoTableName
      * @param string $linkCode
+     *
      * @return int|null
      *
      * @throws \Doctrine\DBAL\DBALException

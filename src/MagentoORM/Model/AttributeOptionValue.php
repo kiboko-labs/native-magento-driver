@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -28,8 +28,8 @@ class AttributeOptionValue implements AttributeOptionValueInterface
     private $value;
 
     /**
-     * @param int $optionId
-     * @param int $storeId
+     * @param int    $optionId
+     * @param int    $storeId
      * @param string $value
      */
     public function __construct($optionId, $storeId, $value)

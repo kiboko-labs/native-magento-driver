@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -13,8 +13,9 @@ use Doctrine\DBAL\Schema\SchemaDiff;
 interface MappingSchemaManagerInterface
 {
     /**
-     * @param Schema $currentSchema
+     * @param Schema     $currentSchema
      * @param SchemaDiff $schemaDiff
+     *
      * @return SchemaDiff
      */
     public function schemaDiff(Schema $currentSchema, SchemaDiff $schemaDiff);
@@ -22,6 +23,7 @@ interface MappingSchemaManagerInterface
     /**
      * @param string $pimgentoTableName
      * @param string $linkCode
+     *
      * @return int
      *
      * @throws \Doctrine\DBAL\DBALException

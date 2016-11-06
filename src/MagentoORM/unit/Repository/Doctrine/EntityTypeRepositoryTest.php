@@ -124,7 +124,7 @@ class EntityTypeRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $entityType = $this->repository->findOneByCode('catalog_product');
         $this->assertInstanceOf(EntityTypeInterface::class, $entityType);
-        
+
         $this->assertEquals('catalog_product', $entityType->getCode());
         $this->assertEquals(4, $entityType->getId());
     }

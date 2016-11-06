@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -18,12 +18,9 @@ interface EntityTypeMapperInterface
 
     /**
      * @param string $code
-     * @param int $identifier
+     * @param int    $identifier
      */
     public function persist($code, $identifier);
 
-    /**
-     * @return void
-     */
     public function flush();
 }

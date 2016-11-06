@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -50,11 +50,11 @@ abstract class AbstractAttributeGroupTransformer implements AttributeGroupTransf
      * AttributeGroupOptionTransformer constructor.
      *
      * @param AttributeGroupMapperInterface $attributeGroupMapper
-     * @param FamilyMapperInterface $familyMapper
-     * @param FamilyRepositoryInterface $familyRepository
-     * @param StoreRepositoryInterface $storeRepository
-     * @param string $adminLocaleCode
-     * @param array $storeLocaleCodes
+     * @param FamilyMapperInterface         $familyMapper
+     * @param FamilyRepositoryInterface     $familyRepository
+     * @param StoreRepositoryInterface      $storeRepository
+     * @param string                        $adminLocaleCode
+     * @param array                         $storeLocaleCodes
      */
     public function __construct(
         AttributeGroupMapperInterface $attributeGroupMapper,

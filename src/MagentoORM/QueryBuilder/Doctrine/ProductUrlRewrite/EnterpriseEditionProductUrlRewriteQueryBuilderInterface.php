@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -14,6 +14,7 @@ interface EnterpriseEditionProductUrlRewriteQueryBuilderInterface
     /**
      * @param string $alias
      * @param string $productLinkAlias
+     *
      * @return QueryBuilder
      */
     public function createFindOneByProductIdQueryBuilder($alias, $productLinkAlias);

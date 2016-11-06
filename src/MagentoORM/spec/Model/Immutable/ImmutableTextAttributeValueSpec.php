@@ -4,17 +4,16 @@ namespace spec\Kiboko\Component\MagentoORM\Model\Immutable;
 
 use Kiboko\Component\MagentoORM\Model\AttributeInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class ImmutableTextAttributeValueSpec extends ObjectBehavior
 {
-    function it_is_an_ImmutableAttributeValueInterface(AttributeInterface $attribute)
+    public function it_is_an_ImmutableAttributeValueInterface(AttributeInterface $attribute)
     {
         $this->beConstructedWith($attribute, 'Lorem ipsum');
         $this->shouldImplement('Kiboko\Component\MagentoORM\Model\Immutable\ImmutableAttributeValueInterface');
     }
 
-    function it_should_contain_string_value(AttributeInterface $attribute)
+    public function it_should_contain_string_value(AttributeInterface $attribute)
     {
         $this->beConstructedWith($attribute, 'Lorem ipsum');
 

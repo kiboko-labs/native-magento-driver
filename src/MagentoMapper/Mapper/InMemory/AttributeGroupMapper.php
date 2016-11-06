@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -30,6 +30,7 @@ class AttributeGroupMapper implements AttributeGroupMapperInterface
     /**
      * @param string $groupCode
      * @param string $familyCode
+     *
      * @return int
      */
     public function map($groupCode, $familyCode)
@@ -66,7 +67,7 @@ class AttributeGroupMapper implements AttributeGroupMapperInterface
     /**
      * @param string $groupCode
      * @param string $familyCode
-     * @param int $identifier
+     * @param int    $identifier
      */
     public function persist($groupCode, $familyCode, $identifier)
     {

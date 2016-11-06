@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -76,7 +76,7 @@ class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
         foreach ($fields as $field) {
             $outputFields[] = sprintf('%s.%s', $alias, $field);
         }
-        
+
         return $outputFields;
     }
 

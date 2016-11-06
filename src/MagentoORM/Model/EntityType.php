@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -89,6 +89,7 @@ class EntityType implements EntityTypeInterface
 
     /**
      * EntityType constructor.
+     *
      * @param $code
      * @param $entityModelClass
      * @param $attributeModelClass
@@ -138,7 +139,7 @@ class EntityType implements EntityTypeInterface
         $this->additionalAttributeTable = $additionalAttributeTable;
         $this->attributeCollectionClass = $attributeCollectionClass;
     }
-    
+
     /**
      * @return string
      */

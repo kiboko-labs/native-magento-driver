@@ -2,9 +2,6 @@
 
 namespace unit\Kiboko\Component\MagentoORM\SchemaBuilder\Fixture;
 
-use Doctrine\DBAL\Connection;
-use Symfony\Component\Yaml\Yaml;
-
 class DeleterLoader extends Loader
 {
     /**

@@ -8,8 +8,8 @@ use unit\Kiboko\Component\MagentoORM\SchemaBuilder\Fixture\FallbackResolver;
 
 class DoctrineSchemaBuilder
 {
-    const CONTEXT_PERSISTER  = 'persister';
-    const CONTEXT_DELETER    = 'deleter';
+    const CONTEXT_PERSISTER = 'persister';
+    const CONTEXT_DELETER = 'deleter';
     const CONTEXT_REPOSITORY = 'repository';
 
     /**
@@ -53,7 +53,7 @@ class DoctrineSchemaBuilder
      */
     public function getFixturesPath()
     {
-        return __DIR__ . '/..';
+        return __DIR__.'/..';
     }
 
     /**

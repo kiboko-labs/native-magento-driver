@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -9,8 +9,7 @@ namespace Kiboko\Component\MagentoORM\Model\Magento20;
 
 use Kiboko\Component\MagentoORM\Model\CatalogAttributeExtensionInterface as BaseCatalogAttributeExtensionInterface;
 
-interface CatalogAttributeExtensionInterface
-    extends BaseCatalogAttributeExtensionInterface
+interface CatalogAttributeExtensionInterface extends BaseCatalogAttributeExtensionInterface
 {
     /**
      * @return bool

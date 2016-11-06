@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -30,8 +30,8 @@ class FamilyMapper implements FamilyMapperInterface
 
     /**
      * @param FamilyRepositoryInterface $repository
-     * @param FamilyPersisterInterface $persister
-     * @param FamilyMapperInterface $secondLevelMapper
+     * @param FamilyPersisterInterface  $persister
+     * @param FamilyMapperInterface     $secondLevelMapper
      */
     public function __construct(
         FamilyRepositoryInterface $repository,
@@ -45,6 +45,7 @@ class FamilyMapper implements FamilyMapperInterface
 
     /**
      * @param string $code
+     *
      * @return int
      */
     public function map($code)
@@ -60,7 +61,7 @@ class FamilyMapper implements FamilyMapperInterface
 
     /**
      * @param string $code
-     * @param int $identifier
+     * @param int    $identifier
      */
     public function persist($code, $identifier)
     {
@@ -68,9 +69,6 @@ class FamilyMapper implements FamilyMapperInterface
         $this->persister->persist($code, $identifier);
     }
 
-    /**
-     * @return void
-     */
     public function flush()
     {
         $this->secondLevelMapper->flush();

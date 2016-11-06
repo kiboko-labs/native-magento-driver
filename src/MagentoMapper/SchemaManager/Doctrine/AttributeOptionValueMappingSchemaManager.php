@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -8,9 +8,6 @@
 namespace Kiboko\Component\MagentoMapper\SchemaManager\Doctrine;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Query\QueryBuilder;
-use Doctrine\DBAL\Schema\Schema;
-use Doctrine\DBAL\Schema\SchemaDiff;
 use Doctrine\DBAL\Schema\Table;
 use Doctrine\DBAL\Schema\Comparator as SchemaComparator;
 
@@ -59,7 +56,7 @@ class AttributeOptionValueMappingSchemaManager extends AbstractMappingSchemaMana
         ]);
 
         $table->addColumn('instance_identifier', 'string', [
-            'length' => 64
+            'length' => 64,
         ]);
 
         $table->addColumn('option_code', 'string', [
@@ -67,7 +64,7 @@ class AttributeOptionValueMappingSchemaManager extends AbstractMappingSchemaMana
         ]);
 
         $table->addColumn('locale', 'string', [
-            'length' => 12
+            'length' => 12,
         ]);
 
         $table->addColumn('mapping_class', 'string', [
@@ -104,6 +101,7 @@ class AttributeOptionValueMappingSchemaManager extends AbstractMappingSchemaMana
     /**
      * @param string $pimgentoTableName
      * @param string $linkCode
+     *
      * @return int|null
      *
      * @throws \Doctrine\DBAL\DBALException

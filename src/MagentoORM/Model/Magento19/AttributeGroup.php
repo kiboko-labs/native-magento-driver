@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -37,6 +37,7 @@ class AttributeGroup implements AttributeGroupInterface
      * @param string $label
      * @param int    $sortOrder
      * @param int    $defaultId
+     *
      * @return self
      */
     public static function buildNewWith(

@@ -1,16 +1,16 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
 namespace Kiboko\Component\MagentoMapper\Mapper\InMemory;
+
 use Kiboko\Component\MagentoMapper\Exception\InvalidArgumentException;
 
 /**
- * Class InMemoryMapperTrait
- * @package Kiboko\Component\MagentoMapper\Mapper\InMemory
+ * Class InMemoryMapperTrait.
  *
  * @attribute array $mapping
  */
@@ -20,6 +20,7 @@ trait InMemoryMapperTrait
 
     /**
      * @param string $code
+     *
      * @return int
      */
     public function map($code)
@@ -32,7 +33,7 @@ trait InMemoryMapperTrait
                 )
             );
         }
-        
+
         if (!isset($this->mapping) || !is_array($this->mapping)) {
             $this->mapping = [];
         }
@@ -46,7 +47,7 @@ trait InMemoryMapperTrait
 
     /**
      * @param string $code
-     * @param int $identifier
+     * @param int    $identifier
      */
     public function persist($code, $identifier)
     {

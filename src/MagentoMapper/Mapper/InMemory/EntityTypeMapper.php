@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -15,7 +15,7 @@ class EntityTypeMapper implements EntityTypeMapperInterface
 
     protected $mapping = [
         'Pim\\Bundle\\CatalogBundle\\Model\\Product' => 4, // Version 1.4
-        'Pim\\Component\\Catalog\\Model\\Product'    => 4, // Version 1.5+
+        'Pim\\Component\\Catalog\\Model\\Product' => 4, // Version 1.5+
     ];
 
     /**

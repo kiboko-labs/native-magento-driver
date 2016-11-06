@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -11,8 +11,7 @@ use Kiboko\Component\MagentoORM\Model\AttributeInterface;
 use Kiboko\Component\MagentoORM\Model\FamilyInterface;
 use Kiboko\Component\MagentoORM\Entity\Product\ProductInterface;
 
-interface ProductAttributeRepositoryInterface
-    extends AttributeRepositoryInterface
+interface ProductAttributeRepositoryInterface extends AttributeRepositoryInterface
 {
     /**
      * @param ProductInterface $product

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -19,7 +19,7 @@ interface EntityAttributeRepositoryInterface
     public function findOneById($identifier);
 
     /**
-     * return \Traversable|EntityAttributeInterface[]
+     * return \Traversable|EntityAttributeInterface[].
      */
     public function findAll();
 

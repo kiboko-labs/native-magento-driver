@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -20,8 +20,6 @@ interface AttributeValuePersisterInterface
 
     /**
      * @param AttributeValueInterface $value
-     *
-     * @return void
      */
     public function __invoke(AttributeValueInterface $value);
 

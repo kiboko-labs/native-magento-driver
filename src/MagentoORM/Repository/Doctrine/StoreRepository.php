@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -9,7 +9,6 @@ namespace Kiboko\Component\MagentoORM\Repository\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Kiboko\Component\MagentoORM\Exception\DatabaseFetchingFailureException;
-use Kiboko\Component\MagentoORM\Factory\StoreFactoryInterface;
 use Kiboko\Component\MagentoORM\Model\Store;
 use Kiboko\Component\MagentoORM\Model\StoreInterface;
 use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\StoreQueryBuilderInterface;
@@ -96,7 +95,6 @@ class StoreRepository implements StoreRepositoryInterface
     }
 
     /**
-     *
      * @return StoreInterface[]|\Traversable
      */
     public function findAll()

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -74,7 +74,7 @@ class AttributeLabel implements AttributeLabelInterface
     public static function buildNewWith(
         $attributeLabelId,
         $attributeId,
-        $storeId, 
+        $storeId,
         $value = null
     ) {
         $object = new static($attributeId, $storeId, $value);

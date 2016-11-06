@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -30,6 +30,7 @@ class AttributeOptionValueMapper implements AttributeOptionValueMapperInterface
     /**
      * @param string $code
      * @param string $locale
+     *
      * @return int
      */
     public function map($code, $locale)
@@ -66,7 +67,7 @@ class AttributeOptionValueMapper implements AttributeOptionValueMapperInterface
     /**
      * @param string $code
      * @param string $locale
-     * @param int $identifier
+     * @param int    $identifier
      */
     public function persist($code, $locale, $identifier)
     {

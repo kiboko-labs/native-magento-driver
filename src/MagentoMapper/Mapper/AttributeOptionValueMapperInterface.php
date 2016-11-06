@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -20,12 +20,9 @@ interface AttributeOptionValueMapperInterface
     /**
      * @param string $optionCode
      * @param string $locale
-     * @param int $identifier
+     * @param int    $identifier
      */
     public function persist($optionCode, $locale, $identifier);
 
-    /**
-     * @return void
-     */
     public function flush();
 }

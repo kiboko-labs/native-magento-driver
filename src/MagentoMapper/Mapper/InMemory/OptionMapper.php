@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -9,7 +9,7 @@ namespace Kiboko\Component\MagentoMapper\Mapper\InMemory;
 
 use Kiboko\Component\MagentoMapper\Mapper\OptionMapperInterface;
 
-class DefaultOptionMapper implements OptionMapperInterface
+class OptionMapper implements OptionMapperInterface
 {
     use InMemoryMapperTrait;
 

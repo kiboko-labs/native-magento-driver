@@ -1,13 +1,11 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
 namespace Kiboko\Component\MagentoORM\Entity;
-
-use Kiboko\Component\MagentoORM\Model\AttributeInterface;
 
 class Category implements CategoryInterface
 {

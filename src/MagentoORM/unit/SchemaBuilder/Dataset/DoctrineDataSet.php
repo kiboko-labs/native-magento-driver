@@ -4,8 +4,7 @@ namespace unit\Kiboko\Component\MagentoORM\SchemaBuilder\Fixture;
 
 use Doctrine\DBAL\Connection;
 
-class DoctrineDataSet
-    extends \PHPUnit_Extensions_Database_DataSet_AbstractDataSet
+class DoctrineDataSet extends \PHPUnit_Extensions_Database_DataSet_AbstractDataSet
 {
     /**
      * An array of ITable objects.
@@ -31,10 +30,10 @@ class DoctrineDataSet
         $this->databaseConnection = $databaseConnection;
     }
 
-    public function addTable($tableName, $query = NULL)
+    public function addTable($tableName, $query = null)
     {
-        if ($query === NULL) {
-            $query = 'SELECT * FROM ' . $this->databaseConnection->quoteIdentifier($tableName);
+        if ($query === null) {
+            $query = 'SELECT * FROM '.$this->databaseConnection->quoteIdentifier($tableName);
         }
 
         $this->tables[$tableName] = new DoctrineQueryTable($tableName, $query, $this->databaseConnection);
@@ -44,7 +43,8 @@ class DoctrineDataSet
      * Creates an iterator over the tables in the data set. If $reverse is
      * true a reverse iterator will be returned.
      *
-     * @param  bool                                         $reverse
+     * @param bool $reverse
+     *
      * @return \PHPUnit_Extensions_Database_DB_TableIterator
      */
     protected function createIterator($reverse = false)
@@ -55,7 +55,8 @@ class DoctrineDataSet
     /**
      * Returns a table object for the given table.
      *
-     * @param  string                               $tableName
+     * @param string $tableName
+     *
      * @return \PHPUnit_Extensions_Database_DB_Table
      */
     public function getTable($tableName)
@@ -68,7 +69,7 @@ class DoctrineDataSet
     }
 
     /**
-     * Returns a list of table names for the database
+     * Returns a list of table names for the database.
      *
      * @return array
      */

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -8,7 +8,6 @@
 namespace Kiboko\Component\MagentoMapper\SchemaManager\Doctrine;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\DBAL\Schema\SchemaDiff;
 use Doctrine\DBAL\Schema\Table;
@@ -50,9 +49,11 @@ abstract class AbstractMappingSchemaManager implements MappingSchemaManagerInter
     }
 
     /**
-     * @param Schema $currentSchema
+     * @param Schema     $currentSchema
      * @param SchemaDiff $schemaDiff
+     *
      * @return SchemaDiff
+     *
      * @throws \Doctrine\DBAL\Schema\SchemaException
      */
     public function schemaDiff(Schema $currentSchema, SchemaDiff $schemaDiff)

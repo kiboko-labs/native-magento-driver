@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -32,19 +32,16 @@ class AttributePersister implements AttributePersisterInterface
 
     /**
      * @param string $code
-     * @param int $identifier
+     * @param int    $identifier
      */
     public function persist($code, $identifier)
     {
         $this->unitOfWork[] = [
-            'attribute_id'   => $identifier,
+            'attribute_id' => $identifier,
             'attribute_code' => $code,
         ];
     }
 
-    /**
-     * @return void
-     */
     public function flush()
     {
         foreach ($this->unitOfWork as $item) {

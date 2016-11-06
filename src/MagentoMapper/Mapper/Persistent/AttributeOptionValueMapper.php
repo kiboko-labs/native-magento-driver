@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -30,8 +30,8 @@ class AttributeOptionValueMapper implements AttributeOptionValueMapperInterface
 
     /**
      * @param AttributeOptionValueRepositoryInterface $repository
-     * @param AttributeOptionValuePersisterInterface $persister
-     * @param AttributeOptionValueMapperInterface $secondLevelMapper
+     * @param AttributeOptionValuePersisterInterface  $persister
+     * @param AttributeOptionValueMapperInterface     $secondLevelMapper
      */
     public function __construct(
         AttributeOptionValueRepositoryInterface $repository,
@@ -46,6 +46,7 @@ class AttributeOptionValueMapper implements AttributeOptionValueMapperInterface
     /**
      * @param string $code
      * @param string $locale
+     *
      * @return int
      */
     public function map($code, $locale)
@@ -62,7 +63,7 @@ class AttributeOptionValueMapper implements AttributeOptionValueMapperInterface
     /**
      * @param string $optionCode
      * @param string $locale
-     * @param int $identifier
+     * @param int    $identifier
      */
     public function persist($optionCode, $locale, $identifier)
     {
@@ -70,9 +71,6 @@ class AttributeOptionValueMapper implements AttributeOptionValueMapperInterface
         $this->persister->persist($optionCode, $locale, $identifier);
     }
 
-    /**
-     * @return void
-     */
     public function flush()
     {
         $this->secondLevelMapper->flush();

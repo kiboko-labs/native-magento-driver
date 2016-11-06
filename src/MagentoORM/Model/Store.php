@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -24,7 +24,8 @@ class Store
 
     /**
      * Store constructor.
-     * @param int $identifier
+     *
+     * @param int    $identifier
      * @param string $code
      */
     public function __construct($code, $name)
@@ -50,17 +51,18 @@ class Store
     }
 
     /**
-     * @param int $identifier
+     * @param int    $identifier
      * @param string $code
      * @param string $name
+     *
      * @return static
      */
     public static function buildNewWith($identifier, $code, $name = null)
     {
         $object = new static($code, $name);
-        
+
         $object->persistedToId($identifier);
-        
+
         return $object;
     }
 }

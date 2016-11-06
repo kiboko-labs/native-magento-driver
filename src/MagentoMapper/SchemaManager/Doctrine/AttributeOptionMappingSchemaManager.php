@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -9,8 +9,6 @@ namespace Kiboko\Component\MagentoMapper\SchemaManager\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
-use Doctrine\DBAL\Schema\Schema;
-use Doctrine\DBAL\Schema\SchemaDiff;
 use Doctrine\DBAL\Schema\Table;
 use Doctrine\DBAL\Schema\Comparator as SchemaComparator;
 
@@ -51,7 +49,7 @@ class AttributeOptionMappingSchemaManager extends AbstractMappingSchemaManager
         ]);
 
         $table->addColumn('instance_identifier', 'string', [
-            'length' => 64
+            'length' => 64,
         ]);
 
         $table->addColumn('option_code', 'string', [
@@ -90,6 +88,7 @@ class AttributeOptionMappingSchemaManager extends AbstractMappingSchemaManager
     /**
      * @param string $pimgentoTableName
      * @param string $linkCode
+     *
      * @return int|null
      *
      * @throws \Doctrine\DBAL\DBALException
@@ -106,11 +105,11 @@ class AttributeOptionMappingSchemaManager extends AbstractMappingSchemaManager
 
         $queryBuilder
             ->select([
-                'option_id'           => 'pim.entity_id',
+                'option_id' => 'pim.entity_id',
                 'instance_identifier' => $queryBuilder->expr()->literal($linkCode),
-                'option_code'         => 'INSERT(pim.code, LOCATE(CONCAT(pim2.code, "_"), pim.code), LENGTH(CONCAT(pim2.code, "_")), "")',
-                'mapping_class'       => 'NULL',
-                'mapping_options'     => $queryBuilder->expr()->literal(json_encode([], JSON_OBJECT_AS_ARRAY)),
+                'option_code' => 'INSERT(pim.code, LOCATE(CONCAT(pim2.code, "_"), pim.code), LENGTH(CONCAT(pim2.code, "_")), "")',
+                'mapping_class' => 'NULL',
+                'mapping_options' => $queryBuilder->expr()->literal(json_encode([], JSON_OBJECT_AS_ARRAY)),
             ])
             ->from($pimgentoTableName, 'pim')
             ->innerJoin('pim', 'eav_attribute_option', 'ao', $queryBuilder->expr()->eq('ao.option_id', 'pim.entity_id'))
@@ -123,7 +122,7 @@ class AttributeOptionMappingSchemaManager extends AbstractMappingSchemaManager
 
         return $this->connection->executeUpdate(
             "INSERT INTO {$this->connection->quoteIdentifier($this->tableName)} "
-                . $queryBuilder->getSQL()
+                .$queryBuilder->getSQL()
         );
     }
 }

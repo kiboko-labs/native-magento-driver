@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -13,8 +13,7 @@ use Kiboko\Component\MagentoMapper\Mapper\FamilyMapperInterface;
 use Kiboko\Component\MagentoMapper\Mapper\ProductMapperInterface;
 use Pim\Component\Catalog\Model\ProductInterface as PimProductInterface;
 
-class SimpleProductTransformer
-    implements ProductTransformerInterface
+class SimpleProductTransformer implements ProductTransformerInterface
 {
     /**
      * @var ProductMapperInterface
@@ -28,6 +27,7 @@ class SimpleProductTransformer
 
     /**
      * @param PimProductInterface $product
+     *
      * @return KibokoProductInterface|null
      */
     public function transform(PimProductInterface $product)
@@ -39,12 +39,13 @@ class SimpleProductTransformer
                 $this->familyMapper->map($product->getFamily()->getCode()),
                 new \DateTimeImmutable(),
                 new \DateTimeImmutable()
-            )
+            ),
         ];
     }
 
     /**
      * @param PimProductInterface $product
+     *
      * @return bool
      */
     public function supportsTransformation(PimProductInterface $product)

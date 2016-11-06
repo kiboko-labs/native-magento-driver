@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -27,7 +27,7 @@ class AttributeGroupRepository implements AttributeGroupRepositoryInterface
     /**
      * AttributeRepository constructor.
      *
-     * @param Connection                  $connection
+     * @param Connection                          $connection
      * @param AttributeGroupQueryBuilderInterface $queryBuilder
      */
     public function __construct(

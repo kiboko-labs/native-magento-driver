@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -21,7 +21,7 @@ trait MediaGalleryAttributeValueTrait
     /**
      * MediaGalleryAttributeValue constructor.
      *
-     * @param AttributeInterface                        $attribute
+     * @param AttributeInterface                          $attribute
      * @param \Traversable|ImageAttributeValueInterface[] $imagesCollection
      */
     abstract public function __construct(
@@ -30,8 +30,8 @@ trait MediaGalleryAttributeValueTrait
     );
 
     /**
-     * @param AttributeInterface                        $attribute
-     * @param int                                       $valueId
+     * @param AttributeInterface                          $attribute
+     * @param int                                         $valueId
      * @param \Traversable|ImageAttributeValueInterface[] $imagesCollection
      *
      * @return MediaGalleryAttributeValueInterface

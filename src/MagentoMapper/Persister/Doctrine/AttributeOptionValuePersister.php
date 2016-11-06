@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -33,20 +33,17 @@ class AttributeOptionValuePersister implements AttributeOptionValuePersisterInte
     /**
      * @param string $optionsCode
      * @param string $locale
-     * @param int $identifier
+     * @param int    $identifier
      */
     public function persist($optionsCode, $locale, $identifier)
     {
         $this->unitOfWork[] = [
-            'value_id'    => $identifier,
+            'value_id' => $identifier,
             'option_code' => $optionsCode,
-            'locale'      => $locale,
+            'locale' => $locale,
         ];
     }
 
-    /**
-     * @return void
-     */
     public function flush()
     {
         foreach ($this->unitOfWork as $item) {

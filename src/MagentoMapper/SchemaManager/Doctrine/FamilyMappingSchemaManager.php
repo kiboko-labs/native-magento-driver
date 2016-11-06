@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -9,8 +9,6 @@ namespace Kiboko\Component\MagentoMapper\SchemaManager\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
-use Doctrine\DBAL\Schema\Schema;
-use Doctrine\DBAL\Schema\SchemaDiff;
 use Doctrine\DBAL\Schema\Table;
 use Doctrine\DBAL\Schema\Comparator as SchemaComparator;
 
@@ -27,7 +25,7 @@ class FamilyMappingSchemaManager extends AbstractMappingSchemaManager
      * @param Connection       $connection
      * @param SchemaComparator $schemaComparator
      * @param string           $tableName
-     * @param string     $attributeSetsTableName
+     * @param string           $attributeSetsTableName
      */
     public function __construct(
         Connection $connection,
@@ -51,7 +49,7 @@ class FamilyMappingSchemaManager extends AbstractMappingSchemaManager
         ]);
 
         $table->addColumn('instance_identifier', 'string', [
-            'length' => 64
+            'length' => 64,
         ]);
 
         $table->addColumn('family_code', 'string', [
@@ -90,6 +88,7 @@ class FamilyMappingSchemaManager extends AbstractMappingSchemaManager
     /**
      * @param string $pimgentoTableName
      * @param string $linkCode
+     *
      * @return int|null
      *
      * @throws \Doctrine\DBAL\DBALException

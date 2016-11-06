@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -26,7 +26,7 @@ class StandardProductAttributeValuesPersister implements ProductPersisterInterfa
 
     /**
      * @param AttributeValuePersisterInterface $persister
-     * @param \Traversable                       $attributeList
+     * @param \Traversable                     $attributeList
      */
     public function __construct(
         AttributeValuePersisterInterface $persister,

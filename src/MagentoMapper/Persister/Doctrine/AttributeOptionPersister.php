@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -32,19 +32,16 @@ class AttributeOptionPersister implements AttributeOptionPersisterInterface
 
     /**
      * @param string $code
-     * @param int $identifier
+     * @param int    $identifier
      */
     public function persist($code, $identifier)
     {
         $this->unitOfWork[] = [
-            'option_id'   => $identifier,
+            'option_id' => $identifier,
             'option_code' => $code,
         ];
     }
 
-    /**
-     * @return void
-     */
     public function flush()
     {
         foreach ($this->unitOfWork as $item) {

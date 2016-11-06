@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -68,7 +68,7 @@ class CategoryMappingSchemaManager implements MappingSchemaManagerInterface
         ]);
 
         $table->addColumn('instance_identifier', 'string', [
-            'length' => 64
+            'length' => 64,
         ]);
 
         $table->addColumn('category_code', 'string', [

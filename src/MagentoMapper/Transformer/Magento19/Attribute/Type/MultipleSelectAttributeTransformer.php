@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -15,8 +15,7 @@ use Kiboko\Component\MagentoMapper\Mapper\EntityTypeMapperInterface;
 use Kiboko\Component\MagentoMapper\Transformer\AttributeTransformerInterface;
 use Pim\Component\Catalog\Model\AttributeInterface as PimAttributeInterface;
 
-class MultipleSelectAttributeTransformer
-    implements AttributeTransformerInterface
+class MultipleSelectAttributeTransformer implements AttributeTransformerInterface
 {
     /**
      * @var EntityTypeMapperInterface

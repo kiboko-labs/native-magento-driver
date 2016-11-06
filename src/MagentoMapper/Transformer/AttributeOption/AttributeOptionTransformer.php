@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -28,7 +28,8 @@ class AttributeOptionTransformer implements AttributeOptionTransformerInterface
 
     /**
      * AttributeOptionTransformer constructor.
-     * @param AttributeMapperInterface $attributeMapper
+     *
+     * @param AttributeMapperInterface       $attributeMapper
      * @param AttributeOptionMapperInterface $attributeOptionMapper
      */
     public function __construct(

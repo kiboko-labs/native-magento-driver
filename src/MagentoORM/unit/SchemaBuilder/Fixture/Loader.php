@@ -2,9 +2,6 @@
 
 namespace unit\Kiboko\Component\MagentoORM\SchemaBuilder\Fixture;
 
-use Doctrine\DBAL\Connection;
-use Symfony\Component\Yaml\Yaml;
-
 class Loader implements LoaderInterface
 {
     /**
@@ -24,8 +21,8 @@ class Loader implements LoaderInterface
 
     /**
      * @param FallbackResolver $resolver
-     * @param string $magentoVersion
-     * @param string $magentoEdition
+     * @param string           $magentoVersion
+     * @param string           $magentoEdition
      */
     public function __construct(
         FallbackResolver $resolver,
@@ -41,6 +38,7 @@ class Loader implements LoaderInterface
      * @param string $suite
      * @param string $context
      * @param string $file
+     *
      * @return string
      */
     protected function getPathname($suite, $context, $file)
@@ -50,7 +48,6 @@ class Loader implements LoaderInterface
     }
 
     /**
-     *
      * @param string $suite
      * @param string $context
      *
@@ -63,7 +60,6 @@ class Loader implements LoaderInterface
     }
 
     /**
-     *
      * @param string $suite
      * @param string $context
      *
@@ -76,7 +72,6 @@ class Loader implements LoaderInterface
     }
 
     /**
-     *
      * @param string $name
      * @param string $suite
      * @param string $context

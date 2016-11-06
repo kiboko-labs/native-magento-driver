@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -45,11 +45,12 @@ class AttributeOptionValueTransformer implements AttributeOptionTransformerInter
 
     /**
      * AttributeOptionTransformer constructor.
-     * @param AttributeOptionMapperInterface $attributeOptionMapper
+     *
+     * @param AttributeOptionMapperInterface      $attributeOptionMapper
      * @param AttributeOptionValueMapperInterface $attributeOptionValueMapper
-     * @param StoreRepositoryInterface $storeRepository
-     * @param string $adminLocaleCode
-     * @param array $storeLocaleCodes
+     * @param StoreRepositoryInterface            $storeRepository
+     * @param string                              $adminLocaleCode
+     * @param array                               $storeLocaleCodes
      */
     public function __construct(
         AttributeOptionMapperInterface $attributeOptionMapper,
@@ -103,7 +104,7 @@ class AttributeOptionValueTransformer implements AttributeOptionTransformerInter
         foreach ($attributeOption->getOptionValues() as $value) {
             $currentLocale = $value->getLocale();
 
-            $stores = array_filter($this->storeLocaleCodes, function($locale) use($currentLocale) {
+            $stores = array_filter($this->storeLocaleCodes, function ($locale) use ($currentLocale) {
                 return $locale === $currentLocale;
             }, ARRAY_FILTER_USE_BOTH);
 

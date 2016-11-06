@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -175,7 +175,7 @@ class ProductAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
         $attributes = $this->repository->findAllByCode('catalog_product',
             [
                 'release_date',
-                'gift_message_available'
+                'gift_message_available',
             ]
         );
 
@@ -227,7 +227,7 @@ class ProductAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
             $this->assertInstanceOf(AttributeInterface::class, $attribute);
 
             if ($attribute->getId() === 167) {
-                $this->assertEquals('release_date',$attribute->getCode());
+                $this->assertEquals('release_date', $attribute->getCode());
             }
             if ($attribute->getId() === 167) {
                 $this->assertEquals('gift_message_available', $attribute->getCode());
@@ -374,7 +374,7 @@ class ProductAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(\Traversable::class, $attributes);
 
         $items = 0;
-        foreach ($attributes as $attribute){
+        foreach ($attributes as $attribute) {
             ++$items;
 
             $this->assertInstanceOf(AttributeInterface::class, $attribute);

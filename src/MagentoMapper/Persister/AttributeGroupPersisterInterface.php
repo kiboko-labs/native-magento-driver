@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -12,12 +12,9 @@ interface AttributeGroupPersisterInterface
     /**
      * @param string $groupCode
      * @param string $familyCode
-     * @param int $identifier
+     * @param int    $identifier
      */
     public function persist($groupCode, $familyCode, $identifier);
 
-    /**
-     * @return void
-     */
     public function flush();
 }

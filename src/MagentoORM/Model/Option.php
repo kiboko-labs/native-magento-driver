@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -145,10 +145,11 @@ class Option implements OptionInterface
     }
 
     /**
-     * @param int $identifier
-     * @param string $value
+     * @param int                   $identifier
+     * @param string                $value
      * @param OptionLocaleInterface $default
-     * @param Collection $locales
+     * @param Collection            $locales
+     *
      * @return static
      */
     public static function buildNewWith(

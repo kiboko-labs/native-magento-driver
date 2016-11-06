@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -32,19 +32,16 @@ class FamilyPersister implements FamilyPersisterInterface
 
     /**
      * @param string $code
-     * @param int $identifier
+     * @param int    $identifier
      */
     public function persist($code, $identifier)
     {
         $this->unitOfWork[] = [
             'attribute_set_id' => $identifier,
-            'family_code'      => $code,
+            'family_code' => $code,
         ];
     }
 
-    /**
-     * @return void
-     */
     public function flush()
     {
         foreach ($this->unitOfWork as $item) {

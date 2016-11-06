@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -9,8 +9,6 @@ namespace Kiboko\Component\MagentoMapper\SchemaManager\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
-use Doctrine\DBAL\Schema\Schema;
-use Doctrine\DBAL\Schema\SchemaDiff;
 use Doctrine\DBAL\Schema\Table;
 use Doctrine\DBAL\Schema\Comparator as SchemaComparator;
 
@@ -51,7 +49,7 @@ class AttributeMappingSchemaManager extends AbstractMappingSchemaManager
         ]);
 
         $table->addColumn('instance_identifier', 'string', [
-            'length' => 64
+            'length' => 64,
         ]);
 
         $table->addColumn('attribute_code', 'string', [
@@ -90,6 +88,7 @@ class AttributeMappingSchemaManager extends AbstractMappingSchemaManager
     /**
      * @param string $pimgentoTableName
      * @param string $linkCode
+     *
      * @return int|null
      *
      * @throws \Doctrine\DBAL\DBALException
@@ -106,11 +105,11 @@ class AttributeMappingSchemaManager extends AbstractMappingSchemaManager
 
         $queryBuilder
             ->select([
-                'attribute_id'        => 'pim.entity_id',
+                'attribute_id' => 'pim.entity_id',
                 'instance_identifier' => $queryBuilder->expr()->literal($linkCode),
-                'attribute_code'      => 'pim.code',
-                'mapping_class'       => 'NULL',
-                'mapping_options'     => $queryBuilder->expr()->literal(json_encode([], JSON_OBJECT_AS_ARRAY)),
+                'attribute_code' => 'pim.code',
+                'mapping_class' => 'NULL',
+                'mapping_options' => $queryBuilder->expr()->literal(json_encode([], JSON_OBJECT_AS_ARRAY)),
             ])
             ->from($pimgentoTableName, 'pim')
             ->where($queryBuilder->expr()->eq('pim.import', $queryBuilder->expr()->literal('attribute')))

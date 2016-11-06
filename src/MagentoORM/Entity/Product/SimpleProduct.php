@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -46,11 +46,11 @@ class SimpleProduct implements SimpleProductInterface
     }
 
     /**
-     * @param int                                  $identifier
-     * @param string                               $stringIdentifier
-     * @param FamilyInterface                      $family
-     * @param \DateTimeInterface                   $creationDate
-     * @param \DateTimeInterface                   $modificationDate
+     * @param int                                    $identifier
+     * @param string                                 $stringIdentifier
+     * @param FamilyInterface                        $family
+     * @param \DateTimeInterface                     $creationDate
+     * @param \DateTimeInterface                     $modificationDate
      * @param \Traversable|AttributeValueInterface[] $values
      *
      * @return static

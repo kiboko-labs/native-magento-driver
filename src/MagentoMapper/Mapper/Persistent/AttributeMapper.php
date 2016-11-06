@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS
+ * Copyright (c) 2016 Kiboko SAS.
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -30,8 +30,8 @@ class AttributeMapper implements AttributeMapperInterface
 
     /**
      * @param AttributeRepositoryInterface $repository
-     * @param AttributePersisterInterface $persister
-     * @param AttributeMapperInterface $secondLevelMapper
+     * @param AttributePersisterInterface  $persister
+     * @param AttributeMapperInterface     $secondLevelMapper
      */
     public function __construct(
         AttributeRepositoryInterface $repository,
@@ -45,6 +45,7 @@ class AttributeMapper implements AttributeMapperInterface
 
     /**
      * @param string $code
+     *
      * @return int
      */
     public function map($code)
@@ -60,7 +61,7 @@ class AttributeMapper implements AttributeMapperInterface
 
     /**
      * @param string $code
-     * @param int $identifier
+     * @param int    $identifier
      */
     public function persist($code, $identifier)
     {
@@ -68,9 +69,6 @@ class AttributeMapper implements AttributeMapperInterface
         $this->persister->persist($code, $identifier);
     }
 
-    /**
-     * @return void
-     */
     public function flush()
     {
         $this->secondLevelMapper->flush();
