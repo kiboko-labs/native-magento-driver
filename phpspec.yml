@@ -1,0 +1,6 @@
+suites:
+    magento_orm:
+        namespace: Kiboko\Component\MagentoORM
+        psr4_prefix: Kiboko\Component\MagentoORM
+        src_path: src/MagentoORM
+        spec_path: src/MagentoORM/

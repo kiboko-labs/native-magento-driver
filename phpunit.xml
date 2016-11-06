@@ -14,4 +14,9 @@
         <var name="MAGENTO_VERSION" value="1.9" />
         <var name="MAGENTO_EDITION" value="ce" />
     </php>
+    <testsuites>
+        <testsuite name="MagentoORM">
+            <directory>src/MagentoORM/unit/</directory>
+        </testsuite>
+    </testsuites>
 </phpunit>

@@ -1,0 +1,33 @@
+{
+    "name": "kiboko/magento-orm",
+    "description": "A Magento driver built as an ORM and ODM",
+    "type": "library",
+    "require": {
+        "php": ">=5.6",
+        "doctrine/dbal": "2.4.*",
+        "league/flysystem": "~1.0",
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.5",
+        "phpunit/dbunit": "^2.0"
+    },
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Grégory Planchat",
+            "email": "gregory@kiboko.fr"
+        }
+    ],
+    "minimum-stability": "alpha",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/kiboko-labs/batch-orm.git"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Kiboko\\Component\\MagentoORM\\": ""
+        }
+    }
+}
