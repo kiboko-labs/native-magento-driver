@@ -74,4 +74,18 @@ class Loader implements LoaderInterface
         return new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
             $this->getPathname($suite, $context, 'initial'));
     }
+
+    /**
+     *
+     * @param string $name
+     * @param string $suite
+     * @param string $context
+     *
+     * @return \PHPUnit_Extensions_Database_DataSet_IDataSet
+     */
+    public function namedDataSet($name, $suite, $context)
+    {
+        return new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(
+            $this->getPathname($suite, $context, $name));
+    }
 }

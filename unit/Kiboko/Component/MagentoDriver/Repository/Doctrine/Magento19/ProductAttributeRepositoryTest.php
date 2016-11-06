@@ -1,11 +1,16 @@
 <?php
+/**
+ * Copyright (c) 2016 Kiboko SAS
+ *
+ * @author Grégory Planchat <gregory@kiboko.fr>
+ */
 
-namespace unit\Kiboko\Component\MagentoDriver\Repository\Doctrine;
+namespace unit\Kiboko\Component\MagentoDriver\Repository\Doctrine\Magento19;
 
 use Doctrine\DBAL\Schema\Schema;
 use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
 use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilder;
-use Kiboko\Component\MagentoDriver\Repository\Doctrine\ProductAttributeRepository;
+use Kiboko\Component\MagentoDriver\Repository\Doctrine\Magento19\ProductAttributeRepository;
 use Kiboko\Component\MagentoDriver\Entity\Product\SimpleProduct;
 use Kiboko\Component\MagentoDriver\Entity\Product\ConfigurableProduct;
 use Kiboko\Component\MagentoDriver\Model\Family;

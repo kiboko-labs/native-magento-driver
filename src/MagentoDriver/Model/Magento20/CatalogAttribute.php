@@ -1,8 +1,15 @@
 <?php
+/**
+ * Copyright (c) 2016 Kiboko SAS
+ *
+ * @author Grégory Planchat <gregory@kiboko.fr>
+ */
 
-namespace Kiboko\Component\MagentoDriver\Model;
+namespace Kiboko\Component\MagentoDriver\Model\Magento20;
 
 use Kiboko\Component\MagentoDriver\Exception\RuntimeErrorException;
+use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
+use Kiboko\Component\MagentoDriver\Model\MappableTrait;
 
 class CatalogAttribute implements CatalogAttributeInterface
 {
@@ -281,15 +288,6 @@ class CatalogAttribute implements CatalogAttributeInterface
     public function isUsedForSortBy()
     {
         return $this->extension->isUsedForSortBy();
-    }
-
-    /**
-     * @return bool
-     * @MagentoODM\Field('is_configurable', version='1.*')
-     */
-    public function isConfigurable()
-    {
-        return $this->extension->isConfigurable();
     }
 
     /**

@@ -1,9 +1,14 @@
 <?php
+/**
+ * Copyright (c) 2016 Kiboko SAS
+ *
+ * @author Grégory Planchat <gregory@kiboko.fr>
+ */
 
-namespace unit\Kiboko\Component\MagentoDriver\Persister\StandardDml\Attribute;
+namespace unit\Kiboko\Component\MagentoDriver\Persister\Magento19\StandardDml\Attribute;
 
 use Doctrine\DBAL\Schema\Schema;
-use Kiboko\Component\MagentoDriver\Model\CatalogAttributeExtension;
+use Kiboko\Component\MagentoDriver\Model\Magento20\CatalogAttributeExtension;
 use Kiboko\Component\MagentoDriver\Persister\CatalogAttributeExtensionPersisterInterface;
 use Kiboko\Component\MagentoDriver\Persister\StandardDml\Attribute\CatalogAttributeExtensionPersister;
 use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilder;
@@ -94,29 +99,25 @@ class CatalogAttributeExtensionPersisterTest extends \PHPUnit_Framework_TestCase
 
         $this->fixturesLoader = new Loader(
             new FallbackResolver($schemaBuilder->getFixturesPath()),
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            '2.0', 'ce'
         );
 
         $schemaBuilder->hydrateEntityTypeTable(
             'catalog_eav_attribute',
             DoctrineSchemaBuilder::CONTEXT_PERSISTER,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            '2.0', 'ce'
         );
 
         $schemaBuilder->hydrateAttributeTable(
             'catalog_eav_attribute',
             DoctrineSchemaBuilder::CONTEXT_PERSISTER,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            '2.0', 'ce'
         );
 
         $schemaBuilder->hydrateCatalogAttributeExtensionsTable(
             'catalog_eav_attribute',
             DoctrineSchemaBuilder::CONTEXT_PERSISTER,
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            '2.0', 'ce'
         );
 
         $this->persister = new CatalogAttributeExtensionPersister(
@@ -150,117 +151,20 @@ class CatalogAttributeExtensionPersisterTest extends \PHPUnit_Framework_TestCase
 
     public function testInsertOne()
     {
-        
-        $catalogAttributeExtensionDatas = array(
-            'ce' => array(
-                '1.9' => array(
-                    'is_global' => 1,                       // Global
-                    'is_visible' => 1,                      // Visible
-                    'is_searchable' => 0,                   // Searchable
-                    'is_filterable' => 0,                   // Filterable
-                    'is_comparable' => 0,                   // Comparable
-                    'is_visible_on_front' => 0,             // VisibleOnFront
-                    'is_html_allowed_on_front' => 0,        // HtmlAllowedOnFront
-                    'is_used_for_price_rules' => 0,         // UsedForPriceRules
-                    'is_filterable_in_search' => 0,         // FilterableInSearch
-                    'used_in_product_listing' => 0,         // UsedInProductListing
-                    'used_for_sort_by' => 0,                // UsedForSortBy
-                    'is_configurable' => 0,                 // Configurable (M1)
-                    'apply_to' => null,                     // ProductTypesApplyingTo
-                    'is_visible_in_advanced_search' => 0,   // VisibleInAdvancedSearch
-                    'position' => 20,                       // Position
-                    'is_wysiwyg_enabled' => 0,              // WysiwygEnabled
-                    'is_used_for_promo_rules' => 0,         // UsedForPromoRules
-                ),
-                '2.0' => array(
-                    'is_global' => 1,                       // Global
-                    'is_visible' => 1,                      // Visible
-                    'is_searchable' => 0,                   // Searchable
-                    'is_filterable' => 0,                   // Filterable
-                    'is_comparable' => 0,                   // Comparable
-                    'is_visible_on_front' => 0,             // VisibleOnFront
-                    'is_html_allowed_on_front' => 0,        // HtmlAllowedOnFront
-                    'is_used_for_price_rules' => 0,         // UsedForPriceRules
-                    'is_filterable_in_search' => 0,         // FilterableInSearch
-                    'used_in_product_listing' => 0,         // UsedInProductListing
-                    'used_for_sort_by' => 0,                // UsedForSortBy
-                    'apply_to' => null,                     // ProductTypesApplyingTo
-                    'is_visible_in_advanced_search' => 0,   // VisibleInAdvancedSearch
-                    'position' => 20,                       // Position
-                    'is_wysiwyg_enabled' => 0,              // WysiwygEnabled
-                    'is_used_for_promo_rules' => 0,         // UsedForPromoRules
-                    'is_required_in_admin_store' => 0,      // RequiredInAdminStore (M2)
-                    'is_used_in_grid' => 0,                 // UsedInGrid (M2)
-                    'is_visible_in_grid' => 0,              // VisibleInGrid (M2)
-                    'is_filterable_in_grid' => 0,           // FilterableInGrid (M2)
-                    'search_weight' => 0,                   // SearchWeight (M2)
-                    'additional_data' => [],                // AdditionalData (M2)
-                ),
-            )
+        $attributeExtension = new CatalogAttributeExtension(
+            122,
+            null
         );
-        
-        $catalogAttributeExtensionRows = array(
-            'ce' => array(
-                '1.9' => array(
-                    'attribute_id' => 122,
-                    'frontend_input_renderer' => null,
-                    'is_global' => 1,
-                    'is_visible' => 1,
-                    'is_searchable' => 0,
-                    'is_filterable' => 0,
-                    'is_comparable' => 0,
-                    'is_visible_on_front' => 0,
-                    'is_html_allowed_on_front' => 0,
-                    'is_used_for_price_rules' => 0,
-                    'is_filterable_in_search' => 0,
-                    'used_in_product_listing' => 0,
-                    'used_for_sort_by' => 0,
-                    'is_configurable' => 0,
-                    'apply_to' => null,
-                    'is_visible_in_advanced_search' => 0,
-                    'position' => 20,
-                    'is_wysiwyg_enabled' => 0,
-                    'is_used_for_promo_rules' => 0,
-                ),
-                '2.0' => array(
-                    'attribute_id' => 122,
-                    'frontend_input_renderer' => null,
-                    'is_global' => 1,
-                    'is_visible' => 1,
-                    'is_searchable' => 0,
-                    'is_filterable' => 0,
-                    'is_comparable' => 0,
-                    'is_visible_on_front' => 0,
-                    'is_html_allowed_on_front' => 0,
-                    'is_used_for_price_rules' => 0,
-                    'is_filterable_in_search' => 0,
-                    'used_in_product_listing' => 0,
-                    'used_for_sort_by' => 0,
-                    'apply_to' => null,
-                    'is_visible_in_advanced_search' => 0,
-                    'position' => 20,
-                    'is_wysiwyg_enabled' => 0,
-                    'is_used_for_promo_rules' => 0,
-                    'is_required_in_admin_store' => 0,
-                    'is_used_in_grid' => 0,
-                    'is_visible_in_grid' => 0,
-                    'is_filterable_in_grid' => 0,
-                    'search_weight' => 0,
-                    'additional_data' => null,
-                ),
-            )
-        );
-        
+
         $this->persister->initialize();
-        $this->persister->persist(new CatalogAttributeExtension(
-            122,     // AttributeId
-            null,   // FrontendInputRendererClassName
-            $catalogAttributeExtensionDatas[$GLOBALS['MAGENTO_EDITION']][$GLOBALS['MAGENTO_VERSION']] // Datas
-        ));
+        $this->persister->persist($attributeExtension);
         $this->persister->flush();
 
-        $expected = $this->getDataSet();
-        $expected->getTable('catalog_eav_attribute')->addRow($catalogAttributeExtensionRows[$GLOBALS['MAGENTO_EDITION']][$GLOBALS['MAGENTO_VERSION']]);
+        $expected = $this->fixturesLoader->namedDataSet(
+            'insert-one',
+            'catalog_eav_attribute',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER
+        );
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('catalog_eav_attribute');

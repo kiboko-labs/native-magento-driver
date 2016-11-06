@@ -1,10 +1,16 @@
 <?php
+/**
+ * Copyright (c) 2016 Kiboko SAS
+ *
+ * @author Grégory Planchat <gregory@kiboko.fr>
+ */
 
 namespace Kiboko\Component\MagentoDriver\Model;
 
 class EntityType implements EntityTypeInterface
 {
     use MappableTrait;
+    use IdentifiableTrait;
 
     /**
      * @var string

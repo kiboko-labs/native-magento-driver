@@ -1,8 +1,13 @@
 <?php
+/**
+ * Copyright (c) 2016 Kiboko SAS
+ *
+ * @author Grégory Planchat <gregory@kiboko.fr>
+ */
 
 namespace Kiboko\Component\MagentoMapper\Transformer;
 
-use Kiboko\Component\MagentoDriver\Model\AttributeInterface as KibokoAttributeInterface;
+use Kiboko\Component\MagentoDriver\Model\CatalogAttributeInterface as KibokoAttributeInterface;
 use Pim\Component\Catalog\Model\AttributeInterface as PimAttributeInterface;
 
 interface AttributeTransformerInterface

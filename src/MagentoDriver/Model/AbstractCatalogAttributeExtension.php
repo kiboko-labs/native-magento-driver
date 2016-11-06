@@ -1,13 +1,15 @@
 <?php
+/**
+ * Copyright (c) 2016 Kiboko SAS
+ *
+ * @author Grégory Planchat <gregory@kiboko.fr>
+ */
 
 namespace Kiboko\Component\MagentoDriver\Model;
 
-class CatalogAttributeExtension implements CatalogAttributeExtensionInterface
+abstract class AbstractCatalogAttributeExtension implements CatalogAttributeExtensionInterface
 {
-    /**
-     * @var int
-     */
-    private $identifier;
+    use IdentifiableTrait;
 
     /**
      * @var string
@@ -70,11 +72,6 @@ class CatalogAttributeExtension implements CatalogAttributeExtensionInterface
     private $usedForSortBy;
 
     /**
-     * @var int
-     */
-    private $configurable;
-
-    /**
      * @var bool
      */
     private $visibleInAdvancedSearch;
@@ -90,24 +87,9 @@ class CatalogAttributeExtension implements CatalogAttributeExtensionInterface
     private $usedForPromoRules;
 
     /**
-     * @var int
+     * @var string
      */
-    private $requiredInAdminStore;
-
-    /**
-     * @var int
-     */
-    private $usedInGrid;
-
-    /**
-     * @var int
-     */
-    private $visibleInGrid;
-
-    /**
-     * @var int
-     */
-    private $filterableInGrid;
+    private $note;
 
     /**
      * @var int
@@ -115,64 +97,73 @@ class CatalogAttributeExtension implements CatalogAttributeExtensionInterface
     private $position;
 
     /**
-     * @var int
-     */
-    private $searchWeight;
-
-    /**
      * @var array
      */
     private $productTypesApplyingTo;
 
     /**
-     * @var array
-     */
-    private $additionalData;
-
-    /**
-     * @var string
-     */
-    private $note;
-    
-    /**
+     * AbstractCatalogAttributeExtension constructor.
+     *
      * @param int $attributeId
-     * @param bool $frontendInputRendererClassName
-     * @param array $variableFields An associative array containing column-value pairs.
+     * @param string $frontendInputRendererClassName
+     * @param bool $global
+     * @param bool $visible
+     * @param bool $searchable
+     * @param bool $filterable
+     * @param bool $comparable
+     * @param bool $visibleOnFront
+     * @param bool $htmlAllowedOnFront
+     * @param bool $usedForPriceRules
+     * @param bool $filterableInSearch
+     * @param bool $usedInProductListing
+     * @param bool $usedForSortBy
+     * @param bool $visibleInAdvancedSearch
+     * @param bool $wysiwygEnabled
+     * @param bool $usedForPromoRules
+     * @param string $note
+     * @param int $position
+     * @param array $productTypesApplyingTo
      */
     public function __construct(
-        $attributeId, 
-        $frontendInputRendererClassName, 
-        $variableFields
-    )
-    {
+        $attributeId,
+        $frontendInputRendererClassName,
+        $global = true,
+        $visible = true,
+        $searchable = false,
+        $filterable = false,
+        $comparable = false,
+        $visibleOnFront = false,
+        $htmlAllowedOnFront = false,
+        $usedForPriceRules = false,
+        $filterableInSearch = false,
+        $usedInProductListing = false,
+        $usedForSortBy = false,
+        $visibleInAdvancedSearch = false,
+        $wysiwygEnabled = false,
+        $usedForPromoRules = false,
+        array $productTypesApplyingTo = [],
+        $note = null,
+        $position = null
+    ) {
         $this->identifier = $attributeId;
         $this->frontendInputRendererClassName = $frontendInputRendererClassName;
-        $this->global = (int) @$variableFields['is_global']?: 1;
-        $this->visible = (bool) @$variableFields['is_visible']?: true;
-        $this->searchable = (bool) @$variableFields['is_searchable']?: false;
-        $this->filterable = (bool) @$variableFields['is_filterable']?: false;
-        $this->comparable = (bool) @$variableFields['is_comparable']?: false;
-        $this->visibleOnFront = (bool) @$variableFields['is_visible_on_front']?: false;
-        $this->htmlAllowedOnFront = (bool) @$variableFields['is_html_allowed_on_front']?: false;
-        $this->usedForPriceRules = (bool) @$variableFields['is_used_for_price_rules']?: false;
-        $this->filterableInSearch = (bool) @$variableFields['is_filterable_in_search']?: false;
-        $this->usedInProductListing = (bool) @$variableFields['used_in_product_listing']?: false;
-        $this->usedForSortBy = (bool) @$variableFields['used_for_sort_by']?: false;
-        $this->configurable = (isset($variableFields['is_configurable'])) ? (int) $variableFields['is_configurable'] : null; // M1
-        $this->productTypesApplyingTo = (array) @$variableFields['apply_to']?: null;
-        $this->visibleInAdvancedSearch = (bool) @$variableFields['is_visible_in_advanced_search']?: false;
-        $this->position = (int) @$variableFields['position']?: 0;
-        $this->wysiwygEnabled = (bool) @$variableFields['is_wysiwyg_enabled']?: false;
-        $this->usedForPromoRules = (bool) @$variableFields['is_used_for_promo_rules']?: false;
-        // M2 fields
-        $this->requiredInAdminStore = (bool) @$variableFields['is_required_in_admin_store']?: null;
-        $this->usedInGrid = (bool) @$variableFields['is_used_in_grid']?: null;
-        $this->visibleInGrid = (bool) @$variableFields['is_visible_in_grid']?: null;
-        $this->filterableInGrid = (bool) @$variableFields['is_filterable_in_grid']?: null;
-        $this->searchWeight =(isset($variableFields['search_weight'])) ? (int) $variableFields['search_weight'] : null;
-        $this->additionalData = (array) @$variableFields['additional_data']?: null;
-        $this->note = (string) @$variableFields['note']?: null;
-        
+        $this->global = $global;
+        $this->visible = $visible;
+        $this->searchable = $searchable;
+        $this->filterable = $filterable;
+        $this->comparable = $comparable;
+        $this->visibleOnFront = $visibleOnFront;
+        $this->htmlAllowedOnFront = $htmlAllowedOnFront;
+        $this->usedForPriceRules = $usedForPriceRules;
+        $this->filterableInSearch = $filterableInSearch;
+        $this->usedInProductListing = $usedInProductListing;
+        $this->usedForSortBy = $usedForSortBy;
+        $this->visibleInAdvancedSearch = $visibleInAdvancedSearch;
+        $this->wysiwygEnabled = $wysiwygEnabled;
+        $this->usedForPromoRules = $usedForPromoRules;
+        $this->note = $note;
+        $this->position = $position;
+        $this->productTypesApplyingTo = $productTypesApplyingTo;
     }
 
     /**
@@ -284,15 +275,6 @@ class CatalogAttributeExtension implements CatalogAttributeExtensionInterface
     }
 
     /**
-     * @return int
-     * @MagentoODM\Field('is_configurable', version='1.*')
-     */
-    public function isConfigurable()
-    {
-        return $this->configurable;
-    }
-
-    /**
      * @return bool
      * @MagentoODM\Field('is_visible_in_advanced_search', version='*')
      */
@@ -321,56 +303,11 @@ class CatalogAttributeExtension implements CatalogAttributeExtensionInterface
 
     /**
      * @return int
-     * @MagentoODM\Field('is_required_in_admin_store', version='2.*')
-     */
-    public function isRequiredInAdminStore()
-    {
-        return $this->requiredInAdminStore;
-    }
-
-    /**
-     * @return int
-     * @MagentoODM\Field('is_used_in_grid', version='2.*')
-     */
-    public function isUsedInGrid()
-    {
-        return $this->usedInGrid;
-    }
-
-    /**
-     * @return int
-     * @MagentoODM\Field('is_visible_in_grid', version='2.*')
-     */
-    public function isVisibleInGrid()
-    {
-        return $this->visibleInGrid;
-    }
-
-    /**
-     * @return int
-     * @MagentoODM\Field('is_filterable_in_grid', version='2.*')
-     */
-    public function isFilterableInGrid()
-    {
-        return $this->filterableInGrid;
-    }
-
-    /**
-     * @return int
      * @MagentoODM\Field('position', version='*')
      */
     public function getPosition()
     {
         return $this->position;
-    }
-
-    /**
-     * @return int
-     * @MagentoODM\Field('search_weight', version='2.*')
-     */
-    public function getSearchWeight()
-    {
-        return $this->searchWeight;
     }
 
     /**
@@ -380,14 +317,5 @@ class CatalogAttributeExtension implements CatalogAttributeExtensionInterface
     public function getProductTypesApplyingTo()
     {
         return $this->productTypesApplyingTo;
-    }
-
-    /**
-     * @return array
-     * @MagentoODM\Field('additional_data', version='2.*')
-     */
-    public function getAdditionalData()
-    {
-        return $this->additionalData;
     }
 }

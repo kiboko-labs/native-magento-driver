@@ -2,6 +2,7 @@
 
 namespace unit\Kiboko\Component\MagentoDriver\DoctrineTools;
 
+use Doctrine\DBAL\Configuration;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use unit\Kiboko\Component\MagentoDriver\SchemaBuilder\Fixture\Loader;
@@ -64,6 +65,8 @@ trait DatabaseConnectionAwareTrait
             $this->doctrineConnection = DriverManager::getConnection([
                 'pdo' => $this->getPdoConnection(),
             ]);
+            $this->doctrineConnection->getDatabasePlatform()
+                ->registerDoctrineTypeMapping('enum', 'string');
         }
 
         return $this->doctrineConnection;
