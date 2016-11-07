@@ -7,6 +7,7 @@
 
 namespace Kiboko\Component\AkeneoToMagentoMapper\Transformer\Magento19\Attribute\Type;
 
+use Kiboko\Component\AkeneoToMagentoMapper\Mapper\AttributeMapperInterface;
 use Kiboko\Component\MagentoORM\Model\Attribute;
 use Kiboko\Component\MagentoORM\Model\AttributeInterface as KibokoAttributeInterface;
 use Kiboko\Component\MagentoORM\Model\Magento19\CatalogAttribute;
@@ -18,6 +19,11 @@ use Pim\Component\Catalog\Model\AttributeInterface as PimAttributeInterface;
 class NativeDatetimeAttributeTransformer implements AttributeTransformerInterface
 {
     /**
+     * @var AttributeMapperInterface
+     */
+    private $attributeMapper;
+
+    /**
      * @var EntityTypeMapperInterface
      */
     private $entityTypeMapper;
@@ -28,10 +34,12 @@ class NativeDatetimeAttributeTransformer implements AttributeTransformerInterfac
     private $supportedAttributeCodes;
 
     /**
+     * @param AttributeMapperInterface $attributeMapper
      * @param EntityTypeMapperInterface $entityTypeMapper
      * @param string[]
      */
     public function __construct(
+        AttributeMapperInterface $attributeMapper,
         EntityTypeMapperInterface $entityTypeMapper,
         array $supportedAttributeCodes = null
     ) {
@@ -55,9 +63,11 @@ class NativeDatetimeAttributeTransformer implements AttributeTransformerInterfac
      */
     public function transform(PimAttributeInterface $attribute)
     {
+        $attributeId = $this->attributeMapper->map($attribute->getCode());
         $entityTypeId = $this->entityTypeMapper->map($attribute->getEntityType());
         yield new CatalogAttribute(
-            new Attribute(
+            Attribute::buildNewWith(
+                $attributeId,
                 $entityTypeId,                           // entity_type_id
                 $attribute->getCode(),                   // attribute_code
                 null,                                    // attribute_model
@@ -67,8 +77,8 @@ class NativeDatetimeAttributeTransformer implements AttributeTransformerInterfac
                 null,                                    // frontend_model
                 'date',                                  // frontend_input
                 $attribute->getLabel(),                  // frontend_label
-                null,                                    // source_model
                 null,                                    // frontend_class
+                null,                                    // source_model
                 $attribute->isRequired(),                // is_required
                 false,                                   // is_user_defined
                 $attribute->isUnique(),                  // is_unique
@@ -76,6 +86,8 @@ class NativeDatetimeAttributeTransformer implements AttributeTransformerInterfac
                 null                                     // note
             ),
             new CatalogAttributeExtension(
+                $attributeId,
+                ''
             )
         );
     }

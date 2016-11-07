@@ -18,16 +18,24 @@ use Pim\Component\Catalog\Model\AttributeInterface as PimAttributeInterface;
 class BooleanAttributeTransformer implements AttributeTransformerInterface
 {
     /**
+     * @var AttributeMapperInterface
+     */
+    private $attributeMapper;
+
+    /**
      * @var EntityTypeMapperInterface
      */
     private $entityTypeMapper;
 
     /**
+     * @param AttributeMapperInterface $attributeMapper
      * @param EntityTypeMapperInterface $entityTypeMapper
      */
     public function __construct(
+        AttributeMapperInterface $attributeMapper,
         EntityTypeMapperInterface $entityTypeMapper
     ) {
+        $this->attributeMapper = $attributeMapper;
         $this->entityTypeMapper = $entityTypeMapper;
     }
 
@@ -38,9 +46,11 @@ class BooleanAttributeTransformer implements AttributeTransformerInterface
      */
     public function transform(PimAttributeInterface $attribute)
     {
+        $attributeId = $this->attributeMapper->map($attribute->getCode());
         $entityTypeId = $this->entityTypeMapper->map($attribute->getEntityType());
         yield new CatalogAttribute(
-            new Attribute(
+            Attribute::buildNewWith(
+                $attributeId,
                 $entityTypeId,                               // entity_type_id
                 $attribute->getCode(),                       // attribute_code
                 null,                                        // attribute_model
@@ -59,6 +69,8 @@ class BooleanAttributeTransformer implements AttributeTransformerInterface
                 null                                         // note
             ),
             new CatalogAttributeExtension(
+                $attributeId,
+                ''
             )
         );
     }
