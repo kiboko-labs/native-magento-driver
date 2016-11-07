@@ -54,7 +54,7 @@
     "autoload": {
         "psr-4": {
             "Kiboko\\Component\\MagentoORM\\": "src/MagentoORM/",
-            "Kiboko\\Component\\MagentoMapper\\": "src/MagentoMapper/",
+            "Kiboko\\Component\\AkeneoToMagentoMapper\\": "src/AkeneoToMagentoMapper/",
             "Kiboko\\Component\\MagentoSerializer\\": "src/MagentoSerializer/"
         }
     },
