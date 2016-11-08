@@ -7,28 +7,64 @@
 
 namespace Kiboko\Component\MagentoSerializer\Decoder;
 
-use Kiboko\Component\MagentoDriver\Repository\ProductAttributeRepositoryInterface;
-use Kiboko\Component\MagentoMapper\Repository\CategoryRepositoryInterface;
+use Kiboko\Component\AkeneoToMagentoMapper\Repository\CategoryRepositoryInterface;
+use Kiboko\Component\MagentoORM\Repository\ProductAttributeRepositoryInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Serializer\Encoder\DecoderInterface;
 
 class ProductDecoder implements DecoderInterface
 {
+    /**
+     * @var array
+     */
     private $headers;
+
+    /**
+     * @var int
+     */
     private $headersCount;
+
+    /**
+     * @var ProductAttributeRepositoryInterface
+     */
     private $productAttributeRepository;
+
+    /**
+     * @var CategoryRepositoryInterface
+     */
     private $categoryMapperRepository;
 
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
+     * ProductDecoder constructor.
+     * @param array $headers
+     * @param ProductAttributeRepositoryInterface $productAttributeRepository
+     * @param CategoryRepositoryInterface $categoryMapperRepository
+     * @param LoggerInterface $logger
+     */
     public function __construct(
         array $headers,
         ProductAttributeRepositoryInterface $productAttributeRepository,
-        CategoryRepositoryInterface $categoryMapperRepository
+        CategoryRepositoryInterface $categoryMapperRepository,
+        LoggerInterface $logger
     ) {
         $this->headers = $headers;
         $this->headersCount = count($headers);
         $this->productAttributeRepository = $productAttributeRepository;
         $this->categoryMapperRepository = $categoryMapperRepository;
+        $this->logger = $logger;
     }
 
+    /**
+     * @param string $data
+     * @param string $format
+     * @param array $context
+     * @return array
+     */
     public function decode($data, $format, array $context = [])
     {
         $reader = new \SplFileObject($data, 'r');
@@ -40,17 +76,25 @@ class ProductDecoder implements DecoderInterface
                     continue;
                 }
             } catch (\Exception $e) {
-                file_put_contents('php://stderr', $e->getMessage());
+                $this->logger->error($e->getMessage());
                 continue;
             }
         }
     }
 
+    /**
+     * @param string $format
+     * @return bool
+     */
     public function supportsDecoding($format)
     {
-        return $format === 'csv';
+        return $format === 'magento';
     }
 
+    /**
+     * @param \SplFileObject $reader
+     * @return array
+     */
     public function read(\SplFileObject $reader)
     {
         $raw = $reader->fgetcsv(';', '"');
@@ -92,7 +136,7 @@ class ProductDecoder implements DecoderInterface
 
             $attribute = $this->productAttributeRepository->findOneByCode('catalog_product', $fieldName);
             if ($attribute !== null) {
-                if ($attribute->getFrontendType() !== 'multiselect' &&
+                if ($attribute->getFrontendInput() !== 'multiselect' &&
                     !in_array($fieldName, ['axis', 'groups', 'categories'])
                 ) {
                     $finalValue = [
@@ -146,7 +190,7 @@ class ProductDecoder implements DecoderInterface
             }
 
             if ($attribute !== null &&
-                $attribute->getFrontendType() === 'price' &&
+                $attribute->getFrontendInput() === 'price' &&
                 preg_match('/^[A-Z]{3}$/', $option)
             ) {
                 $finalValue = array_merge(
