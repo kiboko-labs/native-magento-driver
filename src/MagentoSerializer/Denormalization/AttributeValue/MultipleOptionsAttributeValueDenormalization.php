@@ -7,10 +7,10 @@
 
 namespace Kiboko\Component\MagentoSerializer\Denormalization\AttributeValue;
 
-use Kiboko\Component\MagentoMapper\Mapper\OptionMapperInterface;
-use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
-use Kiboko\Component\MagentoDriver\Model\Immutable\ImmutableVarcharAttributeValue;
-use Kiboko\Component\MagentoDriver\Repository\AttributeRepositoryInterface;
+use Kiboko\Component\AkeneoToMagentoMapper\Mapper\OptionMapperInterface;
+use Kiboko\Component\MagentoORM\Model\AttributeValueInterface;
+use Kiboko\Component\MagentoORM\Model\Immutable\ImmutableVarcharAttributeValue;
+use Kiboko\Component\MagentoORM\Repository\AttributeRepositoryInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 class MultipleOptionsAttributeValueDenormalization implements DenormalizerInterface
@@ -18,7 +18,7 @@ class MultipleOptionsAttributeValueDenormalization implements DenormalizerInterf
     /**
      * @var AttributeRepositoryInterface
      */
-    private $attributeRepository;
+    protected $attributeRepository;
 
     /**
      * @var OptionMapperInterface

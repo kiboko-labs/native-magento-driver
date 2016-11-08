@@ -34,7 +34,7 @@ class TierPriceAttributeTransformer implements AttributeTransformerInterface
     private $supportedAttributeCodes;
 
     /**
-     * @param AttributeMapperInterface $attributeMapper
+     * @param AttributeMapperInterface  $attributeMapper
      * @param EntityTypeMapperInterface $entityTypeMapper
      * @param string[]
      */

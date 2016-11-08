@@ -29,7 +29,7 @@ class AssetAttributeTransformer implements AttributeTransformerInterface
     private $entityTypeMapper;
 
     /**
-     * @param AttributeMapperInterface $attributeMapper
+     * @param AttributeMapperInterface  $attributeMapper
      * @param EntityTypeMapperInterface $entityTypeMapper
      */
     public function __construct(

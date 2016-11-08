@@ -24,6 +24,11 @@ use Pim\Component\Catalog\Model\AttributeInterface as PimAttributeInterface;
 class GroupPriceAttributeTransformer implements AttributeTransformerInterface
 {
     /**
+     * @var AttributeMapperInterface
+     */
+    private $attributeMapper;
+
+    /**
      * @var EntityTypeMapperInterface
      */
     private $entityTypeMapper;
@@ -34,7 +39,7 @@ class GroupPriceAttributeTransformer implements AttributeTransformerInterface
     private $supportedAttributeCodes;
 
     /**
-     * @param AttributeMapperInterface $attributeMapper
+     * @param AttributeMapperInterface  $attributeMapper
      * @param EntityTypeMapperInterface $entityTypeMapper
      * @param string[]
      */
@@ -43,6 +48,7 @@ class GroupPriceAttributeTransformer implements AttributeTransformerInterface
         EntityTypeMapperInterface $entityTypeMapper,
         array $supportedAttributeCodes = null
     ) {
+        $this->attributeMapper = $attributeMapper;
         $this->entityTypeMapper = $entityTypeMapper;
 
         if ($supportedAttributeCodes === null) {

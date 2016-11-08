@@ -7,6 +7,7 @@
 
 namespace Kiboko\Component\AkeneoToMagentoMapper\Transformer\Magento19\Attribute\Type;
 
+use Kiboko\Component\AkeneoToMagentoMapper\Mapper\AttributeMapperInterface;
 use Kiboko\Component\MagentoORM\Model\Attribute;
 use Kiboko\Component\MagentoORM\Model\AttributeInterface as KibokoAttributeInterface;
 use Kiboko\Component\MagentoORM\Model\Magento19\CatalogAttribute;
@@ -28,7 +29,7 @@ class BooleanAttributeTransformer implements AttributeTransformerInterface
     private $entityTypeMapper;
 
     /**
-     * @param AttributeMapperInterface $attributeMapper
+     * @param AttributeMapperInterface  $attributeMapper
      * @param EntityTypeMapperInterface $entityTypeMapper
      */
     public function __construct(

@@ -34,7 +34,7 @@ class NativeDatetimeAttributeTransformer implements AttributeTransformerInterfac
     private $supportedAttributeCodes;
 
     /**
-     * @param AttributeMapperInterface $attributeMapper
+     * @param AttributeMapperInterface  $attributeMapper
      * @param EntityTypeMapperInterface $entityTypeMapper
      * @param string[]
      */

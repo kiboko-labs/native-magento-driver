@@ -7,7 +7,7 @@
 
 namespace Kiboko\Component\MagentoSerializer\Denormalization\AttributeValue;
 
-use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
+use Kiboko\Component\MagentoORM\Model\AttributeValueInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 class DummyAttributeValueDenormalization implements DenormalizerInterface

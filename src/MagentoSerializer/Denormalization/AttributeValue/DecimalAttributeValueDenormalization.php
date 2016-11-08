@@ -7,9 +7,9 @@
 
 namespace Kiboko\Component\MagentoSerializer\Denormalization\AttributeValue;
 
-use Kiboko\Component\MagentoDriver\Model\AttributeValueInterface;
-use Kiboko\Component\MagentoDriver\Model\Immutable\ImmutableDecimalAttributeValue;
-use Kiboko\Component\MagentoDriver\Repository\AttributeRepositoryInterface;
+use Kiboko\Component\MagentoORM\Model\AttributeValueInterface;
+use Kiboko\Component\MagentoORM\Model\Immutable\ImmutableDecimalAttributeValue;
+use Kiboko\Component\MagentoORM\Repository\AttributeRepositoryInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 class DecimalAttributeValueDenormalization implements DenormalizerInterface
@@ -17,7 +17,7 @@ class DecimalAttributeValueDenormalization implements DenormalizerInterface
     /**
      * @var AttributeRepositoryInterface
      */
-    private $attributeRepository;
+    protected $attributeRepository;
 
     /**
      * @param AttributeRepositoryInterface $attributeRepository
