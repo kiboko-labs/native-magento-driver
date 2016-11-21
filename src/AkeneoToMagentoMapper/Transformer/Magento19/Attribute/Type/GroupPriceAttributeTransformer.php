@@ -7,6 +7,7 @@
 
 namespace Kiboko\Component\AkeneoToMagentoMapper\Transformer\Attribute\Type;
 
+use Kiboko\Component\AkeneoToMagentoMapper\Mapper\AttributeMapperInterface;
 use Kiboko\Component\MagentoORM\Model\Attribute;
 use Kiboko\Component\MagentoORM\Model\AttributeInterface as KibokoAttributeInterface;
 use Kiboko\Component\MagentoORM\Model\Magento19\CatalogAttribute;
@@ -23,6 +24,11 @@ use Pim\Component\Catalog\Model\AttributeInterface as PimAttributeInterface;
 class GroupPriceAttributeTransformer implements AttributeTransformerInterface
 {
     /**
+     * @var AttributeMapperInterface
+     */
+    private $attributeMapper;
+
+    /**
      * @var EntityTypeMapperInterface
      */
     private $entityTypeMapper;
@@ -33,13 +39,16 @@ class GroupPriceAttributeTransformer implements AttributeTransformerInterface
     private $supportedAttributeCodes;
 
     /**
+     * @param AttributeMapperInterface  $attributeMapper
      * @param EntityTypeMapperInterface $entityTypeMapper
      * @param string[]
      */
     public function __construct(
+        AttributeMapperInterface $attributeMapper,
         EntityTypeMapperInterface $entityTypeMapper,
         array $supportedAttributeCodes = null
     ) {
+        $this->attributeMapper = $attributeMapper;
         $this->entityTypeMapper = $entityTypeMapper;
 
         if ($supportedAttributeCodes === null) {
@@ -58,9 +67,11 @@ class GroupPriceAttributeTransformer implements AttributeTransformerInterface
      */
     public function transform(PimAttributeInterface $attribute)
     {
+        $attributeId = $this->attributeMapper->map($attribute->getCode());
         $entityTypeId = $this->entityTypeMapper->map($attribute->getEntityType());
         yield new CatalogAttribute(
-            new Attribute(
+            Attribute::buildNewWith(
+                $attributeId,
                 $entityTypeId,                                      // entity_type_id
                 $this->entityTypeMapper->map($attribute),           // entity_type_id
                 $attribute->getCode(),                              // attribute_code
@@ -81,6 +92,8 @@ class GroupPriceAttributeTransformer implements AttributeTransformerInterface
                 null                                                // note
             ),
             new CatalogAttributeExtension(
+                $attributeId,
+                ''
             )
         );
     }

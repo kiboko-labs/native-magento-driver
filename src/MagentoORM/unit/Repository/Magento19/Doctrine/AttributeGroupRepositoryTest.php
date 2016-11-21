@@ -1,14 +1,14 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS.
+ * Copyright (c) 2016 Kiboko SAS
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace unit\Kiboko\Component\MagentoORM\Repository\Doctrine\Magento20;
+namespace unit\Kiboko\Component\MagentoORM\Repository\Magento19\Doctrine;
 
 use Doctrine\DBAL\Schema\Schema;
-use Kiboko\Component\MagentoORM\Factory\Magento20\AttributeGroupFactory;
+use Kiboko\Component\MagentoORM\Factory\Magento19\AttributeGroupFactory;
 use Kiboko\Component\MagentoORM\Model\AttributeGroupInterface;
 use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\AttributeGroupQueryBuilder;
 use Kiboko\Component\MagentoORM\Repository\Doctrine\AttributeGroupRepository;
@@ -36,7 +36,7 @@ class AttributeGroupRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     private function getVersion()
     {
-        return '2.0';
+        return '1.9';
     }
 
     /**

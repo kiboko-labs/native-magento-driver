@@ -7,12 +7,11 @@
 
 $finder = Symfony\CS\Finder\DefaultFinder::create()
     ->in('src/MagentoORM')
-    ->in('src/MagentoMapper')
+    ->in('src/AkeneoToMagentoMapper')
     ->in('src/MagentoSerializer')
     ->exclude('src/MagentoORM/spec')
-    ->exclude('src/MagentoMapper/spec')
+    ->exclude('src/AkeneoToMagentoMapper/spec')
     ->exclude('src/MagentoSerializer/spec')
-    ->not
 ;
 
 return Symfony\CS\Config\Config::create()

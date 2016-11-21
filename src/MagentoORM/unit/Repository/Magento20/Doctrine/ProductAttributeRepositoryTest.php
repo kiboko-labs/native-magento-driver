@@ -1,16 +1,16 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS.
+ * Copyright (c) 2016 Kiboko SAS
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace unit\Kiboko\Component\MagentoORM\Repository\Doctrine\Magento20;
+namespace unit\Kiboko\Component\MagentoORM\Repository\Magento20\Doctrine;
 
 use Doctrine\DBAL\Schema\Schema;
 use Kiboko\Component\MagentoORM\Model\AttributeInterface;
 use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\ProductAttributeQueryBuilder;
-use Kiboko\Component\MagentoORM\Repository\Doctrine\Magento20\ProductAttributeRepository;
+use Kiboko\Component\MagentoORM\Repository\Magento20\Doctrine\ProductAttributeRepository;
 use Kiboko\Component\MagentoORM\Entity\Product\SimpleProduct;
 use Kiboko\Component\MagentoORM\Entity\Product\ConfigurableProduct;
 use Kiboko\Component\MagentoORM\Model\Family;

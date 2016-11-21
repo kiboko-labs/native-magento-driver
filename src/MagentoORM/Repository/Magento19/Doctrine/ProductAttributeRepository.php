@@ -5,7 +5,7 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace Kiboko\Component\MagentoORM\Repository\Doctrine\Magento19;
+namespace Kiboko\Component\MagentoORM\Repository\Magento19\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Kiboko\Component\MagentoORM\Model\Attribute;

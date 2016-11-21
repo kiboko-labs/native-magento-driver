@@ -5,7 +5,7 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace Kiboko\Component\MagentoORM\Repository\Doctrine\Magento20;
+namespace Kiboko\Component\MagentoORM\Repository\Magento20\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Kiboko\Component\MagentoORM\Model\Attribute;
