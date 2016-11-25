@@ -19,7 +19,7 @@ This object creates Doctrine DBAL `QueryBuilder` objects for product attribute d
 
 /** @var \Doctrine\DBAL\Connection $connection */
 
-use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilder;
+use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\ProductAttributeQueryBuilder;
 
 $queryBuilder = new ProductAttributeQueryBuilder(
     $connection,
@@ -37,7 +37,7 @@ $queryBuilder = new ProductAttributeQueryBuilder(
 
 ```yaml
 parameters:
-  kiboko.magento_driver.query_builder.product_attribute.class:       Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeQueryBuilder
+  kiboko.magento_driver.query_builder.product_attribute.class:       Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\ProductAttributeQueryBuilder
   
   kiboko.magento_driver.backend.attribute.standard.table: 'eav_attribute'
   kiboko.magento_driver.backend.attribute.catalog_extras.table: 'catalog_eav_attribute'
@@ -103,7 +103,7 @@ The *Repository* objects helps you fetch data from the database. It requires a p
 ```php
 <?php
 
-use Luni\Component\MagentoDriver\Repository\Doctrine\ProductAttributeRepository;
+use Kiboko\Component\MagentoORM\Repository\Doctrine\ProductAttributeRepository;
 
 $productAttributeRepository = new ProductAttributeRepository(
     $connection,
@@ -115,7 +115,7 @@ $productAttributeRepository = new ProductAttributeRepository(
 
 ```yaml
 parameters:
-  kiboko.magento_driver.repository.catalog_attribute.class:       Kiboko\Component\MagentoDriver\Repository\Doctrine\ProductAttributeRepository
+  kiboko.magento_driver.repository.catalog_attribute.class:       Kiboko\Component\MagentoORM\Repository\Doctrine\ProductAttributeRepository
 
 services:
   kiboko.magento_driver.repository.catalog_attribute:
@@ -150,7 +150,7 @@ There is a cached repository which will request only attribute data that haven't
 ```php
 <?php
 
-use Kiboko\Component\MagentoDriver\Repository\CachedRepository\CachedProductAttributeRepository;
+use Kiboko\Component\MagentoORM\Repository\CachedRepository\CachedProductAttributeRepository;
 
 $cachedProductAttributeRepository = new CachedProductAttributeRepository($productAttributeRepository);
 ```
@@ -159,7 +159,7 @@ $cachedProductAttributeRepository = new CachedProductAttributeRepository($produc
 
 ```yaml
 parameters:
-  kiboko.magento_driver.repository.cached.catalog_attribute.class: Kiboko\Component\MagentoDriver\Repository\CachedRepository\CachedProductAttributeRepository
+  kiboko.magento_driver.repository.cached.catalog_attribute.class: Kiboko\Component\MagentoORM\Repository\CachedRepository\CachedProductAttributeRepository
   
 services:
   kiboko.magento_driver.repository.cached.catalog_attribute:
@@ -181,9 +181,9 @@ Concerning product attributes, data are stored in 2 tables. To address this you 
 ```php
 <?php
 
-use Kiboko\Component\MagentoDriver\Persister\StandardDml\Attribute\StandardAttributePersister;
-use Kiboko\Component\MagentoDriver\Persister\StandardDml\Attribute\CatalogAttributeExtensionPersister;
-use Kiboko\Component\MagentoDriver\Persister\CatalogAttributePersister;
+use Kiboko\Component\MagentoORM\Persister\StandardDml\Attribute\StandardAttributePersister;
+use Kiboko\Component\MagentoORM\Persister\StandardDml\Attribute\CatalogAttributeExtensionPersister;
+use Kiboko\Component\MagentoORM\Persister\CatalogAttributePersister;
 
 $standardAttributePersister = new StandardAttributePersister(
     $connection,
@@ -205,9 +205,9 @@ $cataogAttributePersister = new CatalogAttributePersister(
 
 ```yaml
 parameters:
-  kiboko.magento_driver.persister.standard_dml.attribute.standard.class: Kiboko\Component\MagentoDriver\Persister\StandardDml\Attribute\StandardAttributePersister
-  kiboko.magento_driver.persister.standard_dml.attribute.catalog_extras.class:  Kiboko\Component\MagentoDriver\Persister\StandardDml\Attribute\CatalogAttributeExtensionPersister
-  kiboko.magento_driver.persister.standard_dml.attribute.catalog.class:  Kiboko\Component\MagentoDriver\Persister\CatalogAttributePersister
+  kiboko.magento_driver.persister.standard_dml.attribute.standard.class: Kiboko\Component\MagentoORM\Persister\StandardDml\Attribute\StandardAttributePersister
+  kiboko.magento_driver.persister.standard_dml.attribute.catalog_extras.class:  Kiboko\Component\MagentoORM\Persister\StandardDml\Attribute\CatalogAttributeExtensionPersister
+  kiboko.magento_driver.persister.standard_dml.attribute.catalog.class:  Kiboko\Component\MagentoORM\Persister\CatalogAttributePersister
   
   kiboko.magento_driver.backend.attribute.standard.table: 'eav_attribute'
   kiboko.magento_driver.backend.attribute.catalog_extras.table: 'catalog_eav_attribute'
@@ -265,7 +265,7 @@ Deleting data is made easy by the *Deleter*. It works quite similarily as the *R
 ```php
 <?php
 
-use Kiboko\Component\MagentoDriver\Deleter\Doctrine\AttributeDeleter;
+use Kiboko\Component\MagentoORM\Deleter\Doctrine\AttributeDeleter;
 
 new AttributeDeleter(
     $connection,
@@ -277,7 +277,7 @@ new AttributeDeleter(
 
 ```yaml
 parameters:
-  kiboko.magento_driver.deleter.attribute.class: Kiboko\Component\MagentoDriver\Deleter\Doctrine\AttributeDeleter
+  kiboko.magento_driver.deleter.attribute.class: Kiboko\Component\MagentoORM\Deleter\Doctrine\AttributeDeleter
 sevices:
   kiboko.magento_driver.deleter.attribute:
     class: '%kiboko.magento_driver.deleter.attribute.class%'

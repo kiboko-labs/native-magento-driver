@@ -15,7 +15,7 @@ use Kiboko\Component\MagentoORM\Repository\ProductAttributeValueRepositoryInterf
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoORM\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Kiboko\Component\MagentoORM\DoctrineTools\DatabaseConnectionAwareTrait;
-use unit\Kiboko\Component\MagentoORM\SchemaBuilder\Table\Store as TableStore;
+use unit\Kiboko\Component\MagentoORM\SchemaBuilder\Table\Store as StoreTableSchemaBuilder;
 
 class ProductAttributeDecimalValueRepositoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -37,6 +37,22 @@ class ProductAttributeDecimalValueRepositoryTest extends \PHPUnit_Framework_Test
     private $attributeRepositoryMock;
 
     /**
+     * @return string
+     */
+    private function getVersion()
+    {
+        return '2.0';
+    }
+
+    /**
+     * @return string
+     */
+    private function getEdition()
+    {
+        return 'ce';
+    }
+
+    /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
     protected function getDataSet()
@@ -55,7 +71,7 @@ class ProductAttributeDecimalValueRepositoryTest extends \PHPUnit_Framework_Test
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
         $this->getDoctrineConnection()->exec(
-            $platform->getTruncateTableSQL(TableStore::getTableName($GLOBALS['MAGENTO_VERSION']))
+            $platform->getTruncateTableSQL(StoreTableSchemaBuilder::getTableName($this->getVersion()))
         );
 
         $this->getDoctrineConnection()->exec(
@@ -87,7 +103,7 @@ class ProductAttributeDecimalValueRepositoryTest extends \PHPUnit_Framework_Test
         $this->schema = new Schema();
 
         $schemaBuilder = new DoctrineSchemaBuilder(
-            $this->getDoctrineConnection(), $this->schema, $GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
+            $this->getDoctrineConnection(), $this->schema, $this->getVersion(), $this->getEdition());
         $schemaBuilder->ensureStoreTable();
         $schemaBuilder->ensureAttributeTable();
         $schemaBuilder->ensureCatalogProductEntityTable();

@@ -14,7 +14,7 @@ This object creates Doctrine DBAL `QueryBuilder` objects for entity type data fe
 
 /** @var \Doctrine\DBAL\Connection $connection */
 
-use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\EntityTypeQueryBuilder;
+use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\EntityTypeQueryBuilder;
 
 $queryBuilder = new EntityTypeQueryBuilder(
     $connection,
@@ -27,7 +27,7 @@ $queryBuilder = new EntityTypeQueryBuilder(
 
 ```yaml
 parameters:
-  kiboko.magento_driver.query_builder.entity_type.class: Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\EntityTypeQueryBuilder
+  kiboko.magento_driver.query_builder.entity_type.class: Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\EntityTypeQueryBuilder
   
   kiboko.magento_driver.backend.entity_type.table: 'eav_entity_type'
   kiboko.magento_driver.backend.entity_type.fields:
@@ -66,7 +66,7 @@ The *Repository* objects helps you fetch data from the database. It requires a p
 ```php
 <?php
 
-use Kiboko\Component\MagentoDriver\Repository\Doctrine\EntityTypeRepository;
+use Kiboko\Component\MagentoORM\Repository\Doctrine\EntityTypeRepository;
 
 $entityTypeQueryBuilder = new EntityTypeRepository(
 	$connection,
@@ -78,7 +78,7 @@ $entityTypeQueryBuilder = new EntityTypeRepository(
 
 ```yaml
 parameters:
-  kiboko.magento_driver.repository.doctrine.entity_type.class: Kiboko\Component\MagentoDriver\Repository\Doctrine\EntityTypeRepository
+  kiboko.magento_driver.repository.doctrine.entity_type.class: Kiboko\Component\MagentoORM\Repository\Doctrine\EntityTypeRepository
 
 services:
   kiboko.magento_driver.repository.doctrine.entity_type:

@@ -1,12 +1,17 @@
 <?php
+/**
+ * Copyright (c) 2016 Kiboko SAS
+ *
+ * @author Grégory Planchat <gregory@kiboko.fr>
+ */
 
-namespace unit\Kiboko\Component\MagentoORM\Persister\StandardDml\EntityAttribute;
+namespace unit\Kiboko\Component\MagentoORM\Persister\Magento20\StandardDml\Family;
 
 use Doctrine\DBAL\Schema\Schema;
-use Kiboko\Component\MagentoORM\Model\EntityAttribute;
-use Kiboko\Component\MagentoORM\Persister\EntityAttributePersisterInterface;
-use Kiboko\Component\MagentoORM\Persister\StandardDml\Attribute\StandardEntityAttributePersister;
-use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\EntityAttributeQueryBuilder;
+use Kiboko\Component\MagentoORM\Model\Family;
+use Kiboko\Component\MagentoORM\Persister\FamilyPersisterInterface;
+use Kiboko\Component\MagentoORM\Persister\StandardDml\Family\StandardFamilyPersister;
+use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\FamilyQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoORM\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Kiboko\Component\MagentoORM\DoctrineTools\DatabaseConnectionAwareTrait;
@@ -14,7 +19,7 @@ use unit\Kiboko\Component\MagentoORM\SchemaBuilder\Fixture\FallbackResolver;
 use unit\Kiboko\Component\MagentoORM\SchemaBuilder\Fixture\Loader;
 use unit\Kiboko\Component\MagentoORM\SchemaBuilder\Fixture\LoaderInterface;
 
-class EntityAttributePersisterTest extends \PHPUnit_Framework_TestCase
+class StandardFamilyPersisterTest extends \PHPUnit_Framework_TestCase
 {
     use DatabaseConnectionAwareTrait;
 
@@ -24,7 +29,7 @@ class EntityAttributePersisterTest extends \PHPUnit_Framework_TestCase
     private $schema;
 
     /**
-     * @var EntityAttributePersisterInterface
+     * @var FamilyPersisterInterface
      */
     private $persister;
 
@@ -32,6 +37,22 @@ class EntityAttributePersisterTest extends \PHPUnit_Framework_TestCase
      * @var LoaderInterface
      */
     private $fixturesLoader;
+
+    /**
+     * @return string
+     */
+    private function getVersion()
+    {
+        return '2.0';
+    }
+
+    /**
+     * @return string
+     */
+    private function getEdition()
+    {
+        return 'ce';
+    }
 
     /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
@@ -50,15 +71,11 @@ class EntityAttributePersisterTest extends \PHPUnit_Framework_TestCase
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
 
         $this->getDoctrineConnection()->exec(
-            $platform->getTruncateTableSQL('eav_attribute_group')
+            $platform->getTruncateTableSQL('eav_entity_type')
         );
 
         $this->getDoctrineConnection()->exec(
-            $platform->getTruncateTableSQL('eav_attribute')
-        );
-
-        $this->getDoctrineConnection()->exec(
-            $platform->getTruncateTableSQL('eav_entity_attribute')
+            $platform->getTruncateTableSQL('eav_attribute_set')
         );
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
@@ -74,10 +91,9 @@ class EntityAttributePersisterTest extends \PHPUnit_Framework_TestCase
         $this->schema = new Schema();
 
         $schemaBuilder = new DoctrineSchemaBuilder(
-            $this->getDoctrineConnection(), $this->schema, $GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
-        $schemaBuilder->ensureAttributeGroupTable();
-        $schemaBuilder->ensureAttributeTable();
-        $schemaBuilder->ensureEntityAttributeTable();
+            $this->getDoctrineConnection(), $this->schema, $this->getVersion(), $this->getEdition());
+        $schemaBuilder->ensureFamilyTable();
+        $schemaBuilder->ensureEntityTypeTable();
 
         $comparator = new \Doctrine\DBAL\Schema\Comparator();
         $schemaDiff = $comparator->compare($currentSchema, $this->schema);
@@ -92,28 +108,18 @@ class EntityAttributePersisterTest extends \PHPUnit_Framework_TestCase
 
         $this->fixturesLoader = new Loader(
             new FallbackResolver($schemaBuilder->getFixturesPath()),
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            $this->getVersion(),
+            $this->getEdition()
         );
 
-        $schemaBuilder->hydrateAttributeGroupTable(
-            'eav_entity_attribute',
+        $schemaBuilder->hydrateFamilyTable(
+            'eav_attribute_set',
             DoctrineSchemaBuilder::CONTEXT_PERSISTER
         );
 
-        $schemaBuilder->hydrateAttributeTable(
-            'eav_entity_attribute',
-            DoctrineSchemaBuilder::CONTEXT_PERSISTER
-        );
-
-        $schemaBuilder->hydrateEntityAttributeTable(
-            'eav_entity_attribute',
-            DoctrineSchemaBuilder::CONTEXT_PERSISTER
-        );
-
-        $this->persister = new StandardEntityAttributePersister(
+        $this->persister = new StandardFamilyPersister(
             $this->getDoctrineConnection(),
-            EntityAttributeQueryBuilder::getDefaultTable()
+            FamilyQueryBuilder::getDefaultTable()
         );
     }
 
@@ -134,20 +140,18 @@ class EntityAttributePersisterTest extends \PHPUnit_Framework_TestCase
         foreach ($this->persister->flush() as $item);
 
         $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
-            'eav_entity_attribute' => [
+            'eav_attribute_set' => [
                 [
-                    'entity_attribute_id' => 1,
-                    'entity_type_id' => 4,
                     'attribute_set_id' => 4,
-                    'attribute_group_id' => 7,
-                    'attribute_id' => 79,
-                    'sort_order' => 10,
+                    'entity_type_id' => 4,
+                    'attribute_set_name' => 'Default',
+                    'sort_order' => 1,
                 ],
             ],
         ]);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable('eav_entity_attribute');
+        $actual->addTable('eav_attribute_set');
 
         $this->assertDataSetsEqual($expected, $actual);
     }
@@ -155,36 +159,30 @@ class EntityAttributePersisterTest extends \PHPUnit_Framework_TestCase
     public function testInsertOne()
     {
         $this->persister->initialize();
-        $this->persister->persist($entityAttribute = new EntityAttribute(
-            4, 4, 7, 122, 20
-        ));
+        $this->persister->persist($family = new Family('Shoes', 4));
         foreach ($this->persister->flush() as $item);
 
-        $this->assertEquals(2, $entityAttribute->getId());
+        $this->assertEquals(5, $family->getId());
 
         $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
-            'eav_entity_attribute' => [
+            'eav_attribute_set' => [
                 [
-                    'entity_attribute_id' => 1,
-                    'entity_type_id' => 4,
                     'attribute_set_id' => 4,
-                    'attribute_group_id' => 7,
-                    'attribute_id' => 79,
-                    'sort_order' => 10,
+                    'entity_type_id' => 4,
+                    'attribute_set_name' => 'Default',
+                    'sort_order' => 1,
                 ],
                 [
-                    'entity_attribute_id' => 2,
+                    'attribute_set_id' => 5,
                     'entity_type_id' => 4,
-                    'attribute_set_id' => 4,
-                    'attribute_group_id' => 7,
-                    'attribute_id' => 122,
-                    'sort_order' => 20,
+                    'attribute_set_name' => 'Shoes',
+                    'sort_order' => 4,
                 ],
             ],
         ]);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable('eav_entity_attribute');
+        $actual->addTable('eav_attribute_set');
 
         $this->assertDataSetsEqual($expected, $actual);
     }
@@ -192,26 +190,24 @@ class EntityAttributePersisterTest extends \PHPUnit_Framework_TestCase
     public function testUpdateOneExisting()
     {
         $this->persister->initialize();
-
-        $this->persister->persist(EntityAttribute::buildNewWith(1, 4, 4, 7, 79, 20));
-
+        $this->persister->persist($family = Family::buildNewWith(4, 'Shoes', 4));
         foreach ($this->persister->flush() as $item);
 
+        $this->assertEquals(4, $family->getId());
+
         $expected = new \PHPUnit_Extensions_Database_DataSet_ArrayDataSet([
-            'eav_entity_attribute' => [
+            'eav_attribute_set' => [
                 [
-                    'entity_attribute_id' => 1,
-                    'entity_type_id' => 4,
                     'attribute_set_id' => 4,
-                    'attribute_group_id' => 7,
-                    'attribute_id' => 79,
-                    'sort_order' => 20,
+                    'entity_type_id' => 4,
+                    'attribute_set_name' => 'Shoes',
+                    'sort_order' => 4,
                 ],
             ],
         ]);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable('eav_entity_attribute');
+        $actual->addTable('eav_attribute_set');
 
         $this->assertDataSetsEqual($expected, $actual);
     }

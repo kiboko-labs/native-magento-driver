@@ -23,7 +23,7 @@ This object creates Doctrine DBAL `QueryBuilder` objects for entity type data fe
 
 /** @var \Doctrine\DBAL\Connection $connection */
 
-use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeValueQueryBuilder;
+use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\ProductAttributeValueQueryBuilder;
 
 $productAttributeDecimalQueryBuilder = new ProductAttributeValueQueryBuilder(
     $connection,
@@ -56,7 +56,7 @@ $productAttributeVarcharQueryBuilder = new ProductAttributeValueQueryBuilder(
 
 ```yaml
 parameters:
-  kiboko.magento_driver.query_builder.doctrine.product_attribute_value.class: Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\ProductAttributeValueQueryBuilder
+  kiboko.magento_driver.query_builder.doctrine.product_attribute_value.class: Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\ProductAttributeValueQueryBuilder
   
   kiboko.magento_driver.backend.product_attribute_value.datetime.table: 'catalog_product_entity_datetime'
   kiboko.magento_driver.backend.product_attribute_value.decimal.table: 'catalog_product_entity_decimal'
@@ -127,12 +127,12 @@ The repository requires an `AttributeRepositoryInterface` object, please see [pr
 ```php
 <?php
 
-use Kiboko\Component\MagentoDriver\Repository\Doctrine\ProductAttributeValueRepository;
-use Kiboko\Component\MagentoDriver\Factory\ProductAttributeValue\DatetimeProductAttributeValueFactory;
-use Kiboko\Component\MagentoDriver\Factory\ProductAttributeValue\DecimalProductAttributeValueFactory;
-use Kiboko\Component\MagentoDriver\Factory\ProductAttributeValue\IntegerProductAttributeValueFactory;
-use Kiboko\Component\MagentoDriver\Factory\ProductAttributeValue\TextProductAttributeValueFactory;
-use Kiboko\Component\MagentoDriver\Factory\ProductAttributeValue\VarcharProductAttributeValueFactory;
+use Kiboko\Component\MagentoORM\Repository\Doctrine\ProductAttributeValueRepository;
+use Kiboko\Component\MagentoORM\Factory\ProductAttributeValue\DatetimeProductAttributeValueFactory;
+use Kiboko\Component\MagentoORM\Factory\ProductAttributeValue\DecimalProductAttributeValueFactory;
+use Kiboko\Component\MagentoORM\Factory\ProductAttributeValue\IntegerProductAttributeValueFactory;
+use Kiboko\Component\MagentoORM\Factory\ProductAttributeValue\TextProductAttributeValueFactory;
+use Kiboko\Component\MagentoORM\Factory\ProductAttributeValue\VarcharProductAttributeValueFactory;
 
 $productAttributeDatetimeValueRepository = new ProductAttributeValueRepository(
     $connection,
@@ -174,13 +174,13 @@ $productAttributeVarcharValueRepository = new ProductAttributeValueRepository(
 
 ```yaml
 parameters:
-  kiboko.magento_driver.factory.catalog_attribute_value.datetime.class: Kiboko\Component\MagentoDriver\Factory\ProductAttributeValue\DatetimeProductAttributeValueFactory
-  kiboko.magento_driver.factory.catalog_attribute_value.decimal.class:  Kiboko\Component\MagentoDriver\Factory\ProductAttributeValue\DecimalProductAttributeValueFactory
-  kiboko.magento_driver.factory.catalog_attribute_value.integer.class:  Kiboko\Component\MagentoDriver\Factory\ProductAttributeValue\IntegerProductAttributeValueFactory
-  kiboko.magento_driver.factory.catalog_attribute_value.text.class:     Kiboko\Component\MagentoDriver\Factory\ProductAttributeValue\TextProductAttributeValueFactory
-  kiboko.magento_driver.factory.catalog_attribute_value.varchar.class:  Kiboko\Component\MagentoDriver\Factory\ProductAttributeValue\VarcharProductAttributeValueFactory
+  kiboko.magento_driver.factory.catalog_attribute_value.datetime.class: Kiboko\Component\MagentoORM\Factory\ProductAttributeValue\DatetimeProductAttributeValueFactory
+  kiboko.magento_driver.factory.catalog_attribute_value.decimal.class:  Kiboko\Component\MagentoORM\Factory\ProductAttributeValue\DecimalProductAttributeValueFactory
+  kiboko.magento_driver.factory.catalog_attribute_value.integer.class:  Kiboko\Component\MagentoORM\Factory\ProductAttributeValue\IntegerProductAttributeValueFactory
+  kiboko.magento_driver.factory.catalog_attribute_value.text.class:     Kiboko\Component\MagentoORM\Factory\ProductAttributeValue\TextProductAttributeValueFactory
+  kiboko.magento_driver.factory.catalog_attribute_value.varchar.class:  Kiboko\Component\MagentoORM\Factory\ProductAttributeValue\VarcharProductAttributeValueFactory
   
-  kiboko.magento_driver.repository.doctrine.product_attribute_value.class: Kiboko\Component\MagentoDriver\Repository\Doctrine\ProductAttributeValueRepository
+  kiboko.magento_driver.repository.doctrine.product_attribute_value.class: Kiboko\Component\MagentoORM\Repository\Doctrine\ProductAttributeValueRepository
 
 services:
   kiboko.magento_driver.factory.catalog_attribute_value.datetime:
@@ -248,9 +248,9 @@ Due to the fact that there could be a lot of different backends, the library pro
 ```php
 <?php
 
-use Kiboko\Component\MagentoDriver\Model\AttributeInterface;
-use Kiboko\Component\MagentoDriver\Broker\AttributeBackendBroker;
-use Kiboko\Component\MagentoDriver\Matcher\AttributeType\BackendTypeAttributeValueMatcher;
+use Kiboko\Component\MagentoORM\Model\AttributeInterface;
+use Kiboko\Component\MagentoORM\Broker\AttributeBackendBroker;
+use Kiboko\Component\MagentoORM\Matcher\AttributeType\BackendTypeAttributeValueMatcher;
 
 $backendBroker = new AttributeBackendBroker();
 $backendBroker->addBackend($productAttributeDatetimeQueryBuilder, new BackendTypeAttributeValueMatcher('int'));
