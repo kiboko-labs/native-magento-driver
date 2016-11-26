@@ -36,8 +36,8 @@ trait DatetimeAttributeValueTrait
     );
 
     /**
-     * @param AttributeInterface $attribute
      * @param int                $valueId
+     * @param AttributeInterface $attribute
      * @param \DateTimeInterface $payload
      * @param ProductInterface   $product
      * @param int                $storeId
@@ -45,18 +45,13 @@ trait DatetimeAttributeValueTrait
      * @return DatetimeAttributeValueInterface
      */
     public static function buildNewWith(
-        AttributeInterface $attribute,
         $valueId,
-        $payload,
+        AttributeInterface $attribute,
+        \DateTimeInterface $payload = null,
         ProductInterface $product = null,
         $storeId = null
     ) {
-        $object = new static(
-                $attribute,
-                ($payload instanceof \DateTimeImmutable) ? $payload : null,
-                $product,
-                $storeId
-                );
+        $object = new self($attribute, $payload, $product, $storeId);
 
         $object->identifier = $valueId;
 

@@ -1,0 +1,36 @@
+catalog_product_entity_decimal:
+  -
+    value_id: '1'
+    entity_type_id: '4'
+    attribute_id: '79'
+    store_id: 0
+    entity_id: '3'
+    value: '99.1700'
+  -
+    value_id: '2'
+    entity_type_id: '4'
+    attribute_id: '79'
+    store_id: '1'
+    entity_id: '961'
+    value: '99.1700'
+  -
+    value_id: '3'
+    entity_type_id: '4'
+    attribute_id: '79'
+    store_id: '1'
+    entity_id: '3'
+    value: '0.0000'
+  -
+    value_id: '4'
+    entity_type_id: '4'
+    attribute_id: '79'
+    store_id: 0
+    entity_id: '961'
+    value: '0.0000'
+  -
+    value_id: '5'
+    entity_type_id: '4'
+    attribute_id: '79'
+    store_id: 1
+    entity_id: '961'
+    value: '99.1700'

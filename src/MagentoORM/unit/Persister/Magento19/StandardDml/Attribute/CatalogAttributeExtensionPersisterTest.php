@@ -117,7 +117,8 @@ class CatalogAttributeExtensionPersisterTest extends \PHPUnit_Framework_TestCase
 
         $this->fixturesLoader = new Loader(
             new FallbackResolver($schemaBuilder->getFixturesPath()),
-            $this->getVersion(), $this->getEdition()
+            $this->getVersion(),
+            $this->getEdition()
         );
 
         $schemaBuilder->hydrateEntityTypeTable(

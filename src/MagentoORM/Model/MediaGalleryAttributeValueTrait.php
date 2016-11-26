@@ -30,15 +30,15 @@ trait MediaGalleryAttributeValueTrait
     );
 
     /**
-     * @param AttributeInterface                          $attribute
      * @param int                                         $valueId
+     * @param AttributeInterface                          $attribute
      * @param \Traversable|ImageAttributeValueInterface[] $imagesCollection
      *
      * @return MediaGalleryAttributeValueInterface
      */
     public static function buildNewWith(
-        AttributeInterface $attribute,
         $valueId,
+        AttributeInterface $attribute,
         \Traversable $imagesCollection
     ) {
         $object = new static($attribute, $imagesCollection);

@@ -30,14 +30,14 @@ trait TextAttributeValueTrait
      */
     abstract public function __construct(
         AttributeInterface $attribute,
-        $payload,
+        $payload = null,
         ProductInterface $product = null,
         $storeId = null
     );
 
     /**
-     * @param AttributeInterface $attribute
      * @param int                $valueId
+     * @param AttributeInterface $attribute
      * @param string             $payload
      * @param ProductInterface   $product
      * @param int                $storeId
@@ -45,9 +45,9 @@ trait TextAttributeValueTrait
      * @return TextAttributeValueInterface
      */
     public static function buildNewWith(
-        AttributeInterface $attribute,
         $valueId,
-        $payload,
+        AttributeInterface $attribute,
+        $payload = null,
         ProductInterface $product = null,
         $storeId = null
     ) {

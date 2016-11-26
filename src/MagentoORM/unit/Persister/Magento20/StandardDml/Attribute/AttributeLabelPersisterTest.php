@@ -40,6 +40,22 @@ class AttributeLabelPersisterTest extends \PHPUnit_Framework_TestCase
     private $fixturesLoader;
 
     /**
+     * @return string
+     */
+    private function getVersion()
+    {
+        return '2.0';
+    }
+
+    /**
+     * @return string
+     */
+    private function getEdition()
+    {
+        return 'ce';
+    }
+
+    /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
     protected function getDataSet()
@@ -56,7 +72,7 @@ class AttributeLabelPersisterTest extends \PHPUnit_Framework_TestCase
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
 
         $this->getDoctrineConnection()->exec(
-            $platform->getTruncateTableSQL(StoreTableSchemaBuilder::getTableName($GLOBALS['MAGENTO_VERSION']))
+            $platform->getTruncateTableSQL(StoreTableSchemaBuilder::getTableName($this->getVersion()))
         );
 
         $this->getDoctrineConnection()->exec(
@@ -80,7 +96,7 @@ class AttributeLabelPersisterTest extends \PHPUnit_Framework_TestCase
         $this->schema = new Schema();
 
         $schemaBuilder = new DoctrineSchemaBuilder(
-            $this->getDoctrineConnection(), $this->schema, $GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
+            $this->getDoctrineConnection(), $this->schema, $this->getVersion(), $this->getEdition());
         $schemaBuilder->ensureStoreTable();
         $schemaBuilder->ensureAttributeTable();
         $schemaBuilder->ensureAttributeLabelTable();
@@ -98,8 +114,8 @@ class AttributeLabelPersisterTest extends \PHPUnit_Framework_TestCase
 
         $this->fixturesLoader = new Loader(
             new FallbackResolver($schemaBuilder->getFixturesPath()),
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            $this->getVersion(),
+            $this->getEdition()
         );
 
         $schemaBuilder->hydrateStoreTable(

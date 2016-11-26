@@ -5,6 +5,11 @@
 * [x] repository [Interface](src/MagentoORM/Repository/StoreRepositoryInterface.php)
   * [Standard DML implementation](src/MagentoORM/Repository/Doctrine/StoreRepository.php)
 
+
+## Websites (table `core_website` / `website`)
+
+* [ ] repository
+
 # Entities
 
 ## Entity types (table `eav_entity_type`)

@@ -1,0 +1,19 @@
+catalog_product_entity_datetime:
+  -
+    value_id: 20
+    attribute_id: 167
+    store_id: 0
+    entity_id: 3
+    value: ~
+  -
+    value_id: 23
+    attribute_id: 167
+    store_id: 0
+    entity_id: 961
+    value: '2016-12-01 12:34:56'
+  -
+    value_id: 24
+    attribute_id: 167
+    store_id: 1
+    entity_id: 961
+    value: '2016-07-13 12:34:56'

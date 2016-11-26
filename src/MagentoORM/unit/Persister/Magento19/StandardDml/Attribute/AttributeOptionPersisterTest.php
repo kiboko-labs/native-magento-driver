@@ -91,7 +91,7 @@ class AttributeOptionPersisterTest extends \PHPUnit_Framework_TestCase
         $this->schema = new Schema();
 
         $schemaBuilder = new DoctrineSchemaBuilder(
-            $this->getDoctrineConnection(), $this->schema, $GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
+            $this->getDoctrineConnection(), $this->schema, $this->getVersion(), $this->getEdition());
         $schemaBuilder->ensureAttributeTable();
         $schemaBuilder->ensureAttributeOptionTable();
 
@@ -108,8 +108,8 @@ class AttributeOptionPersisterTest extends \PHPUnit_Framework_TestCase
 
         $this->fixturesLoader = new Loader(
             new FallbackResolver($schemaBuilder->getFixturesPath()),
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            $this->getVersion(),
+            $this->getEdition()
         );
 
         $schemaBuilder->hydrateAttributeTable(

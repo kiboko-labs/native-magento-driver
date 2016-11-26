@@ -68,9 +68,4 @@ interface AttributeValueInterface extends MappableInterface, IdentifiableInterfa
      * @return array
      */
     public function getAttributeOptions();
-
-    /**
-     * @return int
-     */
-    public function getEntityTypeId();
 }

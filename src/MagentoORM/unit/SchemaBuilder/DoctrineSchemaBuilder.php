@@ -537,7 +537,7 @@ class DoctrineSchemaBuilder
      */
     public function ensureCatalogProductAttributeValueToStoreLinks($backendType)
     {
-        (new Link\CatalogProductAttributeValueToStore($this->schema, $backendType))->build();
+        (new Link\CatalogProductAttributeValueToStore($this->schema, $backendType))->build($this->magentoVersion);
     }
 
     /**

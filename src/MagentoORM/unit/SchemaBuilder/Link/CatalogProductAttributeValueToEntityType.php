@@ -45,7 +45,7 @@ class CatalogProductAttributeValueToEntityType
         $entityTable = $this->schema->getTable($tableName);
         $storeTable = $this->schema->getTable('eav_entity_type');
 
-        if ($magentoVersion !== '2.0') {
+        if (version_compare($magentoVersion, '2.0', '<')) {
             $entityTable->addForeignKeyConstraint(
                 $storeTable,
                 [
