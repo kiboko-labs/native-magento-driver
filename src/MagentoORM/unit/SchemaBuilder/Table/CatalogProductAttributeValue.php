@@ -53,7 +53,7 @@ class CatalogProductAttributeValue
 
         $table->addColumn('value_id', 'integer', ['unsigned' => true, 'autoincrement' => true]);
 
-        if (version_compare($magentoVersion, '2.0', '<=')) {
+        if (version_compare($magentoVersion, '2.0', '<')) {
             $table->addColumn('entity_type_id', 'smallint', ['unsigned' => true]);
         }
 

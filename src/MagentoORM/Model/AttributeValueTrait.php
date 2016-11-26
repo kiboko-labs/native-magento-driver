@@ -8,6 +8,7 @@
 namespace Kiboko\Component\MagentoORM\Model;
 
 use Kiboko\Component\MagentoORM\Entity\Product\ProductInterface;
+use Kiboko\Component\MagentoORM\Exception\RuntimeErrorException;
 
 trait AttributeValueTrait
 {
@@ -60,6 +61,12 @@ trait AttributeValueTrait
      */
     public function attachToProduct(ProductInterface $product)
     {
+        if ($this->product !== null) {
+            throw new RuntimeErrorException(
+                'The attribute value is already attached to a product, you cannot re-attach it.'
+            );
+        }
+
         $this->product = $product;
     }
 

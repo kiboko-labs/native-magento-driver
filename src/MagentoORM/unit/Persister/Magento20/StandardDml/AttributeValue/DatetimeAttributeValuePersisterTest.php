@@ -10,9 +10,9 @@ namespace unit\Kiboko\Component\MagentoORM\Persister\Magento20\StandardDml\Attri
 use Doctrine\DBAL\Schema\Schema;
 use Kiboko\Component\MagentoORM\Entity\Product\ProductInterface;
 use Kiboko\Component\MagentoORM\Model\AttributeInterface;
-use Kiboko\Component\MagentoORM\Model\Immutable\ImmutableDatetimeAttributeValue;
+use Kiboko\Component\MagentoORM\Model\Magento20\Immutable\ImmutableDatetimeAttributeValue;
 use Kiboko\Component\MagentoORM\Persister\AttributeValuePersisterInterface;
-use Kiboko\Component\MagentoORM\Persister\StandardDml\AttributeValue\DatetimeAttributeValuePersister;
+use Kiboko\Component\MagentoORM\Persister\StandardDml\Magento20\AttributeValue\DatetimeAttributeValuePersister;
 use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\ProductAttributeValueQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoORM\SchemaBuilder\DoctrineSchemaBuilder;
@@ -211,13 +211,13 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
         $this->persister->initialize();
         foreach ($this->persister->flush() as $item);
 
-        $expected = $this->getDataSet();
+        $expected = $this->fixturesLoader->namedDataSet(
+            'do-nothing',
+            'catalog_product_entity_datetime',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER
+        );
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable(StoreTableSchemaBuilder::getTableName($this->getVersion()));
-        $actual->addTable('eav_entity_type');
-        $actual->addTable('eav_attribute');
-        $actual->addTable('catalog_product_entity');
         $actual->addTable('catalog_product_entity_datetime');
 
         $this->assertDataSetsEqual($expected, $actual);
@@ -227,56 +227,50 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
     {
         $this->persister->initialize();
 
-        $datetimeAttribute = [
-            'ce' => [
-                '1.9' => new ImmutableDatetimeAttributeValue(
-                            $this->getAttributeMock(167, 4),
-                            new \DateTime('2016-07-13 12:34:56'),
-                            $this->getProductMock(961),
-                            1
-                    ),
-                '2.0' => new ImmutableDatetimeAttributeValue(
-                            $this->getAttributeMock(167),
-                            new \DateTime('2016-07-13 12:34:56'),
-                            $this->getProductMock(961),
-                            1
-                    ),
-            ],
-        ];
+        $datetimeAttribute = new ImmutableDatetimeAttributeValue(
+            $this->getAttributeMock(167, 4),
+            new \DateTime('2016-07-13 12:34:56'),
+            $this->getProductMock(961),
+            1
+        );
 
-        $this->persister->persist($value = $datetimeAttribute[$this->getEdition()][$this->getVersion()]);
+        $this->persister->persist($datetimeAttribute);
         foreach ($this->persister->flush() as $item);
 
-        $this->assertEquals(24, $value->getId());
-
-        $newCatalogProductEntityDatetime = [
-            'ce' => [
-                '1.9' => [
-                    'value_id' => 24,
-                    'entity_type_id' => 4,
-                    'attribute_id' => 167,
-                    'store_id' => 1,
-                    'entity_id' => 961,
-                    'value' => '2016-07-13 12:34:56',
-                ],
-                '2.0' => [
-                    'value_id' => 24,
-                    'attribute_id' => 167,
-                    'store_id' => 1,
-                    'entity_id' => 961,
-                    'value' => '2016-07-13 12:34:56',
-                ],
-            ],
-        ];
-
-        $expected = $this->getDataSet();
-        $expected->getTable('catalog_product_entity_datetime')->addRow($newCatalogProductEntityDatetime[$this->getEdition()][$this->getVersion()]);
+        $expected = $this->fixturesLoader->namedDataSet(
+            'insert-one',
+            'catalog_product_entity_datetime',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER
+        );
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable(StoreTableSchemaBuilder::getTableName($this->getVersion()));
-        $actual->addTable('eav_entity_type');
-        $actual->addTable('eav_attribute');
-        $actual->addTable('catalog_product_entity');
+        $actual->addTable('catalog_product_entity_datetime');
+
+        $this->assertDataSetsEqual($expected, $actual);
+    }
+
+    public function testUpdateOneExisting()
+    {
+        $this->persister->initialize();
+
+        $datetimeAttribute = ImmutableDatetimeAttributeValue::buildNewWith(
+            23,
+            $this->getAttributeMock(167, 4),
+            new \DateTime('2016-07-13 12:34:56'),
+            $this->getProductMock(961),
+            0
+        );
+
+        $this->persister->persist($datetimeAttribute);
+        foreach ($this->persister->flush() as $item);
+
+        $expected = $this->fixturesLoader->namedDataSet(
+            'update-one',
+            'catalog_product_entity_datetime',
+            DoctrineSchemaBuilder::CONTEXT_PERSISTER
+        );
+
+        $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
         $actual->addTable('catalog_product_entity_datetime');
 
         $this->assertDataSetsEqual($expected, $actual);

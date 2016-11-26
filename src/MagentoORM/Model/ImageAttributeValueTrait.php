@@ -42,8 +42,8 @@ trait ImageAttributeValueTrait
     );
 
     /**
-     * @param AttributeInterface $attribute
      * @param int                $valueId
+     * @param AttributeInterface $attribute
      * @param File               $file
      * @param ProductInterface   $product
      * @param array              $metadata
@@ -51,8 +51,8 @@ trait ImageAttributeValueTrait
      * @return ImageAttributeValueInterface
      */
     public static function buildNewWith(
-        AttributeInterface $attribute,
         $valueId,
+        AttributeInterface $attribute,
         File $file,
         ProductInterface $product = null,
         array $metadata
