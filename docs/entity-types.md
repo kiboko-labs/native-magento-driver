@@ -27,10 +27,10 @@ $queryBuilder = new EntityTypeQueryBuilder(
 
 ```yaml
 parameters:
-  kiboko.magento_driver.query_builder.entity_type.class: Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\EntityTypeQueryBuilder
-  
-  kiboko.magento_driver.backend.entity_type.table: 'eav_entity_type'
-  kiboko.magento_driver.backend.entity_type.fields:
+  kiboko_magento_connector.query_builder.entity_type.class: Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\EntityTypeQueryBuilder
+
+  kiboko_magento_connector.backend.entity_type.table: 'eav_entity_type'
+  kiboko_magento_connector.backend.entity_type.fields:
     - 'entity_type_id'
     - 'entity_type_code'
     - 'entity_model'
@@ -49,28 +49,39 @@ parameters:
     - 'entity_attribute_collection'
 
 services:
-  kiboko.magento_driver.query_builder.entity_type:
-    class: '%kiboko.magento_driver.query_builder.entity_type.class%'
+  kiboko_magento_connector.query_builder.entity_type:
+    class: '%kiboko_magento_connector.query_builder.entity_type.class%'
     arguments:
-      - '@database.connection'
-      - '%kiboko.magento_driver.backend.entity_type.table%'
-      - '%kiboko.magento_driver.backend.entity_type.fields%'
+      - '@doctrine.dbal.magento_connection'
+      - '%kiboko_magento_connector.backend.entity_type.table%'
+      - '%kiboko_magento_connector.backend.entity_type.fields%'
 ```
 
 ## Initializing the Repository
 
-The *Repository* objects helps you fetch data from the database. It requires a proper *QueryBuilder* to work.
+The *Repository* objects helps you fetch data from the database.
+
+It requires a proper *QueryBuilder* to work, see above for initializing it.
+
+A *factory* is also required, the intialization code is provided here.
 
 ### PHP iniitalization
 
 ```php
 <?php
 
-use Kiboko\Component\MagentoORM\Repository\Doctrine\EntityTypeRepository;
+/** @var \Doctrine\DBAL\Connection $connection */
+/** @var \Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\EntityTypeQueryBuilderInterface $queryBuilder */
 
-$entityTypeQueryBuilder = new EntityTypeRepository(
-	$connection,
-	$queryBuilder
+use Kiboko\Component\MagentoORM\Repository\Doctrine\EntityTypeRepository;
+use Kiboko\Component\MagentoORM\Factory\StandardEntityTypeFactory;
+
+$factory = new StandardEntityTypeFactory();
+
+$entityTypeRepository = new EntityTypeRepository(
+    $connection,
+    $queryBuilder,
+    $factory
 );
 ```
 
@@ -78,14 +89,17 @@ $entityTypeQueryBuilder = new EntityTypeRepository(
 
 ```yaml
 parameters:
-  kiboko.magento_driver.repository.doctrine.entity_type.class: Kiboko\Component\MagentoORM\Repository\Doctrine\EntityTypeRepository
+  kiboko_magento_connector.factory.entity_type.class:             Kiboko\Component\MagentoORM\Factory\StandardEntityTypeFactory
+  
+  kiboko_magento_connector.repository.doctrine.entity_type.class: Kiboko\Component\MagentoORM\Repository\Doctrine\EntityTypeRepository
 
 services:
-  kiboko.magento_driver.repository.doctrine.entity_type:
-    class: '%kiboko.magento_driver.repository.doctrine.entity_type.class%'
+  kiboko_magento_connector.repository.doctrine.entity_type:
+    class: '%kiboko_magento_connector.repository.doctrine.entity_type.class%'
     arguments:
-      - '@database.connection'
-      - '@kiboko.magento_driver.query_builder.entity_type'
+      - '@doctrine.dbal.magento_connection'
+      - '@kiboko_magento_connector.query_builder.entity_type'
+      - '@kiboko_magento_connector.factory.entity_type'
 ```
 
 ### Using the repository
@@ -95,13 +109,20 @@ The repository has explicitly-named methods, for now 4 exist. You will need to k
 ```php
 <?php
 
+/** @var Kiboko\Component\MagentoORM\Repository\Doctrine\EntityTypeRepository $entityTypeRepository */
+
+// Finding one `EntityType` by code
 $entityType = $entityTypeRepository->findOneByCode('catalog_product');
 
+// Finding multiple `EntityType` by code
 $entityTypeList = $entityTypeRepository->findAllByCode(['catalog_product', 'catalog_category']);
 
+// Finding one `EntityType` by id
 $entityType = $entityTypeRepository->findOneById(3);
 
+// Finding multiple `EntityType` by id
 $entityTypeList = $entityTypeRepository->findAllById([3, 4]);
 
+// Finding all `EntityType`
 $entityTypeList = $entityTypeRepository->findAll();
 ```
