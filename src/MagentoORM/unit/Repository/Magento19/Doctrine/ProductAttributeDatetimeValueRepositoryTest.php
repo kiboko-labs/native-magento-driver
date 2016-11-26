@@ -8,7 +8,6 @@
 namespace unit\Kiboko\Component\MagentoORM\Repository\Magento19\Doctrine;
 
 use Doctrine\DBAL\Schema\Schema;
-use Faker\Provider\tr_TR\DateTime;
 use Kiboko\Component\MagentoORM\Entity\Product\ProductInterface;
 use Kiboko\Component\MagentoORM\Factory\AttributeValueFactoryInterface;
 use Kiboko\Component\MagentoORM\Model\AttributeInterface;
@@ -215,9 +214,9 @@ class ProductAttributeDatetimeValueRepositoryTest extends \PHPUnit_Framework_Tes
             ->with($this->isInstanceOf(AttributeInterface::class), $this->isType('array'))
             ->willReturnCallback(function ($attribute, $data) {
                 return ImmutableDatetimeAttributeValue::buildNewWith(
-                    $attribute,
                     $data['value_id'],
-                    \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $data['value']),
+                    $attribute,
+                    $data['value'] != null ? \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $data['value']) : null,
                     null,
                     $data['store_id']
                 );
@@ -249,10 +248,9 @@ class ProductAttributeDatetimeValueRepositoryTest extends \PHPUnit_Framework_Tes
         $attributeValue = $this->repository->findOneByProductAndAttributeFromDefault($product, $attribute);
         $this->assertInstanceOf(DatetimeAttributeValueInterface::class, $attributeValue);
 
-//        $this->assertInstanceOf(\DateTimeInterface::class, $attributeValue->getValue());
         $this->assertTrue(
-                $attributeValue->getValue() instanceof \DateTimeInterface ||
-                is_null($attributeValue->getValue())
+            $attributeValue->getValue() instanceof \DateTimeInterface ||
+            is_null($attributeValue->getValue())
         );
     }
 

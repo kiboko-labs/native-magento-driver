@@ -236,9 +236,8 @@ class DecimalAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
             $this->getAttributeMock(79, 4),
             22.17,
             $this->getProductMock(961),
-            1
+            0
         );
-
         $this->persister->persist($decimalAttribute);
         foreach ($this->persister->flush() as $item);
 
@@ -261,9 +260,9 @@ class DecimalAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
         $decimalAttribute = ImmutableDecimalAttributeValue::buildNewWith(
             4,
             $this->getAttributeMock(79, 4),
-            99.17,
+            22.17,
             $this->getProductMock(961),
-            0
+            1
         );
 
         $this->persister->persist($decimalAttribute);

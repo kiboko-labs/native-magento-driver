@@ -5,14 +5,14 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace unit\Kiboko\Component\MagentoORM\Persister\Magento20\StandardDml\AttributeValue;
+namespace unit\Kiboko\Component\MagentoORM\Persister\Magento19\StandardDml\AttributeValue;
 
 use Doctrine\DBAL\Schema\Schema;
 use Kiboko\Component\MagentoORM\Entity\Product\ProductInterface;
 use Kiboko\Component\MagentoORM\Model\AttributeInterface;
-use Kiboko\Component\MagentoORM\Model\Magento20\Immutable\ImmutableDatetimeAttributeValue;
+use Kiboko\Component\MagentoORM\Model\Magento19\Immutable\ImmutableIntegerAttributeValue;
 use Kiboko\Component\MagentoORM\Persister\AttributeValuePersisterInterface;
-use Kiboko\Component\MagentoORM\Persister\StandardDml\Magento20\AttributeValue\DatetimeAttributeValuePersister;
+use Kiboko\Component\MagentoORM\Persister\StandardDml\Magento19\AttributeValue\IntegerAttributeValuePersister;
 use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\ProductAttributeValueQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoORM\SchemaBuilder\DoctrineSchemaBuilder;
@@ -22,7 +22,7 @@ use unit\Kiboko\Component\MagentoORM\SchemaBuilder\Fixture\Loader;
 use unit\Kiboko\Component\MagentoORM\SchemaBuilder\Fixture\LoaderInterface;
 use unit\Kiboko\Component\MagentoORM\SchemaBuilder\Table\Store as StoreTableSchemaBuilder;
 
-class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
+class IntegerAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
 {
     use DatabaseConnectionAwareTrait;
 
@@ -46,7 +46,7 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
      */
     private function getVersion()
     {
-        return '2.0';
+        return '1.9';
     }
 
     /**
@@ -63,7 +63,7 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
     protected function getDataSet()
     {
         $dataset = $this->fixturesLoader->initialDataSet(
-            'catalog_product_entity_datetime',
+            'catalog_product_entity_int',
             DoctrineSchemaBuilder::CONTEXT_PERSISTER
         );
 
@@ -114,12 +114,12 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
         $schemaBuilder->ensureAttributeTable();
         $schemaBuilder->ensureStoreTable();
         $schemaBuilder->ensureCatalogProductEntityTable();
-        $schemaBuilder->ensureCatalogProductAttributeValueTable('datetime', 'datetime');
+        $schemaBuilder->ensureCatalogProductAttributeValueTable('int', 'integer');
 
-        $schemaBuilder->ensureCatalogProductAttributeValueToEntityTypeLinks('datetime');
-        $schemaBuilder->ensureCatalogProductAttributeValueToAttributeLinks('datetime');
-        $schemaBuilder->ensureCatalogProductAttributeValueToStoreLinks('datetime');
-        $schemaBuilder->ensureCatalogProductAttributeValueToCatalogProductEntityLinks('datetime');
+        $schemaBuilder->ensureCatalogProductAttributeValueToEntityTypeLinks('int');
+        $schemaBuilder->ensureCatalogProductAttributeValueToAttributeLinks('int');
+        $schemaBuilder->ensureCatalogProductAttributeValueToStoreLinks('int');
+        $schemaBuilder->ensureCatalogProductAttributeValueToCatalogProductEntityLinks('int');
 
         $comparator = new \Doctrine\DBAL\Schema\Comparator();
         $schemaDiff = $comparator->compare($currentSchema, $this->schema);
@@ -128,7 +128,7 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
             $this->getDoctrineConnection()->exec($sql);
         }
 
-        $this->truncateTables('datetime');
+        $this->truncateTables('int');
 
         parent::setUp();
 
@@ -139,40 +139,40 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
         );
 
         $schemaBuilder->hydrateEntityTypeTable(
-            'catalog_product_entity_datetime',
+            'catalog_product_entity_int',
             DoctrineSchemaBuilder::CONTEXT_PERSISTER
         );
 
         $schemaBuilder->hydrateAttributeTable(
-            'catalog_product_entity_datetime',
+            'catalog_product_entity_int',
             DoctrineSchemaBuilder::CONTEXT_PERSISTER
         );
 
         $schemaBuilder->hydrateStoreTable(
-            'catalog_product_entity_datetime',
+            'catalog_product_entity_int',
             DoctrineSchemaBuilder::CONTEXT_PERSISTER
         );
 
         $schemaBuilder->hydrateCatalogProductEntityTable(
-            'catalog_product_entity_datetime',
+            'catalog_product_entity_int',
             DoctrineSchemaBuilder::CONTEXT_PERSISTER
         );
 
         $schemaBuilder->hydrateCatalogProductAttributeValueTable(
-            'datetime',
-            'catalog_product_entity_datetime',
+            'int',
+            'catalog_product_entity_int',
             DoctrineSchemaBuilder::CONTEXT_PERSISTER
         );
 
-        $this->persister = new DatetimeAttributeValuePersister(
+        $this->persister = new IntegerAttributeValuePersister(
             $this->getDoctrineConnection(),
-            ProductAttributeValueQueryBuilder::getDefaultTable('datetime')
+            ProductAttributeValueQueryBuilder::getDefaultTable('int')
         );
     }
 
     protected function tearDown()
     {
-        $this->truncateTables('datetime');
+        $this->truncateTables('int');
         parent::tearDown();
 
         $this->persister = null;
@@ -184,11 +184,12 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|AttributeInterface
      */
-    private function getAttributeMock($attributeId)
+    private function getAttributeMock($attributeId, $entityTypeId = null)
     {
         $mock = $this->createMock(AttributeInterface::class);
 
         $mock->method('getId')->willReturn($attributeId);
+        $mock->method('getEntityTypeId')->willReturn($entityTypeId);
 
         return $mock;
     }
@@ -212,12 +213,12 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
 
         $expected = $this->fixturesLoader->namedDataSet(
             'do-nothing',
-            'catalog_product_entity_datetime',
+            'catalog_product_entity_int',
             DoctrineSchemaBuilder::CONTEXT_PERSISTER
         );
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable('catalog_product_entity_datetime');
+        $actual->addTable('catalog_product_entity_int');
 
         $this->assertDataSetsEqual($expected, $actual);
     }
@@ -226,24 +227,23 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
     {
         $this->persister->initialize();
 
-        $datetimeAttribute = new ImmutableDatetimeAttributeValue(
-            $this->getAttributeMock(167),
-            new \DateTime('2016-07-13 12:34:56'),
+        $integerAttribute = new ImmutableIntegerAttributeValue(
+            $this->getAttributeMock(79, 4),
+            78,
             $this->getProductMock(961),
-            1
+            0
         );
-
-        $this->persister->persist($datetimeAttribute);
+        $this->persister->persist($integerAttribute);
         foreach ($this->persister->flush() as $item);
 
         $expected = $this->fixturesLoader->namedDataSet(
             'insert-one',
-            'catalog_product_entity_datetime',
+            'catalog_product_entity_int',
             DoctrineSchemaBuilder::CONTEXT_PERSISTER
         );
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable('catalog_product_entity_datetime');
+        $actual->addTable('catalog_product_entity_int');
 
         $this->assertDataSetsEqual($expected, $actual);
     }
@@ -252,25 +252,25 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
     {
         $this->persister->initialize();
 
-        $datetimeAttribute = ImmutableDatetimeAttributeValue::buildNewWith(
-            23,
-            $this->getAttributeMock(167),
-            new \DateTime('2016-07-13 12:34:56'),
+        $integerAttribute = ImmutableIntegerAttributeValue::buildNewWith(
+            4,
+            $this->getAttributeMock(79, 4),
+            65,
             $this->getProductMock(961),
-            0
+            1
         );
 
-        $this->persister->persist($datetimeAttribute);
+        $this->persister->persist($integerAttribute);
         foreach ($this->persister->flush() as $item);
 
         $expected = $this->fixturesLoader->namedDataSet(
             'update-one',
-            'catalog_product_entity_datetime',
+            'catalog_product_entity_int',
             DoctrineSchemaBuilder::CONTEXT_PERSISTER
         );
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable('catalog_product_entity_datetime');
+        $actual->addTable('catalog_product_entity_int');
 
         $this->assertDataSetsEqual($expected, $actual);
     }

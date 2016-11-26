@@ -23,8 +23,8 @@ class DatetimeProductAttributeValueFactory implements ProductAttributeValueFacto
     public function buildNew(AttributeInterface $attribute, array $options)
     {
         return ImmutableDatetimeAttributeValue::buildNewWith(
-            $attribute,
             isset($options['value_id']) ? $options['value_id'] : null,
+            $attribute,
             isset($options['value']) ? $options['value'] : null
         );
     }

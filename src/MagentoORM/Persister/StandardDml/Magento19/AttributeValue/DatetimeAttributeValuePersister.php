@@ -88,7 +88,7 @@ class DatetimeAttributeValuePersister implements AttributeValuePersisterInterfac
      */
     public function flush()
     {
-        /** @var DatetimeAttributeValueInterface $value */
+        /** @var DatetimeAttributeValueInterface|AttributeValueInterface $value */
         foreach ($this->dataQueue as $value) {
             $this->insertOnDuplicateUpdate($this->connection, $this->tableName,
                 [
@@ -97,7 +97,7 @@ class DatetimeAttributeValuePersister implements AttributeValuePersisterInterfac
                     'attribute_id' => $value->getAttributeId(),
                     'store_id' => $value->getStoreId(),
                     'entity_id' => $value->getProductId(),
-                    'value' => $value->getValue() ? $value->getValue()->format('Y-m-d H:i:s') : null,
+                    'value' => $value->getValue() !== null ? $value->getValue()->format('Y-m-d H:i:s') : null,
                 ],
                 [
                     'entity_type_id',

@@ -214,8 +214,8 @@ class ProductAttributeVarcharValueRepositoryTest extends \PHPUnit_Framework_Test
             ->with($this->isInstanceOf(AttributeInterface::class), $this->isType('array'))
             ->willReturnCallback(function ($attribute, $data) {
                 return ImmutableVarcharAttributeValue::buildNewWith(
-                    $attribute,
                     $data['value_id'],
+                    $attribute,
                     $data['value'],
                     null,
                     $data['store_id']
