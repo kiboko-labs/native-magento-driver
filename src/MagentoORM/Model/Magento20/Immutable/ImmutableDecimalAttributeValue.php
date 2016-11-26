@@ -12,8 +12,8 @@ use Kiboko\Component\MagentoORM\Model\AttributeInterface;
 use Kiboko\Component\MagentoORM\Model\AttributeValueInterface;
 use Kiboko\Component\MagentoORM\Model\DecimalAttributeValueInterface;
 use Kiboko\Component\MagentoORM\Model\DecimalAttributeValueTrait;
-use Kiboko\Component\MagentoORM\Model\ImmutableAttributeValueInterface;
-use Kiboko\Component\MagentoORM\Model\MutableAttributeValueInterface;
+use Kiboko\Component\MagentoORM\Model\Magento20\ImmutableAttributeValueInterface;
+use Kiboko\Component\MagentoORM\Model\Magento20\MutableAttributeValueInterface;
 use Kiboko\Component\MagentoORM\Model\Magento20\Mutable\MutableDecimalAttributeValue;
 use Kiboko\Component\MagentoORM\Model\ScopableAttributeValueInterface;
 

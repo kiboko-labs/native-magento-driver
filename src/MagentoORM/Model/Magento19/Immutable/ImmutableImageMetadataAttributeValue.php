@@ -11,8 +11,9 @@ use Kiboko\Component\MagentoORM\Model\AttributeInterface;
 use Kiboko\Component\MagentoORM\Model\AttributeValueInterface;
 use Kiboko\Component\MagentoORM\Model\ImageMetadataAttributeValueInterface;
 use Kiboko\Component\MagentoORM\Model\ImageMetadataAttributeValueTrait;
-use Kiboko\Component\MagentoORM\Model\ImmutableAttributeValueInterface;
-use Kiboko\Component\MagentoORM\Model\Magento19\Mutable\MutableImageMetadataAttributeValue;
+use Kiboko\Component\MagentoORM\Model\Magento19\ImmutableAttributeValueInterface;
+use Kiboko\Component\MagentoORM\Model\Magento19\MutableAttributeValueInterface;
+use Kiboko\Component\MagentoORM\Model\Magento19\Mutable\MutableImageAttributeValue;
 use Kiboko\Component\MagentoORM\Model\ScopableAttributeValueInterface;
 
 class ImmutableImageMetadataAttributeValue implements ImmutableAttributeValueInterface, ScopableAttributeValueInterface, ImageMetadataAttributeValueInterface
@@ -43,8 +44,7 @@ class ImmutableImageMetadataAttributeValue implements ImmutableAttributeValueInt
     }
 
     /**
-     * @return MutableImageMetadataAttributeValue
-     * @SuppressWarnings(PHPMD.StaticAccess)
+     * @return ImageMetadataAttributeValueInterface|MutableAttributeValueInterface
      */
     public function switchToMutable()
     {

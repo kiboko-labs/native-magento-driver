@@ -10,11 +10,11 @@ namespace Kiboko\Component\MagentoORM\Model\Magento19\Mutable;
 use Kiboko\Component\MagentoORM\Entity\Product\ProductInterface;
 use Kiboko\Component\MagentoORM\Model\AttributeInterface;
 use Kiboko\Component\MagentoORM\Model\AttributeValueInterface;
-use Kiboko\Component\MagentoORM\Model\ImmutableAttributeValueInterface;
 use Kiboko\Component\MagentoORM\Model\DecimalAttributeValueInterface;
 use Kiboko\Component\MagentoORM\Model\DecimalAttributeValueTrait;
+use Kiboko\Component\MagentoORM\Model\Magento19\ImmutableAttributeValueInterface;
 use Kiboko\Component\MagentoORM\Model\Magento19\Immutable\ImmutableDecimalAttributeValue;
-use Kiboko\Component\MagentoORM\Model\MutableAttributeValueInterface;
+use Kiboko\Component\MagentoORM\Model\Magento19\MutableAttributeValueInterface;
 use Kiboko\Component\MagentoORM\Model\ScopableAttributeValueInterface;
 
 class MutableDecimalAttributeValue implements MutableAttributeValueInterface, ScopableAttributeValueInterface, DecimalAttributeValueInterface
@@ -31,7 +31,7 @@ class MutableDecimalAttributeValue implements MutableAttributeValueInterface, Sc
      */
     public function __construct(
         AttributeInterface $attribute,
-        $payload,
+        $payload = null,
         ProductInterface $product = null,
         $storeId = null
     ) {

@@ -10,8 +10,8 @@ namespace Kiboko\Component\MagentoORM\Model\Magento19\Immutable;
 use Kiboko\Component\MagentoORM\Entity\Product\ProductInterface;
 use Kiboko\Component\MagentoORM\Model\AttributeInterface;
 use Kiboko\Component\MagentoORM\Model\AttributeValueInterface;
-use Kiboko\Component\MagentoORM\Model\ImmutableAttributeValueInterface;
-use Kiboko\Component\MagentoORM\Model\MutableAttributeValueInterface;
+use Kiboko\Component\MagentoORM\Model\Magento19\ImmutableAttributeValueInterface;
+use Kiboko\Component\MagentoORM\Model\Magento19\MutableAttributeValueInterface;
 use Kiboko\Component\MagentoORM\Model\Magento19\Mutable\MutableTextAttributeValue;
 use Kiboko\Component\MagentoORM\Model\ScopableAttributeValueInterface;
 use Kiboko\Component\MagentoORM\Model\TextAttributeValueInterface;
@@ -31,7 +31,7 @@ class ImmutableTextAttributeValue implements ImmutableAttributeValueInterface, S
      */
     public function __construct(
         AttributeInterface $attribute,
-        $payload,
+        $payload = null,
         ProductInterface $product = null,
         $storeId = null
     ) {
@@ -61,7 +61,6 @@ class ImmutableTextAttributeValue implements ImmutableAttributeValueInterface, S
      * @param int $storeId
      *
      * @return AttributeValueInterface
-     * @SuppressWarnings(PHPMD.StaticAccess)
      */
     public function copyToStoreId($storeId)
     {

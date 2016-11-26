@@ -10,11 +10,11 @@ namespace Kiboko\Component\MagentoORM\Model\Magento19\Mutable;
 use Kiboko\Component\MagentoORM\Entity\Product\ProductInterface;
 use Kiboko\Component\MagentoORM\Model\AttributeInterface;
 use Kiboko\Component\MagentoORM\Model\AttributeValueInterface;
-use Kiboko\Component\MagentoORM\Model\ImmutableAttributeValueInterface;
 use Kiboko\Component\MagentoORM\Model\DatetimeAttributeValueInterface;
 use Kiboko\Component\MagentoORM\Model\DatetimeAttributeValueTrait;
+use Kiboko\Component\MagentoORM\Model\Magento19\ImmutableAttributeValueInterface;
 use Kiboko\Component\MagentoORM\Model\Magento19\Immutable\ImmutableDatetimeAttributeValue;
-use Kiboko\Component\MagentoORM\Model\MutableAttributeValueInterface;
+use Kiboko\Component\MagentoORM\Model\Magento19\MutableAttributeValueInterface;
 use Kiboko\Component\MagentoORM\Model\ScopableAttributeValueInterface;
 
 class MutableDatetimeAttributeValue implements MutableAttributeValueInterface, ScopableAttributeValueInterface, DatetimeAttributeValueInterface

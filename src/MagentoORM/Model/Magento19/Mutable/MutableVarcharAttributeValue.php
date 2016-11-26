@@ -10,9 +10,9 @@ namespace Kiboko\Component\MagentoORM\Model\Magento19\Mutable;
 use Kiboko\Component\MagentoORM\Entity\Product\ProductInterface;
 use Kiboko\Component\MagentoORM\Model\AttributeInterface;
 use Kiboko\Component\MagentoORM\Model\AttributeValueInterface;
-use Kiboko\Component\MagentoORM\Model\ImmutableAttributeValueInterface;
-use Kiboko\Component\MagentoORM\Model\Mangento19\Immutable\ImmutableVarcharAttributeValue;
-use Kiboko\Component\MagentoORM\Model\MutableAttributeValueInterface;
+use Kiboko\Component\MagentoORM\Model\Magento19\ImmutableAttributeValueInterface;
+use Kiboko\Component\MagentoORM\Model\Magento19\Immutable\ImmutableVarcharAttributeValue;
+use Kiboko\Component\MagentoORM\Model\Magento19\MutableAttributeValueInterface;
 use Kiboko\Component\MagentoORM\Model\ScopableAttributeValueInterface;
 use Kiboko\Component\MagentoORM\Model\VarcharAttributeValueInterface;
 use Kiboko\Component\MagentoORM\Model\VarcharAttributeValueTrait;
@@ -31,7 +31,7 @@ class MutableVarcharAttributeValue implements MutableAttributeValueInterface, Sc
      */
     public function __construct(
         AttributeInterface $attribute,
-        $payload,
+        $payload = null,
         ProductInterface $product = null,
         $storeId = null
     ) {

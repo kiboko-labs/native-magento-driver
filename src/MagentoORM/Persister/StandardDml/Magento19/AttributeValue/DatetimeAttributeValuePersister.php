@@ -68,7 +68,7 @@ class DatetimeAttributeValuePersister implements AttributeValuePersisterInterfac
         if (!$value instanceof AttributeValueInterface) {
             throw new InvalidAttributePersisterTypeException(sprintf(
                 'Invalid attribute value type, expected "%s", got "%s".',
-                BaseAttributeValueInterface::class,
+                AttributeValueInterface::class,
                 is_object($value) ? get_class($value) : gettype($value)
             ));
         }

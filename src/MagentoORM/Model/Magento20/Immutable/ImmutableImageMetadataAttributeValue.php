@@ -11,7 +11,7 @@ use Kiboko\Component\MagentoORM\Model\AttributeInterface;
 use Kiboko\Component\MagentoORM\Model\AttributeValueInterface;
 use Kiboko\Component\MagentoORM\Model\ImageMetadataAttributeValueInterface;
 use Kiboko\Component\MagentoORM\Model\ImageMetadataAttributeValueTrait;
-use Kiboko\Component\MagentoORM\Model\ImmutableAttributeValueInterface;
+use Kiboko\Component\MagentoORM\Model\Magento20\ImmutableAttributeValueInterface;
 use Kiboko\Component\MagentoORM\Model\Magento20\Mutable\MutableImageMetadataAttributeValue;
 use Kiboko\Component\MagentoORM\Model\ScopableAttributeValueInterface;
 

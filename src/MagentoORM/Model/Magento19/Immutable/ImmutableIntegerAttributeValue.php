@@ -10,10 +10,10 @@ namespace Kiboko\Component\MagentoORM\Model\Magento19\Immutable;
 use Kiboko\Component\MagentoORM\Entity\Product\ProductInterface;
 use Kiboko\Component\MagentoORM\Model\AttributeInterface;
 use Kiboko\Component\MagentoORM\Model\AttributeValueInterface;
-use Kiboko\Component\MagentoORM\Model\ImmutableAttributeValueInterface;
 use Kiboko\Component\MagentoORM\Model\IntegerAttributeValueInterface;
 use Kiboko\Component\MagentoORM\Model\IntegerAttributeValueTrait;
-use Kiboko\Component\MagentoORM\Model\MutableAttributeValueInterface;
+use Kiboko\Component\MagentoORM\Model\Magento19\ImmutableAttributeValueInterface;
+use Kiboko\Component\MagentoORM\Model\Magento19\MutableAttributeValueInterface;
 use Kiboko\Component\MagentoORM\Model\Magento19\Mutable\MutableIntegerAttributeValue;
 use Kiboko\Component\MagentoORM\Model\ScopableAttributeValueInterface;
 
@@ -31,7 +31,7 @@ class ImmutableIntegerAttributeValue implements ImmutableAttributeValueInterface
      */
     public function __construct(
         AttributeInterface $attribute,
-        $payload,
+        $payload = null,
         ProductInterface $product = null,
         $storeId = null
     ) {
