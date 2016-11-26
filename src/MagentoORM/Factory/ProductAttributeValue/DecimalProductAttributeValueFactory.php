@@ -23,8 +23,8 @@ class DecimalProductAttributeValueFactory implements ProductAttributeValueFactor
     public function buildNew(AttributeInterface $attribute, array $options)
     {
         return ImmutableDecimalAttributeValue::buildNewWith(
-            $attribute,
             isset($options['value_id']) ? $options['value_id'] : null,
+            $attribute,
             isset($options['value']) ? $options['value'] : null
         );
     }

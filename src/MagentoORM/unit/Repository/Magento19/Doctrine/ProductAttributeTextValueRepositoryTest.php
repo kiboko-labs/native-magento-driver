@@ -214,8 +214,8 @@ class ProductAttributeTextValueRepositoryTest extends \PHPUnit_Framework_TestCas
             ->with($this->isInstanceOf(AttributeInterface::class), $this->isType('array'))
             ->willReturnCallback(function ($attribute, $data) {
                 return ImmutableTextAttributeValue::buildNewWith(
-                    $attribute,
                     $data['value_id'],
+                    $attribute,
                     $data['value'],
                     null,
                     $data['store_id']

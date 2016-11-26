@@ -215,8 +215,8 @@ class ProductAttributeDatetimeValueRepositoryTest extends \PHPUnit_Framework_Tes
             ->with($this->isInstanceOf(AttributeInterface::class), $this->isType('array'))
             ->willReturnCallback(function ($attribute, $data) {
                 return ImmutableDatetimeAttributeValue::buildNewWith(
-                    $attribute,
                     $data['value_id'],
+                    $attribute,
                     \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $data['value']),
                     null,
                     $data['store_id']

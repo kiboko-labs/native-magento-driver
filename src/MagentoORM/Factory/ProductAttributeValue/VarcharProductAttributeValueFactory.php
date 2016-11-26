@@ -23,8 +23,8 @@ class VarcharProductAttributeValueFactory implements ProductAttributeValueFactor
     public function buildNew(AttributeInterface $attribute, array $options)
     {
         return ImmutableVarcharAttributeValue::buildNewWith(
-            $attribute,
             isset($options['value_id']) ? $options['value_id'] : null,
+            $attribute,
             isset($options['value']) ? $options['value'] : null
         );
     }
