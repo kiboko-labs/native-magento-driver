@@ -1,6 +1,11 @@
 <?php
+/**
+ * Copyright (c) 2016 Kiboko SAS
+ *
+ * @author Grégory Planchat <gregory@kiboko.fr>
+ */
 
-namespace spec\Kiboko\Component\MagentoORM\Model\Immutable;
+namespace spec\Kiboko\Component\MagentoORM\Model\Magento20\Immutable;
 
 use Kiboko\Component\MagentoORM\Model\AttributeInterface;
 use PhpSpec\ObjectBehavior;
@@ -19,7 +24,7 @@ class ImmutableDatetimeAttributeValueSpec extends ObjectBehavior
     public function it_is_an_ImmutableAttributeValueInterface(AttributeInterface $attribute, \DateTimeImmutable $datetime)
     {
         $this->beConstructedWith($attribute, $datetime);
-        $this->shouldImplement('Kiboko\Component\MagentoORM\Model\Immutable\ImmutableAttributeValueInterface');
+        $this->shouldImplement('Kiboko\Component\MagentoORM\Model\Magento20\ImmutableAttributeValueInterface');
     }
 
     public function it_should_contain_immutable_datetime_value(AttributeInterface $attribute, \DateTimeImmutable $datetime)

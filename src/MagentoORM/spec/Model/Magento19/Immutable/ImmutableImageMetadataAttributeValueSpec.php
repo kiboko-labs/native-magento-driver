@@ -1,6 +1,11 @@
 <?php
+/**
+ * Copyright (c) 2016 Kiboko SAS
+ *
+ * @author Grégory Planchat <gregory@kiboko.fr>
+ */
 
-namespace spec\Kiboko\Component\MagentoORM\Model\Immutable;
+namespace spec\Kiboko\Component\MagentoORM\Model\Magento19\Immutable;
 
 use Kiboko\Component\MagentoORM\Model\AttributeInterface;
 use PhpSpec\ObjectBehavior;
@@ -10,7 +15,7 @@ class ImmutableImageMetadataAttributeValueSpec extends ObjectBehavior
     public function it_is_an_ImmutableAttributeValueInterface(AttributeInterface $attribute)
     {
         $this->beConstructedWith($attribute, 'Lorem ipsum', 1, false, 0);
-        $this->shouldImplement('Kiboko\Component\MagentoORM\Model\Immutable\ImmutableAttributeValueInterface');
+        $this->shouldImplement('Kiboko\Component\MagentoORM\Model\Magento19\ImmutableAttributeValueInterface');
     }
 
     public function it_should_contain_label_value_as_string(AttributeInterface $attribute)
