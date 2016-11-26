@@ -214,8 +214,8 @@ class ProductAttributeDecimalValueRepositoryTest extends \PHPUnit_Framework_Test
             ->with($this->isInstanceOf(AttributeInterface::class), $this->isType('array'))
             ->willReturnCallback(function ($attribute, $data) {
                 return ImmutableDecimalAttributeValue::buildNewWith(
-                    $attribute,
                     $data['value_id'],
+                    $attribute,
                     $data['value'],
                     null,
                     $data['store_id']
