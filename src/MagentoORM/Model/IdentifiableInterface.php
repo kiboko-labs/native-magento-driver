@@ -16,6 +16,7 @@ interface IdentifiableInterface
 
     /**
      * @param int $identifier
+     * @internal
      */
     public function persistedToId($identifier);
 }

@@ -68,7 +68,7 @@ class IntegerAttributeValuePersister implements AttributeValuePersisterInterface
         if (!$value instanceof AttributeValueInterface) {
             throw new InvalidAttributePersisterTypeException(sprintf(
                 'Invalid attribute value type, expected "%s", got "%s".',
-                BaseAttributeValueInterface::class,
+                AttributeValueInterface::class,
                 is_object($value) ? get_class($value) : gettype($value)
             ));
         }
@@ -88,7 +88,7 @@ class IntegerAttributeValuePersister implements AttributeValuePersisterInterface
      */
     public function flush()
     {
-        /** @var IntegerAttributeValueInterface $value */
+        /** @var IntegerAttributeValueInterface|AttributeValueInterface $value */
         foreach ($this->dataQueue as $value) {
             $this->insertOnDuplicateUpdate($this->connection, $this->tableName,
                 [
@@ -97,7 +97,7 @@ class IntegerAttributeValuePersister implements AttributeValuePersisterInterface
                     'attribute_id' => $value->getAttributeId(),
                     'store_id' => $value->getStoreId(),
                     'entity_id' => $value->getProductId(),
-                    'value' => (int) $value->getValue(),
+                    'value' => $value->getValue() !== null ? (int) $value->getValue() : null,
                 ],
                 [
                     'entity_type_id',
