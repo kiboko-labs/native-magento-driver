@@ -1,6 +1,6 @@
 <?php
 
-namespace unit\Kiboko\Component\MagentoORM\Persister\StandardDml\AttributeValue;
+namespace unit\Kiboko\Component\MagentoORM\Persister\Magento19\StandardDml\AttributeValue;
 
 use Doctrine\DBAL\Schema\Schema;
 use Kiboko\Component\MagentoORM\Entity\Product\ProductInterface;
@@ -15,7 +15,7 @@ use unit\Kiboko\Component\MagentoORM\DoctrineTools\DatabaseConnectionAwareTrait;
 use unit\Kiboko\Component\MagentoORM\SchemaBuilder\Fixture\FallbackResolver;
 use unit\Kiboko\Component\MagentoORM\SchemaBuilder\Fixture\Loader;
 use unit\Kiboko\Component\MagentoORM\SchemaBuilder\Fixture\LoaderInterface;
-use unit\Kiboko\Component\MagentoORM\SchemaBuilder\Table\Store as TableStore;
+use unit\Kiboko\Component\MagentoORM\SchemaBuilder\Table\Store as StoreTableSchemaBuilder;
 
 class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
 {
@@ -35,6 +35,22 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
      * @var LoaderInterface
      */
     private $fixturesLoader;
+
+    /**
+     * @return string
+     */
+    private function getVersion()
+    {
+        return '2.0';
+    }
+
+    /**
+     * @return string
+     */
+    private function getEdition()
+    {
+        return 'ce';
+    }
 
     /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
@@ -64,7 +80,7 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->getDoctrineConnection()->exec(
-            $platform->getTruncateTableSQL(TableStore::getTableName($GLOBALS['MAGENTO_VERSION']))
+            $platform->getTruncateTableSQL(StoreTableSchemaBuilder::getTableName($this->getVersion()))
         );
 
         $this->getDoctrineConnection()->exec(
@@ -88,7 +104,7 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
         $this->schema = new Schema();
 
         $schemaBuilder = new DoctrineSchemaBuilder(
-            $this->getDoctrineConnection(), $this->schema, $GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
+            $this->getDoctrineConnection(), $this->schema, $this->getVersion(), $this->getEdition());
         $schemaBuilder->ensureEntityTypeTable();
         $schemaBuilder->ensureAttributeTable();
         $schemaBuilder->ensureStoreTable();
@@ -113,8 +129,8 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
 
         $this->fixturesLoader = new Loader(
             new FallbackResolver($schemaBuilder->getFixturesPath()),
-            $GLOBALS['MAGENTO_VERSION'],
-            $GLOBALS['MAGENTO_EDITION']
+            $this->getVersion(),
+            $this->getEdition()
         );
 
         $schemaBuilder->hydrateEntityTypeTable(
@@ -193,7 +209,7 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
         $expected = $this->getDataSet();
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable(TableStore::getTableName($GLOBALS['MAGENTO_VERSION']));
+        $actual->addTable(StoreTableSchemaBuilder::getTableName($this->getVersion()));
         $actual->addTable('eav_entity_type');
         $actual->addTable('eav_attribute');
         $actual->addTable('catalog_product_entity');
@@ -206,27 +222,17 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
     {
         $this->persister->initialize();
 
-        $datetimeAttribute = [
-            'ce' => [
-                '1.9' => new ImmutableDatetimeAttributeValue(
-                            $this->getAttributeMock(167, 4),
-                            new \DateTime('2016-07-13 12:34:56'),
-                            $this->getProductMock(961),
-                            1
-                    ),
-                '2.0' => new ImmutableDatetimeAttributeValue(
-                            $this->getAttributeMock(167),
-                            new \DateTime('2016-07-13 12:34:56'),
-                            $this->getProductMock(961),
-                            1
-                    ),
-            ],
-        ];
+        $datetimeAttribute = new ImmutableDatetimeAttributeValue(
+            $this->getAttributeMock(167, 4),
+            new \DateTime('2016-07-13 12:34:56'),
+            $this->getProductMock(961),
+            1
+        );
 
-        $this->persister->persist($value = $datetimeAttribute[$GLOBALS['MAGENTO_EDITION']][$GLOBALS['MAGENTO_VERSION']]);
+        $this->persister->persist($datetimeAttribute);
         foreach ($this->persister->flush() as $item);
 
-        $this->assertEquals(24, $value->getId());
+        $this->assertEquals(24, $datetimeAttribute->getId());
 
         $newCatalogProductEntityDatetime = [
             'ce' => [
@@ -249,10 +255,10 @@ class DatetimeAttributeValuePersisterTest extends \PHPUnit_Framework_TestCase
         ];
 
         $expected = $this->getDataSet();
-        $expected->getTable('catalog_product_entity_datetime')->addRow($newCatalogProductEntityDatetime[$GLOBALS['MAGENTO_EDITION']][$GLOBALS['MAGENTO_VERSION']]);
+        $expected->getTable('catalog_product_entity_datetime')->addRow($newCatalogProductEntityDatetime[$this->getEdition()][$this->getVersion()]);
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable(TableStore::getTableName($GLOBALS['MAGENTO_VERSION']));
+        $actual->addTable(StoreTableSchemaBuilder::getTableName($this->getVersion()));
         $actual->addTable('eav_entity_type');
         $actual->addTable('eav_attribute');
         $actual->addTable('catalog_product_entity');

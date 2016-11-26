@@ -3,7 +3,7 @@
 namespace unit\Kiboko\Component\MagentoORM\SchemaBuilder\Link;
 
 use Doctrine\DBAL\Schema\Schema;
-use unit\Kiboko\Component\MagentoORM\SchemaBuilder\Table\Store as TableStore;
+use unit\Kiboko\Component\MagentoORM\SchemaBuilder\Table\Store as StoreTableSchemaBuilder;
 
 class CatalogProductAttributeValueToStore
 {
@@ -34,17 +34,17 @@ class CatalogProductAttributeValueToStore
      *
      * @return \Doctrine\DBAL\Schema\Table
      */
-    public function build($magentoVersion = null)
+    public function build($magentoVersion)
     {
         $tableName = sprintf('catalog_product_entity_%s', $this->backendName);
         if (!$this->schema->hasTable($tableName) ||
-            !$this->schema->hasTable(TableStore::getTableName($GLOBALS['MAGENTO_VERSION']))
+            !$this->schema->hasTable(StoreTableSchemaBuilder::getTableName($magentoVersion))
         ) {
             return;
         }
 
         $entityTable = $this->schema->getTable($tableName);
-        $storeTable = $this->schema->getTable(TableStore::getTableName($GLOBALS['MAGENTO_VERSION']));
+        $storeTable = $this->schema->getTable(StoreTableSchemaBuilder::getTableName($magentoVersion));
 
         $entityTable->addForeignKeyConstraint(
             $storeTable,

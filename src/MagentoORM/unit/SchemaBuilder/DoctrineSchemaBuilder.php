@@ -517,7 +517,7 @@ class DoctrineSchemaBuilder
      */
     public function ensureCatalogProductAttributeValueToEntityTypeLinks($backendType)
     {
-        (new Link\CatalogProductAttributeValueToEntityType($this->schema, $backendType))->build($GLOBALS['MAGENTO_VERSION']);
+        (new Link\CatalogProductAttributeValueToEntityType($this->schema, $backendType))->build($this->magentoVersion);
     }
 
     /**

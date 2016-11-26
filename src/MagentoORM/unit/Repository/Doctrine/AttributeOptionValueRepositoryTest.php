@@ -11,7 +11,7 @@ use Kiboko\Component\MagentoORM\Repository\AttributeOptionValueRepositoryInterfa
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoORM\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Kiboko\Component\MagentoORM\DoctrineTools\DatabaseConnectionAwareTrait;
-use unit\Kiboko\Component\MagentoORM\SchemaBuilder\Table\Store as TableStore;
+use unit\Kiboko\Component\MagentoORM\SchemaBuilder\Table\Store as StoreTableSchemaBuilder;
 
 class AttributeOptionValueRepositoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -26,6 +26,22 @@ class AttributeOptionValueRepositoryTest extends \PHPUnit_Framework_TestCase
      * @var AttributeOptionValueRepositoryInterface
      */
     private $repository;
+
+    /**
+     * @return string
+     */
+    private function getVersion()
+    {
+        return '2.0';
+    }
+
+    /**
+     * @return string
+     */
+    private function getEdition()
+    {
+        return 'ce';
+    }
 
     /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
@@ -55,7 +71,7 @@ class AttributeOptionValueRepositoryTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->getDoctrineConnection()->exec(
-            $platform->getTruncateTableSQL(TableStore::getTableName($GLOBALS['MAGENTO_VERSION']))
+            $platform->getTruncateTableSQL(StoreTableSchemaBuilder::getTableName($this->getVersion()))
         );
 
         $this->getDoctrineConnection()->exec(
@@ -80,7 +96,7 @@ class AttributeOptionValueRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->schema = new Schema();
 
         $schemaBuilder = new DoctrineSchemaBuilder(
-            $this->getDoctrineConnection(), $this->schema, $GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
+            $this->getDoctrineConnection(), $this->schema, $this->getVersion(), $this->getEdition());
 
         $schemaBuilder->ensureAttributeTable();
         $schemaBuilder->ensureAttributeOptionTable();

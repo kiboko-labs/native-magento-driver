@@ -14,7 +14,7 @@ his object creates Doctrine DBAL `QueryBuilder` objects for entity type data fet
 
 /** @var \Doctrine\DBAL\Connection $connection */
 
-use Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\FamilyQueryBuilder;
+use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\FamilyQueryBuilder;
 
 $queryBuilder = new FamilyQueryBuilder(
     $connection,
@@ -27,7 +27,7 @@ $queryBuilder = new FamilyQueryBuilder(
 
 ```yaml
 parameters:
-  kiboko.magento_driver.query_builder.family.class: Kiboko\Component\MagentoDriver\QueryBuilder\Doctrine\FamilyQueryBuilder
+  kiboko.magento_driver.query_builder.family.class: Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\FamilyQueryBuilder
   
   kiboko.magento_driver.backend.family.table: 'eav_attribute_set'
   kiboko.magento_driver.backend.family.fields:
@@ -54,8 +54,8 @@ The *Repository* objects helps you fetch data from the database. It requires a p
 ```php
 <?php
 
-use Kiboko\Component\MagentoDriver\Factory\StandardFamilyFactory;
-use Kiboko\Component\MagentoDriver\Repository\Doctrine\FamilyRepository;
+use Kiboko\Component\MagentoORM\Factory\StandardFamilyFactory;
+use Kiboko\Component\MagentoORM\Repository\Doctrine\FamilyRepository;
 
 $familyFactory = new StandardFamilyFactory();
 
@@ -70,8 +70,8 @@ $familyQueryBuilder = new FamilyRepository(
 
 ```yaml
 parameters:
-  kiboko.magento_driver.repository.doctrine.family.class: Kiboko\Component\MagentoDriver\Repository\Doctrine\FamilyRepository
-  kiboko.magento_driver.factory.family.class: Kiboko\Component\MagentoDriver\Factory\StandardFamilyFactory
+  kiboko.magento_driver.repository.doctrine.family.class: Kiboko\Component\MagentoORM\Repository\Doctrine\FamilyRepository
+  kiboko.magento_driver.factory.family.class: Kiboko\Component\MagentoORM\Factory\StandardFamilyFactory
 
 services:
   kiboko.magento_driver.factory.family:

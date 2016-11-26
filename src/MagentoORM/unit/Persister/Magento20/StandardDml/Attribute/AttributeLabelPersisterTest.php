@@ -1,6 +1,11 @@
 <?php
+/**
+ * Copyright (c) 2016 Kiboko SAS
+ *
+ * @author Grégory Planchat <gregory@kiboko.fr>
+ */
 
-namespace unit\Kiboko\Component\MagentoORM\Persister\StandardDml\Attribute;
+namespace unit\Kiboko\Component\MagentoORM\Persister\Magento20\StandardDml\Attribute;
 
 use Doctrine\DBAL\Schema\Schema;
 use Kiboko\Component\MagentoORM\Model\AttributeLabel;
@@ -13,7 +18,7 @@ use unit\Kiboko\Component\MagentoORM\DoctrineTools\DatabaseConnectionAwareTrait;
 use unit\Kiboko\Component\MagentoORM\SchemaBuilder\Fixture\FallbackResolver;
 use unit\Kiboko\Component\MagentoORM\SchemaBuilder\Fixture\Loader;
 use unit\Kiboko\Component\MagentoORM\SchemaBuilder\Fixture\LoaderInterface;
-use unit\Kiboko\Component\MagentoORM\SchemaBuilder\Table\Store as TableStore;
+use unit\Kiboko\Component\MagentoORM\SchemaBuilder\Table\Store as StoreTableSchemaBuilder;
 
 class AttributeLabelPersisterTest extends \PHPUnit_Framework_TestCase
 {
@@ -51,7 +56,7 @@ class AttributeLabelPersisterTest extends \PHPUnit_Framework_TestCase
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
 
         $this->getDoctrineConnection()->exec(
-            $platform->getTruncateTableSQL(TableStore::getTableName($GLOBALS['MAGENTO_VERSION']))
+            $platform->getTruncateTableSQL(StoreTableSchemaBuilder::getTableName($GLOBALS['MAGENTO_VERSION']))
         );
 
         $this->getDoctrineConnection()->exec(

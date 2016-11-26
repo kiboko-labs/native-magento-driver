@@ -11,7 +11,7 @@ use Doctrine\DBAL\Connection;
 use Kiboko\Component\MagentoORM\Exception\DatabaseFetchingFailureException;
 use Kiboko\Component\MagentoORM\Factory\ProductUrlRewriteFactoryInterface;
 use Kiboko\Component\MagentoORM\Model\ProductUrlRewriteInterface;
-use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\CommunityEditionProductUrlRewriteQueryBuilderInterface;
+use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\ProductUrlRewrite\CommunityEditionProductUrlRewriteQueryBuilderInterface;
 
 class CommunityEditionProductUrlRewriteRepository extends AbstractProductUrlRewriteRepository
 {

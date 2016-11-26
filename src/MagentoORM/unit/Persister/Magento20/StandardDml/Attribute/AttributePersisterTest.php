@@ -1,16 +1,16 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS.
+ * Copyright (c) 2016 Kiboko SAS
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace unit\Kiboko\Component\MagentoORM\Persister\Magento19\StandardDml\Attribute;
+namespace unit\Kiboko\Component\MagentoORM\Persister\Magento20\StandardDml\Attribute;
 
 use Doctrine\DBAL\Schema\Schema;
-use Kiboko\Component\MagentoORM\Model\Magento19\CatalogAttributeExtension;
-use Kiboko\Component\MagentoORM\Persister\CatalogAttributeExtensionPersisterInterface;
-use Kiboko\Component\MagentoORM\Persister\StandardDml\Magento19\Attribute\CatalogAttributeExtensionPersister;
+use Kiboko\Component\MagentoORM\Model\Attribute;
+use Kiboko\Component\MagentoORM\Persister\AttributePersisterInterface;
+use Kiboko\Component\MagentoORM\Persister\StandardDml\Attribute\StandardAttributePersister;
 use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\ProductAttributeQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoORM\SchemaBuilder\DoctrineSchemaBuilder;
@@ -19,7 +19,7 @@ use unit\Kiboko\Component\MagentoORM\SchemaBuilder\Fixture\FallbackResolver;
 use unit\Kiboko\Component\MagentoORM\SchemaBuilder\Fixture\Loader;
 use unit\Kiboko\Component\MagentoORM\SchemaBuilder\Fixture\LoaderInterface;
 
-class CatalogAttributeExtensionPersisterTest extends \PHPUnit_Framework_TestCase
+class AttributePersisterTest extends \PHPUnit_Framework_TestCase
 {
     use DatabaseConnectionAwareTrait;
 
@@ -29,7 +29,7 @@ class CatalogAttributeExtensionPersisterTest extends \PHPUnit_Framework_TestCase
     private $schema;
 
     /**
-     * @var CatalogAttributeExtensionPersisterInterface
+     * @var AttributePersisterInterface
      */
     private $persister;
 
@@ -39,28 +39,12 @@ class CatalogAttributeExtensionPersisterTest extends \PHPUnit_Framework_TestCase
     private $fixturesLoader;
 
     /**
-     * @return string
-     */
-    private function getVersion()
-    {
-        return '1.9';
-    }
-
-    /**
-     * @return string
-     */
-    private function getEdition()
-    {
-        return 'ce';
-    }
-
-    /**
      * @return PHPUnit_Extensions_Database_DataSet_IDataSet
      */
     protected function getDataSet()
     {
         $dataset = $this->fixturesLoader->initialDataSet(
-            'catalog_eav_attribute',
+            'eav_attribute',
             DoctrineSchemaBuilder::CONTEXT_PERSISTER
         );
 
@@ -72,7 +56,6 @@ class CatalogAttributeExtensionPersisterTest extends \PHPUnit_Framework_TestCase
         $platform = $this->getDoctrineConnection()->getDatabasePlatform();
 
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
-
         $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('eav_entity_type')
         );
@@ -81,9 +64,6 @@ class CatalogAttributeExtensionPersisterTest extends \PHPUnit_Framework_TestCase
             $platform->getTruncateTableSQL('eav_attribute')
         );
 
-        $this->getDoctrineConnection()->exec(
-            $platform->getTruncateTableSQL('catalog_eav_attribute')
-        );
         $this->getDoctrineConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
     }
 
@@ -97,12 +77,10 @@ class CatalogAttributeExtensionPersisterTest extends \PHPUnit_Framework_TestCase
         $this->schema = new Schema();
 
         $schemaBuilder = new DoctrineSchemaBuilder(
-            $this->getDoctrineConnection(), $this->schema, $this->getVersion(), $this->getEdition());
+            $this->getDoctrineConnection(), $this->schema, $GLOBALS['MAGENTO_VERSION'], $GLOBALS['MAGENTO_EDITION']);
         $schemaBuilder->ensureEntityTypeTable();
         $schemaBuilder->ensureAttributeTable();
-        $schemaBuilder->ensureCatalogAttributeExtensionsTable();
         $schemaBuilder->ensureAttributeToEntityTypeLinks();
-        $schemaBuilder->ensureCatalogAttributeExtensionsToAttributeLinks();
 
         $comparator = new \Doctrine\DBAL\Schema\Comparator();
         $schemaDiff = $comparator->compare($currentSchema, $this->schema);
@@ -117,27 +95,23 @@ class CatalogAttributeExtensionPersisterTest extends \PHPUnit_Framework_TestCase
 
         $this->fixturesLoader = new Loader(
             new FallbackResolver($schemaBuilder->getFixturesPath()),
-            $this->getVersion(), $this->getEdition()
+            $GLOBALS['MAGENTO_VERSION'],
+            $GLOBALS['MAGENTO_EDITION']
         );
 
         $schemaBuilder->hydrateEntityTypeTable(
-            'catalog_eav_attribute',
+            'eav_attribute',
             DoctrineSchemaBuilder::CONTEXT_PERSISTER
         );
 
         $schemaBuilder->hydrateAttributeTable(
-            'catalog_eav_attribute',
+            'eav_attribute',
             DoctrineSchemaBuilder::CONTEXT_PERSISTER
         );
 
-        $schemaBuilder->hydrateCatalogAttributeExtensionsTable(
-            'catalog_eav_attribute',
-            DoctrineSchemaBuilder::CONTEXT_PERSISTER
-        );
-
-        $this->persister = new CatalogAttributeExtensionPersister(
+        $this->persister = new StandardAttributePersister(
             $this->getDoctrineConnection(),
-            ProductAttributeQueryBuilder::getDefaultExtraTable()
+            ProductAttributeQueryBuilder::getDefaultTable()
         );
     }
 
@@ -157,96 +131,81 @@ class CatalogAttributeExtensionPersisterTest extends \PHPUnit_Framework_TestCase
         $this->persister->initialize();
         foreach ($this->persister->flush() as $item);
 
-        $expected = $this->fixturesLoader->namedDataSet(
-            'do-nothing',
-            'catalog_eav_attribute',
-            DoctrineSchemaBuilder::CONTEXT_PERSISTER
-        );
+        $expected = $this->getDataSet();
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable('catalog_eav_attribute');
+        $actual->addTable('eav_attribute');
+        $actual->addTable('eav_entity_type');
 
         $this->assertDataSetsEqual($expected, $actual);
     }
 
     public function testInsertOne()
     {
-        $attributeExtension = new CatalogAttributeExtension(
-            122,
-            null,
-            true,
-            true,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            [],
-            null,
-            20
-        );
-
         $this->persister->initialize();
-        $this->persister->persist($attributeExtension);
+        $attribute = new Attribute(
+            4,              // EntityTypeId
+            'description',  // Identifier
+            null,           // ModelClass
+            'text',         // BackendType
+            null,           // BackendModelClass
+            null,           // BackendTable
+            null,           // FrontendModelClass
+            'text',         // FrontendInput
+            'Description',  // FrontendLabel
+            null,           // FrontendViewClass
+            null,           // SourceModelClass
+            0,              // IsRequired
+            1,              // IsUserDefined
+            0,              // IsUnique
+            null,           // DefaultValue
+            null
+        );
+        $this->persister->persist($attribute);
         foreach ($this->persister->flush() as $item);
 
-        $expected = $this->fixturesLoader->namedDataSet(
-            'insert-one',
-            'catalog_eav_attribute',
-            DoctrineSchemaBuilder::CONTEXT_PERSISTER
+        $this->assertEquals(80, $attribute->getId());
+
+        $expected = $this->getDataSet();
+        $expected->getTable('eav_attribute')->addRow(
+                [
+                    'attribute_id' => 80,
+                    'entity_type_id' => 4,
+                    'attribute_code' => 'description',
+                    'attribute_model' => null,
+                    'backend_model' => null,
+                    'backend_type' => 'text',
+                    'backend_table' => null,
+                    'frontend_model' => null,
+                    'frontend_input' => 'text',
+                    'frontend_label' => 'Description',
+                    'frontend_class' => null,
+                    'source_model' => null,
+                    'is_required' => 0,
+                    'is_user_defined' => 1,
+                    'default_value' => null,
+                    'is_unique' => 0,
+                    'note' => null,
+                ]
         );
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable('catalog_eav_attribute');
+        $actual->addTable('eav_attribute');
+        $actual->addTable('eav_entity_type');
 
         $this->assertDataSetsEqual($expected, $actual);
     }
 
     public function testUpdateOneExisting()
     {
-        $attributeExtension = new CatalogAttributeExtension(
-            122,
-            null,
-            true,
-            true,
-            true,
-            true,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            true,
-            [],
-            null,
-            20
-        );
-
         $this->persister->initialize();
-        $this->persister->persist($attributeExtension);
         foreach ($this->persister->flush() as $item);
 
-        $expected = $this->fixturesLoader->namedDataSet(
-            'update-one',
-            'catalog_eav_attribute',
-            DoctrineSchemaBuilder::CONTEXT_PERSISTER
-        );
+        $expected = $this->getDataSet();
 
         $actual = new \PHPUnit_Extensions_Database_DataSet_QueryDataSet($this->getConnection());
-        $actual->addTable('catalog_eav_attribute');
+        $actual->addTable('eav_attribute');
+        $actual->addTable('eav_entity_type');
 
         $this->assertDataSetsEqual($expected, $actual);
     }
