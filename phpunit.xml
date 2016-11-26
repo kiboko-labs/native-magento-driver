@@ -10,9 +10,6 @@
         <var name="DB_NAME"     value="magento_test" />
         <var name="DB_USERNAME" value="magento" />
         <var name="DB_PASSWORD" value="password" />
-
-        <var name="MAGENTO_VERSION" value="1.9" />
-        <var name="MAGENTO_EDITION" value="ce" />
     </php>
     <testsuites>
         <testsuite name="MagentoORM">
