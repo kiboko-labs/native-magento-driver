@@ -19,12 +19,6 @@
         processIsolation="false"
         stopOnFailure="false"
         syntaxCheck="false">
-    <php>
-        <var name="DB_DRIVER"   value="mysqli" />
-        <var name="DB_NAME"     value="magento_test" />
-        <var name="DB_USERNAME" value="magento" />
-        <var name="DB_PASSWORD" value="password" />
-    </php>
     <testsuites>
         <testsuite name="MagentoORM">
             <directory>src/MagentoORM/unit/</directory>
