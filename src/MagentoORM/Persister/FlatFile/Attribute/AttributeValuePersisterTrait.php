@@ -1,19 +1,18 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS.
+ * Copyright (c) 2016 Kiboko SAS
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
 namespace Kiboko\Component\MagentoORM\Persister\FlatFile\Attribute;
 
-use Kiboko\Component\MagentoORM\Model\AttributeGroupInterface;
+use Kiboko\Component\MagentoORM\Model\AttributeValueInterface as BaseAttributeValueInterface;
 use Kiboko\Component\MagentoORM\Persister\FlatFile\BaseFlatFilePersisterTrait;
-use Kiboko\Component\MagentoORM\Persister\AttributeGroupPersisterInterface;
 use Kiboko\Component\MagentoORM\Writer\Database\DatabaseWriterInterface;
 use Kiboko\Component\MagentoORM\Writer\Temporary\TemporaryWriterInterface;
 
-class AttributeGroupPersister implements AttributeGroupPersisterInterface
+trait AttributeValuePersisterTrait
 {
     use BaseFlatFilePersisterTrait;
 
@@ -40,25 +39,16 @@ class AttributeGroupPersister implements AttributeGroupPersisterInterface
     }
 
     /**
-     * @param AttributeGroupInterface $attributeGroupInterface
+     * @param BaseAttributeValueInterface $value
      */
-    public function persist(AttributeGroupInterface $attributeGroupInterface)
-    {
-        $this->temporaryWriter->persistRow([
-            'attribute_group_id' => $attributeGroupInterface->getId(),
-            'attribute_set_id' => $attributeGroupInterface->getFamilyId(),
-            'attribute_group_name' => $attributeGroupInterface->getLabel(),
-            'sort_order' => $attributeGroupInterface->getSortOrder(),
-            'default_d' => $attributeGroupInterface->getDefaultId(),
-        ]);
-    }
+    abstract public function persist(BaseAttributeValueInterface $value);
 
     /**
-     * @param AttributeGroupInterface $attributeGroup
+     * @param BaseAttributeValueInterface $value
      */
-    public function __invoke(AttributeGroupInterface $attributeGroup)
+    public function __invoke(BaseAttributeValueInterface $value)
     {
-        $this->persist($attributeGroup);
+        $this->persist($value);
     }
 
     public function flush()

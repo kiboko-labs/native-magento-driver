@@ -1,17 +1,17 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS.
+ * Copyright (c) 2016 Kiboko SAS
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace Kiboko\Component\MagentoORM\Persister\StandardDml\Magento19\Attribute;
+namespace Kiboko\Component\MagentoORM\Persister\FlatFile\Magento19\Attribute;
 
 use Kiboko\Component\MagentoORM\Exception\InvalidArgumentException;
 use Kiboko\Component\MagentoORM\Model\CatalogAttributeExtensionInterface as BaseCatalogAttributeExtensionInterface;
 use Kiboko\Component\MagentoORM\Model\Magento19\CatalogAttributeExtensionInterface;
 use Kiboko\Component\MagentoORM\Persister\CatalogAttributeExtensionPersisterInterface;
-use Kiboko\Component\MagentoORM\Persister\StandardDml\Attribute\CatalogAttributeExtensionPersisterTrait;
+use Kiboko\Component\MagentoORM\Persister\FlatFile\Attribute\CatalogAttributeExtensionPersisterTrait;
 
 class CatalogAttributeExtensionPersister implements CatalogAttributeExtensionPersisterInterface
 {
@@ -22,7 +22,7 @@ class CatalogAttributeExtensionPersister implements CatalogAttributeExtensionPer
      *
      * @return array
      */
-    protected function getInsertData(BaseCatalogAttributeExtensionInterface $attributeExtension)
+    public function persist(BaseCatalogAttributeExtensionInterface $attributeExtension)
     {
         if (!$attributeExtension instanceof CatalogAttributeExtensionInterface) {
             throw new InvalidArgumentException(sprintf(
@@ -32,7 +32,7 @@ class CatalogAttributeExtensionPersister implements CatalogAttributeExtensionPer
             ));
         }
 
-        return [
+        $this->temporaryWriter->persistRow([
             'attribute_id' => $attributeExtension->getId(),
             'frontend_input_renderer' => $attributeExtension->getFrontendInputRendererClassName(),
             'is_global' => $attributeExtension->isGlobal(),
@@ -53,42 +53,6 @@ class CatalogAttributeExtensionPersister implements CatalogAttributeExtensionPer
             'position' => $attributeExtension->getPosition(),
             'is_wysiwyg_enabled' => (int) $attributeExtension->isWysiwygEnabled(),
             'is_used_for_promo_rules' => (int) $attributeExtension->isUsedForPromoRules(),
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    protected function getUpdatedFields()
-    {
-        return [
-            'attribute_id',
-            'frontend_input_renderer',
-            'is_global',
-            'is_visible',
-            'is_searchable',
-            'is_filterable',
-            'is_comparable',
-            'is_visible_on_front',
-            'is_html_allowed_on_front',
-            'is_used_for_price_rules',
-            'is_filterable_in_search',
-            'used_in_product_listing',
-            'used_for_sort_by',
-            'apply_to',
-            'is_visible_in_advanced_search',
-            'position',
-            'is_wysiwyg_enabled',
-            'is_used_for_promo_rules',
-            'is_configurable',
-        ];
-    }
-
-    /**
-     * @return string
-     */
-    protected function getIdentifierField()
-    {
-        return 'attribute_id';
+        ]);
     }
 }
