@@ -53,15 +53,28 @@ The driver is split into several tools, each of them having its implementation f
 
 ### [Entity to Attribute relations](entity-attributes.md)
 
-### [Product attributes](product-attributes.md)
+### Product attributes
 
-* [Initializing the Query Builder](product-attributes.md#initializing-the-query-builder)
-* [Initializing the Repository](product-attributes.md#initializing-the-repository)
-* [Using the Cached Repository](product-attributes.md#using-the-cached-repository)
-* [Persisting data](product-attributes.md#persisting-data)
-  * [Portable DML](product-attributes.md#portable-dml)
-  * [MySQL specific, CSV direct importer](product-attributes.md#mysql-specific-csv-direct-importer)
-* [Deleting data](product-attributes.md#deleting-data)
+#### [Product attributes for Magento 1.9CE & 1.14EE](magento-1.9/product-attributes.md)
+
+* [Initializing the Query Builder](magento-1.9/product-attributes.md#initializing-the-query-builder)
+* [Initializing the Repository](magento-1.9/product-attributes.md#initializing-the-repository)
+* [Using the Cached Repository](magento-1.9/product-attributes.md#using-the-cached-repository)
+* [Persisting data](magento-1.9/product-attributes.md#persisting-data)
+  * [Portable DML](magento-1.9/product-attributes.md#portable-dml)
+  * [MySQL specific, CSV direct importer](magento-1.9/product-attributes.md#mysql-specific-csv-direct-importer)
+* [Deleting data](magento-1.9/product-attributes.md#deleting-data)
+
+
+#### [Product attributes for Magento 2.0](magento-2.0/product-attributes.md)
+
+* [Initializing the Query Builder](magento-2.0/product-attributes.md#initializing-the-query-builder)
+* [Initializing the Repository](magento-2.0/product-attributes.md#initializing-the-repository)
+* [Using the Cached Repository](magento-2.0/product-attributes.md#using-the-cached-repository)
+* [Persisting data](magento-2.0/product-attributes.md#persisting-data)
+  * [Portable DML](magento-2.0/product-attributes.md#portable-dml)
+  * [MySQL specific, CSV direct importer](magento-2.0/product-attributes.md#mysql-specific-csv-direct-importer)
+* [Deleting data](magento-2.0/product-attributes.md#deleting-data)
 
 ### [Product values](product-values.md)
 

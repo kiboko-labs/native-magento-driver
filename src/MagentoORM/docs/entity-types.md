@@ -7,7 +7,7 @@
 
 This object creates Doctrine DBAL `QueryBuilder` objects for entity type data fetching. It is used by repositories.
 
-### PHP iniitalization
+### PHP initialization
 
 ```php
 <?php
@@ -73,8 +73,8 @@ A *factory* is also required, the intialization code is provided here.
 /** @var \Doctrine\DBAL\Connection $connection */
 /** @var \Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\EntityTypeQueryBuilderInterface $queryBuilder */
 
-use Kiboko\Component\MagentoORM\Repository\Doctrine\EntityTypeRepository;
 use Kiboko\Component\MagentoORM\Factory\StandardEntityTypeFactory;
+use Kiboko\Component\MagentoORM\Repository\Doctrine\EntityTypeRepository;
 
 $factory = new StandardEntityTypeFactory();
 
@@ -94,6 +94,9 @@ parameters:
   kiboko_magento_connector.repository.doctrine.entity_type.class: Kiboko\Component\MagentoORM\Repository\Doctrine\EntityTypeRepository
 
 services:
+  kiboko_magento_connector.factory.entity_type:
+    class: '%kiboko_magento_connector.factory.entity_type.class%'
+
   kiboko_magento_connector.repository.doctrine.entity_type:
     class: '%kiboko_magento_connector.repository.doctrine.entity_type.class%'
     arguments:
