@@ -5,7 +5,7 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace Kiboko\Component\MagentoORM\Persister\StandardDml\EntityStore;
+namespace Kiboko\Component\MagentoORM\Persister\FlatFile\EntityStore;
 
 use Doctrine\DBAL\Connection;
 use Kiboko\Component\MagentoORM\Model\EntityStoreInterface;

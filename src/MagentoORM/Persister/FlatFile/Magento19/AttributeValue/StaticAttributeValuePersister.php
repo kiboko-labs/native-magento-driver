@@ -5,7 +5,7 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace Kiboko\Component\MagentoORM\Persister\StandardDml\Magento19\AttributeValue;
+namespace Kiboko\Component\MagentoORM\Persister\FlatFile\Magento19\AttributeValue;
 
 use Kiboko\Component\MagentoORM\Exception\InvalidAttributePersisterTypeException;
 use Kiboko\Component\MagentoORM\Model\AttributeValueInterface as BaseAttributeValueInterface;

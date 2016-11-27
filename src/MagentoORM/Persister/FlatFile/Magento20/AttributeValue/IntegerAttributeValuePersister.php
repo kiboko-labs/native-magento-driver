@@ -5,7 +5,7 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace Kiboko\Component\MagentoORM\Persister\StandardDml\Magento20\AttributeValue;
+namespace Kiboko\Component\MagentoORM\Persister\FlatFile\Magento20\AttributeValue;
 
 use Kiboko\Component\MagentoORM\Model\AttributeValueInterface as BaseAttributeValueInterface;
 use Kiboko\Component\MagentoORM\Model\Magento20\AttributeValueInterface;
