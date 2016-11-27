@@ -8,6 +8,7 @@
 namespace Kiboko\Component\MagentoORM\QueryBuilder\Magento19\Doctrine;
 
 use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\AbstractProductAttributeQueryBuilder;
+use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\AttributeQueryBuilder;
 
 class ProductAttributeQueryBuilder extends AbstractProductAttributeQueryBuilder
 {
@@ -16,25 +17,7 @@ class ProductAttributeQueryBuilder extends AbstractProductAttributeQueryBuilder
      */
     public static function getDefaultFields()
     {
-        return [
-            'attribute_id',
-            'entity_type_id',
-            'attribute_code',
-            'attribute_model',
-            'backend_model',
-            'backend_type',
-            'backend_table',
-            'frontend_model',
-            'frontend_input',
-            'frontend_label',
-            'frontend_class',
-            'source_model',
-            'is_required',
-            'is_user_defined',
-            'default_value',
-            'is_unique',
-            'note',
-        ];
+        return AttributeQueryBuilder::getDefaultFields();
     }
 
     /**
@@ -71,11 +54,7 @@ class ProductAttributeQueryBuilder extends AbstractProductAttributeQueryBuilder
      */
     public static function getDefaultTable($prefix = null)
     {
-        if ($prefix !== null) {
-            return sprintf('%seav_attribute', $prefix);
-        }
-
-        return 'eav_attribute';
+        return AttributeQueryBuilder::getDefaultTable($prefix);
     }
 
     /**
@@ -85,11 +64,7 @@ class ProductAttributeQueryBuilder extends AbstractProductAttributeQueryBuilder
      */
     public static function getDefaultEntityTable($prefix = null)
     {
-        if ($prefix !== null) {
-            return sprintf('%seav_entity_type', $prefix);
-        }
-
-        return 'eav_entity_type';
+        return AttributeQueryBuilder::getDefaultEntityTable($prefix);
     }
 
     /**

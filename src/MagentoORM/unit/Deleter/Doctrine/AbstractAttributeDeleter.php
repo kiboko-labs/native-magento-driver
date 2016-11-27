@@ -5,7 +5,7 @@ namespace unit\Kiboko\Component\MagentoORM\Deleter\Doctrine;
 use Doctrine\DBAL\Schema\Schema;
 use Kiboko\Component\MagentoORM\Deleter\AttributeDeleterInterface;
 use Kiboko\Component\MagentoORM\Deleter\Doctrine\AttributeDeleter;
-use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\ProductAttributeQueryBuilder;
+use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\ProductAttributeQueryBuilderInterface;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoORM\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Kiboko\Component\MagentoORM\DoctrineTools\DatabaseConnectionAwareTrait;
@@ -113,23 +113,12 @@ abstract class AbstractAttributeDeleter extends \PHPUnit_Framework_TestCase
 
         $schemaBuilder->hydrateAttributeTable(
             'eav_attribute',
-            DoctrineSchemaBuilder::CONTEXT_DELETER,
-            $this->getVersion(),
-            $this->getEdition()
+            DoctrineSchemaBuilder::CONTEXT_DELETER
         );
 
         $this->deleter = new AttributeDeleter(
             $this->getDoctrineConnection(),
-            new ProductAttributeQueryBuilder(
-                $this->getDoctrineConnection(),
-                ProductAttributeQueryBuilder::getDefaultTable(),
-                ProductAttributeQueryBuilder::getDefaultExtraTable(),
-                ProductAttributeQueryBuilder::getDefaultEntityTable(),
-                ProductAttributeQueryBuilder::getDefaultVariantTable(),
-                ProductAttributeQueryBuilder::getDefaultFamilyTable(),
-                ProductAttributeQueryBuilder::getDefaultFields(),
-                ProductAttributeQueryBuilder::getDefaultExtraFields()
-            )
+            $this->getQueryBuilder()
         );
     }
 
@@ -143,4 +132,9 @@ abstract class AbstractAttributeDeleter extends \PHPUnit_Framework_TestCase
         $this->connection = null;
         $this->pdo = null;
     }
+
+    /**
+     * @return ProductAttributeQueryBuilderInterface
+     */
+    abstract protected function getQueryBuilder();
 }

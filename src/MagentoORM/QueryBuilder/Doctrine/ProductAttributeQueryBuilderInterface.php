@@ -19,7 +19,7 @@ interface ProductAttributeQueryBuilderInterface extends AttributeQueryBuilderInt
      *
      * @return QueryBuilder
      */
-    public function createFindAllVariantAxisByEntityQueryBuilder($alias, $extraAlias, $entityAlias, $variantAxisAlias);
+    public function createFindAllVariantAxisByEntityQueryBuilderWithExtra($alias, $extraAlias, $entityAlias, $variantAxisAlias);
 
     /**
      * @param string $alias
@@ -29,7 +29,7 @@ interface ProductAttributeQueryBuilderInterface extends AttributeQueryBuilderInt
      *
      * @return QueryBuilder
      */
-    public function createFindAllByFamilyQueryBuilder($alias, $extraAlias, $entityAlias, $familyAlias);
+    public function createFindAllByFamilyQueryBuilderWithExtra($alias, $extraAlias, $entityAlias, $familyAlias);
 
     /**
      * @param string $alias
@@ -39,5 +39,5 @@ interface ProductAttributeQueryBuilderInterface extends AttributeQueryBuilderInt
      *
      * @return QueryBuilder
      */
-    public function createFindAllMandatoryByFamilyQueryBuilder($alias, $extraAlias, $entityAlias, $familyAlias);
+    public function createFindAllMandatoryByFamilyQueryBuilderWithExtra($alias, $extraAlias, $entityAlias, $familyAlias);
 }

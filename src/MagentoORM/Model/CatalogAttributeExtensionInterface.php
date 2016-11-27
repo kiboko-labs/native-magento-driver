@@ -9,6 +9,10 @@ namespace Kiboko\Component\MagentoORM\Model;
 
 interface CatalogAttributeExtensionInterface extends IdentifiableInterface
 {
+    const SCOPE_GLOBAL = 1;
+    const SCOPE_WEBSITE = 2;
+    const SCOPE_STORE = 0;
+
     /**
      * @return string
      */

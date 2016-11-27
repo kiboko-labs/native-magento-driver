@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS.
+ * Copyright (c) 2016 Kiboko SAS
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -9,63 +9,62 @@ namespace Kiboko\Component\MagentoORM\QueryBuilder\Doctrine;
 
 use Doctrine\DBAL\Query\QueryBuilder;
 
-interface AttributeQueryBuilderInterface
+interface CatalogAttributeQueryBuilderInterface extends AttributeQueryBuilderInterface
 {
     /**
      * @param string $alias
-     *
-     * @return QueryBuilder
-     */
-    public function createFindQueryBuilder($alias);
-
-    /**
-     * @param string $alias
+     * @param string $extraAlias
      * @param array  $excludedIds
      *
      * @return QueryBuilder
      */
-    public function createFindAllQueryBuilder($alias, array $excludedIds = []);
+    public function createFindAllQueryBuilderWithExtra($alias, $extraAlias, array $excludedIds = []);
 
     /**
      * @param string $alias
+     * @param string $extraAlias
      * @param string $entityAlias
      * @param array  $excludedIds
      *
      * @return QueryBuilder
      */
-    public function createFindAllByEntityTypeQueryBuilder($alias, $entityAlias, array $excludedIds = []);
+    public function createFindAllByEntityTypeQueryBuilderWithExtra($alias, $extraAlias, $entityAlias, array $excludedIds = []);
 
     /**
      * @param string $alias
+     * @param string $extraAlias
      * @param string $entityAlias
      *
      * @return QueryBuilder
      */
-    public function createFindOneByCodeQueryBuilder($alias, $entityAlias);
+    public function createFindOneByCodeQueryBuilderWithExtra($alias, $extraAlias, $entityAlias);
 
     /**
      * @param string $alias
+     * @param string $extraAlias
      *
      * @return QueryBuilder
      */
-    public function createFindOneByIdQueryBuilder($alias);
+    public function createFindOneByIdQueryBuilderWithExtra($alias, $extraAlias);
 
     /**
      * @param string         $alias
+     * @param string         $extraAlias
      * @param string         $entityAlias
      * @param array|string[] $codeList
      *
      * @return QueryBuilder
      */
-    public function createFindAllByCodeQueryBuilder($alias, $entityAlias, array $codeList);
+    public function createFindAllByCodeQueryBuilderWithExtra($alias, $extraAlias, $entityAlias, array $codeList);
 
     /**
      * @param string      $alias
+     * @param string      $extraAlias
      * @param array|int[] $idList
      *
      * @return QueryBuilder
      */
-    public function createFindAllByIdQueryBuilder($alias, array $idList);
+    public function createFindAllByIdQueryBuilderWithExtra($alias, $extraAlias, array $idList);
 
     /**
      * @return QueryBuilder

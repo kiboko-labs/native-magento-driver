@@ -12,7 +12,7 @@ use Doctrine\DBAL\Query\QueryBuilder;
 
 abstract class AbstractProductAttributeQueryBuilder implements ProductAttributeQueryBuilderInterface
 {
-    use AttributeQueryBuilderTrait;
+    use CatalogAttributeQueryBuilderTrait;
 
     /**
      * @var string
@@ -63,9 +63,9 @@ abstract class AbstractProductAttributeQueryBuilder implements ProductAttributeQ
      *
      * @return QueryBuilder
      */
-    public function createFindAllVariantAxisByEntityQueryBuilder($alias, $extraAlias, $entityAlias, $variantAxisAlias)
+    public function createFindAllVariantAxisByEntityQueryBuilderWithExtra($alias, $extraAlias, $entityAlias, $variantAxisAlias)
     {
-        $queryBuilder = $this->createFindAllByEntityTypeQueryBuilder($alias, $extraAlias, $entityAlias);
+        $queryBuilder = $this->createFindAllByEntityTypeQueryBuilderWithExtra($alias, $extraAlias, $entityAlias);
 
         $queryBuilder->innerJoin($alias, $this->variantAxisTable, $variantAxisAlias,
             $queryBuilder->expr()->eq(sprintf('%s.attribute_id', $variantAxisAlias), sprintf('%s.attribute_id', $alias))
@@ -84,9 +84,9 @@ abstract class AbstractProductAttributeQueryBuilder implements ProductAttributeQ
      *
      * @return QueryBuilder
      */
-    public function createFindAllByFamilyQueryBuilder($alias, $extraAlias, $entityAlias, $familyAlias)
+    public function createFindAllByFamilyQueryBuilderWithExtra($alias, $extraAlias, $entityAlias, $familyAlias)
     {
-        $queryBuilder = $this->createFindAllByEntityTypeQueryBuilder($alias, $extraAlias, $entityAlias);
+        $queryBuilder = $this->createFindAllByEntityTypeQueryBuilderWithExtra($alias, $extraAlias, $entityAlias);
 
         $queryBuilder->innerJoin($alias, $this->familyTable, $familyAlias,
             $queryBuilder->expr()->eq(sprintf('%s.entity_type_id', $familyAlias), sprintf('%s.entity_type_id', $alias))
@@ -105,9 +105,9 @@ abstract class AbstractProductAttributeQueryBuilder implements ProductAttributeQ
      *
      * @return QueryBuilder
      */
-    public function createFindAllMandatoryByFamilyQueryBuilder($alias, $extraAlias, $entityAlias, $familyAlias)
+    public function createFindAllMandatoryByFamilyQueryBuilderWithExtra($alias, $extraAlias, $entityAlias, $familyAlias)
     {
-        $queryBuilder = $this->createFindAllByEntityTypeQueryBuilder($alias, $extraAlias, $entityAlias);
+        $queryBuilder = $this->createFindAllByEntityTypeQueryBuilderWithExtra($alias, $extraAlias, $entityAlias);
         $queryBuilder->innerJoin($alias, $this->familyTable, $familyAlias,
             $queryBuilder->expr()->eq(sprintf('%s.entity_type_id', $familyAlias), sprintf('%s.entity_type_id', $alias))
         );

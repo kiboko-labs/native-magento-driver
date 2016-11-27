@@ -8,12 +8,16 @@
 namespace unit\Kiboko\Component\MagentoORM\Repository\Magento19\Doctrine;
 
 use Doctrine\DBAL\Schema\Schema;
-use Kiboko\Component\MagentoORM\Model\AttributeInterface;
-use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\ProductAttributeQueryBuilder;
-use Kiboko\Component\MagentoORM\Repository\Magento19\Doctrine\ProductAttributeRepository;
+use Kiboko\Component\MagentoORM\Factory\AttributeFactory;
+use Kiboko\Component\MagentoORM\Factory\Magento19\ProductAttributeFactory;
+use Kiboko\Component\MagentoORM\Factory\Magento19\CatalogAttributeExtensionsFactory;
 use Kiboko\Component\MagentoORM\Entity\Product\SimpleProduct;
 use Kiboko\Component\MagentoORM\Entity\Product\ConfigurableProduct;
+use Kiboko\Component\MagentoORM\Model\AttributeInterface;
 use Kiboko\Component\MagentoORM\Model\Family;
+use Kiboko\Component\MagentoORM\Model\Magento19\CatalogAttributeExtensionInterface;
+use Kiboko\Component\MagentoORM\QueryBuilder\Magento19\Doctrine\ProductAttributeQueryBuilder;
+use Kiboko\Component\MagentoORM\Repository\Doctrine\ProductAttributeRepository;
 use Kiboko\Component\MagentoORM\Repository\ProductAttributeRepositoryInterface;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoORM\SchemaBuilder\DoctrineSchemaBuilder;
@@ -142,6 +146,10 @@ class ProductAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
                 ProductAttributeQueryBuilder::getDefaultFamilyTable(),
                 ProductAttributeQueryBuilder::getDefaultFields(),
                 ProductAttributeQueryBuilder::getDefaultExtraFields()
+            ),
+            new ProductAttributeFactory(
+                new AttributeFactory(),
+                new CatalogAttributeExtensionsFactory()
             )
         );
     }
@@ -162,6 +170,7 @@ class ProductAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $attribute = $this->repository->findOneById(79);
         $this->assertInstanceOf(AttributeInterface::class, $attribute);
+        $this->assertInstanceOf(CatalogAttributeExtensionInterface::class, $attribute);
 
         $this->assertEquals(79, $attribute->getId());
         $this->assertEquals('cost', $attribute->getCode());
@@ -175,7 +184,7 @@ class ProductAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
     public function testFetchingOneByCode()
     {
         $attribute = $this->repository->findOneByCode('release_date', 'catalog_product');
-        $this->assertInstanceOf(AttributeInterface::class, $attribute);
+        $this->assertInstanceOf(CatalogAttributeExtensionInterface::class, $attribute);
 
         $this->assertEquals('release_date', $attribute->getCode());
         $this->assertEquals(167, $attribute->getId());
@@ -201,6 +210,7 @@ class ProductAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
         foreach ($attributes as $attribute) {
             ++$items;
             $this->assertInstanceOf(AttributeInterface::class, $attribute);
+            $this->assertInstanceOf(CatalogAttributeExtensionInterface::class, $attribute);
             if ($attribute->getCode() === 'release_date') {
                 $this->assertEquals(167, $attribute->getId());
             }
@@ -241,11 +251,12 @@ class ProductAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
             ++$items;
 
             $this->assertInstanceOf(AttributeInterface::class, $attribute);
+            $this->assertInstanceOf(CatalogAttributeExtensionInterface::class, $attribute);
 
             if ($attribute->getId() === 167) {
                 $this->assertEquals('release_date', $attribute->getCode());
             }
-            if ($attribute->getId() === 167) {
+            if ($attribute->getId() === 122) {
                 $this->assertEquals('gift_message_available', $attribute->getCode());
             }
         }
@@ -278,6 +289,7 @@ class ProductAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
             ++$items;
 
             $this->assertInstanceOf(AttributeInterface::class, $attribute);
+            $this->assertInstanceOf(CatalogAttributeExtensionInterface::class, $attribute);
         }
 
         $this->assertEquals(8, $items);
@@ -301,6 +313,7 @@ class ProductAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
             ++$items;
 
             $this->assertInstanceOf(AttributeInterface::class, $attribute);
+            $this->assertInstanceOf(CatalogAttributeExtensionInterface::class, $attribute);
         }
 
         $this->assertEquals(0, $items);
@@ -324,6 +337,7 @@ class ProductAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
             ++$items;
 
             $this->assertInstanceOf(AttributeInterface::class, $attribute);
+            $this->assertInstanceOf(CatalogAttributeExtensionInterface::class, $attribute);
         }
 
         $this->assertEquals(0, $items);
@@ -345,6 +359,7 @@ class ProductAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
         $items = 0;
         foreach ($attributes as $attribute) {
             $this->assertInstanceOf(AttributeInterface::class, $attribute);
+            $this->assertInstanceOf(CatalogAttributeExtensionInterface::class, $attribute);
         }
 
         $this->assertEquals(0, $items);
@@ -368,14 +383,12 @@ class ProductAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
             ++$items;
 
             $this->assertInstanceOf(AttributeInterface::class, $attribute);
+            $this->assertInstanceOf(CatalogAttributeExtensionInterface::class, $attribute);
         }
 
         $this->assertEquals(0, $items);
     }
 
-    /**
-     * @todo: SQL Error: Table catalog_product_super_attribute not found
-     */
     public function testFetchingAllVariantAxisByEntity()
     {
         $product = new ConfigurableProduct(
@@ -394,6 +407,7 @@ class ProductAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
             ++$items;
 
             $this->assertInstanceOf(AttributeInterface::class, $attribute);
+            $this->assertInstanceOf(CatalogAttributeExtensionInterface::class, $attribute);
             $this->assertEquals(4, $attribute->getEntityTypeId());
         }
 
@@ -426,6 +440,7 @@ class ProductAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
             ++$items;
 
             $this->assertInstanceOf(AttributeInterface::class, $attribute);
+            $this->assertInstanceOf(CatalogAttributeExtensionInterface::class, $attribute);
             $this->assertEquals(4, $attribute->getEntityTypeId());
         }
 
@@ -449,6 +464,7 @@ class ProductAttributeRepositoryTest extends \PHPUnit_Framework_TestCase
             ++$items;
 
             $this->assertInstanceOf(AttributeInterface::class, $attribute);
+            $this->assertInstanceOf(CatalogAttributeExtensionInterface::class, $attribute);
             $this->assertEquals(4, $attribute->getEntityTypeId());
         }
 

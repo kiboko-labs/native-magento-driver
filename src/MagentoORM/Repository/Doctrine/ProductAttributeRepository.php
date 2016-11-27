@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS.
+ * Copyright (c) 2016 Kiboko SAS
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -8,7 +8,8 @@
 namespace Kiboko\Component\MagentoORM\Repository\Doctrine;
 
 use Doctrine\DBAL\Connection;
-use Kiboko\Component\MagentoORM\Factory\CatalogAttributeExtensionsFactoryInterface;
+use Kiboko\Component\MagentoORM\Factory\ProductAttributeFactoryInterface;
+use Kiboko\Component\MagentoORM\Model\AttributeInterface;
 use Kiboko\Component\MagentoORM\Model\CatalogAttributeExtensionInterface;
 use Kiboko\Component\MagentoORM\Model\FamilyInterface;
 use Kiboko\Component\MagentoORM\Entity\Product\ProductInterface;
@@ -29,21 +30,21 @@ class ProductAttributeRepository implements ProductAttributeRepositoryInterface
     protected $connection;
 
     /**
-     * @var CatalogAttributeExtensionsFactoryInterface
+     * @var ProductAttributeFactoryInterface
      */
     protected $factory;
 
     /**
      * ProductAttributeRepository constructor.
      *
-     * @param Connection                                 $connection
-     * @param ProductAttributeQueryBuilderInterface      $queryBuilder
-     * @param CatalogAttributeExtensionsFactoryInterface $factory
+     * @param Connection                            $connection
+     * @param ProductAttributeQueryBuilderInterface $queryBuilder
+     * @param ProductAttributeFactoryInterface      $factory
      */
     public function __construct(
         Connection $connection,
         ProductAttributeQueryBuilderInterface $queryBuilder,
-        CatalogAttributeExtensionsFactoryInterface $factory
+        ProductAttributeFactoryInterface $factory
     ) {
         $this->connection = $connection;
         $this->queryBuilder = $queryBuilder;
@@ -53,7 +54,7 @@ class ProductAttributeRepository implements ProductAttributeRepositoryInterface
     /**
      * @param array $options
      *
-     * @return CatalogAttributeExtensionInterface
+     * @return AttributeInterface
      */
     protected function createNewAttributeInstanceFromDatabase(array $options)
     {
@@ -64,7 +65,7 @@ class ProductAttributeRepository implements ProductAttributeRepositoryInterface
      * @param string $code
      * @param string $entityTypeCode
      *
-     * @return CatalogAttributeExtensionInterface
+     * @return AttributeInterface|CatalogAttributeExtensionInterface
      */
     public function findOneByCode($code, $entityTypeCode)
     {
@@ -87,7 +88,7 @@ class ProductAttributeRepository implements ProductAttributeRepositoryInterface
     /**
      * @param int $identifier
      *
-     * @return CatalogAttributeExtensionInterface
+     * @return AttributeInterface|CatalogAttributeExtensionInterface
      */
     public function findOneById($identifier)
     {
@@ -111,11 +112,11 @@ class ProductAttributeRepository implements ProductAttributeRepositoryInterface
      * @param string         $entityTypeCode
      * @param array|string[] $codeList
      *
-     * @return \Traversable|CatalogAttributeExtensionInterface[]
+     * @return \Traversable|AttributeInterface[]|CatalogAttributeExtensionInterface[]
      */
     public function findAllByCode($entityTypeCode, array $codeList)
     {
-        $query = $this->queryBuilder->createFindAllByCodeQueryBuilder('a', 'x', 'e', $codeList);
+        $query = $this->queryBuilder->createFindAllByCodeQueryBuilder('a', 'e', $codeList);
 
         $statement = $this->connection->prepare($query);
         if (!$statement->execute(array_merge([$entityTypeCode], $codeList))) {
@@ -134,11 +135,11 @@ class ProductAttributeRepository implements ProductAttributeRepositoryInterface
     /**
      * @param array|int[] $idList
      *
-     * @return \Traversable|CatalogAttributeExtensionInterface[]
+     * @return \Traversable|AttributeInterface[]|CatalogAttributeExtensionInterface[]
      */
     public function findAllById(array $idList)
     {
-        $query = $this->queryBuilder->createFindAllByIdQueryBuilder('a', 'x', $idList);
+        $query = $this->queryBuilder->createFindAllByIdQueryBuilder('a', $idList);
 
         $statement = $this->connection->prepare($query);
         if (!$statement->execute($idList)) {
@@ -155,11 +156,11 @@ class ProductAttributeRepository implements ProductAttributeRepositoryInterface
     }
 
     /**
-     * @return \Traversable|CatalogAttributeExtensionInterface[]
+     * @return \Traversable|AttributeInterface[]|CatalogAttributeExtensionInterface[]
      */
     public function findAll()
     {
-        $query = $this->queryBuilder->createFindAllQueryBuilder('a', 'x');
+        $query = $this->queryBuilder->createFindAllQueryBuilder('a');
 
         $statement = $this->connection->prepare($query);
         if (!$statement->execute()) {
@@ -178,7 +179,7 @@ class ProductAttributeRepository implements ProductAttributeRepositoryInterface
     /**
      * @param ProductInterface $product
      *
-     * @return \Traversable|CatalogAttributeExtensionInterface[]
+     * @return \Traversable|AttributeInterface[]|CatalogAttributeExtensionInterface[]
      */
     public function findAllByEntity(ProductInterface $product)
     {
@@ -188,11 +189,11 @@ class ProductAttributeRepository implements ProductAttributeRepositoryInterface
     /**
      * @param string $entityTypeCode
      *
-     * @return \Traversable|CatalogAttributeExtensionInterface[]
+     * @return \Traversable|AttributeInterface[]|CatalogAttributeExtensionInterface[]
      */
     public function findAllByEntityTypeCode($entityTypeCode)
     {
-        $query = $this->queryBuilder->createFindAllByEntityTypeQueryBuilder('a', 'x', 'e');
+        $query = $this->queryBuilder->createFindAllByEntityTypeQueryBuilder('a', 'e');
 
         $query->where($query->expr()->eq('e.entity_type_code', '?'));
 
@@ -213,11 +214,11 @@ class ProductAttributeRepository implements ProductAttributeRepositoryInterface
     /**
      * @param int $entityTypeId
      *
-     * @return \Traversable|CatalogAttributeExtensionInterface[]
+     * @return \Traversable|AttributeInterface[]|CatalogAttributeExtensionInterface[]
      */
     public function findAllByEntityTypeId($entityTypeId)
     {
-        $query = $this->queryBuilder->createFindAllQueryBuilder('a', 'x');
+        $query = $this->queryBuilder->createFindAllQueryBuilder('a');
 
         $query->where($query->expr()->eq('a.entity_type_id', '?'));
 
@@ -238,7 +239,7 @@ class ProductAttributeRepository implements ProductAttributeRepositoryInterface
     /**
      * @param ProductInterface $product
      *
-     * @return \Traversable|CatalogAttributeExtensionInterface[]
+     * @return \Traversable|AttributeInterface[]|CatalogAttributeExtensionInterface[]
      */
     public function findAllVariantAxisByEntity(ProductInterface $product)
     {
@@ -246,7 +247,7 @@ class ProductAttributeRepository implements ProductAttributeRepositoryInterface
             return;
         }
 
-        $query = $this->queryBuilder->createFindAllVariantAxisByEntityQueryBuilder('a', 'x', 'e', 'va');
+        $query = $this->queryBuilder->createFindAllVariantAxisByEntityQueryBuilderWithExtra('a', 'x', 'e', 'va');
 
         $statement = $this->connection->prepare($query);
         if (!$statement->execute([$product->getIdentifier()])) {
@@ -265,11 +266,11 @@ class ProductAttributeRepository implements ProductAttributeRepositoryInterface
     /**
      * @param FamilyInterface $family
      *
-     * @return \Traversable|CatalogAttributeExtensionInterface[]
+     * @return \Traversable|AttributeInterface[]|CatalogAttributeExtensionInterface[]
      */
     public function findAllByFamily(FamilyInterface $family)
     {
-        $query = $this->queryBuilder->createFindAllByFamilyQueryBuilder('a', 'x', 'e', 'f');
+        $query = $this->queryBuilder->createFindAllByFamilyQueryBuilderWithExtra('a', 'x', 'e', 'f');
 
         $statement = $this->connection->prepare($query);
         if (!$statement->execute([$family->getId()])) {
@@ -288,11 +289,11 @@ class ProductAttributeRepository implements ProductAttributeRepositoryInterface
     /**
      * @param FamilyInterface $family
      *
-     * @return \Traversable|CatalogAttributeExtensionInterface[]
+     * @return \Traversable|AttributeInterface[]|CatalogAttributeExtensionInterface[]
      */
     public function findAllMandatoryByFamily(FamilyInterface $family)
     {
-        $query = $this->queryBuilder->createFindAllMandatoryByFamilyQueryBuilder('a', 'x', 'e', 'f');
+        $query = $this->queryBuilder->createFindAllMandatoryByFamilyQueryBuilderWithExtra('a', 'x', 'e', 'f');
 
         $statement = $this->connection->prepare($query);
         if (!$statement->execute([$family->getId()])) {

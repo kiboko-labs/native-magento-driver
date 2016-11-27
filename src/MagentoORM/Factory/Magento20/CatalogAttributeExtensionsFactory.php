@@ -23,7 +23,7 @@ class CatalogAttributeExtensionsFactory implements CatalogAttributeExtensionsFac
         return new CatalogAttributeExtension(
             $this->readInteger($options, 'attribute_id', null),
             $this->readString($options, 'frontend_input_renderer', null),
-            $this->readInteger($options, 'is_global', 1),
+            $this->readInteger($options, 'is_global', CatalogAttributeExtensionInterface::SCOPE_GLOBAL),
             $this->readBoolean($options, 'is_visible', false),
             $this->readBoolean($options, 'is_searchable', false),
             $this->readBoolean($options, 'is_filterable', false),

@@ -5,7 +5,7 @@ namespace unit\Kiboko\Component\MagentoORM\Deleter\Doctrine;
 use Doctrine\DBAL\Schema\Schema;
 use Kiboko\Component\MagentoORM\Deleter\CatalogAttributeDeleterInterface;
 use Kiboko\Component\MagentoORM\Deleter\Doctrine\CatalogAttributeDeleter;
-use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\ProductAttributeQueryBuilder;
+use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\ProductAttributeQueryBuilderInterface;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoORM\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Kiboko\Component\MagentoORM\DoctrineTools\DatabaseConnectionAwareTrait;
@@ -83,10 +83,6 @@ abstract class AbstractCatalogAttributeDeleter extends \PHPUnit_Framework_TestCa
         );
 
         $this->getDoctrineConnection()->exec(
-            $platform->getTruncateTableSQL('eav_attribute_set')
-        );
-
-        $this->getDoctrineConnection()->exec(
             $platform->getTruncateTableSQL('catalog_eav_attribute')
         );
 
@@ -105,9 +101,9 @@ abstract class AbstractCatalogAttributeDeleter extends \PHPUnit_Framework_TestCa
         $schemaBuilder = new DoctrineSchemaBuilder(
             $this->getDoctrineConnection(), $this->schema, $this->getVersion(), $this->getEdition());
         $schemaBuilder->ensureAttributeTable();
-        $schemaBuilder->ensureFamilyTable();
         $schemaBuilder->ensureEntityTypeTable();
         $schemaBuilder->ensureCatalogAttributeExtensionsTable();
+        $schemaBuilder->ensureCatalogAttributeExtensionsToAttributeLinks();
 
         $comparator = new \Doctrine\DBAL\Schema\Comparator();
         $schemaDiff = $comparator->compare($currentSchema, $this->schema);
@@ -131,11 +127,6 @@ abstract class AbstractCatalogAttributeDeleter extends \PHPUnit_Framework_TestCa
             DoctrineSchemaBuilder::CONTEXT_DELETER
         );
 
-        $schemaBuilder->hydrateFamilyTable(
-            'catalog_eav_attribute',
-            DoctrineSchemaBuilder::CONTEXT_DELETER
-        );
-
         $schemaBuilder->hydrateAttributeTable(
             'catalog_eav_attribute',
             DoctrineSchemaBuilder::CONTEXT_DELETER
@@ -148,16 +139,7 @@ abstract class AbstractCatalogAttributeDeleter extends \PHPUnit_Framework_TestCa
 
         $this->deleter = new CatalogAttributeDeleter(
             $this->getDoctrineConnection(),
-            new ProductAttributeQueryBuilder(
-                $this->getDoctrineConnection(),
-                ProductAttributeQueryBuilder::getDefaultExtraTable(),
-                ProductAttributeQueryBuilder::getDefaultTable(),
-                ProductAttributeQueryBuilder::getDefaultEntityTable(),
-                ProductAttributeQueryBuilder::getDefaultVariantTable(),
-                ProductAttributeQueryBuilder::getDefaultFamilyTable(),
-                ProductAttributeQueryBuilder::getDefaultExtraFields(),
-                ProductAttributeQueryBuilder::getDefaultFields()
-            )
+            $this->getQueryBuilder()
         );
     }
 
@@ -171,4 +153,9 @@ abstract class AbstractCatalogAttributeDeleter extends \PHPUnit_Framework_TestCa
         $this->connection = null;
         $this->pdo = null;
     }
+
+    /**
+     * @return ProductAttributeQueryBuilderInterface
+     */
+    abstract protected function getQueryBuilder();
 }
