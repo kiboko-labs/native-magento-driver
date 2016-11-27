@@ -11,7 +11,7 @@ use Doctrine\DBAL\Schema\Schema;
 use Kiboko\Component\MagentoORM\Model\Magento20\CatalogAttributeExtension;
 use Kiboko\Component\MagentoORM\Persister\CatalogAttributeExtensionPersisterInterface;
 use Kiboko\Component\MagentoORM\Persister\StandardDml\Magento20\Attribute\CatalogAttributeExtensionPersister;
-use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\ProductAttributeQueryBuilder;
+use Kiboko\Component\MagentoORM\QueryBuilder\Magento20\Doctrine\ProductAttributeQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoORM\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Kiboko\Component\MagentoORM\DoctrineTools\DatabaseConnectionAwareTrait;

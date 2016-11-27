@@ -31,7 +31,10 @@ trait DatabaseConnectionAwareTrait
     final public function getConnection()
     {
         if ($this->connection === null) {
-            $this->connection = $this->createDefaultDBConnection($this->getPdoConnection(), $GLOBALS['DB_NAME']);
+            $this->connection = $this->createDefaultDBConnection(
+                $this->getPdoConnection(),
+                isset($GLOBALS['DB_NAME']) ? $GLOBALS['DB_NAME'] : 'test'
+            );
         }
 
         return $this->connection;
@@ -44,12 +47,16 @@ trait DatabaseConnectionAwareTrait
     {
         if ($this->pdo === null) {
             $dsn = sprintf('mysql:dbname=%s;hostname=%s;port=%s',
-                isset($GLOBALS['DB_NAME']) ? $GLOBALS['DB_NAME'] : 'magento',
+                isset($GLOBALS['DB_NAME']) ? $GLOBALS['DB_NAME'] : 'test',
                 isset($GLOBALS['DB_HOSTNAME']) ? $GLOBALS['DB_HOSTNAME'] : '127.0.0.1',
                 isset($GLOBALS['DB_PORT']) ? $GLOBALS['DB_PORT'] : 3306
             );
 
-            $this->pdo = new \PDO($dsn, $GLOBALS['DB_USERNAME'], $GLOBALS['DB_PASSWORD']);
+            $this->pdo = new \PDO(
+                $dsn,
+                isset($GLOBALS['DB_USERNAME']) ? $GLOBALS['DB_USERNAME'] : 'root',
+                isset($GLOBALS['DB_PASSWORD']) ? $GLOBALS['DB_PASSWORD'] : null
+            );
         }
 
         return $this->pdo;

@@ -26,7 +26,7 @@ eav_attribute:
         backend_type: "varchar"
         backend_table: ~
         frontend_model: ~
-        frontend_input: select
+        frontend_input: "select"
         frontend_label: "Allow Gift Message"
         frontend_class: ~
         source_model: "Magento\Eav\Model\Entity\Attribute\Source\Boolean"
@@ -35,111 +35,21 @@ eav_attribute:
         default_value: ~
         is_unique: 0
         note: ~
+eav_entity_type:
     -
-        attribute_id: 131
         entity_type_id: 4
-        attribute_code: "links_exist"
-        attribute_model: ~
-        backend_model: ~
-        backend_type: "int"
-        backend_table: ~
-        frontend_model: ~
-        frontend_input: ~
-        frontend_label: ~
-        frontend_class: ~
-        source_model: ~
-        is_required: 0
-        is_user_defined: 0
-        default_value: ~
-        is_unique: 0
-        note: ~
-    -
-        attribute_id: 167
-        entity_type_id: 4
-        attribute_code: "release_date"
-        attribute_model: ~
-        backend_model: "Magento\Eav\Model\Entity\Attribute\Backend\Datetime"
-        backend_type: "datetime"
-        backend_table: ~
-        frontend_model: "Magento\Eav\Model\Entity\Attribute\Frontend\Datetime"
-        frontend_input: "date"
-        frontend_label: "Date de sortie"
-        frontend_class: ~
-        source_model: ~
-        is_required: 0
-        is_user_defined: 1
-        default_value: ~
-        is_unique: 0
-        note: ~
-    -
-        attribute_id: 210
-        entity_type_id: 4
-        attribute_code: "description"
-        attribute_model: ~
-        backend_model: ~
-        backend_type: "text"
-        backend_table: ~
-        frontend_model: ~
-        frontend_input: "textarea"
-        frontend_label: "Description"
-        frontend_class: ~
-        source_model: ~
-        is_required: 0
-        is_user_defined: 1
-        default_value: ~
-        is_unique: 0
-        note: ~
-    -
-        attribute_id: 226
-        entity_type_id: 4
-        attribute_code: "main_color"
-        attribute_model: ~
-        backend_model: ~
-        backend_type: "int"
-        backend_table: ~
-        frontend_model: ~
-        frontend_input: "select"
-        frontend_label: "Couleur principale"
-        frontend_class: ~
-        source_model: "Magento\Eav\Model\Entity\Attribute\Source\Table"
-        is_required: 0
-        is_user_defined: 1
-        default_value: ~
-        is_unique: 0
-        note: ~
-    -
-        attribute_id: 232
-        entity_type_id: 4
-        attribute_code: "shoelace_length"
-        attribute_model: ~
-        backend_model: "Magento\Eav\Model\Entity\Attribute\Backend\ArrayBackend" 
-        backend_type: "varchar"
-        backend_table: ~
-        frontend_model: ~
-        frontend_input: "multiselect"
-        frontend_label: "Longueur de lacet"
-        frontend_class: ~
-        source_model: ~
-        is_required: 0
-        is_user_defined: 1
-        default_value: ~
-        is_unique: 0
-        note: ~
-    -
-        attribute_id: 300
-        entity_type_id: 4
-        attribute_code: "title"
-        attribute_model: ~
-        backend_model: ~
-        backend_type: "text"
-        backend_table: ~
-        frontend_model: ~
-        frontend_input: "textarea"
-        frontend_label: "Description"
-        frontend_class: ~
-        source_model: ~
-        is_required: 0
-        is_user_defined: 1
-        default_value: ~
-        is_unique: 0
-        note: ~
+        entity_type_code: "catalog_product"
+        entity_model: "Magento\Catalog\Model\ResourceModel\Product"
+        attribute_model: "Magento\Catalog\Model\ResourceModel\Eav\Attribute"
+        entity_table: "catalog_product_entity"
+        value_table_prefix: ~
+        entity_id_field: ~
+        is_data_sharing: 1
+        data_sharing_key: "default"
+        default_attribute_set_id: 4
+        increment_model: ~
+        increment_per_store: 0
+        increment_pad_length: 8
+        increment_pad_char: 0
+        additional_attribute_table: "catalog_eav_attribute"
+        entity_attribute_collection: "Magento\Catalog\Model\ResourceModel\Product\Attribute\Collection"

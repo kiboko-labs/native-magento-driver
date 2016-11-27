@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ Copyright (c) 2016 Kiboko SAS
+  ~
+  ~ @author Grégory Planchat <gregory@kiboko.fr>
+  -->
+
 <phpunit
         colors="true"
         beStrictAboutTestsThatDoNotTestAnything="true"
         beStrictAboutOutputDuringTests="true"
         beStrictAboutChangesToGlobalState="true"
-        bootstrap="vendor/autoload.php">
+        bootstrap="vendor/autoload.php"
+        backupGlobals="false"
+        backupStaticAttributes="false"
+        convertErrorsToExceptions="true"
+        convertNoticesToExceptions="true"
+        convertWarningsToExceptions="true"
+        processIsolation="false"
+        stopOnFailure="false"
+        syntaxCheck="false">
     <php>
         <var name="DB_DRIVER"   value="mysqli" />
         <var name="DB_NAME"     value="magento_test" />

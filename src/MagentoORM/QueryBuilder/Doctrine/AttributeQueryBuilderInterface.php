@@ -20,58 +20,52 @@ interface AttributeQueryBuilderInterface
 
     /**
      * @param string $alias
-     * @param string $extraAlias
      * @param array  $excludedIds
      *
      * @return QueryBuilder
      */
-    public function createFindAllQueryBuilder($alias, $extraAlias, array $excludedIds = []);
+    public function createFindAllQueryBuilder($alias, array $excludedIds = []);
 
     /**
      * @param string $alias
-     * @param string $extraAlias
      * @param string $entityAlias
      * @param array  $excludedIds
      *
      * @return QueryBuilder
      */
-    public function createFindAllByEntityTypeQueryBuilder($alias, $extraAlias, $entityAlias, array $excludedIds = []);
+    public function createFindAllByEntityTypeQueryBuilder($alias, $entityAlias, array $excludedIds = []);
 
     /**
      * @param string $alias
-     * @param string $extraAlias
      * @param string $entityAlias
      *
      * @return QueryBuilder
      */
-    public function createFindOneByCodeQueryBuilder($alias, $extraAlias, $entityAlias);
+    public function createFindOneByCodeQueryBuilder($alias, $entityAlias);
 
     /**
      * @param string $alias
-     * @param string $extraAlias
      *
      * @return QueryBuilder
      */
-    public function createFindOneByIdQueryBuilder($alias, $extraAlias);
+    public function createFindOneByIdQueryBuilder($alias);
 
     /**
      * @param string         $alias
-     * @param string         $extraAlias
      * @param string         $entityAlias
      * @param array|string[] $codeList
      *
      * @return QueryBuilder
      */
-    public function createFindAllByCodeQueryBuilder($alias, $extraAlias, $entityAlias, array $codeList);
+    public function createFindAllByCodeQueryBuilder($alias, $entityAlias, array $codeList);
 
     /**
      * @param string      $alias
-     * @param string      $extraAlias
      * @param array|int[] $idList
      *
      * @return QueryBuilder
      */
-    public function createFindAllByIdQueryBuilder($alias, $extraAlias, array $idList);
+    public function createFindAllByIdQueryBuilder($alias, array $idList);
 
     /**
      * @return QueryBuilder
