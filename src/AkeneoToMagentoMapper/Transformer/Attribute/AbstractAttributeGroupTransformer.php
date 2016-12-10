@@ -7,14 +7,15 @@
 
 namespace Kiboko\Component\AkeneoToMagentoMapper\Transformer\Attribute;
 
+use Kiboko\Component\AkeneoToMagentoMapper\Transformer\AdminLocaleCodeAwareInterface;
 use Kiboko\Component\MagentoORM\Repository\StoreRepositoryInterface;
 use Kiboko\Component\AkeneoToMagentoMapper\Mapper\AttributeGroupMapperInterface;
 use Kiboko\Component\AkeneoToMagentoMapper\Mapper\FamilyMapperInterface;
 use Kiboko\Component\AkeneoToMagentoMapper\Transformer\AttributeGroupTransformerInterface;
-use Pim\Bundle\CatalogBundle\Repository\FamilyRepositoryInterface;
+use Pim\Component\Catalog\Repository\FamilyRepositoryInterface;
 use Pim\Component\Catalog\Model\AttributeGroupInterface as PimAttributeGroupInterface;
 
-abstract class AbstractAttributeGroupTransformer implements AttributeGroupTransformerInterface
+abstract class AbstractAttributeGroupTransformer implements AttributeGroupTransformerInterface, AdminLocaleCodeAwareInterface
 {
     /**
      * @var AttributeGroupMapperInterface
@@ -61,7 +62,7 @@ abstract class AbstractAttributeGroupTransformer implements AttributeGroupTransf
         FamilyMapperInterface $familyMapper,
         FamilyRepositoryInterface $familyRepository,
         StoreRepositoryInterface $storeRepository,
-        $adminLocaleCode,
+        $adminLocaleCode = null,
         array $storeLocaleCodes = []
     ) {
         $this->attributeGroupMapper = $attributeGroupMapper;
@@ -70,6 +71,18 @@ abstract class AbstractAttributeGroupTransformer implements AttributeGroupTransf
         $this->storeRepository = $storeRepository;
         $this->adminLocaleCode = $adminLocaleCode;
         $this->storeLocaleCodes = $storeLocaleCodes;
+    }
+
+    /**
+     * @param string $adminLocaleCode
+     *
+     * @return $this
+     */
+    public function setAdminLocaleCode($adminLocaleCode)
+    {
+        $this->adminLocaleCode = $adminLocaleCode;
+
+        return $this;
     }
 
     /**

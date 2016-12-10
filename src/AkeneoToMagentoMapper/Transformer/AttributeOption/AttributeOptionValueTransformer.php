@@ -7,6 +7,7 @@
 
 namespace Kiboko\Component\AkeneoToMagentoMapper\Transformer\AttributeOption;
 
+use Kiboko\Component\AkeneoToMagentoMapper\Transformer\AdminLocaleCodeAwareInterface;
 use Kiboko\Component\MagentoORM\Model\AttributeOptionValueInterface as KibokoAttributeOptionValueInterface;
 use Kiboko\Component\MagentoORM\Model\AttributeOptionValue;
 use Kiboko\Component\MagentoORM\Repository\StoreRepositoryInterface;
@@ -16,7 +17,7 @@ use Kiboko\Component\AkeneoToMagentoMapper\Transformer\AttributeOptionTransforme
 use Pim\Component\Catalog\Model\AttributeOptionInterface as PimAttributeOptionInterface;
 use Pim\Component\Catalog\Model\AttributeOptionValueInterface;
 
-class AttributeOptionValueTransformer implements AttributeOptionTransformerInterface
+class AttributeOptionValueTransformer implements AttributeOptionTransformerInterface, AdminLocaleCodeAwareInterface
 {
     /**
      * @var AttributeOptionMapperInterface
@@ -56,7 +57,7 @@ class AttributeOptionValueTransformer implements AttributeOptionTransformerInter
         AttributeOptionMapperInterface $attributeOptionMapper,
         AttributeOptionValueMapperInterface $attributeOptionValueMapper,
         StoreRepositoryInterface $storeRepository,
-        $adminLocaleCode,
+        $adminLocaleCode = null,
         array $storeLocaleCodes = []
     ) {
         $this->attributeOptionMapper = $attributeOptionMapper;
@@ -64,6 +65,18 @@ class AttributeOptionValueTransformer implements AttributeOptionTransformerInter
         $this->storeRepository = $storeRepository;
         $this->adminLocaleCode = $adminLocaleCode;
         $this->storeLocaleCodes = $storeLocaleCodes;
+    }
+
+    /**
+     * @param string $adminLocaleCode
+     *
+     * @return $this
+     */
+    public function setAdminLocaleCode($adminLocaleCode)
+    {
+        $this->adminLocaleCode = $adminLocaleCode;
+
+        return $this;
     }
 
     /**

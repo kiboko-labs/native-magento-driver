@@ -1,13 +1,15 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS.
+ * Copyright (c) 2016 Kiboko SAS
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace Kiboko\Component\MagentoORM\Persister;
+namespace Kiboko\Component\MagentoORM\Persister\Magento19;
 
-use Kiboko\Component\MagentoORM\Model\CatalogAttributeInterface;
+use Kiboko\Component\MagentoORM\Model\Magento19\CatalogAttributeInterface;
+use Kiboko\Component\MagentoORM\Persister\AttributePersisterInterface;
+use Kiboko\Component\MagentoORM\Persister\CatalogAttributeExtensionPersisterInterface;
 
 class CatalogAttributePersister implements CatalogAttributePersisterInterface
 {

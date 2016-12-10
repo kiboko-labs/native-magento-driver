@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Kiboko SAS.
+ * Copyright (c) 2016 Kiboko SAS
  *
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
@@ -44,14 +44,6 @@ trait CatalogAttributeExtensionPersisterTrait
         $this->dataQueue = new \SplQueue();
     }
 
-    /**
-     * @return string
-     */
-    protected function getTableName()
-    {
-        return $this->tableName;
-    }
-
     public function initialize()
     {
         $this->dataQueue = new \SplQueue();
@@ -64,23 +56,6 @@ trait CatalogAttributeExtensionPersisterTrait
     {
         $this->dataQueue->push($attribute);
     }
-
-    /**
-     * @param CatalogAttributeExtensionInterface $attributeExtension
-     *
-     * @return array
-     */
-    abstract protected function getInsertData(CatalogAttributeExtensionInterface $attributeExtension);
-
-    /**
-     * @return array
-     */
-    abstract protected function getUpdatedFields();
-
-    /**
-     * @return string
-     */
-    abstract protected function getIdentifierField();
 
     /**
      * @return \Traversable
@@ -104,6 +79,31 @@ trait CatalogAttributeExtensionPersisterTrait
             yield $attribute;
         }
     }
+
+    /**
+     * @return string
+     */
+    protected function getTableName()
+    {
+        return $this->tableName;
+    }
+
+    /**
+     * @param CatalogAttributeExtensionInterface $attributeExtension
+     *
+     * @return array
+     */
+    abstract protected function getInsertData(CatalogAttributeExtensionInterface $attributeExtension);
+
+    /**
+     * @return array
+     */
+    abstract protected function getUpdatedFields();
+
+    /**
+     * @return string
+     */
+    abstract protected function getIdentifierField();
 
     /**
      * @param CatalogAttributeExtensionInterface $attribute
