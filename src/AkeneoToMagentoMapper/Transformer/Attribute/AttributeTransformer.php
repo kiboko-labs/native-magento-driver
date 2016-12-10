@@ -8,11 +8,12 @@
 namespace Kiboko\Component\AkeneoToMagentoMapper\Transformer\Attribute;
 
 use Kiboko\Component\AkeneoToMagentoMapper\Mapper\AttributeMapperInterface;
+use Kiboko\Component\AkeneoToMagentoMapper\Transformer\AdminLocaleCodeAwareInterface;
 use Kiboko\Component\AkeneoToMagentoMapper\Transformer\AttributeTransformerInterface;
 use Kiboko\Component\MagentoORM\Model\AttributeInterface as KibokoAttributeInterface;
 use Pim\Component\Catalog\Model\AttributeInterface as PimAttributeInterface;
 
-class AttributeTransformer implements AttributeTransformerInterface
+class AttributeTransformer implements AttributeTransformerInterface, AdminLocaleCodeAwareInterface
 {
     /**
      * @var AttributeMapperInterface
@@ -38,13 +39,25 @@ class AttributeTransformer implements AttributeTransformerInterface
      */
     public function __construct(
         AttributeMapperInterface $mapper,
-        $adminLocaleCode,
+        $adminLocaleCode = null,
         array $attributeTransformers = []
     ) {
         $this->mapper = $mapper;
         $this->adminLocaleCode = $adminLocaleCode;
 
         $this->setAttributeTransformers($attributeTransformers);
+    }
+
+    /**
+     * @param string $adminLocaleCode
+     *
+     * @return $this
+     */
+    public function setAdminLocaleCode($adminLocaleCode)
+    {
+        $this->adminLocaleCode = $adminLocaleCode;
+
+        return $this;
     }
 
     /**
@@ -85,6 +98,7 @@ class AttributeTransformer implements AttributeTransformerInterface
 
             $attribute->setLocale($this->adminLocaleCode);
 
+            /** @var KibokoAttributeInterface $transformedAttribute */
             foreach ($transformer->transform($attribute) as $transformedAttribute) {
                 if (($attributeId = $this->mapper->map($attribute->getCode())) !== null) {
                     $transformedAttribute->persistedToId($attributeId);
