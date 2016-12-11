@@ -13,7 +13,6 @@ use Kiboko\Component\MagentoORM\AndWhereDoctrineFixForPHP7;
 
 abstract class AbstractProductAttributeQueryBuilder implements ProductAttributeQueryBuilderInterface
 {
-    use AndWhereDoctrineFixForPHP7;
     use CatalogAttributeQueryBuilderTrait;
 
     /**
