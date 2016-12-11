@@ -121,7 +121,7 @@ class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
      * @param string $alias
      * @param int[]  $idList
      *
-     * @return type
+     * @return QueryBuilder
      */
     public function createFindAllByIdQueryBuilder($alias, array $idList)
     {
@@ -161,7 +161,7 @@ class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
      * @param string   $alias
      * @param string[] $nameList
      *
-     * @return type
+     * @return QueryBuilder
      */
     public function createFindAllByNameQueryBuilder($alias, array $nameList)
     {
@@ -182,7 +182,7 @@ class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
     public function createDeleteQueryBuilder()
     {
         return (new QueryBuilder($this->connection))
-                        ->delete($this->table)
+            ->delete($this->table)
         ;
     }
 

@@ -116,11 +116,18 @@ trait AttributeQueryBuilderTrait
      */
     public function createFindOneByCodeQueryBuilder($alias, $entityAlias)
     {
-        return $this->createFindAllByEntityTypeQueryBuilder($alias, $entityAlias)
-            ->andWhere(sprintf('%s.attribute_code = ?', $alias))
+        $queryBuilder = $this->createFindAllByEntityTypeQueryBuilder($alias, $entityAlias);
+
+        $this
+            ->andWhere(
+                $queryBuilder,
+                $queryBuilder->expr()->eq(sprintf('%s.attribute_code', $alias), '?')
+            )
             ->setFirstResult(0)
             ->setMaxResults(1)
         ;
+
+        return $queryBuilder;
     }
 
     /**
@@ -130,11 +137,18 @@ trait AttributeQueryBuilderTrait
      */
     public function createFindOneByIdQueryBuilder($alias)
     {
-        return $this->createFindAllQueryBuilder($alias)
-            ->andWhere(sprintf('%s.attribute_id = ?', $alias))
+        $queryBuilder = $this->createFindAllQueryBuilder($alias);
+
+        $this
+            ->andWhere(
+                $queryBuilder,
+                $queryBuilder->expr()->eq(sprintf('%s.attribute_id', $alias), '?')
+            )
             ->setFirstResult(0)
             ->setMaxResults(1)
         ;
+
+        return $queryBuilder;
     }
 
     /**

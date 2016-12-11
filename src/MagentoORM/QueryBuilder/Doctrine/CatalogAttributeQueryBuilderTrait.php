@@ -12,7 +12,6 @@ use Kiboko\Component\MagentoORM\AndWhereDoctrineFixForPHP7;
 
 trait CatalogAttributeQueryBuilderTrait
 {
-    use AndWhereDoctrineFixForPHP7;
     use AttributeQueryBuilderTrait;
 
     /**
@@ -37,8 +36,12 @@ trait CatalogAttributeQueryBuilderTrait
         $queryBuilder = $this->createFindAllQueryBuilder($alias, $excludedIds)
             ->innerJoin($alias, $this->extraTable, $extraAlias,
                 sprintf('%s.attribute_id=%s.attribute_id', $extraAlias, $alias))
-            ->andWhere(sprintf('%s.entity_type_id=4', $alias))
         ;
+
+        $this->andWhere(
+            $queryBuilder,
+            sprintf('%s.entity_type_id=4', $alias)
+        );
 
         return $queryBuilder;
     }
@@ -76,8 +79,13 @@ trait CatalogAttributeQueryBuilderTrait
      */
     public function createFindOneByCodeQueryBuilderWithExtra($alias, $extraAlias, $entityAlias)
     {
-        return $this->createFindAllByEntityTypeQueryBuilderWithExtra($alias, $extraAlias, $entityAlias)
-            ->andWhere(sprintf('%s.attribute_code = ?', $alias))
+        $queryBuilder = $this->createFindAllByEntityTypeQueryBuilderWithExtra($alias, $extraAlias, $entityAlias);
+
+        $this
+            ->andWhere(
+                $queryBuilder,
+                $queryBuilder->expr()->eq(sprintf('%s.attribute_code', $alias), '?')
+            )
             ->setFirstResult(0)
             ->setMaxResults(1)
         ;
@@ -91,8 +99,13 @@ trait CatalogAttributeQueryBuilderTrait
      */
     public function createFindOneByIdQueryBuilderWithExtra($alias, $extraAlias)
     {
-        return $this->createFindAllQueryBuilderWithExtra($alias, $extraAlias)
-            ->andWhere(sprintf('%s.attribute_id = ?', $alias))
+        $queryBuilder = $this->createFindAllQueryBuilderWithExtra($alias, $extraAlias);
+
+        $this
+            ->andWhere(
+                $queryBuilder,
+                $queryBuilder->expr()->eq(sprintf('%s.attribute_id', $alias), '?')
+            )
             ->setFirstResult(0)
             ->setMaxResults(1)
         ;

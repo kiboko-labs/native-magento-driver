@@ -35,7 +35,7 @@ trait AndWhereDoctrineFixForPHP7
         $wherePart = $queryBuilder->getQueryPart('where');
 
         if ($wherePart instanceof CompositeExpression && $wherePart->getType() === CompositeExpression::TYPE_AND) {
-            $wherePart->addMultiple(...$additionalWhere);
+            $wherePart->addMultiple($additionalWhere);
         } else {
             array_unshift($additionalWhere, $wherePart);
             $wherePart = new CompositeExpression(CompositeExpression::TYPE_AND, $additionalWhere);

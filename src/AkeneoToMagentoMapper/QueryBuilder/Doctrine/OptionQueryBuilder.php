@@ -182,12 +182,10 @@ class OptionQueryBuilder implements OptionQueryBuilderInterface
     {
         $queryBuilder = $this->createFindQueryBuilder($alias);
 
-        $this
-            ->andWhere(
-                $queryBuilder,
-                $queryBuilder->expr()->eq(sprintf('%s.attribute_id', $alias), '?')
-            )
-        ;
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->eq(sprintf('%s.attribute_id', $alias), '?')
+        );
 
         return $queryBuilder;
     }

@@ -171,10 +171,14 @@ class FamilyQueryBuilder implements FamilyQueryBuilderInterface
      */
     public function createDeleteQueryBuilder()
     {
-        return (new QueryBuilder($this->connection))
+        $queryBuilder = (new QueryBuilder($this->connection))
             ->delete($this->table)
-            ->andWhere('entity_type_id=4')
         ;
+
+        return $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->eq('entity_type_id', $queryBuilder->expr()->literal(4))
+        );
     }
 
     /**

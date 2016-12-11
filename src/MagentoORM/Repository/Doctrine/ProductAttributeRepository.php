@@ -273,7 +273,7 @@ class ProductAttributeRepository implements ProductAttributeRepositoryInterface
         $query = $this->queryBuilder->createFindAllByFamilyQueryBuilderWithExtra('a', 'x', 'e', 'f');
 
         $statement = $this->connection->prepare($query);
-        if (!$statement->execute([$family->getId()])) {
+        if (!$statement->execute(['catalog_product', $family->getId()])) {
             throw new DatabaseFetchingFailureException();
         }
 
@@ -296,7 +296,7 @@ class ProductAttributeRepository implements ProductAttributeRepositoryInterface
         $query = $this->queryBuilder->createFindAllMandatoryByFamilyQueryBuilderWithExtra('a', 'x', 'e', 'f');
 
         $statement = $this->connection->prepare($query);
-        if (!$statement->execute([$family->getId()])) {
+        if (!$statement->execute(['catalog_product', $family->getId()])) {
             throw new DatabaseFetchingFailureException();
         }
 

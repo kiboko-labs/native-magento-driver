@@ -87,12 +87,10 @@ class CategoryRepository implements CategoryRepositoryInterface
         $query = $this->queryBuilder->createFindAllQueryBuilder('p');
 
         $expr = array_pad([], count($codes), $query->expr()->eq('p.category_id', '?'));
-        $this
-            ->andWhere(
-                $query,
-                $query->expr()->andX(...$expr)
-            )
-        ;
+        $this->andWhere(
+            $query,
+            $query->expr()->andX(...$expr)
+        );
 
         $statement = $this->connection->prepare($query);
         if (!$statement->execute($codes)) {
