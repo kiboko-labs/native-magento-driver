@@ -9,9 +9,12 @@ namespace Kiboko\Component\MagentoORM\QueryBuilder\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
+use Kiboko\Component\MagentoORM\AndWhereDoctrineFixForPHP7;
 
 class ProductSuperAttributeQueryBuilder implements ProductSuperAttributeQueryBuilderInterface
 {
+    use AndWhereDoctrineFixForPHP7;
+
     /**
      * @var Connection
      */
@@ -103,9 +106,12 @@ class ProductSuperAttributeQueryBuilder implements ProductSuperAttributeQueryBui
     {
         $queryBuilder = $this->createFindAllQueryBuilder($alias);
 
-        $queryBuilder
-            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.product_id', $alias), '?'))
-            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_id', $alias), '?'))
+        $this
+            ->andWhere(
+                $queryBuilder,
+                $queryBuilder->expr()->eq(sprintf('%s.product_id', $alias), '?'),
+                $queryBuilder->expr()->eq(sprintf('%s.attribute_id', $alias), '?')
+            )
             ->setFirstResult(0)
             ->setMaxResults(1)
         ;
@@ -122,20 +128,26 @@ class ProductSuperAttributeQueryBuilder implements ProductSuperAttributeQueryBui
     {
         $queryBuilder = $this->createFindAllQueryBuilder($alias);
 
-        $queryBuilder
-            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.product_id', $alias), '?'))
-        ;
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->eq(sprintf('%s.product_id', $alias), '?')
+        );
 
         return $queryBuilder;
     }
 
+    /**
+     * @param string $alias
+     * @return QueryBuilder
+     */
     public function createFindAllByAttributeQueryBuilder($alias)
     {
         $queryBuilder = $this->createFindAllQueryBuilder($alias);
 
-        $queryBuilder
-            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_id', $alias), '?'))
-        ;
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->eq(sprintf('%s.attribute_id', $alias), '?')
+        );
 
         return $queryBuilder;
     }

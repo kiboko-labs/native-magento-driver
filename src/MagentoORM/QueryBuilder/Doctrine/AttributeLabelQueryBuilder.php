@@ -9,9 +9,12 @@ namespace Kiboko\Component\MagentoORM\QueryBuilder\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
+use Kiboko\Component\MagentoORM\AndWhereDoctrineFixForPHP7;
 
 class AttributeLabelQueryBuilder implements AttributeLabelQueryBuilderInterface
 {
+    use AndWhereDoctrineFixForPHP7;
+
     /**
      * @var Connection
      */
@@ -99,10 +102,13 @@ class AttributeLabelQueryBuilder implements AttributeLabelQueryBuilderInterface
     {
         $queryBuilder = $this->createFindQueryBuilder($alias);
 
-        $queryBuilder
-                ->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_label_id', $alias), '?'))
-                ->setFirstResult(0)
-                ->setMaxResults(1)
+        $this
+            ->andWhere(
+                $queryBuilder,
+                $queryBuilder->expr()->eq(sprintf('%s.attribute_label_id', $alias), '?')
+            )
+            ->setFirstResult(0)
+            ->setMaxResults(1)
         ;
 
         return $queryBuilder;
@@ -112,14 +118,17 @@ class AttributeLabelQueryBuilder implements AttributeLabelQueryBuilderInterface
      * @param string $alias
      * @param int[]  $idList
      *
-     * @return type
+     * @return QueryBuilder
      */
     public function createFindAllByIdQueryBuilder($alias, array $idList)
     {
         $queryBuilder = $this->createFindQueryBuilder($alias);
 
         $expr = array_pad([], count($idList), $queryBuilder->expr()->eq(sprintf('%s.attribute_label_id', $alias), '?'));
-        $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->orX(...$expr)
+        );
 
         return $queryBuilder;
     }
@@ -130,23 +139,24 @@ class AttributeLabelQueryBuilder implements AttributeLabelQueryBuilderInterface
     public function createDeleteQueryBuilder()
     {
         return (new QueryBuilder($this->connection))
-                        ->delete($this->table)
+            ->delete($this->table)
         ;
     }
 
     /**
-     * @param int $identifier
-     *
      * @return QueryBuilder
      */
     public function createDeleteOneByIdQueryBuilder()
     {
         $queryBuilder = $this->createDeleteQueryBuilder();
 
-        $queryBuilder
-                ->andWhere($queryBuilder->expr()->eq('attribute_label_id', '?'))
-                ->setFirstResult(0)
-                ->setMaxResults(1)
+        $this
+            ->andWhere(
+                $queryBuilder,
+                $queryBuilder->expr()->eq('attribute_label_id', '?')
+            )
+            ->setFirstResult(0)
+            ->setMaxResults(1)
         ;
 
         return $queryBuilder;
@@ -162,7 +172,10 @@ class AttributeLabelQueryBuilder implements AttributeLabelQueryBuilderInterface
         $queryBuilder = $this->createDeleteQueryBuilder();
 
         $expr = array_pad([], count($idList), $queryBuilder->expr()->eq('attribute_label_id', '?'));
-        $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->orX(...$expr)
+        );
 
         return $queryBuilder;
     }

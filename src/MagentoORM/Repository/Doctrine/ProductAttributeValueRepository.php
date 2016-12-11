@@ -9,6 +9,7 @@ namespace Kiboko\Component\MagentoORM\Repository\Doctrine;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Connection;
+use Kiboko\Component\MagentoORM\AndWhereDoctrineFixForPHP7;
 use Kiboko\Component\MagentoORM\Model\AttributeInterface;
 use Kiboko\Component\MagentoORM\Model\AttributeValueInterface;
 use Kiboko\Component\MagentoORM\Entity\Product\ProductInterface;
@@ -23,6 +24,8 @@ use Kiboko\Component\MagentoORM\Repository\ProductAttributeValueRepositoryBacken
  */
 class ProductAttributeValueRepository implements ProductAttributeValueRepositoryBackendInterface
 {
+    use AndWhereDoctrineFixForPHP7;
+
     /**
      * @var ProductAttributeValueQueryBuilderInterface
      */
@@ -278,7 +281,10 @@ class ProductAttributeValueRepository implements ProductAttributeValueRepository
         }, $attributeList);
 
         $expr = array_pad([], count($attributeIdList), $query->expr()->eq('v.attribute_id', '?'));
-        $query->andWhere($query->expr()->orX(...$expr));
+        $this->andWhere(
+            $query,
+            $query->expr()->orX(...$expr)
+        );
 
         $statement = $this->connection->prepare($query);
         if (!$statement->execute(array_merge([$storeId, $product->getId()], $attributeIdList))) {
@@ -329,7 +335,10 @@ class ProductAttributeValueRepository implements ProductAttributeValueRepository
         }, $productList);
 
         $expr = array_pad([], count($productIdList), $query->expr()->eq('v.entity_id', '?'));
-        $query->andWhere($query->expr()->orX(...$expr));
+        $this->andWhere(
+            $query,
+            $query->expr()->orX(...$expr)
+        );
 
         $statement = $this->connection->prepare($query);
         if (!$statement->execute(array_merge([$storeId], $productIdList))) {
@@ -384,14 +393,20 @@ class ProductAttributeValueRepository implements ProductAttributeValueRepository
         }, $productList);
 
         $expr = array_pad([], count($productIdList), $query->expr()->eq('v.entity_id', '?'));
-        $query->andWhere($query->expr()->orX(...$expr));
+        $this->andWhere(
+            $query,
+            $query->expr()->orX(...$expr)
+        );
 
         $attributeIdList = array_map(function (AttributeInterface $item) {
             return $item->getId();
         }, $attributeList);
 
         $expr = array_pad([], count($attributeIdList), $query->expr()->eq('v.attribute_id', '?'));
-        $query->andWhere($query->expr()->orX(...$expr));
+        $this->andWhere(
+            $query,
+            $query->expr()->orX(...$expr)
+        );
 
         $statement = $this->connection->prepare($query);
         if (!$statement->execute(array_merge([$storeId], $productIdList, $attributeIdList))) {

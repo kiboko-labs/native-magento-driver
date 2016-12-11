@@ -9,9 +9,12 @@ namespace Kiboko\Component\MagentoORM\QueryBuilder\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
+use Kiboko\Component\MagentoORM\AndWhereDoctrineFixForPHP7;
 
 class FamilyQueryBuilder implements FamilyQueryBuilderInterface
 {
+    use AndWhereDoctrineFixForPHP7;
+
     /**
      * @var Connection
      */
@@ -117,8 +120,11 @@ class FamilyQueryBuilder implements FamilyQueryBuilderInterface
     {
         $queryBuilder = $this->createFindAllQueryBuilder($alias);
 
-        $queryBuilder
-            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_set_id', $alias), '?'))
+        $this
+            ->andWhere(
+                $queryBuilder,
+                $queryBuilder->expr()->eq(sprintf('%s.attribute_set_id', $alias), '?')
+            )
             ->setFirstResult(0)
             ->setMaxResults(1)
         ;
@@ -135,8 +141,11 @@ class FamilyQueryBuilder implements FamilyQueryBuilderInterface
     {
         $queryBuilder = $this->createFindAllQueryBuilder($alias);
 
-        $queryBuilder
-            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_set_name', $alias), '?'))
+        $this
+            ->andWhere(
+                $queryBuilder,
+                $queryBuilder->expr()->eq(sprintf('%s.attribute_set_name', $alias), '?')
+            )
             ->setFirstResult(0)
             ->setMaxResults(1)
         ;
@@ -149,7 +158,10 @@ class FamilyQueryBuilder implements FamilyQueryBuilderInterface
         $queryBuilder = $this->createFindAllQueryBuilder($alias);
 
         $expr = array_pad([], count($idList), $queryBuilder->expr()->eq(sprintf('%s.attribute_set_id', $alias), '?'));
-        $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->orX(...$expr)
+        );
 
         return $queryBuilder;
     }
@@ -172,8 +184,11 @@ class FamilyQueryBuilder implements FamilyQueryBuilderInterface
     {
         $queryBuilder = $this->createDeleteQueryBuilder();
 
-        $queryBuilder
-            ->andWhere($queryBuilder->expr()->eq('attribute_set_id', '?'))
+        $this
+            ->andWhere(
+                $queryBuilder,
+                $queryBuilder->expr()->eq('attribute_set_id', '?')
+            )
             ->setFirstResult(0)
             ->setMaxResults(1)
         ;
@@ -191,7 +206,10 @@ class FamilyQueryBuilder implements FamilyQueryBuilderInterface
         $queryBuilder = $this->createDeleteQueryBuilder();
 
         $expr = array_pad([], count($idList), $queryBuilder->expr()->eq('attribute_set_id', '?'));
-        $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->orX(...$expr)
+        );
 
         return $queryBuilder;
     }

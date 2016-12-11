@@ -8,12 +8,15 @@
 namespace Kiboko\Component\AkeneoToMagentoMapper\Repository\Doctrine;
 
 use Doctrine\DBAL\Connection;
+use Kiboko\Component\MagentoORM\AndWhereDoctrineFixForPHP7;
 use Kiboko\Component\MagentoORM\Exception\DatabaseFetchingFailureException;
 use Kiboko\Component\AkeneoToMagentoMapper\QueryBuilder\Doctrine\CategoryQueryBuilder;
 use Kiboko\Component\AkeneoToMagentoMapper\Repository\CategoryRepositoryInterface;
 
 class CategoryRepository implements CategoryRepositoryInterface
 {
+    use AndWhereDoctrineFixForPHP7;
+
     /**
      * @var Connection
      */
@@ -84,7 +87,12 @@ class CategoryRepository implements CategoryRepositoryInterface
         $query = $this->queryBuilder->createFindAllQueryBuilder('p');
 
         $expr = array_pad([], count($codes), $query->expr()->eq('p.category_id', '?'));
-        $query->andWhere($query->expr()->andX(...$expr));
+        $this
+            ->andWhere(
+                $query,
+                $query->expr()->andX(...$expr)
+            )
+        ;
 
         $statement = $this->connection->prepare($query);
         if (!$statement->execute($codes)) {

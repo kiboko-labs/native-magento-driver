@@ -9,9 +9,12 @@ namespace Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\ProductUrlRewrite;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
+use Kiboko\Component\MagentoORM\AndWhereDoctrineFixForPHP7;
 
 class EnterpriseEditionProductUrlRewriteQueryBuilder implements EnterpriseEditionProductUrlRewriteQueryBuilderInterface
 {
+    use AndWhereDoctrineFixForPHP7;
+
     /**
      * @var Connection
      */
@@ -145,11 +148,14 @@ class EnterpriseEditionProductUrlRewriteQueryBuilder implements EnterpriseEditio
             )
         );
 
-        $queryBuilder
-            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.entity_id', $productLinkAlias), '?'))
-            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.store_id', $productLinkAlias), '?'))
-            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.entity_type_id', $productLinkAlias), '4'))
-            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.is_system', $productLinkAlias), '1'))
+        $this
+            ->andWhere(
+                $queryBuilder,
+                $queryBuilder->expr()->eq(sprintf('%s.entity_id', $productLinkAlias), '?'),
+                $queryBuilder->expr()->eq(sprintf('%s.store_id', $productLinkAlias), '?'),
+                $queryBuilder->expr()->eq(sprintf('%s.entity_type_id', $productLinkAlias), '4'),
+                $queryBuilder->expr()->eq(sprintf('%s.is_system', $productLinkAlias), '1')
+            )
             ->setFirstResult(0)
             ->setMaxResults(1)
         ;

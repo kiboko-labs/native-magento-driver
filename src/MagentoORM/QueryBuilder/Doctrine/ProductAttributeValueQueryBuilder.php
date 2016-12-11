@@ -9,9 +9,12 @@ namespace Kiboko\Component\MagentoORM\QueryBuilder\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
+use Kiboko\Component\MagentoORM\AndWhereDoctrineFixForPHP7;
 
 class ProductAttributeValueQueryBuilder implements ProductAttributeValueQueryBuilderInterface
 {
+    use AndWhereDoctrineFixForPHP7;
+
     /**
      * @var Connection
      */
@@ -142,7 +145,10 @@ class ProductAttributeValueQueryBuilder implements ProductAttributeValueQueryBui
     {
         $queryBuilder = $this->createBaseQueryBuilder($alias, $this->createFieldsList(['*'], $alias));
 
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.store_id', $alias), '?'));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->eq(sprintf('%s.store_id', $alias), '?')
+        );
 
         return $queryBuilder;
     }
@@ -166,7 +172,10 @@ class ProductAttributeValueQueryBuilder implements ProductAttributeValueQueryBui
             ))
         ;
 
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.store_id', $defaultAlias), 0));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->eq(sprintf('%s.store_id', $defaultAlias), 0)
+        );
 
         return $queryBuilder;
     }
@@ -211,7 +220,10 @@ class ProductAttributeValueQueryBuilder implements ProductAttributeValueQueryBui
     {
         $queryBuilder = $this->createBaseQueryBuilder($alias, $this->createFieldsList($this->fields, $alias));
 
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.value_id'), '?'));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->eq(sprintf('%s.value_id'), '?')
+        );
 
         return $queryBuilder;
     }
@@ -227,7 +239,10 @@ class ProductAttributeValueQueryBuilder implements ProductAttributeValueQueryBui
         $queryBuilder = $this->createBaseQueryBuilder($alias, $this->createFieldsList($this->fields, $alias));
 
         $expr = array_pad([], count($valueIds), $queryBuilder->expr()->eq(sprintf('%s.value_id', $alias), '?'));
-        $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->orX(...$expr)
+        );
 
         return $queryBuilder;
     }
@@ -241,8 +256,11 @@ class ProductAttributeValueQueryBuilder implements ProductAttributeValueQueryBui
     {
         $queryBuilder = $this->createBaseQueryBuilderWithStoreFilter($alias);
 
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.entity_id', $alias), '?'));
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_id', $alias), '?'));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->eq(sprintf('%s.entity_id', $alias), '?'),
+            $queryBuilder->expr()->eq(sprintf('%s.attribute_id', $alias), '?')
+        );
 
         return $queryBuilder;
     }
@@ -257,8 +275,11 @@ class ProductAttributeValueQueryBuilder implements ProductAttributeValueQueryBui
     {
         $queryBuilder = $this->createBaseQueryBuilderWithDefaultAndStoreFilter($defaultAlias, $storeAlias);
 
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.entity_id', $defaultAlias), '?'));
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_id', $defaultAlias), '?'));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->eq(sprintf('%s.entity_id', $defaultAlias), '?'),
+            $queryBuilder->expr()->eq(sprintf('%s.attribute_id', $defaultAlias), '?')
+        );
 
         return $queryBuilder;
     }
@@ -272,7 +293,10 @@ class ProductAttributeValueQueryBuilder implements ProductAttributeValueQueryBui
     {
         $queryBuilder = $this->createBaseQueryBuilderWithStoreFilter($alias);
 
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.entity_id', $alias), '?'));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->eq(sprintf('%s.entity_id', $alias), '?')
+        );
 
         return $queryBuilder;
     }
@@ -287,7 +311,10 @@ class ProductAttributeValueQueryBuilder implements ProductAttributeValueQueryBui
     {
         $queryBuilder = $this->createBaseQueryBuilderWithDefaultAndStoreFilter($defaultAlias, $storeAlias);
 
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.entity_id', $defaultAlias), '?'));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->eq(sprintf('%s.entity_id', $defaultAlias), '?')
+        );
 
         return $queryBuilder;
     }
@@ -336,7 +363,10 @@ class ProductAttributeValueQueryBuilder implements ProductAttributeValueQueryBui
     {
         $queryBuilder = $this->createBaseQueryBuilder($alias, $this->createFieldsList($this->fields, $alias));
 
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.entity_id', $alias), '?'));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->eq(sprintf('%s.entity_id', $alias), '?')
+        );
 
         return $queryBuilder;
     }

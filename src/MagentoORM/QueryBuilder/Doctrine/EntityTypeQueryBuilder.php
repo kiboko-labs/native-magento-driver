@@ -9,9 +9,12 @@ namespace Kiboko\Component\MagentoORM\QueryBuilder\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
+use Kiboko\Component\MagentoORM\AndWhereDoctrineFixForPHP7;
 
 class EntityTypeQueryBuilder implements EntityTypeQueryBuilderInterface
 {
+    use AndWhereDoctrineFixForPHP7;
+
     /**
      * @var Connection
      */
@@ -127,10 +130,13 @@ class EntityTypeQueryBuilder implements EntityTypeQueryBuilderInterface
     {
         $queryBuilder = $this->createFindAllQueryBuilder($alias);
 
-        $queryBuilder
-                ->andWhere($queryBuilder->expr()->eq(sprintf('%s.entity_type_id', $alias), '?'))
-                ->setFirstResult(0)
-                ->setMaxResults(1)
+        $this
+            ->andWhere(
+                $queryBuilder,
+                $queryBuilder->expr()->eq(sprintf('%s.entity_type_id', $alias), '?')
+            )
+            ->setFirstResult(0)
+            ->setMaxResults(1)
         ;
 
         return $queryBuilder;
@@ -153,10 +159,13 @@ class EntityTypeQueryBuilder implements EntityTypeQueryBuilderInterface
     {
         $queryBuilder = $this->createFindAllQueryBuilder($alias);
 
-        $queryBuilder
-                ->andWhere($queryBuilder->expr()->eq(sprintf('%s.entity_type_code', $alias), '?'))
-                ->setFirstResult(0)
-                ->setMaxResults(1)
+        $this
+            ->andWhere(
+                $queryBuilder,
+                $queryBuilder->expr()->eq(sprintf('%s.entity_type_code', $alias), '?')
+            )
+            ->setFirstResult(0)
+            ->setMaxResults(1)
         ;
 
         return $queryBuilder;
@@ -167,7 +176,10 @@ class EntityTypeQueryBuilder implements EntityTypeQueryBuilderInterface
         $queryBuilder = $this->createFindAllQueryBuilder($alias);
 
         $expr = array_pad([], count($idList), $queryBuilder->expr()->eq(sprintf('%s.entity_type_id', $alias), '?'));
-        $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->orX(...$expr)
+        );
 
         return $queryBuilder;
     }
@@ -190,10 +202,13 @@ class EntityTypeQueryBuilder implements EntityTypeQueryBuilderInterface
     {
         $queryBuilder = $this->createDeleteQueryBuilder();
 
-        $queryBuilder
-                ->andWhere($queryBuilder->expr()->eq('entity_type_id', '?'))
-                ->setFirstResult(0)
-                ->setMaxResults(1)
+        $this
+            ->andWhere(
+                $queryBuilder,
+                $queryBuilder->expr()->eq('entity_type_id', '?')
+            )
+            ->setFirstResult(0)
+            ->setMaxResults(1)
         ;
 
         return $queryBuilder;
@@ -209,7 +224,10 @@ class EntityTypeQueryBuilder implements EntityTypeQueryBuilderInterface
         $queryBuilder = $this->createDeleteQueryBuilder();
 
         $expr = array_pad([], count($idList), $queryBuilder->expr()->eq('entity_type_id', '?'));
-        $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->orX(...$expr)
+        );
 
         return $queryBuilder;
     }

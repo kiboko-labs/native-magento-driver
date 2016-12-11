@@ -9,9 +9,12 @@ namespace Kiboko\Component\MagentoORM\QueryBuilder\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
+use Kiboko\Component\MagentoORM\AndWhereDoctrineFixForPHP7;
 
 trait AttributeQueryBuilderTrait
 {
+    use AndWhereDoctrineFixForPHP7;
+
     /**
      * @var Connection
      */
@@ -73,7 +76,10 @@ trait AttributeQueryBuilderTrait
 
         if (count($excludedIds) > 0) {
             $expr = array_pad([], count($excludedIds), $queryBuilder->expr()->neq(sprintf('%s.attribute_id', $alias), '?'));
-            $queryBuilder->andWhere($queryBuilder->expr()->andX(...$expr));
+            $this->andWhere(
+                $queryBuilder,
+                $queryBuilder->expr()->andX(...$expr)
+            );
         }
 
         return $queryBuilder;
@@ -94,7 +100,10 @@ trait AttributeQueryBuilderTrait
             $queryBuilder->expr()->eq(sprintf('%s.entity_type_id', $entityAlias), sprintf('%s.entity_type_id', $alias))
         );
 
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.entity_type_code', $entityAlias), '?'));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->eq(sprintf('%s.entity_type_code', $entityAlias), '?')
+        );
 
         return $queryBuilder;
     }
@@ -140,7 +149,10 @@ trait AttributeQueryBuilderTrait
         $queryBuilder = $this->createFindAllByEntityTypeQueryBuilder($alias, $entityAlias);
 
         $expr = array_pad([], count($codeList), $queryBuilder->expr()->eq(sprintf('%s.attribute_code', $alias), '?'));
-        $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->orX(...$expr)
+        );
 
         return $queryBuilder;
     }
@@ -156,7 +168,10 @@ trait AttributeQueryBuilderTrait
         $queryBuilder = $this->createFindAllQueryBuilder($alias);
 
         $expr = array_pad([], count($idList), $queryBuilder->expr()->eq(sprintf('%s.attribute_id', $alias), '?'));
-        $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->orX(...$expr)
+        );
 
         return $queryBuilder;
     }
@@ -210,7 +225,10 @@ trait AttributeQueryBuilderTrait
         $queryBuilder = $this->createDeleteQueryBuilder();
 
         $expr = array_pad([], count($codeList), $queryBuilder->expr()->eq('attribute_code', '?'));
-        $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->orX(...$expr)
+        );
 
         return $queryBuilder;
     }
@@ -225,7 +243,10 @@ trait AttributeQueryBuilderTrait
         $queryBuilder = $this->createDeleteQueryBuilder();
 
         $expr = array_pad([], count($idList), $queryBuilder->expr()->eq('attribute_id', '?'));
-        $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->orX(...$expr)
+        );
 
         return $queryBuilder;
     }

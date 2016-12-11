@@ -9,9 +9,12 @@ namespace Kiboko\Component\MagentoORM\QueryBuilder\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
+use Kiboko\Component\MagentoORM\AndWhereDoctrineFixForPHP7;
 
 class EntityStoreQueryBuilder implements EntityStoreQueryBuilderInterface
 {
+    use AndWhereDoctrineFixForPHP7;
+
     /**
      * @var Connection
      */
@@ -112,10 +115,13 @@ class EntityStoreQueryBuilder implements EntityStoreQueryBuilderInterface
     {
         $queryBuilder = $this->createFindAllQueryBuilder($alias);
 
-        $queryBuilder
-                ->andWhere($queryBuilder->expr()->eq(sprintf('%s.entity_store_id', $alias), '?'))
-                ->setFirstResult(0)
-                ->setMaxResults(1);
+        $this
+            ->andWhere(
+                $queryBuilder,
+                $queryBuilder->expr()->eq(sprintf('%s.entity_store_id', $alias), '?')
+            )
+            ->setFirstResult(0)
+            ->setMaxResults(1);
 
         return $queryBuilder;
     }
@@ -131,7 +137,10 @@ class EntityStoreQueryBuilder implements EntityStoreQueryBuilderInterface
         $queryBuilder = $this->createFindAllQueryBuilder($alias);
 
         $expr = array_pad([], count($storeIdList), $queryBuilder->expr()->eq(sprintf('%s.store_id', $alias), '?'));
-        $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->orX(...$expr)
+        );
 
         return $queryBuilder;
     }
@@ -145,10 +154,13 @@ class EntityStoreQueryBuilder implements EntityStoreQueryBuilderInterface
     {
         $queryBuilder = $this->createFindAllQueryBuilder($alias);
 
-        $queryBuilder
-                ->andWhere($queryBuilder->expr()->eq(sprintf('%s.store_id', $alias), '?'))
-                ->setFirstResult(0)
-                ->setMaxResults(1);
+        $this
+            ->andWhere(
+                $queryBuilder,
+                $queryBuilder->expr()->eq(sprintf('%s.store_id', $alias), '?')
+            )
+            ->setFirstResult(0)
+            ->setMaxResults(1);
 
         return $queryBuilder;
     }
@@ -164,7 +176,10 @@ class EntityStoreQueryBuilder implements EntityStoreQueryBuilderInterface
         $queryBuilder = $this->createFindAllQueryBuilder($alias);
 
         $expr = array_pad([], count($idList), $queryBuilder->expr()->eq(sprintf('%s.entity_store_id', $alias), '?'));
-        $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->orX(...$expr)
+        );
 
         return $queryBuilder;
     }
@@ -202,7 +217,10 @@ class EntityStoreQueryBuilder implements EntityStoreQueryBuilderInterface
         $queryBuilder = $this->createDeleteQueryBuilder();
 
         $expr = array_pad([], count($idList), $queryBuilder->expr()->eq('entity_store_id', '?'));
-        $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->orX(...$expr)
+        );
 
         return $queryBuilder;
     }
@@ -216,10 +234,13 @@ class EntityStoreQueryBuilder implements EntityStoreQueryBuilderInterface
     {
         $queryBuilder = $this->createFindAllQueryBuilder($alias);
 
-        $queryBuilder
-                ->andWhere($queryBuilder->expr()->eq(sprintf('%s.entity_type_id', $alias), '?'))
-                ->setFirstResult(0)
-                ->setMaxResults(1)
+        $this
+            ->andWhere(
+                $queryBuilder,
+                $queryBuilder->expr()->eq(sprintf('%s.entity_type_id', $alias), '?')
+            )
+            ->setFirstResult(0)
+            ->setMaxResults(1)
         ;
 
         return $queryBuilder;
@@ -236,7 +257,10 @@ class EntityStoreQueryBuilder implements EntityStoreQueryBuilderInterface
         $queryBuilder = $this->createFindAllQueryBuilder($alias);
 
         $expr = array_pad([], count($typeIdList), $queryBuilder->expr()->eq(sprintf('%s.entity_type_id', $alias), '?'));
-        $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->orX(...$expr)
+        );
 
         return $queryBuilder;
     }

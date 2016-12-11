@@ -9,9 +9,12 @@ namespace Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\ProductUrlRewrite;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
+use Kiboko\Component\MagentoORM\AndWhereDoctrineFixForPHP7;
 
 class CommunityEditionProductUrlRewriteQueryBuilder implements CommunityEditionProductUrlRewriteQueryBuilderInterface
 {
+    use AndWhereDoctrineFixForPHP7;
+
     /**
      * @var Connection
      */
@@ -114,10 +117,13 @@ class CommunityEditionProductUrlRewriteQueryBuilder implements CommunityEditionP
     {
         $queryBuilder = $this->createFindQueryBuilder($alias);
 
-        $queryBuilder
-            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.product_id', $alias), '?'))
-            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.store_id', $alias), '?'))
-            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.is_system', $alias), '1'))
+        $this
+            ->andWhere(
+                $queryBuilder,
+                $queryBuilder->expr()->eq(sprintf('%s.product_id', $alias), '?'),
+                $queryBuilder->expr()->eq(sprintf('%s.store_id', $alias), '?'),
+                $queryBuilder->expr()->eq(sprintf('%s.is_system', $alias), '1')
+            )
             ->setFirstResult(0)
             ->setMaxResults(1)
         ;

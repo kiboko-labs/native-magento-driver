@@ -10,9 +10,12 @@ namespace Kiboko\Component\AkeneoToMagentoMapper\QueryBuilder\Doctrine;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Kiboko\Component\AkeneoToMagentoMapper\QueryBuilder\OptionQueryBuilderInterface;
+use Kiboko\Component\MagentoORM\AndWhereDoctrineFixForPHP7;
 
 class OptionQueryBuilder implements OptionQueryBuilderInterface
 {
+    use AndWhereDoctrineFixForPHP7;
+
     /**
      * @var Connection
      */
@@ -135,9 +138,12 @@ class OptionQueryBuilder implements OptionQueryBuilderInterface
     {
         $queryBuilder = $this->createFindQueryBuilder($alias);
 
-        $queryBuilder
-            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.option_code', $alias), '?'))
-            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_id', $alias), '?'))
+        $this
+            ->andWhere(
+                $queryBuilder,
+                $queryBuilder->expr()->eq(sprintf('%s.option_code', $alias), '?'),
+                $queryBuilder->expr()->eq(sprintf('%s.attribute_id', $alias), '?')
+            )
             ->setFirstResult(0)
             ->setMaxResults(1)
         ;
@@ -154,9 +160,12 @@ class OptionQueryBuilder implements OptionQueryBuilderInterface
     {
         $queryBuilder = $this->createFindQueryBuilder($alias);
 
-        $queryBuilder
-            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.option_code', $alias), '?'))
-            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_code', $alias), '?'))
+        $this
+            ->andWhere(
+                $queryBuilder,
+                $queryBuilder->expr()->eq(sprintf('%s.option_code', $alias), '?'),
+                $queryBuilder->expr()->eq(sprintf('%s.attribute_code', $alias), '?')
+            )
             ->setFirstResult(0)
             ->setMaxResults(1)
         ;
@@ -173,8 +182,11 @@ class OptionQueryBuilder implements OptionQueryBuilderInterface
     {
         $queryBuilder = $this->createFindQueryBuilder($alias);
 
-        $queryBuilder
-            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_id', $alias), '?'))
+        $this
+            ->andWhere(
+                $queryBuilder,
+                $queryBuilder->expr()->eq(sprintf('%s.attribute_id', $alias), '?')
+            )
         ;
 
         return $queryBuilder;

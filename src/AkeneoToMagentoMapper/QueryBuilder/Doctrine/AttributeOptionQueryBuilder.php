@@ -10,9 +10,12 @@ namespace Kiboko\Component\AkeneoToMagentoMapper\QueryBuilder\Doctrine;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Kiboko\Component\AkeneoToMagentoMapper\QueryBuilder\AttributeOptionQueryBuilderInterface;
+use Kiboko\Component\MagentoORM\AndWhereDoctrineFixForPHP7;
 
 class AttributeOptionQueryBuilder implements AttributeOptionQueryBuilderInterface
 {
+    use AndWhereDoctrineFixForPHP7;
+
     /**
      * @var Connection
      */
@@ -120,8 +123,11 @@ class AttributeOptionQueryBuilder implements AttributeOptionQueryBuilderInterfac
     {
         $queryBuilder = $this->createFindQueryBuilder($alias);
 
-        $queryBuilder
-            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.option_code', $alias), '?'))
+        $this
+            ->andWhere(
+                $queryBuilder,
+                $queryBuilder->expr()->eq(sprintf('%s.option_code', $alias), '?')
+            )
             ->setFirstResult(0)
             ->setMaxResults(1)
         ;

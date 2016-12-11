@@ -10,9 +10,12 @@ namespace Kiboko\Component\AkeneoToMagentoMapper\QueryBuilder\Doctrine;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Kiboko\Component\AkeneoToMagentoMapper\QueryBuilder\AttributeGroupQueryBuilderInterface;
+use Kiboko\Component\MagentoORM\AndWhereDoctrineFixForPHP7;
 
 class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
 {
+    use AndWhereDoctrineFixForPHP7;
+
     /**
      * @var Connection
      */
@@ -121,9 +124,12 @@ class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
     {
         $queryBuilder = $this->createFindQueryBuilder($alias);
 
-        $queryBuilder
-            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_group_code', $alias), '?'))
-            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.family_code', $alias), '?'))
+        $this
+            ->andWhere(
+                $queryBuilder,
+                $queryBuilder->expr()->eq(sprintf('%s.attribute_group_code', $alias), '?'),
+                $queryBuilder->expr()->eq(sprintf('%s.family_code', $alias), '?')
+            )
             ->setFirstResult(0)
             ->setMaxResults(1)
         ;

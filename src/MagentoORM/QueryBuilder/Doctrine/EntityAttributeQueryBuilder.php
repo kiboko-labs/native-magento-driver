@@ -9,9 +9,12 @@ namespace Kiboko\Component\MagentoORM\QueryBuilder\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
+use Kiboko\Component\MagentoORM\AndWhereDoctrineFixForPHP7;
 
 class EntityAttributeQueryBuilder implements EntityAttributeQueryBuilderInterface
 {
+    use AndWhereDoctrineFixForPHP7;
+
     /**
      * @var Connection
      */
@@ -101,38 +104,59 @@ class EntityAttributeQueryBuilder implements EntityAttributeQueryBuilderInterfac
     {
         $queryBuilder = $this->createFindQueryBuilder($alias);
 
-        $queryBuilder
-                ->andWhere($queryBuilder->expr()->eq(sprintf('%s.entity_attribute_id', $alias), '?'))
-                ->setFirstResult(0)
-                ->setMaxResults(1)
+        $this
+            ->andWhere(
+                $queryBuilder,
+                $queryBuilder->expr()->eq(sprintf('%s.entity_attribute_id', $alias), '?')
+            )
+            ->setFirstResult(0)
+            ->setMaxResults(1)
         ;
 
         return $queryBuilder;
     }
 
+    /**
+     * @param string $alias
+     * @param int $attributeId
+     * @param int $attributeGroupId
+     * @return QueryBuilder
+     */
     public function createFindOneByAttributeIdAndGroupIdQueryBuilder($alias, $attributeId, $attributeGroupId)
     {
         $queryBuilder = $this->createFindQueryBuilder($alias);
 
-        $queryBuilder
-                ->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_id', $alias), $attributeId))
-                ->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_group_id', $alias), $attributeGroupId))
-                ->setFirstResult(0)
-                ->setMaxResults(1)
+        $this
+            ->andWhere(
+                $queryBuilder,
+                $queryBuilder->expr()->eq(sprintf('%s.attribute_id', $alias), $attributeId),
+                $queryBuilder->expr()->eq(sprintf('%s.attribute_group_id', $alias), $attributeGroupId)
+            )
+            ->setFirstResult(0)
+            ->setMaxResults(1)
         ;
 
         return $queryBuilder;
     }
 
+    /**
+     * @param string $alias
+     * @param int $attributeId
+     * @param int $attributeSetId
+     * @return QueryBuilder
+     */
     public function createFindOneByAttributeIdAndSetIdQueryBuilder($alias, $attributeId, $attributeSetId)
     {
         $queryBuilder = $this->createFindQueryBuilder($alias);
 
-        $queryBuilder
-                ->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_id', $alias), $attributeId))
-                ->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_set_id', $alias), $attributeSetId))
-                ->setFirstResult(0)
-                ->setMaxResults(1)
+        $this
+            ->andWhere(
+                $queryBuilder,
+                $queryBuilder->expr()->eq(sprintf('%s.attribute_id', $alias), $attributeId),
+                $queryBuilder->expr()->eq(sprintf('%s.attribute_set_id', $alias), $attributeSetId)
+            )
+            ->setFirstResult(0)
+            ->setMaxResults(1)
         ;
 
         return $queryBuilder;
@@ -149,7 +173,10 @@ class EntityAttributeQueryBuilder implements EntityAttributeQueryBuilderInterfac
         $queryBuilder = $this->createFindQueryBuilder($alias);
 
         $expr = array_pad([], count($idList), $queryBuilder->expr()->eq(sprintf('%s.entity_attribute_id', $alias), '?'));
-        $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->orX(...$expr)
+        );
 
         return $queryBuilder;
     }
@@ -173,10 +200,13 @@ class EntityAttributeQueryBuilder implements EntityAttributeQueryBuilderInterfac
     {
         $queryBuilder = $this->createDeleteQueryBuilder();
 
-        $queryBuilder
-                ->andWhere($queryBuilder->expr()->eq('entity_attribute_id', '?'))
-                ->setFirstResult(0)
-                ->setMaxResults(1)
+        $this
+            ->andWhere(
+                $queryBuilder,
+                $queryBuilder->expr()->eq('entity_attribute_id', '?')
+            )
+            ->setFirstResult(0)
+            ->setMaxResults(1)
         ;
 
         return $queryBuilder;
@@ -192,7 +222,10 @@ class EntityAttributeQueryBuilder implements EntityAttributeQueryBuilderInterfac
         $queryBuilder = $this->createDeleteQueryBuilder();
 
         $expr = array_pad([], count($idList), $queryBuilder->expr()->eq('entity_attribute_id', '?'));
-        $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->orX(...$expr)
+        );
 
         return $queryBuilder;
     }

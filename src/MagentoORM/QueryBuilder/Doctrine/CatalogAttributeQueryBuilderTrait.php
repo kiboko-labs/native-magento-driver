@@ -8,9 +8,11 @@
 namespace Kiboko\Component\MagentoORM\QueryBuilder\Doctrine;
 
 use Doctrine\DBAL\Query\QueryBuilder;
+use Kiboko\Component\MagentoORM\AndWhereDoctrineFixForPHP7;
 
 trait CatalogAttributeQueryBuilderTrait
 {
+    use AndWhereDoctrineFixForPHP7;
     use AttributeQueryBuilderTrait;
 
     /**
@@ -57,7 +59,10 @@ trait CatalogAttributeQueryBuilderTrait
             $queryBuilder->expr()->eq(sprintf('%s.entity_type_id', $entityAlias), sprintf('%s.entity_type_id', $alias))
         );
 
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.entity_type_code', $entityAlias), '?'));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->eq(sprintf('%s.entity_type_code', $entityAlias), '?')
+        );
 
         return $queryBuilder;
     }
@@ -106,7 +111,10 @@ trait CatalogAttributeQueryBuilderTrait
         $queryBuilder = $this->createFindAllByEntityTypeQueryBuilderWithExtra($alias, $extraAlias, $entityAlias);
 
         $expr = array_pad([], count($codeList), $queryBuilder->expr()->eq(sprintf('%s.attribute_code', $alias), '?'));
-        $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->orX(...$expr)
+        );
 
         return $queryBuilder;
     }
@@ -123,7 +131,10 @@ trait CatalogAttributeQueryBuilderTrait
         $queryBuilder = $this->createFindAllQueryBuilderWithExtra($alias, $extraAlias);
 
         $expr = array_pad([], count($idList), $queryBuilder->expr()->eq(sprintf('%s.attribute_id', $alias), '?'));
-        $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->orX(...$expr)
+        );
 
         return $queryBuilder;
     }

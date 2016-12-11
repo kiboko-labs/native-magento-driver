@@ -9,9 +9,12 @@ namespace Kiboko\Component\MagentoORM\QueryBuilder\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
+use Kiboko\Component\MagentoORM\AndWhereDoctrineFixForPHP7;
 
 class ProductQueryBuilder implements ProductQueryBuilderInterface
 {
+    use AndWhereDoctrineFixForPHP7;
+
     /**
      * @var Connection
      */
@@ -232,7 +235,10 @@ class ProductQueryBuilder implements ProductQueryBuilderInterface
         $queryBuilder = $this->createFindAllQueryBuilder($alias);
 
         $expr = array_pad([], count($identifierList), $queryBuilder->expr()->eq(sprintf('%s.sku', $alias), '?'));
-        $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->orX(...$expr)
+        );
 
         return $queryBuilder;
     }
@@ -248,7 +254,10 @@ class ProductQueryBuilder implements ProductQueryBuilderInterface
         $queryBuilder = $this->createFindAllQueryBuilder($alias);
 
         $expr = array_pad([], count($idList), $queryBuilder->expr()->eq(sprintf('%s.entity_id', $alias), '?'));
-        $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->orX(...$expr)
+        );
 
         return $queryBuilder;
     }
@@ -269,7 +278,10 @@ class ProductQueryBuilder implements ProductQueryBuilderInterface
             )
         );
 
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.attribute_set_id', $familyAlias), '?'));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->eq(sprintf('%s.attribute_set_id', $familyAlias), '?')
+        );
 
         return $queryBuilder;
     }
@@ -288,7 +300,10 @@ class ProductQueryBuilder implements ProductQueryBuilderInterface
             $queryBuilder->expr()->eq(sprintf('%s.product_id', $categoryAlias), sprintf('%s.entity_id', $alias))
         );
 
-        $queryBuilder->andWhere($queryBuilder->expr()->eq(sprintf('%s.category_id', $categoryAlias), '?'));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->eq(sprintf('%s.category_id', $categoryAlias), '?')
+        );
 
         return $queryBuilder;
     }
@@ -318,7 +333,10 @@ class ProductQueryBuilder implements ProductQueryBuilderInterface
         $queryBuilder = $this->createDeleteQueryBuilder();
 
         $expr = array_pad([], count($idList), $queryBuilder->expr()->eq('entity_id', '?'));
-        $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->orX(...$expr)
+        );
 
         return $queryBuilder;
     }
@@ -348,7 +366,10 @@ class ProductQueryBuilder implements ProductQueryBuilderInterface
         $queryBuilder = $this->createDeleteQueryBuilder();
 
         $expr = array_pad([], count($skuList), $queryBuilder->expr()->eq('sku', '?'));
-        $queryBuilder->andWhere($queryBuilder->expr()->orX(...$expr));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->orX(...$expr)
+        );
 
         return $queryBuilder;
     }

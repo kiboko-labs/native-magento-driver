@@ -9,9 +9,11 @@ namespace Kiboko\Component\MagentoORM\QueryBuilder\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
+use Kiboko\Component\MagentoORM\AndWhereDoctrineFixForPHP7;
 
 abstract class AbstractProductAttributeQueryBuilder implements ProductAttributeQueryBuilderInterface
 {
+    use AndWhereDoctrineFixForPHP7;
     use CatalogAttributeQueryBuilderTrait;
 
     /**
@@ -92,7 +94,10 @@ abstract class AbstractProductAttributeQueryBuilder implements ProductAttributeQ
             $queryBuilder->expr()->eq(sprintf('%s.entity_type_id', $familyAlias), sprintf('%s.entity_type_id', $alias))
         );
 
-        $queryBuilder->where($queryBuilder->expr()->eq(sprintf('%s.attribute_set_id', $familyAlias), '?'));
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->eq(sprintf('%s.attribute_set_id', $familyAlias), '?')
+        );
 
         return $queryBuilder;
     }
@@ -111,9 +116,12 @@ abstract class AbstractProductAttributeQueryBuilder implements ProductAttributeQ
         $queryBuilder->innerJoin($alias, $this->familyTable, $familyAlias,
             $queryBuilder->expr()->eq(sprintf('%s.entity_type_id', $familyAlias), sprintf('%s.entity_type_id', $alias))
         );
-        $queryBuilder->where(sprintf('%s.attribute_set_id = ?', $familyAlias))
-            ->andWhere(sprintf('%s.is_required = 1', $alias))
-        ;
+
+        $this->andWhere(
+            $queryBuilder,
+            $queryBuilder->expr()->eq(sprintf('%s.attribute_set_id', $familyAlias), '?'),
+            $queryBuilder->expr()->eq(sprintf('%s.is_required', $alias), $queryBuilder->expr()->literal(1))
+        );
 
         return $queryBuilder;
     }
