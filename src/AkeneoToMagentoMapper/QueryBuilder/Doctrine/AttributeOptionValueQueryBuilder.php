@@ -52,8 +52,9 @@ class AttributeOptionValueQueryBuilder implements AttributeOptionValueQueryBuild
     public static function getDefaultFields()
     {
         return [
-            'option_id',
+            'value_id',
             'option_code',
+            'locale',
         ];
     }
 
