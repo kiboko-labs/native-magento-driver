@@ -51,10 +51,13 @@ class AttributeOptionValueRepository implements AttributeOptionValueRepositoryIn
         $query = $this->queryBuilder->createFindOneByCodeAndLocaleQueryBuilder('p');
 
         $statement = $this->connection->prepare($query);
-        $statement->bindValue(1, $code);
-        $statement->bindValue(2, $locale);
 
-        if (!$statement->execute()) {
+        if (!$statement->execute(
+            [
+                $code,
+                $locale
+            ]
+        )) {
             throw new DatabaseFetchingFailureException();
         }
 
