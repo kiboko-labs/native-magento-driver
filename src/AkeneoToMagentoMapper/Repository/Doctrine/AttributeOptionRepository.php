@@ -47,12 +47,15 @@ class AttributeOptionRepository implements AttributeOptionRepositoryInterface
      */
     public function findOneByCode($code)
     {
-        $query = $this->queryBuilder->createFindOneByCodeQueryBuilder('p');
+        $query = $this->queryBuilder->createFindOneByCodeQueryBuilder('ao');
 
         $statement = $this->connection->prepare($query);
-        $statement->bindValue(1, $code);
 
-        if (!$statement->execute()) {
+        if (!$statement->execute(
+            [
+                $code,
+            ]
+        )) {
             throw new DatabaseFetchingFailureException();
         }
 
@@ -75,7 +78,7 @@ class AttributeOptionRepository implements AttributeOptionRepositoryInterface
      */
     public function findAll()
     {
-        $query = $this->queryBuilder->createFindAllQueryBuilder('p');
+        $query = $this->queryBuilder->createFindAllQueryBuilder('ao');
 
         $statement = $this->connection->prepare($query);
         if (!$statement->execute()) {

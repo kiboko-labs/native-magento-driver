@@ -48,14 +48,14 @@ class AttributeOptionValueRepository implements AttributeOptionValueRepositoryIn
      */
     public function findOneByCodeAndLocale($code, $locale)
     {
-        $query = $this->queryBuilder->createFindOneByCodeAndLocaleQueryBuilder('p');
+        $query = $this->queryBuilder->createFindOneByCodeAndLocaleQueryBuilder('aov');
 
         $statement = $this->connection->prepare($query);
 
         if (!$statement->execute(
             [
                 $code,
-                $locale
+                $locale,
             ]
         )) {
             throw new DatabaseFetchingFailureException();
@@ -80,7 +80,7 @@ class AttributeOptionValueRepository implements AttributeOptionValueRepositoryIn
      */
     public function findAll()
     {
-        $query = $this->queryBuilder->createFindAllQueryBuilder('p');
+        $query = $this->queryBuilder->createFindAllQueryBuilder('aov');
 
         $statement = $this->connection->prepare($query);
         if (!$statement->execute()) {
