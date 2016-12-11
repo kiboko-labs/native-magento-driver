@@ -121,7 +121,7 @@ class AttributeOptionQueryBuilder implements AttributeOptionQueryBuilderInterfac
         $queryBuilder = $this->createFindQueryBuilder($alias);
 
         $queryBuilder
-            ->where($queryBuilder->expr()->eq(sprintf('%s.option_code', $alias), '?'))
+            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.option_code', $alias), '?'))
             ->setFirstResult(0)
             ->setMaxResults(1)
         ;

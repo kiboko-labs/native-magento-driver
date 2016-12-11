@@ -49,7 +49,7 @@ class AttributeOptionValueQueryBuilder implements AttributeOptionValueQueryBuild
     public static function getDefaultFields()
     {
         return [
-            'value_id',
+            'option_id',
             'option_code',
         ];
     }
@@ -121,7 +121,7 @@ class AttributeOptionValueQueryBuilder implements AttributeOptionValueQueryBuild
         $queryBuilder = $this->createFindQueryBuilder($alias);
 
         $queryBuilder
-            ->where($queryBuilder->expr()->eq(sprintf('%s.option_code', $alias), '?'))
+            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.option_code', $alias), '?'))
             ->andWhere($queryBuilder->expr()->eq(sprintf('%s.locale', $alias), '?'))
             ->setFirstResult(0)
             ->setMaxResults(1)
