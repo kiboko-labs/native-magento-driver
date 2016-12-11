@@ -121,7 +121,7 @@ class AttributeOptionValueQueryBuilder implements AttributeOptionValueQueryBuild
         $queryBuilder = $this->createFindQueryBuilder($alias);
 
         $queryBuilder
-            ->andWhere($queryBuilder->expr()->eq(sprintf('%s.option_code', $alias), '?'))
+            ->where($queryBuilder->expr()->eq(sprintf('%s.option_code', $alias), '?'))
             ->andWhere($queryBuilder->expr()->eq(sprintf('%s.locale', $alias), '?'))
             ->setFirstResult(0)
             ->setMaxResults(1)
