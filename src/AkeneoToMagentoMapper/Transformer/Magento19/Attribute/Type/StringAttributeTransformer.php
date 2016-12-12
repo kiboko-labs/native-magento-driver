@@ -36,6 +36,7 @@ class StringAttributeTransformer implements AttributeTransformerInterface
         AttributeMapperInterface $attributeMapper,
         EntityTypeMapperInterface $entityTypeMapper
     ) {
+        $this->attributeMapper = $attributeMapper;
         $this->entityTypeMapper = $entityTypeMapper;
     }
 

@@ -36,6 +36,7 @@ class DecimalAttributeTransformer implements AttributeTransformerInterface
         AttributeMapperInterface $attributeMapper,
         EntityTypeMapperInterface $entityTypeMapper
     ) {
+        $this->attributeMapper = $attributeMapper;
         $this->entityTypeMapper = $entityTypeMapper;
     }
 

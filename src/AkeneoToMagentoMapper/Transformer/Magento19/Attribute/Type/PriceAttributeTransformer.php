@@ -69,6 +69,8 @@ class PriceAttributeTransformer implements AttributeTransformerInterface
                 null                                       // note
             ),
             new CatalogAttributeExtension(
+                $attributeId,
+                ''
             )
         );
     }

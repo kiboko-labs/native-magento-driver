@@ -7,7 +7,7 @@
 
 namespace Kiboko\Component\AkeneoToMagentoMapper\Transformer;
 
-use Kiboko\Component\MagentoORM\Model\CatalogAttributeInterface as KibokoAttributeInterface;
+use Kiboko\Component\MagentoORM\Model\AttributeInterface as KibokoAttributeInterface;
 use Pim\Component\Catalog\Model\AttributeInterface as PimAttributeInterface;
 
 interface AttributeTransformerInterface

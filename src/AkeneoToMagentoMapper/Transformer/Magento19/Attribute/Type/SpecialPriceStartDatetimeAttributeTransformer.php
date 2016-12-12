@@ -43,6 +43,7 @@ class SpecialPriceStartDatetimeAttributeTransformer implements AttributeTransfor
         EntityTypeMapperInterface $entityTypeMapper,
         array $supportedAttributeCodes = null
     ) {
+        $this->attributeMapper = $attributeMapper;
         $this->entityTypeMapper = $entityTypeMapper;
 
         if ($supportedAttributeCodes === null) {

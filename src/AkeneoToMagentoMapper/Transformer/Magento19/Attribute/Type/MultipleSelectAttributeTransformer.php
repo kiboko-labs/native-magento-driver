@@ -36,6 +36,7 @@ class MultipleSelectAttributeTransformer implements AttributeTransformerInterfac
         AttributeMapperInterface $attributeMapper,
         EntityTypeMapperInterface $entityTypeMapper
     ) {
+        $this->attributeMapper = $attributeMapper;
         $this->entityTypeMapper = $entityTypeMapper;
     }
 

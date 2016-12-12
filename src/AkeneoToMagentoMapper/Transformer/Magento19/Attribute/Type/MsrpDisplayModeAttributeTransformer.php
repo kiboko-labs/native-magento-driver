@@ -43,6 +43,7 @@ class MsrpDisplayModeAttributeTransformer implements AttributeTransformerInterfa
         EntityTypeMapperInterface $entityTypeMapper,
         array $supportedAttributeCodes = null
     ) {
+        $this->attributeMapper = $attributeMapper;
         $this->entityTypeMapper = $entityTypeMapper;
 
         if ($supportedAttributeCodes === null) {
