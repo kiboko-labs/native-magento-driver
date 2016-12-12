@@ -7,7 +7,7 @@
 
 namespace Kiboko\Component\MagentoORM\Model;
 
-class Store
+class Store implements StoreInterface
 {
     use MappableTrait;
     use IdentifiableTrait;
@@ -25,8 +25,8 @@ class Store
     /**
      * Store constructor.
      *
-     * @param int    $identifier
-     * @param string $code
+     * @param int    $code
+     * @param string $name
      */
     public function __construct($code, $name)
     {

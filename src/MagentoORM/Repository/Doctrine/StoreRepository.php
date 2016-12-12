@@ -55,7 +55,7 @@ class StoreRepository implements StoreRepositoryInterface
      */
     public function findOneById($identifier)
     {
-        $query = $this->queryBuilder->createFindOneByIdQueryBuilder('f');
+        $query = $this->queryBuilder->createFindOneByIdQueryBuilder('s');
 
         $statement = $this->connection->prepare($query);
         if (!$statement->execute([$identifier])) {
@@ -78,7 +78,7 @@ class StoreRepository implements StoreRepositoryInterface
      */
     public function findOneByCode($code)
     {
-        $query = $this->queryBuilder->createFindOneByCodeQueryBuilder('f');
+        $query = $this->queryBuilder->createFindOneByCodeQueryBuilder('s');
 
         $statement = $this->connection->prepare($query);
         if (!$statement->execute([$code])) {
@@ -99,7 +99,7 @@ class StoreRepository implements StoreRepositoryInterface
      */
     public function findAll()
     {
-        $query = $this->queryBuilder->createFindOneByCodeQueryBuilder('f');
+        $query = $this->queryBuilder->createFindOneByCodeQueryBuilder('s');
 
         $statement = $this->connection->prepare($query);
         if (!$statement->execute()) {
