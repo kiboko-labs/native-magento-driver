@@ -55,8 +55,10 @@ class CatalogAttributePersister implements CatalogAttributePersisterInterface
      */
     public function flush()
     {
-        $this->standardAttributePersister->flush();
-        $this->catalogAttributeExtensionPersister->flush();
+        foreach ($this->standardAttributePersister->flush() as $item) {
+            yield $item;
+        }
+        iterator_count($this->catalogAttributeExtensionPersister->flush());
     }
 
     /**
