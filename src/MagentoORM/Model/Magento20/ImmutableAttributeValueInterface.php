@@ -5,7 +5,7 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace Kiboko\Component\MagentoORM\Model\Magento20;
+namespace Kiboko\Component\MagentoORM\Model\V2_0ce;
 
 interface ImmutableAttributeValueInterface extends AttributeValueInterface
 {

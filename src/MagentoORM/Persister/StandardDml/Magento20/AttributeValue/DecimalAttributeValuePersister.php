@@ -5,11 +5,11 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace Kiboko\Component\MagentoORM\Persister\StandardDml\Magento20\AttributeValue;
+namespace Kiboko\Component\MagentoORM\Persister\StandardDml\V2_0ce\AttributeValue;
 
 use Doctrine\DBAL\Connection;
 use Kiboko\Component\MagentoORM\Model\AttributeValueInterface as BaseAttributeValueInterface;
-use Kiboko\Component\MagentoORM\Model\Magento20\AttributeValueInterface;
+use Kiboko\Component\MagentoORM\Model\V2_0ce\AttributeValueInterface;
 use Kiboko\Component\MagentoORM\Model\DecimalAttributeValueInterface;
 use Kiboko\Component\MagentoORM\Persister\AttributeValuePersisterInterface;
 use Kiboko\Component\MagentoORM\Exception\InvalidAttributePersisterTypeException;

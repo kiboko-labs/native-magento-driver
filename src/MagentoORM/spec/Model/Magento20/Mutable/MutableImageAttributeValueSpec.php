@@ -5,7 +5,7 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace spec\Kiboko\Component\MagentoORM\Model\Magento20\Mutable;
+namespace spec\Kiboko\Component\MagentoORM\Model\V2_0ce\Mutable;
 
 use League\Flysystem\Adapter\NullAdapter;
 use League\Flysystem\File;
@@ -30,7 +30,7 @@ class MutableImageAttributeValueSpec extends ObjectBehavior
     public function it_is_an_MutableAttributeValueInterface(AttributeInterface $attribute, File $file)
     {
         $this->beConstructedWith($attribute, $file);
-        $this->shouldImplement('Kiboko\Component\MagentoORM\Model\Magento20\MutableAttributeValueInterface');
+        $this->shouldImplement('Kiboko\Component\MagentoORM\Model\V2_0ce\MutableAttributeValueInterface');
     }
 
     public function it_should_contain_flysystem_file_value(AttributeInterface $attribute,  File $file)

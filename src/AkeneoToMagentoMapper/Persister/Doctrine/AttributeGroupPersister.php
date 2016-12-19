@@ -23,6 +23,11 @@ class AttributeGroupPersister implements AttributeGroupPersisterInterface
     private $tableName;
 
     /**
+     * @var string
+     */
+    private $instanceIdentifier;
+
+    /**
      * @var array
      */
     private $unitOfWork;
@@ -32,28 +37,59 @@ class AttributeGroupPersister implements AttributeGroupPersisterInterface
      *
      * @param Connection $connection
      * @param string     $tableName
+     * @param string     $instanceIdentifier
      */
     public function __construct(
         Connection $connection,
-        $tableName
+        $tableName,
+        $instanceIdentifier = null
     ) {
         $this->connection = $connection;
         $this->tableName = $tableName;
+        $this->instanceIdentifier = $instanceIdentifier;
         $this->unitOfWork = [];
     }
 
     /**
-     * @param string $groupCode
-     * @param string $familyCode
-     * @param int    $identifier
+     * @param string     $groupCode
+     * @param string     $familyCode
+     * @param int        $identifier
+     * @param string     $mappingClass
+     * @param array|null $mappingOptions
      */
-    public function persist($groupCode, $familyCode, $identifier)
+    public function persist($groupCode, $familyCode, $identifier, $mappingClass = null, array $mappingOptions = null)
     {
-        $this->unitOfWork[] = [
-            'attribute_group_id' => $identifier,
-            'attribute_group_code' => $groupCode,
-            'family_code' => $familyCode,
-        ];
+        $this->unitOfWork[] = $this->buildRow(
+            [
+                'attribute_group_id' => $identifier,
+                'attribute_group_code' => $groupCode,
+                'family_code' => $familyCode,
+            ],
+            $mappingClass,
+            $mappingOptions
+        );
+    }
+
+    /**
+     * @param array      $data
+     * @param string     $mappingClass
+     * @param array|null $mappingOptions
+     *
+     * @return array
+     */
+    private function buildRow(array $data, $mappingClass = null, array $mappingOptions = null)
+    {
+        if ($this->instanceIdentifier !== null) {
+            $data['instance_identifier'] = $this->instanceIdentifier;
+        }
+        if ($mappingClass !== null) {
+            $data['mapping_class'] = $mappingClass;
+        }
+        if ($mappingOptions !== null) {
+            $data['mapping_class'] = json_encode($mappingOptions, JSON_OBJECT_AS_ARRAY);
+        }
+
+        return $data;
     }
 
     public function flush()

@@ -5,12 +5,12 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace Kiboko\Component\MagentoSerializer\Denormalization\Magento19;
+namespace Kiboko\Component\MagentoSerializer\Denormalization\V1_9ce;
 
 use Kiboko\Component\MagentoORM\Model\Attribute;
 use Kiboko\Component\MagentoORM\Model\AttributeInterface;
-use Kiboko\Component\MagentoORM\Model\Magento19\CatalogAttribute;
-use Kiboko\Component\MagentoORM\Model\Magento19\CatalogAttributeExtension;
+use Kiboko\Component\MagentoORM\Model\V1_9ce\CatalogAttribute;
+use Kiboko\Component\MagentoORM\Model\V1_9ce\CatalogAttributeExtension;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 class TextareaAttributeTypeDenormalizer implements DenormalizerInterface

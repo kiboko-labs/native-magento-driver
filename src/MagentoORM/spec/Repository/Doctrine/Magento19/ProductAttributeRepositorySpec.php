@@ -5,12 +5,12 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace spec\Kiboko\Component\MagentoORM\Repository\Magento19\Doctrine;
+namespace spec\Kiboko\Component\MagentoORM\Repository\V1_9ce\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Kiboko\Component\MagentoORM\Factory\ProductAttributeValueFactoryInterface;
 use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\ProductAttributeQueryBuilderInterface;
-use Kiboko\Component\MagentoORM\Repository\Magento19\Doctrine\ProductAttributeRepository;
+use Kiboko\Component\MagentoORM\Repository\V1_9ce\Doctrine\ProductAttributeRepository;
 use PhpSpec\ObjectBehavior;
 
 class ProductAttributeRepositorySpec extends ObjectBehavior

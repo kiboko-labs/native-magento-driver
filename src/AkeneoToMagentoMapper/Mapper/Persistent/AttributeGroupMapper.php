@@ -8,11 +8,15 @@
 namespace Kiboko\Component\AkeneoToMagentoMapper\Mapper\Persistent;
 
 use Kiboko\Component\AkeneoToMagentoMapper\Mapper\AttributeGroupMapperInterface;
+use Kiboko\Component\AkeneoToMagentoMapper\Mapper\IdentifiableInterface;
+use Kiboko\Component\AkeneoToMagentoMapper\Mapper\IdentifiableTrait;
 use Kiboko\Component\AkeneoToMagentoMapper\Persister\AttributeGroupPersisterInterface;
 use Kiboko\Component\AkeneoToMagentoMapper\Repository\AttributeGroupRepositoryInterface;
 
-class AttributeGroupMapper implements AttributeGroupMapperInterface
+class AttributeGroupMapper implements AttributeGroupMapperInterface, IdentifiableInterface
 {
+    use IdentifiableTrait;
+
     /**
      * @var AttributeGroupRepositoryInterface
      */

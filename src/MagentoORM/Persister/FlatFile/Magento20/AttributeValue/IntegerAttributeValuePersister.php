@@ -5,10 +5,10 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace Kiboko\Component\MagentoORM\Persister\FlatFile\Magento20\AttributeValue;
+namespace Kiboko\Component\MagentoORM\Persister\FlatFile\V2_0ce\AttributeValue;
 
 use Kiboko\Component\MagentoORM\Model\AttributeValueInterface as BaseAttributeValueInterface;
-use Kiboko\Component\MagentoORM\Model\Magento20\AttributeValueInterface;
+use Kiboko\Component\MagentoORM\Model\V2_0ce\AttributeValueInterface;
 use Kiboko\Component\MagentoORM\Model\IntegerAttributeValueInterface;
 use Kiboko\Component\MagentoORM\Persister\AttributeValuePersisterInterface;
 use Kiboko\Component\MagentoORM\Exception\InvalidAttributePersisterTypeException;

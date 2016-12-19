@@ -5,9 +5,9 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace Kiboko\Component\MagentoORM\Persister\Magento20;
+namespace Kiboko\Component\MagentoORM\Persister\V2_0ce;
 
-use Kiboko\Component\MagentoORM\Model\Magento20\CatalogAttributeInterface;
+use Kiboko\Component\MagentoORM\Model\V2_0ce\CatalogAttributeInterface;
 use Kiboko\Component\MagentoORM\Persister\AttributePersisterInterface;
 use Kiboko\Component\MagentoORM\Persister\CatalogAttributeExtensionPersisterInterface;
 

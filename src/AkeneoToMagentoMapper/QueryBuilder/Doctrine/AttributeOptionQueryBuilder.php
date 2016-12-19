@@ -54,6 +54,10 @@ class AttributeOptionQueryBuilder implements AttributeOptionQueryBuilderInterfac
         return [
             'option_id',
             'option_code',
+
+            'instance_identifier',
+            'mapping_class',
+            'mapping_options',
         ];
     }
 

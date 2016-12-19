@@ -5,10 +5,10 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace Kiboko\Component\AkeneoToMagentoMapper\Transformer\Magento19\Attribute;
+namespace Kiboko\Component\AkeneoToMagentoMapper\Transformer\V1_9ce\Attribute;
 
 use Kiboko\Component\MagentoORM\Model\CatalogAttributeExtensionInterface as KibokoCatalogAttributeExtensionInterface;
-use Kiboko\Component\MagentoORM\Model\Magento19\CatalogAttributeExtension;
+use Kiboko\Component\MagentoORM\Model\V1_9ce\CatalogAttributeExtension;
 use Kiboko\Component\AkeneoToMagentoMapper\Transformer\Attribute\AbstractCatalogAttributeExtensionsTransformer;
 use Pim\Component\Catalog\Model\AttributeInterface as PimAttributeInterface;
 

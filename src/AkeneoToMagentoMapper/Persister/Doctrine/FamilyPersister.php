@@ -17,29 +17,77 @@ class FamilyPersister implements FamilyPersisterInterface
      */
     private $connection;
 
+    /**
+     * @var string
+     */
     private $tableName;
 
+    /**
+     * @var string
+     */
+    private $instanceIdentifier;
+
+    /**
+     * @var array
+     */
     private $unitOfWork;
 
+    /**
+     * AttributeGroupPersister constructor.
+     *
+     * @param Connection $connection
+     * @param string     $tableName
+     * @param string     $instanceIdentifier
+     */
     public function __construct(
         Connection $connection,
-        $tableName
+        $tableName,
+        $instanceIdentifier = null
     ) {
         $this->connection = $connection;
         $this->tableName = $tableName;
+        $this->instanceIdentifier = $instanceIdentifier;
         $this->unitOfWork = [];
     }
 
     /**
-     * @param string $code
-     * @param int    $identifier
+     * @param string     $code
+     * @param int        $identifier
+     * @param string     $mappingClass
+     * @param array|null $mappingOptions
      */
-    public function persist($code, $identifier)
+    public function persist($code, $identifier, $mappingClass = null, array $mappingOptions = null)
     {
-        $this->unitOfWork[] = [
-            'attribute_set_id' => $identifier,
-            'family_code' => $code,
-        ];
+        $this->unitOfWork[] = $this->buildRow(
+            [
+                'attribute_set_id' => $identifier,
+                'family_code' => $code,
+            ],
+            $mappingClass,
+            $mappingOptions
+        );
+    }
+
+    /**
+     * @param array      $data
+     * @param string     $mappingClass
+     * @param array|null $mappingOptions
+     *
+     * @return array
+     */
+    private function buildRow(array $data, $mappingClass = null, array $mappingOptions = null)
+    {
+        if ($this->instanceIdentifier !== null) {
+            $data['instance_identifier'] = $this->instanceIdentifier;
+        }
+        if ($mappingClass !== null) {
+            $data['mapping_class'] = $mappingClass;
+        }
+        if ($mappingOptions !== null) {
+            $data['mapping_class'] = json_encode($mappingOptions, JSON_OBJECT_AS_ARRAY);
+        }
+
+        return $data;
     }
 
     public function flush()

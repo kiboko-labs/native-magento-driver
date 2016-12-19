@@ -5,10 +5,10 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace unit\Kiboko\Component\MagentoORM\Repository\Magento19\Doctrine;
+namespace unit\Kiboko\Component\MagentoORM\Repository\V1_9ce\Doctrine;
 
 use Doctrine\DBAL\Schema\Schema;
-use Kiboko\Component\MagentoORM\Factory\Magento19\AttributeGroupFactory;
+use Kiboko\Component\MagentoORM\Factory\V1_9ce\AttributeGroupFactory;
 use Kiboko\Component\MagentoORM\Model\AttributeGroupInterface;
 use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\AttributeGroupQueryBuilder;
 use Kiboko\Component\MagentoORM\Repository\Doctrine\AttributeGroupRepository;

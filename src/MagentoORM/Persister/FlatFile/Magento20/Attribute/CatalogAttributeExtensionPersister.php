@@ -5,11 +5,11 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace Kiboko\Component\MagentoORM\Persister\FlatFile\Magento20\Attribute;
+namespace Kiboko\Component\MagentoORM\Persister\FlatFile\V2_0ce\Attribute;
 
 use Kiboko\Component\MagentoORM\Exception\InvalidArgumentException;
 use Kiboko\Component\MagentoORM\Model\CatalogAttributeExtensionInterface as BaseCatalogAttributeExtensionInterface;
-use Kiboko\Component\MagentoORM\Model\Magento20\CatalogAttributeExtensionInterface;
+use Kiboko\Component\MagentoORM\Model\V2_0ce\CatalogAttributeExtensionInterface;
 use Kiboko\Component\MagentoORM\Persister\CatalogAttributeExtensionPersisterInterface;
 use Kiboko\Component\MagentoORM\Persister\FlatFile\Attribute\CatalogAttributeExtensionPersisterTrait;
 

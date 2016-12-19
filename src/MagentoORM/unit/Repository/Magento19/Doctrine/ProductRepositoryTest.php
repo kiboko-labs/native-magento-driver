@@ -5,7 +5,7 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace unit\Kiboko\Component\MagentoORM\Repository\Magento19\Doctrine;
+namespace unit\Kiboko\Component\MagentoORM\Repository\V1_9ce\Doctrine;
 
 use Doctrine\DBAL\Schema\Schema;
 use Kiboko\Component\MagentoORM\Broker\ProductFactoryBroker;

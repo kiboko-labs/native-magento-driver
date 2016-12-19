@@ -5,11 +5,11 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace Kiboko\Component\MagentoORM\Persister\StandardDml\Magento20\Attribute;
+namespace Kiboko\Component\MagentoORM\Persister\StandardDml\V2_0ce\Attribute;
 
 use Kiboko\Component\MagentoORM\Exception\InvalidArgumentException;
 use Kiboko\Component\MagentoORM\Model\AttributeGroupInterface as BaseAttributeGroupInterface;
-use Kiboko\Component\MagentoORM\Model\Magento20\AttributeGroupInterface;
+use Kiboko\Component\MagentoORM\Model\V2_0ce\AttributeGroupInterface;
 use Kiboko\Component\MagentoORM\Persister\AttributeGroupPersisterInterface;
 use Kiboko\Component\MagentoORM\Persister\StandardDml\Attribute\AttributeGroupPersisterTrait;
 

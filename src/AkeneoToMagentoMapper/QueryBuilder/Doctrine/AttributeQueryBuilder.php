@@ -54,6 +54,10 @@ class AttributeQueryBuilder implements AttributeQueryBuilderInterface
         return [
             'attribute_id',
             'attribute_code',
+
+            'instance_identifier',
+            'mapping_class',
+            'mapping_options',
         ];
     }
 

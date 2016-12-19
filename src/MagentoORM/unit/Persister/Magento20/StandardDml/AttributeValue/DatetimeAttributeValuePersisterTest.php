@@ -5,14 +5,14 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace unit\Kiboko\Component\MagentoORM\Persister\Magento20\StandardDml\AttributeValue;
+namespace unit\Kiboko\Component\MagentoORM\Persister\V2_0ce\StandardDml\AttributeValue;
 
 use Doctrine\DBAL\Schema\Schema;
 use Kiboko\Component\MagentoORM\Entity\Product\ProductInterface;
 use Kiboko\Component\MagentoORM\Model\AttributeInterface;
-use Kiboko\Component\MagentoORM\Model\Magento20\Immutable\ImmutableDatetimeAttributeValue;
+use Kiboko\Component\MagentoORM\Model\V2_0ce\Immutable\ImmutableDatetimeAttributeValue;
 use Kiboko\Component\MagentoORM\Persister\AttributeValuePersisterInterface;
-use Kiboko\Component\MagentoORM\Persister\StandardDml\Magento20\AttributeValue\DatetimeAttributeValuePersister;
+use Kiboko\Component\MagentoORM\Persister\StandardDml\V2_0ce\AttributeValue\DatetimeAttributeValuePersister;
 use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\ProductAttributeValueQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoORM\SchemaBuilder\DoctrineSchemaBuilder;

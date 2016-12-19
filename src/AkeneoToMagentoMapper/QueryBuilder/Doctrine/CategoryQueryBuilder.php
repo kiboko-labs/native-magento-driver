@@ -54,6 +54,10 @@ class CategoryQueryBuilder implements AttributeQueryBuilderInterface
         return [
             'category_id',
             'category_code',
+
+            'instance_identifier',
+            'mapping_class',
+            'mapping_options',
         ];
     }
 

@@ -5,18 +5,18 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace unit\Kiboko\Component\MagentoORM\Repository\Magento19\Doctrine;
+namespace unit\Kiboko\Component\MagentoORM\Repository\V1_9ce\Doctrine;
 
 use Doctrine\DBAL\Schema\Schema;
 use Kiboko\Component\MagentoORM\Factory\AttributeFactory;
-use Kiboko\Component\MagentoORM\Factory\Magento19\ProductAttributeFactory;
-use Kiboko\Component\MagentoORM\Factory\Magento19\CatalogAttributeExtensionsFactory;
+use Kiboko\Component\MagentoORM\Factory\V1_9ce\ProductAttributeFactory;
+use Kiboko\Component\MagentoORM\Factory\V1_9ce\CatalogAttributeExtensionsFactory;
 use Kiboko\Component\MagentoORM\Entity\Product\SimpleProduct;
 use Kiboko\Component\MagentoORM\Entity\Product\ConfigurableProduct;
 use Kiboko\Component\MagentoORM\Model\AttributeInterface;
 use Kiboko\Component\MagentoORM\Model\Family;
-use Kiboko\Component\MagentoORM\Model\Magento19\CatalogAttributeExtensionInterface;
-use Kiboko\Component\MagentoORM\QueryBuilder\Magento19\Doctrine\ProductAttributeQueryBuilder;
+use Kiboko\Component\MagentoORM\Model\V1_9ce\CatalogAttributeExtensionInterface;
+use Kiboko\Component\MagentoORM\QueryBuilder\V1_9ce\Doctrine\ProductAttributeQueryBuilder;
 use Kiboko\Component\MagentoORM\Repository\Doctrine\ProductAttributeRepository;
 use Kiboko\Component\MagentoORM\Repository\ProductAttributeRepositoryInterface;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;

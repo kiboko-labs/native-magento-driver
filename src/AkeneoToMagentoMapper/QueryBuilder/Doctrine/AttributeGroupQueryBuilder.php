@@ -55,6 +55,10 @@ class AttributeGroupQueryBuilder implements AttributeGroupQueryBuilderInterface
             'attribute_group_id',
             'attribute_group_code',
             'family_code',
+
+            'instance_identifier',
+            'mapping_class',
+            'mapping_options',
         ];
     }
 

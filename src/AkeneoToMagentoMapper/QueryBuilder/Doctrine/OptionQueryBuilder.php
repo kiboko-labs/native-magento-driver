@@ -55,6 +55,10 @@ class OptionQueryBuilder implements OptionQueryBuilderInterface
             'option_id',
             'attribute_id',
             'option_code',
+
+            'instance_identifier',
+            'mapping_class',
+            'mapping_options',
         ];
     }
 

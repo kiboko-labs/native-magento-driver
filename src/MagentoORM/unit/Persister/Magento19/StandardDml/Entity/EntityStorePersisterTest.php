@@ -1,6 +1,6 @@
 <?php
 
-namespace unit\Kiboko\Component\MagentoORM\Persister\Magento19\StandardDml\Entity;
+namespace unit\Kiboko\Component\MagentoORM\Persister\V1_9ce\StandardDml\Entity;
 
 use Doctrine\DBAL\Schema\Schema;
 use Kiboko\Component\MagentoORM\Model\EntityStore;

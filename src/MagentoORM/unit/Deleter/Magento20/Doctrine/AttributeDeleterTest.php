@@ -5,7 +5,7 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace unit\Kiboko\Component\MagentoORM\Deleter\Magento20\Doctrine;
+namespace unit\Kiboko\Component\MagentoORM\Deleter\V2_0ce\Doctrine;
 
 use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\AttributeQueryBuilder;
 use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\AttributeQueryBuilderInterface;

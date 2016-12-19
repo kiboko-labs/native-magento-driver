@@ -5,7 +5,7 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace unit\Kiboko\Component\MagentoORM\Persister\Magento20\StandardDml\Entity;
+namespace unit\Kiboko\Component\MagentoORM\Persister\V2_0ce\StandardDml\Entity;
 
 use Doctrine\DBAL\Schema\Schema;
 use Kiboko\Component\MagentoORM\Model\EntityStore;

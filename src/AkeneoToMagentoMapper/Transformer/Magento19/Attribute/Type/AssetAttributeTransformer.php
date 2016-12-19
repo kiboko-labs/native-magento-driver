@@ -5,13 +5,13 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace Kiboko\Component\AkeneoToMagentoMapper\Transformer\Magento19\Attribute\Type;
+namespace Kiboko\Component\AkeneoToMagentoMapper\Transformer\V1_9ce\Attribute\Type;
 
 use Kiboko\Component\AkeneoToMagentoMapper\Mapper\AttributeMapperInterface;
 use Kiboko\Component\MagentoORM\Model\Attribute;
 use Kiboko\Component\MagentoORM\Model\AttributeInterface as KibokoAttributeInterface;
-use Kiboko\Component\MagentoORM\Model\Magento19\CatalogAttribute;
-use Kiboko\Component\MagentoORM\Model\Magento19\CatalogAttributeExtension;
+use Kiboko\Component\MagentoORM\Model\V1_9ce\CatalogAttribute;
+use Kiboko\Component\MagentoORM\Model\V1_9ce\CatalogAttributeExtension;
 use Kiboko\Component\AkeneoToMagentoMapper\Mapper\EntityTypeMapperInterface;
 use Kiboko\Component\AkeneoToMagentoMapper\Transformer\AttributeTransformerInterface;
 use Pim\Component\Catalog\Model\AttributeInterface as PimAttributeInterface;

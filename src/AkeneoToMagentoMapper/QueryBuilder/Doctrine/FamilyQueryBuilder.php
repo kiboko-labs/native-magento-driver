@@ -54,6 +54,10 @@ class FamilyQueryBuilder implements FamilyQueryBuilderInterface
         return [
             'attribute_set_id',
             'family_code',
+
+            'instance_identifier',
+            'mapping_class',
+            'mapping_options',
         ];
     }
 

@@ -5,14 +5,14 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace unit\Kiboko\Component\MagentoORM\Persister\Magento19\StandardDml\AttributeValue;
+namespace unit\Kiboko\Component\MagentoORM\Persister\V1_9ce\StandardDml\AttributeValue;
 
 use Doctrine\DBAL\Schema\Schema;
 use Kiboko\Component\MagentoORM\Entity\Product\ProductInterface;
 use Kiboko\Component\MagentoORM\Model\AttributeInterface;
-use Kiboko\Component\MagentoORM\Model\Magento19\Immutable\ImmutableIntegerAttributeValue;
+use Kiboko\Component\MagentoORM\Model\V1_9ce\Immutable\ImmutableIntegerAttributeValue;
 use Kiboko\Component\MagentoORM\Persister\AttributeValuePersisterInterface;
-use Kiboko\Component\MagentoORM\Persister\StandardDml\Magento19\AttributeValue\IntegerAttributeValuePersister;
+use Kiboko\Component\MagentoORM\Persister\StandardDml\V1_9ce\AttributeValue\IntegerAttributeValuePersister;
 use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\ProductAttributeValueQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoORM\SchemaBuilder\DoctrineSchemaBuilder;

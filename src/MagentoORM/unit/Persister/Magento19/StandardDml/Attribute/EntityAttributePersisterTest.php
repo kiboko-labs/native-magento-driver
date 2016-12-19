@@ -5,7 +5,7 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace unit\Kiboko\Component\MagentoORM\Persister\Magento19\StandardDml\Attribute;
+namespace unit\Kiboko\Component\MagentoORM\Persister\V1_9ce\StandardDml\Attribute;
 
 use Doctrine\DBAL\Schema\Schema;
 use Kiboko\Component\MagentoORM\Model\EntityAttribute;

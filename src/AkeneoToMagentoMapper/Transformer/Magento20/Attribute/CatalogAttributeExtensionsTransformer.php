@@ -5,7 +5,7 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace Kiboko\Component\AkeneoToMagentoMapper\Transformer\Magento20\Attribute;
+namespace Kiboko\Component\AkeneoToMagentoMapper\Transformer\V2_0ce\Attribute;
 
 use Kiboko\Component\MagentoORM\Model\CatalogAttributeExtensionInterface as KibokoCatalogAttributeExtensionInterface;
 use Kiboko\Component\AkeneoToMagentoMapper\Transformer\Attribute\AbstractCatalogAttributeExtensionsTransformer;

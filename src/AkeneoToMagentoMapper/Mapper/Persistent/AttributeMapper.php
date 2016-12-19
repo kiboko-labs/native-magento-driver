@@ -8,11 +8,15 @@
 namespace Kiboko\Component\AkeneoToMagentoMapper\Mapper\Persistent;
 
 use Kiboko\Component\AkeneoToMagentoMapper\Mapper\AttributeMapperInterface;
+use Kiboko\Component\AkeneoToMagentoMapper\Mapper\IdentifiableInterface;
+use Kiboko\Component\AkeneoToMagentoMapper\Mapper\IdentifiableTrait;
 use Kiboko\Component\AkeneoToMagentoMapper\Persister\AttributePersisterInterface;
 use Kiboko\Component\AkeneoToMagentoMapper\Repository\AttributeRepositoryInterface;
 
-class AttributeMapper implements AttributeMapperInterface
+class AttributeMapper implements AttributeMapperInterface, IdentifiableInterface
 {
+    use IdentifiableTrait;
+
     /**
      * @var AttributeRepositoryInterface
      */

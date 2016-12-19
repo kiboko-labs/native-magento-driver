@@ -5,10 +5,10 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace Kiboko\Component\AkeneoToMagentoMapper\Transformer\Magento19\Attribute;
+namespace Kiboko\Component\AkeneoToMagentoMapper\Transformer\V1_9ce\Attribute;
 
 use Kiboko\Component\MagentoORM\Model\AttributeGroupInterface as KibokoAttributeGroupInterface;
-use Kiboko\Component\MagentoORM\Model\Magento19\AttributeGroup;
+use Kiboko\Component\MagentoORM\Model\V1_9ce\AttributeGroup;
 use Kiboko\Component\AkeneoToMagentoMapper\Transformer\Attribute\AbstractAttributeGroupTransformer;
 use Pim\Component\Catalog\Model\AttributeGroupInterface as PimAttributeGroupInterface;
 use Pim\Component\Catalog\Model\FamilyInterface;

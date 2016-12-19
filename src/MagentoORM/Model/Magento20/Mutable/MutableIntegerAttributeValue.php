@@ -5,16 +5,16 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace Kiboko\Component\MagentoORM\Model\Magento20\Mutable;
+namespace Kiboko\Component\MagentoORM\Model\V2_0ce\Mutable;
 
 use Kiboko\Component\MagentoORM\Entity\Product\ProductInterface;
 use Kiboko\Component\MagentoORM\Model\AttributeInterface;
 use Kiboko\Component\MagentoORM\Model\AttributeValueInterface;
 use Kiboko\Component\MagentoORM\Model\IntegerAttributeValueInterface;
 use Kiboko\Component\MagentoORM\Model\IntegerAttributeValueTrait;
-use Kiboko\Component\MagentoORM\Model\Magento20\ImmutableAttributeValueInterface;
-use Kiboko\Component\MagentoORM\Model\Magento20\Immutable\ImmutableIntegerAttributeValue;
-use Kiboko\Component\MagentoORM\Model\Magento20\MutableAttributeValueInterface;
+use Kiboko\Component\MagentoORM\Model\V2_0ce\ImmutableAttributeValueInterface;
+use Kiboko\Component\MagentoORM\Model\V2_0ce\Immutable\ImmutableIntegerAttributeValue;
+use Kiboko\Component\MagentoORM\Model\V2_0ce\MutableAttributeValueInterface;
 use Kiboko\Component\MagentoORM\Model\ScopableAttributeValueInterface;
 
 class MutableIntegerAttributeValue implements MutableAttributeValueInterface, ScopableAttributeValueInterface, IntegerAttributeValueInterface

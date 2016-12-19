@@ -5,7 +5,7 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace Kiboko\Component\MagentoORM\QueryBuilder\Magento20\Doctrine;
+namespace Kiboko\Component\MagentoORM\QueryBuilder\V2_0ce\Doctrine;
 
 use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\AbstractProductAttributeQueryBuilder;
 use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\AttributeQueryBuilder;

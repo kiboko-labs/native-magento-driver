@@ -8,11 +8,15 @@
 namespace Kiboko\Component\AkeneoToMagentoMapper\Mapper\Persistent;
 
 use Kiboko\Component\AkeneoToMagentoMapper\Mapper\AttributeOptionValueMapperInterface;
+use Kiboko\Component\AkeneoToMagentoMapper\Mapper\IdentifiableInterface;
+use Kiboko\Component\AkeneoToMagentoMapper\Mapper\IdentifiableTrait;
 use Kiboko\Component\AkeneoToMagentoMapper\Persister\AttributeOptionValuePersisterInterface;
 use Kiboko\Component\AkeneoToMagentoMapper\Repository\AttributeOptionValueRepositoryInterface;
 
-class AttributeOptionValueMapper implements AttributeOptionValueMapperInterface
+class AttributeOptionValueMapper implements AttributeOptionValueMapperInterface, IdentifiableInterface
 {
+    use IdentifiableTrait;
+
     /**
      * @var AttributeOptionValueRepositoryInterface
      */

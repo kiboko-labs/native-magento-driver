@@ -5,10 +5,10 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace unit\Kiboko\Component\MagentoORM\Deleter\Magento20\Doctrine;
+namespace unit\Kiboko\Component\MagentoORM\Deleter\V2_0ce\Doctrine;
 
 use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\ProductAttributeQueryBuilderInterface;
-use Kiboko\Component\MagentoORM\QueryBuilder\Magento20\Doctrine\ProductAttributeQueryBuilder;
+use Kiboko\Component\MagentoORM\QueryBuilder\V2_0ce\Doctrine\ProductAttributeQueryBuilder;
 use unit\Kiboko\Component\MagentoORM\Deleter\Doctrine\AbstractCatalogAttributeDeleter;
 use unit\Kiboko\Component\MagentoORM\SchemaBuilder\DoctrineSchemaBuilder;
 

@@ -5,14 +5,14 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace Kiboko\Component\MagentoORM\Model\Magento20\Immutable;
+namespace Kiboko\Component\MagentoORM\Model\V2_0ce\Immutable;
 
 use Kiboko\Component\MagentoORM\Model\AttributeInterface;
 use Kiboko\Component\MagentoORM\Model\AttributeValueInterface;
 use Kiboko\Component\MagentoORM\Model\ImageMetadataAttributeValueInterface;
 use Kiboko\Component\MagentoORM\Model\ImageMetadataAttributeValueTrait;
-use Kiboko\Component\MagentoORM\Model\Magento20\ImmutableAttributeValueInterface;
-use Kiboko\Component\MagentoORM\Model\Magento20\Mutable\MutableImageMetadataAttributeValue;
+use Kiboko\Component\MagentoORM\Model\V2_0ce\ImmutableAttributeValueInterface;
+use Kiboko\Component\MagentoORM\Model\V2_0ce\Mutable\MutableImageMetadataAttributeValue;
 use Kiboko\Component\MagentoORM\Model\ScopableAttributeValueInterface;
 
 class ImmutableImageMetadataAttributeValue implements ImmutableAttributeValueInterface, ScopableAttributeValueInterface, ImageMetadataAttributeValueInterface

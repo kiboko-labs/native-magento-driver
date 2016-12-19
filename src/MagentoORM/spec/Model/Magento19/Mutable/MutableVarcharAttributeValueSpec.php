@@ -5,7 +5,7 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace spec\Kiboko\Component\MagentoORM\Model\Magento19\Mutable;
+namespace spec\Kiboko\Component\MagentoORM\Model\V1_9ce\Mutable;
 
 use Kiboko\Component\MagentoORM\Model\AttributeInterface;
 use PhpSpec\ObjectBehavior;
@@ -15,7 +15,7 @@ class MutableVarcharAttributeValueSpec extends ObjectBehavior
     public function it_is_an_MutableAttributeValueInterface(AttributeInterface $attribute)
     {
         $this->beConstructedWith($attribute, 'Lorem ipsum');
-        $this->shouldImplement('Kiboko\Component\MagentoORM\Model\Magento19\MutableAttributeValueInterface');
+        $this->shouldImplement('Kiboko\Component\MagentoORM\Model\V1_9ce\MutableAttributeValueInterface');
     }
 
     public function it_should_contain_string_value(AttributeInterface $attribute)

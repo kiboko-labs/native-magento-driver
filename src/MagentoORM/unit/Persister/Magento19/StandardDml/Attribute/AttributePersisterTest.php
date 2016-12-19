@@ -5,13 +5,13 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace unit\Kiboko\Component\MagentoORM\Persister\Magento19\StandardDml\Attribute;
+namespace unit\Kiboko\Component\MagentoORM\Persister\V1_9ce\StandardDml\Attribute;
 
 use Doctrine\DBAL\Schema\Schema;
 use Kiboko\Component\MagentoORM\Model\Attribute;
 use Kiboko\Component\MagentoORM\Persister\AttributePersisterInterface;
 use Kiboko\Component\MagentoORM\Persister\StandardDml\Attribute\StandardAttributePersister;
-use Kiboko\Component\MagentoORM\QueryBuilder\Magento19\Doctrine\ProductAttributeQueryBuilder;
+use Kiboko\Component\MagentoORM\QueryBuilder\V1_9ce\Doctrine\ProductAttributeQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoORM\SchemaBuilder\DoctrineSchemaBuilder;
 use unit\Kiboko\Component\MagentoORM\DoctrineTools\DatabaseConnectionAwareTrait;

@@ -5,11 +5,11 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace Kiboko\Component\MagentoORM\Factory\Magento19;
+namespace Kiboko\Component\MagentoORM\Factory\V1_9ce;
 
 use Kiboko\Component\MagentoORM\Factory\CatalogAttributeExtensionsFactoryInterface;
 use Kiboko\Component\MagentoORM\Model\CatalogAttributeExtensionInterface;
-use Kiboko\Component\MagentoORM\Model\Magento19\CatalogAttributeExtension;
+use Kiboko\Component\MagentoORM\Model\V1_9ce\CatalogAttributeExtension;
 
 class CatalogAttributeExtensionsFactory implements CatalogAttributeExtensionsFactoryInterface
 {

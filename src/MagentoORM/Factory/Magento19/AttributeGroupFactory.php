@@ -5,10 +5,10 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace Kiboko\Component\MagentoORM\Factory\Magento19;
+namespace Kiboko\Component\MagentoORM\Factory\V1_9ce;
 
 use Kiboko\Component\MagentoORM\Factory\AttributeGroupFactoryInterface;
-use Kiboko\Component\MagentoORM\Model\Magento19\AttributeGroup;
+use Kiboko\Component\MagentoORM\Model\V1_9ce\AttributeGroup;
 use Kiboko\Component\MagentoORM\Model\AttributeGroupInterface;
 
 /**

@@ -5,7 +5,7 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace spec\Kiboko\Component\MagentoORM\Model\Magento20\Mutable;
+namespace spec\Kiboko\Component\MagentoORM\Model\V2_0ce\Mutable;
 
 use Kiboko\Component\MagentoORM\Model\AttributeInterface;
 use PhpSpec\ObjectBehavior;
@@ -15,7 +15,7 @@ class MutableIntegerAttributeValueSpec extends ObjectBehavior
     public function it_is_an_MutableAttributeValueInterface(AttributeInterface $attribute)
     {
         $this->beConstructedWith($attribute, 1.5);
-        $this->shouldImplement('Kiboko\Component\MagentoORM\Model\Magento20\MutableAttributeValueInterface');
+        $this->shouldImplement('Kiboko\Component\MagentoORM\Model\V2_0ce\MutableAttributeValueInterface');
     }
 
     public function it_should_contain_integer_value(AttributeInterface $attribute)

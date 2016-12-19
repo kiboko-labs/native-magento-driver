@@ -22,10 +22,10 @@
 * [x] repository [Interface](src/MagentoORM/Repository/EntityStoreRepositoryInterface.php)
   * [Standard DML implementation](src/MagentoORM/Repository/Doctrine/EntityStoreRepository.php) ([PHPUnit](src/MagentoORM/unit/Repository/Doctrine/EntityStoreRepositoryTest.php))
 * [x] persister [Interface](src/MagentoORM/Persister/EntityStorePersisterInterface.php)
-  * [Standard DML implementation](src/MagentoORM/Persister/StandardDml/Entity/StandardEntityStorePersister.php) ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Persister/Magento19/StandardDml/Entity/EntityStorePersisterTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Persister/Magento20/StandardDml/Entity/EntityStorePersisterTest.php))
+  * [Standard DML implementation](src/MagentoORM/Persister/StandardDml/Entity/StandardEntityStorePersister.php) ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Persister/V1_9ce/StandardDml/Entity/EntityStorePersisterTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Persister/V2_0ce/StandardDml/Entity/EntityStorePersisterTest.php))
   * [MySQL-specific flat file implementation](src/MagentoORM/Persister/FlatFile/Entity/StandardEntityStorePersister.php)
 * [x] deleter [Interface](src/MagentoORM/Deleter/EntityStoreDeleterInterface.php)
-  * [Standard DML implementation](src/MagentoORM/Deleter/Doctrine/EntityStoreDeleter.php) ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Deleter/Magento19/Doctrine/EntityStoreDeleterTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Deleter/Magento20/Doctrine/EntityStoreDeleterTest.php))
+  * [Standard DML implementation](src/MagentoORM/Deleter/Doctrine/EntityStoreDeleter.php) ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Deleter/V1_9ce/Doctrine/EntityStoreDeleterTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Deleter/V2_0ce/Doctrine/EntityStoreDeleterTest.php))
 
 # Families
 
@@ -34,80 +34,80 @@
 * [x] repository [Interface](src/MagentoORM/Repository/FamilyRepositoryInterface.php)
   * [Standard DML implementation](src/MagentoORM/Repository/Doctrine/FamilyRepository.php) ([PHPUnit](src/MagentoORM/unit/Repository/Doctrine/FamilyRepositoryTest.php))
 * [x] persister [Interface](src/MagentoORM/Persister/FamilyPersisterInterface.php)
-  * [Standard DML implementation](src/MagentoORM/Persister/StandardDml/Family/StandardFamilyPersister.php) ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Persister/Magento19/StandardDml/Family/StandardFamilyPersisterTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Persister/Magento20/StandardDml/Family/StandardFamilyPersisterTest.php))
+  * [Standard DML implementation](src/MagentoORM/Persister/StandardDml/Family/StandardFamilyPersister.php) ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Persister/V1_9ce/StandardDml/Family/StandardFamilyPersisterTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Persister/V2_0ce/StandardDml/Family/StandardFamilyPersisterTest.php))
   * [MySQL-specific flat file implementation](src/MagentoORM/Persister/FlatFile/Family/StandardFamilyPersister.php)
 * [x] deleter [Interface](src/MagentoORM/Deleter/FamilyDeleterInterface.php)
-  * [Standard DML implementation](src/MagentoORM/Deleter/Doctrine/FamilyDeleter.php) ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Deleter/Magento19/Doctrine/FamilyDeleterTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Deleter/Magento20/Doctrine/FamilyDeleterTest.php))
+  * [Standard DML implementation](src/MagentoORM/Deleter/Doctrine/FamilyDeleter.php) ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Deleter/V1_9ce/Doctrine/FamilyDeleterTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Deleter/V2_0ce/Doctrine/FamilyDeleterTest.php))
 
 # Attributes
 
 ## Catalog Attributes data + extensions (tables `eav_attribute` and `catalog_eav_attribute`)
 
 * [x] repository [Interface](src/MagentoORM/Repository/AttributeRepositoryInterface.php)
-  * [Standard DML implementation for 1.9CE/1.14EE](src/MagentoORM/Repository/Magento19/Doctrine/ProductAttributeRepository.php) ([PHPUnit](src/MagentoORM/unit/Repository/Magento19/Doctrine/ProductAttributeRepositoryTest.php))
-  * [Standard DML implementation for 2.0 CE/EE](src/MagentoORM/Repository/Magento20/Doctrine/ProductAttributeRepository.php) ([PHPUnit](src/MagentoORM/unit/Repository/Magento20/Doctrine/ProductAttributeRepositoryTest.php))
+  * [Standard DML implementation for 1.9CE/1.14EE](src/MagentoORM/Repository/V1_9ce/Doctrine/ProductAttributeRepository.php) ([PHPUnit](src/MagentoORM/unit/Repository/V1_9ce/Doctrine/ProductAttributeRepositoryTest.php))
+  * [Standard DML implementation for 2.0 CE/EE](src/MagentoORM/Repository/V2_0ce/Doctrine/ProductAttributeRepository.php) ([PHPUnit](src/MagentoORM/unit/Repository/V2_0ce/Doctrine/ProductAttributeRepositoryTest.php))
 * [x] persister [Interface](src/MagentoORM/Persister/AttributePersisterInterface.php)
-  * [Standard DML implementation](src/MagentoORM/Persister/StandardDml/Attribute/StandardAttributePersister.php) ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Persister/Magento19/StandardDml/Attribute/AttributePersisterTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Persister/Magento20/StandardDml/Attribute/AttributePersisterTest.php))
+  * [Standard DML implementation](src/MagentoORM/Persister/StandardDml/Attribute/StandardAttributePersister.php) ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Persister/V1_9ce/StandardDml/Attribute/AttributePersisterTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Persister/V2_0ce/StandardDml/Attribute/AttributePersisterTest.php))
   * [MySQL-specific flat file implementation](src/MagentoORM/Persister/FlatFile/Attribute/StandardAttributePersister.php)
 * [x] deleter [Interface](src/MagentoORM/Deleter/AttributeDeleterInterface.php)
-  * [Standard DML implementation](src/MagentoORM/Deleter/Doctrine/AttributeDeleter.php) ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Deleter/Magento19/Doctrine/AttributeDeleterTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Deleter/Magento20/Doctrine/AttributeDeleterTest.php))
+  * [Standard DML implementation](src/MagentoORM/Deleter/Doctrine/AttributeDeleter.php) ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Deleter/V1_9ce/Doctrine/AttributeDeleterTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Deleter/V2_0ce/Doctrine/AttributeDeleterTest.php))
 
 ## Attribute groups (table `eav_attribute_group`)
 
 * [x] repository [Interface](src/MagentoORM/Repository/AttributeGroupRepositoryInterface.php)
-  * [Standard DML implementation](src/MagentoORM/Repository/Doctrine/AttributeGroupRepository.php)  ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Repository/Magento19/Doctrine/AttributeGroupRepositoryTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Repository/Magento20/Doctrine/AttributeGroupRepositoryTest.php))
+  * [Standard DML implementation](src/MagentoORM/Repository/Doctrine/AttributeGroupRepository.php)  ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Repository/V1_9ce/Doctrine/AttributeGroupRepositoryTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Repository/V2_0ce/Doctrine/AttributeGroupRepositoryTest.php))
 * [x] persister [Interface](src/MagentoORM/Persister/AttributeGroupPersisterInterface.php)
-  * [Standard DML implementation for 1.9CE/1.14EE](src/MagentoORM/Persister/StandardDml/Magento19/Attribute/AttributeGroupPersister.php) ([PHPUnit](src/MagentoORM/unit/Persister/Magento19/StandardDml/Attribute/AttributeGroupPersisterTest.php))
-  * [Standard DML implementation for 2.0 CE/EE](src/MagentoORM/Persister/StandardDml/Magento20/Attribute/AttributeGroupPersister.php) ([PHPUnit](src/MagentoORM/unit/Persister/Magento20/StandardDml/Attribute/AttributeGroupPersisterTest.php))
+  * [Standard DML implementation for 1.9CE/1.14EE](src/MagentoORM/Persister/StandardDml/V1_9ce/Attribute/AttributeGroupPersister.php) ([PHPUnit](src/MagentoORM/unit/Persister/V1_9ce/StandardDml/Attribute/AttributeGroupPersisterTest.php))
+  * [Standard DML implementation for 2.0 CE/EE](src/MagentoORM/Persister/StandardDml/V2_0ce/Attribute/AttributeGroupPersister.php) ([PHPUnit](src/MagentoORM/unit/Persister/V2_0ce/StandardDml/Attribute/AttributeGroupPersisterTest.php))
   * [MySQL-specific flat file implementation](src/MagentoORM/Persister/FlatFile/Attribute/AttributeGroupPersister.php)
 * [x] deleter [Interface](src/MagentoORM/Deleter/AttributeGroupDeleterInterface.php)
-  * [Standard DML implementation](src/MagentoORM/Deleter/Doctrine/AttributeGroupDeleter.php) ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Deleter/Magento19/Doctrine/AttributeGroupDeleterTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Deleter/Magento20/Doctrine/AttributeGroupDeleterTest.php))
+  * [Standard DML implementation](src/MagentoORM/Deleter/Doctrine/AttributeGroupDeleter.php) ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Deleter/V1_9ce/Doctrine/AttributeGroupDeleterTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Deleter/V2_0ce/Doctrine/AttributeGroupDeleterTest.php))
 
 ## Attribute labels (table `eav_attribute_label`)
 
 * [x] repository [Interface](src/MagentoORM/Repository/AttributeLabelRepositoryInterface.php)
   * [Standard DML implementation](src/MagentoORM/Repository/Doctrine/AttributeLabelRepository.php) ([PHPUnit](src/MagentoORM/unit/Repository/Doctrine/AttributeLabelRepositoryTest.php))
 * [x] persister [Interface](src/MagentoORM/Persister/AttributeLabelPersisterInterface.php)
-  * [Standard DML implementation](src/MagentoORM/Persister/StandardDml/Attribute/AttributeLabelPersister.php) ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Persister/Magento19/StandardDml/Attribute/AttributeLabelPersisterTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Persister/Magento20/StandardDml/Attribute/AttributeLabelPersisterTest.php))
+  * [Standard DML implementation](src/MagentoORM/Persister/StandardDml/Attribute/AttributeLabelPersister.php) ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Persister/V1_9ce/StandardDml/Attribute/AttributeLabelPersisterTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Persister/V2_0ce/StandardDml/Attribute/AttributeLabelPersisterTest.php))
   * [MySQL-specific flat file implementation](src/MagentoORM/Persister/FlatFile/Attribute/AttributeLabelPersister.php)
 * [x] deleter [Interface](src/MagentoORM/Deleter/AttributeLabelDeleterInterface.php)
-  * [Standard DML implementation](src/MagentoORM/Deleter/Doctrine/AttributeLabelDeleter.php) ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Deleter/Magento19/Doctrine/AttributeLabelDeleterTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Deleter/Magento20/Doctrine/AttributeLabelDeleterTest.php))
+  * [Standard DML implementation](src/MagentoORM/Deleter/Doctrine/AttributeLabelDeleter.php) ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Deleter/V1_9ce/Doctrine/AttributeLabelDeleterTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Deleter/V2_0ce/Doctrine/AttributeLabelDeleterTest.php))
 
 ## Attribute options (table `eav_attribute_option`)
 
 * [x] repository [Interface](src/MagentoORM/Repository/AttributeOptionRepositoryInterface.php)
   * [Standard DML implementation](src/MagentoORM/Repository/Doctrine/AttributeOptionRepository.php) ([PHPUnit](src/MagentoORM/unit/Repository/Doctrine/AttributeOptionRepositoryTest.php))
 * [x] persister [Interface](src/MagentoORM/Persister/AttributeOptionPersisterInterface.php)
-  * [Standard DML implementation](src/MagentoORM/Persister/StandardDml/Attribute/AttributeOptionPersister.php) ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Persister/Magento19/StandardDml/Attribute/AttributeOptionPersisterTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Persister/Magento20/StandardDml/Attribute/AttributeOptionPersisterTest.php))
+  * [Standard DML implementation](src/MagentoORM/Persister/StandardDml/Attribute/AttributeOptionPersister.php) ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Persister/V1_9ce/StandardDml/Attribute/AttributeOptionPersisterTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Persister/V2_0ce/StandardDml/Attribute/AttributeOptionPersisterTest.php))
   * [MySQL-specific flat file implementation](src/MagentoORM/Persister/FlatFile/Attribute/AttributeOptionPersister.php)
 * [x] deleter [Interface](src/MagentoORM/Deleter/AttributeOptionDeleterInterface.php)
-  * [Standard DML implementation](src/MagentoORM/Deleter/Doctrine/AttributeOptionDeleter.php) ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Deleter/Magento19/Doctrine/AttributeOptionDeleterTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Deleter/Magento20/Doctrine/AttributeOptionDeleterTest.php))
+  * [Standard DML implementation](src/MagentoORM/Deleter/Doctrine/AttributeOptionDeleter.php) ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Deleter/V1_9ce/Doctrine/AttributeOptionDeleterTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Deleter/V2_0ce/Doctrine/AttributeOptionDeleterTest.php))
 
 ## Attribute option values (table `eav_attribute_option_value`)
 
 * [x] repository [Interface](src/MagentoORM/Repository/AttributeOptionValueRepositoryInterface.php)
   * [Standard DML implementation](src/MagentoORM/Repository/Doctrine/AttributeOptionValueRepository.php) ([PHPUnit](src/MagentoORM/unit/Repository/Doctrine/AttributeOptionValueRepositoryTest.php))
 * [x] persister [Interface](src/MagentoORM/Persister/AttributeOptionValuePersisterInterface.php)
-  * [Standard DML implementation](src/MagentoORM/Persister/StandardDml/Attribute/AttributeOptionValuePersister.php) ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Persister/Magento19/StandardDml/Attribute/AttributeOptionValuePersisterTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Persister/Magento20/StandardDml/Attribute/AttributeOptionValuePersisterTest.php))
+  * [Standard DML implementation](src/MagentoORM/Persister/StandardDml/Attribute/AttributeOptionValuePersister.php) ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Persister/V1_9ce/StandardDml/Attribute/AttributeOptionValuePersisterTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Persister/V2_0ce/StandardDml/Attribute/AttributeOptionValuePersisterTest.php))
   * [MySQL-specific flat file implementation](src/MagentoORM/Persister/FlatFile/Attribute/AttributeOptionValuePersister.php)
 * [x] deleter [Interface](src/MagentoORM/Deleter/AttributeOptionValueDeleterInterface.php)
-  * [Standard DML implementation](src/MagentoORM/Deleter/Doctrine/AttributeOptionValueDeleter.php) ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Deleter/Magento19/Doctrine/AttributeOptionValueDeleterTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Deleter/Magento20/Doctrine/AttributeOptionValueDeleterTest.php))
+  * [Standard DML implementation](src/MagentoORM/Deleter/Doctrine/AttributeOptionValueDeleter.php) ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Deleter/V1_9ce/Doctrine/AttributeOptionValueDeleterTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Deleter/V2_0ce/Doctrine/AttributeOptionValueDeleterTest.php))
 
 ## Attribute to entity linking (table `eav_entity_attribute`)
 
 * [x] repository [Interface](src/MagentoORM/Repository/EntityAttributeRepositoryInterface.php) 
   * [Standard DML implementation](src/MagentoORM/Repository/Doctrine/EntityAttributeRepository.php) ([PHPUnit](src/MagentoORM/unit/Repository/Doctrine/EntityAttributeRepositoryTest.php))
 * [x] persister [Interface](src/MagentoORM/Persister/EntityAttributePersisterInterface.php)
-  * [Standard DML implementation](src/MagentoORM/Persister/StandardDml/Attribute/StandardEntityAttributePersister.php) ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Persister/Magento19/StandardDml/Attribute/EntityAttributePersisterTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Persister/Magento20/StandardDml/Attribute/EntityAttributePersisterTest.php))
+  * [Standard DML implementation](src/MagentoORM/Persister/StandardDml/Attribute/StandardEntityAttributePersister.php) ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Persister/V1_9ce/StandardDml/Attribute/EntityAttributePersisterTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Persister/V2_0ce/StandardDml/Attribute/EntityAttributePersisterTest.php))
 * [x] deleter [Interface](src/MagentoORM/Deleter/EntityAttributeDeleterInterface.php)
-  * [Standard DML implementation](src/MagentoORM/Deleter/Doctrine/EntityAttributeDeleter.php) ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Deleter/Magento19/Doctrine/EntityAttributeDeleterTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Deleter/Magento20/Doctrine/EntityAttributeDeleterTest.php))
+  * [Standard DML implementation](src/MagentoORM/Deleter/Doctrine/EntityAttributeDeleter.php) ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Deleter/V1_9ce/Doctrine/EntityAttributeDeleterTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Deleter/V2_0ce/Doctrine/EntityAttributeDeleterTest.php))
 
 # Products
 
 ## Product entities (table `catalog_product_entity`)
 
 * [x] repository [Interface](src/MagentoORM/Repository/ProductRepositoryInterface.php)
-  * [Standard DML implementation](src/MagentoORM/Repository/Doctrine/ProductRepository.php) ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Repository/Magento19/Doctrine/ProductRepositoryTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Repository/Magento20/Doctrine/ProductRepositoryTest.php))
+  * [Standard DML implementation](src/MagentoORM/Repository/Doctrine/ProductRepository.php) ([PHPUnit for 1.9CE/1.14EE](src/MagentoORM/unit/Repository/V1_9ce/Doctrine/ProductRepositoryTest.php), [PHPUnit for 2.0+ CE/EE](src/MagentoORM/unit/Repository/V2_0ce/Doctrine/ProductRepositoryTest.php))
 * [x] persister [Interface](src/MagentoORM/Persister/ProductPersisterInterface.php)
   * [Standard DML implementation](src/MagentoORM/Persister/StandardDml/Product/SimpleProductPersister.php)
   * [MySQL-specific flat file implementation](src/MagentoORM/Persister/FlatFile/Product/SimpleProductPersister.php)

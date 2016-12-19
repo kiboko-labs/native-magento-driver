@@ -5,7 +5,7 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace Kiboko\Component\MagentoORM\Model\Magento20\Immutable;
+namespace Kiboko\Component\MagentoORM\Model\V2_0ce\Immutable;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use League\Flysystem\File;
@@ -14,9 +14,9 @@ use Kiboko\Component\MagentoORM\Model\AttributeInterface;
 use Kiboko\Component\MagentoORM\Model\ImageAttributeValueInterface;
 use Kiboko\Component\MagentoORM\Model\ImageAttributeValueTrait;
 use Kiboko\Component\MagentoORM\Model\ImageMetadataAttributeValueInterface;
-use Kiboko\Component\MagentoORM\Model\Magento20\ImmutableAttributeValueInterface;
-use Kiboko\Component\MagentoORM\Model\Magento20\MutableAttributeValueInterface;
-use Kiboko\Component\MagentoORM\Model\Magento20\Mutable\MutableImageAttributeValue;
+use Kiboko\Component\MagentoORM\Model\V2_0ce\ImmutableAttributeValueInterface;
+use Kiboko\Component\MagentoORM\Model\V2_0ce\MutableAttributeValueInterface;
+use Kiboko\Component\MagentoORM\Model\V2_0ce\Mutable\MutableImageAttributeValue;
 
 class ImmutableImageAttributeValue implements ImmutableAttributeValueInterface, ImageAttributeValueInterface
 {

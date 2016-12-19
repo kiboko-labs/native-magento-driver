@@ -55,6 +55,10 @@ class AttributeOptionValueQueryBuilder implements AttributeOptionValueQueryBuild
             'value_id',
             'option_code',
             'locale',
+
+            'instance_identifier',
+            'mapping_class',
+            'mapping_options',
         ];
     }
 

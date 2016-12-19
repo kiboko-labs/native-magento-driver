@@ -8,11 +8,15 @@
 namespace Kiboko\Component\AkeneoToMagentoMapper\Mapper\Persistent;
 
 use Kiboko\Component\AkeneoToMagentoMapper\Mapper\FamilyMapperInterface;
+use Kiboko\Component\AkeneoToMagentoMapper\Mapper\IdentifiableInterface;
+use Kiboko\Component\AkeneoToMagentoMapper\Mapper\IdentifiableTrait;
 use Kiboko\Component\AkeneoToMagentoMapper\Persister\FamilyPersisterInterface;
 use Kiboko\Component\AkeneoToMagentoMapper\Repository\FamilyRepositoryInterface;
 
-class FamilyMapper implements FamilyMapperInterface
+class FamilyMapper implements FamilyMapperInterface, IdentifiableInterface
 {
+    use IdentifiableTrait;
+
     /**
      * @var FamilyRepositoryInterface
      */

@@ -19,7 +19,7 @@ This object creates Doctrine DBAL `QueryBuilder` objects for product attribute d
 
 /** @var \Doctrine\DBAL\Connection $connection */
 
-use Kiboko\Component\MagentoORM\QueryBuilder\Magento20\Doctrine\ProductAttributeQueryBuilder;
+use Kiboko\Component\MagentoORM\QueryBuilder\V2_0ce\Doctrine\ProductAttributeQueryBuilder;
 
 $queryBuilder = new ProductAttributeQueryBuilder(
     $connection,
@@ -37,7 +37,7 @@ $queryBuilder = new ProductAttributeQueryBuilder(
 
 ```yaml
 parameters:
-  kiboko_magento_connector.query_builder.product_attribute.class: Kiboko\Component\MagentoORM\QueryBuilder\Magento20\Doctrine\ProductAttributeQueryBuilder
+  kiboko_magento_connector.query_builder.product_attribute.class: Kiboko\Component\MagentoORM\QueryBuilder\V2_0ce\Doctrine\ProductAttributeQueryBuilder
   
   kiboko_magento_connector.backend.attribute.standard.table: 'eav_attribute'
   kiboko_magento_connector.backend.attribute.catalog_extras.table: 'catalog_eav_attribute'
@@ -116,8 +116,8 @@ It requires a proper *QueryBuilder* to work.
 
 use Kiboko\Component\MagentoORM\Repository\Doctrine\ProductAttributeRepository;
 use Kiboko\Component\MagentoORM\Factory\AttributeFactory;
-use Kiboko\Component\MagentoORM\Factory\Magento20\CatalogAttributeExtensionsFactory;
-use Kiboko\Component\MagentoORM\Factory\Magento20\ProductAttributeFactory;
+use Kiboko\Component\MagentoORM\Factory\V2_0ce\CatalogAttributeExtensionsFactory;
+use Kiboko\Component\MagentoORM\Factory\V2_0ce\ProductAttributeFactory;
 
 $factory = new ProductAttributeFactory(
     new AttributeFactory(),
@@ -136,8 +136,8 @@ $productAttributeRepository = new ProductAttributeRepository(
 ```yaml
 parameters:
   kiboko_magento_connector.factory.attribute.class:                    Kiboko\Component\MagentoORM\Factory\AttributeFactory
-  kiboko_magento_connector.factory.catalog_attribute_extensions.class: Kiboko\Component\MagentoORM\Factory\Magento20\CatalogAttributeExtensionsFactory
-  kiboko_magento_connector.factory.catalog_attribute.class:            Kiboko\Component\MagentoORM\Factory\Magento20\ProductAttributeFactory
+  kiboko_magento_connector.factory.catalog_attribute_extensions.class: Kiboko\Component\MagentoORM\Factory\V2_0ce\CatalogAttributeExtensionsFactory
+  kiboko_magento_connector.factory.catalog_attribute.class:            Kiboko\Component\MagentoORM\Factory\V2_0ce\ProductAttributeFactory
   
   kiboko_magento_connector.repository.catalog_attribute.class: Kiboko\Component\MagentoORM\Repository\Doctrine\ProductAttributeRepository
 
@@ -225,9 +225,9 @@ Concerning product attributes, data are stored in 2 tables. To address this you 
 /** @var \Doctrine\DBAL\Connection $connection */
 
 use Kiboko\Component\MagentoORM\Persister\StandardDml\Attribute\StandardAttributePersister;
-use Kiboko\Component\MagentoORM\Persister\StandardDml\Magento20\Attribute\CatalogAttributeExtensionPersister;
+use Kiboko\Component\MagentoORM\Persister\StandardDml\V2_0ce\Attribute\CatalogAttributeExtensionPersister;
 use Kiboko\Component\MagentoORM\Persister\CatalogAttributePersister;
-use Kiboko\Component\MagentoORM\QueryBuilder\Magento20\Doctrine\ProductAttributeQueryBuilder;
+use Kiboko\Component\MagentoORM\QueryBuilder\V2_0ce\Doctrine\ProductAttributeQueryBuilder;
 
 $standardAttributePersister = new StandardAttributePersister(
     $connection,
@@ -250,7 +250,7 @@ $cataogAttributePersister = new CatalogAttributePersister(
 ```yaml
 parameters:
   kiboko_magento_connector.persister.standard_dml.attribute.standard.class: Kiboko\Component\MagentoORM\Persister\StandardDml\Attribute\StandardAttributePersister
-  kiboko_magento_connector.persister.standard_dml.attribute.catalog_extras.class:  Kiboko\Component\MagentoORM\Persister\StandardDml\Magento20\Attribute\CatalogAttributeExtensionPersister
+  kiboko_magento_connector.persister.standard_dml.attribute.catalog_extras.class:  Kiboko\Component\MagentoORM\Persister\StandardDml\V2_0ce\Attribute\CatalogAttributeExtensionPersister
   kiboko_magento_connector.persister.standard_dml.attribute.catalog.class:  Kiboko\Component\MagentoORM\Persister\CatalogAttributePersister
   
   kiboko_magento_connector.backend.attribute.standard.table:       'eav_attribute'
@@ -286,7 +286,7 @@ The CSV direct importer requires some more configuration, as long as data can be
 
 ```php
 <?php
-/** @var \Kiboko\Component\MagentoORM\Model\Magento20\CatalogAttributeInterface[] $data */
+/** @var \Kiboko\Component\MagentoORM\Model\V2_0ce\CatalogAttributeInterface[] $data */
 /** @var Kiboko\Component\MagentoORM\Persister\CatalogAttributePersister $cataogAttributePersister */
 
 // Starting the persiting process
