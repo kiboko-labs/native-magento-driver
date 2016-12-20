@@ -54,13 +54,21 @@
     "autoload": {
         "psr-4": {
             "Kiboko\\Component\\MagentoORM\\": "src/MagentoORM/",
+            "Kiboko\\Component\\Connector\\": "src/Connector/",
+            "Kiboko\\Component\\FieldMapping\\": "src/FieldMapping/",
             "Kiboko\\Component\\AkeneoToMagentoMapper\\": "src/AkeneoToMagentoMapper/",
-            "Kiboko\\Component\\MagentoSerializer\\": "src/MagentoSerializer/"
+            "Kiboko\\Component\\MagentoSerializer\\": "src/MagentoSerializer/",
+            "Kiboko\\Component\\MagentoIndexer\\": "src/MagentoIndexer/"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "spec\\Kiboko\\Component\\MagentoORM\\": "src/MagentoORM/spec/",
+            "spec\\Kiboko\\Component\\Connector\\": "src/Connector/spec/",
+            "spec\\Kiboko\\Component\\FieldMapping\\": "src/FieldMapping/spec/",
+            "spec\\Kiboko\\Component\\AkeneoToMagentoMapper\\": "src/AkeneoToMagentoMapper/spec/",
+            "spec\\Kiboko\\Component\\MagentoSerializer\\": "src/MagentoSerializer/spec/",
+            "unit\\Kiboko\\Component\\MagentoIndexer\\": "src/MagentoIndexer/spec/",
             "unit\\Kiboko\\Component\\MagentoORM\\": "src/MagentoORM/unit/"
         }
     },

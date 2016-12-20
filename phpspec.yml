@@ -2,5 +2,15 @@ suites:
     magento_orm:
         namespace: Kiboko\Component\MagentoORM
         psr4_prefix: Kiboko\Component\MagentoORM
-        src_path: src/MagentoORM
+        src_path: src/MagentoORM/
         spec_path: src/MagentoORM/
+    connector:
+        namespace: Kiboko\Component\Connector
+        psr4_prefix: Kiboko\Component\Connector
+        src_path: src/Connector/
+        spec_path: src/Connector/
+    field_mapping:
+        namespace: Kiboko\Component\FieldMapping
+        psr4_prefix: Kiboko\Component\FieldMapping
+        src_path: src/FieldMapping/
+        spec_path: src/FieldMapping/
