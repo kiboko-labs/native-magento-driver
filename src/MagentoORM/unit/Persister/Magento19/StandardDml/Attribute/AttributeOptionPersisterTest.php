@@ -5,12 +5,12 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace unit\Kiboko\Component\MagentoORM\Persister\V1_9ce\StandardDml\Attribute;
+namespace unit\Kiboko\Component\MagentoORM\Persister\V1_9ce\StandardDML\Attribute;
 
 use Doctrine\DBAL\Schema\Schema;
 use Kiboko\Component\MagentoORM\Model\AttributeOption;
 use Kiboko\Component\MagentoORM\Persister\AttributeOptionPersisterInterface;
-use Kiboko\Component\MagentoORM\Persister\StandardDml\Attribute\AttributeOptionPersister;
+use Kiboko\Component\MagentoORM\Persister\StandardDML\Attribute\AttributeOptionPersister;
 use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\AttributeOptionQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoORM\SchemaBuilder\DoctrineSchemaBuilder;

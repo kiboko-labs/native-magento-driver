@@ -5,12 +5,12 @@
  * @author Grégory Planchat <gregory@kiboko.fr>
  */
 
-namespace unit\Kiboko\Component\MagentoORM\Persister\V2_0ce\StandardDml\Family;
+namespace unit\Kiboko\Component\MagentoORM\Persister\V2_0ce\StandardDML\Family;
 
 use Doctrine\DBAL\Schema\Schema;
 use Kiboko\Component\MagentoORM\Model\Family;
 use Kiboko\Component\MagentoORM\Persister\FamilyPersisterInterface;
-use Kiboko\Component\MagentoORM\Persister\StandardDml\Family\StandardFamilyPersister;
+use Kiboko\Component\MagentoORM\Persister\StandardDML\Family\StandardFamilyPersister;
 use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\FamilyQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoORM\SchemaBuilder\DoctrineSchemaBuilder;

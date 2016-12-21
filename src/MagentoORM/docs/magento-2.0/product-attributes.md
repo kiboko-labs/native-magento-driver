@@ -224,8 +224,8 @@ Concerning product attributes, data are stored in 2 tables. To address this you 
 
 /** @var \Doctrine\DBAL\Connection $connection */
 
-use Kiboko\Component\MagentoORM\Persister\StandardDml\Attribute\StandardAttributePersister;
-use Kiboko\Component\MagentoORM\Persister\StandardDml\V2_0ce\Attribute\CatalogAttributeExtensionPersister;
+use Kiboko\Component\MagentoORM\Persister\StandardDML\Attribute\StandardAttributePersister;
+use Kiboko\Component\MagentoORM\Persister\StandardDML\V2_0ce\Attribute\CatalogAttributeExtensionPersister;
 use Kiboko\Component\MagentoORM\Persister\CatalogAttributePersister;
 use Kiboko\Component\MagentoORM\QueryBuilder\V2_0ce\Doctrine\ProductAttributeQueryBuilder;
 
@@ -249,8 +249,8 @@ $cataogAttributePersister = new CatalogAttributePersister(
 
 ```yaml
 parameters:
-  kiboko_magento_connector.persister.standard_dml.attribute.standard.class: Kiboko\Component\MagentoORM\Persister\StandardDml\Attribute\StandardAttributePersister
-  kiboko_magento_connector.persister.standard_dml.attribute.catalog_extras.class:  Kiboko\Component\MagentoORM\Persister\StandardDml\V2_0ce\Attribute\CatalogAttributeExtensionPersister
+  kiboko_magento_connector.persister.standard_dml.attribute.standard.class: Kiboko\Component\MagentoORM\Persister\StandardDML\Attribute\StandardAttributePersister
+  kiboko_magento_connector.persister.standard_dml.attribute.catalog_extras.class:  Kiboko\Component\MagentoORM\Persister\StandardDML\V2_0ce\Attribute\CatalogAttributeExtensionPersister
   kiboko_magento_connector.persister.standard_dml.attribute.catalog.class:  Kiboko\Component\MagentoORM\Persister\CatalogAttributePersister
   
   kiboko_magento_connector.backend.attribute.standard.table:       'eav_attribute'

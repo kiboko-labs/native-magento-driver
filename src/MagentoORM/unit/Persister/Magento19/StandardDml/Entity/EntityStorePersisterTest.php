@@ -1,11 +1,11 @@
 <?php
 
-namespace unit\Kiboko\Component\MagentoORM\Persister\V1_9ce\StandardDml\Entity;
+namespace unit\Kiboko\Component\MagentoORM\Persister\V1_9ce\StandardDML\Entity;
 
 use Doctrine\DBAL\Schema\Schema;
 use Kiboko\Component\MagentoORM\Model\EntityStore;
 use Kiboko\Component\MagentoORM\Persister\EntityStorePersisterInterface;
-use Kiboko\Component\MagentoORM\Persister\StandardDml\Entity\StandardEntityStorePersister;
+use Kiboko\Component\MagentoORM\Persister\StandardDML\Entity\StandardEntityStorePersister;
 use Kiboko\Component\MagentoORM\QueryBuilder\Doctrine\EntityStoreQueryBuilder;
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use unit\Kiboko\Component\MagentoORM\SchemaBuilder\DoctrineSchemaBuilder;
